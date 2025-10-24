@@ -1,0 +1,136 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(() => {
+var exports = {};
+exports.id = "app/api/dashboard/standings/[league_id]/route";
+exports.ids = ["app/api/dashboard/standings/[league_id]/route"];
+exports.modules = {
+
+/***/ "next/dist/compiled/next-server/app-page.runtime.dev.js":
+/*!*************************************************************************!*\
+  !*** external "next/dist/compiled/next-server/app-page.runtime.dev.js" ***!
+  \*************************************************************************/
+/***/ ((module) => {
+
+module.exports = require("next/dist/compiled/next-server/app-page.runtime.dev.js");
+
+/***/ }),
+
+/***/ "next/dist/compiled/next-server/app-route.runtime.dev.js":
+/*!**************************************************************************!*\
+  !*** external "next/dist/compiled/next-server/app-route.runtime.dev.js" ***!
+  \**************************************************************************/
+/***/ ((module) => {
+
+module.exports = require("next/dist/compiled/next-server/app-route.runtime.dev.js");
+
+/***/ }),
+
+/***/ "http":
+/*!***********************!*\
+  !*** external "http" ***!
+  \***********************/
+/***/ ((module) => {
+
+module.exports = require("http");
+
+/***/ }),
+
+/***/ "https":
+/*!************************!*\
+  !*** external "https" ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = require("https");
+
+/***/ }),
+
+/***/ "punycode":
+/*!***************************!*\
+  !*** external "punycode" ***!
+  \***************************/
+/***/ ((module) => {
+
+module.exports = require("punycode");
+
+/***/ }),
+
+/***/ "stream":
+/*!*************************!*\
+  !*** external "stream" ***!
+  \*************************/
+/***/ ((module) => {
+
+module.exports = require("stream");
+
+/***/ }),
+
+/***/ "url":
+/*!**********************!*\
+  !*** external "url" ***!
+  \**********************/
+/***/ ((module) => {
+
+module.exports = require("url");
+
+/***/ }),
+
+/***/ "zlib":
+/*!***********************!*\
+  !*** external "zlib" ***!
+  \***********************/
+/***/ ((module) => {
+
+module.exports = require("zlib");
+
+/***/ }),
+
+/***/ "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fapi%2Fdashboard%2Fstandings%2F%5Bleague_id%5D%2Froute&page=%2Fapi%2Fdashboard%2Fstandings%2F%5Bleague_id%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fdashboard%2Fstandings%2F%5Bleague_id%5D%2Froute.ts&appDir=%2FUsers%2Fje4ndev%2FDocuments%2FProjetos%20TRAE%20%2FHypeFc1%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Fje4ndev%2FDocuments%2FProjetos%20TRAE%20%2FHypeFc1&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fapi%2Fdashboard%2Fstandings%2F%5Bleague_id%5D%2Froute&page=%2Fapi%2Fdashboard%2Fstandings%2F%5Bleague_id%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fdashboard%2Fstandings%2F%5Bleague_id%5D%2Froute.ts&appDir=%2FUsers%2Fje4ndev%2FDocuments%2FProjetos%20TRAE%20%2FHypeFc1%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Fje4ndev%2FDocuments%2FProjetos%20TRAE%20%2FHypeFc1&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D! ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   originalPathname: () => (/* binding */ originalPathname),\n/* harmony export */   patchFetch: () => (/* binding */ patchFetch),\n/* harmony export */   requestAsyncStorage: () => (/* binding */ requestAsyncStorage),\n/* harmony export */   routeModule: () => (/* binding */ routeModule),\n/* harmony export */   serverHooks: () => (/* binding */ serverHooks),\n/* harmony export */   staticGenerationAsyncStorage: () => (/* binding */ staticGenerationAsyncStorage)\n/* harmony export */ });\n/* harmony import */ var next_dist_server_future_route_modules_app_route_module_compiled__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/dist/server/future/route-modules/app-route/module.compiled */ \"(rsc)/./node_modules/next/dist/server/future/route-modules/app-route/module.compiled.js\");\n/* harmony import */ var next_dist_server_future_route_modules_app_route_module_compiled__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_future_route_modules_app_route_module_compiled__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/dist/server/future/route-kind */ \"(rsc)/./node_modules/next/dist/server/future/route-kind.js\");\n/* harmony import */ var next_dist_server_lib_patch_fetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/dist/server/lib/patch-fetch */ \"(rsc)/./node_modules/next/dist/server/lib/patch-fetch.js\");\n/* harmony import */ var next_dist_server_lib_patch_fetch__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_lib_patch_fetch__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _Users_je4ndev_Documents_Projetos_TRAE_HypeFc1_src_app_api_dashboard_standings_league_id_route_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./src/app/api/dashboard/standings/[league_id]/route.ts */ \"(rsc)/./src/app/api/dashboard/standings/[league_id]/route.ts\");\n\n\n\n\n// We inject the nextConfigOutput here so that we can use them in the route\n// module.\nconst nextConfigOutput = \"\"\nconst routeModule = new next_dist_server_future_route_modules_app_route_module_compiled__WEBPACK_IMPORTED_MODULE_0__.AppRouteRouteModule({\n    definition: {\n        kind: next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__.RouteKind.APP_ROUTE,\n        page: \"/api/dashboard/standings/[league_id]/route\",\n        pathname: \"/api/dashboard/standings/[league_id]\",\n        filename: \"route\",\n        bundlePath: \"app/api/dashboard/standings/[league_id]/route\"\n    },\n    resolvedPagePath: \"/Users/je4ndev/Documents/Projetos TRAE /HypeFc1/src/app/api/dashboard/standings/[league_id]/route.ts\",\n    nextConfigOutput,\n    userland: _Users_je4ndev_Documents_Projetos_TRAE_HypeFc1_src_app_api_dashboard_standings_league_id_route_ts__WEBPACK_IMPORTED_MODULE_3__\n});\n// Pull out the exports that we need to expose from the module. This should\n// be eliminated when we've moved the other routes to the new format. These\n// are used to hook into the route.\nconst { requestAsyncStorage, staticGenerationAsyncStorage, serverHooks } = routeModule;\nconst originalPathname = \"/api/dashboard/standings/[league_id]/route\";\nfunction patchFetch() {\n    return (0,next_dist_server_lib_patch_fetch__WEBPACK_IMPORTED_MODULE_2__.patchFetch)({\n        serverHooks,\n        staticGenerationAsyncStorage\n    });\n}\n\n\n//# sourceMappingURL=app-route.js.map//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L2J1aWxkL3dlYnBhY2svbG9hZGVycy9uZXh0LWFwcC1sb2FkZXIuanM/bmFtZT1hcHAlMkZhcGklMkZkYXNoYm9hcmQlMkZzdGFuZGluZ3MlMkYlNUJsZWFndWVfaWQlNUQlMkZyb3V0ZSZwYWdlPSUyRmFwaSUyRmRhc2hib2FyZCUyRnN0YW5kaW5ncyUyRiU1QmxlYWd1ZV9pZCU1RCUyRnJvdXRlJmFwcFBhdGhzPSZwYWdlUGF0aD1wcml2YXRlLW5leHQtYXBwLWRpciUyRmFwaSUyRmRhc2hib2FyZCUyRnN0YW5kaW5ncyUyRiU1QmxlYWd1ZV9pZCU1RCUyRnJvdXRlLnRzJmFwcERpcj0lMkZVc2VycyUyRmplNG5kZXYlMkZEb2N1bWVudHMlMkZQcm9qZXRvcyUyMFRSQUUlMjAlMkZIeXBlRmMxJTJGc3JjJTJGYXBwJnBhZ2VFeHRlbnNpb25zPXRzeCZwYWdlRXh0ZW5zaW9ucz10cyZwYWdlRXh0ZW5zaW9ucz1qc3gmcGFnZUV4dGVuc2lvbnM9anMmcm9vdERpcj0lMkZVc2VycyUyRmplNG5kZXYlMkZEb2N1bWVudHMlMkZQcm9qZXRvcyUyMFRSQUUlMjAlMkZIeXBlRmMxJmlzRGV2PXRydWUmdHNjb25maWdQYXRoPXRzY29uZmlnLmpzb24mYmFzZVBhdGg9JmFzc2V0UHJlZml4PSZuZXh0Q29uZmlnT3V0cHV0PSZwcmVmZXJyZWRSZWdpb249Jm1pZGRsZXdhcmVDb25maWc9ZTMwJTNEISIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7QUFBc0c7QUFDdkM7QUFDYztBQUNvRDtBQUNqSTtBQUNBO0FBQ0E7QUFDQSx3QkFBd0IsZ0hBQW1CO0FBQzNDO0FBQ0EsY0FBYyx5RUFBUztBQUN2QjtBQUNBO0FBQ0E7QUFDQTtBQUNBLEtBQUs7QUFDTDtBQUNBO0FBQ0EsWUFBWTtBQUNaLENBQUM7QUFDRDtBQUNBO0FBQ0E7QUFDQSxRQUFRLGlFQUFpRTtBQUN6RTtBQUNBO0FBQ0EsV0FBVyw0RUFBVztBQUN0QjtBQUNBO0FBQ0EsS0FBSztBQUNMO0FBQ3VIOztBQUV2SCIsInNvdXJjZXMiOlsid2VicGFjazovL2h5cGVmYy8/Yzk2MyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBBcHBSb3V0ZVJvdXRlTW9kdWxlIH0gZnJvbSBcIm5leHQvZGlzdC9zZXJ2ZXIvZnV0dXJlL3JvdXRlLW1vZHVsZXMvYXBwLXJvdXRlL21vZHVsZS5jb21waWxlZFwiO1xuaW1wb3J0IHsgUm91dGVLaW5kIH0gZnJvbSBcIm5leHQvZGlzdC9zZXJ2ZXIvZnV0dXJlL3JvdXRlLWtpbmRcIjtcbmltcG9ydCB7IHBhdGNoRmV0Y2ggYXMgX3BhdGNoRmV0Y2ggfSBmcm9tIFwibmV4dC9kaXN0L3NlcnZlci9saWIvcGF0Y2gtZmV0Y2hcIjtcbmltcG9ydCAqIGFzIHVzZXJsYW5kIGZyb20gXCIvVXNlcnMvamU0bmRldi9Eb2N1bWVudHMvUHJvamV0b3MgVFJBRSAvSHlwZUZjMS9zcmMvYXBwL2FwaS9kYXNoYm9hcmQvc3RhbmRpbmdzL1tsZWFndWVfaWRdL3JvdXRlLnRzXCI7XG4vLyBXZSBpbmplY3QgdGhlIG5leHRDb25maWdPdXRwdXQgaGVyZSBzbyB0aGF0IHdlIGNhbiB1c2UgdGhlbSBpbiB0aGUgcm91dGVcbi8vIG1vZHVsZS5cbmNvbnN0IG5leHRDb25maWdPdXRwdXQgPSBcIlwiXG5jb25zdCByb3V0ZU1vZHVsZSA9IG5ldyBBcHBSb3V0ZVJvdXRlTW9kdWxlKHtcbiAgICBkZWZpbml0aW9uOiB7XG4gICAgICAgIGtpbmQ6IFJvdXRlS2luZC5BUFBfUk9VVEUsXG4gICAgICAgIHBhZ2U6IFwiL2FwaS9kYXNoYm9hcmQvc3RhbmRpbmdzL1tsZWFndWVfaWRdL3JvdXRlXCIsXG4gICAgICAgIHBhdGhuYW1lOiBcIi9hcGkvZGFzaGJvYXJkL3N0YW5kaW5ncy9bbGVhZ3VlX2lkXVwiLFxuICAgICAgICBmaWxlbmFtZTogXCJyb3V0ZVwiLFxuICAgICAgICBidW5kbGVQYXRoOiBcImFwcC9hcGkvZGFzaGJvYXJkL3N0YW5kaW5ncy9bbGVhZ3VlX2lkXS9yb3V0ZVwiXG4gICAgfSxcbiAgICByZXNvbHZlZFBhZ2VQYXRoOiBcIi9Vc2Vycy9qZTRuZGV2L0RvY3VtZW50cy9Qcm9qZXRvcyBUUkFFIC9IeXBlRmMxL3NyYy9hcHAvYXBpL2Rhc2hib2FyZC9zdGFuZGluZ3MvW2xlYWd1ZV9pZF0vcm91dGUudHNcIixcbiAgICBuZXh0Q29uZmlnT3V0cHV0LFxuICAgIHVzZXJsYW5kXG59KTtcbi8vIFB1bGwgb3V0IHRoZSBleHBvcnRzIHRoYXQgd2UgbmVlZCB0byBleHBvc2UgZnJvbSB0aGUgbW9kdWxlLiBUaGlzIHNob3VsZFxuLy8gYmUgZWxpbWluYXRlZCB3aGVuIHdlJ3ZlIG1vdmVkIHRoZSBvdGhlciByb3V0ZXMgdG8gdGhlIG5ldyBmb3JtYXQuIFRoZXNlXG4vLyBhcmUgdXNlZCB0byBob29rIGludG8gdGhlIHJvdXRlLlxuY29uc3QgeyByZXF1ZXN0QXN5bmNTdG9yYWdlLCBzdGF0aWNHZW5lcmF0aW9uQXN5bmNTdG9yYWdlLCBzZXJ2ZXJIb29rcyB9ID0gcm91dGVNb2R1bGU7XG5jb25zdCBvcmlnaW5hbFBhdGhuYW1lID0gXCIvYXBpL2Rhc2hib2FyZC9zdGFuZGluZ3MvW2xlYWd1ZV9pZF0vcm91dGVcIjtcbmZ1bmN0aW9uIHBhdGNoRmV0Y2goKSB7XG4gICAgcmV0dXJuIF9wYXRjaEZldGNoKHtcbiAgICAgICAgc2VydmVySG9va3MsXG4gICAgICAgIHN0YXRpY0dlbmVyYXRpb25Bc3luY1N0b3JhZ2VcbiAgICB9KTtcbn1cbmV4cG9ydCB7IHJvdXRlTW9kdWxlLCByZXF1ZXN0QXN5bmNTdG9yYWdlLCBzdGF0aWNHZW5lcmF0aW9uQXN5bmNTdG9yYWdlLCBzZXJ2ZXJIb29rcywgb3JpZ2luYWxQYXRobmFtZSwgcGF0Y2hGZXRjaCwgIH07XG5cbi8vIyBzb3VyY2VNYXBwaW5nVVJMPWFwcC1yb3V0ZS5qcy5tYXAiXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fapi%2Fdashboard%2Fstandings%2F%5Bleague_id%5D%2Froute&page=%2Fapi%2Fdashboard%2Fstandings%2F%5Bleague_id%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fdashboard%2Fstandings%2F%5Bleague_id%5D%2Froute.ts&appDir=%2FUsers%2Fje4ndev%2FDocuments%2FProjetos%20TRAE%20%2FHypeFc1%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Fje4ndev%2FDocuments%2FProjetos%20TRAE%20%2FHypeFc1&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!\n");
+
+/***/ }),
+
+/***/ "(rsc)/./src/app/api/dashboard/standings/[league_id]/route.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/api/dashboard/standings/[league_id]/route.ts ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   GET: () => (/* binding */ GET)\n/* harmony export */ });\n/* harmony import */ var next_server__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/server */ \"(rsc)/./node_modules/next/dist/api/server.js\");\n/* harmony import */ var _lib_supabase__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/lib/supabase */ \"(rsc)/./src/lib/supabase.ts\");\n\n\nasync function GET(request, { params }) {\n    try {\n        const { league_id } = params;\n        if (!league_id) {\n            return next_server__WEBPACK_IMPORTED_MODULE_0__.NextResponse.json({\n                error: \"League ID is required\"\n            }, {\n                status: 400\n            });\n        }\n        // Buscar na tabela leagues para pegar league_name\n        const { data: leagueData, error: leagueError } = await _lib_supabase__WEBPACK_IMPORTED_MODULE_1__.supabaseAdmin.from(\"leagues\").select(\"name\").eq(\"id\", league_id).single();\n        if (leagueError) throw leagueError;\n        // Buscar na tabela standings: WHERE league_id = :league_id ORDER BY position ASC LIMIT 10\n        const { data: standingsData, error: standingsError } = await _lib_supabase__WEBPACK_IMPORTED_MODULE_1__.supabaseAdmin.from(\"standings\").select(\"*\").eq(\"league_id\", league_id).order(\"position\", {\n            ascending: true\n        }).limit(10);\n        if (standingsError) throw standingsError;\n        // Pegar captured_at = a data/hora mais recente desse mesmo league_id (MAX(captured_at))\n        const { data: capturedAtData, error: capturedAtError } = await _lib_supabase__WEBPACK_IMPORTED_MODULE_1__.supabaseAdmin.from(\"standings\").select(\"captured_at\").eq(\"league_id\", league_id).order(\"captured_at\", {\n            ascending: false\n        }).limit(1);\n        if (capturedAtError) throw capturedAtError;\n        // Montar o array `table` com: pos = position, team = team_name, pts = points, played, wins, draws, losses\n        const table = standingsData?.map((standing)=>({\n                pos: standing.position,\n                team: standing.team_name,\n                pts: standing.points,\n                played: standing.played,\n                wins: standing.wins,\n                draws: standing.draws,\n                losses: standing.losses\n            })) || [];\n        const response = {\n            league_id,\n            league_name: leagueData?.name || league_id,\n            table,\n            captured_at: capturedAtData?.[0]?.captured_at || new Date().toISOString()\n        };\n        return next_server__WEBPACK_IMPORTED_MODULE_0__.NextResponse.json(response);\n    } catch (error) {\n        console.error(\"Error fetching standings:\", error);\n        return next_server__WEBPACK_IMPORTED_MODULE_0__.NextResponse.json({\n            error: \"Failed to fetch standings\"\n        }, {\n            status: 500\n        });\n    }\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9zcmMvYXBwL2FwaS9kYXNoYm9hcmQvc3RhbmRpbmdzL1tsZWFndWVfaWRdL3JvdXRlLnRzIiwibWFwcGluZ3MiOiI7Ozs7OztBQUF3RDtBQUNUO0FBRXhDLGVBQWVFLElBQ3BCQyxPQUFvQixFQUNwQixFQUFFQyxNQUFNLEVBQXFDO0lBRTdDLElBQUk7UUFDRixNQUFNLEVBQUVDLFNBQVMsRUFBRSxHQUFHRDtRQUV0QixJQUFJLENBQUNDLFdBQVc7WUFDZCxPQUFPTCxxREFBWUEsQ0FBQ00sSUFBSSxDQUN0QjtnQkFBRUMsT0FBTztZQUF3QixHQUNqQztnQkFBRUMsUUFBUTtZQUFJO1FBRWxCO1FBRUEsa0RBQWtEO1FBQ2xELE1BQU0sRUFBRUMsTUFBTUMsVUFBVSxFQUFFSCxPQUFPSSxXQUFXLEVBQUUsR0FBRyxNQUFNVix3REFBYUEsQ0FDakVXLElBQUksQ0FBQyxXQUNMQyxNQUFNLENBQUMsUUFDUEMsRUFBRSxDQUFDLE1BQU1ULFdBQ1RVLE1BQU07UUFFVCxJQUFJSixhQUFhLE1BQU1BO1FBRXZCLDBGQUEwRjtRQUMxRixNQUFNLEVBQUVGLE1BQU1PLGFBQWEsRUFBRVQsT0FBT1UsY0FBYyxFQUFFLEdBQUcsTUFBTWhCLHdEQUFhQSxDQUN2RVcsSUFBSSxDQUFDLGFBQ0xDLE1BQU0sQ0FBQyxLQUNQQyxFQUFFLENBQUMsYUFBYVQsV0FDaEJhLEtBQUssQ0FBQyxZQUFZO1lBQUVDLFdBQVc7UUFBSyxHQUNwQ0MsS0FBSyxDQUFDO1FBRVQsSUFBSUgsZ0JBQWdCLE1BQU1BO1FBRTFCLHdGQUF3RjtRQUN4RixNQUFNLEVBQUVSLE1BQU1ZLGNBQWMsRUFBRWQsT0FBT2UsZUFBZSxFQUFFLEdBQUcsTUFBTXJCLHdEQUFhQSxDQUN6RVcsSUFBSSxDQUFDLGFBQ0xDLE1BQU0sQ0FBQyxlQUNQQyxFQUFFLENBQUMsYUFBYVQsV0FDaEJhLEtBQUssQ0FBQyxlQUFlO1lBQUVDLFdBQVc7UUFBTSxHQUN4Q0MsS0FBSyxDQUFDO1FBRVQsSUFBSUUsaUJBQWlCLE1BQU1BO1FBRTNCLDBHQUEwRztRQUMxRyxNQUFNQyxRQUFRUCxlQUFlUSxJQUFJQyxDQUFBQSxXQUFhO2dCQUM1Q0MsS0FBS0QsU0FBU0UsUUFBUTtnQkFDdEJDLE1BQU1ILFNBQVNJLFNBQVM7Z0JBQ3hCQyxLQUFLTCxTQUFTTSxNQUFNO2dCQUNwQkMsUUFBUVAsU0FBU08sTUFBTTtnQkFDdkJDLE1BQU1SLFNBQVNRLElBQUk7Z0JBQ25CQyxPQUFPVCxTQUFTUyxLQUFLO2dCQUNyQkMsUUFBUVYsU0FBU1UsTUFBTTtZQUN6QixPQUFPLEVBQUU7UUFFVCxNQUFNQyxXQUFXO1lBQ2YvQjtZQUNBZ0MsYUFBYTNCLFlBQVk0QixRQUFRakM7WUFDakNrQjtZQUNBZ0IsYUFBYWxCLGdCQUFnQixDQUFDLEVBQUUsRUFBRWtCLGVBQWUsSUFBSUMsT0FBT0MsV0FBVztRQUN6RTtRQUVBLE9BQU96QyxxREFBWUEsQ0FBQ00sSUFBSSxDQUFDOEI7SUFDM0IsRUFBRSxPQUFPN0IsT0FBTztRQUNkbUMsUUFBUW5DLEtBQUssQ0FBQyw2QkFBNkJBO1FBQzNDLE9BQU9QLHFEQUFZQSxDQUFDTSxJQUFJLENBQ3RCO1lBQUVDLE9BQU87UUFBNEIsR0FDckM7WUFBRUMsUUFBUTtRQUFJO0lBRWxCO0FBQ0YiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9oeXBlZmMvLi9zcmMvYXBwL2FwaS9kYXNoYm9hcmQvc3RhbmRpbmdzL1tsZWFndWVfaWRdL3JvdXRlLnRzP2FlMWEiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTmV4dFJlcXVlc3QsIE5leHRSZXNwb25zZSB9IGZyb20gJ25leHQvc2VydmVyJztcbmltcG9ydCB7IHN1cGFiYXNlQWRtaW4gfSBmcm9tICdAL2xpYi9zdXBhYmFzZSc7XG5cbmV4cG9ydCBhc3luYyBmdW5jdGlvbiBHRVQoXG4gIHJlcXVlc3Q6IE5leHRSZXF1ZXN0LFxuICB7IHBhcmFtcyB9OiB7IHBhcmFtczogeyBsZWFndWVfaWQ6IHN0cmluZyB9IH1cbikge1xuICB0cnkge1xuICAgIGNvbnN0IHsgbGVhZ3VlX2lkIH0gPSBwYXJhbXM7XG5cbiAgICBpZiAoIWxlYWd1ZV9pZCkge1xuICAgICAgcmV0dXJuIE5leHRSZXNwb25zZS5qc29uKFxuICAgICAgICB7IGVycm9yOiAnTGVhZ3VlIElEIGlzIHJlcXVpcmVkJyB9LFxuICAgICAgICB7IHN0YXR1czogNDAwIH1cbiAgICAgICk7XG4gICAgfVxuXG4gICAgLy8gQnVzY2FyIG5hIHRhYmVsYSBsZWFndWVzIHBhcmEgcGVnYXIgbGVhZ3VlX25hbWVcbiAgICBjb25zdCB7IGRhdGE6IGxlYWd1ZURhdGEsIGVycm9yOiBsZWFndWVFcnJvciB9ID0gYXdhaXQgc3VwYWJhc2VBZG1pblxuICAgICAgLmZyb20oJ2xlYWd1ZXMnKVxuICAgICAgLnNlbGVjdCgnbmFtZScpXG4gICAgICAuZXEoJ2lkJywgbGVhZ3VlX2lkKVxuICAgICAgLnNpbmdsZSgpO1xuXG4gICAgaWYgKGxlYWd1ZUVycm9yKSB0aHJvdyBsZWFndWVFcnJvcjtcblxuICAgIC8vIEJ1c2NhciBuYSB0YWJlbGEgc3RhbmRpbmdzOiBXSEVSRSBsZWFndWVfaWQgPSA6bGVhZ3VlX2lkIE9SREVSIEJZIHBvc2l0aW9uIEFTQyBMSU1JVCAxMFxuICAgIGNvbnN0IHsgZGF0YTogc3RhbmRpbmdzRGF0YSwgZXJyb3I6IHN0YW5kaW5nc0Vycm9yIH0gPSBhd2FpdCBzdXBhYmFzZUFkbWluXG4gICAgICAuZnJvbSgnc3RhbmRpbmdzJylcbiAgICAgIC5zZWxlY3QoJyonKVxuICAgICAgLmVxKCdsZWFndWVfaWQnLCBsZWFndWVfaWQpXG4gICAgICAub3JkZXIoJ3Bvc2l0aW9uJywgeyBhc2NlbmRpbmc6IHRydWUgfSlcbiAgICAgIC5saW1pdCgxMCk7XG5cbiAgICBpZiAoc3RhbmRpbmdzRXJyb3IpIHRocm93IHN0YW5kaW5nc0Vycm9yO1xuXG4gICAgLy8gUGVnYXIgY2FwdHVyZWRfYXQgPSBhIGRhdGEvaG9yYSBtYWlzIHJlY2VudGUgZGVzc2UgbWVzbW8gbGVhZ3VlX2lkIChNQVgoY2FwdHVyZWRfYXQpKVxuICAgIGNvbnN0IHsgZGF0YTogY2FwdHVyZWRBdERhdGEsIGVycm9yOiBjYXB0dXJlZEF0RXJyb3IgfSA9IGF3YWl0IHN1cGFiYXNlQWRtaW5cbiAgICAgIC5mcm9tKCdzdGFuZGluZ3MnKVxuICAgICAgLnNlbGVjdCgnY2FwdHVyZWRfYXQnKVxuICAgICAgLmVxKCdsZWFndWVfaWQnLCBsZWFndWVfaWQpXG4gICAgICAub3JkZXIoJ2NhcHR1cmVkX2F0JywgeyBhc2NlbmRpbmc6IGZhbHNlIH0pXG4gICAgICAubGltaXQoMSk7XG5cbiAgICBpZiAoY2FwdHVyZWRBdEVycm9yKSB0aHJvdyBjYXB0dXJlZEF0RXJyb3I7XG5cbiAgICAvLyBNb250YXIgbyBhcnJheSBgdGFibGVgIGNvbTogcG9zID0gcG9zaXRpb24sIHRlYW0gPSB0ZWFtX25hbWUsIHB0cyA9IHBvaW50cywgcGxheWVkLCB3aW5zLCBkcmF3cywgbG9zc2VzXG4gICAgY29uc3QgdGFibGUgPSBzdGFuZGluZ3NEYXRhPy5tYXAoc3RhbmRpbmcgPT4gKHtcbiAgICAgIHBvczogc3RhbmRpbmcucG9zaXRpb24sXG4gICAgICB0ZWFtOiBzdGFuZGluZy50ZWFtX25hbWUsXG4gICAgICBwdHM6IHN0YW5kaW5nLnBvaW50cyxcbiAgICAgIHBsYXllZDogc3RhbmRpbmcucGxheWVkLFxuICAgICAgd2luczogc3RhbmRpbmcud2lucyxcbiAgICAgIGRyYXdzOiBzdGFuZGluZy5kcmF3cyxcbiAgICAgIGxvc3Nlczogc3RhbmRpbmcubG9zc2VzXG4gICAgfSkpIHx8IFtdO1xuXG4gICAgY29uc3QgcmVzcG9uc2UgPSB7XG4gICAgICBsZWFndWVfaWQsXG4gICAgICBsZWFndWVfbmFtZTogbGVhZ3VlRGF0YT8ubmFtZSB8fCBsZWFndWVfaWQsXG4gICAgICB0YWJsZSxcbiAgICAgIGNhcHR1cmVkX2F0OiBjYXB0dXJlZEF0RGF0YT8uWzBdPy5jYXB0dXJlZF9hdCB8fCBuZXcgRGF0ZSgpLnRvSVNPU3RyaW5nKClcbiAgICB9O1xuXG4gICAgcmV0dXJuIE5leHRSZXNwb25zZS5qc29uKHJlc3BvbnNlKTtcbiAgfSBjYXRjaCAoZXJyb3IpIHtcbiAgICBjb25zb2xlLmVycm9yKCdFcnJvciBmZXRjaGluZyBzdGFuZGluZ3M6JywgZXJyb3IpO1xuICAgIHJldHVybiBOZXh0UmVzcG9uc2UuanNvbihcbiAgICAgIHsgZXJyb3I6ICdGYWlsZWQgdG8gZmV0Y2ggc3RhbmRpbmdzJyB9LFxuICAgICAgeyBzdGF0dXM6IDUwMCB9XG4gICAgKTtcbiAgfVxufSJdLCJuYW1lcyI6WyJOZXh0UmVzcG9uc2UiLCJzdXBhYmFzZUFkbWluIiwiR0VUIiwicmVxdWVzdCIsInBhcmFtcyIsImxlYWd1ZV9pZCIsImpzb24iLCJlcnJvciIsInN0YXR1cyIsImRhdGEiLCJsZWFndWVEYXRhIiwibGVhZ3VlRXJyb3IiLCJmcm9tIiwic2VsZWN0IiwiZXEiLCJzaW5nbGUiLCJzdGFuZGluZ3NEYXRhIiwic3RhbmRpbmdzRXJyb3IiLCJvcmRlciIsImFzY2VuZGluZyIsImxpbWl0IiwiY2FwdHVyZWRBdERhdGEiLCJjYXB0dXJlZEF0RXJyb3IiLCJ0YWJsZSIsIm1hcCIsInN0YW5kaW5nIiwicG9zIiwicG9zaXRpb24iLCJ0ZWFtIiwidGVhbV9uYW1lIiwicHRzIiwicG9pbnRzIiwicGxheWVkIiwid2lucyIsImRyYXdzIiwibG9zc2VzIiwicmVzcG9uc2UiLCJsZWFndWVfbmFtZSIsIm5hbWUiLCJjYXB0dXJlZF9hdCIsIkRhdGUiLCJ0b0lTT1N0cmluZyIsImNvbnNvbGUiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(rsc)/./src/app/api/dashboard/standings/[league_id]/route.ts\n");
+
+/***/ }),
+
+/***/ "(rsc)/./src/lib/supabase.ts":
+/*!*****************************!*\
+  !*** ./src/lib/supabase.ts ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__),\n/* harmony export */   supabase: () => (/* binding */ supabase),\n/* harmony export */   supabaseAdmin: () => (/* binding */ supabaseAdmin)\n/* harmony export */ });\n/* harmony import */ var _supabase_supabase_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @supabase/supabase-js */ \"(rsc)/./node_modules/@supabase/supabase-js/dist/module/index.js\");\n\nconst supabaseUrl = \"https://hfbmtpsziwsdazgrpfzw.supabase.co\";\nconst supabaseAnonKey = \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhmYm10cHN6aXdzZGF6Z3JwZnp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzMjM3NzIsImV4cCI6MjA3Njg5OTc3Mn0.bX4Oi9PkcoyCguyoUKc1THrpbLlMy8Pvrs2MSdoPL6c\";\nconst supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;\n// Client for frontend usage (anon key)\nconst supabase = (0,_supabase_supabase_js__WEBPACK_IMPORTED_MODULE_0__.createClient)(supabaseUrl, supabaseAnonKey);\n// Client for backend usage (service role key)\nconst supabaseAdmin = (0,_supabase_supabase_js__WEBPACK_IMPORTED_MODULE_0__.createClient)(supabaseUrl, supabaseServiceKey);\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (supabase);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9zcmMvbGliL3N1cGFiYXNlLnRzIiwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBcUQ7QUFFckQsTUFBTUMsY0FBY0MsMENBQW9DO0FBQ3hELE1BQU1HLGtCQUFrQkgsa05BQXlDO0FBQ2pFLE1BQU1LLHFCQUFxQkwsUUFBUUMsR0FBRyxDQUFDSyx5QkFBeUI7QUFFaEUsdUNBQXVDO0FBQ2hDLE1BQU1DLFdBQVdULG1FQUFZQSxDQUFDQyxhQUFhSSxpQkFBaUI7QUFFbkUsOENBQThDO0FBQ3ZDLE1BQU1LLGdCQUFnQlYsbUVBQVlBLENBQUNDLGFBQWFNLG9CQUFvQjtBQUUzRSxpRUFBZUUsUUFBUUEsRUFBQyIsInNvdXJjZXMiOlsid2VicGFjazovL2h5cGVmYy8uL3NyYy9saWIvc3VwYWJhc2UudHM/MDZlMSJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBjcmVhdGVDbGllbnQgfSBmcm9tICdAc3VwYWJhc2Uvc3VwYWJhc2UtanMnO1xuXG5jb25zdCBzdXBhYmFzZVVybCA9IHByb2Nlc3MuZW52Lk5FWFRfUFVCTElDX1NVUEFCQVNFX1VSTCE7XG5jb25zdCBzdXBhYmFzZUFub25LZXkgPSBwcm9jZXNzLmVudi5ORVhUX1BVQkxJQ19TVVBBQkFTRV9BTk9OX0tFWSE7XG5jb25zdCBzdXBhYmFzZVNlcnZpY2VLZXkgPSBwcm9jZXNzLmVudi5TVVBBQkFTRV9TRVJWSUNFX1JPTEVfS0VZITtcblxuLy8gQ2xpZW50IGZvciBmcm9udGVuZCB1c2FnZSAoYW5vbiBrZXkpXG5leHBvcnQgY29uc3Qgc3VwYWJhc2UgPSBjcmVhdGVDbGllbnQoc3VwYWJhc2VVcmwsIHN1cGFiYXNlQW5vbktleSk7XG5cbi8vIENsaWVudCBmb3IgYmFja2VuZCB1c2FnZSAoc2VydmljZSByb2xlIGtleSlcbmV4cG9ydCBjb25zdCBzdXBhYmFzZUFkbWluID0gY3JlYXRlQ2xpZW50KHN1cGFiYXNlVXJsLCBzdXBhYmFzZVNlcnZpY2VLZXkpO1xuXG5leHBvcnQgZGVmYXVsdCBzdXBhYmFzZTsiXSwibmFtZXMiOlsiY3JlYXRlQ2xpZW50Iiwic3VwYWJhc2VVcmwiLCJwcm9jZXNzIiwiZW52IiwiTkVYVF9QVUJMSUNfU1VQQUJBU0VfVVJMIiwic3VwYWJhc2VBbm9uS2V5IiwiTkVYVF9QVUJMSUNfU1VQQUJBU0VfQU5PTl9LRVkiLCJzdXBhYmFzZVNlcnZpY2VLZXkiLCJTVVBBQkFTRV9TRVJWSUNFX1JPTEVfS0VZIiwic3VwYWJhc2UiLCJzdXBhYmFzZUFkbWluIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(rsc)/./src/lib/supabase.ts\n");
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../../../../../webpack-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@supabase","vendor-chunks/tr46","vendor-chunks/whatwg-url","vendor-chunks/tslib","vendor-chunks/webidl-conversions"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fapi%2Fdashboard%2Fstandings%2F%5Bleague_id%5D%2Froute&page=%2Fapi%2Fdashboard%2Fstandings%2F%5Bleague_id%5D%2Froute&appPaths=&pagePath=private-next-app-dir%2Fapi%2Fdashboard%2Fstandings%2F%5Bleague_id%5D%2Froute.ts&appDir=%2FUsers%2Fje4ndev%2FDocuments%2FProjetos%20TRAE%20%2FHypeFc1%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Fje4ndev%2FDocuments%2FProjetos%20TRAE%20%2FHypeFc1&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
+module.exports = __webpack_exports__;
+
+})();
