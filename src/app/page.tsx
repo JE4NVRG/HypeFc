@@ -24,6 +24,7 @@ interface HypeTeam {
 interface Standing {
   pos: number
   team: string
+  crest: string // Adicionar URL do escudo
   pts: number
   played: number
   wins: number
@@ -50,6 +51,8 @@ export default function Home() {
   const [standingsData, setStandingsData] = useState<StandingsData | null>(null)
   const [loadingToday, setLoadingToday] = useState(true)
   const [loadingStandings, setLoadingStandings] = useState(true)
+  const [lastUpdated, setLastUpdated] = useState<string>('')
+  const [apiPerformance, setApiPerformance] = useState<{today?: string, standings?: string}>({})
 
   const leagues = [
     { id: 'BSA', name: 'Brasileirão' },
@@ -69,6 +72,8 @@ export default function Home() {
         const json = await res.json()
         console.log("todayData:", json)
         setTodayData(json)
+        setLastUpdated(new Date().toLocaleString('pt-BR'))
+        setApiPerformance(prev => ({ ...prev, today: json._meta?.responseTime || 'N/A' }))
       } catch (error) {
         console.error("Erro ao carregar dados de hoje:", error)
         setTodayData({ date: '', matches: [], hype: [] })
@@ -88,6 +93,7 @@ export default function Home() {
         const json = await res.json()
         console.log("standingsData:", json)
         setStandingsData(json)
+        setApiPerformance(prev => ({ ...prev, standings: json._meta?.responseTime || 'N/A' }))
       } catch (error) {
         console.error("Erro ao carregar standings:", error)
         setStandingsData({ league_id: leagueId, league_name: '', table: [], captured_at: '' })
@@ -107,6 +113,8 @@ export default function Home() {
       const json = await res.json()
       console.log("todayData (refresh):", json)
       setTodayData(json)
+      setLastUpdated(new Date().toLocaleString('pt-BR'))
+      setApiPerformance(prev => ({ ...prev, today: json._meta?.responseTime || 'N/A' }))
     } catch (error) {
       console.error("Erro ao recarregar dados de hoje:", error)
     } finally {
@@ -120,11 +128,14 @@ export default function Home() {
       const json = await res.json()
       console.log("standingsData (refresh):", json)
       setStandingsData(json)
+      setApiPerformance(prev => ({ ...prev, standings: json._meta?.responseTime || 'N/A' }))
     } catch (error) {
       console.error("Erro ao recarregar standings:", error)
     } finally {
       setLoadingStandings(false)
     }
+    
+    console.log("refresh ok")
   }
 
   // Agrupar jogos por league_name
@@ -188,7 +199,7 @@ export default function Home() {
                     <div className="space-y-2">
                       {matches.map((match, matchIndex) => (
                         <div 
-                          key={`${match.league_id}-${match.home}-${match.away}-${match.time_local}-${matchIndex}`} 
+                          key={league_name + match.home + match.away + match.time_local} 
                           className="flex items-center justify-between text-sm text-slate-200"
                         >
                           <div className="font-medium">{match.home} x {match.away}</div>
@@ -226,7 +237,7 @@ export default function Home() {
               <div className="space-y-3">
                 {todayData?.hype?.map((h, hypeIndex) => (
                   <div
-                    key={`${h.team}-${h.reason}-${h.priority}-${hypeIndex}`}
+                    key={h.team + "-" + h.reason + "-" + hypeIndex}
                     className="flex items-center justify-between text-sm text-slate-200 border-b border-white/5 py-2 last:border-none"
                   >
                     <div className="font-medium">{h.team}</div>
@@ -245,7 +256,7 @@ export default function Home() {
               <CardTitle className="flex items-center gap-2">
                 <Trophy className="h-4 w-4 text-yellow-400" />
                 <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
-                  Top 10 da Liga
+                  Tabela da Liga
                 </span>
               </CardTitle>
               <select 
@@ -282,21 +293,21 @@ export default function Home() {
                   </thead>
                   <tbody>
                     {standingsData?.table?.map((standing, index) => (
-                      <tr key={`${standingsData.league_id}-${standing.pos}-${standing.team}-${index}`} className="border-b border-white/5 hover:bg-white/5">
-                        <td className="py-2 font-medium">
-                          <div className="flex items-center gap-2">
-                            {standing.pos <= 3 && (
-                              <Trophy className={`h-3 w-3 ${
-                                standing.pos === 1 ? 'text-yellow-400' : 
-                                standing.pos === 2 ? 'text-slate-300' : 
-                                'text-amber-600'
-                              }`} />
-                            )}
-                            {standing.pos}
-                          </div>
+                      <tr key={standing.pos + "-" + standing.team} className="hover:bg-white/5">
+                        <td className="py-2 text-slate-400 text-xs w-[2rem]">{standing.pos}</td>
+                        <td className="py-2 flex items-center gap-2">
+                          <img 
+                            src={standing.crest || '/default-team-logo.svg'} 
+                            alt={standing.team} 
+                            className="h-5 w-5 rounded bg-slate-800 border border-white/10 object-contain" 
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = '/default-team-logo.svg';
+                            }}
+                          />
+                          <span className="text-slate-200 text-sm font-medium">{standing.team}</span>
                         </td>
-                        <td className="py-2">{standing.team}</td>
-                        <td className="py-2 text-right font-semibold">{standing.pts}</td>
+                        <td className="py-2 text-right font-semibold text-slate-100">{standing.pts}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -313,13 +324,29 @@ export default function Home() {
       </main>
 
       {/* Rodapé */}
-      <footer className="mt-12 text-center">
-        <p className="text-slate-500 text-xs">
-          HypeFC Dashboard — Dados atualizados diariamente às 8:00 (horário de Brasília)
-        </p>
-        <p className="text-slate-500 text-xs mt-1">
-          Powered by Football-Data.org e Supabase
-        </p>
+      <footer className="mt-12 text-center space-y-2">
+        <div className="flex justify-center items-center gap-4 text-xs text-slate-500">
+          <span>HypeFC Dashboard</span>
+          <span>•</span>
+          <span>Dados atualizados diariamente às 6:00 (horário de Brasília)</span>
+          {lastUpdated && (
+            <>
+              <span>•</span>
+              <span>Última atualização: {lastUpdated}</span>
+            </>
+          )}
+        </div>
+        <div className="flex justify-center items-center gap-4 text-xs text-slate-600">
+          <span>Powered by Football-Data.org e Supabase</span>
+          {(apiPerformance.today || apiPerformance.standings) && (
+            <>
+              <span>•</span>
+              <span>
+                Performance: Today {apiPerformance.today}, Standings {apiPerformance.standings}
+              </span>
+            </>
+          )}
+        </div>
       </footer>
     </div>
   )

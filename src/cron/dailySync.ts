@@ -82,13 +82,12 @@ async function saveStandings(leagueId: string, standingsData: any): Promise<void
     return;
   }
 
-  // Inserir SOMENTE as 10 primeiras posições
-  const top10 = table.slice(0, 10);
-  
-  const standingsToInsert = top10.map((standing: any) => ({
+  // Inserir TODAS as posições da liga (não só top 10)
+  const standingsToInsert = table.map((standing: any) => ({
     league_id: leagueId,
     position: standing.position,
     team_name: standing.team.name,
+    team_crest: standing.team.crest, // Adicionar URL do escudo
     played: standing.playedGames,
     wins: standing.won,
     draws: standing.draw,

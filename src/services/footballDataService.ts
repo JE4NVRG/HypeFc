@@ -49,6 +49,17 @@ class FootballDataService {
     return this.makeRequest(`/competitions/${competitionId}/standings`);
   }
 
+  async getMatches(leagueId: string): Promise<any> {
+    const competitionId = LEAGUE_MAPPING[leagueId];
+    
+    if (!competitionId) {
+      throw new Error(`League ${leagueId} not supported`);
+    }
+
+    const today = new Date().toISOString().split('T')[0];
+    return this.makeRequest(`/competitions/${competitionId}/matches?dateFrom=${today}&dateTo=${today}`);
+  }
+
   async getAllStandings(): Promise<Record<string, FootballDataStandingsResponse>> {
     const results: Record<string, FootballDataStandingsResponse> = {};
     
