@@ -2,14 +2,25 @@ import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 import { footballDataService } from '@/services/footballDataService';
 
-// Configuração das ligas
+// Configuração completa das ligas
 const LEAGUES = [
-  { id: 'BSA', name: 'Brasileirão' },
+  // Ligas Europeias Principais
   { id: 'PL', name: 'Premier League' },
   { id: 'PD', name: 'La Liga' },
   { id: 'SA', name: 'Serie A' },
   { id: 'FL1', name: 'Ligue 1' },
-  { id: 'CL', name: 'Champions League' }
+  { id: 'BL1', name: 'Bundesliga' },
+  { id: 'DED', name: 'Eredivisie' },
+  { id: 'PPL', name: 'Primeira Liga' },
+  { id: 'ELC', name: 'Championship' },
+  
+  // Competições Internacionais
+  { id: 'CL', name: 'Champions League' },
+  { id: 'EC', name: 'European Championship' },
+  { id: 'WC', name: 'FIFA World Cup' },
+  
+  // Liga Sul-Americana
+  { id: 'BSA', name: 'Brasileirão' }
 ];
 
 // Função para limpar dados antigos
@@ -287,6 +298,7 @@ export async function GET(request: Request) {
         await saveMatches(league.id, matchesData, hoje);
         
         results.push({
+          league_id: league.id,
           league: league.name,
           status: 'success',
           standings: standingsData.standings?.[0]?.table?.length || 0,
@@ -299,6 +311,7 @@ export async function GET(request: Request) {
       } catch (error) {
         console.error(`❌ Erro ao processar ${league.name}:`, error);
         results.push({
+          league_id: league.id,
           league: league.name,
           status: 'error',
           error: error instanceof Error ? error.message : 'Unknown error'

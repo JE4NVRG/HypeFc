@@ -1,18 +1,30 @@
 import { createClient } from '@supabase/supabase-js';
+import { LEAGUE_NAMES } from '@/types';
 
 // Configuração do Supabase diretamente no arquivo
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
 
-// Lista fixa de ligas conforme especificado
+// Lista completa de todas as ligas disponíveis
 const LEAGUES = [
-  { id: "BSA", name: "Brasileirão Série A" },
+  // Ligas Europeias Principais
   { id: "PL", name: "Premier League" },
   { id: "PD", name: "La Liga" },
   { id: "SA", name: "Serie A" },
   { id: "FL1", name: "Ligue 1" },
-  { id: "CL", name: "Champions League" }
+  { id: "BL1", name: "Bundesliga" },
+  { id: "DED", name: "Eredivisie" },
+  { id: "PPL", name: "Primeira Liga" },
+  { id: "ELC", name: "Championship" },
+  
+  // Competições Internacionais
+  { id: "CL", name: "Champions League" },
+  { id: "EC", name: "European Championship" },
+  { id: "WC", name: "FIFA World Cup" },
+  
+  // Liga Sul-Americana
+  { id: "BSA", name: "Brasileirão Série A" }
 ];
 
 // Helper para aguardar entre chamadas (rate limit)

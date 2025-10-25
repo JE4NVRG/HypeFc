@@ -62,14 +62,6 @@ export default function Home() {
   const [lastUpdated, setLastUpdated] = useState<string>('')
   const [apiPerformance, setApiPerformance] = useState<{today?: string, standings?: string}>({})
 
-  const leagues = [
-    { id: 'BSA', name: 'Brasileirão' },
-    { id: 'PL', name: 'Premier League' },
-    { id: 'PD', name: 'La Liga' },
-    { id: 'SA', name: 'Serie A' },
-    { id: 'FL1', name: 'Ligue 1' },
-    { id: 'CL', name: 'Champions' }
-  ]
 
   // useEffect #1: Buscar dados de hoje
   useEffect(() => {
@@ -146,8 +138,9 @@ export default function Home() {
     console.log("refresh ok")
   }
 
-  // Agrupar jogos por league_name
+  // Agrupar jogos por league_name - com verificação de segurança
   const groupedMatches = todayData?.matches?.reduce((acc, match) => {
+    if (!match?.league_name) return acc
     if (!acc[match.league_name]) {
       acc[match.league_name] = []
     }
@@ -195,17 +188,17 @@ export default function Home() {
                   <div key={i} className="h-4 w-40 bg-white/10 rounded animate-pulse" />
                 ))}
               </div>
-            ) : !loadingToday && todayData?.matches && todayData.matches.length === 0 ? (
+            ) : !loadingToday && (!todayData?.matches || todayData.matches.length === 0) ? (
               <p className="text-slate-500 text-sm">Nenhum jogo programado para hoje</p>
             ) : (
               <div className="space-y-4">
-                {Object.entries(groupedMatches).map(([league_name, matches]) => (
+                {Object.entries(groupedMatches || {}).map(([league_name, matches]) => (
                   <div key={league_name}>
                     <div className="text-xs uppercase text-slate-400 mt-4 first:mt-0 mb-2">
                       {league_name}
                     </div>
                     <div className="space-y-2">
-                      {matches.map((match, matchIndex) => (
+                      {(matches || []).map((match, matchIndex) => (
                         <div 
                           key={`${match.league_id}-${match.home}-${match.away}-${match.time_local}-${matchIndex}`} 
                           className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm text-slate-200 p-2 rounded-lg bg-white/5 border border-white/10"
@@ -287,11 +280,11 @@ export default function Home() {
                   <div key={i} className="h-4 w-40 bg-white/10 rounded animate-pulse" />
                 ))}
               </div>
-            ) : !loadingToday && todayData?.hype && todayData.hype.length === 0 ? (
+            ) : !loadingToday && (!todayData?.hype || todayData.hype.length === 0) ? (
               <p className="text-slate-500 text-sm">Nenhum time em destaque hoje</p>
             ) : (
               <div className="space-y-3">
-                {todayData?.hype?.map((h, hypeIndex) => (
+                {(todayData?.hype || []).map((h, hypeIndex) => (
                   <div
                     key={h.team + "-" + h.reason + "-" + hypeIndex}
                     className="flex items-center justify-between text-sm text-slate-200 border-b border-white/5 py-2 last:border-none"
@@ -329,23 +322,32 @@ export default function Home() {
         {/* Card 3: Top 10 da Liga */}
         <Card className="rounded-2xl bg-white/5 border border-white/10 shadow-xl p-5 flex flex-col gap-4">
           <CardHeader className="p-0">
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <Trophy className="h-4 w-4 text-yellow-400" />
-                <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
-                  Tabela da Liga
-                </span>
-              </CardTitle>
-              <select 
-                value={leagueId} 
-                onChange={e => setLeagueId(e.target.value)} 
-                className="bg-slate-900 border border-slate-700 text-slate-100 text-sm rounded px-2 py-1"
+            <CardTitle className="flex items-center gap-2 mb-4">
+              <Trophy className="h-4 w-4 text-yellow-400" />
+              <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent font-semibold">
+                Tabela da Liga
+              </span>
+            </CardTitle>
+
+            {/* Seletor de Liga Simples */}
+            <div className="space-y-3">
+              <select
+                value={leagueId}
+                onChange={(e) => setLeagueId(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
-                {leagues.map((league) => (
-                  <option key={league.id} value={league.id}>
-                    {league.name}
-                  </option>
-                ))}
+                <option value="BSA">Brasileirão Série A</option>
+                <option value="PL">Premier League</option>
+                <option value="PD">La Liga</option>
+                <option value="SA">Serie A</option>
+                <option value="FL1">Ligue 1</option>
+                <option value="BL1">Bundesliga</option>
+                <option value="DED">Eredivisie</option>
+                <option value="PPL">Primeira Liga</option>
+                <option value="ELC">Championship</option>
+                <option value="CL">Champions League</option>
+                <option value="EC">Eurocopa</option>
+                <option value="WC">Copa do Mundo</option>
               </select>
             </div>
           </CardHeader>
@@ -356,7 +358,7 @@ export default function Home() {
                   <div key={i} className="h-4 w-40 bg-white/10 rounded animate-pulse" />
                 ))}
               </div>
-            ) : !loadingStandings && (!standingsData || standingsData.table.length === 0) ? (
+            ) : !loadingStandings && (!standingsData?.table || standingsData.table.length === 0) ? (
               <p className="text-slate-500 text-sm">Nenhuma classificação disponível</p>
             ) : (
               <>
@@ -369,7 +371,7 @@ export default function Home() {
                     </tr>
                   </thead>
                   <tbody>
-                    {standingsData?.table?.map((standing, index) => (
+                    {(standingsData?.table || []).map((standing, index) => (
                       <tr key={standing.pos + "-" + standing.team} className="hover:bg-white/5">
                         <td className="py-2 text-slate-400 text-xs w-[2rem]">{standing.pos}</td>
                         <td className="py-2 flex items-center gap-2">

@@ -14,14 +14,12 @@ export async function GET(
 
     // Usar cache com TTL de 10 minutos (standings mudam menos frequentemente)
     const result = await withCache(cacheKey, async () => {
-      // Buscar a liga para pegar o nome
-      const { data: leagueData, error: leagueError } = await supabaseAdmin
+      // Buscar a liga para pegar o nome (opcional, não falhar se não encontrar)
+      const { data: leagueData } = await supabaseAdmin
         .from('leagues')
         .select('*')
         .eq('id', league_id)
         .single();
-
-      if (leagueError) throw leagueError;
 
       // Buscar standings mais recentes para esta liga
       const { data: standingsData, error: standingsError } = await supabaseAdmin

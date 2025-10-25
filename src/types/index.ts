@@ -100,23 +100,78 @@ export interface FootballDataStandingsResponse {
 }
 
 // League mapping for Football Data API
+// Mapeamento completo de todas as ligas disponíveis na API Football-Data.org
 export const LEAGUE_MAPPING: Record<string, number> = {
-  'PL': 2021,    // Premier League
-  'PD': 2014,    // La Liga
-  'SA': 2019,    // Serie A
-  'FL1': 2015,   // Ligue 1
-  'BSA': 2013,   // Brasileirão
-  'CL': 2001,    // Champions League
+  // Ligas Europeias Principais
+  'PL': 2021,    // Premier League (Inglaterra)
+  'PD': 2014,    // La Liga (Espanha)
+  'SA': 2019,    // Serie A (Itália)
+  'FL1': 2015,   // Ligue 1 (França)
+  'BL1': 2002,   // Bundesliga (Alemanha)
+  'DED': 2003,   // Eredivisie (Holanda)
+  'PPL': 2017,   // Primeira Liga (Portugal)
+  'ELC': 2016,   // Championship (Inglaterra)
+  
+  // Competições Internacionais
+  'CL': 2001,    // UEFA Champions League
+  'EC': 2018,    // European Championship (Eurocopa)
+  'WC': 2000,    // FIFA World Cup
+  
+  // Liga Sul-Americana
+  'BSA': 2013,   // Brasileirão Série A
 };
 
-// Reverse mapping for API responses
+// Mapeamento reverso: ID da competição para código da liga
 export const COMPETITION_ID_TO_LEAGUE: Record<number, string> = {
-  2021: 'PL',
-  2014: 'PD',
-  2019: 'SA',
-  2015: 'FL1',
-  2013: 'BSA',
-  2001: 'CL',
+  // Ligas Europeias Principais
+  2021: 'PL',    // Premier League
+  2014: 'PD',    // La Liga
+  2019: 'SA',    // Serie A
+  2015: 'FL1',   // Ligue 1
+  2002: 'BL1',   // Bundesliga
+  2003: 'DED',   // Eredivisie
+  2017: 'PPL',   // Primeira Liga
+  2016: 'ELC',   // Championship
+  
+  // Competições Internacionais
+  2001: 'CL',    // Champions League
+  2018: 'EC',    // European Championship
+  2000: 'WC',    // FIFA World Cup
+  
+  // Liga Sul-Americana
+  2013: 'BSA',   // Brasileirão
+};
+
+// Nomes completos das ligas para exibição
+export const LEAGUE_NAMES: Record<string, string> = {
+  'PL': 'Premier League',
+  'PD': 'La Liga',
+  'SA': 'Serie A',
+  'FL1': 'Ligue 1',
+  'BL1': 'Bundesliga',
+  'DED': 'Eredivisie',
+  'PPL': 'Primeira Liga',
+  'ELC': 'Championship',
+  'CL': 'Champions League',
+  'EC': 'European Championship',
+  'WC': 'FIFA World Cup',
+  'BSA': 'Brasileirão Série A',
+};
+
+// Países das ligas
+export const LEAGUE_COUNTRIES: Record<string, string> = {
+  'PL': 'Inglaterra',
+  'PD': 'Espanha',
+  'SA': 'Itália',
+  'FL1': 'França',
+  'BL1': 'Alemanha',
+  'DED': 'Holanda',
+  'PPL': 'Portugal',
+  'ELC': 'Inglaterra',
+  'CL': 'Europa',
+  'EC': 'Europa',
+  'WC': 'Mundial',
+  'BSA': 'Brasil',
 };
 
 // Hype generation priorities

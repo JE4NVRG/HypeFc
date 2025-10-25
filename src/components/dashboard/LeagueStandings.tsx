@@ -7,14 +7,25 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Trophy, Medal, Award } from 'lucide-react';
 import type { StandingsResponse, Standing } from '@/types';
 
-// Mapeamento de ligas disponíveis
+// Mapeamento de ligas disponíveis - TODAS as ligas da API
 const AVAILABLE_LEAGUES = [
-  { id: 'BSA', name: 'Brasileirão' },
+  // Ligas Europeias Principais
   { id: 'PL', name: 'Premier League' },
   { id: 'PD', name: 'La Liga' },
   { id: 'SA', name: 'Serie A' },
   { id: 'FL1', name: 'Ligue 1' },
+  { id: 'BL1', name: 'Bundesliga' },
+  { id: 'DED', name: 'Eredivisie' },
+  { id: 'PPL', name: 'Primeira Liga' },
+  { id: 'ELC', name: 'Championship' },
+  
+  // Competições Internacionais
   { id: 'CL', name: 'Champions League' },
+  { id: 'EC', name: 'Eurocopa' },
+  { id: 'WC', name: 'Copa do Mundo' },
+  
+  // América do Sul
+  { id: 'BSA', name: 'Brasileirão' },
 ];
 
 export function LeagueStandings() {

@@ -7,14 +7,25 @@ import { Separator } from '@/components/ui/separator';
 import { Clock } from 'lucide-react';
 import type { DashboardTodayResponse, Match } from '@/types';
 
-// Mapeamento de IDs de liga para nomes
+// Mapeamento de IDs de liga para nomes - TODAS as ligas da API
 const LEAGUE_NAMES: Record<string, string> = {
+  // Ligas Europeias Principais
   'PL': 'Premier League',
   'PD': 'La Liga',
   'SA': 'Serie A',
   'FL1': 'Ligue 1',
-  'BSA': 'Brasileirão',
+  'BL1': 'Bundesliga',
+  'DED': 'Eredivisie',
+  'PPL': 'Primeira Liga',
+  'ELC': 'Championship',
+  
+  // Competições Internacionais
   'CL': 'Champions League',
+  'EC': 'Eurocopa',
+  'WC': 'Copa do Mundo',
+  
+  // América do Sul
+  'BSA': 'Brasileirão',
 };
 
 export function TodayMatches() {
