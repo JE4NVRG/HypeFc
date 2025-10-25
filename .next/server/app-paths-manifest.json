@@ -1,7 +1,7 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js",
   "/api/cron/daily-sync/route": "app/api/cron/daily-sync/route.js",
   "/api/dashboard/today/route": "app/api/dashboard/today/route.js",
-  "/api/dashboard/standings/[league_id]/route": "app/api/dashboard/standings/[league_id]/route.js"
+  "/api/dashboard/standings/[league_id]/route": "app/api/dashboard/standings/[league_id]/route.js",
+  "/page": "app/page.js"
 }

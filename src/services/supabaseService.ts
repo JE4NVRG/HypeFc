@@ -38,7 +38,7 @@ class SupabaseService {
 
   async upsertStandings(standings: Standing[]): Promise<void> {
     // Clear existing standings for the leagues being updated
-    const leagueIds = [...new Set(standings.map(s => s.league_id))];
+    const leagueIds = Array.from(new Set(standings.map(s => s.league_id)));
     
     for (const leagueId of leagueIds) {
       await supabaseAdmin

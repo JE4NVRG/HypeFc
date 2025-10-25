@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
@@ -296,9 +297,11 @@ export default function Home() {
                       <tr key={standing.pos + "-" + standing.team} className="hover:bg-white/5">
                         <td className="py-2 text-slate-400 text-xs w-[2rem]">{standing.pos}</td>
                         <td className="py-2 flex items-center gap-2">
-                          <img 
+                          <Image 
                             src={standing.crest || '/default-team-logo.svg'} 
                             alt={standing.team} 
+                            width={20}
+                            height={20}
                             className="h-5 w-5 rounded bg-slate-800 border border-white/10 object-contain" 
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;

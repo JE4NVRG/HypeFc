@@ -44,11 +44,11 @@ class MemoryCache {
   // Limpar itens expirados
   cleanup(): void {
     const now = Date.now();
-    for (const [key, item] of this.cache.entries()) {
+    Array.from(this.cache.entries()).forEach(([key, item]) => {
       if (now - item.timestamp > item.ttl) {
         this.cache.delete(key);
       }
-    }
+    });
   }
 
   // Obter estatísticas do cache
