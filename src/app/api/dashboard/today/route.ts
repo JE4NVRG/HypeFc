@@ -34,14 +34,51 @@ export async function GET() {
         return acc;
       }, {}) || {};
 
-      // Formatar matches com league_name
-      const matches = matchesData?.map((match: any) => ({
-        league_id: match.league_id,
-        league_name: leagueMap[match.league_id] || match.league_id,
-        home: match.home_team,
-        away: match.away_team,
-        time_local: match.kickoff_time || '00:00'
-      })) || [];
+      // Buscar standings para obter team_crest e posições
+      const { data: standingsData, error: standingsError } = await supabaseAdmin
+        .from('standings')
+        .select('team_name, team_crest, position, league_id');
+
+      if (standingsError) throw standingsError;
+
+      // Criar mapa de team_name -> {crest, position, league_id}
+      const teamDataMap = standingsData?.reduce((acc: any, standing: any) => {
+        const key = `${standing.league_id}-${standing.team_name}`;
+        acc[key] = {
+          crest: standing.team_crest,
+          position: standing.position,
+          league_id: standing.league_id
+        };
+        return acc;
+      }, {}) || {};
+
+      // Formatar matches com league_name, team crests e posições, removendo duplicatas
+      const uniqueMatchesMap = new Map();
+      
+      matchesData?.forEach((match: any) => {
+        const homeKey = `${match.league_id}-${match.home_team}`;
+        const awayKey = `${match.league_id}-${match.away_team}`;
+        
+        // Criar chave única para o jogo
+        const matchKey = `${match.league_id}-${match.home_team}-${match.away_team}-${match.kickoff_time}`;
+        
+        // Só adicionar se não existir
+        if (!uniqueMatchesMap.has(matchKey)) {
+          uniqueMatchesMap.set(matchKey, {
+            league_id: match.league_id,
+            league_name: leagueMap[match.league_id] || match.league_id,
+            home: match.home_team,
+            home_crest: teamDataMap[homeKey]?.crest || null,
+            home_position: teamDataMap[homeKey]?.position || null,
+            away: match.away_team,
+            away_crest: teamDataMap[awayKey]?.crest || null,
+            away_position: teamDataMap[awayKey]?.position || null,
+            time_local: (match.kickoff_time || '00:00').substring(0, 5) // Remover segundos
+          });
+        }
+      });
+      
+      const matches = Array.from(uniqueMatchesMap.values());
 
       // Ordenar matches por league_name e depois por time_local
       matches.sort((a, b) => {
@@ -62,12 +99,37 @@ export async function GET() {
 
       if (hypeError) throw hypeError;
 
-      // Formatar hype flags
-      const hype = hypeData?.map((flag: any) => ({
-        team: flag.team_name,
-        reason: flag.reason,
-        priority: flag.priority
-      })) || [];
+      // Formatar hype flags com team_crest e position, removendo duplicatas
+      const uniqueHypeMap = new Map();
+      
+      hypeData?.forEach((flag: any) => {
+        const teamKey = `${flag.league_id}-${flag.team_name}`;
+        const teamData = teamDataMap[teamKey];
+        
+        // Se já existe um time com prioridade menor (número menor = prioridade maior), manter o existente
+        if (uniqueHypeMap.has(flag.team_name)) {
+          const existing = uniqueHypeMap.get(flag.team_name);
+          if (existing.priority <= flag.priority) {
+            return; // Manter o existente
+          }
+        }
+        
+        uniqueHypeMap.set(flag.team_name, {
+          team: flag.team_name,
+          reason: flag.reason,
+          priority: flag.priority,
+          crest: teamData?.crest || null,
+          position: teamData?.position || null,
+          league_id: flag.league_id
+        });
+      });
+      
+      const hype = Array.from(uniqueHypeMap.values()).sort((a, b) => {
+        if (a.priority !== b.priority) {
+          return a.priority - b.priority; // Prioridade menor primeiro
+        }
+        return a.team.localeCompare(b.team); // Alfabético por nome do time
+      });
 
       return {
         date: hoje,

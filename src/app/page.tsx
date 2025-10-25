@@ -12,7 +12,11 @@ interface Match {
   league_id: string
   league_name: string
   home: string
+  home_crest?: string | null
+  home_position?: number | null
   away: string
+  away_crest?: string | null
+  away_position?: number | null
   time_local: string
 }
 
@@ -20,6 +24,9 @@ interface HypeTeam {
   team: string
   reason: string
   priority: number
+  crest?: string | null
+  position?: number | null
+  league_id: string
 }
 
 interface Standing {
@@ -200,10 +207,56 @@ export default function Home() {
                     <div className="space-y-2">
                       {matches.map((match, matchIndex) => (
                         <div 
-                          key={league_name + match.home + match.away + match.time_local} 
+                          key={`${match.league_id}-${match.home}-${match.away}-${match.time_local}-${matchIndex}`} 
                           className="flex items-center justify-between text-sm text-slate-200"
                         >
-                          <div className="font-medium">{match.home} x {match.away}</div>
+                          <div className="flex items-center gap-2 font-medium">
+                            <div className="flex items-center gap-1">
+                              {match.home_crest && (
+                                <Image
+                                  src={match.home_crest}
+                                  alt={`${match.home} logo`}
+                                  width={16}
+                                  height={16}
+                                  className="rounded-sm"
+                                  onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                  }}
+                                />
+                              )}
+                              <div className="flex flex-col">
+                                <div className="flex items-center gap-1">
+                                  <span>{match.home}</span>
+                                  {match.home_position && (
+                                    <span className="text-xs text-slate-400">(#{match.home_position})</span>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                            <span className="text-slate-400">x</span>
+                            <div className="flex items-center gap-1">
+                              {match.away_crest && (
+                                <Image
+                                  src={match.away_crest}
+                                  alt={`${match.away} logo`}
+                                  width={16}
+                                  height={16}
+                                  className="rounded-sm"
+                                  onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                  }}
+                                />
+                              )}
+                              <div className="flex flex-col">
+                                <div className="flex items-center gap-1">
+                                  <span>{match.away}</span>
+                                  {match.away_position && (
+                                    <span className="text-xs text-slate-400">(#{match.away_position})</span>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                           <div className="text-slate-400">{match.time_local}</div>
                         </div>
                       ))}
@@ -241,7 +294,28 @@ export default function Home() {
                     key={h.team + "-" + h.reason + "-" + hypeIndex}
                     className="flex items-center justify-between text-sm text-slate-200 border-b border-white/5 py-2 last:border-none"
                   >
-                    <div className="font-medium">{h.team}</div>
+                    <div className="flex items-center gap-2 font-medium">
+                      {h.crest && (
+                        <Image
+                          src={h.crest}
+                          alt={`${h.team} logo`}
+                          width={20}
+                          height={20}
+                          className="rounded-sm"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                      )}
+                      <div className="flex flex-col">
+                        <div className="flex items-center gap-1">
+                          {h.position && (
+                            <span className="text-xs text-slate-400">#{h.position}</span>
+                          )}
+                          <span>{h.team}</span>
+                        </div>
+                      </div>
+                    </div>
                     <span className="text-xs rounded bg-white/10 px-2 py-1 text-slate-300">{h.reason}</span>
                   </div>
                 ))}
