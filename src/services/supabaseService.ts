@@ -57,7 +57,7 @@ class SupabaseService {
 
   // Matches
   async getMatchesToday(): Promise<Match[]> {
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });
     
     const { data, error } = await supabaseAdmin
       .from('matches')
@@ -146,6 +146,7 @@ class SupabaseService {
       league_id: leagueId,
       position: standing.position,
       team_name: standing.team.name,
+      team_crest: standing.team.crest || null, // Adicionar URL do escudo da Football-Data.org
       played: standing.playedGames,
       wins: standing.won,
       draws: standing.draw,

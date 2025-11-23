@@ -9,12 +9,34 @@ const FOOTBALL_API_BASE_URL = process.env.FOOTBALL_API_BASE_URL || 'https://api.
 const FOOTBALL_API_TOKEN = process.env.FOOTBALL_API_TOKEN;
 
 class FootballDataService {
+  private async fetchWithRetry(url: string, options: RequestInit, attempts = 4): Promise<Response> {
+    let lastError: any = null;
+    for (let i = 0; i < attempts; i++) {
+      try {
+        const res = await fetch(url, options);
+        if (res.status === 429 || (res.status >= 500 && res.status < 600)) {
+          const retryAfter = Number(res.headers.get('retry-after')) || 0;
+          const backoff = retryAfter > 0 ? retryAfter * 1000 : Math.min(2000 * 2 ** i, 15000);
+          await new Promise(r => setTimeout(r, backoff));
+          lastError = new Error(`HTTP ${res.status}`);
+          continue;
+        }
+        return res;
+      } catch (err) {
+        lastError = err;
+        const backoff = Math.min(1000 * 2 ** i, 10000);
+        await new Promise(r => setTimeout(r, backoff));
+      }
+    }
+    throw lastError || new Error('Fetch failed');
+  }
+
   private async makeRequest(endpoint: string): Promise<any> {
     if (!FOOTBALL_API_TOKEN) {
       throw new Error('Football API token not configured');
     }
 
-    const response = await fetch(`${FOOTBALL_API_BASE_URL}${endpoint}`, {
+    const response = await this.fetchWithRetry(`${FOOTBALL_API_BASE_URL}${endpoint}`, {
       headers: {
         'X-Auth-Token': FOOTBALL_API_TOKEN,
         'Content-Type': 'application/json',

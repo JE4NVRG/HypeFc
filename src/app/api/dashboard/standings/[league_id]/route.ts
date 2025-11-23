@@ -79,7 +79,11 @@ export async function GET(
       }
     };
 
-    return NextResponse.json(response);
+    return NextResponse.json(response, {
+      headers: {
+        'Cache-Control': 'public, max-age=300, stale-while-revalidate=900'
+      }
+    });
   } catch (error) {
     const endTime = Date.now();
     const responseTime = endTime - startTime;
@@ -93,7 +97,7 @@ export async function GET(
           timestamp: new Date().toISOString()
         }
       },
-      { status: 500 }
+      { status: 500, headers: { 'Cache-Control': 'no-store' } }
     );
   }
 }

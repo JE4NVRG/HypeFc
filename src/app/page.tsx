@@ -212,9 +212,6 @@ export default function Home() {
                                   width={16}
                                   height={16}
                                   className="rounded-sm flex-shrink-0"
-                                  onError={(e) => {
-                                    e.currentTarget.style.display = 'none';
-                                  }}
                                 />
                               )}
                               <div className="flex flex-col min-w-0">
@@ -235,9 +232,6 @@ export default function Home() {
                                   width={16}
                                   height={16}
                                   className="rounded-sm flex-shrink-0"
-                                  onError={(e) => {
-                                    e.currentTarget.style.display = 'none';
-                                  }}
                                 />
                               )}
                               <div className="flex flex-col min-w-0">
@@ -290,7 +284,7 @@ export default function Home() {
                     className="flex items-center justify-between text-sm text-slate-200 border-b border-white/5 py-2 last:border-none"
                   >
                     <div className="flex items-center gap-2 font-medium">
-                      {h.crest && (
+                      {h.crest && h.crest.includes('football-data.org') && (
                         <Image
                           src={h.crest}
                           alt={`${h.team} logo`}
@@ -375,17 +369,24 @@ export default function Home() {
                       <tr key={standing.pos + "-" + standing.team} className="hover:bg-white/5">
                         <td className="py-2 text-slate-400 text-xs w-[2rem]">{standing.pos}</td>
                         <td className="py-2 flex items-center gap-2">
-                          <Image 
-                            src={standing.crest || '/default-team-logo.svg'} 
-                            alt={standing.team} 
-                            width={20}
-                            height={20}
-                            className="h-5 w-5 rounded bg-slate-800 border border-white/10 object-contain" 
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.src = '/default-team-logo.svg';
-                            }}
-                          />
+                          {standing.crest && standing.crest.includes('football-data.org') ? (
+                            <Image 
+                              src={standing.crest} 
+                              alt={standing.team} 
+                              width={20}
+                              height={20}
+                              className="h-5 w-5 rounded bg-slate-800 border border-white/10 object-contain"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                              }}
+                            />
+                          ) : (
+                            <div className="h-5 w-5 rounded bg-slate-700 border border-white/10 flex items-center justify-center">
+                              <span className="text-xs text-slate-400 font-bold">
+                                {standing.team.charAt(0)}
+                              </span>
+                            </div>
+                          )}
                           <span className="text-slate-200 text-sm font-medium">{standing.team}</span>
                         </td>
                         <td className="py-2 text-right font-semibold text-slate-100">{standing.pts}</td>

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 import { footballDataService } from '@/services/footballDataService';
+import { supabaseService } from '@/services/supabaseService';
 
 // Configuração completa das ligas
 const LEAGUES = [
@@ -73,28 +74,21 @@ async function saveStandings(leagueId: string, standingsData: any): Promise<void
     return;
   }
 
-  const standingsToInsert = table.map((standing: any) => ({
-    league_id: leagueId,
-    position: standing.position,
-    team_name: standing.team.name,
-    team_crest: standing.team.crest,
-    played: standing.playedGames,
-    wins: standing.won,
-    draws: standing.draw,
-    losses: standing.lost,
-    points: standing.points,
-    captured_at: new Date().toISOString()
+  const now = new Date().toISOString();
+  const standings = table.map((s: any) => ({
+    ...supabaseService.transformFootballDataStanding(s, leagueId),
+    captured_at: now,
   }));
 
   const { error } = await supabaseAdmin
     .from('standings')
-    .insert(standingsToInsert);
+    .upsert(standings as any, { onConflict: 'league_id,captured_at,team_name' });
 
   if (error) {
     throw new Error(`Erro ao salvar standings para ${leagueId}: ${error.message}`);
   }
 
-  console.log(`✅ Standings salvos para ${leagueId}: ${standingsToInsert.length} times`);
+  console.log(`✅ Standings salvos para ${leagueId}: ${standings.length} times`);
 }
 
 // Função para salvar matches no banco
@@ -130,7 +124,7 @@ async function saveMatches(leagueId: string, matchesData: any, hoje: string): Pr
 
   const { error } = await supabaseAdmin
     .from('matches')
-    .insert(matchesToInsert);
+    .upsert(matchesToInsert, { onConflict: 'league_id,match_date,home_team,away_team' });
 
   if (error) {
     throw new Error(`Erro ao salvar matches para ${leagueId}: ${error.message}`);
@@ -140,139 +134,22 @@ async function saveMatches(leagueId: string, matchesData: any, hoje: string): Pr
 }
 
 // Função para gerar hype_flags
-async function generateHypeFlags(hoje: string): Promise<void> {
-  console.log('🔥 Gerando hype flags...');
-  
-  const hypeFlags: any[] = [];
-  const teamHypeMap = new Map<string, { reason: string; priority: number; league_id: string }>();
-
-  for (const league of LEAGUES) {
-    try {
-      const { data: standings } = await supabaseAdmin
-        .from('standings')
-        .select('*')
-        .eq('league_id', league.id)
-        .order('captured_at', { ascending: false })
-        .order('position', { ascending: true })
-        .limit(10);
-
-      const { data: matches } = await supabaseAdmin
-        .from('matches')
-        .select('*')
-        .eq('league_id', league.id)
-        .eq('match_date', hoje);
-
-      if (standings && standings.length > 0) {
-        // Líder da liga
-        const leader = standings.find(s => s.position === 1);
-        if (leader) {
-          const key = `${league.id}-${leader.team_name}`;
-          teamHypeMap.set(key, {
-            reason: "Líder da liga",
-            priority: 1,
-            league_id: league.id
-          });
-        }
-
-        // Top 3 da liga
-        const top3 = standings.filter(s => s.position <= 3);
-        for (const team of top3) {
-          const key = `${league.id}-${team.team_name}`;
-          if (!teamHypeMap.has(key) || teamHypeMap.get(key)!.priority > 2) {
-            teamHypeMap.set(key, {
-              reason: "Top 3 da liga",
-              priority: 2,
-              league_id: league.id
-            });
-          }
-        }
-      }
-
-      if (matches && matches.length > 0) {
-        // Times que jogam hoje
-        for (const match of matches) {
-          const homeKey = `${league.id}-${match.home_team}`;
-          const awayKey = `${league.id}-${match.away_team}`;
-
-          if (!teamHypeMap.has(homeKey) || teamHypeMap.get(homeKey)!.priority > 2) {
-            teamHypeMap.set(homeKey, {
-              reason: "Joga hoje",
-              priority: 2,
-              league_id: league.id
-            });
-          }
-
-          if (!teamHypeMap.has(awayKey) || teamHypeMap.get(awayKey)!.priority > 2) {
-            teamHypeMap.set(awayKey, {
-              reason: "Joga hoje",
-              priority: 2,
-              league_id: league.id
-            });
-          }
-
-          // Clássico hoje (ambos no top 5)
-          if (standings) {
-            const top5 = standings.filter(s => s.position <= 5);
-            const homeInTop5 = top5.find(s => s.team_name === match.home_team);
-            const awayInTop5 = top5.find(s => s.team_name === match.away_team);
-
-            if (homeInTop5 && awayInTop5) {
-              teamHypeMap.set(homeKey, {
-                reason: "Clássico hoje",
-                priority: 1,
-                league_id: league.id
-              });
-              teamHypeMap.set(awayKey, {
-                reason: "Clássico hoje",
-                priority: 1,
-                league_id: league.id
-              });
-            }
-          }
-        }
-      }
-    } catch (error) {
-      console.error(`Erro ao processar hype flags para ${league.id}:`, error);
-    }
-  }
-
-  // Converter Map para array
-  teamHypeMap.forEach((hype, key) => {
-    const teamName = key.split('-').slice(1).join('-');
-    hypeFlags.push({
-      league_id: hype.league_id,
-      team_name: teamName,
-      reason: hype.reason,
-      priority: hype.priority,
-      created_at: new Date().toISOString()
-    });
-  });
-
-  if (hypeFlags.length > 0) {
-    const { error } = await supabaseAdmin
-      .from('hype_flags')
-      .insert(hypeFlags);
-
-    if (error) {
-      throw new Error(`Erro ao salvar hype flags: ${error.message}`);
-    }
-
-    console.log(`✅ Hype flags gerados: ${hypeFlags.length} flags`);
-  }
+async function generateHypeFlags(): Promise<void> {
+  await supabaseService.generateHypeFlags();
 }
 
 export async function GET(request: Request) {
   const startTime = Date.now();
   
   try {
-    // Verificar autorização (opcional - para segurança)
     const { searchParams } = new URL(request.url);
-    const authToken = searchParams.get('token');
-    
-    // Se você quiser adicionar um token de segurança
-    // if (authToken !== process.env.CRON_SECRET_TOKEN) {
-    //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    // }
+    const headerAuth = request.headers.get('authorization') || '';
+    const bearer = headerAuth.startsWith('Bearer ') ? headerAuth.replace('Bearer ', '').trim() : null;
+    const queryToken = searchParams.get('token');
+    const expected = process.env.CRON_SECRET_TOKEN;
+    if (expected && bearer !== expected && queryToken !== expected) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
     console.log('🚀 Iniciando sincronização diária...');
     
@@ -289,11 +166,10 @@ export async function GET(request: Request) {
       try {
         console.log(`🏆 Processando ${league.name} (${league.id})...`);
         
-        // Buscar standings
+        // Usar Football-Data.org para todas as ligas, incluindo o Brasileirão
         const standingsData = await footballDataService.getStandings(league.id);
         await saveStandings(league.id, standingsData);
         
-        // Buscar matches de hoje
         const matchesData = await footballDataService.getMatches(league.id);
         await saveMatches(league.id, matchesData, hoje);
         
@@ -320,7 +196,7 @@ export async function GET(request: Request) {
     }
 
     // 3. Gerar hype flags
-    await generateHypeFlags(hoje);
+    await generateHypeFlags();
 
     const endTime = Date.now();
     const duration = endTime - startTime;

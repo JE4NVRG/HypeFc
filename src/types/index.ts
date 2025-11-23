@@ -11,6 +11,7 @@ export interface Standing {
   league_id: string;
   position: number;
   team_name: string;
+  team_crest?: string | null; // URL do escudo do time da Football-Data.org
   played: number;
   wins: number;
   draws: number;

@@ -34,7 +34,28 @@ function delay(ms: number): Promise<void> {
 
 // Função para buscar classificação de uma liga
 async function fetchStandings(leagueId: string): Promise<any> {
-  const response = await fetch(`https://api.football-data.org/v4/competitions/${leagueId}/standings`, {
+  // Mapeamento de league_id para competition_id
+  const LEAGUE_TO_COMPETITION: Record<string, number> = {
+    'PL': 2021,    // Premier League
+    'PD': 2014,    // La Liga
+    'SA': 2019,    // Serie A
+    'FL1': 2015,   // Ligue 1
+    'BL1': 2002,   // Bundesliga
+    'DED': 2003,   // Eredivisie
+    'PPL': 2017,   // Primeira Liga
+    'ELC': 2016,   // Championship
+    'CL': 2001,    // Champions League
+    'EC': 2018,    // European Championship
+    'WC': 2000,    // FIFA World Cup
+    'BSA': 2013,   // Brasileirão Série A
+  };
+
+  const competitionId = LEAGUE_TO_COMPETITION[leagueId];
+  if (!competitionId) {
+    throw new Error(`Liga ${leagueId} não suportada`);
+  }
+
+  const response = await fetch(`https://api.football-data.org/v4/competitions/${competitionId}/standings`, {
     headers: {
       'X-Auth-Token': process.env.FOOTBALL_API_TOKEN!,
       'Content-Type': 'application/json'
@@ -50,7 +71,28 @@ async function fetchStandings(leagueId: string): Promise<any> {
 
 // Função para buscar jogos de uma liga em um período
 async function fetchMatches(leagueId: string, dateFrom: string, dateTo: string): Promise<any> {
-  const response = await fetch(`https://api.football-data.org/v4/competitions/${leagueId}/matches?dateFrom=${dateFrom}&dateTo=${dateTo}`, {
+  // Mapeamento de league_id para competition_id
+  const LEAGUE_TO_COMPETITION: Record<string, number> = {
+    'PL': 2021,    // Premier League
+    'PD': 2014,    // La Liga
+    'SA': 2019,    // Serie A
+    'FL1': 2015,   // Ligue 1
+    'BL1': 2002,   // Bundesliga
+    'DED': 2003,   // Eredivisie
+    'PPL': 2017,   // Primeira Liga
+    'ELC': 2016,   // Championship
+    'CL': 2001,    // Champions League
+    'EC': 2018,    // European Championship
+    'WC': 2000,    // FIFA World Cup
+    'BSA': 2013,   // Brasileirão Série A
+  };
+
+  const competitionId = LEAGUE_TO_COMPETITION[leagueId];
+  if (!competitionId) {
+    throw new Error(`Liga ${leagueId} não suportada`);
+  }
+
+  const response = await fetch(`https://api.football-data.org/v4/competitions/${competitionId}/matches?dateFrom=${dateFrom}&dateTo=${dateTo}`, {
     headers: {
       'X-Auth-Token': process.env.FOOTBALL_API_TOKEN!,
       'Content-Type': 'application/json'
