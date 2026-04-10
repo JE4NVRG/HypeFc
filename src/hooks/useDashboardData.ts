@@ -40,10 +40,30 @@ export interface Standing {
   losses: number
 }
 
+export interface Scorer {
+  player: string
+  team: string
+  team_crest: string | null
+  goals: number
+  assists: number
+  matches: number
+}
+
+export interface DayStats {
+  totalMatches: number
+  liveMatches: number
+  finishedMatches: number
+  scheduledMatches: number
+  totalGoals: number
+  avgGoals: number
+  leaguesActive: number
+}
+
 interface TodayData {
   date: string
   matches: Match[]
   hype: HypeTeam[]
+  stats?: DayStats
 }
 
 interface StandingsData {
@@ -53,12 +73,19 @@ interface StandingsData {
   captured_at: string
 }
 
+interface ScorersData {
+  league_id: string
+  scorers: Scorer[]
+}
+
 interface DashboardState {
   todayData: TodayData | null
   standingsData: StandingsData | null
+  scorersData: ScorersData | null
   leagueId: string
   loadingToday: boolean
   loadingStandings: boolean
+  loadingScorers: boolean
   lastUpdated: string
 }
 
@@ -66,9 +93,11 @@ export function useDashboardData() {
   const [state, setState] = useState<DashboardState>({
     todayData: null,
     standingsData: null,
+    scorersData: null,
     leagueId: 'BSA',
     loadingToday: true,
     loadingStandings: true,
+    loadingScorers: true,
     lastUpdated: '',
   })
 
@@ -115,9 +144,28 @@ export function useDashboardData() {
     }
   }, [])
 
+  const fetchScorers = useCallback(async (leagueId: string) => {
+    setState(prev => ({ ...prev, loadingScorers: true }))
+    try {
+      const res = await fetch(`/api/dashboard/scorers/${leagueId}`)
+      const json = await res.json()
+      setState(prev => ({
+        ...prev,
+        scorersData: json,
+        loadingScorers: false,
+      }))
+    } catch {
+      setState(prev => ({
+        ...prev,
+        scorersData: { league_id: leagueId, scorers: [] },
+        loadingScorers: false,
+      }))
+    }
+  }, [])
+
   const refresh = useCallback(async () => {
-    await Promise.all([fetchToday(), fetchStandings(state.leagueId)])
-  }, [fetchToday, fetchStandings, state.leagueId])
+    await Promise.all([fetchToday(), fetchStandings(state.leagueId), fetchScorers(state.leagueId)])
+  }, [fetchToday, fetchStandings, fetchScorers, state.leagueId])
 
   useEffect(() => {
     fetchToday()
@@ -125,7 +173,8 @@ export function useDashboardData() {
 
   useEffect(() => {
     fetchStandings(state.leagueId)
-  }, [state.leagueId, fetchStandings])
+    fetchScorers(state.leagueId)
+  }, [state.leagueId, fetchStandings, fetchScorers])
 
   const groupedMatches = state.todayData?.matches?.reduce((acc, match) => {
     if (!match?.league_name) return acc

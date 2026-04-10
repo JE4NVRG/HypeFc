@@ -2,18 +2,22 @@
 
 import { useDashboardData } from '@/hooks/useDashboardData'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
+import { StatsBar } from '@/components/dashboard/StatsBar'
 import { TodayMatches } from '@/components/dashboard/TodayMatches'
 import { HypeFlags } from '@/components/dashboard/HypeFlags'
 import { LeagueStandings } from '@/components/dashboard/LeagueStandings'
+import { TopScorers } from '@/components/dashboard/TopScorers'
 import { DashboardFooter } from '@/components/dashboard/DashboardFooter'
 
 export default function Home() {
   const {
     todayData,
     standingsData,
+    scorersData,
     leagueId,
     loadingToday,
     loadingStandings,
+    loadingScorers,
     lastUpdated,
     isLoading,
     hasLiveMatches,
@@ -32,7 +36,13 @@ export default function Home() {
       />
 
       <main className="w-full flex-1 px-2 py-3 sm:px-4 sm:py-4">
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+        {/* Stats resumo do dia */}
+        <div className="mb-3">
+          <StatsBar stats={todayData?.stats} loading={loadingToday} />
+        </div>
+
+        {/* Grid principal */}
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
           <TodayMatches
             groupedMatches={groupedMatches}
             loading={loadingToday}
@@ -48,6 +58,10 @@ export default function Home() {
             capturedAt={standingsData?.captured_at ?? null}
             loading={loadingStandings}
             onLeagueChange={setLeagueId}
+          />
+          <TopScorers
+            scorers={scorersData?.scorers ?? []}
+            loading={loadingScorers}
           />
         </div>
       </main>

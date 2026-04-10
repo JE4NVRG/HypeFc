@@ -236,3 +236,70 @@ export function generateHypeFlags(
     .sort((a, b) => a.priority !== b.priority ? a.priority - b.priority : a.team.localeCompare(b.team))
     .slice(0, MAX_HYPE_FLAGS)
 }
+
+// ---------- Top Scorers ----------
+
+interface ApiScorer {
+  player: { id: number; name: string; nationality: string }
+  team: { id: number; name: string; crest?: string }
+  goals: number
+  assists: number | null
+  playedMatches: number
+}
+
+export interface Scorer {
+  player: string
+  team: string
+  team_crest: string | null
+  goals: number
+  assists: number
+  matches: number
+}
+
+export async function fetchTopScorers(leagueCode: string, limit = 10): Promise<Scorer[]> {
+  const compId = LEAGUE_MAPPING[leagueCode]
+  if (!compId) throw new Error(`League ${leagueCode} not supported`)
+
+  const data = await apiGet<{ scorers: ApiScorer[] }>(
+    `/competitions/${compId}/scorers?limit=${limit}`
+  )
+
+  return (data.scorers || []).map(s => ({
+    player: s.player.name,
+    team: s.team.name,
+    team_crest: s.team.crest || null,
+    goals: s.goals,
+    assists: s.assists || 0,
+    matches: s.playedMatches,
+  }))
+}
+
+// ---------- Day Summary Stats ----------
+
+export interface DayStats {
+  totalMatches: number
+  liveMatches: number
+  finishedMatches: number
+  scheduledMatches: number
+  totalGoals: number
+  avgGoals: number
+  leaguesActive: number
+}
+
+export function computeDayStats(matches: TodayMatch[]): DayStats {
+  const live = matches.filter(m => m.status === 'IN_PLAY' || m.status === 'PAUSED')
+  const finished = matches.filter(m => m.status === 'FINISHED')
+  const scheduled = matches.filter(m => m.status === 'TIMED' || m.status === 'SCHEDULED')
+  const totalGoals = matches.reduce((sum, m) => sum + (m.score_home || 0) + (m.score_away || 0), 0)
+  const leagues = new Set(matches.map(m => m.league_id))
+
+  return {
+    totalMatches: matches.length,
+    liveMatches: live.length,
+    finishedMatches: finished.length,
+    scheduledMatches: scheduled.length,
+    totalGoals,
+    avgGoals: finished.length > 0 ? Math.round((totalGoals / finished.length) * 10) / 10 : 0,
+    leaguesActive: leagues.size,
+  }
+}

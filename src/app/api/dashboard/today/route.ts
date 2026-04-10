@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic'
 
 import { NextResponse } from 'next/server'
 import { createCacheKey, withCache } from '@/lib/cache'
-import { fetchTodayMatches, fetchStandings, generateHypeFlags } from '@/services/footballApi'
+import { fetchTodayMatches, fetchStandings, generateHypeFlags, computeDayStats } from '@/services/footballApi'
 import type { StandingRow } from '@/services/footballApi'
 
 export async function GET() {
@@ -44,8 +44,9 @@ export async function GET() {
       })
 
       const hype = generateHypeFlags(enrichedMatches, standingsMap)
+      const stats = computeDayStats(enrichedMatches)
 
-      return { date: hoje, matches: enrichedMatches, hype }
+      return { date: hoje, matches: enrichedMatches, hype, stats }
     }, 5)
 
     return NextResponse.json({
