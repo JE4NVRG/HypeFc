@@ -1,167 +1,92 @@
-# ⚽ HypeFC
+# HypeFC
+
+> Dashboard de futebol em tempo real que identifica **times em alta** nas principais ligas do mundo.
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+
+![Next.js](https://img.shields.io/badge/Next.js_14-black?logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000?logo=vercel&logoColor=white)
+
 </div>
 
 <div align="center">
-  <h3>🔥 Dashboard de Futebol com Dados em Tempo Real</h3>
-  <p>Descubra os times mais quentes para vender hoje no mercado de apostas esportivas</p>
+  <img src="public/preview.png" alt="HypeFC Dashboard" width="100%" />
 </div>
 
 ---
 
-## 📋 Sobre o Projeto
+## O que faz
 
-O **HypeFC** é um dashboard moderno e responsivo que fornece informações essenciais sobre futebol em tempo real. Desenvolvido para ajudar apostadores e entusiastas do futebol a identificar oportunidades no mercado, o sistema apresenta dados atualizados sobre jogos, times em alta e classificações das principais ligas.
+O HypeFC consome a [Football-Data.org API](https://www.football-data.org/) em **tempo real** e aplica um algoritmo de hype para destacar:
 
-### ✨ Funcionalidades Principais
+- **Lider da liga** - time no topo da classificacao
+- **Top 3** - times nas primeiras posicoes
+- **Jogando hoje** - times com partida no dia, com placar ao vivo
 
-- **🗓️ Jogos de Hoje**: Visualize todos os jogos programados para hoje, organizados por liga
-- **🔥 Times em Alta**: Descubra quais times estão com maior potencial de valorização
-- **🏆 Top 10 da Liga**: Acompanhe as classificações das principais ligas europeias e brasileiras
-- **🔄 Atualização Manual**: Botão para recarregar dados em tempo real
-- **📱 Design Responsivo**: Interface otimizada para desktop e mobile
+Tudo sem banco de dados - dados vem direto da API com cache inteligente.
 
-## 🛠️ Tecnologias Utilizadas
+## Features
 
-- **Frontend**: Next.js 14, React 18, TypeScript
-- **Styling**: Tailwind CSS, shadcn/ui
-- **Backend**: Next.js API Routes
-- **Database**: Supabase (PostgreSQL)
-- **API Externa**: Football-Data.org
-- **Deployment**: Vercel (pronto para deploy)
+| Feature | Descricao |
+|---------|-----------|
+| **Jogos de Hoje** | Partidas agrupadas por liga com escudos, posicoes e placar ao vivo |
+| **Times em Alta** | Deteccao automatica com badges de prioridade e nome da liga |
+| **Classificacao** | Tabela com zonas visuais (Champions, Europa, Rebaixamento) |
+| **10+ ligas** | Brasileirao, Premier League, La Liga, Serie A, Bundesliga, Ligue 1, Champions League |
+| **Tempo real** | Placar ao vivo com indicador "LIVE" e status dos jogos |
+| **Responsivo** | Mobile, tablet e desktop |
 
-## 🚀 Como Executar o Projeto
+## Tech Stack
 
-### Pré-requisitos
+```
+Frontend    Next.js 14 (App Router) + React + Tailwind CSS + shadcn/ui
+API         Football-Data.org v4 (tempo real)
+Cache       In-memory (5-10 min TTL)
+Font        Geist Sans/Mono
+Deploy      Vercel
+```
 
-- Node.js 18+ instalado
-- Conta no Supabase
-- API Key do Football-Data.org
+## Setup
 
-### Instalação
-
-1. **Clone o repositório**
 ```bash
 git clone https://github.com/JE4NVRG/HypeFc.git
 cd HypeFc
-```
-
-2. **Instale as dependências**
-```bash
 npm install
-```
-
-3. **Configure as variáveis de ambiente**
-```bash
 cp .env.example .env.local
-```
-
-Edite o arquivo `.env.local` com suas credenciais:
-```env
-NEXT_PUBLIC_SUPABASE_URL=sua_url_do_supabase
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sua_chave_anonima
-SUPABASE_SERVICE_ROLE_KEY=sua_chave_de_servico
-FOOTBALL_DATA_API_KEY=sua_chave_da_api
-```
-
-4. **Execute as migrações do banco**
-```bash
-# Execute o SQL em supabase/migrations/001_create_tables.sql no seu Supabase
-```
-
-5. **Inicie o servidor de desenvolvimento**
-```bash
+# Preencher FOOTBALL_API_TOKEN no .env.local
 npm run dev
 ```
 
-Acesse [http://localhost:3000](http://localhost:3000) para ver o projeto rodando.
+Para obter o token gratuito: [football-data.org/client/register](https://www.football-data.org/client/register)
 
-## 📁 Estrutura do Projeto
+### Deploy na Vercel
+
+1. Conecte o repositorio no [vercel.com](https://vercel.com)
+2. Adicione a env var `FOOTBALL_API_TOKEN` em Settings > Environment Variables
+3. Deploy automatico a cada push
+
+## Estrutura
 
 ```
 src/
 ├── app/
-│   ├── api/
-│   │   └── dashboard/
-│   │       ├── today/          # API para jogos de hoje
-│   │       └── standings/      # API para classificações
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx               # Página principal do dashboard
-├── components/
-│   └── ui/                    # Componentes shadcn/ui
-├── lib/
-│   ├── supabase.ts           # Configuração do Supabase
-│   └── utils.ts              # Utilitários
-├── services/
-│   ├── footballDataService.ts # Integração com Football-Data.org
-│   └── supabaseService.ts     # Serviços do Supabase
-└── types/
-    └── index.ts              # Definições de tipos TypeScript
+│   ├── api/dashboard/        # API Routes (today + standings)
+│   ├── layout.tsx            # Root layout (Geist)
+│   ├── page.tsx              # Dashboard
+│   └── globals.css
+├── components/dashboard/     # Header, Matches, Hype, Standings, Footer
+├── hooks/                    # useDashboardData
+├── lib/                      # Cache in-memory
+├── services/                 # Football-Data.org API client
+└── types/                    # Types e mapeamentos de ligas
 ```
 
-## 🔌 API Endpoints
+## Autor
 
-### `GET /api/dashboard/today`
-Retorna jogos de hoje e times em alta
-```json
-{
-  "date": "2024-01-15",
-  "matches": [...],
-  "hype": [...]
-}
-```
+**Jean Carlos Vargas da Silva** - [@JE4NVRG](https://github.com/JE4NVRG)
 
-### `GET /api/dashboard/standings/:league_id`
-Retorna classificação de uma liga específica
-```json
-{
-  "league_id": "BSA",
-  "league_name": "Brasileirão Série A",
-  "table": [...],
-  "captured_at": "2024-01-15T10:00:00Z"
-}
-```
+## Licenca
 
-## 🎨 Design System
-
-O projeto utiliza um design system moderno com:
-- **Cores**: Paleta dark com gradientes sutis
-- **Tipografia**: Inter font para máxima legibilidade
-- **Componentes**: shadcn/ui para consistência
-- **Ícones**: Lucide React para ícones vetoriais
-- **Layout**: Grid responsivo com Tailwind CSS
-
-## 📊 Dados e Integrações
-
-- **Football-Data.org**: API principal para dados de jogos e classificações
-- **Supabase**: Armazenamento e cache dos dados
-- **Cron Jobs**: Sincronização automática diária às 8:00 (horário de Brasília)
-
-## 🤝 Como Contribuir
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-## 📝 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 👨‍💻 Autor
-
-**Jean Vargas** - [@JE4NVRG](https://github.com/JE4NVRG)
-
----
-
-<div align="center">
-  <p>⭐ Se este projeto te ajudou, considere dar uma estrela!</p>
-  <p>🚀 Desenvolvido com ❤️ usando Next.js e Supabase</p>
-</div>
+MIT

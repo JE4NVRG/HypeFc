@@ -1,197 +1,147 @@
-'use client';
+"use client"
 
-import { useState, useEffect } from 'react';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Trophy, Medal, Award } from 'lucide-react';
-import type { StandingsResponse, Standing } from '@/types';
+import Image from 'next/image'
+import { Trophy } from 'lucide-react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import type { Standing } from '@/hooks/useDashboardData'
 
-// Mapeamento de ligas disponíveis - TODAS as ligas da API
-const AVAILABLE_LEAGUES = [
-  // Ligas Europeias Principais
-  { id: 'PL', name: 'Premier League' },
-  { id: 'PD', name: 'La Liga' },
-  { id: 'SA', name: 'Serie A' },
-  { id: 'FL1', name: 'Ligue 1' },
-  { id: 'BL1', name: 'Bundesliga' },
-  { id: 'DED', name: 'Eredivisie' },
-  { id: 'PPL', name: 'Primeira Liga' },
-  { id: 'ELC', name: 'Championship' },
-  
-  // Competições Internacionais
-  { id: 'CL', name: 'Champions League' },
-  { id: 'EC', name: 'Eurocopa' },
-  { id: 'WC', name: 'Copa do Mundo' },
-  
-  // América do Sul
-  { id: 'BSA', name: 'Brasileirão' },
-];
+interface LeagueStandingsProps {
+  standings: Standing[]
+  leagueId: string
+  leagueName: string
+  capturedAt: string | null
+  loading: boolean
+  onLeagueChange: (id: string) => void
+}
 
-export function LeagueStandings() {
-  const [selectedLeague, setSelectedLeague] = useState<string>('BSA');
-  const [standings, setStandings] = useState<Standing[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+const LEAGUES = [
+  { id: 'BSA', name: 'Brasileirao Serie A', flag: '\u{1F1E7}\u{1F1F7}' },
+  { id: 'PL', name: 'Premier League', flag: '\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}' },
+  { id: 'PD', name: 'La Liga', flag: '\u{1F1EA}\u{1F1F8}' },
+  { id: 'SA', name: 'Serie A', flag: '\u{1F1EE}\u{1F1F9}' },
+  { id: 'FL1', name: 'Ligue 1', flag: '\u{1F1EB}\u{1F1F7}' },
+  { id: 'BL1', name: 'Bundesliga', flag: '\u{1F1E9}\u{1F1EA}' },
+  { id: 'DED', name: 'Eredivisie', flag: '\u{1F1F3}\u{1F1F1}' },
+  { id: 'PPL', name: 'Primeira Liga', flag: '\u{1F1F5}\u{1F1F9}' },
+  { id: 'ELC', name: 'Championship', flag: '\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}' },
+  { id: 'CL', name: 'Champions League', flag: '\u{1F3C6}' },
+] as const
 
-  useEffect(() => {
-    fetchStandings(selectedLeague);
-  }, [selectedLeague]);
+function getPositionStyle(pos: number, totalTeams: number) {
+  if (pos <= 4) return 'border-l-emerald-500/60 bg-emerald-500/[0.04]'
+  if (pos <= 6) return 'border-l-blue-500/60 bg-blue-500/[0.03]'
+  if (totalTeams > 0 && pos > totalTeams - 3) return 'border-l-red-500/60 bg-red-500/[0.04]'
+  return 'border-l-transparent'
+}
 
-  const fetchStandings = async (leagueId: string) => {
-    try {
-      setLoading(true);
-      setError(null);
-      
-      const response = await fetch(`/api/dashboard/standings/${leagueId}`);
-      
-      if (!response.ok) {
-        throw new Error('Falha ao carregar classificação');
-      }
-      
-      const data: StandingsResponse = await response.json();
-      setStandings(data.standings || []);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro desconhecido');
-      setStandings([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getPositionIcon = (position: number) => {
-    if (position === 1) {
-      return <Trophy className="h-4 w-4 text-yellow-500" />;
-    }
-    if (position <= 3) {
-      return <Medal className="h-4 w-4 text-slate-400" />;
-    }
-    if (position <= 6) {
-      return <Award className="h-4 w-4 text-blue-400" />;
-    }
-    return null;
-  };
-
-  const getPositionStyle = (position: number) => {
-    if (position === 1) {
-      return 'bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-yellow-500/30';
-    }
-    if (position <= 3) {
-      return 'bg-gradient-to-r from-slate-500/20 to-slate-400/20 border-slate-400/30';
-    }
-    if (position <= 6) {
-      return 'bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border-blue-400/30';
-    }
-    if (position >= standings.length - 2) {
-      return 'bg-gradient-to-r from-red-500/20 to-pink-500/20 border-red-400/30';
-    }
-    return 'hover:bg-white/5';
-  };
-
-  if (loading) {
-    return (
-      <div className="space-y-4">
-        <Skeleton className="h-10 w-full bg-slate-700" />
-        <div className="space-y-2">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <Skeleton key={i} className="h-12 w-full bg-slate-700" />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
+export function LeagueStandings({
+  standings,
+  leagueId,
+  capturedAt,
+  loading,
+  onLeagueChange,
+}: LeagueStandingsProps) {
   return (
-    <div className="space-y-4">
-      <Select value={selectedLeague} onValueChange={setSelectedLeague}>
-        <SelectTrigger className="w-full bg-slate-800/50 border-slate-700 text-slate-200">
-          <SelectValue placeholder="Selecione uma liga" />
+    <div className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
+      <div className="mb-4 flex items-center gap-2">
+        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-yellow-500/10">
+          <Trophy className="h-3.5 w-3.5 text-yellow-400" />
+        </div>
+        <h2 className="text-sm font-semibold text-slate-200">Classificacao</h2>
+      </div>
+
+      <Select value={leagueId} onValueChange={onLeagueChange}>
+        <SelectTrigger className="mb-4 border-white/10 bg-white/5 text-sm text-slate-200 focus:ring-orange-500/30">
+          <SelectValue />
         </SelectTrigger>
-        <SelectContent className="bg-slate-800 border-slate-700">
-          {AVAILABLE_LEAGUES.map((league) => (
-            <SelectItem 
-              key={league.id} 
-              value={league.id}
-              className="text-slate-200 focus:bg-slate-700 focus:text-white"
-            >
-              {league.name}
+        <SelectContent className="border-white/10 bg-slate-900">
+          {LEAGUES.map((league) => (
+            <SelectItem key={league.id} value={league.id} className="text-slate-200 focus:bg-white/10 focus:text-white">
+              <span className="flex items-center gap-2">
+                <span>{league.flag}</span>
+                <span>{league.name}</span>
+              </span>
             </SelectItem>
           ))}
         </SelectContent>
       </Select>
 
-      {error ? (
-        <div className="text-center py-8">
-          <p className="text-slate-400 text-sm">Erro ao carregar classificação</p>
-          <p className="text-slate-500 text-xs mt-1">{error}</p>
-        </div>
-      ) : standings.length === 0 ? (
-        <div className="text-center py-8">
-          <Trophy className="h-8 w-8 text-slate-500 mx-auto mb-2" />
-          <p className="text-slate-400 text-sm">Nenhuma classificação disponível</p>
-        </div>
-      ) : (
-        <div className="rounded-lg border border-slate-700/50 bg-white/5 overflow-hidden">
-          <Table>
-            <TableHeader>
-              <TableRow className="border-slate-700/50 hover:bg-slate-800/50">
-                <TableHead className="text-slate-300 font-semibold w-16">POS</TableHead>
-                <TableHead className="text-slate-300 font-semibold">TIME</TableHead>
-                <TableHead className="text-slate-300 font-semibold text-center w-16">J</TableHead>
-                <TableHead className="text-slate-300 font-semibold text-center w-16">V</TableHead>
-                <TableHead className="text-slate-300 font-semibold text-center w-16">E</TableHead>
-                <TableHead className="text-slate-300 font-semibold text-center w-16">D</TableHead>
-                <TableHead className="text-slate-300 font-semibold text-center w-20">PTS</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {standings.slice(0, 10).map((team) => (
-                <TableRow 
-                  key={team.id}
-                  className={`border-slate-700/30 transition-all duration-200 ${getPositionStyle(team.position)}`}
-                >
-                  <TableCell className="font-medium">
-                    <div className="flex items-center space-x-2">
-                      {getPositionIcon(team.position)}
-                      <span className="text-slate-200 font-semibold">
-                        {team.position}
-                      </span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-slate-100 font-medium">
-                    {team.team_name}
-                  </TableCell>
-                  <TableCell className="text-center text-slate-300">
-                    {team.played}
-                  </TableCell>
-                  <TableCell className="text-center text-green-400 font-medium">
-                    {team.wins}
-                  </TableCell>
-                  <TableCell className="text-center text-yellow-400 font-medium">
-                    {team.draws}
-                  </TableCell>
-                  <TableCell className="text-center text-red-400 font-medium">
-                    {team.losses}
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <span className="text-slate-100 font-bold text-lg">
-                      {team.points}
-                    </span>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      )}
+      <div className="flex-1">
+        {loading ? (
+          <div className="space-y-2">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="h-9 animate-pulse rounded bg-white/5" />
+            ))}
+          </div>
+        ) : standings.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-12 text-center">
+            <Trophy className="mb-3 h-8 w-8 text-slate-700" />
+            <p className="text-sm text-slate-500">Sem classificacao disponivel</p>
+          </div>
+        ) : (
+          <>
+            <div className="mb-1 grid grid-cols-[1.5rem_1fr_1.8rem_1.8rem_1.8rem_1.8rem_2.2rem] items-center gap-1 px-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+              <span>#</span>
+              <span>Time</span>
+              <span className="text-center">J</span>
+              <span className="text-center">V</span>
+              <span className="text-center">E</span>
+              <span className="text-center">D</span>
+              <span className="text-right">Pts</span>
+            </div>
 
-      {standings.length > 0 && (
-        <div className="text-center">
-          <p className="text-slate-500 text-xs">
-            Mostrando top 10 • Atualizado em {new Date().toLocaleDateString('pt-BR')}
-          </p>
-        </div>
-      )}
+            <div className="space-y-0.5">
+              {standings.map((s) => (
+                <div
+                  key={`${s.pos}-${s.team}`}
+                  className={`grid grid-cols-[1.5rem_1fr_1.8rem_1.8rem_1.8rem_1.8rem_2.2rem] items-center gap-1 rounded-lg border-l-2 px-2 py-2 transition-colors hover:bg-white/[0.04] ${getPositionStyle(s.pos, standings.length)}`}
+                >
+                  <span className="text-xs font-medium text-slate-500">{s.pos}</span>
+                  <div className="flex items-center gap-2 overflow-hidden">
+                    {s.crest && s.crest.includes('football-data.org') ? (
+                      <Image
+                        src={s.crest}
+                        alt={s.team}
+                        width={18}
+                        height={18}
+                        className="h-[18px] w-[18px] flex-shrink-0 rounded object-contain"
+                      />
+                    ) : (
+                      <div className="flex h-[18px] w-[18px] flex-shrink-0 items-center justify-center rounded bg-slate-800 text-[9px] font-bold text-slate-500">
+                        {s.team.charAt(0)}
+                      </div>
+                    )}
+                    <span className="truncate text-xs font-medium text-slate-200">{s.team}</span>
+                  </div>
+                  <span className="text-center text-xs text-slate-500">{s.played}</span>
+                  <span className="text-center text-xs text-slate-400">{s.wins}</span>
+                  <span className="text-center text-xs text-slate-500">{s.draws}</span>
+                  <span className="text-center text-xs text-slate-500">{s.losses}</span>
+                  <span className="text-right text-xs font-bold text-slate-100">{s.pts}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-4 flex flex-wrap gap-3 text-[10px] text-slate-600">
+              <span className="flex items-center gap-1">
+                <span className="h-2 w-2 rounded-full bg-emerald-500/60" /> Champions
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="h-2 w-2 rounded-full bg-blue-500/60" /> Europa
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="h-2 w-2 rounded-full bg-red-500/60" /> Rebaixamento
+              </span>
+            </div>
+
+            {capturedAt && (
+              <p className="mt-3 text-[10px] text-slate-600">
+                Atualizado em {new Date(capturedAt).toLocaleString('pt-BR')}
+              </p>
+            )}
+          </>
+        )}
+      </div>
     </div>
-  );
+  )
 }

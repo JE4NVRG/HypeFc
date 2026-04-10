@@ -1,0 +1,238 @@
+import {
+  LEAGUE_MAPPING,
+  COMPETITION_ID_TO_LEAGUE,
+  LEAGUE_NAMES,
+} from '@/types'
+
+const BASE_URL = process.env.FOOTBALL_API_BASE_URL || 'https://api.football-data.org/v4'
+const TOKEN = process.env.FOOTBALL_API_TOKEN
+
+async function fetchWithRetry(url: string, attempts = 3): Promise<Response> {
+  let lastError: Error | null = null
+  for (let i = 0; i < attempts; i++) {
+    try {
+      const res = await fetch(url, {
+        headers: { 'X-Auth-Token': TOKEN || '', 'Content-Type': 'application/json' },
+      })
+      if (res.status === 429 || res.status >= 500) {
+        const retryAfter = Number(res.headers.get('retry-after')) || 0
+        const backoff = retryAfter > 0 ? retryAfter * 1000 : Math.min(2000 * 2 ** i, 15000)
+        await new Promise(r => setTimeout(r, backoff))
+        lastError = new Error(`HTTP ${res.status}`)
+        continue
+      }
+      return res
+    } catch (err) {
+      lastError = err as Error
+      await new Promise(r => setTimeout(r, Math.min(1000 * 2 ** i, 10000)))
+    }
+  }
+  throw lastError || new Error('Fetch failed')
+}
+
+async function apiGet<T>(endpoint: string): Promise<T> {
+  if (!TOKEN) throw new Error('FOOTBALL_API_TOKEN not configured')
+  const res = await fetchWithRetry(`${BASE_URL}${endpoint}`)
+  if (!res.ok) throw new Error(`Football API ${res.status}: ${res.statusText}`)
+  return res.json()
+}
+
+// ---------- Types ----------
+
+interface ApiMatch {
+  competition: { id: number; name: string; code: string }
+  utcDate: string
+  status: string
+  homeTeam: { id: number; name: string; crest?: string }
+  awayTeam: { id: number; name: string; crest?: string }
+  score: {
+    fullTime: { home: number | null; away: number | null }
+    halfTime: { home: number | null; away: number | null }
+  }
+}
+
+export type MatchStatus = 'SCHEDULED' | 'TIMED' | 'IN_PLAY' | 'PAUSED' | 'FINISHED' | 'POSTPONED' | 'CANCELLED' | 'SUSPENDED'
+
+export interface TodayMatch {
+  league_id: string
+  league_name: string
+  home: string
+  home_crest: string | null
+  home_position: number | null
+  away: string
+  away_crest: string | null
+  away_position: number | null
+  time_local: string
+  status: MatchStatus
+  score_home: number | null
+  score_away: number | null
+}
+
+export interface StandingRow {
+  pos: number
+  team: string
+  crest: string
+  pts: number
+  played: number
+  wins: number
+  draws: number
+  losses: number
+}
+
+export interface HypeFlag {
+  team: string
+  reason: string
+  priority: number
+  crest: string | null
+  position: number | null
+  league_id: string
+  league_name: string
+}
+
+// ---------- Today's matches ----------
+
+export async function fetchTodayMatches(): Promise<TodayMatch[]> {
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' })
+  const validCompIds = new Set(Object.values(LEAGUE_MAPPING))
+
+  const data = await apiGet<{ matches: ApiMatch[] }>(`/matches?date=${today}`)
+
+  const seen = new Set<string>()
+
+  return (data.matches || [])
+    .filter(m => validCompIds.has(m.competition.id))
+    .map(m => {
+      const leagueCode = COMPETITION_ID_TO_LEAGUE[m.competition.id] || m.competition.code
+      const key = `${leagueCode}-${m.homeTeam.name}-${m.awayTeam.name}`
+      if (seen.has(key)) return null
+      seen.add(key)
+
+      const utc = new Date(m.utcDate)
+      const timeLocal = utc.toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'America/Sao_Paulo',
+      })
+
+      return {
+        league_id: leagueCode,
+        league_name: LEAGUE_NAMES[leagueCode] || m.competition.name,
+        home: m.homeTeam.name,
+        home_crest: m.homeTeam.crest || null,
+        home_position: null,
+        away: m.awayTeam.name,
+        away_crest: m.awayTeam.crest || null,
+        away_position: null,
+        time_local: timeLocal,
+        status: m.status as MatchStatus,
+        score_home: m.score?.fullTime?.home ?? m.score?.halfTime?.home ?? null,
+        score_away: m.score?.fullTime?.away ?? m.score?.halfTime?.away ?? null,
+      } as TodayMatch
+    })
+    .filter((m): m is TodayMatch => m !== null)
+    .sort((a, b) => a.league_name.localeCompare(b.league_name) || a.time_local.localeCompare(b.time_local))
+}
+
+// ---------- Standings ----------
+
+interface ApiStandingTeam {
+  position: number
+  team: { id: number; name: string; crest?: string }
+  playedGames: number
+  won: number
+  draw: number
+  lost: number
+  points: number
+}
+
+export async function fetchStandings(leagueCode: string): Promise<{
+  league_id: string
+  league_name: string
+  table: StandingRow[]
+  captured_at: string
+}> {
+  const compId = LEAGUE_MAPPING[leagueCode]
+  if (!compId) throw new Error(`League ${leagueCode} not supported`)
+
+  const data = await apiGet<{ standings: Array<{ table: ApiStandingTeam[] }> }>(
+    `/competitions/${compId}/standings`
+  )
+
+  return {
+    league_id: leagueCode,
+    league_name: LEAGUE_NAMES[leagueCode] || leagueCode,
+    table: (data.standings?.[0]?.table || []).map(t => ({
+      pos: t.position,
+      team: t.team.name,
+      crest: t.team.crest || '',
+      pts: t.points,
+      played: t.playedGames,
+      wins: t.won,
+      draws: t.draw,
+      losses: t.lost,
+    })),
+    captured_at: new Date().toISOString(),
+  }
+}
+
+// ---------- Hype flags (max 12) ----------
+
+const MAX_HYPE_FLAGS = 12
+
+export function generateHypeFlags(
+  matches: TodayMatch[],
+  standingsMap: Record<string, StandingRow[]>
+): HypeFlag[] {
+  const seen = new Map<string, HypeFlag>()
+
+  function addFlag(flag: HypeFlag) {
+    const existing = seen.get(flag.team)
+    if (!existing || flag.priority < existing.priority) {
+      seen.set(flag.team, flag)
+    }
+  }
+
+  // Apenas ligas com jogos hoje
+  const todayLeagues = new Set(matches.map(m => m.league_id))
+
+  for (const [leagueId, table] of Object.entries(standingsMap)) {
+    if (!table.length || !todayLeagues.has(leagueId)) continue
+    const leagueName = LEAGUE_NAMES[leagueId] || leagueId
+
+    addFlag({
+      team: table[0].team,
+      reason: 'Líder da liga',
+      priority: 1,
+      crest: table[0].crest || null,
+      position: table[0].pos,
+      league_id: leagueId,
+      league_name: leagueName,
+    })
+    for (const t of table.slice(1, 3)) {
+      addFlag({
+        team: t.team,
+        reason: 'Top 3 da liga',
+        priority: 2,
+        crest: t.crest || null,
+        position: t.pos,
+        league_id: leagueId,
+        league_name: leagueName,
+      })
+    }
+  }
+
+  // Times jogando hoje que ainda nao estao no hype
+  for (const m of matches) {
+    const leagueName = m.league_name
+    if (!seen.has(m.home)) {
+      addFlag({ team: m.home, reason: 'Joga hoje', priority: 3, crest: m.home_crest, position: m.home_position, league_id: m.league_id, league_name: leagueName })
+    }
+    if (!seen.has(m.away)) {
+      addFlag({ team: m.away, reason: 'Joga hoje', priority: 3, crest: m.away_crest, position: m.away_position, league_id: m.league_id, league_name: leagueName })
+    }
+  }
+
+  return Array.from(seen.values())
+    .sort((a, b) => a.priority !== b.priority ? a.priority - b.priority : a.team.localeCompare(b.team))
+    .slice(0, MAX_HYPE_FLAGS)
+}

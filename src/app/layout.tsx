@@ -1,12 +1,19 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export const metadata: Metadata = {
-  title: 'HypeFC Dashboard',
-  description: 'Dashboard de times em alta para vender hoje',
+  title: 'HypeFC - Dashboard de Futebol em Tempo Real',
+  description: 'Dashboard inteligente que identifica times em alta, acompanha classificacoes e jogos do dia das principais ligas do mundo.',
+  keywords: ['futebol', 'dashboard', 'premier league', 'brasileirao', 'la liga', 'champions league'],
+  authors: [{ name: 'Jean Carlos', url: 'https://github.com/JE4NVRG' }],
+  openGraph: {
+    title: 'HypeFC - Dashboard de Futebol',
+    description: 'Times em alta, jogos de hoje e classificacoes das maiores ligas do mundo.',
+    type: 'website',
+    locale: 'pt_BR',
+  },
 }
 
 export default function RootLayout({
@@ -15,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR">
-      <body className={`${inter.className} min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100 antialiased`}>
+    <html lang="pt-BR" className="dark">
+      <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>

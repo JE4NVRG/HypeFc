@@ -28,6 +28,10 @@ yarn-error.log*
 # Vercel
 .vercel
 
+# IDE
+.trae/
+.playwright-mcp/
+
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts

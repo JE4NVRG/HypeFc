@@ -1,130 +1,122 @@
-'use client';
+"use client"
 
-import { useState, useEffect } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Flame, TrendingUp } from 'lucide-react';
-import type { DashboardTodayResponse, HypeFlag } from '@/types';
+import Image from 'next/image'
+import { Flame, TrendingUp, Trophy, Swords } from 'lucide-react'
+import type { HypeTeam } from '@/hooks/useDashboardData'
 
-export function HypeFlags() {
-  const [data, setData] = useState<DashboardTodayResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+interface HypeFlagsProps {
+  hypeTeams: HypeTeam[]
+  loading: boolean
+}
 
-  useEffect(() => {
-    fetchHypeFlags();
-  }, []);
+const priorityConfig: Record<number, { color: string; bg: string; border: string; glow: string; icon: React.ReactNode }> = {
+  1: {
+    color: 'text-red-400',
+    bg: 'bg-red-500/10',
+    border: 'border-red-500/20',
+    glow: 'shadow-red-500/10',
+    icon: <Trophy className="h-3 w-3" />,
+  },
+  2: {
+    color: 'text-orange-400',
+    bg: 'bg-orange-500/10',
+    border: 'border-orange-500/20',
+    glow: 'shadow-orange-500/10',
+    icon: <TrendingUp className="h-3 w-3" />,
+  },
+  3: {
+    color: 'text-emerald-400',
+    bg: 'bg-emerald-500/10',
+    border: 'border-emerald-500/20',
+    glow: 'shadow-emerald-500/10',
+    icon: <Swords className="h-3 w-3" />,
+  },
+  4: {
+    color: 'text-blue-400',
+    bg: 'bg-blue-500/10',
+    border: 'border-blue-500/20',
+    glow: 'shadow-blue-500/10',
+    icon: <Swords className="h-3 w-3" />,
+  },
+}
 
-  const fetchHypeFlags = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch('/api/dashboard/today');
-      
-      if (!response.ok) {
-        throw new Error('Falha ao carregar times em alta');
-      }
-      
-      const result = await response.json();
-      setData(result);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro desconhecido');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="space-y-4">
-        <Skeleton className="h-8 w-2/3 bg-slate-700" />
-        <Skeleton className="h-6 w-1/2 bg-slate-700" />
-        <Skeleton className="h-8 w-3/4 bg-slate-700" />
-        <Skeleton className="h-6 w-1/3 bg-slate-700" />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="text-center py-8">
-        <p className="text-slate-400 text-sm">Erro ao carregar times em alta</p>
-        <p className="text-slate-500 text-xs mt-1">{error}</p>
-      </div>
-    );
-  }
-
-  if (!data?.hypeFlags || data.hypeFlags.length === 0) {
-    return (
-      <div className="text-center py-8">
-        <Flame className="h-8 w-8 text-slate-500 mx-auto mb-2" />
-        <p className="text-slate-400 text-sm">Nenhum time em destaque hoje</p>
-      </div>
-    );
-  }
-
-  // Ordenar por prioridade (1 primeiro)
-  const sortedHypeFlags = [...data.hypeFlags].sort((a, b) => a.priority - b.priority);
-
-  const getPriorityColor = (priority: number) => {
-    switch (priority) {
-      case 1:
-        return 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white border-yellow-400';
-      case 2:
-        return 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-emerald-400';
-      case 3:
-        return 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white border-blue-400';
-      case 4:
-        return 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-purple-400';
-      default:
-        return 'bg-slate-700/50 text-slate-200 border-slate-600';
-    }
-  };
-
-  const getPriorityIcon = (priority: number) => {
-    if (priority === 1) {
-      return <TrendingUp className="h-3 w-3" />;
-    }
-    return <Flame className="h-3 w-3" />;
-  };
+function HypeCard({ team }: { team: HypeTeam }) {
+  const config = priorityConfig[team.priority] || priorityConfig[3]
 
   return (
-    <div className="space-y-3">
-      {sortedHypeFlags.map((hypeFlag, index) => (
-        <div 
-          key={hypeFlag.id}
-          className="group p-4 rounded-lg bg-white/5 border border-slate-700/30 hover:bg-white/10 transition-all duration-200 hover:border-slate-600/50"
-        >
-          <div className="flex items-start justify-between mb-2">
-            <h3 className="text-slate-100 font-semibold text-sm group-hover:text-white transition-colors">
-              {hypeFlag.team_name}
-            </h3>
-            <div className="flex items-center space-x-1 text-slate-400 text-xs">
-              {getPriorityIcon(hypeFlag.priority)}
-              <span>#{hypeFlag.priority}</span>
-            </div>
+    <div className={`group relative flex items-center gap-3 rounded-xl border ${config.border} ${config.bg} p-3 shadow-lg ${config.glow} transition-all hover:scale-[1.02] hover:shadow-xl`}>
+      <div className="flex-shrink-0">
+        {team.crest && team.crest.includes('football-data.org') ? (
+          <Image
+            src={team.crest}
+            alt={team.team}
+            width={32}
+            height={32}
+            className="h-8 w-8 rounded-lg object-contain"
+          />
+        ) : (
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-800 text-sm font-bold text-slate-400">
+            {team.team.charAt(0)}
           </div>
-          
-          <Badge 
-            className={`${getPriorityColor(hypeFlag.priority)} text-xs font-medium`}
-          >
-            {hypeFlag.reason}
-          </Badge>
-          
-          {hypeFlag.created_at && (
-            <p className="text-slate-500 text-xs mt-2">
-              Adicionado em {new Date(hypeFlag.created_at).toLocaleDateString('pt-BR')}
-            </p>
+        )}
+      </div>
+
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center gap-1.5">
+          {team.position && (
+            <span className="text-[10px] font-medium text-slate-500">#{team.position}</span>
+          )}
+          <span className="truncate text-sm font-semibold text-slate-100">{team.team}</span>
+        </div>
+        <div className="mt-0.5 flex items-center gap-2">
+          <div className={`flex items-center gap-1 text-[11px] ${config.color}`}>
+            {config.icon}
+            <span>{team.reason}</span>
+          </div>
+          {team.league_name && (
+            <span className="text-[10px] text-slate-600">{team.league_name}</span>
           )}
         </div>
-      ))}
-      
-      {sortedHypeFlags.length > 0 && (
-        <div className="text-center pt-2">
-          <p className="text-slate-500 text-xs">
-            {sortedHypeFlags.length} time{sortedHypeFlags.length !== 1 ? 's' : ''} em destaque
-          </p>
-        </div>
-      )}
+      </div>
     </div>
-  );
+  )
+}
+
+export function HypeFlags({ hypeTeams, loading }: HypeFlagsProps) {
+  return (
+    <div className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
+      <div className="mb-4 flex items-center gap-2">
+        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-orange-500/10">
+          <Flame className="h-3.5 w-3.5 text-orange-400" />
+        </div>
+        <h2 className="text-sm font-semibold text-slate-200">Times em Alta</h2>
+        {!loading && hypeTeams.length > 0 && (
+          <span className="ml-auto rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-medium text-slate-400">
+            {hypeTeams.length} times
+          </span>
+        )}
+      </div>
+
+      <div className="flex-1">
+        {loading ? (
+          <div className="space-y-3">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="h-16 animate-pulse rounded-xl bg-white/5" />
+            ))}
+          </div>
+        ) : hypeTeams.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-12 text-center">
+            <Flame className="mb-3 h-8 w-8 text-slate-700" />
+            <p className="text-sm text-slate-500">Nenhum time em destaque hoje</p>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {hypeTeams.map((team, i) => (
+              <HypeCard key={`${team.team}-${team.reason}-${i}`} team={team} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
 }

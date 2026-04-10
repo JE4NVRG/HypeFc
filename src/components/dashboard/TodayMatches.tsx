@@ -1,152 +1,128 @@
-'use client';
+"use client"
 
-import { useState, useEffect } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Separator } from '@/components/ui/separator';
-import { Clock } from 'lucide-react';
-import type { DashboardTodayResponse, Match } from '@/types';
+import Image from 'next/image'
+import { Calendar } from 'lucide-react'
+import type { Match } from '@/hooks/useDashboardData'
 
-// Mapeamento de IDs de liga para nomes - TODAS as ligas da API
-const LEAGUE_NAMES: Record<string, string> = {
-  // Ligas Europeias Principais
-  'PL': 'Premier League',
-  'PD': 'La Liga',
-  'SA': 'Serie A',
-  'FL1': 'Ligue 1',
-  'BL1': 'Bundesliga',
-  'DED': 'Eredivisie',
-  'PPL': 'Primeira Liga',
-  'ELC': 'Championship',
-  
-  // Competições Internacionais
-  'CL': 'Champions League',
-  'EC': 'Eurocopa',
-  'WC': 'Copa do Mundo',
-  
-  // América do Sul
-  'BSA': 'Brasileirão',
-};
+interface TodayMatchesProps {
+  groupedMatches: Record<string, Match[]>
+  loading: boolean
+}
 
-export function TodayMatches() {
-  const [data, setData] = useState<DashboardTodayResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetchMatches();
-  }, []);
-
-  const fetchMatches = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch('/api/dashboard/today');
-      
-      if (!response.ok) {
-        throw new Error('Falha ao carregar jogos');
-      }
-      
-      const result = await response.json();
-      setData(result);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro desconhecido');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="space-y-4">
-        <Skeleton className="h-4 w-3/4 bg-slate-700" />
-        <Skeleton className="h-4 w-1/2 bg-slate-700" />
-        <Skeleton className="h-4 w-2/3 bg-slate-700" />
-      </div>
-    );
+function Crest({ src, name }: { src?: string | null; name: string }) {
+  if (src) {
+    return <Image src={src} alt={name} width={20} height={20} className="h-5 w-5 flex-shrink-0 rounded object-contain" />
   }
+  return (
+    <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded bg-slate-800 text-[9px] font-bold text-slate-500">
+      {name.charAt(0)}
+    </div>
+  )
+}
 
-  if (error) {
+function MatchCenter({ match }: { match: Match }) {
+  const isLive = match.status === 'IN_PLAY' || match.status === 'PAUSED'
+  const isFinished = match.status === 'FINISHED'
+  const hasScore = match.score_home !== null && match.score_away !== null
+
+  if (hasScore && (isLive || isFinished)) {
     return (
-      <div className="text-center py-8">
-        <p className="text-slate-400 text-sm">Erro ao carregar jogos</p>
-        <p className="text-slate-500 text-xs mt-1">{error}</p>
+      <div className={`flex flex-shrink-0 flex-col items-center rounded-md px-2 py-0.5 ${isLive ? 'bg-emerald-500/15' : 'bg-slate-800/60'}`}>
+        <span className={`font-mono text-xs font-bold leading-tight ${isLive ? 'text-emerald-300' : 'text-slate-300'}`}>
+          {match.score_home} - {match.score_away}
+        </span>
+        {isLive && (
+          <span className="flex items-center gap-0.5 text-[8px] font-bold uppercase leading-tight text-emerald-400">
+            <span className="h-1 w-1 animate-pulse rounded-full bg-emerald-400" />
+            live
+          </span>
+        )}
+        {isFinished && (
+          <span className="text-[8px] font-medium uppercase leading-tight text-slate-600">fim</span>
+        )}
       </div>
-    );
+    )
   }
-
-  if (!data?.matches || data.matches.length === 0) {
-    return (
-      <div className="text-center py-8">
-        <Clock className="h-8 w-8 text-slate-500 mx-auto mb-2" />
-        <p className="text-slate-400 text-sm">Nenhum jogo programado para hoje</p>
-      </div>
-    );
-  }
-
-  // Agrupar jogos por liga
-  const matchesByLeague = data.matches.reduce((acc, match) => {
-    const leagueName = LEAGUE_NAMES[match.league_id] || match.league_id;
-    if (!acc[leagueName]) {
-      acc[leagueName] = [];
-    }
-    acc[leagueName].push(match);
-    return acc;
-  }, {} as Record<string, Match[]>);
-
-  const formatTime = (dateString: string, kickoffTime?: string | null) => {
-    try {
-      if (kickoffTime) {
-        return kickoffTime;
-      }
-      const date = new Date(dateString);
-      return date.toLocaleTimeString('pt-BR', { 
-        hour: '2-digit', 
-        minute: '2-digit',
-        timeZone: 'America/Sao_Paulo'
-      });
-    } catch {
-      return 'Horário TBD';
-    }
-  };
 
   return (
-    <div className="space-y-6">
-      {Object.entries(matchesByLeague).map(([leagueName, matches], index) => (
-        <div key={leagueName}>
-          {index > 0 && <Separator className="bg-slate-700/50" />}
-          
-          <div className="space-y-3">
-            <Badge 
-              variant="secondary" 
-              className="bg-slate-700/50 text-slate-200 border-slate-600"
-            >
-              {leagueName}
-            </Badge>
-            
-            <div className="space-y-2">
-              {matches.map((match) => (
-                <div 
-                  key={match.id} 
-                  className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-slate-700/30 hover:bg-white/10 transition-colors"
-                >
-                  <div className="flex-1">
-                    <p className="text-slate-100 font-medium text-sm">
-                      {match.home_team} <span className="text-slate-400 mx-2">×</span> {match.away_team}
-                    </p>
-                  </div>
-                  
-                  <div className="flex items-center space-x-2 text-slate-300">
-                    <Clock className="h-4 w-4" />
-                    <span className="text-sm font-mono">
-                      {formatTime(match.match_date, match.kickoff_time)}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      ))}
+    <div className="flex-shrink-0 rounded-md bg-slate-800/60 px-2 py-1">
+      <span className="font-mono text-xs font-semibold text-slate-400">{match.time_local}</span>
     </div>
-  );
+  )
+}
+
+function MatchRow({ match }: { match: Match }) {
+  const isLive = match.status === 'IN_PLAY' || match.status === 'PAUSED'
+
+  return (
+    <div className={`flex items-center gap-1.5 rounded-lg px-2 py-2 transition-colors ${isLive ? 'bg-emerald-500/[0.06] ring-1 ring-emerald-500/10' : 'bg-white/[0.03] hover:bg-white/[0.06]'}`}>
+      {/* Casa */}
+      <div className="flex flex-1 items-center justify-end gap-1.5 overflow-hidden text-right">
+        <span className="truncate text-sm font-medium text-slate-200">{match.home}</span>
+        <Crest src={match.home_crest} name={match.home} />
+      </div>
+
+      <MatchCenter match={match} />
+
+      {/* Visitante */}
+      <div className="flex flex-1 items-center gap-1.5 overflow-hidden">
+        <Crest src={match.away_crest} name={match.away} />
+        <span className="truncate text-sm font-medium text-slate-200">{match.away}</span>
+      </div>
+    </div>
+  )
+}
+
+export function TodayMatches({ groupedMatches, loading }: TodayMatchesProps) {
+  const leagueEntries = Object.entries(groupedMatches)
+
+  return (
+    <div className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4">
+      <div className="mb-3 flex items-center gap-2">
+        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10">
+          <Calendar className="h-3.5 w-3.5 text-emerald-400" />
+        </div>
+        <h2 className="text-sm font-semibold text-slate-200">Jogos de Hoje</h2>
+        {!loading && leagueEntries.length > 0 && (
+          <span className="ml-auto rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-medium text-slate-400">
+            {leagueEntries.reduce((sum, [, m]) => sum + m.length, 0)} jogos
+          </span>
+        )}
+      </div>
+
+      <div className="flex-1">
+        {loading ? (
+          <div className="space-y-2">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="h-10 animate-pulse rounded-lg bg-white/5" />
+            ))}
+          </div>
+        ) : leagueEntries.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-12 text-center">
+            <Calendar className="mb-3 h-8 w-8 text-slate-700" />
+            <p className="text-sm text-slate-500">Nenhum jogo programado para hoje</p>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {leagueEntries.map(([leagueName, matches]) => (
+              <div key={leagueName}>
+                <div className="mb-1.5 flex items-center gap-2">
+                  <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
+                  <span className="text-[9px] font-semibold uppercase tracking-wider text-slate-500">
+                    {leagueName}
+                  </span>
+                  <div className="h-px flex-1 bg-gradient-to-l from-white/10 to-transparent" />
+                </div>
+                <div className="space-y-0.5">
+                  {matches.map((match, i) => (
+                    <MatchRow key={`${match.league_id}-${match.home}-${match.away}-${i}`} match={match} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
 }
