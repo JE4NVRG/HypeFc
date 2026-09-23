@@ -1,5 +1,60 @@
-export const MIN_HYPE_SCORE = 28
+/**
+ * Corte de entrada no board.
+ *
+ * Calibrado com `npm run backtest` (1.440 jogos, ajuste/validacao por liga):
+ * subir de 28 para 44 leva a taxa de acerto de ~50% para ~59% na validacao, com
+ * card em ~30% dos jogos — o suficiente para encher um painel de 12 em uma
+ * rodada de 36 jogos. O criterio foi "maior acerto mantendo >=28% de cobertura";
+ * 48 acerta mais (61,6%) mas cai para 24% de cobertura.
+ */
+export const MIN_HYPE_SCORE = 44
 export const MAX_HYPE_FLAGS = 12
+
+/**
+ * Pesos do score, isolados para poderem ser calibrados contra resultado real.
+ * Os valores aqui sao o default do produto; o backtest varre variacoes em cima
+ * do MESMO codigo, em vez de reimplementar a conta.
+ */
+export interface HypeWeights {
+  formWin: number
+  formDraw: number
+  positionFirst: number
+  positionSecond: number
+  positionThird: number
+  positionTop6: number
+  balanceHigh: number
+  balanceMid: number
+  classic: number
+  live: number
+  playing: number
+}
+
+export const DEFAULT_HYPE_WEIGHTS: HypeWeights = {
+  formWin: 7,
+  formDraw: 3,
+  positionFirst: 24,
+  positionSecond: 18,
+  positionThird: 14,
+  positionTop6: 8,
+  balanceHigh: 8,
+  balanceMid: 4,
+  classic: 18,
+  live: 14,
+  playing: 8,
+}
+
+export interface HypeOptions {
+  /** Corte de entrada. Default: MIN_HYPE_SCORE. */
+  minScore?: number
+  weights?: Partial<HypeWeights>
+}
+
+function resolveOptions(options?: HypeOptions): { minScore: number; weights: HypeWeights } {
+  return {
+    minScore: options?.minScore ?? MIN_HYPE_SCORE,
+    weights: { ...DEFAULT_HYPE_WEIGHTS, ...(options?.weights ?? {}) },
+  }
+}
 
 export interface DayStats {
   totalMatches: number
@@ -153,24 +208,31 @@ export function parseForm(form: string | null | undefined): Array<'W' | 'D' | 'L
   return letters.slice(-5) as Array<'W' | 'D' | 'L'>
 }
 
-function formPoints(letters: Array<'W' | 'D' | 'L'>): number {
-  return letters.reduce((sum, letter) => sum + (letter === 'W' ? 7 : letter === 'D' ? 3 : 0), 0)
+function formPoints(letters: Array<'W' | 'D' | 'L'>, weights: HypeWeights): number {
+  return letters.reduce(
+    (sum, letter) => sum + (letter === 'W' ? weights.formWin : letter === 'D' ? weights.formDraw : 0),
+    0
+  )
 }
 
-function positionPoints(position: number | null): number {
+function positionPoints(position: number | null, weights: HypeWeights): number {
   if (!position || position < 1) return 0
-  if (position === 1) return 24
-  if (position === 2) return 18
-  if (position === 3) return 14
-  if (position <= 6) return 8
+  if (position === 1) return weights.positionFirst
+  if (position === 2) return weights.positionSecond
+  if (position === 3) return weights.positionThird
+  if (position <= 6) return weights.positionTop6
   return 0
 }
 
-function goalDifferencePoints(goalDifference: number, played: number): number {
+function goalDifferencePoints(
+  goalDifference: number,
+  played: number,
+  weights: HypeWeights
+): number {
   if (!played || played < 1) return 0
   const perGame = goalDifference / played
-  if (perGame >= 1) return 8
-  if (perGame >= 0.5) return 4
+  if (perGame >= 1) return weights.balanceHigh
+  if (perGame >= 0.5) return weights.balanceMid
   return 0
 }
 
@@ -195,16 +257,17 @@ function rowFor(table: HypeTableRow[] | undefined, team: string): HypeTableRow |
   return table?.find((row) => row.team === team)
 }
 
-function scoreDraft(draft: Draft): HypeBoardItem | null {
+function scoreDraft(draft: Draft, options: { minScore: number; weights: HypeWeights }): HypeBoardItem | null {
+  const { weights } = options
   const letters = parseForm(draft.formRaw)
-  const shape = formPoints(letters)
-  const table = positionPoints(draft.position)
-  const playing = draft.isActiveFixture ? 8 : 0
-  const live = draft.isLive ? 14 : 0
-  const classic = draft.isClassic ? 18 : 0
-  const balance = goalDifferencePoints(draft.goalDifference, draft.played)
+  const shape = formPoints(letters, weights)
+  const table = positionPoints(draft.position, weights)
+  const playing = draft.isActiveFixture ? weights.playing : 0
+  const live = draft.isLive ? weights.live : 0
+  const classic = draft.isClassic ? weights.classic : 0
+  const balance = goalDifferencePoints(draft.goalDifference, draft.played, weights)
   const score = Math.min(100, shape + table + playing + live + classic + balance)
-  if (score < MIN_HYPE_SCORE) return null
+  if (score < options.minScore) return null
 
   const signals: Array<{ label: string; points: number }> = []
   if (classic > 0) signals.push({ label: 'Clássico', points: classic })
@@ -251,12 +314,14 @@ function keepBetter(current: HypeBoardItem | undefined, next: HypeBoardItem): Hy
 export function buildHypeBoard(
   matches: HypeFixture[],
   standingsMap: Record<string, HypeTableRow[]>,
-  leagueNames: Record<string, string> = {}
+  leagueNames: Record<string, string> = {},
+  options?: HypeOptions
 ): HypeBoardItem[] {
+  const resolved = resolveOptions(options)
   const ranked = new Map<string, HypeBoardItem>()
 
   const consider = (draft: Draft) => {
-    const item = scoreDraft(draft)
+    const item = scoreDraft(draft, resolved)
     if (!item) return
     ranked.set(item.team, keepBetter(ranked.get(item.team), item))
   }

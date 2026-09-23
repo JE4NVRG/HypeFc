@@ -21,7 +21,12 @@
  *
  * Uso: npm run backtest
  */
-import { buildHypeBoard, MIN_HYPE_SCORE, type HypeTableRow } from '../src/lib/hypeScore.ts'
+import {
+  buildHypeBoard,
+  MIN_HYPE_SCORE,
+  type HypeTableRow,
+  type HypeWeights,
+} from '../src/lib/hypeScore.ts'
 import { parseEspnMatches, type EspnMatch } from '../src/lib/espnParse.ts'
 
 const SEASON = 2026
@@ -121,7 +126,17 @@ function pct(part: number, total: number): string {
   return `${((part / total) * 100).toFixed(1)}%`
 }
 
+/** Esperado dado o mando, calculado dentro do proprio split (ajuste/validacao). */
+function splitExpected(split: Split, tally: EdgeTally): number {
+  const base = baselineSplit[split]
+  if (!tally.n || !base.n) return 0
+  const homeRate = base.home / base.n
+  const awayRate = base.away / base.n
+  return (tally.homeN * homeRate + tally.awayN * awayRate) / tally.n
+}
+
 const baseline = newTally()
+const baselineSplit: Record<Split, Tally> = { fit: newTally(), validate: newTally() }
 const flaggedOnly = {
   n: 0,
   wins: 0,
@@ -158,6 +173,58 @@ function bumpEdge(key: string, won: boolean, isHome: boolean) {
 
 const perLeague: Array<{ league: string; finished: number; eligible: number }> = []
 
+/** Cortes testados para o MIN_HYPE_SCORE. */
+const CUTOFFS = [24, 28, 32, 36, 40, 44, 48]
+
+/**
+ * Fora da amostra: dentro de cada liga, os jogos antes da data mediana servem de
+ * ajuste e os depois dela de validacao. Nunca escolho o corte olhando a
+ * validacao — senao seria so overfitting com outro nome.
+ */
+type Split = 'fit' | 'validate'
+
+const EMPTY_ABLATIONS: Record<string, Partial<HypeWeights>> = {}
+
+/** Zera um grupo de pesos para medir o que cada sinal carrega sozinho. */
+const ZERO_FORM: Partial<HypeWeights> = { formWin: 0, formDraw: 0 }
+const ZERO_POSITION: Partial<HypeWeights> = {
+  positionFirst: 0,
+  positionSecond: 0,
+  positionThird: 0,
+  positionTop6: 0,
+}
+const ZERO_BALANCE: Partial<HypeWeights> = { balanceHigh: 0, balanceMid: 0 }
+const ZERO_MATCH: Partial<HypeWeights> = { classic: 0, live: 0, playing: 0 }
+
+const ABLATIONS: Array<{ key: string; weights: Partial<HypeWeights> }> = [
+  { key: 'score completo', weights: EMPTY_ABLATIONS },
+  { key: 'so forma', weights: { ...ZERO_POSITION, ...ZERO_BALANCE, ...ZERO_MATCH } },
+  { key: 'so posicao', weights: { ...ZERO_FORM, ...ZERO_BALANCE, ...ZERO_MATCH } },
+  { key: 'so saldo', weights: { ...ZERO_FORM, ...ZERO_POSITION, ...ZERO_MATCH } },
+]
+
+const cutoffSweep = new Map<number, Record<Split, EdgeTally>>()
+const ablationSweep = new Map<string, Record<Split, EdgeTally>>()
+
+function sweepEntry<K, T>(map: Map<K, T>, key: K, make: () => T): T {
+  const current = map.get(key)
+  if (current) return current
+  const fresh = make()
+  map.set(key, fresh)
+  return fresh
+}
+
+function newEdgeTally(): EdgeTally {
+  return { n: 0, wins: 0, homeN: 0, awayN: 0 }
+}
+
+function registerEdge(tally: EdgeTally, won: boolean, pickedIsHome: boolean) {
+  tally.n += 1
+  if (won) tally.wins += 1
+  if (pickedIsHome) tally.homeN += 1
+  else tally.awayN += 1
+}
+
 function band(score: number): string {
   if (score < 40) return '28-39'
   if (score < 55) return '40-54'
@@ -191,11 +258,17 @@ async function main() {
     const state = new Map<string, TeamState>()
     let eligible = 0
 
+    // Metade de cada liga marca a fronteira ajuste/validacao (sem espiar o fim).
+    const medianDate = finished.length
+      ? String(finished[Math.floor(finished.length / 2)].date)
+      : ''
+
     for (const match of finished) {
       const homeState = state.get(match.home)
       const awayState = state.get(match.away)
       const ready =
         (homeState?.played ?? 0) >= MIN_PLAYED && (awayState?.played ?? 0) >= MIN_PLAYED
+      const split: Split = String(match.date) < medianDate ? 'fit' : 'validate'
 
       const scoreHome = match.score_home as number
       const scoreAway = match.score_away as number
@@ -231,6 +304,10 @@ async function main() {
         if (homeWon) baseline.home += 1
         else if (awayWon) baseline.away += 1
         else baseline.draw += 1
+        baselineSplit[split].n += 1
+        if (homeWon) baselineSplit[split].home += 1
+        else if (awayWon) baselineSplit[split].away += 1
+        else baselineSplit[split].draw += 1
 
         if (homeItem && awayItem) {
           bothFlagged.n += 1
@@ -276,6 +353,72 @@ async function main() {
                   : 'mesma posicao'
             bumpEdge(edge, flaggedWon, flaggedIsHome)
           }
+        }
+
+        // --- varredura de corte: uma chamada com minScore 0 devolve todos os
+        // itens com score, entao cada corte candidato vira um filtro. Testa o
+        // codigo real, sem reimplementar a conta nem repetir o replay. ---
+        const allItems = buildHypeBoard(
+          [
+            {
+              league_id: match.league_id,
+              league_name: leagueName,
+              home: match.home,
+              away: match.away,
+              status: 'TIMED',
+            },
+          ],
+          { [match.league_id]: table },
+          { [match.league_id]: leagueName },
+          { minScore: 0 }
+        )
+        const allHome = allItems.find((item) => item.team === match.home)
+        const allAway = allItems.find((item) => item.team === match.away)
+
+        for (const cutoff of CUTOFFS) {
+          const flaggedHome = Boolean(allHome && allHome.score >= cutoff)
+          const flaggedAway = Boolean(allAway && allAway.score >= cutoff)
+          if (flaggedHome === flaggedAway) continue
+          const pickedIsHome = flaggedHome
+          registerEdge(
+            sweepEntry(cutoffSweep, cutoff, () => ({
+              fit: newEdgeTally(),
+              validate: newEdgeTally(),
+            }))[split],
+            pickedIsHome ? homeWon : awayWon,
+            pickedIsHome
+          )
+        }
+
+        // --- ablacao: qual sinal carrega o score sozinho ---
+        for (const variant of ABLATIONS) {
+          const items = buildHypeBoard(
+            [
+              {
+                league_id: match.league_id,
+                league_name: leagueName,
+                home: match.home,
+                away: match.away,
+                status: 'TIMED',
+              },
+            ],
+            { [match.league_id]: table },
+            { [match.league_id]: leagueName },
+            { minScore: 0, weights: variant.weights }
+          )
+          const sideHome = items.find((item) => item.team === match.home)
+          const sideAway = items.find((item) => item.team === match.away)
+          if (!sideHome || !sideAway) continue
+          if (sideHome.score === sideAway.score) continue
+          const pickedIsHome = sideHome.score > sideAway.score
+          registerEdge(
+            sweepEntry(ablationSweep, variant.key, () => ({
+              fit: newEdgeTally(),
+              validate: newEdgeTally(),
+            }))[split],
+            pickedIsHome ? homeWon : awayWon,
+            pickedIsHome
+          )
         }
       }
 
@@ -370,6 +513,49 @@ async function main() {
         `menor score vence ${pct(bothFlagged.lowerWins, bothFlagged.n)}  (n=${bothFlagged.n})`
     )
   }
+
+  console.log('=== VARREDURA DE CORTE (MIN_HYPE_SCORE) ===')
+  console.log('  ajuste = 1a metade de cada liga | validacao = 2a metade')
+  console.log(
+    `  baseline ajuste: casa ${pct(baselineSplit.fit.home, baselineSplit.fit.n)} / ` +
+      `fora ${pct(baselineSplit.fit.away, baselineSplit.fit.n)} (n=${baselineSplit.fit.n})`
+  )
+  console.log(
+    `  baseline validacao: casa ${pct(baselineSplit.validate.home, baselineSplit.validate.n)} / ` +
+      `fora ${pct(baselineSplit.validate.away, baselineSplit.validate.n)} (n=${baselineSplit.validate.n})`
+  )
+  console.log('  corte |  ajuste            |  validacao         | card em')
+  for (const cutoff of CUTOFFS) {
+    const row = cutoffSweep.get(cutoff)
+    if (!row) continue
+    const fit = row.fit
+    const val = row.validate
+    const cardRate = baseline.n ? ((fit.n + val.n) / baseline.n) * 100 : 0
+    console.log(
+      `  ${String(cutoff).padStart(4)}  | ${pct(fit.wins, fit.n).padStart(6)} (n=${String(fit.n).padStart(4)}) | ` +
+        `${pct(val.wins, val.n).padStart(6)} (n=${String(val.n).padStart(4)}) | ${cardRate.toFixed(1)}%`
+    )
+  }
+  console.log()
+
+  console.log('=== ABLACAO: QUAL SINAL CARREGA O SCORE ===')
+  console.log('  regra: fica com o lado de maior score; so jogos em que os dois tem sinal')
+  for (const variant of ABLATIONS) {
+    const row = ablationSweep.get(variant.key)
+    if (!row) continue
+    for (const split of ['fit', 'validate'] as Split[]) {
+      const tally = row[split]
+      const expected = splitExpected(split, tally)
+      const actual = tally.n ? tally.wins / tally.n : 0
+      const lift =
+        tally.n >= 30 ? `${((actual - expected) * 100).toFixed(1)}pp` : 'amostra baixa'
+      console.log(
+        `  ${variant.key.padEnd(15)} ${split.padEnd(8)} vence ${pct(tally.wins, tally.n).padStart(6)} | ` +
+          `esperado ${(expected * 100).toFixed(1)}% | lift ${lift} (n=${tally.n})`
+      )
+    }
+  }
+  console.log()
 
   console.log('\n=== LEITURA ===')
   console.log('  Baseline e a media dos mesmos jogos. Lift positivo no mando certo e o unico')

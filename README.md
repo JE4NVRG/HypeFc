@@ -67,31 +67,50 @@ Cada card mostra o score, a forma e o motivo. Líder frio sem jogo relevante fic
 #### Como o score é calculado
 
 O hype não é uma lista de quem joga hoje — é um score 0-100 montado por sinais
-ponderados, com corte mínimo (`MIN_HYPE_SCORE = 28`) e teto de 12 cards. Um time
+ponderados, com corte mínimo (`MIN_HYPE_SCORE = 44`) e teto de 12 cards. Um time
 entra no board pelo que fez, não por estar na tela.
 
-| Sinal | Peso | Por que existe |
+| Sinal | Peso | O que o backtest mostrou |
 |---|---|---|
-| Forma (últimos 5) | 7 por vitória, 3 por empate (máx. 35) | 4-5 vitórias seguidas é o sinal mais forte de momento |
-| Posição na tabela | 24 / 18 / 14 / 8 (1º, 2º, 3º, 4º-6º) | líder e pódio carregam peso próprio |
-| Saldo de gols por jogo | 8 se ≥ 1.0, 4 se ≥ 0.5 | diferencia ataque real de sorte |
-| Clássico do dia | 18 | jogo de rivalidade puxa atenção sozinho |
-| Jogo ao vivo | 14 | sinal temporal: está acontecendo agora |
-| Joga hoje | 8 | estar na rodada conta, mas pouco |
+| Forma (últimos 5) | 7 por vitória, 3 por empate (máx. 35) | sozinha acerta tanto quanto o score completo — não acrescenta |
+| Posição na tabela | 24 / 18 / 14 / 8 (1º, 2º, 3º, 4º-6º) | sozinha bate o score completo (+17,2pp na validação) |
+| Saldo de gols por jogo | 8 se ≥ 1.0, 4 se ≥ 0.5 | o sinal mais forte isolado (+22,7pp) e o de menor peso |
+| Clássico do dia | 18 | vale para os dois lados do jogo: decide destaque, não favorito |
+| Jogo ao vivo | 14 | idem — simétrico no confronto |
+| Joga hoje | 8 | idem — é presença, não força |
 
-O score é `min(100, soma)` e só entra quem passa de `MIN_HYPE_SCORE = 28`.
+O score é `min(100, soma)`.
+
+**De onde saiu o corte 44.** Não foi escolha no olho: o `npm run backtest` varreu
+de 24 a 48 com ajuste/validação por liga. O acerto sobe de forma monótona e a
+ordem se repete fora da amostra:
+
+| Corte | Acerto (ajuste) | Acerto (validação) | Jogos com card |
+|---|---|---|---|
+| 28 | 45,5% | 50,0% | 48,6% |
+| 36 | 51,9% | 56,8% | 38,4% |
+| 40 | 51,3% | 56,7% | 34,7% |
+| **44** | **53,3%** | **58,9%** | **30,0%** |
+| 48 | 56,5% | 61,6% | 24,3% |
+
+Critério: maior acerto mantendo pelo menos 28% de cobertura — 48 acerta mais, mas
+deixa rodada demais sem card. O valor antigo (28) enchia o painel com cards de
+28-39, faixa que acerta 39% — abaixo da média do mando.
+
+Na prática, numa rodada de 36 jogos o painel **continua mostrando 12 cards**, mas
+o piso subiu de 28 para 53: os slots de baixo deixaram de ser preenchidos por card
+fraco.
 
 Repare no peso de "joga hoje": 8 pontos, bem abaixo do corte. É de propósito —
-antes o painel listava todo mundo que jogava no dia e chamava isso de hype. Com
-o corte de 28, "joga hoje" sozinho não coloca ninguém no board; ou o time soma
-forma e tabela, ou não aparece. Um líder em má fase sem jogo relevante fica em
-67 e entra; um time ao vivo de meio de tabela fica em 50 e não passa na frente
-de quem tem forma.
+antes o painel listava todo mundo que jogava no dia e chamava isso de hype. "Joga
+hoje" sozinho não coloca ninguém no board; ou o time soma forma e tabela, ou não
+aparece.
 
 Cada sinal aparece no card como motivo (`Forma 5V`, `Clássico`, `Líder`), então
 o ranking é auditável: dá para ver de onde veio cada ponto em vez de aceitar um
-número opaco. Os testes em `scripts/test-hype.ts` prendem os cortes e os casos
-de fronteira, para o score não derivar sem alguém perceber.
+número opaco. Os testes em `scripts/test-hype.ts` prendem o corte, os casos de
+fronteira e o segundo passo do board (líder entra mesmo sem jogar na rodada),
+para o score não derivar sem alguém perceber.
 
 #### O score acerta? (medido, não assumido)
 

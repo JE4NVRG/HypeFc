@@ -70,4 +70,43 @@ assert.equal(stats.avgGoals, 2)
 assert.equal(stats.scheduledMatches, 1)
 assert.equal(stats.liveMatches, 1)
 
+// Corte calibrado: um time mediano em boa fase NAO entra mais (score 37), e um
+// do podio em boa fase entra (47). Prende os dois lados da fronteira de 44 para
+// mudanca de peso ou de corte nao passar despercebida.
+const boundary = buildHypeBoard(
+  [
+    {
+      league_id: 'PL',
+      league_name: 'Premier League',
+      home: 'Mid Table FC',
+      away: 'Podium FC',
+      status: 'TIMED',
+      time_local: '16:00',
+    },
+  ],
+  {
+    PL: [
+      { team: 'Mid Table FC', pos: 4, played: 20, form: 'W,W,W,L,L', goalDifference: 4, crest: null },
+      { team: 'Podium FC', pos: 2, played: 20, form: 'W,W,W,L,L', goalDifference: 6, crest: null },
+      { team: 'Leader FC', pos: 1, played: 20, form: 'W,W,W,W,W', goalDifference: 20, crest: null },
+    ],
+  },
+  { PL: 'Premier League' }
+)
+
+const midTable = boundary.find((item) => item.team === 'Mid Table FC')
+assert.equal(midTable, undefined, 'score abaixo do corte nao pode entrar no board')
+
+const podium = boundary.find((item) => item.team === 'Podium FC')
+assert.ok(podium, 'score acima do corte precisa entrar')
+assert.equal(podium?.score, 47)
+
+// Lider que NAO joga nesta rodada: entra pela tabela (posicao 24 + forma 35 +
+// saldo 8 = 67), sem o bonus de "joga hoje" e sem adversario. Prende o segundo
+// passo do board, que puxa times da classificacao alem dos que tem partida.
+const leader = boundary.find((item) => item.team === 'Leader FC')
+assert.ok(leader, 'lider entra mesmo sem jogar na rodada')
+assert.equal(leader?.score, 67)
+assert.equal(leader?.opponent, null)
+
 console.log('hype tests ok')
