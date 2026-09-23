@@ -1,4 +1,5 @@
 import type { MatchStatus } from '@/types'
+import { parseMarketOdds, type MarketLine } from './marketOdds.ts'
 
 /**
  * Detalhe de partida (endpoint summary da ESPN). O payload tem ~400KB e traria
@@ -69,6 +70,8 @@ export interface MatchDetail {
   meetings: MatchDetailMeeting[]
   events: MatchDetailEvent[]
   odds: Array<{ provider: string; detail: string }>
+  /** Odd publicada convertida em probabilidade de mercado (fato da fonte). */
+  market: MarketLine[]
   source: 'espn'
   captured_at: string
 }
@@ -478,6 +481,7 @@ export function parseMatchDetail(
     meetings: buildMeetings(data),
     events: buildEvents(data),
     odds: buildOdds(data),
+    market: parseMarketOdds(data),
     source: 'espn',
     captured_at: new Date().toISOString(),
   }

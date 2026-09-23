@@ -27,6 +27,7 @@ import type {
 import { isAllowedCrest } from './HypeFlags'
 import { NextFixtures } from './NextFixtures'
 import { ProbabilityBars } from './MatchProbability'
+import { impliedProbabilities } from '@/lib/marketOdds'
 import type { MatchProb } from '@/lib/matchProbability'
 import { fetchMatchDetailData } from '@/lib/dataSource'
 import { fetchTeamSchedule } from '@/lib/teamSchedule'
@@ -769,17 +770,68 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
               )}
             </Section>
 
-            {/* Mercado, quando a fonte manda. */}
+            {/* Mercado, quando a fonte manda. Odd e fato da fonte convertido em
+                probabilidade — com a margem da casa a mostra e sem recomendacao. */}
             {detail.odds.length ? (
               <Section title="Mercado (referência)">
-                <div className="space-y-1">
-                  {detail.odds.map((odd, index) => (
+                {detail.market.length ? (
+                  <div className="space-y-2">
+                    {detail.market.map((linha, index) => {
+                      const prob = impliedProbabilities(linha)
+                      if (!prob) return null
+                      return (
+                        <div key={`${linha.provider}-prob-${index}`} className="space-y-1">
+                          <div className="flex items-baseline justify-between gap-2 text-[11px]">
+                            <span className="truncate text-slate-400" title={linha.provider}>
+                              {linha.provider}
+                            </span>
+                            <span className="shrink-0 font-mono text-[10px] text-slate-500">
+                              margem {(prob.margin * 100).toFixed(1)}pp
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5 text-[11px]">
+                            <span className="w-[32%] truncate text-right text-slate-300" title={detail.home.team}>
+                              {detail.home.team}
+                            </span>
+                            <span className="font-mono font-semibold text-slate-100">{Math.round(prob.home * 100)}%</span>
+                            {prob.draw !== null ? (
+                              <>
+                                <span className="text-slate-600">·</span>
+                                <span className="font-mono text-slate-300" title="empate">
+                                  {Math.round(prob.draw * 100)}%
+                                </span>
+                              </>
+                            ) : null}
+                            <span className="text-slate-600">·</span>
+                            <span className="font-mono font-semibold text-slate-100">{Math.round(prob.away * 100)}%</span>
+                            <span className="w-[32%] truncate text-slate-300" title={detail.away.team}>
+                              {detail.away.team}
+                            </span>
+                          </div>
+                          {linha.over_under !== null ? (
+                            <p className="text-[10px] text-slate-500">
+                              linha de gols: {linha.over_under}
+                              {linha.detail ? ` · ${linha.detail}` : ''}
+                            </p>
+                          ) : null}
+                        </div>
+                      )
+                    })}
+                    <p className="text-[10px] leading-relaxed text-slate-600">
+                      Probabilidade do MERCADO: a odd publicada convertida e normalizada (a margem da casa já foi removida e está
+                      mostrada acima). É o que a casa precificou, não previsão nossa nem recomendação.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-1">
+                    {detail.odds.map((odd, index) => (
                     <div key={`${odd.provider}-${index}`} className="flex items-baseline gap-2 text-[11px]">
                       <span className="shrink-0 text-slate-500">{odd.provider}</span>
                       <span className="min-w-0 flex-1 break-words text-slate-300">{odd.detail}</span>
                     </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </Section>
             ) : null}
 

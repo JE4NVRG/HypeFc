@@ -1,4 +1,4 @@
-import { predictFromRatings, type MatchProb } from './matchProbability'
+import { predictFromRatings, type MatchProb } from './matchProbability.ts'
 
 /**
  * Ratings do modelo publicado como arquivo estatico pelo build
