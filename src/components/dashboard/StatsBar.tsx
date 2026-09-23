@@ -75,10 +75,10 @@ export function StatsBar({ stats, loading }: StatsBarProps) {
       <h2 id={TITULO_ID} className="sr-only">
         Resumo do dia
       </h2>
-      {/* No mobile os 5 KPIs viram UMA linha que rola: a grade 3x2 custava 120px
-          antes do primeiro card, e o cockpit nao pode gastar a tela antes do
-          conteudo. A partir de lg volta a grade de 5. */}
-      <div className="-mx-0.5 flex gap-2 overflow-x-auto px-0.5 pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-5 lg:overflow-visible lg:pb-0">
+      {/* Uma linha so, sem rolagem horizontal: a grade 3x2 custava 120px antes do
+          primeiro card e a faixa rolavel cortava o 4o cartao no meio da palavra.
+          No mobile ficam 4 KPIs inteiros (o 5o entra em sm+, onde cabe). */}
+      <div className="grid grid-cols-4 gap-2 sm:grid-cols-5">
         <StatCard icon={<Tv className="h-4 w-4" />} label={stats.totalMatches === 1 ? 'Jogo' : 'Jogos'} value={stats.totalMatches} />
         <StatCard icon={<Goal className="h-4 w-4" />} label={stats.totalGoals === 1 ? 'Gol' : 'Gols'} value={stats.totalGoals} />
         <StatCard icon={<BarChart3 className="h-4 w-4" />} label="Média/jogo" value={stats.avgGoals} />
@@ -101,11 +101,15 @@ export function StatsBar({ stats, loading }: StatsBarProps) {
             value={stats.finishedMatches}
           />
         )}
-        <StatCard
-          icon={<Clock className="h-4 w-4" />}
-          label={stats.scheduledMatches > 0 ? 'A jogar' : 'Ligas'}
-          value={stats.scheduledMatches > 0 ? stats.scheduledMatches : stats.leaguesActive}
-        />
+        {/* 5o KPI: escondido no mobile (com 5 cartoes em 390px algum ficaria
+            cortado no meio da palavra) e participando da grade a partir de sm. */}
+        <div className="hidden sm:contents">
+          <StatCard
+            icon={<Clock className="h-4 w-4" />}
+            label={stats.scheduledMatches > 0 ? 'A jogar' : 'Ligas'}
+            value={stats.scheduledMatches > 0 ? stats.scheduledMatches : stats.leaguesActive}
+          />
+        </div>
       </div>
     </section>
   )
