@@ -10,8 +10,10 @@
  * que um erro de rede, porque o usuario acredita nele. Terceiro passa direto.
  */
 
-// Suba a versao ao mudar SHELL: o activate apaga as versoes antigas.
-const CACHE_VERSION = 'v1'
+// A versao do cache e carimbada pelo build (scripts/build-pages.mjs), nao a mao:
+// se ela ficasse fixa, o stale-while-revalidate serviria o bundle antigo na
+// primeira carga depois de cada deploy.
+const CACHE_VERSION = '20260923T071034z'
 const CACHE = `hypefc-${CACHE_VERSION}`
 const CACHE_PREFIX = 'hypefc-'
 
