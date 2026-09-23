@@ -70,7 +70,9 @@ export default function ResgatePro() {
           limparUrl()
           setAviso({
             tipo: 'ok',
-            texto: 'Pro ativado neste navegador: alertas ligados e até 20 times seguidos.',
+            texto: contaConfigurada()
+              ? 'Pro ativado neste navegador: alertas ligados e até 20 times seguidos. Dica: entre com o Google na aba Pro para levar este acesso a qualquer aparelho.'
+              : 'Pro ativado neste navegador: alertas ligados e até 20 times seguidos.',
           })
           return
         }
@@ -127,28 +129,33 @@ export default function ResgatePro() {
           }
           return
         }
-        if (!r.pro) {
-          if (veioDoGoogle) {
-            setAviso({
-              tipo: 'erro',
-              texto: `Entramos com ${r.email ?? 'sua conta'}, mas essa conta ainda não tem assinatura Pro.`,
-            })
-          }
-          return
-        }
         if (temToken()) {
           if (veioDoGoogle) {
             setAviso({ tipo: 'ok', texto: `Conta conectada (${r.email ?? 'Google'}). Pro ativo neste aparelho.` })
           }
           return
         }
+        // Sem licença neste navegador: sempre tenta ligar. É aqui que entra quem
+        // comprou ANTES de ter conta — `pro_conta_entrar` resgata a compra paga
+        // pelo e-mail da conta. Checar `r.pro` antes disso deixaria essa pessoa
+        // de fora para sempre (bug real, achado em teste).
         const ligou = await entrarComoAssinante()
         if (!vivo) return
-        setAviso(
-          ligou.pro
-            ? { tipo: 'ok', texto: `Pro restaurado na conta ${ligou.email ?? ''}: este aparelho está liberado.` }
-            : { tipo: 'erro', texto: 'A conta entrou, mas não conseguimos liberar o Pro agora. Tente de novo.' },
-        )
+        if (ligou.pro) {
+          setAviso({
+            tipo: 'ok',
+            texto: veioDoGoogle
+              ? `Pro ativado na conta ${ligou.email ?? ''}. Abra a aba Pro: este aparelho está liberado.`
+              : `Pro restaurado na conta ${ligou.email ?? ''}: este aparelho está liberado.`,
+          })
+          return
+        }
+        if (veioDoGoogle) {
+          setAviso({
+            tipo: 'erro',
+            texto: `Entramos com ${ligou.email ?? r.email ?? 'sua conta'}, mas essa conta ainda não tem assinatura Pro.`,
+          })
+        }
       })
       .catch(() => {
         // rede fora do ar: o resgate por sessão continua sendo o caminho
