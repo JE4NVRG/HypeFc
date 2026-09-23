@@ -15,7 +15,7 @@ colar o link. Este documento é a ordem exata dos passos.
 | Venda: abrir pedido | `npm run venda:abrir -- --email cliente@x.com` | pronto |
 | Venda: fechar (gera o código + link de ativação) | `npm run venda:paga -- --order <id>` | pronto |
 | Termos de uso e privacidade (LGPD) — provedor costuma exigir | `/termos` e `/privacidade` | pronto |
-| **Conta no provedor de pagamento + `NEXT_PUBLIC_CHECKOUT_URL`** | — | **falta você** |
+| **Conta no provedor de pagamento + `NEXT_PUBLIC_CHECKOUT_URL`** | Stripe (link live + sync no cron) | **pronto** |
 
 ## Passo 1 — escolher onde o dinheiro entra
 
@@ -209,7 +209,30 @@ configurado; só o teste real do `/auth/v1/authorize` denuncia (`400 "missing OA
 **Sempre** validar com o authorize devolvendo 302 para `accounts.google.com` com o seu
 `client_id` e o `redirect_uri` esperado.
 
-**Pendência**: o app está em **"Testando"** no Google (só usuários de teste entram; refresh token
-expira em 7 dias). Publicar exige completar branding/verificar domínio. Até isso, cliente novo não
-consegue entrar com Google — o caminho sem conta continua funcionando.
+**Estado (23/09, fim do dia): resolvido — não é mais "Testando".**
+
+| Item | Como ficou |
+| --- | --- |
+| Status de publicação | **Em produção** (o app não está mais em "Testando": qualquer cliente entra) |
+| Escopos | `openid`, `.../userinfo.email`, `.../userinfo.profile` — **nenhuma verificação necessária** (só escopo não sensível) |
+| E-mail para suporte do usuário | `je4ndev@gmail.com` (era `jean.v1803@gmail.com`) |
+| Domínios autorizados | `je4ndev.com` **e** `sebyzlcgadsiinikxfgu.supabase.co` (o do callback não pode sair) |
+| Marca / nome no consent | **verificada e publicada** — a tela do Google mostra "Prosseguir para HypeFC" (antes mostrava o domínio do callback do Supabase) |
+
+**O que travava, e a lição**: o projeto é da `jean.v1803@gmail.com`; a `je4ndev@gmail.com` só passou a
+enxergá-lo **depois de aceitar o convite**. Dar o papel de Proprietário no IAM **não basta**: o console
+segue respondendo "Você precisa de acesso adicional a projeto" (inclusive com `?authuser=1`) até o
+convidado abrir o link `console.cloud.google.com/invitation?...memberEmail=...` que chega por e-mail e
+clicar em **Aceitar o convite**. Sem o convite aceito, o campo "E-mail para suporte" lista apenas os
+endereços da conta logada — era por isso que não dava para trocar para o e-mail da marca.
+
+Ordem que funcionou: aceitar o convite → esperar a propagação (~1–2 min; antes disso a página de
+branding responde "permissões ausentes: `clientauthconfig.clients.list`") → trocar o e-mail de suporte →
+**Ver problemas → Corrigi os problemas → Continuar** (a verificação da marca só passa se o **dono do
+projeto também tiver o domínio verificado no Search Console** — `sc-domain:je4ndev.com` já estava
+verificado na `je4ndev`) → **Publicar branding** (o resultado verificado expira em 7 dias se não publicar).
+
+Conferência final (não confiar no painel): `GET /auth/v1/authorize?provider=google` devolve **302** para
+`accounts.google.com` com `scope=email+profile`, e a tela de escolha de conta mostra **"Prosseguir para
+HypeFC"**.
 
