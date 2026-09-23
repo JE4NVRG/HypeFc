@@ -99,6 +99,8 @@ export interface EspnMatch {
   status: MatchStatus
   score_home: number | null
   score_away: number | null
+  /** Id do evento na ESPN. E a chave do summary (a pagina de detalhe busca por ele). */
+  event_id: string
 }
 
 export interface EspnLeaderEntry {
@@ -208,6 +210,7 @@ export function parseEspnStandings(payload: EspnStandingsPayload): EspnStandingR
 
 interface EspnScoreboardPayload {
   events?: Array<{
+    id?: string
     date?: string
     season?: { year?: number }
     status?: { type?: { name?: string; state?: string } }
@@ -307,6 +310,7 @@ export function parseEspnMatches(
       status,
       score_home: started ? Number(home.score ?? 0) : null,
       score_away: started ? Number(away.score ?? 0) : null,
+      event_id: event.id || '',
     })
   }
 

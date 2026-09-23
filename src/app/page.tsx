@@ -1,6 +1,8 @@
 "use client"
 
+import { useState } from 'react'
 import { useDashboardData } from '@/hooks/useDashboardData'
+import type { Match } from '@/hooks/useDashboardData'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
 import { StatsBar } from '@/components/dashboard/StatsBar'
 import { TodayMatches } from '@/components/dashboard/TodayMatches'
@@ -9,6 +11,7 @@ import { LeagueStandings } from '@/components/dashboard/LeagueStandings'
 import { LeagueIntel } from '@/components/dashboard/LeagueIntel'
 import { HypeRecord } from '@/components/dashboard/HypeRecord'
 import { TopScorers } from '@/components/dashboard/TopScorers'
+import { MatchDetailPanel } from '@/components/dashboard/MatchDetailPanel'
 import { DashboardFooter } from '@/components/dashboard/DashboardFooter'
 
 function formatDay(iso: string): string {
@@ -34,6 +37,9 @@ export default function Home() {
     refresh,
     groupedMatches,
   } = useDashboardData()
+
+  // Uma pagina so: o detalhe abre por cima, sem tirar o usuario da rodada.
+  const [selected, setSelected] = useState<Match | null>(null)
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -73,6 +79,7 @@ export default function Home() {
             loading={loadingToday}
             isFallback={todayData?.is_fallback}
             dayLabel={todayData?.date ? formatDay(todayData.date) : undefined}
+            onSelect={setSelected}
           />
           <HypeFlags
             hypeTeams={todayData?.hype ?? []}
@@ -103,6 +110,13 @@ export default function Home() {
         <div className="mt-3">
           <HypeRecord />
         </div>
+
+        <MatchDetailPanel
+          eventId={selected?.event_id ?? null}
+          leagueId={selected?.league_id ?? ''}
+          leagueName={selected?.league_name ?? ''}
+          onClose={() => setSelected(null)}
+        />
       </main>
 
       <DashboardFooter source={todayData?.source} />

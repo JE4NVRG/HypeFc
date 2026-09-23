@@ -4,6 +4,7 @@ import {
   fetchEspnScorers,
   fetchEspnLatestForms,
   fetchEspnSeason,
+  fetchMatchDetail,
   ESPN_LEAGUE_SLUGS,
 } from '@/services/espn'
 import { composeDay, applyForm } from '@/lib/composeDay'
@@ -11,6 +12,7 @@ import { buildHomeAwaySplits, alignSplitRows, playedWindow, splitsReconcile } fr
 import { LEAGUE_NAMES } from '@/types'
 import type { StandingRow, TodayMatch, Scorer } from '@/services/footballApi'
 import type { DayStats, HypeBoardItem } from '@/lib/hypeScore'
+import type { MatchDetail } from '@/lib/matchDetail'
 
 /**
  * Caminho sem servidor: o navegador fala direto com a ESPN publica, que libera
@@ -38,6 +40,17 @@ async function cached<T>(key: string, ttlMs: number, produce: () => Promise<T>):
 
 export function saoPauloToday(): string {
   return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' })
+}
+
+/**
+ * Detalhe de uma partida no caminho sem servidor. O payload tem ~400KB, entao
+ * fica em cache em memoria por 15 minutos: voltar no mesmo confronto nao refaz
+ * a requisicao. O parser e o mesmo do servidor (src/lib/matchDetail.ts).
+ */
+export async function loadBrowserMatchDetail(leagueId: string, eventId: string): Promise<MatchDetail> {
+  return cached(`match:${leagueId}:${eventId}`, 15 * 60 * 1000, () =>
+    fetchMatchDetail(leagueId, eventId)
+  )
 }
 
 export function shiftIso(iso: string, days: number): string {

@@ -20,7 +20,11 @@ const stashDir = resolve(workDir, 'api-stash')
 const configPath = resolve(root, 'next.config.js')
 const configBackup = resolve(workDir, 'next.config.js.bak')
 const pagesConfig = resolve(root, 'next.config.pages.js')
-const basePath = process.env.PAGES_BASE_PATH || '/HypeFc'
+const basePath = process.env.PAGES_BASE_PATH ?? '/HypeFc'
+// Dominio proprio (ex hypefc.je4ndev.com): o Pages identifica o dominio pelo
+// arquivo CNAME no branch publicado, e o deploy apaga a arvore inteira a cada
+// rodada — entao o CNAME precisa sair do proprio build, senao o dominio cai.
+const customDomain = process.env.PAGES_CUSTOM_DOMAIN || ''
 
 function restore() {
   if (existsSync(stashDir)) {
@@ -68,7 +72,11 @@ try {
   if (!existsSync(resolve(root, 'out/index.html'))) {
     throw new Error('out/index.html nao foi gerado')
   }
-  console.log(`[pages] build estatico pronto em out/ (basePath ${basePath})`)
+  if (customDomain) {
+    writeFileSync(resolve(root, 'out/CNAME'), `${customDomain}\n`)
+    console.log(`[pages] CNAME gravado: ${customDomain}`)
+  }
+  console.log(`[pages] build estatico pronto em out/ (basePath ${basePath || '/'})`)
 } catch (error) {
   failed = true
   console.error('[pages] build falhou:', error instanceof Error ? error.message : error)

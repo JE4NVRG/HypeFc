@@ -259,3 +259,20 @@ export async function fetchEspnFixtures(leagueIds: string[], dateIso: string): P
   )
   return boards.flat()
 }
+
+/**
+ * Resumo/detalhe do jogo (summary, ~400KB). Fica aqui porque o mapa de slugs
+ * desta liga e deste arquivo; o parser puro mora em lib/matchDetail.
+ */
+export async function fetchEspnMatchSummary(leagueId: string, eventId: string): Promise<unknown> {
+  const slug = ESPN_LEAGUE_SLUGS[leagueId]
+  if (!slug) return null
+  return getJson<unknown>(`${SITE}/site/v2/sports/soccer/${slug}/summary?event=${eventId}`)
+}
+
+/**
+ * O parser do detalhe mora em lib/matchDetail (a rota /api/dashboard/match importa
+ * de la). Reexportado aqui porque o caminho sem servidor (lib/browserData) so fala
+ * com a ESPN por este service.
+ */
+export { fetchMatchDetail } from '@/lib/matchDetail'

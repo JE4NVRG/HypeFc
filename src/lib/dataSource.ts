@@ -2,8 +2,10 @@ import {
   loadBrowserToday,
   loadBrowserStandings,
   loadBrowserScorers,
+  loadBrowserMatchDetail,
 } from '@/lib/browserData'
 import type { TodayData, StandingsData, ScorersData } from '@/hooks/useDashboardData'
+import type { MatchDetail } from '@/lib/matchDetail'
 
 /**
  * Fonte de dados com duas implementacoes:
@@ -35,4 +37,17 @@ export async function fetchStandingsData(leagueId: string): Promise<StandingsDat
 export async function fetchScorersData(leagueId: string): Promise<ScorersData> {
   if (STATIC_MODE) return loadBrowserScorers(leagueId)
   return apiGet<ScorersData>(`/api/dashboard/scorers/${leagueId}`)
+}
+
+/**
+ * Detalhe do confronto clicado. No modo servidor a rota cacheia 10 minutos; no
+ * modo estatico o navegador busca o mesmo payload na ESPN (CORS liberado), com
+ * o mesmo parser e cache em memoria por 15 minutos.
+ */
+export async function fetchMatchDetailData(leagueId: string, eventId: string): Promise<MatchDetail> {
+  if (STATIC_MODE) return loadBrowserMatchDetail(leagueId, eventId)
+  const json = await apiGet<{ detail: MatchDetail }>(
+    `/api/dashboard/match/${leagueId}/${eventId}`
+  )
+  return json.detail
 }

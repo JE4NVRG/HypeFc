@@ -5,7 +5,7 @@
  * O Pages serve o projeto em https://<user>.github.io/HypeFc/, por isso o
  * basePath. O modo estatico nao tem servidor: o navegador chama a ESPN direto.
  */
-const basePath = process.env.PAGES_BASE_PATH || '/HypeFc'
+const basePath = process.env.PAGES_BASE_PATH ?? '/HypeFc'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

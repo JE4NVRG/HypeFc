@@ -87,7 +87,12 @@ try {
     )
     console.log('[deploy] 4/4 empurrando para gh-pages')
     run('git', ['push', '--force', 'origin', 'gh-pages'], { cwd: treeDir })
-    console.log('[deploy] pronto: https://je4nvrg.github.io/HypeFc/')
+    const dominio = (process.env.PAGES_CUSTOM_DOMAIN || '').trim()
+    console.log(
+      dominio
+        ? `[deploy] pronto: https://${dominio}/`
+        : '[deploy] pronto: https://je4nvrg.github.io/HypeFc/'
+    )
   }
 } catch (error) {
   failed = true

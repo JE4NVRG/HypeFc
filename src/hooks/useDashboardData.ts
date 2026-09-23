@@ -23,6 +23,8 @@ function humanError(message: string): string {
 export interface Match {
   league_id: string
   league_name: string
+  /** Id do evento na ESPN: e o que abre o detalhe da partida no clique. */
+  event_id?: string | null
   home: string
   home_crest?: string | null
   home_position?: number | null
