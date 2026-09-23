@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
 import { createCacheKey, withCache } from '@/lib/cache'
 import { fetchStandings } from '@/services/footballApi'
-import { fetchEspnStandings, fetchEspnLatestForms } from '@/services/espn'
+import { fetchEspnStandings, fetchEspnLatestForms, fetchEspnSeason } from '@/services/espn'
 import { buildTeamFormIndex, lookupTeamForm } from '@/lib/espnParse'
+import { buildHomeAwaySplits, alignSplitRows, playedWindow, splitsReconcile } from '@/lib/splits'
 import { LEAGUE_NAMES } from '@/types'
 
 const HAS_TOKEN = Boolean(process.env.FOOTBALL_API_TOKEN)
@@ -53,12 +54,40 @@ export async function GET(
       console.error('ESPN form enrichment failed:', formError)
     }
 
+    // Split de mando: a tabela da ESPN so traz o geral, entao casa/fora e
+    // reconstruido dos jogos encerrados da temporada (uma chamada por liga).
+    let home: Awaited<ReturnType<typeof buildHomeAwaySplits>>['home'] = []
+    let away: Awaited<ReturnType<typeof buildHomeAwaySplits>>['away'] = []
+    try {
+      const season = await withCache(
+        createCacheKey('espn-season', league_id),
+        () => fetchEspnSeason(league_id),
+        60
+      )
+      const splits = buildHomeAwaySplits(season, playedWindow(table))
+      // Alinha ao nome canonico da tabela pelo id: o scoreboard chama o mesmo
+      // time de "Athletico-PR" e a tabela de "Athletico Paranaense", e o painel
+      // casa o split por nome.
+      const alignedHome = alignSplitRows(splits.home, table)
+      const alignedAway = alignSplitRows(splits.away, table)
+
+      // So publica o split se casa+fora somar exatamente a tabela.
+      if (splitsReconcile(alignedHome, alignedAway, table)) {
+        home = alignedHome
+        away = alignedAway
+      } else {
+        console.error('ESPN home/away split did not reconcile with the table; dropping it')
+      }
+    } catch (splitError) {
+      console.error('ESPN home/away split failed:', splitError)
+    }
+
     return NextResponse.json({
       league_id,
       league_name: LEAGUE_NAMES[league_id] || league_id,
       table,
-      home: [],
-      away: [],
+      home,
+      away,
       source: 'espn',
       captured_at: new Date().toISOString(),
       _meta: { responseTime: `${Date.now() - startTime}ms`, timestamp: new Date().toISOString() },

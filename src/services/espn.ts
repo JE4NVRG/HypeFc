@@ -6,6 +6,7 @@ import {
   parseEspnLeaders,
   espnAthleteName,
   espnTeamName,
+  type EspnMatch,
   type EspnTeamMeta,
 } from '@/lib/espnParse'
 import type { StandingRow, TodayMatch, Scorer } from '@/services/footballApi'
@@ -126,6 +127,39 @@ export async function fetchEspnStandings(leagueId: string): Promise<StandingRow[
   const rows = parseEspnStandings(payload)
   if (!rows.length) throw new Error('ESPN standings empty')
   return rows
+}
+
+/**
+ * Temporada inteira em uma chamada so.
+ *
+ * Detalhe importante do endpoint: ele NAO aceita faixa de datas (retorna zero
+ * eventos para "20260801-20260923"), mas aceita o ANO em `dates`. E o `limit`
+ * precisa ser explicito, senao vem truncado em 100.
+ *
+ * Como o parametro e o ano-calendario, uma temporada europeia em curso (ago ->
+ * mai) atravessa dois deles; por isso a janela padrao cobre o ano atual e o
+ * anterior. Sem isso, no meio da temporada europeia o split nao teria os jogos
+ * necessarios para bater com a classificacao e seria descartado.
+ */
+export async function fetchEspnSeason(
+  leagueId: string,
+  years: number[] = [new Date().getFullYear(), new Date().getFullYear() - 1]
+): Promise<EspnMatch[]> {
+  const slug = ESPN_LEAGUE_SLUGS[leagueId]
+  if (!slug) throw new Error(`League ${leagueId} not supported by ESPN`)
+
+  const pages = await Promise.all(
+    years.map((year) =>
+      getJson<Parameters<typeof parseEspnMatches>[0]>(
+        `${SITE}/site/v2/sports/soccer/${slug}/scoreboard?dates=${year}&limit=500`
+      )
+    )
+  )
+
+  const payloads = pages.filter(Boolean) as Array<Parameters<typeof parseEspnMatches>[0]>
+  if (!payloads.length) throw new Error('ESPN season unavailable')
+
+  return payloads.flatMap((payload) => parseEspnMatches(payload, leagueId, leagueId))
 }
 
 export async function fetchEspnDay(

@@ -162,6 +162,16 @@ Reproduza com `npm run backtest`.
 ### Classificacao Completa
 Tabela de qualquer liga com indicadores visuais de zona: Champions League (verde), Europa League (azul) e rebaixamento (vermelho). Alterna entre 10+ competicoes com um clique.
 
+### Rendimento por mando (casa/fora)
+A classificacao da ESPN so traz o total, entao o split de mando e reconstruido dos jogos encerrados da liga: cada time ganha PPG em casa e fora, o card **Fortaleza** aponta quem mais depende do mando e a tabela ganha as colunas `CASA` / `FORA`.
+
+Duas armadilhas do dado apareceram aqui, e as duas viraram verificacao automatica:
+
+- **A janela e o ano-calendario, nao a temporada.** O endpoint aceita `dates=<ano>`; na Europa isso devolve dois campeonatos no mesmo calendario (2025-26 + 2026-27) e o split inflava ate 4x. O corte passou a ser pelos `played` jogos mais recentes de cada time — exatamente a janela que a classificacao mostra.
+- **A tabela e o placar nomeiam o mesmo clube de formas diferentes** (`Athletico Paranaense` contra `Athletico-PR`, mesmo id 3458). O split e casado por id, senao o time fica sem casa/fora.
+
+E antes de publicar, o split precisa **reconciliar** com a classificacao: se os jogos de casa e fora de qualquer time nao somarem exatamente o `played` da tabela, o painel mostra "—" em vez de numero errado. Medido nas 6 ligas principais: 0 divergencias e os gols casa+fora batem com o total (739 = 739 no Brasileirao, 141 = 141 na Premier League).
+
 ### Artilheiros
 Top 10 goleadores da liga selecionada com gols, assistencias e time. Medalhas para o podio (ouro, prata, bronze).
 

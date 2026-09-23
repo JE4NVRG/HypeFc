@@ -3,9 +3,11 @@ import {
   fetchEspnStandings,
   fetchEspnScorers,
   fetchEspnLatestForms,
+  fetchEspnSeason,
   ESPN_LEAGUE_SLUGS,
 } from '@/services/espn'
 import { composeDay, applyForm } from '@/lib/composeDay'
+import { buildHomeAwaySplits, alignSplitRows, playedWindow, splitsReconcile } from '@/lib/splits'
 import { LEAGUE_NAMES } from '@/types'
 import type { StandingRow, TodayMatch, Scorer } from '@/services/footballApi'
 import type { DayStats, HypeBoardItem } from '@/lib/hypeScore'
@@ -136,12 +138,30 @@ export async function loadBrowserStandings(leagueId: string): Promise<BrowserSta
   const metas = await formsFor([leagueId], today)
   applyForm({ [leagueId]: table }, metas)
 
+  // Split de mando reconstruido da temporada. Se falhar, as colunas CASA/FORA
+  // ficam vazias e o painel esconde os cards — melhor que inventar numero.
+  let home: StandingRow[] = []
+  let away: StandingRow[] = []
+  try {
+    const season = await cached(`season:${leagueId}`, 60 * TTL_MS, () => fetchEspnSeason(leagueId))
+    const splits = buildHomeAwaySplits(season, playedWindow(table))
+    const alignedHome = alignSplitRows(splits.home, table)
+    const alignedAway = alignSplitRows(splits.away, table)
+    // Mesma rede de seguranca da rota: sem reconciliar com a tabela, nao mostra.
+    if (splitsReconcile(alignedHome, alignedAway, table)) {
+      home = alignedHome
+      away = alignedAway
+    }
+  } catch {
+    // sem split nesta liga
+  }
+
   return {
     league_id: leagueId,
     league_name: LEAGUE_NAMES[leagueId] || leagueId,
     table,
-    home: [],
-    away: [],
+    home,
+    away,
     captured_at: new Date().toISOString(),
     source: 'espn',
   }

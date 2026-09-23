@@ -78,9 +78,13 @@ export interface EspnMatch {
   league_id: string
   league_name: string
   home: string
+  /** Id do time na ESPN. A tabela e o scoreboard as vezes usam nomes diferentes
+   *  para o mesmo time (Athletico-PR vs Athletico Paranaense); o id casa. */
+  home_id?: string | null
   home_crest: string | null
   home_position: number | null
   away: string
+  away_id?: string | null
   away_crest: string | null
   away_position: number | null
   /** ISO do inicio. Necessario para ordenar historico (a busca por temporada traz varios dias). */
@@ -282,9 +286,11 @@ export function parseEspnMatches(
       league_id: leagueId,
       league_name: leagueName,
       home: homeName,
+      home_id: home.team?.id ?? null,
       home_crest: crestOf(home.team) || null,
       home_position: null,
       away: awayName,
+      away_id: away.team?.id ?? null,
       away_crest: crestOf(away.team) || null,
       away_position: null,
       date: event.date ?? null,

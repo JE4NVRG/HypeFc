@@ -10,7 +10,7 @@
     "build:pages": "node scripts/build-pages.mjs",
     "deploy:pages": "node scripts/deploy-pages.mjs",
     "backtest": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/backtest-hype.ts",
-    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-hype.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-league-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-espn-parse.ts"
+    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-hype.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-league-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-espn-parse.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-splits.ts"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.2.6",
