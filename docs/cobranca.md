@@ -108,6 +108,11 @@ provedor e chamando o mesmo `mark-paid` — o resto da cadeia não muda.
 
 ## O que NÃO fazer
 
+- **Não deixar o projeto pausar.** O Supabase grátis pausa projeto sem atividade
+  por alguns dias. O cron diário encosta no banco (mesmo sem assinante: a consulta
+  conta como atividade), então enquanto o Mac rodar o cron o projeto fica de pé.
+  Com o Mac desligado por mais de uma semana, o projeto pausa e os scripts passam
+  a falhar — restaure no painel do Supabase antes de rodar `npm run venda:*`.
 - Não colocar login/senha no painel: o painel é público e não precisa de conta; a
   assinatura usa código de uso único.
 - Não vender o score como palpite nem prometer acerto. O registro publicado mostra
