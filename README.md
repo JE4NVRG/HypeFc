@@ -54,6 +54,38 @@ Barra de estatisticas com metricas em tempo real: total de jogos, gols marcados,
 ### Jogos de Hoje
 Todas as partidas do dia agrupadas por liga, com escudos dos times, posicoes na tabela e **placar ao vivo**. Jogos em andamento recebem destaque visual com indicador LIVE.
 
+Cada linha e clicavel e carrega o selo do score no proprio confronto (`71 em alta`), alem da linha de posse/chutes/no alvo. Uma linha so vira botao quando existe id de evento da ESPN para abrir: nao prometemos clique que nao funciona.
+
+### Detalhe do confronto (um clique, uma chamada)
+
+O painel abre por cima da rodada (lateral de 420px no desktop, tela cheia a 390px) e busca o resumo da partida na ESPN **sob demanda** — sao ~400KB por jogo, entao nada disso entra no carregamento da home. Traz:
+
+- placar, minuto e estado; estadio, cidade, arbitro e publico
+- comparativo em barras: posse, chutes, no alvo, escanteios, faltas, cartoes, defesas, impedimentos
+- gols e lances com minuto e autor
+- escalacoes titulares/banco quando publicadas
+- ultimos 5 de cada lado e os confrontos diretos
+- **proximos jogos** dos dois times
+- mercado (odds) em uma linha, so quando a casa publica — sem destaque e sem verbo de recomendacao
+
+Se um bloco nao tem fonte confirmada, ele nao aparece com dado inventado: mostra estado vazio explicito. Publico `0` do Brasileirao vira `—` (a ESPN nao publica o numero e `0` seria dado falso).
+
+### Link compartilhavel do confronto
+
+`?jogo=<eventId>&dia=YYYY-MM-DD` — abre a rodada daquele dia e o painel do jogo. A URL entra no historico, entao o **botao voltar do navegador fecha o painel** e devolve a rodada. O `dia` e obrigatorio no link: sem ele, um link compartilhado morreria no dia seguinte.
+
+### Uma pagina, com o detalhe no clique
+
+A rodada domina a primeira tela; classificacao, rendimento por mando e artilheiros dividem **uma secao com abas e um unico seletor de liga** (antes eram tres areas empilhadas somando ~2.100px de rolagem). So a aba ativa fica montada.
+
+### Instalavel e offline (PWA)
+
+Manifest + service worker: da para instalar na tela inicial e abrir sem rede com a ultima rodada carregada. O cache **nao intercepta a ESPN** — dado de terceiro nunca e servido do cache, senao o painel mostraria placar velho; os JSON de dados sao network-first com fallback.
+
+### Procedencia
+
+O painel declara a fonte, o ritmo de leitura, o que a fonte **nao** da (xG, publico no Brasileirao, odds quando nao publicadas) e onde o produto prefere nao mostrar a mostrar errado. Quem publica um recorde medido precisa mostrar de onde vem o numero.
+
 ### Times em Alta (Hype Detection)
 Score de 0 a 100, não uma lista de quem joga hoje. Entram no máximo 12 times que passam de um corte mínimo, cruzando:
 - forma dos últimos 5 jogos
