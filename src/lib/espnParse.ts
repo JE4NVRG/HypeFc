@@ -83,6 +83,8 @@ export interface EspnMatch {
   away: string
   away_crest: string | null
   away_position: number | null
+  /** ISO do inicio. Necessario para ordenar historico (a busca por temporada traz varios dias). */
+  date?: string | null
   time_local: string
   status: MatchStatus
   score_home: number | null
@@ -285,6 +287,7 @@ export function parseEspnMatches(
       away: awayName,
       away_crest: crestOf(away.team) || null,
       away_position: null,
+      date: event.date ?? null,
       time_local: timeLocal,
       status,
       score_home: started ? Number(home.score ?? 0) : null,

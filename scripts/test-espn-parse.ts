@@ -96,9 +96,11 @@ const scheduled = matches.find((match) => match.home === 'Flamengo')
 assert.equal(scheduled?.status, 'TIMED')
 assert.equal(scheduled?.score_home, null)
 assert.equal(scheduled?.home_crest, 'https://x/f.png')
+assert.equal(scheduled?.date, '2026-09-20T21:30Z')
 const finished = matches.find((match) => match.home === 'Grêmio')
 assert.equal(finished?.score_away, 2)
 assert.equal(finished?.status, 'FINISHED')
+assert.equal(finished?.date, '2026-09-20T14:00Z')
 
 const leaders = parseEspnLeaders(
   {
