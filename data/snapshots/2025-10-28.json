@@ -1,0 +1,74 @@
+{
+  "date": "2025-10-28",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-10-28T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Lecce",
+      "away": "Napoli",
+      "home_pos": 16,
+      "away_pos": 1,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "SA",
+      "home": "Atalanta",
+      "away": "AC Milan",
+      "home_pos": 7,
+      "away_pos": 3,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Lecce",
+      "away": "Napoli",
+      "team": "Napoli",
+      "venue": "away",
+      "score": 57,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 16,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Atalanta",
+      "away": "AC Milan",
+      "team": "AC Milan",
+      "venue": "away",
+      "score": 53,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 7,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

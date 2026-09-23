@@ -1,0 +1,194 @@
+{
+  "date": "2025-12-28",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-12-28T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "AC Milan",
+      "away": "Hellas Verona",
+      "home_pos": 2,
+      "away_pos": 18,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "SA",
+      "home": "Cremonese",
+      "away": "Napoli",
+      "home_pos": 12,
+      "away_pos": 4,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "SA",
+      "home": "Bologna",
+      "away": "Sassuolo",
+      "home_pos": 7,
+      "away_pos": 11,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "SA",
+      "home": "Atalanta",
+      "away": "Internazionale",
+      "home_pos": 9,
+      "away_pos": 1,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Arouca",
+      "away": "Gil Vicente",
+      "home_pos": 16,
+      "away_pos": 4,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Casa Pia",
+      "away": "Vitória de Guimaraes",
+      "home_pos": 15,
+      "away_pos": 8,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Braga",
+      "away": "Benfica",
+      "home_pos": 5,
+      "away_pos": 3,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Sporting CP",
+      "away": "Rio Ave",
+      "home_pos": 2,
+      "away_pos": 11,
+      "score_home": 4,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Atalanta",
+      "away": "Internazionale",
+      "team": "Internazionale",
+      "venue": "away",
+      "score": 68,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 9,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "AC Milan",
+      "away": "Hellas Verona",
+      "team": "AC Milan",
+      "venue": "home",
+      "score": 57,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 18,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Sporting CP",
+      "away": "Rio Ave",
+      "team": "Sporting CP",
+      "venue": "home",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 11,
+      "outcome": "home",
+      "score_home": 4,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Braga",
+      "away": "Benfica",
+      "team": "Benfica",
+      "venue": "away",
+      "score": 57,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 5,
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Braga",
+      "away": "Benfica",
+      "team": "Braga",
+      "venue": "home",
+      "score": 48,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 3,
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
+    }
+  ]
+}

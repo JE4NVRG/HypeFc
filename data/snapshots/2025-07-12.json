@@ -1,0 +1,74 @@
+{
+  "date": "2025-07-12",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-07-12T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Flamengo",
+      "away": "São Paulo",
+      "home_pos": 1,
+      "away_pos": 14,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Internacional",
+      "away": "Vitória",
+      "home_pos": 17,
+      "away_pos": 16,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Vasco da Gama",
+      "away": "Botafogo",
+      "home_pos": 13,
+      "away_pos": 8,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Bahia",
+      "away": "Atlético-MG",
+      "home_pos": 5,
+      "away_pos": 7,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "São Paulo",
+      "team": "Flamengo",
+      "venue": "home",
+      "score": 64,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 14,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

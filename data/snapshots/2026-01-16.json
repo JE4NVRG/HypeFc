@@ -1,0 +1,104 @@
+{
+  "date": "2026-01-16",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-16T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "FL1",
+      "home": "AS Monaco",
+      "away": "Lorient",
+      "home_pos": 9,
+      "away_pos": 12,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "FL1",
+      "home": "Paris Saint-Germain",
+      "away": "Lille",
+      "home_pos": 2,
+      "away_pos": 4,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Sporting CP",
+      "away": "Casa Pia",
+      "home_pos": 2,
+      "away_pos": 15,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Paris Saint-Germain",
+      "away": "Lille",
+      "team": "Paris Saint-Germain",
+      "venue": "home",
+      "score": 62,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 4,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Paris Saint-Germain",
+      "away": "Lille",
+      "team": "Lille",
+      "venue": "away",
+      "score": 48,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 2,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Sporting CP",
+      "away": "Casa Pia",
+      "team": "Sporting CP",
+      "venue": "home",
+      "score": 61,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 15,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

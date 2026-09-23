@@ -1,0 +1,53 @@
+{
+  "date": "2026-09-17",
+  "seasons": [
+    2026
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-09-17T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PD",
+      "home": "Real Betis",
+      "away": "Getafe",
+      "home_pos": 5,
+      "away_pos": 15,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Málaga",
+      "away": "Villarreal",
+      "home_pos": 18,
+      "away_pos": 19,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Real Betis",
+      "away": "Getafe",
+      "team": "Real Betis",
+      "venue": "home",
+      "score": 44,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 5,
+      "opp_pos": 15,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

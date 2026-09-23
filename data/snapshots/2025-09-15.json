@@ -1,0 +1,44 @@
+{
+  "date": "2025-09-15",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-09-15T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Bahia",
+      "away": "Cruzeiro",
+      "home_pos": 5,
+      "away_pos": 3,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Bahia",
+      "away": "Cruzeiro",
+      "team": "Cruzeiro",
+      "venue": "away",
+      "score": 50,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 5,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 2,
+      "hit": true
+    }
+  ]
+}

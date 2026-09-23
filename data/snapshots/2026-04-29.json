@@ -1,0 +1,44 @@
+{
+  "date": "2026-04-29",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-04-29T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PPL",
+      "home": "Sporting CP",
+      "away": "Tondela",
+      "home_pos": 3,
+      "away_pos": 17,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Sporting CP",
+      "away": "Tondela",
+      "team": "Sporting CP",
+      "venue": "home",
+      "score": 54,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 17,
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
+    }
+  ]
+}

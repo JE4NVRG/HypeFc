@@ -24,91 +24,23 @@
 import {
   buildHypeBoard,
   MIN_HYPE_SCORE,
-  type HypeTableRow,
   type HypeWeights,
 } from '../src/lib/hypeScore.ts'
-import { parseEspnMatches, type EspnMatch } from '../src/lib/espnParse.ts'
+import type { EspnMatch } from '../src/lib/espnParse.ts'
+import {
+  LEAGUES,
+  MIN_PLAYED,
+  applyResult,
+  buildTable,
+  fetchLeagueSeason,
+  seasonFinished,
+  type TeamState,
+} from './lib/replay.ts'
 
 const SEASON = 2026
-const LEAGUES: Array<[string, string, string]> = [
-  ['BSA', 'bra.1', 'Brasileirao'],
-  ['PL', 'eng.1', 'Premier League'],
-  ['PD', 'esp.1', 'La Liga'],
-  ['SA', 'ita.1', 'Serie A'],
-  ['BL1', 'ger.1', 'Bundesliga'],
-  ['FL1', 'fra.1', 'Ligue 1'],
-  ['PPL', 'por.1', 'Primeira Liga'],
-  ['DED', 'ned.1', 'Eredivisie'],
-]
 
-/** Um time so entra na conta depois de ter forma minima acumulada. */
-const MIN_PLAYED = 5
 /** Abaixo disso eu me recuso a tirar conclusao. */
 const MIN_SAMPLE = 100
-
-const HEADERS = {
-  Accept: 'application/json',
-  'User-Agent': 'HypeFC/0.1 (+https://github.com/JE4NVRG/HypeFc)',
-}
-
-interface TeamState {
-  played: number
-  points: number
-  gf: number
-  ga: number
-  results: string[]
-}
-
-async function fetchLeagueSeason(slug: string): Promise<EspnMatch[]> {
-  const url =
-    `https://site.api.espn.com/apis/site/v2/sports/soccer/${slug}/scoreboard` +
-    `?dates=${SEASON}&limit=500`
-  const res = await fetch(url, { headers: HEADERS })
-  if (!res.ok) throw new Error(`${slug}: HTTP ${res.status}`)
-  const payload = await res.json()
-  return parseEspnMatches(payload, slug, slug)
-}
-
-/** Ordena como uma tabela de verdade: pontos, saldo, gols pro, nome. */
-function buildTable(state: Map<string, TeamState>): HypeTableRow[] {
-  const rows = [...state.entries()]
-    .filter(([, s]) => s.played > 0)
-    .map(([team, s]) => ({ team, played: s.played, points: s.points, gd: s.gf - s.ga, gf: s.gf }))
-
-  rows.sort(
-    (a, b) =>
-      b.points - a.points ||
-      b.gd - a.gd ||
-      b.gf - a.gf ||
-      a.team.localeCompare(b.team)
-  )
-
-  return rows.map((row, index) => ({
-    team: row.team,
-    pos: index + 1,
-    played: row.played,
-    form: (state.get(row.team)?.results ?? []).slice(-5).join(''),
-    goalDifference: row.gd,
-  }))
-}
-
-function applyResult(state: Map<string, TeamState>, team: string, scored: number, conceded: number) {
-  const current =
-    state.get(team) ?? { played: 0, points: 0, gf: 0, ga: 0, results: [] as string[] }
-  current.played += 1
-  current.gf += scored
-  current.ga += conceded
-  if (scored > conceded) {
-    current.points += 3
-    current.results.push('W')
-  } else if (scored === conceded) {
-    current.points += 1
-    current.results.push('D')
-  } else {
-    current.results.push('L')
-  }
-  state.set(team, current)
-}
 
 interface Tally {
   n: number
@@ -161,6 +93,16 @@ interface EdgeTally {
   awayN: number
 }
 const byEdge = new Map<string, EdgeTally>()
+
+/**
+ * Ancoragem mais dura: na propria liga, o time MELHOR colocado vence quanto?
+ *
+ * Sem isso o lift do marcado e comparado com a media crua do mando — e como o
+ * marcado quase sempre e o melhor colocado, o lift mede "time forte ganha mais",
+ * que todo mundo ja sabia. Aqui guardo a taxa do melhor colocado (independente
+ * de hype) para comparar maca com maca.
+ */
+const betterPlaced = { n: 0, wins: 0, homeN: 0, winsHome: 0, awayN: 0, winsAway: 0 }
 
 function bumpEdge(key: string, won: boolean, isHome: boolean) {
   const current = byEdge.get(key) ?? { n: 0, wins: 0, homeN: 0, awayN: 0 }
@@ -240,22 +182,24 @@ function bump(map: Map<string, { n: number; wins: number }>, key: string, won: b
 
 async function main() {
   console.log(`Backtest do hype score — temporada ${SEASON} (fonte: ESPN)\n`)
+  console.log(
+    'nota: a tabela zera na virada de temporada (a ESPN manda o ano da temporada);\n' +
+      'sem isso a Europa acumularia pontos de 2025-26 na tabela de 2026-27\n'
+  )
 
   for (const [leagueId, slug, leagueName] of LEAGUES) {
     let matches: EspnMatch[] = []
     try {
-      matches = await fetchLeagueSeason(slug)
+      matches = seasonFinished(await fetchLeagueSeason(slug, SEASON))
     } catch (error) {
       console.log(`  ${leagueId}: falhou (${error instanceof Error ? error.message : error})`)
       continue
     }
 
     const finished = matches
-      .filter((m) => m.status === 'FINISHED' && m.score_home !== null && m.score_away !== null)
-      .filter((m) => Boolean(m.date))
-      .sort((a, b) => String(a.date).localeCompare(String(b.date)))
 
     const state = new Map<string, TeamState>()
+    let seasonAtual: number | null = null
     let eligible = 0
 
     // Metade de cada liga marca a fronteira ajuste/validacao (sem espiar o fim).
@@ -264,6 +208,12 @@ async function main() {
       : ''
 
     for (const match of finished) {
+      const matchSeason = match.season ?? null
+      if (matchSeason !== null && seasonAtual !== null && matchSeason !== seasonAtual) {
+        state.clear()
+      }
+      if (matchSeason !== null) seasonAtual = matchSeason
+
       const homeState = state.get(match.home)
       const awayState = state.get(match.away)
       const ready =
@@ -299,6 +249,25 @@ async function main() {
 
         const homeWon = scoreHome > scoreAway
         const awayWon = scoreAway > scoreHome
+
+        // Ancoragem independente do hype: o melhor colocado da tabela vence
+        // quanto, nestes mesmos jogos? E contra isso que o marcado tem que se
+        // comparar, nao contra a media crua do mando.
+        const homePos = posOf.get(match.home)
+        const awayPos = posOf.get(match.away)
+        if (homePos && awayPos && homePos !== awayPos) {
+          const betterIsHome = homePos < awayPos
+          const betterWon = betterIsHome ? homeWon : awayWon
+          betterPlaced.n += 1
+          if (betterWon) betterPlaced.wins += 1
+          if (betterIsHome) {
+            betterPlaced.homeN += 1
+            if (betterWon) betterPlaced.winsHome += 1
+          } else {
+            betterPlaced.awayN += 1
+            if (betterWon) betterPlaced.winsAway += 1
+          }
+        }
 
         baseline.n += 1
         if (homeWon) baseline.home += 1
@@ -488,6 +457,15 @@ async function main() {
 
   console.log('=== CONTROLE DE VIES: POSICAO RELATIVA AO ADVERSARIO ===')
   console.log('  esperado = media do mando nesses mesmos jogos (casa/fora), nao um numero unico')
+  const anchorHome = betterPlaced.homeN ? betterPlaced.winsHome / betterPlaced.homeN : 0
+  const anchorAway = betterPlaced.awayN ? betterPlaced.winsAway / betterPlaced.awayN : 0
+  if (betterPlaced.n >= MIN_SAMPLE) {
+    console.log(
+      `  ancora SEM hype (o melhor colocado vence): ${pct(betterPlaced.wins, betterPlaced.n)} ` +
+        `| casa ${pct(betterPlaced.winsHome, betterPlaced.homeN)} ` +
+        `| fora ${pct(betterPlaced.winsAway, betterPlaced.awayN)} (n=${betterPlaced.n})`
+    )
+  }
   for (const key of ['marcado MELHOR colocado', 'marcado PIOR colocado', 'mesma posicao']) {
     const row = byEdge.get(key)
     if (!row || row.n < 30) {
@@ -500,6 +478,15 @@ async function main() {
       `  ${key}: vence ${pct(row.wins, row.n)} | esperado ${(expected * 100).toFixed(1)}% | ` +
         `lift ${((actual - expected) * 100).toFixed(1)}pp  (n=${row.n})`
     )
+    // O teste duro: o marcado que esta MELHOR colocado vence mais do que um
+    // melhor colocado qualquer venceria? Se nao, o score so repetiu a tabela.
+    if (key === 'marcado MELHOR colocado' && betterPlaced.n >= MIN_SAMPLE) {
+      const anchor = (row.homeN * anchorHome + row.awayN * anchorAway) / row.n
+      console.log(
+        `      ancorado no melhor colocado: ${(anchor * 100).toFixed(1)}% esperado vs ` +
+          `${(actual * 100).toFixed(1)}% real -> ${((actual - anchor) * 100).toFixed(1)}pp`
+      )
+    }
   }
   console.log()
 

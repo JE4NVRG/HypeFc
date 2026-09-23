@@ -1,0 +1,104 @@
+{
+  "date": "2025-07-16",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-07-16T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Palmeiras",
+      "away": "Mirassol",
+      "home_pos": 5,
+      "away_pos": 10,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Ceará",
+      "away": "Corinthians",
+      "home_pos": 9,
+      "away_pos": 11,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Santos",
+      "away": "Flamengo",
+      "home_pos": 16,
+      "away_pos": 1,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Botafogo",
+      "away": "Vitória",
+      "home_pos": 6,
+      "away_pos": 17,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Red Bull Bragantino",
+      "away": "São Paulo",
+      "home_pos": 3,
+      "away_pos": 15,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Santos",
+      "away": "Flamengo",
+      "team": "Flamengo",
+      "venue": "away",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 16,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Botafogo",
+      "away": "Vitória",
+      "team": "Botafogo",
+      "venue": "home",
+      "score": 51,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 6,
+      "opp_pos": 17,
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
+    }
+  ]
+}

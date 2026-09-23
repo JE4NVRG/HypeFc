@@ -1,0 +1,74 @@
+{
+  "date": "2025-08-25",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-08-25T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Palmeiras",
+      "away": "Sport",
+      "home_pos": 3,
+      "away_pos": 20,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Flamengo",
+      "away": "Vitória",
+      "home_pos": 1,
+      "away_pos": 17,
+      "score_home": 8,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Vitória",
+      "team": "Flamengo",
+      "venue": "home",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 17,
+      "outcome": "home",
+      "score_home": 8,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Palmeiras",
+      "away": "Sport",
+      "team": "Palmeiras",
+      "venue": "home",
+      "score": 57,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 20,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

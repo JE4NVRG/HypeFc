@@ -1,0 +1,323 @@
+{
+  "date": "2026-05-09",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-05-09T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Liverpool",
+      "away": "Chelsea",
+      "home_pos": 4,
+      "away_pos": 9,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Brighton & Hove Albion",
+      "away": "Wolverhampton Wanderers",
+      "home_pos": 8,
+      "away_pos": 20,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PL",
+      "home": "Fulham",
+      "away": "AFC Bournemouth",
+      "home_pos": 11,
+      "away_pos": 6,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PL",
+      "home": "Sunderland",
+      "away": "Manchester United",
+      "home_pos": 12,
+      "away_pos": 3,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Manchester City",
+      "away": "Brentford",
+      "home_pos": 2,
+      "away_pos": 7,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Elche",
+      "away": "Alavés",
+      "home_pos": 14,
+      "away_pos": 18,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PD",
+      "home": "Sevilla",
+      "away": "Espanyol",
+      "home_pos": 17,
+      "away_pos": 13,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Atlético Madrid",
+      "away": "Celta Vigo",
+      "home_pos": 4,
+      "away_pos": 6,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PD",
+      "home": "Real Sociedad",
+      "away": "Real Betis",
+      "home_pos": 9,
+      "away_pos": 5,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "SA",
+      "home": "Cagliari",
+      "away": "Udinese",
+      "home_pos": 16,
+      "away_pos": 11,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "SA",
+      "home": "Lazio",
+      "away": "Internazionale",
+      "home_pos": 8,
+      "away_pos": 1,
+      "score_home": 0,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "SA",
+      "home": "Lecce",
+      "away": "Juventus",
+      "home_pos": 17,
+      "away_pos": 4,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BL1",
+      "home": "FC Augsburg",
+      "away": "Borussia Mönchengladbach",
+      "home_pos": 9,
+      "away_pos": 11,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "RB Leipzig",
+      "away": "St. Pauli",
+      "home_pos": 3,
+      "away_pos": 17,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "TSG Hoffenheim",
+      "away": "Werder Bremen",
+      "home_pos": 6,
+      "away_pos": 15,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "VfB Stuttgart",
+      "away": "Bayer Leverkusen",
+      "home_pos": 5,
+      "away_pos": 4,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "VfL Wolfsburg",
+      "away": "Bayern Munich",
+      "home_pos": 16,
+      "away_pos": 1,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Manchester City",
+      "away": "Brentford",
+      "team": "Manchester City",
+      "venue": "home",
+      "score": 61,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 7,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Sunderland",
+      "away": "Manchester United",
+      "team": "Manchester United",
+      "venue": "away",
+      "score": 46,
+      "flags": [
+        "Boa forma",
+        "Top 3"
+      ],
+      "pos": 3,
+      "opp_pos": 12,
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Lazio",
+      "away": "Internazionale",
+      "team": "Internazionale",
+      "venue": "away",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 8,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 3,
+      "hit": true
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Lecce",
+      "away": "Juventus",
+      "team": "Juventus",
+      "venue": "away",
+      "score": 47,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 17,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "VfL Wolfsburg",
+      "away": "Bayern Munich",
+      "team": "Bayern Munich",
+      "venue": "away",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 16,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "RB Leipzig",
+      "away": "St. Pauli",
+      "team": "RB Leipzig",
+      "venue": "home",
+      "score": 54,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 17,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "VfB Stuttgart",
+      "away": "Bayer Leverkusen",
+      "team": "Bayer Leverkusen",
+      "venue": "away",
+      "score": 48,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 5,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

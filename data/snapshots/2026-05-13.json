@@ -1,0 +1,183 @@
+{
+  "date": "2026-05-13",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-05-13T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Manchester City",
+      "away": "Crystal Palace",
+      "home_pos": 2,
+      "away_pos": 15,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Espanyol",
+      "away": "Athletic Club",
+      "home_pos": 17,
+      "away_pos": 9,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Villarreal",
+      "away": "Sevilla",
+      "home_pos": 3,
+      "away_pos": 13,
+      "score_home": 2,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PD",
+      "home": "Alavés",
+      "away": "Barcelona",
+      "home_pos": 19,
+      "away_pos": 1,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Getafe",
+      "away": "Mallorca",
+      "home_pos": 7,
+      "away_pos": 15,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "FL1",
+      "home": "Brest",
+      "away": "Strasbourg",
+      "home_pos": 12,
+      "away_pos": 8,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "FL1",
+      "home": "Lens",
+      "away": "Paris Saint-Germain",
+      "home_pos": 2,
+      "away_pos": 1,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Manchester City",
+      "away": "Crystal Palace",
+      "team": "Manchester City",
+      "venue": "home",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 15,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Alavés",
+      "away": "Barcelona",
+      "team": "Barcelona",
+      "venue": "away",
+      "score": 75,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 19,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Villarreal",
+      "away": "Sevilla",
+      "team": "Villarreal",
+      "venue": "home",
+      "score": 53,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 13,
+      "outcome": "away",
+      "score_home": 2,
+      "score_away": 3,
+      "hit": false
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Lens",
+      "away": "Paris Saint-Germain",
+      "team": "Paris Saint-Germain",
+      "venue": "away",
+      "score": 64,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 2,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Lens",
+      "away": "Paris Saint-Germain",
+      "team": "Lens",
+      "venue": "home",
+      "score": 50,
+      "flags": [
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 1,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": false
+    }
+  ]
+}

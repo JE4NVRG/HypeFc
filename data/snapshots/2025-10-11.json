@@ -1,0 +1,44 @@
+{
+  "date": "2025-10-11",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-10-11T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Palmeiras",
+      "away": "Juventude",
+      "home_pos": 2,
+      "away_pos": 19,
+      "score_home": 4,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Palmeiras",
+      "away": "Juventude",
+      "team": "Palmeiras",
+      "venue": "home",
+      "score": 58,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 19,
+      "outcome": "home",
+      "score_home": 4,
+      "score_away": 1,
+      "hit": true
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "date": "2026-01-26",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-26T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PPL",
+      "home": "FC Porto",
+      "away": "Gil Vicente",
+      "home_pos": 1,
+      "away_pos": 5,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "FC Porto",
+      "away": "Gil Vicente",
+      "team": "FC Porto",
+      "venue": "home",
+      "score": 75,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 5,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "date": "2025-05-19",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-05-19T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Brighton & Hove Albion",
+      "away": "Liverpool",
+      "home_pos": 11,
+      "away_pos": 1,
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Brighton & Hove Albion",
+      "away": "Liverpool",
+      "team": "Liverpool",
+      "venue": "away",
+      "score": 64,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 11,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 2,
+      "hit": false
+    }
+  ]
+}

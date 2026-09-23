@@ -1,0 +1,84 @@
+{
+  "date": "2026-01-15",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-15T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Hellas Verona",
+      "away": "Bologna",
+      "home_pos": 20,
+      "away_pos": 9,
+      "score_home": 2,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "SA",
+      "home": "Como",
+      "away": "AC Milan",
+      "home_pos": 6,
+      "away_pos": 2,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BL1",
+      "home": "FC Augsburg",
+      "away": "1. FC Union Berlin",
+      "home_pos": 15,
+      "away_pos": 9,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Como",
+      "away": "AC Milan",
+      "team": "AC Milan",
+      "venue": "away",
+      "score": 53,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 6,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": true
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Como",
+      "away": "AC Milan",
+      "team": "Como",
+      "venue": "home",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 6,
+      "opp_pos": 2,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": false
+    }
+  ]
+}

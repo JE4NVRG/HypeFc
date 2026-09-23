@@ -1,0 +1,144 @@
+{
+  "date": "2025-02-26",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-02-26T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Brentford",
+      "away": "Everton",
+      "home_pos": 8,
+      "away_pos": 5,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Manchester United",
+      "away": "Ipswich Town",
+      "home_pos": 15,
+      "away_pos": 20,
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PL",
+      "home": "Nottingham Forest",
+      "away": "Arsenal",
+      "home_pos": 13,
+      "away_pos": 2,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Tottenham Hotspur",
+      "away": "Manchester City",
+      "home_pos": 14,
+      "away_pos": 6,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PL",
+      "home": "Liverpool",
+      "away": "Newcastle United",
+      "home_pos": 1,
+      "away_pos": 11,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Liverpool",
+      "away": "Newcastle United",
+      "team": "Liverpool",
+      "venue": "home",
+      "score": 67,
+      "flags": [
+        "Boa forma",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 11,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Nottingham Forest",
+      "away": "Arsenal",
+      "team": "Arsenal",
+      "venue": "away",
+      "score": 58,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 13,
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Brentford",
+      "away": "Everton",
+      "team": "Everton",
+      "venue": "away",
+      "score": 47,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 8,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Tottenham Hotspur",
+      "away": "Manchester City",
+      "team": "Manchester City",
+      "venue": "away",
+      "score": 45,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 6,
+      "opp_pos": 14,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    }
+  ]
+}

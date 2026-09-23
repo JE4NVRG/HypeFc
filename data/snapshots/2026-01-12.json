@@ -1,0 +1,54 @@
+{
+  "date": "2026-01-12",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-12T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Genoa",
+      "away": "Cagliari",
+      "home_pos": 17,
+      "away_pos": 15,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "SA",
+      "home": "Juventus",
+      "away": "Cremonese",
+      "home_pos": 5,
+      "away_pos": 13,
+      "score_home": 5,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Juventus",
+      "away": "Cremonese",
+      "team": "Juventus",
+      "venue": "home",
+      "score": 51,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 13,
+      "outcome": "home",
+      "score_home": 5,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

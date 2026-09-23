@@ -1,0 +1,114 @@
+{
+  "date": "2026-01-02",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-02T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Cagliari",
+      "away": "AC Milan",
+      "home_pos": 14,
+      "away_pos": 2,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "FL1",
+      "home": "Toulouse",
+      "away": "Lens",
+      "home_pos": 8,
+      "away_pos": 1,
+      "score_home": 0,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Gil Vicente",
+      "away": "Sporting CP",
+      "home_pos": 4,
+      "away_pos": 2,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Vitória de Guimaraes",
+      "away": "C.D. Nacional",
+      "home_pos": 7,
+      "away_pos": 13,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Cagliari",
+      "away": "AC Milan",
+      "team": "AC Milan",
+      "venue": "away",
+      "score": 61,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 14,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Toulouse",
+      "away": "Lens",
+      "team": "Lens",
+      "venue": "away",
+      "score": 71,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 8,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 3,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Gil Vicente",
+      "away": "Sporting CP",
+      "team": "Sporting CP",
+      "venue": "away",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 4,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

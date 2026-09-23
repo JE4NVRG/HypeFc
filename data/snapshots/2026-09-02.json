@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-02",
+  "seasons": [
+    2026
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-09-02T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Flamengo",
+      "away": "Mirassol",
+      "home_pos": 2,
+      "away_pos": 17,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Mirassol",
+      "team": "Flamengo",
+      "venue": "home",
+      "score": 58,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 17,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

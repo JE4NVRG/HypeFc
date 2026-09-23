@@ -1,0 +1,94 @@
+{
+  "date": "2025-03-03",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-03-03T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Juventus",
+      "away": "Hellas Verona",
+      "home_pos": 4,
+      "away_pos": 16,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Sporting CP",
+      "away": "Estoril",
+      "home_pos": 4,
+      "away_pos": 2,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Juventus",
+      "away": "Hellas Verona",
+      "team": "Juventus",
+      "venue": "home",
+      "score": 48,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 16,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Sporting CP",
+      "away": "Estoril",
+      "team": "Estoril",
+      "venue": "away",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 4,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Sporting CP",
+      "away": "Estoril",
+      "team": "Sporting CP",
+      "venue": "home",
+      "score": 47,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 2,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 1,
+      "hit": true
+    }
+  ]
+}

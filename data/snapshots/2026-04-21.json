@@ -1,0 +1,74 @@
+{
+  "date": "2026-04-21",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-04-21T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PD",
+      "home": "Athletic Club",
+      "away": "Osasuna",
+      "home_pos": 11,
+      "away_pos": 9,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Mallorca",
+      "away": "Valencia",
+      "home_pos": 15,
+      "away_pos": 14,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PD",
+      "home": "Girona",
+      "away": "Real Betis",
+      "home_pos": 12,
+      "away_pos": 5,
+      "score_home": 2,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PD",
+      "home": "Real Madrid",
+      "away": "Alavés",
+      "home_pos": 2,
+      "away_pos": 17,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Real Madrid",
+      "away": "Alavés",
+      "team": "Real Madrid",
+      "venue": "home",
+      "score": 58,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 17,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": true
+    }
+  ]
+}

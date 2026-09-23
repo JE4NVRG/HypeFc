@@ -1,0 +1,63 @@
+{
+  "date": "2026-07-17",
+  "seasons": [
+    2026
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-07-17T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Bahia",
+      "away": "Chapecoense",
+      "home_pos": 6,
+      "away_pos": 20,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Fluminense",
+      "away": "Red Bull Bragantino",
+      "home_pos": 3,
+      "away_pos": 5,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Mirassol",
+      "away": "Grêmio",
+      "home_pos": 19,
+      "away_pos": 15,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Fluminense",
+      "away": "Red Bull Bragantino",
+      "team": "Red Bull Bragantino",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 5,
+      "opp_pos": 3,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

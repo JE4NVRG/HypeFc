@@ -1,0 +1,94 @@
+{
+  "date": "2026-01-23",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-23T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Internazionale",
+      "away": "Pisa",
+      "home_pos": 1,
+      "away_pos": 19,
+      "score_home": 6,
+      "score_away": 2,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "St. Pauli",
+      "away": "Hamburg SV",
+      "home_pos": 18,
+      "away_pos": 14,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "FL1",
+      "home": "AJ Auxerre",
+      "away": "Paris Saint-Germain",
+      "home_pos": 17,
+      "away_pos": 2,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Casa Pia",
+      "away": "AVS",
+      "home_pos": 16,
+      "away_pos": 18,
+      "score_home": 3,
+      "score_away": 3,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Internazionale",
+      "away": "Pisa",
+      "team": "Internazionale",
+      "venue": "home",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 19,
+      "outcome": "home",
+      "score_home": 6,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "AJ Auxerre",
+      "away": "Paris Saint-Germain",
+      "team": "Paris Saint-Germain",
+      "venue": "away",
+      "score": 62,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 17,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "date": "2025-05-14",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-05-14T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PD",
+      "home": "Alavés",
+      "away": "Valencia",
+      "home_pos": 14,
+      "away_pos": 4,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Villarreal",
+      "away": "Leganés",
+      "home_pos": 5,
+      "away_pos": 17,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Real Madrid",
+      "away": "Mallorca",
+      "home_pos": 2,
+      "away_pos": 16,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "Almere City",
+      "away": "Fortuna Sittard",
+      "home_pos": 16,
+      "away_pos": 15,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "DED",
+      "home": "FC Groningen",
+      "away": "Ajax Amsterdam",
+      "home_pos": 9,
+      "away_pos": 1,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "DED",
+      "home": "FC Twente",
+      "away": "AZ Alkmaar",
+      "home_pos": 7,
+      "away_pos": 10,
+      "score_home": 2,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "DED",
+      "home": "FC Utrecht",
+      "away": "Sparta Rotterdam",
+      "home_pos": 4,
+      "away_pos": 5,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "DED",
+      "home": "Feyenoord Rotterdam",
+      "away": "RKC Waalwijk",
+      "home_pos": 2,
+      "away_pos": 14,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "Go Ahead Eagles",
+      "away": "Heerenveen",
+      "home_pos": 8,
+      "away_pos": 12,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "NEC Nijmegen",
+      "away": "NAC Breda",
+      "home_pos": 11,
+      "away_pos": 17,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "PSV Eindhoven",
+      "away": "Heracles Almelo",
+      "home_pos": 3,
+      "away_pos": 6,
+      "score_home": 4,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "Willem II",
+      "away": "PEC Zwolle",
+      "home_pos": 18,
+      "away_pos": 13,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Real Madrid",
+      "away": "Mallorca",
+      "team": "Real Madrid",
+      "venue": "home",
+      "score": 58,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 16,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Villarreal",
+      "away": "Leganés",
+      "team": "Villarreal",
+      "venue": "home",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 17,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "Feyenoord Rotterdam",
+      "away": "RKC Waalwijk",
+      "team": "Feyenoord Rotterdam",
+      "venue": "home",
+      "score": 62,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 14,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "PSV Eindhoven",
+      "away": "Heracles Almelo",
+      "team": "PSV Eindhoven",
+      "venue": "home",
+      "score": 61,
+      "flags": [
+        "Forma 5V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 6,
+      "outcome": "home",
+      "score_home": 4,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "FC Groningen",
+      "away": "Ajax Amsterdam",
+      "team": "Ajax Amsterdam",
+      "venue": "away",
+      "score": 53,
+      "flags": [
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 9,
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "FC Utrecht",
+      "away": "Sparta Rotterdam",
+      "team": "FC Utrecht",
+      "venue": "home",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 5,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "FC Utrecht",
+      "away": "Sparta Rotterdam",
+      "team": "Sparta Rotterdam",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 4,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

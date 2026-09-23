@@ -1,0 +1,104 @@
+{
+  "date": "2025-07-27",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-07-27T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Cruzeiro",
+      "away": "Ceará",
+      "home_pos": 1,
+      "away_pos": 13,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "São Paulo",
+      "away": "Fluminense",
+      "home_pos": 12,
+      "away_pos": 10,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Bahia",
+      "away": "Juventude",
+      "home_pos": 7,
+      "away_pos": 19,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Internacional",
+      "away": "Vasco da Gama",
+      "home_pos": 11,
+      "away_pos": 17,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Flamengo",
+      "away": "Atlético-MG",
+      "home_pos": 2,
+      "away_pos": 9,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Cruzeiro",
+      "away": "Ceará",
+      "team": "Cruzeiro",
+      "venue": "home",
+      "score": 67,
+      "flags": [
+        "Boa forma",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 13,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Atlético-MG",
+      "team": "Flamengo",
+      "venue": "home",
+      "score": 62,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 9,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "date": "2025-09-17",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-09-17T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Botafogo",
+      "away": "Mirassol",
+      "home_pos": 6,
+      "away_pos": 4,
+      "score_home": 3,
+      "score_away": 3,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Botafogo",
+      "away": "Mirassol",
+      "team": "Mirassol",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 6,
+      "outcome": "draw",
+      "score_home": 3,
+      "score_away": 3,
+      "hit": false
+    }
+  ]
+}

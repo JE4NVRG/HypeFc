@@ -1,0 +1,84 @@
+{
+  "date": "2025-02-28",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-02-28T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BL1",
+      "home": "VfB Stuttgart",
+      "away": "Bayern Munich",
+      "home_pos": 8,
+      "away_pos": 1,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "FL1",
+      "home": "AS Monaco",
+      "away": "Stade de Reims",
+      "home_pos": 9,
+      "away_pos": 18,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "RKC Waalwijk",
+      "away": "Fortuna Sittard",
+      "home_pos": 5,
+      "away_pos": 18,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "VfB Stuttgart",
+      "away": "Bayern Munich",
+      "team": "Bayern Munich",
+      "venue": "away",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 8,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": true
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "RKC Waalwijk",
+      "away": "Fortuna Sittard",
+      "team": "RKC Waalwijk",
+      "venue": "home",
+      "score": 48,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 18,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 2,
+      "hit": false
+    }
+  ]
+}

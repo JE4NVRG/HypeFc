@@ -1,0 +1,184 @@
+{
+  "date": "2026-04-06",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-04-06T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PD",
+      "home": "Girona",
+      "away": "Villarreal",
+      "home_pos": 14,
+      "away_pos": 3,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "SA",
+      "home": "Udinese",
+      "away": "Como",
+      "home_pos": 11,
+      "away_pos": 4,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "SA",
+      "home": "Lecce",
+      "away": "Atalanta",
+      "home_pos": 17,
+      "away_pos": 7,
+      "score_home": 0,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "SA",
+      "home": "Juventus",
+      "away": "Genoa",
+      "home_pos": 5,
+      "away_pos": 14,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "SA",
+      "home": "Napoli",
+      "away": "AC Milan",
+      "home_pos": 3,
+      "away_pos": 2,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Arouca",
+      "away": "Estoril",
+      "home_pos": 12,
+      "away_pos": 7,
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Casa Pia",
+      "away": "Benfica",
+      "home_pos": 16,
+      "away_pos": 3,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Girona",
+      "away": "Villarreal",
+      "team": "Villarreal",
+      "venue": "away",
+      "score": 50,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 14,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Udinese",
+      "away": "Como",
+      "team": "Como",
+      "venue": "away",
+      "score": 59,
+      "flags": [
+        "Forma 5V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 11,
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Napoli",
+      "away": "AC Milan",
+      "team": "Napoli",
+      "venue": "home",
+      "score": 54,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 2,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Napoli",
+      "away": "AC Milan",
+      "team": "AC Milan",
+      "venue": "away",
+      "score": 51,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 3,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Casa Pia",
+      "away": "Benfica",
+      "team": "Benfica",
+      "venue": "away",
+      "score": 61,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 16,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

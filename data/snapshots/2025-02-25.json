@@ -1,0 +1,74 @@
+{
+  "date": "2025-02-25",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-02-25T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Brighton & Hove Albion",
+      "away": "AFC Bournemouth",
+      "home_pos": 8,
+      "away_pos": 5,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PL",
+      "home": "Crystal Palace",
+      "away": "Aston Villa",
+      "home_pos": 6,
+      "away_pos": 9,
+      "score_home": 4,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PL",
+      "home": "Wolverhampton Wanderers",
+      "away": "Fulham",
+      "home_pos": 17,
+      "away_pos": 12,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PL",
+      "home": "Chelsea",
+      "away": "Southampton",
+      "home_pos": 15,
+      "away_pos": 19,
+      "score_home": 4,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Brighton & Hove Albion",
+      "away": "AFC Bournemouth",
+      "team": "AFC Bournemouth",
+      "venue": "away",
+      "score": 45,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 8,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

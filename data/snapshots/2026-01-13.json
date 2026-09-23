@@ -1,0 +1,64 @@
+{
+  "date": "2026-01-13",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-13T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BL1",
+      "home": "VfB Stuttgart",
+      "away": "Eintracht Frankfurt",
+      "home_pos": 5,
+      "away_pos": 7,
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "Borussia Dortmund",
+      "away": "Werder Bremen",
+      "home_pos": 2,
+      "away_pos": 12,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "Mainz",
+      "away": "1. FC Heidenheim 1846",
+      "home_pos": 18,
+      "away_pos": 17,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "Borussia Dortmund",
+      "away": "Werder Bremen",
+      "team": "Borussia Dortmund",
+      "venue": "home",
+      "score": 57,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 12,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

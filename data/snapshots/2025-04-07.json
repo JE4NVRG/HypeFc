@@ -1,0 +1,114 @@
+{
+  "date": "2025-04-07",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-04-07T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Bologna",
+      "away": "Napoli",
+      "home_pos": 2,
+      "away_pos": 5,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PPL",
+      "home": "SC Farense",
+      "away": "Casa Pia",
+      "home_pos": 17,
+      "away_pos": 9,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Rio Ave",
+      "away": "Boavista",
+      "home_pos": 13,
+      "away_pos": 18,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Sporting CP",
+      "away": "Braga",
+      "home_pos": 3,
+      "away_pos": 2,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Bologna",
+      "away": "Napoli",
+      "team": "Bologna",
+      "venue": "home",
+      "score": 65,
+      "flags": [
+        "Forma 5V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 5,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Sporting CP",
+      "away": "Braga",
+      "team": "Braga",
+      "venue": "away",
+      "score": 62,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 3,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Sporting CP",
+      "away": "Braga",
+      "team": "Sporting CP",
+      "venue": "home",
+      "score": 61,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 2,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

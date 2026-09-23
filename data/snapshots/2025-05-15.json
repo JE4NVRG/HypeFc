@@ -1,0 +1,114 @@
+{
+  "date": "2025-05-15",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-05-15T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PD",
+      "home": "Osasuna",
+      "away": "Atlético Madrid",
+      "home_pos": 13,
+      "away_pos": 6,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Rayo Vallecano",
+      "away": "Real Betis",
+      "home_pos": 9,
+      "away_pos": 4,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PD",
+      "home": "Espanyol",
+      "away": "Barcelona",
+      "home_pos": 10,
+      "away_pos": 1,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PD",
+      "home": "Getafe",
+      "away": "Athletic Club",
+      "home_pos": 11,
+      "away_pos": 7,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Espanyol",
+      "away": "Barcelona",
+      "team": "Barcelona",
+      "venue": "away",
+      "score": 75,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 10,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Rayo Vallecano",
+      "away": "Real Betis",
+      "team": "Real Betis",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 9,
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Osasuna",
+      "away": "Atlético Madrid",
+      "team": "Atlético Madrid",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 6,
+      "opp_pos": 13,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": false
+    }
+  ]
+}

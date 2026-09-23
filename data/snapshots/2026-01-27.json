@@ -1,0 +1,54 @@
+{
+  "date": "2026-01-27",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-27T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BL1",
+      "home": "St. Pauli",
+      "away": "RB Leipzig",
+      "home_pos": 17,
+      "away_pos": 5,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BL1",
+      "home": "Werder Bremen",
+      "away": "TSG Hoffenheim",
+      "home_pos": 15,
+      "away_pos": 3,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "Werder Bremen",
+      "away": "TSG Hoffenheim",
+      "team": "TSG Hoffenheim",
+      "venue": "away",
+      "score": 57,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 15,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": true
+    }
+  ]
+}

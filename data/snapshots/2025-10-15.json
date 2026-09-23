@@ -1,0 +1,163 @@
+{
+  "date": "2025-10-15",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-10-15T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Palmeiras",
+      "away": "Red Bull Bragantino",
+      "home_pos": 1,
+      "away_pos": 9,
+      "score_home": 5,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Botafogo",
+      "away": "Flamengo",
+      "home_pos": 5,
+      "away_pos": 2,
+      "score_home": 0,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Mirassol",
+      "away": "Internacional",
+      "home_pos": 4,
+      "away_pos": 15,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Sport",
+      "away": "Ceará",
+      "home_pos": 20,
+      "away_pos": 10,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Atlético-MG",
+      "away": "Cruzeiro",
+      "home_pos": 14,
+      "away_pos": 3,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Fortaleza",
+      "away": "Vasco da Gama",
+      "home_pos": 18,
+      "away_pos": 11,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Santos",
+      "away": "Corinthians",
+      "home_pos": 16,
+      "away_pos": 12,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Botafogo",
+      "away": "Flamengo",
+      "team": "Flamengo",
+      "venue": "away",
+      "score": 72,
+      "flags": [
+        "Clássico",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 5,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 3,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Palmeiras",
+      "away": "Red Bull Bragantino",
+      "team": "Palmeiras",
+      "venue": "home",
+      "score": 64,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 9,
+      "outcome": "home",
+      "score_home": 5,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Botafogo",
+      "away": "Flamengo",
+      "team": "Botafogo",
+      "venue": "home",
+      "score": 55,
+      "flags": [
+        "Clássico",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 2,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 3,
+      "hit": false
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Atlético-MG",
+      "away": "Cruzeiro",
+      "team": "Cruzeiro",
+      "venue": "away",
+      "score": 46,
+      "flags": [
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 14,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "date": "2025-12-22",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-12-22T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PD",
+      "home": "Athletic Club",
+      "away": "Espanyol",
+      "home_pos": 8,
+      "away_pos": 5,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Alverca",
+      "away": "FC Porto",
+      "home_pos": 11,
+      "away_pos": 1,
+      "score_home": 0,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Benfica",
+      "away": "FC Famalicao",
+      "home_pos": 3,
+      "away_pos": 6,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Athletic Club",
+      "away": "Espanyol",
+      "team": "Espanyol",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 5,
+      "opp_pos": 8,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Alverca",
+      "away": "FC Porto",
+      "team": "FC Porto",
+      "venue": "away",
+      "score": 75,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 11,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 3,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Benfica",
+      "away": "FC Famalicao",
+      "team": "Benfica",
+      "venue": "home",
+      "score": 57,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 6,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

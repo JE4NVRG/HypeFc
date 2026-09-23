@@ -1,0 +1,234 @@
+{
+  "date": "2026-01-10",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-10T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PD",
+      "home": "Real Oviedo",
+      "away": "Real Betis",
+      "home_pos": 20,
+      "away_pos": 6,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PD",
+      "home": "Villarreal",
+      "away": "Alavés",
+      "home_pos": 3,
+      "away_pos": 14,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Girona",
+      "away": "Osasuna",
+      "home_pos": 17,
+      "away_pos": 13,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Valencia",
+      "away": "Elche",
+      "home_pos": 18,
+      "away_pos": 9,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "SA",
+      "home": "Como",
+      "away": "Bologna",
+      "home_pos": 6,
+      "away_pos": 8,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "SA",
+      "home": "Udinese",
+      "away": "Pisa",
+      "home_pos": 10,
+      "away_pos": 20,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "SA",
+      "home": "AS Roma",
+      "away": "Sassuolo",
+      "home_pos": 5,
+      "away_pos": 11,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "SA",
+      "home": "Atalanta",
+      "away": "Torino",
+      "home_pos": 7,
+      "away_pos": 12,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "1. FC Heidenheim 1846",
+      "away": "FC Cologne",
+      "home_pos": 17,
+      "away_pos": 11,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BL1",
+      "home": "1. FC Union Berlin",
+      "away": "Mainz",
+      "home_pos": 8,
+      "away_pos": 18,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BL1",
+      "home": "SC Freiburg",
+      "away": "Hamburg SV",
+      "home_pos": 9,
+      "away_pos": 13,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "Bayer Leverkusen",
+      "away": "VfB Stuttgart",
+      "home_pos": 3,
+      "away_pos": 6,
+      "score_home": 1,
+      "score_away": 4,
+      "outcome": "away"
+    },
+    {
+      "league_id": "DED",
+      "home": "AZ Alkmaar",
+      "away": "FC Volendam",
+      "home_pos": 7,
+      "away_pos": 16,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "FC Twente",
+      "away": "PEC Zwolle",
+      "home_pos": 6,
+      "away_pos": 14,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "DED",
+      "home": "PSV Eindhoven",
+      "away": "Excelsior",
+      "home_pos": 1,
+      "away_pos": 13,
+      "score_home": 5,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "FC Groningen",
+      "away": "NAC Breda",
+      "home_pos": 5,
+      "away_pos": 18,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Villarreal",
+      "away": "Alavés",
+      "team": "Villarreal",
+      "venue": "home",
+      "score": 58,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 14,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "Bayer Leverkusen",
+      "away": "VfB Stuttgart",
+      "team": "Bayer Leverkusen",
+      "venue": "home",
+      "score": 47,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 6,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 4,
+      "hit": false
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "PSV Eindhoven",
+      "away": "Excelsior",
+      "team": "PSV Eindhoven",
+      "venue": "home",
+      "score": 75,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 13,
+      "outcome": "home",
+      "score_home": 5,
+      "score_away": 1,
+      "hit": true
+    }
+  ]
+}

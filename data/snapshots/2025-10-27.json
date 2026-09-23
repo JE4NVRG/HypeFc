@@ -1,0 +1,94 @@
+{
+  "date": "2025-10-27",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-10-27T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PD",
+      "home": "Real Betis",
+      "away": "Atlético Madrid",
+      "home_pos": 6,
+      "away_pos": 5,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Moreirense",
+      "away": "FC Porto",
+      "home_pos": 6,
+      "away_pos": 2,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Real Betis",
+      "away": "Atlético Madrid",
+      "team": "Atlético Madrid",
+      "venue": "away",
+      "score": 47,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 6,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Real Betis",
+      "away": "Atlético Madrid",
+      "team": "Real Betis",
+      "venue": "home",
+      "score": 47,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 6,
+      "opp_pos": 5,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Moreirense",
+      "away": "FC Porto",
+      "team": "FC Porto",
+      "venue": "away",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 6,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 2,
+      "hit": true
+    }
+  ]
+}

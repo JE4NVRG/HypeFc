@@ -1,0 +1,213 @@
+{
+  "date": "2026-09-12",
+  "seasons": [
+    2026
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-09-12T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Atlético-MG",
+      "away": "Fluminense",
+      "home_pos": 8,
+      "away_pos": 4,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Grêmio",
+      "away": "Vasco da Gama",
+      "home_pos": 15,
+      "away_pos": 18,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Chapecoense",
+      "away": "Internacional",
+      "home_pos": 20,
+      "away_pos": 17,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Palmeiras",
+      "away": "São Paulo",
+      "home_pos": 2,
+      "away_pos": 10,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Botafogo",
+      "away": "Red Bull Bragantino",
+      "home_pos": 14,
+      "away_pos": 9,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Santos",
+      "away": "Cruzeiro",
+      "home_pos": 12,
+      "away_pos": 6,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PPL",
+      "home": "C.D. Nacional",
+      "away": "Alverca",
+      "home_pos": 11,
+      "away_pos": 16,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Casa Pia",
+      "away": "FC Porto",
+      "home_pos": 18,
+      "away_pos": 1,
+      "score_home": 1,
+      "score_away": 4,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Académico de Viseu",
+      "away": "Vitória de Guimaraes",
+      "home_pos": 10,
+      "away_pos": 12,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "FC Twente",
+      "away": "ADO Den Haag",
+      "home_pos": 5,
+      "away_pos": 17,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "Go Ahead Eagles",
+      "away": "FC Groningen",
+      "home_pos": 7,
+      "away_pos": 10,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "DED",
+      "home": "SC Cambuur",
+      "away": "NEC Nijmegen",
+      "home_pos": 18,
+      "away_pos": 9,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Palmeiras",
+      "away": "São Paulo",
+      "team": "Palmeiras",
+      "venue": "home",
+      "score": 64,
+      "flags": [
+        "Clássico",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 10,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Santos",
+      "away": "Cruzeiro",
+      "team": "Cruzeiro",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 6,
+      "opp_pos": 12,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Casa Pia",
+      "away": "FC Porto",
+      "team": "FC Porto",
+      "venue": "away",
+      "score": 75,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 18,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 4,
+      "hit": true
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "FC Twente",
+      "away": "ADO Den Haag",
+      "team": "FC Twente",
+      "venue": "home",
+      "score": 48,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 17,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

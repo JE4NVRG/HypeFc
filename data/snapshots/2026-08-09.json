@@ -1,0 +1,132 @@
+{
+  "date": "2026-08-09",
+  "seasons": [
+    2026
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-08-09T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Cruzeiro",
+      "away": "Mirassol",
+      "home_pos": 9,
+      "away_pos": 15,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Bahia",
+      "away": "Vasco da Gama",
+      "home_pos": 5,
+      "away_pos": 19,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Palmeiras",
+      "away": "Internacional",
+      "home_pos": 1,
+      "away_pos": 17,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Red Bull Bragantino",
+      "away": "Corinthians",
+      "home_pos": 6,
+      "away_pos": 10,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Santos",
+      "away": "Athletico-PR",
+      "home_pos": 16,
+      "away_pos": 3,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Flamengo",
+      "away": "Vitória",
+      "home_pos": 2,
+      "away_pos": 13,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Palmeiras",
+      "away": "Internacional",
+      "team": "Palmeiras",
+      "venue": "home",
+      "score": 68,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 17,
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Santos",
+      "away": "Athletico-PR",
+      "team": "Athletico-PR",
+      "venue": "away",
+      "score": 53,
+      "flags": [
+        "Forma 4V",
+        "Top 3"
+      ],
+      "pos": 3,
+      "opp_pos": 16,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Vitória",
+      "team": "Flamengo",
+      "venue": "home",
+      "score": 50,
+      "flags": [
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 13,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "date": "2025-05-12",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-05-12T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Venezia",
+      "away": "Fiorentina",
+      "home_pos": 17,
+      "away_pos": 10,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "SA",
+      "home": "Atalanta",
+      "away": "AS Roma",
+      "home_pos": 9,
+      "away_pos": 1,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Atalanta",
+      "away": "AS Roma",
+      "team": "AS Roma",
+      "venue": "away",
+      "score": 67,
+      "flags": [
+        "Boa forma",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 9,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

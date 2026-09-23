@@ -1,0 +1,93 @@
+{
+  "date": "2026-07-29",
+  "seasons": [
+    2026
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-07-29T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Internacional",
+      "away": "Flamengo",
+      "home_pos": 16,
+      "away_pos": 2,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Mirassol",
+      "away": "Remo",
+      "home_pos": 19,
+      "away_pos": 18,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Fluminense",
+      "away": "Bahia",
+      "home_pos": 4,
+      "away_pos": 6,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Vitória",
+      "away": "Palmeiras",
+      "home_pos": 13,
+      "away_pos": 1,
+      "score_home": 0,
+      "score_away": 4,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Vitória",
+      "away": "Palmeiras",
+      "team": "Palmeiras",
+      "venue": "away",
+      "score": 60,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 13,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 4,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Internacional",
+      "away": "Flamengo",
+      "team": "Flamengo",
+      "venue": "away",
+      "score": 54,
+      "flags": [
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 16,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

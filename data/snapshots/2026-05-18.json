@@ -1,0 +1,44 @@
+{
+  "date": "2026-05-18",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-05-18T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Arsenal",
+      "away": "Burnley",
+      "home_pos": 1,
+      "away_pos": 19,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Arsenal",
+      "away": "Burnley",
+      "team": "Arsenal",
+      "venue": "home",
+      "score": 61,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 19,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

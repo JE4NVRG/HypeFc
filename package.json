@@ -10,7 +10,10 @@
     "build:pages": "node scripts/build-pages.mjs",
     "deploy:pages": "node scripts/deploy-pages.mjs",
     "backtest": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/backtest-hype.ts",
-    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-hype.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-league-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-espn-parse.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-splits.ts"
+    "snapshot:hype": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/snapshot-hype.ts",
+    "settle:hype": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/settle-hype.ts",
+    "record": "npm run snapshot:hype -- --today && npm run settle:hype",
+    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-hype.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-league-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-espn-parse.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-splits.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-hype-record.ts"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.2.6",

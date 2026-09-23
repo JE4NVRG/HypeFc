@@ -1,0 +1,64 @@
+{
+  "date": "2025-09-22",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-09-22T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PPL",
+      "home": "Sporting CP",
+      "away": "Moreirense",
+      "home_pos": 4,
+      "away_pos": 5,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Sporting CP",
+      "away": "Moreirense",
+      "team": "Sporting CP",
+      "venue": "home",
+      "score": 52,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 5,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Sporting CP",
+      "away": "Moreirense",
+      "team": "Moreirense",
+      "venue": "away",
+      "score": 48,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 4,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": false
+    }
+  ]
+}

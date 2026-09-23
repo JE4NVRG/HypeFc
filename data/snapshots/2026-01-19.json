@@ -1,0 +1,64 @@
+{
+  "date": "2026-01-19",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-19T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Cremonese",
+      "away": "Hellas Verona",
+      "home_pos": 15,
+      "away_pos": 20,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "SA",
+      "home": "Lazio",
+      "away": "Como",
+      "home_pos": 9,
+      "away_pos": 6,
+      "score_home": 0,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Estrela",
+      "away": "Estoril",
+      "home_pos": 12,
+      "away_pos": 10,
+      "score_home": 0,
+      "score_away": 5,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Lazio",
+      "away": "Como",
+      "team": "Como",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 6,
+      "opp_pos": 9,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 3,
+      "hit": true
+    }
+  ]
+}

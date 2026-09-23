@@ -1,0 +1,74 @@
+{
+  "date": "2025-11-28",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-11-28T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BL1",
+      "home": "Borussia Mönchengladbach",
+      "away": "RB Leipzig",
+      "home_pos": 12,
+      "away_pos": 2,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "FL1",
+      "home": "Metz",
+      "away": "Stade Rennais",
+      "home_pos": 17,
+      "away_pos": 6,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Vitória de Guimaraes",
+      "away": "AVS",
+      "home_pos": 8,
+      "away_pos": 18,
+      "score_home": 4,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "PEC Zwolle",
+      "away": "Heerenveen",
+      "home_pos": 15,
+      "away_pos": 9,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "Borussia Mönchengladbach",
+      "away": "RB Leipzig",
+      "team": "RB Leipzig",
+      "venue": "away",
+      "score": 58,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 12,
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
+    }
+  ]
+}

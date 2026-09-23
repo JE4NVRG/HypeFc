@@ -1,0 +1,114 @@
+{
+  "date": "2026-01-14",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-14T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Napoli",
+      "away": "Parma",
+      "home_pos": 4,
+      "away_pos": 14,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "SA",
+      "home": "Internazionale",
+      "away": "Lecce",
+      "home_pos": 1,
+      "away_pos": 17,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "VfL Wolfsburg",
+      "away": "St. Pauli",
+      "home_pos": 14,
+      "away_pos": 17,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "FC Cologne",
+      "away": "Bayern Munich",
+      "home_pos": 11,
+      "away_pos": 1,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BL1",
+      "home": "RB Leipzig",
+      "away": "SC Freiburg",
+      "home_pos": 4,
+      "away_pos": 8,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "TSG Hoffenheim",
+      "away": "Borussia Mönchengladbach",
+      "home_pos": 6,
+      "away_pos": 10,
+      "score_home": 5,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Internazionale",
+      "away": "Lecce",
+      "team": "Internazionale",
+      "venue": "home",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 17,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "FC Cologne",
+      "away": "Bayern Munich",
+      "team": "Bayern Munich",
+      "venue": "away",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 11,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": true
+    }
+  ]
+}

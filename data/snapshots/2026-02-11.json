@@ -1,0 +1,123 @@
+{
+  "date": "2026-02-11",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-02-11T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Aston Villa",
+      "away": "Brighton & Hove Albion",
+      "home_pos": 3,
+      "away_pos": 14,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PL",
+      "home": "Manchester City",
+      "away": "Fulham",
+      "home_pos": 2,
+      "away_pos": 12,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PL",
+      "home": "Nottingham Forest",
+      "away": "Wolverhampton Wanderers",
+      "home_pos": 17,
+      "away_pos": 20,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Crystal Palace",
+      "away": "Burnley",
+      "home_pos": 13,
+      "away_pos": 19,
+      "score_home": 2,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PL",
+      "home": "Sunderland",
+      "away": "Liverpool",
+      "home_pos": 11,
+      "away_pos": 6,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "DED",
+      "home": "Go Ahead Eagles",
+      "away": "Heerenveen",
+      "home_pos": 14,
+      "away_pos": 12,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "DED",
+      "home": "NEC Nijmegen",
+      "away": "FC Utrecht",
+      "home_pos": 3,
+      "away_pos": 13,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Manchester City",
+      "away": "Fulham",
+      "team": "Manchester City",
+      "venue": "home",
+      "score": 54,
+      "flags": [
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 12,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "NEC Nijmegen",
+      "away": "FC Utrecht",
+      "team": "NEC Nijmegen",
+      "venue": "home",
+      "score": 61,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 13,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": false
+    }
+  ]
+}

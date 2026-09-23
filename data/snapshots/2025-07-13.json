@@ -1,0 +1,64 @@
+{
+  "date": "2025-07-13",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-07-13T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Corinthians",
+      "away": "Red Bull Bragantino",
+      "home_pos": 10,
+      "away_pos": 4,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Cruzeiro",
+      "away": "Grêmio",
+      "home_pos": 2,
+      "away_pos": 11,
+      "score_home": 4,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Fortaleza",
+      "away": "Ceará",
+      "home_pos": 18,
+      "away_pos": 12,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Cruzeiro",
+      "away": "Grêmio",
+      "team": "Cruzeiro",
+      "venue": "home",
+      "score": 57,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 11,
+      "outcome": "home",
+      "score_home": 4,
+      "score_away": 1,
+      "hit": true
+    }
+  ]
+}

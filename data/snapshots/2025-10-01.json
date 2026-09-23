@@ -1,0 +1,114 @@
+{
+  "date": "2025-10-01",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-10-01T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Mirassol",
+      "away": "Red Bull Bragantino",
+      "home_pos": 4,
+      "away_pos": 10,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Palmeiras",
+      "away": "Vasco da Gama",
+      "home_pos": 3,
+      "away_pos": 12,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Sport",
+      "away": "Fluminense",
+      "home_pos": 20,
+      "away_pos": 8,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Internacional",
+      "away": "Corinthians",
+      "home_pos": 15,
+      "away_pos": 14,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Botafogo",
+      "away": "Bahia",
+      "home_pos": 5,
+      "away_pos": 6,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Santos",
+      "away": "Grêmio",
+      "home_pos": 16,
+      "away_pos": 9,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Palmeiras",
+      "away": "Vasco da Gama",
+      "team": "Palmeiras",
+      "venue": "home",
+      "score": 50,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 12,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Mirassol",
+      "away": "Red Bull Bragantino",
+      "team": "Mirassol",
+      "venue": "home",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 10,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

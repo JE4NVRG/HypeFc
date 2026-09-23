@@ -1,0 +1,94 @@
+{
+  "date": "2025-12-08",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-12-08T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Pisa",
+      "away": "Parma",
+      "home_pos": 18,
+      "away_pos": 17,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "SA",
+      "home": "Udinese",
+      "away": "Genoa",
+      "home_pos": 11,
+      "away_pos": 16,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "SA",
+      "home": "Torino",
+      "away": "AC Milan",
+      "home_pos": 14,
+      "away_pos": 3,
+      "score_home": 2,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Vitória de Guimaraes",
+      "away": "Gil Vicente",
+      "home_pos": 8,
+      "away_pos": 4,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Torino",
+      "away": "AC Milan",
+      "team": "AC Milan",
+      "venue": "away",
+      "score": 53,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 14,
+      "outcome": "away",
+      "score_home": 2,
+      "score_away": 3,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Vitória de Guimaraes",
+      "away": "Gil Vicente",
+      "team": "Gil Vicente",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 8,
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
+    }
+  ]
+}

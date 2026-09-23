@@ -1,0 +1,44 @@
+{
+  "date": "2025-09-29",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-09-29T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PPL",
+      "home": "Arouca",
+      "away": "FC Porto",
+      "home_pos": 10,
+      "away_pos": 2,
+      "score_home": 0,
+      "score_away": 4,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Arouca",
+      "away": "FC Porto",
+      "team": "FC Porto",
+      "venue": "away",
+      "score": 69,
+      "flags": [
+        "Forma 5V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 10,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 4,
+      "hit": true
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "date": "2025-05-05",
+  "seasons": [
+    2024,
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-05-05T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Red Bull Bragantino",
+      "away": "Mirassol",
+      "home_pos": 3,
+      "away_pos": 13,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Juventude",
+      "away": "Atlético-MG",
+      "home_pos": 16,
+      "away_pos": 17,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PL",
+      "home": "Crystal Palace",
+      "away": "Nottingham Forest",
+      "home_pos": 8,
+      "away_pos": 12,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PD",
+      "home": "Girona",
+      "away": "Mallorca",
+      "home_pos": 19,
+      "away_pos": 16,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "SA",
+      "home": "Genoa",
+      "away": "AC Milan",
+      "home_pos": 12,
+      "away_pos": 9,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Rio Ave",
+      "away": "Estrela",
+      "home_pos": 14,
+      "away_pos": 15,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PPL",
+      "home": "AVS",
+      "away": "Boavista",
+      "home_pos": 17,
+      "away_pos": 18,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Red Bull Bragantino",
+      "away": "Mirassol",
+      "team": "Red Bull Bragantino",
+      "venue": "home",
+      "score": 54,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 13,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

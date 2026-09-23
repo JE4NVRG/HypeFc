@@ -1,0 +1,143 @@
+{
+  "date": "2026-04-24",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-04-24T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PD",
+      "home": "Real Betis",
+      "away": "Real Madrid",
+      "home_pos": 5,
+      "away_pos": 2,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "SA",
+      "home": "Napoli",
+      "away": "Cremonese",
+      "home_pos": 3,
+      "away_pos": 17,
+      "score_home": 4,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "RB Leipzig",
+      "away": "1. FC Union Berlin",
+      "home_pos": 3,
+      "away_pos": 11,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "FL1",
+      "home": "Brest",
+      "away": "Lens",
+      "home_pos": 12,
+      "away_pos": 2,
+      "score_home": 3,
+      "score_away": 3,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Alverca",
+      "away": "Arouca",
+      "home_pos": 10,
+      "away_pos": 11,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Real Betis",
+      "away": "Real Madrid",
+      "team": "Real Madrid",
+      "venue": "away",
+      "score": 58,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 5,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Napoli",
+      "away": "Cremonese",
+      "team": "Napoli",
+      "venue": "home",
+      "score": 46,
+      "flags": [
+        "Boa forma",
+        "Top 3"
+      ],
+      "pos": 3,
+      "opp_pos": 17,
+      "outcome": "home",
+      "score_home": 4,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "RB Leipzig",
+      "away": "1. FC Union Berlin",
+      "team": "RB Leipzig",
+      "venue": "home",
+      "score": 54,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 11,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Brest",
+      "away": "Lens",
+      "team": "Lens",
+      "venue": "away",
+      "score": 51,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 12,
+      "outcome": "draw",
+      "score_home": 3,
+      "score_away": 3,
+      "hit": false
+    }
+  ]
+}

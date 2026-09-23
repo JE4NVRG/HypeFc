@@ -1,0 +1,143 @@
+{
+  "date": "2026-03-04",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-03-04T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Aston Villa",
+      "away": "Chelsea",
+      "home_pos": 4,
+      "away_pos": 6,
+      "score_home": 1,
+      "score_away": 4,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PL",
+      "home": "Brighton & Hove Albion",
+      "away": "Arsenal",
+      "home_pos": 12,
+      "away_pos": 1,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PL",
+      "home": "Fulham",
+      "away": "West Ham United",
+      "home_pos": 10,
+      "away_pos": 18,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PL",
+      "home": "Manchester City",
+      "away": "Nottingham Forest",
+      "home_pos": 2,
+      "away_pos": 17,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Newcastle United",
+      "away": "Manchester United",
+      "home_pos": 13,
+      "away_pos": 3,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Rayo Vallecano",
+      "away": "Real Oviedo",
+      "home_pos": 15,
+      "away_pos": 20,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BL1",
+      "home": "Hamburg SV",
+      "away": "Bayer Leverkusen",
+      "home_pos": 11,
+      "away_pos": 6,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Brighton & Hove Albion",
+      "away": "Arsenal",
+      "team": "Arsenal",
+      "venue": "away",
+      "score": 67,
+      "flags": [
+        "Boa forma",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 12,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Manchester City",
+      "away": "Nottingham Forest",
+      "team": "Manchester City",
+      "venue": "home",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 17,
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Newcastle United",
+      "away": "Manchester United",
+      "team": "Manchester United",
+      "venue": "away",
+      "score": 53,
+      "flags": [
+        "Forma 4V",
+        "Top 3"
+      ],
+      "pos": 3,
+      "opp_pos": 13,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

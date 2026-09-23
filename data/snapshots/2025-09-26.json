@@ -1,0 +1,124 @@
+{
+  "date": "2025-09-26",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-09-26T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "FL1",
+      "home": "Strasbourg",
+      "away": "Marseille",
+      "home_pos": 4,
+      "away_pos": 6,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Benfica",
+      "away": "Gil Vicente",
+      "home_pos": 3,
+      "away_pos": 4,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "FC Twente",
+      "away": "Fortuna Sittard",
+      "home_pos": 11,
+      "away_pos": 6,
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Strasbourg",
+      "away": "Marseille",
+      "team": "Strasbourg",
+      "venue": "home",
+      "score": 48,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 6,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Strasbourg",
+      "away": "Marseille",
+      "team": "Marseille",
+      "venue": "away",
+      "score": 45,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 6,
+      "opp_pos": 4,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Benfica",
+      "away": "Gil Vicente",
+      "team": "Benfica",
+      "venue": "home",
+      "score": 57,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 4,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Benfica",
+      "away": "Gil Vicente",
+      "team": "Gil Vicente",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 3,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

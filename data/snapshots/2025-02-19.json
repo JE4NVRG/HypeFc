@@ -1,0 +1,44 @@
+{
+  "date": "2025-02-19",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-02-19T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Aston Villa",
+      "away": "Liverpool",
+      "home_pos": 11,
+      "away_pos": 2,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Aston Villa",
+      "away": "Liverpool",
+      "team": "Liverpool",
+      "venue": "away",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 11,
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
+    }
+  ]
+}

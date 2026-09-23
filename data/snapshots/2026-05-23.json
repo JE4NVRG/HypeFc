@@ -1,0 +1,294 @@
+{
+  "date": "2026-05-23",
+  "seasons": [
+    2025,
+    2026
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-05-23T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "São Paulo",
+      "away": "Botafogo",
+      "home_pos": 4,
+      "away_pos": 10,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Vitória",
+      "away": "Internacional",
+      "home_pos": 14,
+      "away_pos": 9,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Grêmio",
+      "away": "Santos",
+      "home_pos": 15,
+      "away_pos": 16,
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Mirassol",
+      "away": "Fluminense",
+      "home_pos": 19,
+      "away_pos": 3,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Flamengo",
+      "away": "Palmeiras",
+      "home_pos": 2,
+      "away_pos": 1,
+      "score_home": 0,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PD",
+      "home": "Alavés",
+      "away": "Rayo Vallecano",
+      "home_pos": 13,
+      "away_pos": 8,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PD",
+      "home": "Celta Vigo",
+      "away": "Sevilla",
+      "home_pos": 6,
+      "away_pos": 14,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Espanyol",
+      "away": "Real Sociedad",
+      "home_pos": 11,
+      "away_pos": 10,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PD",
+      "home": "Getafe",
+      "away": "Osasuna",
+      "home_pos": 7,
+      "away_pos": 15,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Girona",
+      "away": "Elche",
+      "home_pos": 18,
+      "away_pos": 16,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PD",
+      "home": "Mallorca",
+      "away": "Real Oviedo",
+      "home_pos": 19,
+      "away_pos": 20,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Real Betis",
+      "away": "Levante",
+      "home_pos": 5,
+      "away_pos": 17,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Real Madrid",
+      "away": "Athletic Club",
+      "home_pos": 2,
+      "away_pos": 12,
+      "score_home": 4,
+      "score_away": 2,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Valencia",
+      "away": "Barcelona",
+      "home_pos": 9,
+      "away_pos": 1,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "SA",
+      "home": "Bologna",
+      "away": "Internazionale",
+      "home_pos": 8,
+      "away_pos": 1,
+      "score_home": 3,
+      "score_away": 3,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "SA",
+      "home": "Lazio",
+      "away": "Pisa",
+      "home_pos": 9,
+      "away_pos": 20,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Palmeiras",
+      "team": "Flamengo",
+      "venue": "home",
+      "score": 79,
+      "flags": [
+        "Clássico",
+        "Boa forma",
+        "Top 3"
+      ],
+      "pos": 2,
+      "opp_pos": 1,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 3,
+      "hit": false
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Palmeiras",
+      "team": "Palmeiras",
+      "venue": "away",
+      "score": 77,
+      "flags": [
+        "Clássico",
+        "Líder",
+        "Boa forma"
+      ],
+      "pos": 1,
+      "opp_pos": 2,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 3,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Mirassol",
+      "away": "Fluminense",
+      "team": "Fluminense",
+      "venue": "away",
+      "score": 46,
+      "flags": [
+        "Boa forma",
+        "Top 3"
+      ],
+      "pos": 3,
+      "opp_pos": 19,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Valencia",
+      "away": "Barcelona",
+      "team": "Barcelona",
+      "venue": "away",
+      "score": 68,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 9,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Real Madrid",
+      "away": "Athletic Club",
+      "team": "Real Madrid",
+      "venue": "home",
+      "score": 58,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 12,
+      "outcome": "home",
+      "score_home": 4,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Bologna",
+      "away": "Internazionale",
+      "team": "Internazionale",
+      "venue": "away",
+      "score": 67,
+      "flags": [
+        "Boa forma",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 8,
+      "outcome": "draw",
+      "score_home": 3,
+      "score_away": 3,
+      "hit": false
+    }
+  ]
+}

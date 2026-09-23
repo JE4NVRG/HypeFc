@@ -1,0 +1,134 @@
+{
+  "date": "2026-03-18",
+  "seasons": [
+    2026
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-03-18T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Bahia",
+      "away": "Red Bull Bragantino",
+      "home_pos": 4,
+      "away_pos": 9,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Athletico-PR",
+      "away": "Cruzeiro",
+      "home_pos": 10,
+      "away_pos": 19,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Atlético-MG",
+      "away": "São Paulo",
+      "home_pos": 16,
+      "away_pos": 1,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Mirassol",
+      "away": "Coritiba",
+      "home_pos": 13,
+      "away_pos": 6,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Santos",
+      "away": "Internacional",
+      "home_pos": 14,
+      "away_pos": 20,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Vasco da Gama",
+      "away": "Fluminense",
+      "home_pos": 15,
+      "away_pos": 3,
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Atlético-MG",
+      "away": "São Paulo",
+      "team": "São Paulo",
+      "venue": "away",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 16,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Vasco da Gama",
+      "away": "Fluminense",
+      "team": "Fluminense",
+      "venue": "away",
+      "score": 50,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 15,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Bahia",
+      "away": "Red Bull Bragantino",
+      "team": "Bahia",
+      "venue": "home",
+      "score": 47,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 9,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

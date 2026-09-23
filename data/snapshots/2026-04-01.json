@@ -1,0 +1,114 @@
+{
+  "date": "2026-04-01",
+  "seasons": [
+    2026
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-04-01T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Botafogo",
+      "away": "Mirassol",
+      "home_pos": 18,
+      "away_pos": 17,
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Internacional",
+      "away": "São Paulo",
+      "home_pos": 12,
+      "away_pos": 3,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Bahia",
+      "away": "Athletico-PR",
+      "home_pos": 6,
+      "away_pos": 2,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Cruzeiro",
+      "away": "Vitória",
+      "home_pos": 20,
+      "away_pos": 11,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Coritiba",
+      "away": "Vasco da Gama",
+      "home_pos": 7,
+      "away_pos": 9,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Fluminense",
+      "away": "Corinthians",
+      "home_pos": 4,
+      "away_pos": 10,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Bahia",
+      "away": "Athletico-PR",
+      "team": "Athletico-PR",
+      "venue": "away",
+      "score": 54,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 6,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Internacional",
+      "away": "São Paulo",
+      "team": "São Paulo",
+      "venue": "away",
+      "score": 47,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 12,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

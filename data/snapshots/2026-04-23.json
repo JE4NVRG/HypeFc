@@ -1,0 +1,114 @@
+{
+  "date": "2026-04-23",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-04-23T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PD",
+      "home": "Levante",
+      "away": "Sevilla",
+      "home_pos": 19,
+      "away_pos": 17,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Rayo Vallecano",
+      "away": "Espanyol",
+      "home_pos": 16,
+      "away_pos": 11,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Real Oviedo",
+      "away": "Villarreal",
+      "home_pos": 20,
+      "away_pos": 3,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Casa Pia",
+      "away": "Braga",
+      "home_pos": 16,
+      "away_pos": 4,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "DED",
+      "home": "Go Ahead Eagles",
+      "away": "AZ Alkmaar",
+      "home_pos": 11,
+      "away_pos": 6,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "DED",
+      "home": "PSV Eindhoven",
+      "away": "PEC Zwolle",
+      "home_pos": 1,
+      "away_pos": 13,
+      "score_home": 6,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Real Oviedo",
+      "away": "Villarreal",
+      "team": "Villarreal",
+      "venue": "away",
+      "score": 50,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 20,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "PSV Eindhoven",
+      "away": "PEC Zwolle",
+      "team": "PSV Eindhoven",
+      "venue": "home",
+      "score": 61,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 13,
+      "outcome": "home",
+      "score_home": 6,
+      "score_away": 1,
+      "hit": true
+    }
+  ]
+}

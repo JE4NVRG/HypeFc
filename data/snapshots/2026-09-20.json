@@ -1,0 +1,461 @@
+{
+  "date": "2026-09-20",
+  "seasons": [
+    2026
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-09-20T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Grêmio",
+      "away": "Palmeiras",
+      "home_pos": 18,
+      "away_pos": 2,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Corinthians",
+      "away": "Fluminense",
+      "home_pos": 14,
+      "away_pos": 5,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Vitória",
+      "away": "Cruzeiro",
+      "home_pos": 13,
+      "away_pos": 6,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Flamengo",
+      "away": "Red Bull Bragantino",
+      "home_pos": 1,
+      "away_pos": 10,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Athletico-PR",
+      "away": "Bahia",
+      "home_pos": 3,
+      "away_pos": 4,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Getafe",
+      "away": "Málaga",
+      "home_pos": 17,
+      "away_pos": 20,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Atlético Madrid",
+      "away": "Real Madrid",
+      "home_pos": 4,
+      "away_pos": 2,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Deportivo",
+      "away": "Real Betis",
+      "home_pos": 7,
+      "away_pos": 3,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PD",
+      "home": "Villarreal",
+      "away": "Levante",
+      "home_pos": 15,
+      "away_pos": 16,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PD",
+      "home": "Valencia",
+      "away": "Real Sociedad",
+      "home_pos": 19,
+      "away_pos": 13,
+      "score_home": 2,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Estrela",
+      "away": "Académico de Viseu",
+      "home_pos": 6,
+      "away_pos": 10,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Vitória de Guimaraes",
+      "away": "Moreirense",
+      "home_pos": 14,
+      "away_pos": 13,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Estoril",
+      "away": "Casa Pia",
+      "home_pos": 17,
+      "away_pos": 18,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Santa Clara",
+      "away": "Braga",
+      "home_pos": 4,
+      "away_pos": 7,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PPL",
+      "home": "FC Porto",
+      "away": "Benfica",
+      "home_pos": 1,
+      "away_pos": 2,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "Feyenoord Rotterdam",
+      "away": "FC Utrecht",
+      "home_pos": 3,
+      "away_pos": 14,
+      "score_home": 5,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "AZ Alkmaar",
+      "away": "Telstar",
+      "home_pos": 2,
+      "away_pos": 12,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "FC Twente",
+      "away": "PSV Eindhoven",
+      "home_pos": 5,
+      "away_pos": 1,
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "NEC Nijmegen",
+      "away": "Go Ahead Eagles",
+      "home_pos": 11,
+      "away_pos": 9,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Red Bull Bragantino",
+      "team": "Flamengo",
+      "venue": "home",
+      "score": 68,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 10,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Grêmio",
+      "away": "Palmeiras",
+      "team": "Palmeiras",
+      "venue": "away",
+      "score": 50,
+      "flags": [
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 18,
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Athletico-PR",
+      "away": "Bahia",
+      "team": "Bahia",
+      "venue": "away",
+      "score": 47,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 4,
+      "opp_pos": 3,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Atlético Madrid",
+      "away": "Real Madrid",
+      "team": "Real Madrid",
+      "venue": "away",
+      "score": 80,
+      "flags": [
+        "Clássico",
+        "Forma 4V",
+        "Top 3"
+      ],
+      "pos": 2,
+      "opp_pos": 4,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Atlético Madrid",
+      "away": "Real Madrid",
+      "team": "Atlético Madrid",
+      "venue": "home",
+      "score": 66,
+      "flags": [
+        "Clássico",
+        "Boa forma",
+        "Zona alta"
+      ],
+      "pos": 4,
+      "opp_pos": 2,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Deportivo",
+      "away": "Real Betis",
+      "team": "Real Betis",
+      "venue": "away",
+      "score": 50,
+      "flags": [
+        "Forma 4V",
+        "Top 3"
+      ],
+      "pos": 3,
+      "opp_pos": 7,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "FC Porto",
+      "away": "Benfica",
+      "team": "FC Porto",
+      "venue": "home",
+      "score": 93,
+      "flags": [
+        "Clássico",
+        "Forma 5V",
+        "Líder"
+      ],
+      "pos": 1,
+      "opp_pos": 2,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "FC Porto",
+      "away": "Benfica",
+      "team": "Benfica",
+      "venue": "away",
+      "score": 87,
+      "flags": [
+        "Clássico",
+        "Forma 5V",
+        "Top 3"
+      ],
+      "pos": 2,
+      "opp_pos": 1,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Santa Clara",
+      "away": "Braga",
+      "team": "Santa Clara",
+      "venue": "home",
+      "score": 55,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 7,
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "FC Twente",
+      "away": "PSV Eindhoven",
+      "team": "PSV Eindhoven",
+      "venue": "away",
+      "score": 75,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 5,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "AZ Alkmaar",
+      "away": "Telstar",
+      "team": "AZ Alkmaar",
+      "venue": "home",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 12,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "Feyenoord Rotterdam",
+      "away": "FC Utrecht",
+      "team": "Feyenoord Rotterdam",
+      "venue": "home",
+      "score": 57,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 14,
+      "outcome": "home",
+      "score_home": 5,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "FC Twente",
+      "away": "PSV Eindhoven",
+      "team": "FC Twente",
+      "venue": "home",
+      "score": 55,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 1,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 2,
+      "hit": true
+    }
+  ]
+}

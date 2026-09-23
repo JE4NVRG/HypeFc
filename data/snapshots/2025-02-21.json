@@ -1,0 +1,44 @@
+{
+  "date": "2025-02-21",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-02-21T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PPL",
+      "home": "Braga",
+      "away": "C.D. Nacional",
+      "home_pos": 1,
+      "away_pos": 6,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Braga",
+      "away": "C.D. Nacional",
+      "team": "Braga",
+      "venue": "home",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 6,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

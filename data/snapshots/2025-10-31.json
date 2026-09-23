@@ -1,0 +1,104 @@
+{
+  "date": "2025-10-31",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-10-31T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BL1",
+      "home": "FC Augsburg",
+      "away": "Borussia Dortmund",
+      "home_pos": 15,
+      "away_pos": 4,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Sporting CP",
+      "away": "Alverca",
+      "home_pos": 2,
+      "away_pos": 12,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "PSV Eindhoven",
+      "away": "Fortuna Sittard",
+      "home_pos": 2,
+      "away_pos": 12,
+      "score_home": 5,
+      "score_away": 2,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "FC Augsburg",
+      "away": "Borussia Dortmund",
+      "team": "Borussia Dortmund",
+      "venue": "away",
+      "score": 48,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 15,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Sporting CP",
+      "away": "Alverca",
+      "team": "Sporting CP",
+      "venue": "home",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 12,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "PSV Eindhoven",
+      "away": "Fortuna Sittard",
+      "team": "PSV Eindhoven",
+      "venue": "home",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 12,
+      "outcome": "home",
+      "score_home": 5,
+      "score_away": 2,
+      "hit": true
+    }
+  ]
+}

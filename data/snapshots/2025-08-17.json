@@ -1,0 +1,93 @@
+{
+  "date": "2025-08-17",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-08-17T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Atlético-MG",
+      "away": "Grêmio",
+      "home_pos": 11,
+      "away_pos": 15,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Santos",
+      "away": "Vasco da Gama",
+      "home_pos": 14,
+      "away_pos": 17,
+      "score_home": 0,
+      "score_away": 6,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Internacional",
+      "away": "Flamengo",
+      "home_pos": 12,
+      "away_pos": 1,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Botafogo",
+      "away": "Palmeiras",
+      "home_pos": 5,
+      "away_pos": 3,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Internacional",
+      "away": "Flamengo",
+      "team": "Flamengo",
+      "venue": "away",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 12,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Botafogo",
+      "away": "Palmeiras",
+      "team": "Palmeiras",
+      "venue": "away",
+      "score": 53,
+      "flags": [
+        "Forma 4V",
+        "Top 3"
+      ],
+      "pos": 3,
+      "opp_pos": 5,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    }
+  ]
+}

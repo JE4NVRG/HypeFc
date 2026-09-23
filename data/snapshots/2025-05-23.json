@@ -1,0 +1,54 @@
+{
+  "date": "2025-05-23",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-05-23T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Como",
+      "away": "Internazionale",
+      "home_pos": 8,
+      "away_pos": 3,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "SA",
+      "home": "Napoli",
+      "away": "Cagliari",
+      "home_pos": 2,
+      "away_pos": 12,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Napoli",
+      "away": "Cagliari",
+      "team": "Napoli",
+      "venue": "home",
+      "score": 57,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 12,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

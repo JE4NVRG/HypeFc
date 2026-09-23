@@ -1,0 +1,74 @@
+{
+  "date": "2025-11-15",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-11-15T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Sport",
+      "away": "Flamengo",
+      "home_pos": 20,
+      "away_pos": 1,
+      "score_home": 1,
+      "score_away": 5,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Santos",
+      "away": "Palmeiras",
+      "home_pos": 17,
+      "away_pos": 2,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Santos",
+      "away": "Palmeiras",
+      "team": "Palmeiras",
+      "venue": "away",
+      "score": 65,
+      "flags": [
+        "Clássico",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 17,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Sport",
+      "away": "Flamengo",
+      "team": "Flamengo",
+      "venue": "away",
+      "score": 64,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 20,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 5,
+      "hit": true
+    }
+  ]
+}

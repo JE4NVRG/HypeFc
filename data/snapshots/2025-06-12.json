@@ -1,0 +1,114 @@
+{
+  "date": "2025-06-12",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-06-12T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Red Bull Bragantino",
+      "away": "Bahia",
+      "home_pos": 3,
+      "away_pos": 7,
+      "score_home": 0,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Vitória",
+      "away": "Cruzeiro",
+      "home_pos": 16,
+      "away_pos": 2,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Fortaleza",
+      "away": "Santos",
+      "home_pos": 17,
+      "away_pos": 18,
+      "score_home": 2,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Grêmio",
+      "away": "Corinthians",
+      "home_pos": 12,
+      "away_pos": 11,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Atlético-MG",
+      "away": "Internacional",
+      "home_pos": 9,
+      "away_pos": 14,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "São Paulo",
+      "away": "Vasco da Gama",
+      "home_pos": 13,
+      "away_pos": 15,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Vitória",
+      "away": "Cruzeiro",
+      "team": "Cruzeiro",
+      "venue": "away",
+      "score": 61,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 16,
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Red Bull Bragantino",
+      "away": "Bahia",
+      "team": "Red Bull Bragantino",
+      "venue": "home",
+      "score": 50,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 7,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 3,
+      "hit": false
+    }
+  ]
+}

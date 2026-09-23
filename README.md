@@ -115,49 +115,82 @@ para o score não derivar sem alguém perceber.
 #### O score acerta? (medido, não assumido)
 
 Peso escolhido no olho não vale nada até ser testado contra resultado. O
-`npm run backtest` reconstrói a temporada 2026 das 8 ligas com ESPN, anda jogo a
+`npm run backtest` reconstrói a temporada das 8 ligas com ESPN, anda jogo a
 jogo **em ordem de data** e, antes de cada partida, monta a tabela só com o que
 já aconteceu e chama o `buildHypeBoard()` real do produto. Depois compara com o
 placar. Nada do jogo avaliado entra na conta — sem isso o teste se engana
-sozinho.
+sozinho. **A tabela zera na virada de temporada** (a ESPN informa o ano da
+temporada): `dates=<ano>` devolve o ano-calendário, e na Europa ele carrega dois
+campeonatos — no `eng.1`, 194 jogos da temporada 2025 e 180 da 2026.
 
-Amostra: **1.923 jogos finalizados, 1.440 elegíveis** (os dois times com pelo
-menos 5 jogos de histórico). Baseline nesses mesmos jogos: casa vence 43,5%,
-empate 26,1%, fora 30,3%.
+Amostra: **1.923 jogos finalizados, 1.203 elegíveis** (os dois times com pelo
+menos 5 jogos de histórico). Baseline nesses mesmos jogos: casa vence 44,1%,
+empate 26,3%, fora 29,7%.
 
 | Corte | Vence | Amostra |
 |---|---|---|
-| Só um lado marcado (score ≥ 28) | 48,3% | 700 |
-| ↳ marcado **em casa** | 57,6% (baseline 43,5%, **+14,1pp**) | 321 |
-| ↳ marcado **fora** | 40,4% (baseline 30,3%, **+10,0pp**) | 379 |
+| Só um lado marcado (score ≥ 44) | 53,7% | 367 |
+| ↳ marcado **em casa** | 64,4% (baseline 44,1%, **+20,4pp**) | 177 |
+| ↳ marcado **fora** | 43,7% (baseline 29,7%, **+14,0pp**) | 190 |
 
 O lift é positivo dos dois lados, então o que mexe não é só o mando de campo.
-E o score é monotônico — quanto maior, melhor a taxa:
+E o score é monotônico — quanto maior, melhor a taxa (números do recorde
+completo, 1.402 cards):
 
 | Faixa de score | Vence | Amostra |
 |---|---|---|
-| 28-39 | 39,0% | 369 |
-| 40-54 | 50,7% | 203 |
-| 55+ | **71,1%** | 128 |
+| 40-54 | 46,9% | 668 |
+| 55+ | **59,7%** | 734 |
 
-Quando os **dois** lados são marcados (n=345): o de maior score vence 42,9%,
-empate 31,9%, o de menor score vence 25,2% — o favorito ganha 1,7x mais.
+**O limite, que é o achado mais útil:** o time marcado quase sempre é o **melhor
+colocado** da tabela, então comparar com a média crua do mando infla o ganho.
+A comparação honesta é com uma âncora que não sabe nada de hype: *quanto vence
+um melhor colocado qualquer?*
 
-**O limite, que é o achado mais útil:** separei por posição relativa ao
-adversário para não confundir "time bom" com "hype".
-
-| Situação | Vence | Esperado | Lift | Amostra |
+| Comparação | Vence | Esperado | Ganho | Amostra |
 |---|---|---|---|---|
-| Marcado **melhor** colocado | 50,9% | 36,5% | **+14,4pp** | 638 |
-| Marcado **pior** colocado | 21,0% | 35,0% | **−14,1pp** | 62 |
+| Marcado, vs média do mando | 53,6% | 37,0% | +16,6pp | 1.402 |
+| **Marcado, vs melhor colocado** | 53,6% | 48,6% | **+5,0pp** | 1.402 |
+| Ancoragem: melhor colocado vence | 48,8% | — | — | 3.236 jogos |
+| Marcado **melhor** colocado | 56,9% | — | — | 1.235 |
+| Marcado **pior** colocado | 28,7% | — | — | 167 |
 
-Leitura honesta: o score identifica bem **time forte em boa fase** — e nisso é
-confiável. Ele **não** acha zebra: quando o painel marca um time pior colocado
-que o adversário, esse time perdeu mais do que a média do mando. Serve como
-termômetro de quem está quente, **não** como sinal de aposta. Preferi publicar o
-número negativo a esconder: é ele que diz o que o produto não é.
+Leitura honesta: o score confirma **time forte em boa fase** e rende pouco além
+disso — **+5pp** sobre "apostar no melhor colocado", não os +16pp que a
+comparação fraca sugere. Ele também **quase nunca marca o azarão** (no corte 44,
+apenas 8 cards de 367 na temporada 2026): não descobre zebra. Serve como
+termômetro de quem está quente, **não** como sinal de aposta.
+
+> Correção registrada: a primeira versão publicada aqui dizia "marcado pior
+> colocado: −14,1pp (n=62)". Aquele número saiu de um replay que **não zerava a
+> tabela na virada de temporada**, e o viés vinha do estado somado de duas
+> temporadas europeias. Com o replay correto o balde caiu para n=8 na temporada
+> 2026 (e 167 no recorde de 2 temporadas) — o achado qualitativo sobreviveu, o
+> número não. Fica o registro em vez do número antigo.
 
 Reproduza com `npm run backtest`.
+
+### Recorde público (histórico versionado)
+
+Rodada a rodada o painel grava o que marcou **antes** dos jogos, em
+`data/snapshots/<data>.json`, com o contexto daquele momento. O que a tela mostra
+na seção "Recorde público" sai de `public/data/hype-record.json`, gerado a partir
+desses snapshots.
+
+| Comando | O que faz |
+|---|---|
+| `npm run snapshot:hype` | reconstrói a temporada por replay (modo `replay`) |
+| `npm run snapshot:hype -- --today` | grava a rodada de hoje antes dos jogos (modo `live`) |
+| `npm run settle:hype` | liquida os resultados pendentes e republica o recorde |
+| `npm run record` | os dois: grava a rodada de hoje e liquida |
+
+Cada snapshot carrega o modo, e o recorde mostra a contagem separada: `replay`
+foi reconstruído depois com o mesmo código do produto (sem lookahead), `live` foi
+gravado antes da bola rolar. São coisas diferentes e o painel não as mistura.
+
+O recorde também publica a **âncora**: quanto vence um time melhor colocado sem
+hype nenhum nesses mesmos jogos. É a comparação que impede o número bonito — ver
+a seção acima.
 
 ### Classificacao Completa
 Tabela de qualquer liga com indicadores visuais de zona: Champions League (verde), Europa League (azul) e rebaixamento (vermelho). Alterna entre 10+ competicoes com um clique.

@@ -1,0 +1,44 @@
+{
+  "date": "2025-11-03",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-11-03T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PPL",
+      "home": "Gil Vicente",
+      "away": "Santa Clara",
+      "home_pos": 4,
+      "away_pos": 8,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Gil Vicente",
+      "away": "Santa Clara",
+      "team": "Gil Vicente",
+      "venue": "home",
+      "score": 52,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 8,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

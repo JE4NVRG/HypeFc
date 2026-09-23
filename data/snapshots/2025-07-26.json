@@ -1,0 +1,84 @@
+{
+  "date": "2025-07-26",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-07-26T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Botafogo",
+      "away": "Corinthians",
+      "home_pos": 5,
+      "away_pos": 11,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Fortaleza",
+      "away": "Red Bull Bragantino",
+      "home_pos": 18,
+      "away_pos": 4,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Mirassol",
+      "away": "Vitória",
+      "home_pos": 7,
+      "away_pos": 15,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Sport",
+      "away": "Santos",
+      "home_pos": 20,
+      "away_pos": 17,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Palmeiras",
+      "away": "Grêmio",
+      "home_pos": 3,
+      "away_pos": 14,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Botafogo",
+      "away": "Corinthians",
+      "team": "Botafogo",
+      "venue": "home",
+      "score": 51,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 11,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

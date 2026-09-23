@@ -1,0 +1,53 @@
+{
+  "date": "2026-05-21",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-05-21T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "DED",
+      "home": "Ajax Amsterdam",
+      "away": "FC Groningen",
+      "home_pos": 5,
+      "away_pos": 9,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "DED",
+      "home": "FC Utrecht",
+      "away": "Heerenveen",
+      "home_pos": 6,
+      "away_pos": 8,
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "FC Utrecht",
+      "away": "Heerenveen",
+      "team": "FC Utrecht",
+      "venue": "home",
+      "score": 44,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 6,
+      "opp_pos": 8,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 2,
+      "hit": true
+    }
+  ]
+}

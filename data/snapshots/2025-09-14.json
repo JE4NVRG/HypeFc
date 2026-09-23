@@ -1,0 +1,84 @@
+{
+  "date": "2025-09-14",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-09-14T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Red Bull Bragantino",
+      "away": "Sport",
+      "home_pos": 8,
+      "away_pos": 20,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Atlético-MG",
+      "away": "Santos",
+      "home_pos": 14,
+      "away_pos": 16,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Juventude",
+      "away": "Flamengo",
+      "home_pos": 18,
+      "away_pos": 1,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "São Paulo",
+      "away": "Botafogo",
+      "home_pos": 7,
+      "away_pos": 6,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Vasco da Gama",
+      "away": "Ceará",
+      "home_pos": 15,
+      "away_pos": 12,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Juventude",
+      "away": "Flamengo",
+      "team": "Flamengo",
+      "venue": "away",
+      "score": 67,
+      "flags": [
+        "Boa forma",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 18,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": true
+    }
+  ]
+}

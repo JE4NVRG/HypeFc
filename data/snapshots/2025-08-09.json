@@ -1,0 +1,104 @@
+{
+  "date": "2025-08-09",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-08-09T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Flamengo",
+      "away": "Mirassol",
+      "home_pos": 1,
+      "away_pos": 5,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Red Bull Bragantino",
+      "away": "Internacional",
+      "home_pos": 6,
+      "away_pos": 13,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "São Paulo",
+      "away": "Vitória",
+      "home_pos": 8,
+      "away_pos": 16,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Fortaleza",
+      "away": "Botafogo",
+      "home_pos": 18,
+      "away_pos": 7,
+      "score_home": 0,
+      "score_away": 5,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Bahia",
+      "away": "Fluminense",
+      "home_pos": 4,
+      "away_pos": 10,
+      "score_home": 3,
+      "score_away": 3,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Mirassol",
+      "team": "Flamengo",
+      "venue": "home",
+      "score": 64,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 5,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Mirassol",
+      "team": "Mirassol",
+      "venue": "away",
+      "score": 47,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 1,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

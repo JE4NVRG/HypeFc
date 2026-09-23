@@ -1,0 +1,73 @@
+{
+  "date": "2025-07-19",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-07-19T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Fortaleza",
+      "away": "Bahia",
+      "home_pos": 19,
+      "away_pos": 4,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Vasco da Gama",
+      "away": "Grêmio",
+      "home_pos": 15,
+      "away_pos": 12,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Mirassol",
+      "away": "Santos",
+      "home_pos": 10,
+      "away_pos": 13,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "São Paulo",
+      "away": "Corinthians",
+      "home_pos": 16,
+      "away_pos": 9,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Fortaleza",
+      "away": "Bahia",
+      "team": "Bahia",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 4,
+      "opp_pos": 19,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "date": "2025-03-14",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-03-14T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "FL1",
+      "home": "Nice",
+      "away": "AJ Auxerre",
+      "home_pos": 3,
+      "away_pos": 13,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "DED",
+      "home": "Almere City",
+      "away": "NAC Breda",
+      "home_pos": 17,
+      "away_pos": 16,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Nice",
+      "away": "AJ Auxerre",
+      "team": "Nice",
+      "venue": "home",
+      "score": 58,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 13,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

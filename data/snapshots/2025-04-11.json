@@ -1,0 +1,54 @@
+{
+  "date": "2025-04-11",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-04-11T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PPL",
+      "home": "Gil Vicente",
+      "away": "Vitória de Guimaraes",
+      "home_pos": 16,
+      "away_pos": 5,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "DED",
+      "home": "NEC Nijmegen",
+      "away": "RKC Waalwijk",
+      "home_pos": 13,
+      "away_pos": 14,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Gil Vicente",
+      "away": "Vitória de Guimaraes",
+      "team": "Vitória de Guimaraes",
+      "venue": "away",
+      "score": 51,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 16,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    }
+  ]
+}

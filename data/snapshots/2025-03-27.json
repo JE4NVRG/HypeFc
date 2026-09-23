@@ -1,0 +1,44 @@
+{
+  "date": "2025-03-27",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-03-27T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PD",
+      "home": "Barcelona",
+      "away": "Osasuna",
+      "home_pos": 1,
+      "away_pos": 18,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Barcelona",
+      "away": "Osasuna",
+      "team": "Barcelona",
+      "venue": "home",
+      "score": 75,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 18,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "date": "2025-12-23",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-12-23T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PPL",
+      "home": "Vitória de Guimaraes",
+      "away": "Sporting CP",
+      "home_pos": 7,
+      "away_pos": 2,
+      "score_home": 1,
+      "score_away": 4,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Vitória de Guimaraes",
+      "away": "Sporting CP",
+      "team": "Sporting CP",
+      "venue": "away",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 7,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 4,
+      "hit": true
+    }
+  ]
+}

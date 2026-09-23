@@ -1,0 +1,44 @@
+{
+  "date": "2025-02-06",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-02-06T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Fiorentina",
+      "away": "Internazionale",
+      "home_pos": 11,
+      "away_pos": 2,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Fiorentina",
+      "away": "Internazionale",
+      "team": "Internazionale",
+      "venue": "away",
+      "score": 61,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 11,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": false
+    }
+  ]
+}

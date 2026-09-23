@@ -1,0 +1,94 @@
+{
+  "date": "2025-04-04",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-04-04T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BL1",
+      "home": "FC Augsburg",
+      "away": "Bayern Munich",
+      "home_pos": 3,
+      "away_pos": 1,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "FL1",
+      "home": "Nice",
+      "away": "Nantes",
+      "home_pos": 3,
+      "away_pos": 14,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "AVS",
+      "away": "Estoril",
+      "home_pos": 14,
+      "away_pos": 4,
+      "score_home": 0,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "DED",
+      "home": "Heerenveen",
+      "away": "Willem II",
+      "home_pos": 14,
+      "away_pos": 18,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "FC Augsburg",
+      "away": "Bayern Munich",
+      "team": "Bayern Munich",
+      "venue": "away",
+      "score": 64,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 3,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": true
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "FC Augsburg",
+      "away": "Bayern Munich",
+      "team": "FC Augsburg",
+      "venue": "home",
+      "score": 53,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 1,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": false
+    }
+  ]
+}

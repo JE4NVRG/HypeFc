@@ -1,0 +1,74 @@
+{
+  "date": "2025-12-19",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-12-19T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BL1",
+      "home": "Borussia Dortmund",
+      "away": "Borussia Mönchengladbach",
+      "home_pos": 3,
+      "away_pos": 11,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Estoril",
+      "away": "Braga",
+      "home_pos": 13,
+      "away_pos": 4,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "Borussia Dortmund",
+      "away": "Borussia Mönchengladbach",
+      "team": "Borussia Dortmund",
+      "venue": "home",
+      "score": 49,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 11,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Estoril",
+      "away": "Braga",
+      "team": "Braga",
+      "venue": "away",
+      "score": 52,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 13,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": false
+    }
+  ]
+}

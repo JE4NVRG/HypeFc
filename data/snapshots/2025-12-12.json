@@ -1,0 +1,54 @@
+{
+  "date": "2025-12-12",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-12-12T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BL1",
+      "home": "1. FC Union Berlin",
+      "away": "RB Leipzig",
+      "home_pos": 12,
+      "away_pos": 2,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "FL1",
+      "home": "Angers",
+      "away": "Nantes",
+      "home_pos": 11,
+      "away_pos": 17,
+      "score_home": 4,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "1. FC Union Berlin",
+      "away": "RB Leipzig",
+      "team": "RB Leipzig",
+      "venue": "away",
+      "score": 58,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 12,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "date": "2026-04-13",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-04-13T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Manchester United",
+      "away": "Leeds United",
+      "home_pos": 3,
+      "away_pos": 15,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PD",
+      "home": "Levante",
+      "away": "Getafe",
+      "home_pos": 20,
+      "away_pos": 8,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "SA",
+      "home": "Fiorentina",
+      "away": "Lazio",
+      "home_pos": 16,
+      "away_pos": 9,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Tondela",
+      "away": "Gil Vicente",
+      "home_pos": 17,
+      "away_pos": 6,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Manchester United",
+      "away": "Leeds United",
+      "team": "Manchester United",
+      "venue": "home",
+      "score": 46,
+      "flags": [
+        "Boa forma",
+        "Top 3"
+      ],
+      "pos": 3,
+      "opp_pos": 15,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 2,
+      "hit": false
+    }
+  ]
+}

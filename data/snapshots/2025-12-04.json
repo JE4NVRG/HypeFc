@@ -1,0 +1,54 @@
+{
+  "date": "2025-12-04",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-12-04T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Cruzeiro",
+      "away": "Botafogo",
+      "home_pos": 3,
+      "away_pos": 7,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Manchester United",
+      "away": "West Ham United",
+      "home_pos": 9,
+      "away_pos": 18,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Cruzeiro",
+      "away": "Botafogo",
+      "team": "Cruzeiro",
+      "venue": "home",
+      "score": 49,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 7,
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
+    }
+  ]
+}

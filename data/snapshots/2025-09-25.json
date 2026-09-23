@@ -1,0 +1,54 @@
+{
+  "date": "2025-09-25",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-09-25T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PD",
+      "home": "Osasuna",
+      "away": "Elche",
+      "home_pos": 13,
+      "away_pos": 7,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PD",
+      "home": "Real Oviedo",
+      "away": "Barcelona",
+      "home_pos": 18,
+      "away_pos": 2,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Real Oviedo",
+      "away": "Barcelona",
+      "team": "Barcelona",
+      "venue": "away",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 18,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": true
+    }
+  ]
+}

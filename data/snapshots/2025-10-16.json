@@ -1,0 +1,63 @@
+{
+  "date": "2025-10-16",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-10-16T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Grêmio",
+      "away": "São Paulo",
+      "home_pos": 13,
+      "away_pos": 7,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Fluminense",
+      "away": "Juventude",
+      "home_pos": 8,
+      "away_pos": 19,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Vitória",
+      "away": "Bahia",
+      "home_pos": 17,
+      "away_pos": 6,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Vitória",
+      "away": "Bahia",
+      "team": "Bahia",
+      "venue": "away",
+      "score": 51,
+      "flags": [
+        "Clássico",
+        "Zona alta"
+      ],
+      "pos": 6,
+      "opp_pos": 17,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

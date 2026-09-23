@@ -1,0 +1,54 @@
+{
+  "date": "2025-12-01",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-12-01T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "SA",
+      "home": "Bologna",
+      "away": "Cremonese",
+      "home_pos": 5,
+      "away_pos": 12,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Arouca",
+      "away": "Braga",
+      "home_pos": 17,
+      "away_pos": 8,
+      "score_home": 0,
+      "score_away": 4,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Bologna",
+      "away": "Cremonese",
+      "team": "Bologna",
+      "venue": "home",
+      "score": 51,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 12,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": false
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "date": "2025-08-02",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-08-02T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Sport",
+      "away": "Bahia",
+      "home_pos": 20,
+      "away_pos": 4,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Mirassol",
+      "away": "Vasco da Gama",
+      "home_pos": 7,
+      "away_pos": 16,
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Fluminense",
+      "away": "Grêmio",
+      "home_pos": 13,
+      "away_pos": 14,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Sport",
+      "away": "Bahia",
+      "team": "Bahia",
+      "venue": "away",
+      "score": 47,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 4,
+      "opp_pos": 20,
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
+    }
+  ]
+}

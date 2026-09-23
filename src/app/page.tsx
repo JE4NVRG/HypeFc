@@ -7,6 +7,7 @@ import { TodayMatches } from '@/components/dashboard/TodayMatches'
 import { HypeFlags } from '@/components/dashboard/HypeFlags'
 import { LeagueStandings } from '@/components/dashboard/LeagueStandings'
 import { LeagueIntel } from '@/components/dashboard/LeagueIntel'
+import { HypeRecord } from '@/components/dashboard/HypeRecord'
 import { TopScorers } from '@/components/dashboard/TopScorers'
 import { DashboardFooter } from '@/components/dashboard/DashboardFooter'
 
@@ -98,6 +99,10 @@ export default function Home() {
           leagueName={standingsData?.league_name ?? ''}
           loading={loadingStandings}
         />
+
+        <div className="mt-3">
+          <HypeRecord />
+        </div>
       </main>
 
       <DashboardFooter source={todayData?.source} />

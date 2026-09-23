@@ -1,0 +1,112 @@
+{
+  "date": "2026-08-23",
+  "seasons": [
+    2026
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-08-23T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Palmeiras",
+      "away": "Vasco da Gama",
+      "home_pos": 1,
+      "away_pos": 19,
+      "score_home": 4,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Red Bull Bragantino",
+      "away": "Grêmio",
+      "home_pos": 8,
+      "away_pos": 16,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Vitória",
+      "away": "Bahia",
+      "home_pos": 12,
+      "away_pos": 6,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Chapecoense",
+      "away": "São Paulo",
+      "home_pos": 20,
+      "away_pos": 13,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Santos",
+      "away": "Mirassol",
+      "home_pos": 14,
+      "away_pos": 17,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Coritiba",
+      "away": "Corinthians",
+      "home_pos": 10,
+      "away_pos": 9,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Palmeiras",
+      "away": "Vasco da Gama",
+      "team": "Palmeiras",
+      "venue": "home",
+      "score": 53,
+      "flags": [
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 19,
+      "outcome": "home",
+      "score_home": 4,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Vitória",
+      "away": "Bahia",
+      "team": "Bahia",
+      "venue": "away",
+      "score": 49,
+      "flags": [
+        "Clássico",
+        "Zona alta"
+      ],
+      "pos": 6,
+      "opp_pos": 12,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": true
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "date": "2026-01-09",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-09T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BL1",
+      "home": "Eintracht Frankfurt",
+      "away": "Borussia Dortmund",
+      "home_pos": 7,
+      "away_pos": 2,
+      "score_home": 3,
+      "score_away": 3,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "Eintracht Frankfurt",
+      "away": "Borussia Dortmund",
+      "team": "Borussia Dortmund",
+      "venue": "away",
+      "score": 57,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 7,
+      "outcome": "draw",
+      "score_home": 3,
+      "score_away": 3,
+      "hit": false
+    }
+  ]
+}

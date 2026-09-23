@@ -1,0 +1,73 @@
+{
+  "date": "2026-03-03",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-03-03T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "AFC Bournemouth",
+      "away": "Brentford",
+      "home_pos": 10,
+      "away_pos": 7,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Everton",
+      "away": "Burnley",
+      "home_pos": 8,
+      "away_pos": 19,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PL",
+      "home": "Leeds United",
+      "away": "Sunderland",
+      "home_pos": 15,
+      "away_pos": 12,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PL",
+      "home": "Wolverhampton Wanderers",
+      "away": "Liverpool",
+      "home_pos": 20,
+      "away_pos": 5,
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Wolverhampton Wanderers",
+      "away": "Liverpool",
+      "team": "Liverpool",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 5,
+      "opp_pos": 20,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

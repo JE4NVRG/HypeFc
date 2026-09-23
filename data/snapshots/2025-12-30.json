@@ -1,0 +1,114 @@
+{
+  "date": "2025-12-30",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-12-30T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Burnley",
+      "away": "Newcastle United",
+      "home_pos": 19,
+      "away_pos": 14,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PL",
+      "home": "Chelsea",
+      "away": "AFC Bournemouth",
+      "home_pos": 5,
+      "away_pos": 15,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Nottingham Forest",
+      "away": "Everton",
+      "home_pos": 17,
+      "away_pos": 12,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PL",
+      "home": "West Ham United",
+      "away": "Brighton & Hove Albion",
+      "home_pos": 18,
+      "away_pos": 13,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Arsenal",
+      "away": "Aston Villa",
+      "home_pos": 1,
+      "away_pos": 3,
+      "score_home": 4,
+      "score_away": 1,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PL",
+      "home": "Manchester United",
+      "away": "Wolverhampton Wanderers",
+      "home_pos": 6,
+      "away_pos": 20,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Arsenal",
+      "away": "Aston Villa",
+      "team": "Arsenal",
+      "venue": "home",
+      "score": 68,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 3,
+      "outcome": "home",
+      "score_home": 4,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Arsenal",
+      "away": "Aston Villa",
+      "team": "Aston Villa",
+      "venue": "away",
+      "score": 61,
+      "flags": [
+        "Forma 5V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 1,
+      "outcome": "home",
+      "score_home": 4,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

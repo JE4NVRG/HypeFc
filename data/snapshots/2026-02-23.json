@@ -1,0 +1,83 @@
+{
+  "date": "2026-02-23",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-02-23T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Everton",
+      "away": "Manchester United",
+      "home_pos": 9,
+      "away_pos": 5,
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
+    },
+    {
+      "league_id": "PD",
+      "home": "Alavés",
+      "away": "Girona",
+      "home_pos": 15,
+      "away_pos": 13,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "SA",
+      "home": "Fiorentina",
+      "away": "Pisa",
+      "home_pos": 18,
+      "away_pos": 19,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "SA",
+      "home": "Bologna",
+      "away": "Udinese",
+      "home_pos": 10,
+      "away_pos": 11,
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PPL",
+      "home": "FC Famalicao",
+      "away": "Casa Pia",
+      "home_pos": 8,
+      "away_pos": 13,
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Everton",
+      "away": "Manchester United",
+      "team": "Manchester United",
+      "venue": "away",
+      "score": 47,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 5,
+      "opp_pos": 9,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    }
+  ]
+}

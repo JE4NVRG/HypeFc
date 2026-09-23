@@ -1,0 +1,64 @@
+{
+  "date": "2025-10-17",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-10-17T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "FL1",
+      "home": "Paris Saint-Germain",
+      "away": "Strasbourg",
+      "home_pos": 1,
+      "away_pos": 3,
+      "score_home": 3,
+      "score_away": 3,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Paris Saint-Germain",
+      "away": "Strasbourg",
+      "team": "Paris Saint-Germain",
+      "venue": "home",
+      "score": 64,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 3,
+      "outcome": "draw",
+      "score_home": 3,
+      "score_away": 3,
+      "hit": false
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Paris Saint-Germain",
+      "away": "Strasbourg",
+      "team": "Strasbourg",
+      "venue": "away",
+      "score": 51,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 1,
+      "outcome": "draw",
+      "score_home": 3,
+      "score_away": 3,
+      "hit": false
+    }
+  ]
+}

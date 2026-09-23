@@ -1,0 +1,93 @@
+{
+  "date": "2026-07-22",
+  "seasons": [
+    2026
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-07-22T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Coritiba",
+      "away": "Palmeiras",
+      "home_pos": 7,
+      "away_pos": 1,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Chapecoense",
+      "away": "Flamengo",
+      "home_pos": 20,
+      "away_pos": 2,
+      "score_home": 0,
+      "score_away": 4,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Internacional",
+      "away": "Cruzeiro",
+      "home_pos": 14,
+      "away_pos": 13,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    },
+    {
+      "league_id": "BSA",
+      "home": "São Paulo",
+      "away": "Athletico-PR",
+      "home_pos": 8,
+      "away_pos": 5,
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Coritiba",
+      "away": "Palmeiras",
+      "team": "Palmeiras",
+      "venue": "away",
+      "score": 59,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 7,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Chapecoense",
+      "away": "Flamengo",
+      "team": "Flamengo",
+      "venue": "away",
+      "score": 50,
+      "flags": [
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 20,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 4,
+      "hit": true
+    }
+  ]
+}

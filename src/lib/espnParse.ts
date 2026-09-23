@@ -89,6 +89,12 @@ export interface EspnMatch {
   away_position: number | null
   /** ISO do inicio. Necessario para ordenar historico (a busca por temporada traz varios dias). */
   date?: string | null
+  /**
+   * Ano da temporada segundo a ESPN. `dates=<ano>` devolve o calendario inteiro,
+   * que na Europa contem duas temporadas (194 jogos de 2025 e 180 de 2026 no
+   * mesmo `dates=2026` do eng.1); sem este campo a tabela acumula as duas.
+   */
+  season?: number | null
   time_local: string
   status: MatchStatus
   score_home: number | null
@@ -203,6 +209,7 @@ export function parseEspnStandings(payload: EspnStandingsPayload): EspnStandingR
 interface EspnScoreboardPayload {
   events?: Array<{
     date?: string
+    season?: { year?: number }
     status?: { type?: { name?: string; state?: string } }
     competitions?: Array<{
       status?: { type?: { name?: string; state?: string } }
@@ -294,6 +301,8 @@ export function parseEspnMatches(
       away_crest: crestOf(away.team) || null,
       away_position: null,
       date: event.date ?? null,
+      /** Temporada da ESPN (o ano-calendario carrega duas na Europa). */
+      season: event.season?.year ?? null,
       time_local: timeLocal,
       status,
       score_home: started ? Number(home.score ?? 0) : null,

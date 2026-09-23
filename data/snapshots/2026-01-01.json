@@ -1,0 +1,74 @@
+{
+  "date": "2026-01-01",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-01-01T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Crystal Palace",
+      "away": "Fulham",
+      "home_pos": 11,
+      "away_pos": 12,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Liverpool",
+      "away": "Leeds United",
+      "home_pos": 4,
+      "away_pos": 16,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Brentford",
+      "away": "Tottenham Hotspur",
+      "home_pos": 9,
+      "away_pos": 13,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PL",
+      "home": "Sunderland",
+      "away": "Manchester City",
+      "home_pos": 7,
+      "away_pos": 2,
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Sunderland",
+      "away": "Manchester City",
+      "team": "Manchester City",
+      "venue": "away",
+      "score": 69,
+      "flags": [
+        "Forma 5V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 7,
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
+    }
+  ]
+}

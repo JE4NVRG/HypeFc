@@ -1,0 +1,54 @@
+{
+  "date": "2025-05-20",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-05-20T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Crystal Palace",
+      "away": "Wolverhampton Wanderers",
+      "home_pos": 9,
+      "away_pos": 13,
+      "score_home": 4,
+      "score_away": 2,
+      "outcome": "home"
+    },
+    {
+      "league_id": "PL",
+      "home": "Manchester City",
+      "away": "AFC Bournemouth",
+      "home_pos": 4,
+      "away_pos": 14,
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Manchester City",
+      "away": "AFC Bournemouth",
+      "team": "Manchester City",
+      "venue": "home",
+      "score": 55,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 14,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 1,
+      "hit": true
+    }
+  ]
+}

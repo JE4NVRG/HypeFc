@@ -1,0 +1,54 @@
+{
+  "date": "2025-11-25",
+  "seasons": [
+    2025
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-11-25T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Atlético-MG",
+      "away": "Flamengo",
+      "home_pos": 11,
+      "away_pos": 1,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "BSA",
+      "home": "Grêmio",
+      "away": "Palmeiras",
+      "home_pos": 12,
+      "away_pos": 2,
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Atlético-MG",
+      "away": "Flamengo",
+      "team": "Flamengo",
+      "venue": "away",
+      "score": 64,
+      "flags": [
+        "Líder",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 11,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    }
+  ]
+}

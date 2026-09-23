@@ -1,0 +1,54 @@
+{
+  "date": "2025-02-07",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-02-07T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BL1",
+      "home": "Bayern Munich",
+      "away": "Werder Bremen",
+      "home_pos": 1,
+      "away_pos": 12,
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
+    },
+    {
+      "league_id": "FL1",
+      "home": "Nantes",
+      "away": "Brest",
+      "home_pos": 10,
+      "away_pos": 7,
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "Bayern Munich",
+      "away": "Werder Bremen",
+      "team": "Bayern Munich",
+      "venue": "home",
+      "score": 75,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 12,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    }
+  ]
+}

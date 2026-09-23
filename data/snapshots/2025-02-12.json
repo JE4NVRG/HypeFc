@@ -1,0 +1,64 @@
+{
+  "date": "2025-02-12",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-02-12T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Everton",
+      "away": "Liverpool",
+      "home_pos": 7,
+      "away_pos": 2,
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Everton",
+      "away": "Liverpool",
+      "team": "Liverpool",
+      "venue": "away",
+      "score": 79,
+      "flags": [
+        "Clássico",
+        "Boa forma",
+        "Top 3"
+      ],
+      "pos": 2,
+      "opp_pos": 7,
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Everton",
+      "away": "Liverpool",
+      "team": "Everton",
+      "venue": "home",
+      "score": 51,
+      "flags": [
+        "Clássico",
+        "Boa forma",
+        "Saldo alto"
+      ],
+      "pos": 7,
+      "opp_pos": 2,
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
+    }
+  ]
+}

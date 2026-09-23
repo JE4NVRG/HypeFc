@@ -1,0 +1,63 @@
+{
+  "date": "2025-04-16",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-04-16T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "PL",
+      "home": "Newcastle United",
+      "away": "Crystal Palace",
+      "home_pos": 5,
+      "away_pos": 6,
+      "score_home": 5,
+      "score_away": 0,
+      "outcome": "home"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Newcastle United",
+      "away": "Crystal Palace",
+      "team": "Newcastle United",
+      "venue": "home",
+      "score": 44,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 5,
+      "opp_pos": 6,
+      "outcome": "home",
+      "score_home": 5,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Newcastle United",
+      "away": "Crystal Palace",
+      "team": "Crystal Palace",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 6,
+      "opp_pos": 5,
+      "outcome": "home",
+      "score_home": 5,
+      "score_away": 0,
+      "hit": false
+    }
+  ]
+}

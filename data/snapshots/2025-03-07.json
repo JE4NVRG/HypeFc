@@ -1,0 +1,74 @@
+{
+  "date": "2025-03-07",
+  "seasons": [
+    2024
+  ],
+  "mode": "replay",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2025-03-07T00:00:00-03:00",
+  "matches": [
+    {
+      "league_id": "BL1",
+      "home": "Borussia Mönchengladbach",
+      "away": "Mainz",
+      "home_pos": 9,
+      "away_pos": 5,
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
+    },
+    {
+      "league_id": "FL1",
+      "home": "Toulouse",
+      "away": "AS Monaco",
+      "home_pos": 10,
+      "away_pos": 9,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "PPL",
+      "home": "Estrela",
+      "away": "Gil Vicente",
+      "home_pos": 15,
+      "away_pos": 16,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    },
+    {
+      "league_id": "DED",
+      "home": "NAC Breda",
+      "away": "Sparta Rotterdam",
+      "home_pos": 16,
+      "away_pos": 7,
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "Borussia Mönchengladbach",
+      "away": "Mainz",
+      "team": "Mainz",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 9,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": true
+    }
+  ]
+}
