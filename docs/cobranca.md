@@ -158,3 +158,19 @@ Pontos de atencao que ja morderam:
   Stripe; o `venda:sync` tambem varre `subscriptions list` e grava o `current_period_end` em
   `paid_until` (RPC `pro_assinatura_stripe`, service_role). Sem isso o assinante perderia o Pro no
   segundo mes. Cancelou? O status vira `canceled` mas o acesso continua ate vencer (nunca encurta).
+
+## IDENTIDADE NO CHECKOUT / FATURA (achado do descriptor)
+
+A conta que recebe (`acct_1U9vtzKCOtDfcIhD`, razão social **Vrg Soluções**) é a mesma entidade
+da je4ndev — a descrição da conta já declara a marca. **Nao precisa de conta Stripe separada**
+por produto: a conta e por CNPJ/conta bancaria, e o filtro de receita se faz por produto +
+`metadata[hypefc_plan]=pro` (ja gravado) + pedidos no Supabase.
+
+- O descriptor da fatura estava **URLPIVOT** (outro produto) com prefixo **URLPV**; comprador do
+  HypeFC veria o nome errado no cartao. Trocado (23/09) para **JE4NDEV** / prefixo **J4NDV**.
+  E mudanca de conta inteira (`settings[payments][statement_descriptor]`); reverter e o mesmo
+  comando com o valor antigo.
+- O campo antigo `settings[card_payments][statement_descriptor]` **nao existe mais** na API atual:
+  tentar por ele devolve `parameter_unknown`. O valido e `settings[payments][statement_descriptor]`.
+- Preco: **adaptativo ligado** por decisao do Jean — visitante fora do BR paga na moeda local.
+- Nome exibido no Checkout segue a razao social (Vrg Solucoes); a marca aparece na descricao.
