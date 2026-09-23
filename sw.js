@@ -13,7 +13,7 @@
 // A versao do cache e carimbada pelo build (scripts/build-pages.mjs), nao a mao:
 // se ela ficasse fixa, o stale-while-revalidate serviria o bundle antigo na
 // primeira carga depois de cada deploy.
-const CACHE_VERSION = '20260923T132634z'
+const CACHE_VERSION = '20260923T135509z'
 const CACHE = `hypefc-${CACHE_VERSION}`
 const CACHE_PREFIX = 'hypefc-'
 
