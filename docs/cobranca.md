@@ -131,9 +131,15 @@ Fluxo que esta no ar:
 1. `https://buy.stripe.com/4gMeVec9B7zTdRdh2Uffy00` (live, conta **Vrg Solucoes** ·
    produto `prod_VJUASIr9kJCW0O` · preco `price_1UIrC7KCOtDfcIhDN1xRWO2G` · R$ 9,90/mes BRL).
 2. Stripe devolve o comprador para `https://hypefc.je4ndev.com/?pro=ok&session_id={CHECKOUT_SESSION_ID}`.
-3. Cron `07ce6b93a1d0` (`hypefc-venda-sync.sh`, a cada 10 min) le as sessoes pagas pelo Stripe
-   CLI (`~/.local/bin/stripe`, conta fixada em live por `.env.local:HYPEFC_STRIPE_ACCOUNT`) e
-   grava o pedido via RPC `pro_order_stripe` (service_role, idempotente por sessao).
+3. **O ciclo de 10 min roda na VPS** (`luna-vps`), não no Mac: timer de usuário
+   `hypefc-venda-sync.timer` → `hypefc-venda-sync.service` (oneshot), repo em
+   `/home/jean/hypefc-jobs/HypeFc`, Node 22 do nvm (o 20 do sistema não roda
+   `--experimental-strip-types`). Credencial: **chave restrita da Stripe** (`rk_live_…`, só
+   leitura de Checkout Sessions + Subscriptions) em `STRIPE_API_KEY` no `.env.local` (modo 600)
+   da VPS — por isso não há `stripe login` interativo lá. Log: `journalctl --user -u
+   hypefc-venda-sync.service`. O cron do Mac (`07ce6b93a1d0`) ficou **pausado** depois que a
+   VPS rodou de verdade; os dois são idempotentes (a RPC ignora sessão já gravada), então
+   reativar o do Mac não duplica pedido.
 4. O site (`ResgatePro.tsx`) chama `pro_claim_session` com o id da sessao: libera o Pro, guarda o
    token no navegador e limpa a URL. Resgate e de uso unico (`ja-resgatado` no segundo).
 
@@ -143,7 +149,9 @@ Pontos de atencao que ja morderam:
   **falha fechado** se `HYPEFC_STRIPE_PRICE_LIVE` nao estiver no `.env.local`. Sem o filtro, uma
   assinatura de R$ 39,90 de outro produto virou pedido do HypeFC (e foi removida).
 - **O CLI guarda o modo selecionado.** Um cron rodando com o CLI em sandbox nao ve venda nenhuma:
-  o script roda `stripe switch <conta> --live` antes de ler.
+  o script roda `stripe switch <conta> --live` antes de ler. Na VPS quem manda é a chave restrita em
+  `STRIPE_API_KEY` (o `--api-key`/env tem precedência sobre a sessão do CLI), então o `switch` falha
+  em silêncio ali — comportamento esperado, não erro.
 - **Comprou antes de sincronizar?** O ResgatePro tenta 4x (20s) e, se ainda nao achar, mantem o
   `session_id` na URL e pede recarregar depois. Nunca limpa a URL quando o resgate falhou.
 - **Teste sem dinheiro real:** `https://buy.stripe.com/test_4gMeVec9B7zTdRdh2Uffy00` (cartao
