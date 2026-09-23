@@ -13,6 +13,9 @@ node_modules/
 # Production
 /build
 
+# Build estatico para o GitHub Pages
+/.pages-build/
+
 # Misc
 .DS_Store
 *.pem

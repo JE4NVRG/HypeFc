@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import type { MatchStats } from '@/lib/matchStats'
 import type { MatchStatus } from '@/types'
+import { fetchTodayData, fetchStandingsData, fetchScorersData } from '@/lib/dataSource'
 
 export type { MatchStatus }
 
@@ -84,7 +85,7 @@ export interface DayStats {
   leaguesActive: number
 }
 
-interface TodayData {
+export interface TodayData {
   date: string
   requested_date?: string
   is_fallback?: boolean
@@ -94,7 +95,7 @@ interface TodayData {
   source?: string
 }
 
-interface StandingsData {
+export interface StandingsData {
   league_id: string
   league_name: string
   table: Standing[]
@@ -103,7 +104,7 @@ interface StandingsData {
   captured_at: string
 }
 
-interface ScorersData {
+export interface ScorersData {
   league_id: string
   scorers: Scorer[]
 }
@@ -140,11 +141,7 @@ export function useDashboardData() {
   const fetchToday = useCallback(async (silent = false) => {
     if (!silent) setState(prev => ({ ...prev, loadingToday: true }))
     try {
-      const res = await fetch("/api/dashboard/today")
-      const json = await res.json()
-      if (!res.ok) {
-        throw new Error(json?.error || `HTTP ${res.status}`)
-      }
+      const json = await fetchTodayData()
       setState(prev => ({
         ...prev,
         todayData: json,
@@ -166,9 +163,7 @@ export function useDashboardData() {
   const fetchStandings = useCallback(async (leagueId: string) => {
     setState(prev => ({ ...prev, loadingStandings: true }))
     try {
-      const res = await fetch(`/api/dashboard/standings/${leagueId}`)
-      const json = await res.json()
-      if (!res.ok) throw new Error(json?.error || `HTTP ${res.status}`)
+      const json = await fetchStandingsData(leagueId)
       setState(prev => ({
         ...prev,
         standingsData: json,
@@ -188,9 +183,7 @@ export function useDashboardData() {
   const fetchScorers = useCallback(async (leagueId: string) => {
     setState(prev => ({ ...prev, loadingScorers: true }))
     try {
-      const res = await fetch(`/api/dashboard/scorers/${leagueId}`)
-      const json = await res.json()
-      if (!res.ok) throw new Error(json?.error || `HTTP ${res.status}`)
+      const json = await fetchScorersData(leagueId)
       setState(prev => ({
         ...prev,
         scorersData: json,

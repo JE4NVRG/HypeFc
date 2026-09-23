@@ -11,6 +11,8 @@ Acompanhe jogos, classificacoes, artilheiros e identifique os **times em alta** 
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000?logo=shadcnui&logoColor=white)](https://ui.shadcn.com/)
 [![Vercel](https://img.shields.io/badge/Deploy-Vercel-000?logo=vercel&logoColor=white)](https://vercel.com/)
+[![Demo](https://img.shields.io/badge/Demo-online-2ea44f?logo=githubpages&logoColor=white)](https://je4nvrg.github.io/HypeFc/)
+[![Sem chave](https://img.shields.io/badge/API%20key-nenhuma%20necessaria-orange)](https://je4nvrg.github.io/HypeFc/)
 
 <br />
 
@@ -61,6 +63,35 @@ Score de 0 a 100, não uma lista de quem joga hoje. Entram no máximo 12 times q
 - jogo ao vivo
 
 Cada card mostra o score, a forma e o motivo. Líder frio sem jogo relevante fica de fora; meio de tabela só porque "joga hoje" também.
+
+#### Como o score é calculado
+
+O hype não é uma lista de quem joga hoje — é um score 0-100 montado por sinais
+ponderados, com corte mínimo (`MIN_HYPE_SCORE = 28`) e teto de 12 cards. Um time
+entra no board pelo que fez, não por estar na tela.
+
+| Sinal | Peso | Por que existe |
+|---|---|---|
+| Forma (últimos 5) | 7 por vitória, 3 por empate (máx. 35) | 4-5 vitórias seguidas é o sinal mais forte de momento |
+| Posição na tabela | 24 / 18 / 14 / 8 (1º, 2º, 3º, 4º-6º) | líder e pódio carregam peso próprio |
+| Saldo de gols por jogo | 8 se ≥ 1.0, 4 se ≥ 0.5 | diferencia ataque real de sorte |
+| Clássico do dia | 18 | jogo de rivalidade puxa atenção sozinho |
+| Jogo ao vivo | 14 | sinal temporal: está acontecendo agora |
+| Joga hoje | 8 | estar na rodada conta, mas pouco |
+
+O score é `min(100, soma)` e só entra quem passa de `MIN_HYPE_SCORE = 28`.
+
+Repare no peso de "joga hoje": 8 pontos, bem abaixo do corte. É de propósito —
+antes o painel listava todo mundo que jogava no dia e chamava isso de hype. Com
+o corte de 28, "joga hoje" sozinho não coloca ninguém no board; ou o time soma
+forma e tabela, ou não aparece. Um líder em má fase sem jogo relevante fica em
+67 e entra; um time ao vivo de meio de tabela fica em 50 e não passa na frente
+de quem tem forma.
+
+Cada sinal aparece no card como motivo (`Forma 5V`, `Clássico`, `Líder`), então
+o ranking é auditável: dá para ver de onde veio cada ponto em vez de aceitar um
+número opaco. Os testes em `scripts/test-hype.ts` prendem os cortes e os casos
+de fronteira, para o score não derivar sem alguém perceber.
 
 ### Classificacao Completa
 Tabela de qualquer liga com indicadores visuais de zona: Champions League (verde), Europa League (azul) e rebaixamento (vermelho). Alterna entre 10+ competicoes com um clique.
@@ -161,28 +192,38 @@ cd HypeFc
 # Instalar dependencias
 npm install
 
-# Configurar variavel de ambiente
-cp .env.example .env.local
-```
-
-Edite o `.env.local` e adicione seu token:
-
-```env
-FOOTBALL_API_TOKEN=seu_token_aqui
-```
-
-```bash
-# Iniciar o servidor de desenvolvimento
+# Rodar (nao precisa de chave: o modo ESPN assume)
 npm run dev
 ```
 
 Acesse [http://localhost:3000](http://localhost:3000)
 
-### Deploy na Vercel
+Opcional: se quiser os dados da Football-Data.org, copie `.env.example` para
+`.env.local` e preencha `FOOTBALL_API_TOKEN`.
+
+### Deploy
+
+**GitHub Pages (site estatico, sem servidor e sem chave)** — e como o demo
+publico roda em <https://je4nvrg.github.io/HypeFc/>:
+
+```bash
+npm run build:pages
+```
+
+Isso gera `out/` com o navegador buscando a ESPN direto (a ESPN libera CORS).
+O script afasta `src/app/api` so durante o build, porque as rotas de API usam
+`force-dynamic` e nao convivem com `output: export`, e devolve tudo no fim.
+O `basePath` vem de `PAGES_BASE_PATH` (default `/HypeFc`, o nome do repo).
+
+O workflow `.github/workflows/pages.yml` publica isso no branch `gh-pages` a
+cada push na `main`.
+
+**Vercel (SSR, com as API Routes)** — as rotas continuam valendo para quem
+quer cache no servidor:
 
 1. Importe o repositorio em [vercel.com/new](https://vercel.com/new)
-2. Adicione a variavel de ambiente `FOOTBALL_API_TOKEN`
-3. Deploy automatico a cada push na `main`
+2. Deploy automatico a cada push na `main`
+3. `FOOTBALL_API_TOKEN` e opcional; sem ele o modo ESPN entra
 
 ---
 
@@ -190,8 +231,10 @@ Acesse [http://localhost:3000](http://localhost:3000)
 
 | Variavel | Obrigatoria | Descricao |
 |----------|:-----------:|-----------|
-| `FOOTBALL_API_TOKEN` | Sim | Token de acesso a Football-Data.org API |
+| `FOOTBALL_API_TOKEN` | Nao | Se presente, jogos/tabela/artilheiros vem de Football-Data.org |
 | `FOOTBALL_API_BASE_URL` | Nao | URL base da API (default: `https://api.football-data.org/v4`) |
+| `NEXT_PUBLIC_DATA_MODE` | Nao | `static` faz o navegador buscar a ESPN direto (build para Pages) |
+| `PAGES_BASE_PATH` | Nao | `basePath` do build estatico (default: `/HypeFc`) |
 
 > Nenhuma chave secreta e exposta no frontend. O token e utilizado apenas server-side nas API Routes.
 

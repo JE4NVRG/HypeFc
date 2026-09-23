@@ -2,10 +2,11 @@ export const dynamic = 'force-dynamic'
 
 import { NextResponse } from 'next/server'
 import { createCacheKey, memoryCache, withCache } from '@/lib/cache'
-import { fetchTodayMatches, fetchStandings, generateHypeFlags, computeDayStats } from '@/services/footballApi'
+import { fetchTodayMatches, fetchStandings } from '@/services/footballApi'
 import { fetchEspnDay, fetchEspnStandings, fetchEspnFixtures } from '@/services/espn'
 import { attachMatchStats } from '@/lib/matchStats'
-import { buildTeamFormIndex, lookupTeamForm, normalizeTeamKey, type EspnTeamMeta } from '@/lib/espnParse'
+import { composeDay } from '@/lib/composeDay'
+import type { EspnTeamMeta } from '@/lib/espnParse'
 import { LEAGUE_NAMES } from '@/types'
 import type { StandingRow, TodayMatch } from '@/services/footballApi'
 
@@ -56,56 +57,6 @@ async function loadStandings(leagueIds: string[]): Promise<Record<string, Standi
   return map
 }
 
-function applyForm(standingsMap: Record<string, StandingRow[]>, metas: EspnTeamMeta[]): void {
-  if (!metas.length) return
-  const index = buildTeamFormIndex(metas)
-  for (const table of Object.values(standingsMap)) {
-    for (const row of table) {
-      if (row.form) continue
-      const form = lookupTeamForm(index, row)
-      if (form) row.form = form
-    }
-  }
-}
-
-function indexTable(table: StandingRow[]): Map<string, StandingRow> {
-  const index = new Map<string, StandingRow>()
-  for (const row of table) {
-    if (row.espn_abbr) {
-      const abbrKey = `abbr:${row.espn_abbr.toUpperCase()}`
-      if (!index.has(abbrKey)) index.set(abbrKey, row)
-    }
-    for (const alias of [row.team, row.espn_short]) {
-      const key = normalizeTeamKey(alias)
-      if (key && !index.has(key)) index.set(key, row)
-    }
-  }
-  return index
-}
-
-function findRow(index: Map<string, StandingRow> | undefined, team: string): StandingRow | undefined {
-  if (!index) return undefined
-  return index.get(normalizeTeamKey(team))
-}
-
-function enrich(matches: TodayMatch[], standingsMap: Record<string, StandingRow[]>): TodayMatch[] {
-  const indexes: Record<string, Map<string, StandingRow>> = {}
-  for (const [leagueId, table] of Object.entries(standingsMap)) {
-    indexes[leagueId] = indexTable(table)
-  }
-  return matches.map((match) => {
-    const index = indexes[match.league_id]
-    if (!index) return match
-    const homeRow = findRow(index, match.home)
-    const awayRow = findRow(index, match.away)
-    return {
-      ...match,
-      home_position: homeRow?.pos ?? match.home_position ?? null,
-      away_position: awayRow?.pos ?? match.away_position ?? null,
-    }
-  })
-}
-
 export async function GET(request: Request) {
   const startTime = Date.now()
 
@@ -141,34 +92,31 @@ export async function GET(request: Request) {
     const matches = day.matches
     const leagueIds = Array.from(new Set(matches.map((match) => match.league_id)))
     const standingsMap = await loadStandings(leagueIds)
-    applyForm(standingsMap, day.metas)
-    const enrichedMatches = enrich(matches, standingsMap)
 
-    let withStats = enrichedMatches
-    if (HAS_TOKEN && enrichedMatches.length > 0) {
+    let withStats = matches
+    if (HAS_TOKEN && matches.length > 0) {
       try {
         const fixtures = await withCache(
           createCacheKey('espn', usedDate, leagueIds.slice().sort().join(',')),
           () => fetchEspnFixtures(leagueIds, usedDate),
           15
         )
-        withStats = attachMatchStats(enrichedMatches, fixtures)
+        withStats = attachMatchStats(matches, fixtures)
       } catch (espnError) {
         console.error('ESPN stats unavailable:', espnError)
       }
     }
 
-    const hype = generateHypeFlags(withStats, standingsMap)
-    const stats = computeDayStats(withStats)
+    const composed = composeDay(withStats, standingsMap, day.metas)
 
     return NextResponse.json({
       date: usedDate,
       requested_date: requestedDate,
       is_fallback: usedDate !== requestedDate,
       source: HAS_TOKEN ? 'football-data' : 'espn',
-      matches: withStats,
-      hype,
-      stats,
+      matches: composed.matches,
+      hype: composed.hype,
+      stats: composed.stats,
       _meta: { responseTime: `${Date.now() - startTime}ms`, timestamp: new Date().toISOString() },
     }, {
       headers: { 'Cache-Control': 'public, max-age=60, stale-while-revalidate=120' },
