@@ -7,6 +7,8 @@ import type { Match } from '@/hooks/useDashboardData'
 interface TodayMatchesProps {
   groupedMatches: Record<string, Match[]>
   loading: boolean
+  isFallback?: boolean
+  dayLabel?: string
 }
 
 function Crest({ src, name }: { src?: string | null; name: string }) {
@@ -51,14 +53,36 @@ function MatchCenter({ match }: { match: Match }) {
   )
 }
 
+function StatLine({ match }: { match: Match }) {
+  const stats = match.match_stats
+  if (!stats) return null
+  const bits = [
+    stats.possession_home != null && stats.possession_away != null
+      ? `posse ${Math.round(stats.possession_home)}–${Math.round(stats.possession_away)}`
+      : null,
+    stats.shots_home != null && stats.shots_away != null
+      ? `chutes ${stats.shots_home}–${stats.shots_away}`
+      : null,
+    stats.shots_on_target_home != null && stats.shots_on_target_away != null
+      ? `no alvo ${stats.shots_on_target_home}–${stats.shots_on_target_away}`
+      : null,
+  ].filter(Boolean)
+  if (!bits.length) return null
+  return <p className="px-2 pb-1 text-center font-mono text-[10px] text-slate-500">{bits.join(' · ')}</p>
+}
+
 function MatchRow({ match }: { match: Match }) {
   const isLive = match.status === 'IN_PLAY' || match.status === 'PAUSED'
 
   return (
-    <div className={`flex items-center gap-1.5 rounded-lg px-2 py-2 transition-colors ${isLive ? 'bg-emerald-500/[0.06] ring-1 ring-emerald-500/10' : 'bg-white/[0.03] hover:bg-white/[0.06]'}`}>
+    <div className={`rounded-lg ${isLive ? 'bg-emerald-500/[0.06] ring-1 ring-emerald-500/10' : 'bg-white/[0.03]'}`}>
+      <div className="flex items-center gap-1.5 px-2 py-2">
       {/* Casa */}
       <div className="flex flex-1 items-center justify-end gap-1.5 overflow-hidden text-right">
-        <span className="truncate text-sm font-medium text-slate-200">{match.home}</span>
+        <span className="truncate text-sm font-medium text-slate-200">
+          {match.home_position ? <span className="mr-1 font-mono text-[10px] text-slate-500">#{match.home_position}</span> : null}
+          {match.home}
+        </span>
         <Crest src={match.home_crest} name={match.home} />
       </div>
 
@@ -67,13 +91,18 @@ function MatchRow({ match }: { match: Match }) {
       {/* Visitante */}
       <div className="flex flex-1 items-center gap-1.5 overflow-hidden">
         <Crest src={match.away_crest} name={match.away} />
-        <span className="truncate text-sm font-medium text-slate-200">{match.away}</span>
+        <span className="truncate text-sm font-medium text-slate-200">
+          {match.away}
+          {match.away_position ? <span className="ml-1 font-mono text-[10px] text-slate-500">#{match.away_position}</span> : null}
+        </span>
       </div>
+      </div>
+      <StatLine match={match} />
     </div>
   )
 }
 
-export function TodayMatches({ groupedMatches, loading }: TodayMatchesProps) {
+export function TodayMatches({ groupedMatches, loading, isFallback, dayLabel }: TodayMatchesProps) {
   const leagueEntries = Object.entries(groupedMatches)
 
   return (
@@ -82,7 +111,12 @@ export function TodayMatches({ groupedMatches, loading }: TodayMatchesProps) {
         <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10">
           <Calendar className="h-3.5 w-3.5 text-emerald-400" />
         </div>
-        <h2 className="text-sm font-semibold text-slate-200">Jogos de Hoje</h2>
+        <h2 className="text-sm font-semibold text-slate-200">
+          {isFallback ? 'Ultima rodada' : 'Jogos de Hoje'}
+        </h2>
+        {isFallback && dayLabel && (
+          <span className="text-[10px] font-medium text-amber-300/80">{dayLabel}</span>
+        )}
         {!loading && leagueEntries.length > 0 && (
           <span className="ml-auto rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-medium text-slate-400">
             {leagueEntries.reduce((sum, [, m]) => sum + m.length, 0)} jogos

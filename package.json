@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:pages": "node scripts/build-pages.mjs",
+    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-hype.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-league-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-espn-parse.ts"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.2.6",

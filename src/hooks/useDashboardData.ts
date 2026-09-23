@@ -1,8 +1,24 @@
 "use client"
 
 import { useState, useEffect, useCallback } from 'react'
+import type { MatchStats } from '@/lib/matchStats'
+import type { MatchStatus } from '@/types'
+import { fetchTodayData, fetchStandingsData, fetchScorersData } from '@/lib/dataSource'
 
-export type MatchStatus = 'SCHEDULED' | 'TIMED' | 'IN_PLAY' | 'PAUSED' | 'FINISHED' | 'POSTPONED' | 'CANCELLED' | 'SUSPENDED'
+export type { MatchStatus }
+
+function humanError(message: string): string {
+  if (message.includes('429')) {
+    return 'Limite da fonte de dados atingido. Os dados voltam no próximo ciclo.'
+  }
+  if (message.includes('Failed to fetch') || message.includes('HTTP 50')) {
+    return 'Não consegui atualizar os jogos agora. A ESPN pode estar fora do ar.'
+  }
+  if (message.includes('FOOTBALL_API_TOKEN')) {
+    return 'Token da Football-Data inválido. O dashboard volta ao modo ESPN sem token.'
+  }
+  return message
+}
 
 export interface Match {
   league_id: string
@@ -17,6 +33,7 @@ export interface Match {
   status: MatchStatus
   score_home: number | null
   score_away: number | null
+  match_stats?: MatchStats | null
 }
 
 export interface HypeTeam {
@@ -27,6 +44,12 @@ export interface HypeTeam {
   position?: number | null
   league_id: string
   league_name: string
+  score?: number
+  signals?: string[]
+  form?: Array<'W' | 'D' | 'L'>
+  opponent?: string | null
+  match_status?: string | null
+  time_local?: string | null
 }
 
 export interface Standing {
@@ -38,6 +61,9 @@ export interface Standing {
   wins: number
   draws: number
   losses: number
+  goalsFor?: number
+  goalsAgainst?: number
+  form?: string | null
 }
 
 export interface Scorer {
@@ -59,21 +85,26 @@ export interface DayStats {
   leaguesActive: number
 }
 
-interface TodayData {
+export interface TodayData {
   date: string
+  requested_date?: string
+  is_fallback?: boolean
   matches: Match[]
   hype: HypeTeam[]
   stats?: DayStats
+  source?: string
 }
 
-interface StandingsData {
+export interface StandingsData {
   league_id: string
   league_name: string
   table: Standing[]
+  home?: Standing[]
+  away?: Standing[]
   captured_at: string
 }
 
-interface ScorersData {
+export interface ScorersData {
   league_id: string
   scorers: Scorer[]
 }
@@ -87,6 +118,7 @@ interface DashboardState {
   loadingStandings: boolean
   loadingScorers: boolean
   lastUpdated: string
+  error: string
 }
 
 export function useDashboardData() {
@@ -99,28 +131,31 @@ export function useDashboardData() {
     loadingStandings: true,
     loadingScorers: true,
     lastUpdated: '',
+    error: '',
   })
 
   const setLeagueId = useCallback((id: string) => {
     setState(prev => ({ ...prev, leagueId: id }))
   }, [])
 
-  const fetchToday = useCallback(async () => {
-    setState(prev => ({ ...prev, loadingToday: true }))
+  const fetchToday = useCallback(async (silent = false) => {
+    if (!silent) setState(prev => ({ ...prev, loadingToday: true }))
     try {
-      const res = await fetch("/api/dashboard/today")
-      const json = await res.json()
+      const json = await fetchTodayData()
       setState(prev => ({
         ...prev,
         todayData: json,
         lastUpdated: new Date().toLocaleString('pt-BR'),
         loadingToday: false,
+        error: '',
       }))
-    } catch {
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Falha ao buscar jogos'
       setState(prev => ({
         ...prev,
-        todayData: { date: '', matches: [], hype: [] },
+        todayData: prev.todayData ?? { date: '', matches: [], hype: [] },
         loadingToday: false,
+        error: humanError(message),
       }))
     }
   }, [])
@@ -128,18 +163,19 @@ export function useDashboardData() {
   const fetchStandings = useCallback(async (leagueId: string) => {
     setState(prev => ({ ...prev, loadingStandings: true }))
     try {
-      const res = await fetch(`/api/dashboard/standings/${leagueId}`)
-      const json = await res.json()
+      const json = await fetchStandingsData(leagueId)
       setState(prev => ({
         ...prev,
         standingsData: json,
         loadingStandings: false,
       }))
-    } catch {
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Falha ao buscar classificação'
       setState(prev => ({
         ...prev,
-        standingsData: { league_id: leagueId, league_name: '', table: [], captured_at: '' },
+        standingsData: prev.standingsData ?? { league_id: leagueId, league_name: '', table: [], captured_at: '' },
         loadingStandings: false,
+        error: prev.error || humanError(message),
       }))
     }
   }, [])
@@ -147,18 +183,19 @@ export function useDashboardData() {
   const fetchScorers = useCallback(async (leagueId: string) => {
     setState(prev => ({ ...prev, loadingScorers: true }))
     try {
-      const res = await fetch(`/api/dashboard/scorers/${leagueId}`)
-      const json = await res.json()
+      const json = await fetchScorersData(leagueId)
       setState(prev => ({
         ...prev,
         scorersData: json,
         loadingScorers: false,
       }))
-    } catch {
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Falha ao buscar artilheiros'
       setState(prev => ({
         ...prev,
-        scorersData: { league_id: leagueId, scorers: [] },
+        scorersData: prev.scorersData ?? { league_id: leagueId, scorers: [] },
         loadingScorers: false,
+        error: prev.error || humanError(message),
       }))
     }
   }, [])
@@ -186,6 +223,14 @@ export function useDashboardData() {
   const hasLiveMatches = state.todayData?.matches?.some(
     m => m.status === 'IN_PLAY' || m.status === 'PAUSED'
   ) ?? false
+
+  useEffect(() => {
+    const ms = hasLiveMatches ? 60000 : 300000
+    const id = setInterval(() => {
+      fetchToday(true)
+    }, ms)
+    return () => clearInterval(id)
+  }, [hasLiveMatches, fetchToday])
 
   return {
     ...state,

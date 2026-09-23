@@ -6,8 +6,15 @@ import { StatsBar } from '@/components/dashboard/StatsBar'
 import { TodayMatches } from '@/components/dashboard/TodayMatches'
 import { HypeFlags } from '@/components/dashboard/HypeFlags'
 import { LeagueStandings } from '@/components/dashboard/LeagueStandings'
+import { LeagueIntel } from '@/components/dashboard/LeagueIntel'
 import { TopScorers } from '@/components/dashboard/TopScorers'
 import { DashboardFooter } from '@/components/dashboard/DashboardFooter'
+
+function formatDay(iso: string): string {
+  const [year, month, day] = iso.split('-')
+  if (!year || !month || !day) return iso
+  return `${day}/${month}/${year}`
+}
 
 export default function Home() {
   const {
@@ -19,6 +26,7 @@ export default function Home() {
     loadingStandings,
     loadingScorers,
     lastUpdated,
+    error,
     isLoading,
     hasLiveMatches,
     setLeagueId,
@@ -36,6 +44,22 @@ export default function Home() {
       />
 
       <main className="w-full flex-1 px-2 py-3 sm:px-4 sm:py-4">
+        {error && (
+          <div className="mb-3 rounded-xl border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+            {error}
+          </div>
+        )}
+        {todayData?.is_fallback && (
+          <div className="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-amber-500/20 bg-amber-500/10 px-3 py-2 text-xs text-amber-200">
+            <span className="font-medium">Sem jogos hoje.</span>
+            <span className="text-amber-200/80">
+              Mostrando a ultima rodada com jogos: {formatDay(todayData.date)}.
+            </span>
+            {todayData.requested_date && (
+              <span className="text-amber-200/60">Hoje: {formatDay(todayData.requested_date)}.</span>
+            )}
+          </div>
+        )}
         {/* Stats resumo do dia */}
         <div className="mb-3">
           <StatsBar stats={todayData?.stats} loading={loadingToday} />
@@ -46,6 +70,8 @@ export default function Home() {
           <TodayMatches
             groupedMatches={groupedMatches}
             loading={loadingToday}
+            isFallback={todayData?.is_fallback}
+            dayLabel={todayData?.date ? formatDay(todayData.date) : undefined}
           />
           <HypeFlags
             hypeTeams={todayData?.hype ?? []}
@@ -64,9 +90,17 @@ export default function Home() {
             loading={loadingScorers}
           />
         </div>
+
+        <LeagueIntel
+          table={standingsData?.table ?? []}
+          home={standingsData?.home}
+          away={standingsData?.away}
+          leagueName={standingsData?.league_name ?? ''}
+          loading={loadingStandings}
+        />
       </main>
 
-      <DashboardFooter />
+      <DashboardFooter source={todayData?.source} />
     </div>
   )
 }

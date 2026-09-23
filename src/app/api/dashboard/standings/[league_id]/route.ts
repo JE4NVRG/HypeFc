@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server'
 import { createCacheKey, withCache } from '@/lib/cache'
 import { fetchStandings } from '@/services/footballApi'
+import { fetchEspnStandings, fetchEspnLatestForms } from '@/services/espn'
+import { buildTeamFormIndex, lookupTeamForm } from '@/lib/espnParse'
+import { LEAGUE_NAMES } from '@/types'
+
+const HAS_TOKEN = Boolean(process.env.FOOTBALL_API_TOKEN)
 
 export async function GET(
   _request: Request,
@@ -10,21 +15,70 @@ export async function GET(
 
   try {
     const { league_id } = params
-    const cacheKey = createCacheKey('standings', league_id)
 
-    const result = await withCache(cacheKey, () => fetchStandings(league_id), 10)
+    if (HAS_TOKEN) {
+      const result = await withCache(createCacheKey('standings', league_id), () => fetchStandings(league_id), 10)
+      return NextResponse.json({
+        ...result,
+        source: 'football-data',
+        _meta: { responseTime: `${Date.now() - startTime}ms`, timestamp: new Date().toISOString() },
+      }, {
+        headers: { 'Cache-Control': 'public, max-age=300, stale-while-revalidate=900' },
+      })
+    }
+
+    const table = await withCache(
+      createCacheKey('espn-standings', league_id),
+      () => fetchEspnStandings(league_id),
+      15
+    )
+
+    // A tabela da ESPN nao traz forma; ela vem do ultimo dia com jogos.
+    try {
+      const hoje = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' })
+      const metas = await withCache(
+        createCacheKey('espn-forms', league_id, hoje),
+        () => fetchEspnLatestForms(league_id, hoje),
+        15
+      )
+      if (metas.length) {
+        const index = buildTeamFormIndex(metas)
+        for (const row of table) {
+          if (row.form) continue
+          const form = lookupTeamForm(index, row)
+          if (form) row.form = form
+        }
+      }
+    } catch (formError) {
+      console.error('ESPN form enrichment failed:', formError)
+    }
 
     return NextResponse.json({
-      ...result,
+      league_id,
+      league_name: LEAGUE_NAMES[league_id] || league_id,
+      table,
+      home: [],
+      away: [],
+      source: 'espn',
+      captured_at: new Date().toISOString(),
       _meta: { responseTime: `${Date.now() - startTime}ms`, timestamp: new Date().toISOString() },
     }, {
       headers: { 'Cache-Control': 'public, max-age=300, stale-while-revalidate=900' },
     })
   } catch (error) {
     console.error('Error fetching standings:', error)
+    const { league_id } = params
     return NextResponse.json(
-      { error: 'Failed to fetch standings', _meta: { responseTime: `${Date.now() - startTime}ms` } },
-      { status: 500, headers: { 'Cache-Control': 'no-store' } }
+      {
+        error: 'Classificação indisponível para esta liga agora.',
+        detail: error instanceof Error ? error.message : 'unknown',
+        league_id,
+        league_name: LEAGUE_NAMES[league_id] || league_id,
+        table: [],
+        captured_at: '',
+        _meta: { responseTime: `${Date.now() - startTime}ms` },
+      },
+      { status: 502, headers: { 'Cache-Control': 'no-store' } }
     )
   }
 }

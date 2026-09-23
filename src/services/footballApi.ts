@@ -3,6 +3,7 @@ import {
   COMPETITION_ID_TO_LEAGUE,
   LEAGUE_NAMES,
 } from '@/types'
+import { buildHypeBoard, computeDayStats as scoreDay, type HypeBoardItem } from '@/lib/hypeScore'
 
 const BASE_URL = process.env.FOOTBALL_API_BASE_URL || 'https://api.football-data.org/v4'
 const TOKEN = process.env.FOOTBALL_API_TOKEN
@@ -51,7 +52,8 @@ interface ApiMatch {
   }
 }
 
-export type MatchStatus = 'SCHEDULED' | 'TIMED' | 'IN_PLAY' | 'PAUSED' | 'FINISHED' | 'POSTPONED' | 'CANCELLED' | 'SUSPENDED'
+import type { MatchStatus } from '@/types'
+export type { MatchStatus }
 
 export interface TodayMatch {
   league_id: string
@@ -66,6 +68,7 @@ export interface TodayMatch {
   status: MatchStatus
   score_home: number | null
   score_away: number | null
+  match_stats?: import('@/lib/matchStats').MatchStats | null
 }
 
 export interface StandingRow {
@@ -77,22 +80,21 @@ export interface StandingRow {
   wins: number
   draws: number
   losses: number
+  form: string | null
+  goalDifference: number
+  goalsFor: number
+  goalsAgainst: number
+  espn_id?: string
+  espn_short?: string
+  espn_abbr?: string
 }
 
-export interface HypeFlag {
-  team: string
-  reason: string
-  priority: number
-  crest: string | null
-  position: number | null
-  league_id: string
-  league_name: string
-}
+export type HypeFlag = HypeBoardItem
 
 // ---------- Today's matches ----------
 
-export async function fetchTodayMatches(): Promise<TodayMatch[]> {
-  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' })
+export async function fetchTodayMatches(dateIso?: string): Promise<TodayMatch[]> {
+  const today = dateIso || new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' })
   const validCompIds = new Set(Object.values(LEAGUE_MAPPING))
 
   const data = await apiGet<{ matches: ApiMatch[] }>(`/matches?date=${today}`)
@@ -143,98 +145,68 @@ interface ApiStandingTeam {
   draw: number
   lost: number
   points: number
+  goalsFor?: number
+  goalsAgainst?: number
+  form?: string | null
+  goalDifference?: number
 }
 
 export async function fetchStandings(leagueCode: string): Promise<{
   league_id: string
   league_name: string
   table: StandingRow[]
+  home: StandingRow[]
+  away: StandingRow[]
   captured_at: string
 }> {
   const compId = LEAGUE_MAPPING[leagueCode]
   if (!compId) throw new Error(`League ${leagueCode} not supported`)
 
-  const data = await apiGet<{ standings: Array<{ table: ApiStandingTeam[] }> }>(
+  const data = await apiGet<{ standings: Array<{ type?: string; table: ApiStandingTeam[] }> }>(
     `/competitions/${compId}/standings`
   )
+  const blocks = data.standings || []
+  const pick = (type: string) => {
+    const block = blocks.find(item => item.type === type) || (type === 'TOTAL' ? blocks[0] : undefined)
+    return (block?.table || []).map(mapStandingRow)
+  }
 
   return {
     league_id: leagueCode,
     league_name: LEAGUE_NAMES[leagueCode] || leagueCode,
-    table: (data.standings?.[0]?.table || []).map(t => ({
-      pos: t.position,
-      team: t.team.name,
-      crest: t.team.crest || '',
-      pts: t.points,
-      played: t.playedGames,
-      wins: t.won,
-      draws: t.draw,
-      losses: t.lost,
-    })),
+    table: pick('TOTAL'),
+    home: pick('HOME'),
+    away: pick('AWAY'),
     captured_at: new Date().toISOString(),
+  }
+}
+
+function mapStandingRow(t: ApiStandingTeam): StandingRow {
+  const goalsFor = t.goalsFor || 0
+  const goalsAgainst = t.goalsAgainst || 0
+  return {
+    pos: t.position,
+    team: t.team.name,
+    crest: t.team.crest || '',
+    pts: t.points,
+    played: t.playedGames,
+    wins: t.won,
+    draws: t.draw,
+    losses: t.lost,
+    form: t.form || null,
+    goalDifference: t.goalDifference ?? goalsFor - goalsAgainst,
+    goalsFor,
+    goalsAgainst,
   }
 }
 
 // ---------- Hype flags (max 12) ----------
 
-const MAX_HYPE_FLAGS = 12
-
 export function generateHypeFlags(
   matches: TodayMatch[],
   standingsMap: Record<string, StandingRow[]>
 ): HypeFlag[] {
-  const seen = new Map<string, HypeFlag>()
-
-  function addFlag(flag: HypeFlag) {
-    const existing = seen.get(flag.team)
-    if (!existing || flag.priority < existing.priority) {
-      seen.set(flag.team, flag)
-    }
-  }
-
-  // Apenas ligas com jogos hoje
-  const todayLeagues = new Set(matches.map(m => m.league_id))
-
-  for (const [leagueId, table] of Object.entries(standingsMap)) {
-    if (!table.length || !todayLeagues.has(leagueId)) continue
-    const leagueName = LEAGUE_NAMES[leagueId] || leagueId
-
-    addFlag({
-      team: table[0].team,
-      reason: 'Líder da liga',
-      priority: 1,
-      crest: table[0].crest || null,
-      position: table[0].pos,
-      league_id: leagueId,
-      league_name: leagueName,
-    })
-    for (const t of table.slice(1, 3)) {
-      addFlag({
-        team: t.team,
-        reason: 'Top 3 da liga',
-        priority: 2,
-        crest: t.crest || null,
-        position: t.pos,
-        league_id: leagueId,
-        league_name: leagueName,
-      })
-    }
-  }
-
-  // Times jogando hoje que ainda nao estao no hype
-  for (const m of matches) {
-    const leagueName = m.league_name
-    if (!seen.has(m.home)) {
-      addFlag({ team: m.home, reason: 'Joga hoje', priority: 3, crest: m.home_crest, position: m.home_position, league_id: m.league_id, league_name: leagueName })
-    }
-    if (!seen.has(m.away)) {
-      addFlag({ team: m.away, reason: 'Joga hoje', priority: 3, crest: m.away_crest, position: m.away_position, league_id: m.league_id, league_name: leagueName })
-    }
-  }
-
-  return Array.from(seen.values())
-    .sort((a, b) => a.priority !== b.priority ? a.priority - b.priority : a.team.localeCompare(b.team))
-    .slice(0, MAX_HYPE_FLAGS)
+  return buildHypeBoard(matches, standingsMap, LEAGUE_NAMES)
 }
 
 // ---------- Top Scorers ----------
@@ -287,19 +259,5 @@ export interface DayStats {
 }
 
 export function computeDayStats(matches: TodayMatch[]): DayStats {
-  const live = matches.filter(m => m.status === 'IN_PLAY' || m.status === 'PAUSED')
-  const finished = matches.filter(m => m.status === 'FINISHED')
-  const scheduled = matches.filter(m => m.status === 'TIMED' || m.status === 'SCHEDULED')
-  const totalGoals = matches.reduce((sum, m) => sum + (m.score_home || 0) + (m.score_away || 0), 0)
-  const leagues = new Set(matches.map(m => m.league_id))
-
-  return {
-    totalMatches: matches.length,
-    liveMatches: live.length,
-    finishedMatches: finished.length,
-    scheduledMatches: scheduled.length,
-    totalGoals,
-    avgGoals: finished.length > 0 ? Math.round((totalGoals / finished.length) * 10) / 10 : 0,
-    leaguesActive: leagues.size,
-  }
+  return scoreDay(matches)
 }

@@ -4,6 +4,10 @@ import Image from 'next/image'
 import { Flame, TrendingUp, Trophy, Swords } from 'lucide-react'
 import type { HypeTeam } from '@/hooks/useDashboardData'
 
+export function isAllowedCrest(url: string): boolean {
+  return url.includes('football-data.org') || url.includes('espncdn.com')
+}
+
 interface HypeFlagsProps {
   hypeTeams: HypeTeam[]
   loading: boolean
@@ -40,13 +44,35 @@ const priorityConfig: Record<number, { color: string; bg: string; border: string
   },
 }
 
-function HypeCard({ team }: { team: HypeTeam }) {
+function FormPills({ form }: { form?: Array<'W' | 'D' | 'L'> }) {
+  if (!form?.length) return null
+  return (
+    <div className="flex gap-0.5">
+      {form.map((letter, index) => (
+        <span
+          key={`${letter}-${index}`}
+          className={`flex h-3.5 w-3.5 items-center justify-center rounded-[3px] text-[8px] font-bold ${
+            letter === 'W' ? 'bg-emerald-500/20 text-emerald-300' : letter === 'D' ? 'bg-slate-500/20 text-slate-300' : 'bg-red-500/20 text-red-300'
+          }`}
+        >
+          {letter}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+function HypeCard({ team, rank }: { team: HypeTeam; rank: number }) {
   const config = priorityConfig[team.priority] || priorityConfig[3]
+  const live = team.match_status === 'IN_PLAY' || team.match_status === 'PAUSED'
 
   return (
     <div className={`group relative flex items-center gap-3 rounded-xl border ${config.border} ${config.bg} p-3 shadow-lg ${config.glow} transition-all hover:scale-[1.02] hover:shadow-xl`}>
+      <div className="flex w-5 flex-shrink-0 justify-center font-mono text-[11px] font-semibold text-slate-500">
+        {rank}
+      </div>
       <div className="flex-shrink-0">
-        {team.crest && team.crest.includes('football-data.org') ? (
+        {team.crest && isAllowedCrest(team.crest) ? (
           <Image
             src={team.crest}
             alt={team.team}
@@ -69,15 +95,27 @@ function HypeCard({ team }: { team: HypeTeam }) {
           <span className="truncate text-sm font-semibold text-slate-100">{team.team}</span>
         </div>
         <div className="mt-0.5 flex items-center gap-2">
-          <div className={`flex items-center gap-1 text-[11px] ${config.color}`}>
+          <div className={`flex min-w-0 items-center gap-1 text-[11px] ${config.color}`}>
             {config.icon}
-            <span>{team.reason}</span>
+            <span className="truncate">{team.reason}</span>
           </div>
-          {team.league_name && (
-            <span className="text-[10px] text-slate-600">{team.league_name}</span>
+        </div>
+        <div className="mt-1 flex items-center gap-2">
+          <FormPills form={team.form} />
+          {team.opponent && (
+            <span className="truncate text-[10px] text-slate-500">
+              vs {team.opponent}{live ? ' · ao vivo' : team.time_local ? ` · ${team.time_local}` : ''}
+            </span>
           )}
         </div>
       </div>
+
+      {typeof team.score === 'number' && (
+        <div className="flex-shrink-0 text-right">
+          <div className="font-mono text-sm font-bold text-white">{team.score}</div>
+          <div className="text-[9px] uppercase tracking-wider text-slate-500">hype</div>
+        </div>
+      )}
     </div>
   )
 }
@@ -112,7 +150,7 @@ export function HypeFlags({ hypeTeams, loading }: HypeFlagsProps) {
         ) : (
           <div className="space-y-2">
             {hypeTeams.map((team, i) => (
-              <HypeCard key={`${team.team}-${team.reason}-${i}`} team={team} />
+              <HypeCard key={`${team.team}-${team.league_id}`} team={team} rank={i + 1} />
             ))}
           </div>
         )}

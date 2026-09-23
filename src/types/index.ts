@@ -1,4 +1,6 @@
 // Database entities
+export type MatchStatus = 'SCHEDULED' | 'TIMED' | 'IN_PLAY' | 'PAUSED' | 'FINISHED' | 'POSTPONED' | 'CANCELLED' | 'SUSPENDED'
+
 export interface League {
   id: string;
   name: string;

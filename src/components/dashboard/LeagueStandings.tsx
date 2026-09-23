@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Trophy } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import type { Standing } from '@/hooks/useDashboardData'
+import { isAllowedCrest } from '@/components/dashboard/HypeFlags'
 
 interface LeagueStandingsProps {
   standings: Standing[]
@@ -30,8 +31,33 @@ const LEAGUES = [
 function getPositionStyle(pos: number, totalTeams: number) {
   if (pos <= 4) return 'border-l-emerald-500/60 bg-emerald-500/[0.04]'
   if (pos <= 6) return 'border-l-blue-500/60 bg-blue-500/[0.03]'
-  if (totalTeams > 0 && pos > totalTeams - 3) return 'border-l-red-500/60 bg-red-500/[0.04]'
+  if (totalTeams > 0 && pos > totalTeams - 4) return 'border-l-red-500/60 bg-red-500/[0.04]'
   return 'border-l-transparent'
+}
+
+// As zonas mudam por pais: no Brasil nao existe vaga de Champions/Europa.
+function getZones(leagueId: string, totalTeams: number) {
+  const relegated = totalTeams > 0 ? totalTeams - 3 : 4
+  if (leagueId === 'BSA') {
+    return [
+      { color: 'bg-emerald-500/60', label: `Libertadores (1-4)` },
+      { color: 'bg-blue-500/60', label: `Sul-Americana (5-6)` },
+      { color: 'bg-red-500/60', label: `Rebaixamento (${relegated}-${totalTeams || 20})` },
+    ]
+  }
+  if (leagueId === 'ELC') {
+    return [
+      { color: 'bg-emerald-500/60', label: 'Acesso (1-2)' },
+      { color: 'bg-blue-500/60', label: 'Playoff de acesso (3-6)' },
+      { color: 'bg-red-500/60', label: `Rebaixamento (${relegated}-${totalTeams || 24})` },
+    ]
+  }
+  if (leagueId === 'CL') return []
+  return [
+    { color: 'bg-emerald-500/60', label: 'Champions' },
+    { color: 'bg-blue-500/60', label: 'Europa' },
+    { color: 'bg-red-500/60', label: `Rebaixamento (${relegated}-${totalTeams || 20})` },
+  ]
 }
 
 export function LeagueStandings({
@@ -98,7 +124,7 @@ export function LeagueStandings({
                 >
                   <span className="text-xs font-medium text-slate-500">{s.pos}</span>
                   <div className="flex items-center gap-2 overflow-hidden">
-                    {s.crest && s.crest.includes('football-data.org') ? (
+                    {s.crest && isAllowedCrest(s.crest) ? (
                       <Image
                         src={s.crest}
                         alt={s.team}
@@ -123,15 +149,11 @@ export function LeagueStandings({
             </div>
 
             <div className="mt-4 flex flex-wrap gap-3 text-[10px] text-slate-600">
-              <span className="flex items-center gap-1">
-                <span className="h-2 w-2 rounded-full bg-emerald-500/60" /> Champions
-              </span>
-              <span className="flex items-center gap-1">
-                <span className="h-2 w-2 rounded-full bg-blue-500/60" /> Europa
-              </span>
-              <span className="flex items-center gap-1">
-                <span className="h-2 w-2 rounded-full bg-red-500/60" /> Rebaixamento
-              </span>
+              {getZones(leagueId, standings.length).map((zone) => (
+                <span key={zone.label} className="flex items-center gap-1">
+                  <span className={`h-2 w-2 rounded-full ${zone.color}`} /> {zone.label}
+                </span>
+              ))}
             </div>
 
             {capturedAt && (
