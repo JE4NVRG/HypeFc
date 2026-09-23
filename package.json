@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "build:pages": "node scripts/build-pages.mjs",
+    "deploy:pages": "node scripts/deploy-pages.mjs",
     "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-hype.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-league-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-espn-parse.ts"
   },
   "dependencies": {
