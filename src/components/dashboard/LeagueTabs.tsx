@@ -1,0 +1,120 @@
+"use client"
+
+import { useState } from 'react'
+import { Trophy, TrendingUp, Target } from 'lucide-react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { LeagueStandings } from '@/components/dashboard/LeagueStandings'
+import { LeagueIntel } from '@/components/dashboard/LeagueIntel'
+import { TopScorers } from '@/components/dashboard/TopScorers'
+import { LEAGUE_NAMES } from '@/types'
+import type { StandingsData, ScorersData } from '@/hooks/useDashboardData'
+
+/**
+ * Uma secao de liga em vez de tres: classificacao, rendimento por mando e
+ * artilheiros respondem ao mesmo leagueId, entao dividem o mesmo seletor e
+ * so uma visao fica montada por vez. Antes eram 2.121px de rolagem empilhada.
+ */
+interface LeagueTabsProps {
+  standingsData: StandingsData | null
+  scorersData: ScorersData | null
+  leagueId: string
+  loadingStandings: boolean
+  loadingScorers: boolean
+  onLeagueChange: (id: string) => void
+}
+
+const TABS = [
+  { id: 'classificacao', label: 'Classificação', icon: Trophy },
+  { id: 'rendimento', label: 'Rendimento', icon: TrendingUp },
+  { id: 'artilheiros', label: 'Artilheiros', icon: Target },
+] as const
+
+type TabId = (typeof TABS)[number]['id']
+
+export function LeagueTabs({
+  standingsData,
+  scorersData,
+  leagueId,
+  loadingStandings,
+  loadingScorers,
+  onLeagueChange,
+}: LeagueTabsProps) {
+  const [tab, setTab] = useState<TabId>('classificacao')
+  const leagueName = standingsData?.league_name ?? ''
+
+  return (
+    <div className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4">
+      <div className="mb-3 flex flex-wrap items-center gap-2">
+        <div className="flex items-center gap-1" role="tablist" aria-label="Visões da liga">
+          {TABS.map(({ id, label, icon: Icon }) => {
+            const ativo = tab === id
+            return (
+              <button
+                key={id}
+                type="button"
+                role="tab"
+                aria-selected={ativo}
+                onClick={() => setTab(id)}
+                className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[11px] font-medium transition focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/50 ${
+                  ativo
+                    ? 'bg-white/[0.08] text-slate-100'
+                    : 'text-slate-400 hover:bg-white/[0.04] hover:text-slate-200'
+                }`}
+              >
+                <Icon className={`h-3.5 w-3.5 ${ativo ? 'text-emerald-400' : 'text-slate-500'}`} />
+                {label}
+              </button>
+            )
+          })}
+        </div>
+
+        <div className="ml-auto min-w-[180px]">
+          <Select value={leagueId} onValueChange={onLeagueChange}>
+            <SelectTrigger className="h-8 border-white/10 bg-white/5 text-xs text-slate-200 focus:ring-orange-500/30">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="border-white/10 bg-slate-900">
+              {Object.entries(LEAGUE_NAMES).map(([id, nome]) => (
+                <SelectItem
+                  key={id}
+                  value={id}
+                  className="text-xs text-slate-200 focus:bg-white/10 focus:text-white"
+                >
+                  {nome}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      {/* So a visao ativa fica montada: 20 linhas de tabela + 38 artilheiros
+          montados ao mesmo tempo so serviriam para pesar o scroll. */}
+      {tab === 'classificacao' && (
+        <LeagueStandings
+          standings={standingsData?.table ?? []}
+          leagueId={leagueId}
+          leagueName={leagueName}
+          capturedAt={standingsData?.captured_at ?? null}
+          loading={loadingStandings}
+          onLeagueChange={onLeagueChange}
+          showLeagueSelect={false}
+        />
+      )}
+
+      {tab === 'rendimento' && (
+        <LeagueIntel
+          table={standingsData?.table ?? []}
+          home={standingsData?.home}
+          away={standingsData?.away}
+          leagueName={leagueName}
+          loading={loadingStandings}
+        />
+      )}
+
+      {tab === 'artilheiros' && (
+        <TopScorers scorers={scorersData?.scorers ?? []} loading={loadingScorers} />
+      )}
+    </div>
+  )
+}

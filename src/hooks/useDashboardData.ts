@@ -25,6 +25,9 @@ export interface Match {
   league_name: string
   /** Id do evento na ESPN: e o que abre o detalhe da partida no clique. */
   event_id?: string | null
+  /** Ids de time na ESPN: alimentam os proximos jogos de cada lado no painel. */
+  home_id?: string | null
+  away_id?: string | null
   home: string
   home_crest?: string | null
   home_position?: number | null
@@ -140,10 +143,10 @@ export function useDashboardData() {
     setState(prev => ({ ...prev, leagueId: id }))
   }, [])
 
-  const fetchToday = useCallback(async (silent = false) => {
+  const fetchToday = useCallback(async (silent = false, dateIso?: string) => {
     if (!silent) setState(prev => ({ ...prev, loadingToday: true }))
     try {
-      const json = await fetchTodayData()
+      const json = await fetchTodayData(dateIso)
       setState(prev => ({
         ...prev,
         todayData: json,
@@ -234,10 +237,13 @@ export function useDashboardData() {
     return () => clearInterval(id)
   }, [hasLiveMatches, fetchToday])
 
+  const loadDay = useCallback((dateIso: string) => fetchToday(false, dateIso), [fetchToday])
+
   return {
     ...state,
     setLeagueId,
     refresh,
+    loadDay,
     groupedMatches,
     hasLiveMatches,
     isLoading: state.loadingToday || state.loadingStandings,

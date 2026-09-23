@@ -25,13 +25,19 @@ import type {
   MatchDetailTeamSide,
 } from '@/lib/matchDetail'
 import { isAllowedCrest } from './HypeFlags'
+import { NextFixtures } from './NextFixtures'
 import { fetchMatchDetailData } from '@/lib/dataSource'
+import { fetchTeamSchedule } from '@/lib/teamSchedule'
+import type { TeamFixture } from '@/lib/teamSchedule'
 
 interface MatchDetailPanelProps {
   eventId: string | null
   leagueId: string
   leagueName: string
   onClose: () => void
+  /** Ids ESPN dos dois times: alimentam os proximos jogos no painel. */
+  homeId?: string | null
+  awayId?: string | null
 }
 
 type Phase = 'idle' | 'loading' | 'ready' | 'error'
@@ -386,12 +392,13 @@ function eventVisual(event: MatchDetailEvent): { icon: React.ReactNode; tone: st
 
 /* ---------- painel ---------- */
 
-export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose }: MatchDetailPanelProps) {
+export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeId, awayId }: MatchDetailPanelProps) {
   const [detail, setDetail] = useState<MatchDetail | null>(null)
   const [loadedFor, setLoadedFor] = useState<string | null>(null)
   const [phase, setPhase] = useState<Phase>('idle')
   const [errorInfo, setErrorInfo] = useState<string | null>(null)
   const [attempt, setAttempt] = useState(0)
+  const [fixtures, setFixtures] = useState<{ home: TeamFixture[]; away: TeamFixture[] } | null>(null)
   const panelRef = useRef<HTMLDivElement | null>(null)
   const closeRef = useRef(onClose)
 
@@ -406,6 +413,7 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose }: Mat
       setLoadedFor(null)
       setPhase('idle')
       setErrorInfo(null)
+      setFixtures(null)
       return
     }
 
@@ -414,6 +422,7 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose }: Mat
     setDetail(null)
     setLoadedFor(null)
     setErrorInfo(null)
+    setFixtures(null)
 
     // Carregador ciente do modo (src/lib/dataSource.ts): no servidor ele bate na
     // rota /api; no site estático o navegador fala com a ESPN direto. Devolve o
@@ -439,6 +448,22 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose }: Mat
       alive = false
     }
   }, [eventId, leagueId, attempt])
+
+  // Proximos jogos dos dois times. Endpoint provado: sem ?fixture=true a ESPN
+  // devolve so o que ja aconteceu. Duas chamadas pequenas, so com o painel aberto.
+  useEffect(() => {
+    if (!detail || !homeId || !awayId) return
+    let alive = true
+    Promise.all([
+      fetchTeamSchedule(leagueId, homeId, detail.home.team).catch(() => []),
+      fetchTeamSchedule(leagueId, awayId, detail.away.team).catch(() => []),
+    ]).then(([home, away]) => {
+      if (alive) setFixtures({ home, away })
+    })
+    return () => {
+      alive = false
+    }
+  }, [detail, homeId, awayId, leagueId])
 
   const open = eventId !== null
 
@@ -653,6 +678,22 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose }: Mat
                 </div>
               </div>
             </Section>
+
+            {/* Proximos jogos de cada lado: o painel cobria so o passado. */}
+            {(fixtures || (homeId && awayId)) && (
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <NextFixtures
+                  fixtures={fixtures?.home ?? []}
+                  team={detail.home.team}
+                  loading={fixtures === null}
+                />
+                <NextFixtures
+                  fixtures={fixtures?.away ?? []}
+                  team={detail.away.team}
+                  loading={fixtures === null}
+                />
+              </div>
+            )}
 
             {/* Confrontos diretos. */}
             <Section title="Confrontos" hint={detail.meetings.length ? `${detail.meetings.length} jogos` : undefined}>

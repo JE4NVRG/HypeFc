@@ -96,11 +96,15 @@ async function formsFor(leagueIds: string[], from: string) {
   return lists.flat()
 }
 
-export async function loadBrowserToday(): Promise<BrowserToday> {
-  const requestedDate = saoPauloToday()
+export async function loadBrowserToday(dateIso?: string): Promise<BrowserToday> {
+  // Com data explicita (link compartilhado ?dia=) NAO procura para tras: se a
+  // pessoa mandou o link daquele dia, mostrar outro dia seria mentir o link.
+  const requestedDate = dateIso && /^\d{4}-\d{2}-\d{2}$/.test(dateIso) ? dateIso : saoPauloToday()
   const candidates = [requestedDate]
-  for (let offset = 1; offset <= MAX_LOOKBACK; offset += 1) {
-    candidates.push(shiftIso(requestedDate, -offset))
+  if (!dateIso) {
+    for (let offset = 1; offset <= MAX_LOOKBACK; offset += 1) {
+      candidates.push(shiftIso(requestedDate, -offset))
+    }
   }
 
   let matches: TodayMatch[] = []

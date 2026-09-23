@@ -11,6 +11,8 @@ interface TodayMatchesProps {
   dayLabel?: string
   /** Abre o detalhe da partida. Sem isso (ou sem event_id) o card nao clica. */
   onSelect?: (match: Match) => void
+  /** Score de hype por time: o sinal aparece no confronto, nao so no card lateral. */
+  hypeByTeam?: Record<string, number>
 }
 
 function Crest({ src, name }: { src?: string | null; name: string }) {
@@ -73,11 +75,23 @@ function StatLine({ match }: { match: Match }) {
   return <p className="px-2 pb-1 text-center font-mono text-[10px] text-slate-500">{bits.join(' · ')}</p>
 }
 
-function MatchRow({ match, onSelect }: { match: Match; onSelect?: (match: Match) => void }) {
+function MatchRow({ match, onSelect, hypeByTeam }: { match: Match; onSelect?: (match: Match) => void; hypeByTeam?: Record<string, number> }) {
   const isLive = match.status === 'IN_PLAY' || match.status === 'PAUSED'
   // Sem id de evento nao existe detalhe para abrir: o card continua informativo,
   // mas nao vira botao (nao prometemos clique que nao funciona).
   const canOpen = Boolean(match.event_id && onSelect)
+
+  // Selo do score no proprio confronto. Quando os dois lados estao em alta, e o
+  // mesmo jogo marcado duas vezes (Porto/Benfica): o card fala no singular.
+  const casaScore = hypeByTeam?.[match.home] ?? null
+  const foraScore = hypeByTeam?.[match.away] ?? null
+  const lados = [casaScore, foraScore].filter((s): s is number => s !== null)
+  const selo =
+    lados.length === 0
+      ? null
+      : lados.length === 1
+        ? `${lados[0]} em alta`
+        : '2 em alta'
 
   const content = (
     <>
@@ -101,6 +115,12 @@ function MatchRow({ match, onSelect }: { match: Match; onSelect?: (match: Match)
             {match.away_position ? <span className="ml-1 font-mono text-[10px] text-slate-500">#{match.away_position}</span> : null}
           </span>
         </div>
+
+        {selo && (
+          <span className="ml-1 flex-shrink-0 rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-amber-300">
+            {selo}
+          </span>
+        )}
 
         {canOpen && (
           <ChevronRight className="h-3.5 w-3.5 flex-shrink-0 text-slate-600 transition group-hover:translate-x-0.5 group-hover:text-emerald-400" />
@@ -134,7 +154,7 @@ function MatchRow({ match, onSelect }: { match: Match; onSelect?: (match: Match)
   )
 }
 
-export function TodayMatches({ groupedMatches, loading, isFallback, dayLabel, onSelect }: TodayMatchesProps) {
+export function TodayMatches({ groupedMatches, loading, isFallback, dayLabel, onSelect, hypeByTeam }: TodayMatchesProps) {
   const leagueEntries = Object.entries(groupedMatches)
 
   return (
@@ -181,7 +201,7 @@ export function TodayMatches({ groupedMatches, loading, isFallback, dayLabel, on
                 </div>
                 <div className="space-y-0.5">
                   {matches.map((match, i) => (
-                    <MatchRow key={`${match.league_id}-${match.home}-${match.away}-${i}`} match={match} onSelect={onSelect} />
+                    <MatchRow key={`${match.league_id}-${match.home}-${match.away}-${i}`} match={match} onSelect={onSelect} hypeByTeam={hypeByTeam} />
                   ))}
                 </div>
               </div>

@@ -13,6 +13,8 @@ interface LeagueStandingsProps {
   capturedAt: string | null
   loading: boolean
   onLeagueChange: (id: string) => void
+  /** Quando a secao de liga tem abas, o seletor so aparece uma vez (no cabecalho). */
+  showLeagueSelect?: boolean
 }
 
 const LEAGUES = [
@@ -66,6 +68,7 @@ export function LeagueStandings({
   capturedAt,
   loading,
   onLeagueChange,
+  showLeagueSelect = true,
 }: LeagueStandingsProps) {
   return (
     <div className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
@@ -76,21 +79,23 @@ export function LeagueStandings({
         <h2 className="text-sm font-semibold text-slate-200">Classificacao</h2>
       </div>
 
-      <Select value={leagueId} onValueChange={onLeagueChange}>
-        <SelectTrigger className="mb-4 border-white/10 bg-white/5 text-sm text-slate-200 focus:ring-orange-500/30">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent className="border-white/10 bg-slate-900">
-          {LEAGUES.map((league) => (
-            <SelectItem key={league.id} value={league.id} className="text-slate-200 focus:bg-white/10 focus:text-white">
-              <span className="flex items-center gap-2">
-                <span>{league.flag}</span>
-                <span>{league.name}</span>
-              </span>
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      {showLeagueSelect && (
+        <Select value={leagueId} onValueChange={onLeagueChange}>
+          <SelectTrigger className="mb-4 border-white/10 bg-white/5 text-sm text-slate-200 focus:ring-orange-500/30">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent className="border-white/10 bg-slate-900">
+            {LEAGUES.map((league) => (
+              <SelectItem key={league.id} value={league.id} className="text-slate-200 focus:bg-white/10 focus:text-white">
+                <span className="flex items-center gap-2">
+                  <span>{league.flag}</span>
+                  <span>{league.name}</span>
+                </span>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      )}
 
       <div className="flex-1">
         {loading ? (

@@ -24,9 +24,10 @@ async function apiGet<T>(url: string): Promise<T> {
   return json as T
 }
 
-export async function fetchTodayData(): Promise<TodayData> {
-  if (STATIC_MODE) return loadBrowserToday()
-  return apiGet<TodayData>('/api/dashboard/today')
+export async function fetchTodayData(dateIso?: string): Promise<TodayData> {
+  if (STATIC_MODE) return loadBrowserToday(dateIso)
+  const query = dateIso ? `?date=${encodeURIComponent(dateIso)}` : ''
+  return apiGet<TodayData>(`/api/dashboard/today${query}`)
 }
 
 export async function fetchStandingsData(leagueId: string): Promise<StandingsData> {
