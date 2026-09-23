@@ -49,6 +49,8 @@ export default function Home() {
   // Ratings do modelo (arquivo estatico do build) e o recorde medido dele.
   const [ratings, setRatings] = useState<RatingsPayload | null>(null)
   const [probRecord, setProbRecord] = useState<{ n: number; brier: number; uniformBrier: number; bestPlaced: number | null; hitRate: number } | null>(null)
+  // Recorde EM PRODUCAO: previsoes gravadas antes do jogo e liquidadas depois.
+  const [probForward, setProbForward] = useState<{ n: number; brier: number | null; hitRate: number | null; pendentes: number } | null>(null)
   const [linkNotice, setLinkNotice] = useState('')
   const diaPedido = useRef(false)
   const diaAberto = useRef(false)
@@ -159,6 +161,18 @@ export default function Home() {
           uniformBrier: dados.metrics.uniform?.brier ?? 0,
           bestPlaced: dados.anchor?.best_placed_hit_rate ?? null,
           hitRate: dados.metrics.model?.top_pick_hit_rate ?? 0,
+        })
+      })
+      .catch(() => {})
+    fetch('data/probability-forward.json', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((dados) => {
+        if (!vivo || !dados?.counts) return
+        setProbForward({
+          n: dados.metrics?.n ?? 0,
+          brier: dados.metrics?.brier ?? null,
+          hitRate: dados.metrics?.top_pick_hit_rate ?? null,
+          pendentes: dados.counts.pendentes ?? 0,
         })
       })
       .catch(() => {})
@@ -280,6 +294,7 @@ export default function Home() {
               : null
           }
           probRecord={probRecord}
+          probForward={probForward}
           onClose={fecharConfronto}
         />
       </main>

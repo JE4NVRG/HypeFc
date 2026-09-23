@@ -40,11 +40,13 @@ export function ProbabilityBars({
   homeName,
   awayName,
   record,
+  forward,
 }: {
   prob: MatchProb
   homeName: string
   awayName: string
   record?: { n: number; brier: number; uniformBrier: number; bestPlaced: number | null; hitRate: number } | null
+  forward?: { n: number; brier: number | null; hitRate: number | null; pendentes: number } | null
 }) {
   const linhas = [
     { rotulo: homeName, valor: prob.home, cor: 'bg-emerald-400' },
@@ -73,6 +75,13 @@ export function ProbabilityBars({
               record.bestPlaced !== null ? `, a mesma taxa de "o melhor colocado da tabela vence" (${(record.bestPlaced * 100).toFixed(1)}%)` : ''
             }: probabilidade melhor, palpite igual.`
           : 'Acerto medido e publicado no recorde do modelo.'}
+      </p>
+      <p className="text-[10px] leading-relaxed text-slate-600">
+        {forward && forward.n > 0
+          ? `Registro em produção (gravado antes do jogo, ${forward.n} partidas liquidadas): Brier ${forward.brier}${
+              forward.hitRate !== null ? ` · favorito ${(forward.hitRate * 100).toFixed(1)}%` : ''
+            }${forward.pendentes ? ` · ${forward.pendentes} pendentes` : ''}.`
+          : 'Registro em produção começa do zero: cada probabilidade é gravada antes do apito e liquidada depois — sem número até o primeiro jogo terminar.'}
       </p>
     </div>
   )

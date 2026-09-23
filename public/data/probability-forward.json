@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-09-23T07:06:15.797Z",
+  "kind": "forward",
+  "definition": "Registro EM PRODUCAO: cada probabilidade foi gravada antes do jogo (data de emissao no snapshot) e liquidada depois. Nao confundir com o backtest, que mede o modelo no passado.",
+  "source": "ESPN (site.api.espn.com)",
+  "counts": {
+    "dias_gravados": 1,
+    "partidas_gravadas": 19,
+    "partidas_liquidadas": 0,
+    "pendentes": 0
+  },
+  "metrics": null,
+  "days": [
+    {
+      "date": "2026-09-20",
+      "mode": "replay",
+      "total": 19,
+      "settled": 19
+    }
+  ],
+  "honest_notes": [
+    "Amostra em producao comeca em zero: numero pequeno no inicio e esperado, e nao vira conclusao antes de algumas centenas de partidas.",
+    "Favorito do modelo acerta na mesma faixa da ancora \"melhor colocado da tabela\" no backtest — probabilidade calibrada, nao vantagem de palpite.",
+    "Nao e sinal de aposta nem recomendacao."
+  ]
+}

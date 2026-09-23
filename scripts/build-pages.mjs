@@ -72,6 +72,21 @@ try {
   if (!existsSync(resolve(root, 'out/index.html'))) {
     throw new Error('out/index.html nao foi gerado')
   }
+
+  // Carimba a versao do service worker a cada build. Sem isso o nome do cache
+  // fica fixo e o SW (stale-while-revalidate) serve o bundle ANTIGO na primeira
+  // carga depois do deploy: parece que o deploy falhou, mas e cache velho.
+  const swPath = resolve(root, 'out/sw.js')
+  if (existsSync(swPath)) {
+    const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\..+$/, 'z')
+    const sw = readFileSync(swPath, 'utf8')
+    if (!sw.includes('__HYPEFC_BUILD_STAMP__')) {
+      console.log('[pages] aviso: out/sw.js sem marcador de versao — cache do SW nao vai renovar')
+    }
+    writeFileSync(swPath, sw.replaceAll('__HYPEFC_BUILD_STAMP__', stamp))
+    console.log(`[pages] service worker versionado: hypefc-${stamp}`)
+  }
+
   if (customDomain) {
     writeFileSync(resolve(root, 'out/CNAME'), `${customDomain}\n`)
     console.log(`[pages] CNAME gravado: ${customDomain}`)

@@ -44,6 +44,8 @@ interface MatchDetailPanelProps {
   /** Probabilidade do modelo (Elo+Poisson) e o recorde medido dele. */
   prob?: MatchProb | null
   probRecord?: { n: number; brier: number; uniformBrier: number; bestPlaced: number | null; hitRate: number } | null
+  /** Registro em producao (previsao gravada antes do jogo). */
+  probForward?: { n: number; brier: number | null; hitRate: number | null; pendentes: number } | null
 }
 
 type Phase = 'idle' | 'loading' | 'ready' | 'error'
@@ -398,7 +400,7 @@ function eventVisual(event: MatchDetailEvent): { icon: React.ReactNode; tone: st
 
 /* ---------- painel ---------- */
 
-export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeId, awayId, prob, probRecord }: MatchDetailPanelProps) {
+export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeId, awayId, prob, probRecord, probForward }: MatchDetailPanelProps) {
   const [detail, setDetail] = useState<MatchDetail | null>(null)
   const [loadedFor, setLoadedFor] = useState<string | null>(null)
   const [phase, setPhase] = useState<Phase>('idle')
@@ -645,6 +647,7 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                   homeName={detail.home.team}
                   awayName={detail.away.team}
                   record={probRecord ?? null}
+                  forward={probForward ?? null}
                 />
               </Section>
             ) : null}

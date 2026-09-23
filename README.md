@@ -98,6 +98,16 @@ O rating não vem do navegador: o site é estático, então `scripts/build-ratin
 
 Tudo isso é versionado em `public/data/probability-record.json`, gerado pelo backtest (`npm run backtest:prob`), com o método, as referências e os avisos.
 
+#### Registro em produção (a parte que ninguém faz)
+
+Backtest mede o modelo no passado — prova que a ideia funciona, não que o número mostrado na tela acertou. Então o produto também **pré-registra**:
+
+- `npm run snapshot:prob` grava a probabilidade de cada jogo **antes do apito**, com data de emissão e os ratings usados (reconstruídos só com jogos anteriores — o jogo de hoje nunca entra na própria conta);
+- `npm run settle:prob` liquida o que terminou e republica `public/data/probability-forward.json`;
+- os dois rodam no cron diário junto do recorde do score.
+
+O `mode` separa o que é o quê: `live` (gravado antes do jogo) entra na métrica em produção; `replay` (data passada, para histórico e para exercitar a liquidação) entra na contagem e **fica fora** da métrica. Somar os dois inflaria a amostra de um com a do outro — o número em produção começa em zero e cresce só com jogo de verdade. A interface diz isso: *"sem número até o primeiro jogo terminar"*.
+
 ### Chave de aposta → probabilidade de mercado
 
 `src/lib/marketOdds.ts` converte a odd publicada em probabilidade implícita, **remove a margem da casa** (normaliza para somar 1) e devolve a margem como número visível. A ESPN publica linha de verdade no resumo do jogo (DraftKings, `moneyLine`, over/under), mas **não publica no scoreboard** e não tem modelo próprio: verificado, `predictor` responde `HTTP 400 "Predictor is not supported for sport: soccer, league: bra.1"` — igual para NBA. Então probabilidade de mercado aparece onde existe, rotulada com a fonte, sem verbo de recomendação.
