@@ -5,6 +5,12 @@ import { Trophy } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import type { Standing } from '@/hooks/useDashboardData'
 import { isAllowedCrest } from '@/components/dashboard/HypeFlags'
+import {
+  chanceDoTime,
+  formatarChance,
+  notaDaSimulacao,
+  type TitleOddsPayload,
+} from '@/lib/titleOdds'
 
 interface LeagueStandingsProps {
   standings: Standing[]
@@ -15,6 +21,8 @@ interface LeagueStandingsProps {
   onLeagueChange: (id: string) => void
   /** Quando a secao de liga tem abas, o seletor so aparece uma vez (no cabecalho). */
   showLeagueSelect?: boolean
+  /** Simulacao da temporada inteira (scripts/build-title-odds.ts). */
+  titleOdds?: TitleOddsPayload | null
 }
 
 const LEAGUES = [
@@ -69,7 +77,10 @@ export function LeagueStandings({
   loading,
   onLeagueChange,
   showLeagueSelect = true,
+  titleOdds = null,
 }: LeagueStandingsProps) {
+  const liga = titleOdds?.leagues?.[leagueId] ?? null
+  const simulacoes = titleOdds?.simulacoes ?? 0
   return (
     <div className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
       <div className="mb-4 flex items-center gap-2">
@@ -78,6 +89,42 @@ export function LeagueStandings({
         </div>
         <h2 className="text-sm font-semibold text-slate-200">Classificacao</h2>
       </div>
+
+      {liga && liga.times.length > 0 && simulacoes > 0 && (
+        <div className="mb-4 rounded-xl border border-white/[0.06] bg-gradient-to-br from-orange-500/[0.07] to-transparent p-3">
+          <div className="mb-2 flex items-baseline justify-between gap-2">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-orange-300/90">
+              Chance de titulo
+            </span>
+            <span className="text-[10px] text-slate-500">
+              {simulacoes.toLocaleString('pt-BR')} simulacoes
+            </span>
+          </div>
+          <div className="space-y-1.5">
+            {liga.times.slice(0, 4).map((t, i) => (
+              <div key={t.team} className="flex items-center gap-2">
+                <span className="w-3 text-[10px] font-medium text-slate-500">{i + 1}</span>
+                <span className="w-[88px] truncate text-xs font-medium text-slate-200" title={t.team}>
+                  {t.apelido || t.team}
+                </span>
+                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/[0.06]">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-orange-500/80 to-yellow-400/80"
+                    style={{ width: `${Math.max(2, Math.round(t.p_titulo * 100))}%` }}
+                  />
+                </div>
+                <span className="w-10 text-right text-xs font-bold text-slate-100">
+                  {formatarChance(t.p_titulo)}
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-2 text-[10px] leading-relaxed text-slate-500">
+            {notaDaSimulacao(liga, simulacoes)} Nao e palpite: o modelo e calibrado e nao
+            supera a ancora &ldquo;melhor colocado vence&rdquo;.
+          </p>
+        </div>
+      )}
 
       {showLeagueSelect && (
         <Select value={leagueId} onValueChange={onLeagueChange}>
@@ -111,7 +158,7 @@ export function LeagueStandings({
           </div>
         ) : (
           <>
-            <div className="mb-1 grid grid-cols-[1.5rem_1fr_1.8rem_1.8rem_1.8rem_1.8rem_2.2rem] items-center gap-1 px-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+            <div className="mb-1 grid grid-cols-[1.5rem_1fr_1.8rem_1.8rem_1.8rem_1.8rem_2.2rem_2.4rem] items-center gap-1 px-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500">
               <span>#</span>
               <span>Time</span>
               <span className="text-center">J</span>
@@ -119,13 +166,16 @@ export function LeagueStandings({
               <span className="text-center">E</span>
               <span className="text-center">D</span>
               <span className="text-right">Pts</span>
+              <span className="text-right" title="Chance de titulo na simulacao da temporada">Tit.</span>
             </div>
 
             <div className="space-y-0.5">
-              {standings.map((s) => (
+              {standings.map((s) => {
+                const chance = chanceDoTime(titleOdds, leagueId, s.team)
+                return (
                 <div
                   key={`${s.pos}-${s.team}`}
-                  className={`grid grid-cols-[1.5rem_1fr_1.8rem_1.8rem_1.8rem_1.8rem_2.2rem] items-center gap-1 rounded-lg border-l-2 px-2 py-2 transition-colors hover:bg-white/[0.04] ${getPositionStyle(s.pos, standings.length)}`}
+                  className={`grid grid-cols-[1.5rem_1fr_1.8rem_1.8rem_1.8rem_1.8rem_2.2rem_2.4rem] items-center gap-1 rounded-lg border-l-2 px-2 py-2 transition-colors hover:bg-white/[0.04] ${getPositionStyle(s.pos, standings.length)}`}
                 >
                   <span className="text-xs font-medium text-slate-500">{s.pos}</span>
                   <div className="flex items-center gap-2 overflow-hidden">
@@ -149,8 +199,19 @@ export function LeagueStandings({
                   <span className="text-center text-xs text-slate-500">{s.draws}</span>
                   <span className="text-center text-xs text-slate-500">{s.losses}</span>
                   <span className="text-right text-xs font-bold text-slate-100">{s.pts}</span>
+                  <span
+                    className="text-right text-xs font-semibold text-orange-300/90"
+                    title={
+                      chance
+                        ? `Chance de titulo ${(chance.p_titulo * 100).toFixed(1)}% · G4 ${(chance.p_g4 * 100).toFixed(0)}% · zona ${(chance.p_zona * 100).toFixed(0)}%`
+                        : undefined
+                    }
+                  >
+                    {chance ? formatarChance(chance.p_titulo) : '—'}
+                  </span>
                 </div>
-              ))}
+                )
+              })}
             </div>
 
             <div className="mt-4 flex flex-wrap gap-3 text-[10px] text-slate-600">

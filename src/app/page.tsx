@@ -12,6 +12,7 @@ import { ativar } from '@/lib/proStore'
 import { RoundView } from '@/components/dashboard/RoundView'
 import { SportsView } from '@/components/dashboard/SportsView'
 import { loadRatings, probabilidadeDoJogo, type RatingsPayload } from '@/lib/ratings'
+import { loadTitleOdds, type TitleOddsPayload } from '@/lib/titleOdds'
 import { LeagueTabs } from '@/components/dashboard/LeagueTabs'
 import { HypeRecord } from '@/components/dashboard/HypeRecord'
 import { ShareRound } from '@/components/dashboard/ShareRound'
@@ -50,6 +51,7 @@ export default function Home() {
   const [view, setView] = useState<ViewId>('rodada')
   // Ratings do modelo (arquivo estatico do build) e o recorde medido dele.
   const [ratings, setRatings] = useState<RatingsPayload | null>(null)
+  const [titleOdds, setTitleOdds] = useState<TitleOddsPayload | null>(null)
   const [probRecord, setProbRecord] = useState<{ n: number; brier: number; uniformBrier: number; bestPlaced: number | null; hitRate: number } | null>(null)
   // Recorde EM PRODUCAO: previsoes gravadas antes do jogo e liquidadas depois.
   const [probForward, setProbForward] = useState<{ n: number; brier: number | null; hitRate: number | null; pendentes: number } | null>(null)
@@ -152,6 +154,9 @@ export default function Home() {
     let vivo = true
     loadRatings().then((payload) => {
       if (vivo) setRatings(payload)
+    })
+    loadTitleOdds().then((payload) => {
+      if (vivo) setTitleOdds(payload)
     })
     fetch('data/probability-record.json', { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : null))
@@ -307,6 +312,7 @@ export default function Home() {
                 loadingStandings={loadingStandings}
                 loadingScorers={loadingScorers}
                 onLeagueChange={setLeagueId}
+                titleOdds={titleOdds}
               />
             </div>
           )}

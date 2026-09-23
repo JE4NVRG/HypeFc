@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Trophy, TrendingUp, Target } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { LeagueStandings } from '@/components/dashboard/LeagueStandings'
+import type { TitleOddsPayload } from '@/lib/titleOdds'
 import { LeagueIntel } from '@/components/dashboard/LeagueIntel'
 import { TopScorers } from '@/components/dashboard/TopScorers'
 import { LEAGUE_NAMES } from '@/types'
@@ -21,6 +22,8 @@ interface LeagueTabsProps {
   loadingStandings: boolean
   loadingScorers: boolean
   onLeagueChange: (id: string) => void
+  /** Simulacao da temporada (public/data/title-odds.json) — coluna "Tit.". */
+  titleOdds?: TitleOddsPayload | null
 }
 
 const TABS = [
@@ -38,6 +41,7 @@ export function LeagueTabs({
   loadingStandings,
   loadingScorers,
   onLeagueChange,
+  titleOdds = null,
 }: LeagueTabsProps) {
   const [tab, setTab] = useState<TabId>('classificacao')
   const leagueName = standingsData?.league_name ?? ''
@@ -99,6 +103,7 @@ export function LeagueTabs({
           loading={loadingStandings}
           onLeagueChange={onLeagueChange}
           showLeagueSelect={false}
+          titleOdds={titleOdds}
         />
       )}
 

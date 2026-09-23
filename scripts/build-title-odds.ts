@@ -35,6 +35,26 @@ const AGORA = new Date()
 
 const RAIZ = resolve(import.meta.dirname, '..')
 
+/**
+ * Rodadas de cada campeonato. E fato do calendario, nao estimativa — serve para
+ * saber quantas rodadas a ESPN AINDA NAO publicou. A ESPN publica ~6 semanas
+ * adiante: em setembro, o Brasileirao tem o resto da temporada no ar (fecha em
+ * dezembro) e as ligas europeias so ate dezembro, metade do campeonato. Simular
+ * so o que esta publicado e chamar isso de "chance de titulo" seria mentira por
+ * omissao, entao as rodadas que faltam entram como confronto medio e o arquivo
+ * declara quantas foram publicadas e quantas foram aproximadas.
+ */
+const RODADAS: Record<string, number> = {
+  BSA: 38,
+  PL: 38,
+  PD: 38,
+  SA: 38,
+  BL1: 34,
+  FL1: 34,
+  PPL: 34,
+  DED: 34,
+}
+
 interface RatingsPayload {
   season: number
   model: { name: string; k: number; home_advantage: number }
@@ -77,7 +97,9 @@ interface Time {
  * outras direto em `standings`), entao os dois caminhos sao tentados e as
  * entradas sao deduplicadas por id.
  */
-async function tabelaDePontos(slug: string): Promise<Array<{ id: string; nome: string; pts: number; jogos: number }>> {
+async function tabelaDePontos(
+  slug: string
+): Promise<Array<{ id: string; nome: string; curto: string; pts: number; jogos: number }>> {
   const dados = await pegarJson(
     `https://site.api.espn.com/apis/v2/sports/soccer/${slug}/standings?season=${SEASON}`
   )
@@ -88,7 +110,7 @@ async function tabelaDePontos(slug: string): Promise<Array<{ id: string; nome: s
   }
   if (dados.standings?.entries) grupos.push(...dados.standings.entries)
 
-  const vistos = new Map<string, { id: string; nome: string; pts: number; jogos: number }>()
+  const vistos = new Map<string, { id: string; nome: string; curto: string; pts: number; jogos: number }>()
   for (const e of grupos) {
     const id = String(e?.team?.id ?? '')
     if (!id || vistos.has(id)) continue
@@ -98,7 +120,10 @@ async function tabelaDePontos(slug: string): Promise<Array<{ id: string; nome: s
     if (!Number.isFinite(pontos)) continue
     vistos.set(id, {
       id,
-      nome: e?.team?.shortDisplayName || e?.team?.displayName || `Time ${id}`,
+      // displayName e o nome que a tabela do app mostra (src/lib/espnParse.ts);
+      // casar por ele e o unico jeito de a linha encontrar a chance.
+      nome: e?.team?.displayName || e?.team?.shortDisplayName || `Time ${id}`,
+      curto: e?.team?.shortDisplayName || '',
       pts: pontos,
       jogos: Number.isFinite(jogos) ? jogos : 0,
     })
@@ -182,11 +207,13 @@ async function porLiga(
   // arquivo de ratings): casa primeiro pelos nomes dos jogos restantes e, se o
   // time nao aparece mais na temporada, cai para o nome da tabela de pontos.
   const ratingPorId = new Map<string, string>()
+  const apelidoPorId = new Map<string, string>()
   for (const j of jogos) {
     for (const [id, candidatos] of [
       [j.casaId, j.casaCandidatos],
       [j.foraId, j.foraCandidatos],
     ] as Array<[string, string[]]>) {
+      if (!apelidoPorId.has(id) && candidatos.length) apelidoPorId.set(id, candidatos[0])
       if (ratingPorId.has(id)) continue
       for (const c of candidatos) {
         const achado = porNomeNormalizado.get(normalizar(c))
@@ -198,6 +225,7 @@ async function porLiga(
     }
   }
 
+  const curtoPorId = new Map(pontos.map((p) => [p.id, p.curto]))
   const mediaLiga = media([...tabela.values()])
   let semRating = 0
   const times: Time[] = pontos.map((p) => {
@@ -238,6 +266,27 @@ async function porLiga(
   }
 
   const zona = pontos.length <= 18 ? 2 : shortId === 'BSA' ? 4 : 3
+
+  // Quanto do campeonato a ESPN ainda nao publicou (ela publica ~6 semanas
+  // adiante). Sem isso a chance de titulo europeia valeria so ate dezembro e
+  // pareceria definitiva.
+  const publicadasPorTime = new Map<string, number>()
+  for (const j of calendario) {
+    publicadasPorTime.set(j.casa, (publicadasPorTime.get(j.casa) || 0) + 1)
+    publicadasPorTime.set(j.fora, (publicadasPorTime.get(j.fora) || 0) + 1)
+  }
+  const totalRodadas =
+    RODADAS[shortId] ||
+    Math.max(...times.map((t) => t.jogos + (publicadasPorTime.get(t.ratingName) || 0)))
+  const faltandoPorTime = new Map<string, number>()
+  let rodadasPublicadas = 0
+  for (const t of times) {
+    const conhecidas = t.jogos + (publicadasPorTime.get(t.ratingName) || 0)
+    if (conhecidas > rodadasPublicadas) rodadasPublicadas = conhecidas
+    faltandoPorTime.set(t.ratingName, Math.max(0, totalRodadas - conhecidas))
+  }
+  const rodadasAproximadas = Math.max(0, totalRodadas - rodadasPublicadas)
+
   const titulos = new Map<string, number>()
   const top4 = new Map<string, number>()
   const queda = new Map<string, number>()
@@ -249,6 +298,8 @@ async function porLiga(
 
   for (let s = 0; s < SIMS; s += 1) {
     const pts = new Map(times.map((t) => [t.ratingName, t.pts]))
+    // Copia por temporada simulada: cada time precisa completar suas rodadas.
+    const faltandoNoSorteio = new Map(faltandoPorTime)
     for (const j of calendario) {
       const p = probabilidade(j.casa, j.fora)
       const sorteio = Math.random()
@@ -261,6 +312,36 @@ async function porLiga(
         pts.set(j.fora, (pts.get(j.fora) as number) + 3)
       }
     }
+    // Rodadas que a ESPN ainda nao publicou: sorteio de confrontos dentro da
+    // liga ate cada time completar suas rodadas. Aproximacao declarada — quem
+    // joga contra quem nessas rodadas ainda nao existe no calendario publico.
+    for (let r = 0; r < totalRodadas; r += 1) {
+      const fila = times.map((t) => t.ratingName).filter((n) => (faltandoNoSorteio.get(n) as number) > 0)
+      if (fila.length < 2) break
+      for (let i = fila.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1))
+        const troca = fila[i]
+        fila[i] = fila[j]
+        fila[j] = troca
+      }
+      for (let i = 0; i + 1 < fila.length; i += 2) {
+        const casa = fila[i]
+        const fora = fila[i + 1]
+        faltandoNoSorteio.set(casa, (faltandoNoSorteio.get(casa) as number) - 1)
+        faltandoNoSorteio.set(fora, (faltandoNoSorteio.get(fora) as number) - 1)
+        const p = probabilidade(casa, fora)
+        const sorteio = Math.random()
+        if (sorteio < p.home) {
+          pts.set(casa, (pts.get(casa) as number) + 3)
+        } else if (sorteio < p.home + p.draw) {
+          pts.set(casa, (pts.get(casa) as number) + 1)
+          pts.set(fora, (pts.get(fora) as number) + 1)
+        } else {
+          pts.set(fora, (pts.get(fora) as number) + 3)
+        }
+      }
+    }
+
     // Desempate: pontos e, depois, rating (o criterio real varia por liga —
     // saldo de gols nao existe na simulacao, e dizer o contrario seria mentir).
     const ordem = [...times].sort((a, b) => {
@@ -275,7 +356,11 @@ async function porLiga(
 
   const saida = times
     .map((t) => ({
+      // `team` e o nome que a tabela de classificacao usa (displayName) — e por
+      // ele que a linha da tabela encontra a chance. `apelido` e o nome curto do
+      // calendario ("Athletico-PR"), que cabe no bloco estreito do topo.
       team: t.nome,
+      apelido: apelidoPorId.get(t.id) || curtoPorId.get(t.id) || t.nome,
       rating_name: t.ratingName,
       pos: pontos.findIndex((p) => p.id === t.id) + 1,
       pts: t.pts,
@@ -292,6 +377,9 @@ async function porLiga(
     league_name: nome,
     slug,
     jogos_restantes: calendario.length,
+    rodadas_totais: totalRodadas,
+    rodadas_publicadas: rodadasPublicadas,
+    rodadas_aproximadas: rodadasAproximadas,
     zona_rebaixamento: zona,
     times_sem_rating: semRating,
     times: saida,
@@ -303,7 +391,7 @@ async function principal() {
     readFileSync(resolve(RAIZ, 'public/data/ratings.json'), 'utf8')
   )
   const ligas: Record<string, any> = {}
-  for (const [shortId, nome, slug] of LEAGUES) {
+  for (const [shortId, slug, nome] of LEAGUES) {
     process.stdout.write(`  ${shortId} (${slug})... `)
     const resultado = await porLiga(shortId, nome, slug, catalogo)
     if (!resultado) {
@@ -321,9 +409,9 @@ async function principal() {
     generated_at: new Date().toISOString(),
     season: SEASON,
     simulacoes: SIMS,
-    metodo: `temporada simulada ${SIMS} vezes a partir da tabela de pontos atual e do calendario restante da ESPN, com as probabilidades Elo+Poisson do proprio site; desempate por pontos e rating`,
+    metodo: `temporada simulada ${SIMS} vezes a partir da tabela de pontos atual e do calendario da ESPN, com as probabilidades Elo+Poisson do proprio site; desempate por pontos e rating`,
     aviso:
-      'O modelo e calibrado e nao supera a ancora "melhor colocado vence": a chance de titulo e consequencia da diferenca de rating, nao um palpite. Zona = ultimos colocados, nao rebaixamento confirmado.',
+      'O modelo e calibrado e nao supera a ancora "melhor colocado vence": a chance de titulo e consequencia da diferenca de rating, nao um palpite. Zona = ultimos colocados, nao rebaixamento confirmado. Rodadas que a ESPN ainda nao publicou entram como confronto sorteado dentro da liga — o campo rodadas_aproximadas diz quantas.',
     leagues: ligas,
   }
   mkdirSync(resolve(RAIZ, 'public/data'), { recursive: true })

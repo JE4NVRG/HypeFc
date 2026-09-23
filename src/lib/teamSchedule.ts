@@ -239,10 +239,38 @@ export async function fetchTeamSchedule(
       `${SITE}/site/v2/sports/soccer/${slug}/teams/${encodeURIComponent(id)}/schedule?fixture=true`,
       { headers: HEADERS, cache: 'no-store' }
     )
-    if (!res.ok) return []
+    if (res.ok) {
+      const payload = (await res.json().catch(() => null)) as unknown
+      const daAgenda = parseTeamSchedule(payload, id)
+      if (daAgenda.length) return daAgenda
+    }
 
-    const payload = (await res.json().catch(() => null)) as unknown
-    return parseTeamSchedule(payload, id)
+    // Reserva: calendario da LIGA por mes. Em 23/09/2026 o endpoint de agenda do
+    // time parou de devolver jogos futuros — voltava vazio em todas as variacoes
+    // testadas (sem parametro, com limit, com season), enquanto o scoreboard por
+    // mes seguia publicando a temporada inteira. Sem esta reserva a secao
+    // "proximos jogos" ficava vazia sem motivo aparente.
+    const meses: string[] = []
+    const hoje = new Date()
+    for (let i = 0; i < 4; i += 1) {
+      const d = new Date(Date.UTC(hoje.getUTCFullYear(), hoje.getUTCMonth() + i, 1))
+      meses.push(`${d.getUTCFullYear()}${String(d.getUTCMonth() + 1).padStart(2, '0')}`)
+    }
+    const paginas = await Promise.all(
+      meses.map((mes) =>
+        fetch(`${SITE}/site/v2/sports/soccer/${slug}/scoreboard?dates=${mes}&limit=400`, {
+          headers: HEADERS,
+          cache: 'no-store',
+        })
+          .then((r) => (r.ok ? r.json() : null))
+          .catch(() => null)
+      )
+    )
+    const eventos = paginas.flatMap((pagina: unknown) => {
+      const lista = (pagina as EspnSchedulePayload | null)?.events
+      return Array.isArray(lista) ? lista : []
+    })
+    return parseTeamSchedule({ events: eventos }, id)
   } catch {
     return []
   }
