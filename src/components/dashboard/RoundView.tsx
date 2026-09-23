@@ -278,8 +278,10 @@ export function RoundView({
               primeiro chip, para nao gastar uma linha de altura. */}
           <span className="flex shrink-0 items-center gap-1.5 pr-1">
             <Zap className="h-4 w-4 shrink-0 text-amber-400" aria-hidden />
+            {/* o numero sem unidade nao comunica: e o score de hype do modelo,
+                de 0 a 100, e agora esta escrito ao lado da fileira. */}
             <span className="text-[11px] font-semibold uppercase tracking-wider text-amber-300/90">
-              Em alta
+              Em alta <span className="font-normal normal-case text-slate-400">· score 0–100</span>
             </span>
           </span>
           {hypeTeams.slice(0, 12).map((t) => (
