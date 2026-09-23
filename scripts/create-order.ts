@@ -10,7 +10,7 @@
  * pagamento, e um pedido pendente nao libera nada.
  *
  * Saida: id do pedido + link de checkout com a referencia do pedido, quando a
- * variavel HYPEFC_CHECKOUT_URL estiver definida (e ela que aponta para a sua
+ * variavel NEXT_PUBLIC_CHECKOUT_URL estiver definida (e ela que aponta para a sua
  * pagina de cobranca do provedor).
  */
 

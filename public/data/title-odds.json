@@ -1,0 +1,8 @@
+{
+  "generated_at": "2026-09-23T11:43:42.341Z",
+  "season": 2026,
+  "simulacoes": 5000,
+  "metodo": "temporada simulada 5000 vezes a partir da tabela de pontos atual e do calendario restante da ESPN, com as probabilidades Elo+Poisson do proprio site; desempate por pontos e rating",
+  "aviso": "O modelo e calibrado e nao supera a ancora \"melhor colocado vence\": a chance de titulo e consequencia da diferenca de rating, nao um palpite. Zona = ultimos colocados, nao rebaixamento confirmado.",
+  "leagues": {}
+}

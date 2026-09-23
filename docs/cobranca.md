@@ -15,7 +15,7 @@ colar o link. Este documento é a ordem exata dos passos.
 | Venda: abrir pedido | `npm run venda:abrir -- --email cliente@x.com` | pronto |
 | Venda: fechar (gera o código + link de ativação) | `npm run venda:paga -- --order <id>` | pronto |
 | Termos de uso e privacidade (LGPD) — provedor costuma exigir | `/termos` e `/privacidade` | pronto |
-| **Conta no provedor de pagamento + `HYPEFC_CHECKOUT_URL`** | — | **falta você** |
+| **Conta no provedor de pagamento + `NEXT_PUBLIC_CHECKOUT_URL`** | — | **falta você** |
 
 ## Passo 1 — escolher onde o dinheiro entra
 

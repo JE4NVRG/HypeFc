@@ -22,7 +22,8 @@
     "venda:abrir": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/create-order.ts",
     "venda:paga": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/mark-paid.ts",
     "alertas": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/send-alerts.ts",
-    "loja:conferir": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/conferir-loja.ts"
+    "loja:conferir": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/conferir-loja.ts",
+    "titulo:prob": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/build-title-odds.ts"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.2.6",
