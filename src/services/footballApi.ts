@@ -67,6 +67,7 @@ export interface TodayMatch {
   status: MatchStatus
   score_home: number | null
   score_away: number | null
+  match_stats?: import('@/lib/matchStats').MatchStats | null
 }
 
 export interface StandingRow {

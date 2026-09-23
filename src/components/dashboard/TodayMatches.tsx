@@ -51,11 +51,30 @@ function MatchCenter({ match }: { match: Match }) {
   )
 }
 
+function StatLine({ match }: { match: Match }) {
+  const stats = match.match_stats
+  if (!stats) return null
+  const bits = [
+    stats.possession_home != null && stats.possession_away != null
+      ? `posse ${Math.round(stats.possession_home)}–${Math.round(stats.possession_away)}`
+      : null,
+    stats.shots_home != null && stats.shots_away != null
+      ? `chutes ${stats.shots_home}–${stats.shots_away}`
+      : null,
+    stats.shots_on_target_home != null && stats.shots_on_target_away != null
+      ? `no alvo ${stats.shots_on_target_home}–${stats.shots_on_target_away}`
+      : null,
+  ].filter(Boolean)
+  if (!bits.length) return null
+  return <p className="px-2 pb-1 text-center font-mono text-[10px] text-slate-500">{bits.join(' · ')}</p>
+}
+
 function MatchRow({ match }: { match: Match }) {
   const isLive = match.status === 'IN_PLAY' || match.status === 'PAUSED'
 
   return (
-    <div className={`flex items-center gap-1.5 rounded-lg px-2 py-2 transition-colors ${isLive ? 'bg-emerald-500/[0.06] ring-1 ring-emerald-500/10' : 'bg-white/[0.03] hover:bg-white/[0.06]'}`}>
+    <div className={`rounded-lg ${isLive ? 'bg-emerald-500/[0.06] ring-1 ring-emerald-500/10' : 'bg-white/[0.03]'}`}>
+      <div className="flex items-center gap-1.5 px-2 py-2">
       {/* Casa */}
       <div className="flex flex-1 items-center justify-end gap-1.5 overflow-hidden text-right">
         <span className="truncate text-sm font-medium text-slate-200">
@@ -75,6 +94,8 @@ function MatchRow({ match }: { match: Match }) {
           {match.away_position ? <span className="ml-1 font-mono text-[10px] text-slate-500">#{match.away_position}</span> : null}
         </span>
       </div>
+      </div>
+      <StatLine match={match} />
     </div>
   )
 }

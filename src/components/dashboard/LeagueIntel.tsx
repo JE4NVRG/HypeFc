@@ -116,8 +116,7 @@ export function LeagueIntel({ table, home = [], away = [], leagueName, loading }
             </div>
           </div>
           <p className="mt-3 text-[10px] leading-relaxed text-slate-600">
-            Casa/fora só entra com 3 jogos de cada lado. Chute, posse e xG não existem no plano grátis da Football-Data.
-            O conector seguinte, se for integrar, é API-Football — o X de quem constrói app aponta ela para estatística de partida, não a Sportmonks como primeiro passo.
+            Casa/fora só entra com 3 jogos de cada lado. Posse, chutes e chutes no gol vêm da ESPN, sem chave. xG continua fora: nenhuma API grátis estável entrega isso.
           </p>
         </>
       )}

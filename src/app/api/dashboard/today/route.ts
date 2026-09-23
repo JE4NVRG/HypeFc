@@ -3,6 +3,8 @@ export const dynamic = 'force-dynamic'
 import { NextResponse } from 'next/server'
 import { createCacheKey, memoryCache, withCache } from '@/lib/cache'
 import { fetchTodayMatches, fetchStandings, generateHypeFlags, computeDayStats } from '@/services/footballApi'
+import { fetchEspnFixtures } from '@/services/espn'
+import { attachMatchStats } from '@/lib/matchStats'
 import type { StandingRow, TodayMatch } from '@/services/footballApi'
 
 export async function GET() {
@@ -46,10 +48,18 @@ export async function GET() {
 
     const hype = generateHypeFlags(enrichedMatches, standingsMap)
     const stats = computeDayStats(enrichedMatches)
+    let withStats = enrichedMatches.map(match => ({ ...match, match_stats: null as TodayMatch['match_stats'] }))
+    try {
+      const espnKey = createCacheKey('espn', hoje, leagueIds.slice().sort().join(','))
+      const fixtures = await withCache(espnKey, () => fetchEspnFixtures(leagueIds, hoje), 2)
+      withStats = attachMatchStats(enrichedMatches, fixtures)
+    } catch (espnError) {
+      console.error('ESPN stats unavailable:', espnError)
+    }
 
     return NextResponse.json({
       date: hoje,
-      matches: enrichedMatches,
+      matches: withStats,
       hype,
       stats,
       _meta: { responseTime: `${Date.now() - startTime}ms`, timestamp: new Date().toISOString() },

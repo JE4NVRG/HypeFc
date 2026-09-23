@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from 'react'
+import type { MatchStats } from '@/lib/matchStats'
 
 function humanError(message: string): string {
   if (message.includes('FOOTBALL_API_TOKEN')) {
@@ -30,6 +31,7 @@ export interface Match {
   status: MatchStatus
   score_home: number | null
   score_away: number | null
+  match_stats?: MatchStats | null
 }
 
 export interface HypeTeam {
