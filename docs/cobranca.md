@@ -121,3 +121,35 @@ provedor e chamando o mesmo `mark-paid` — o resto da cadeia não muda.
   adivinhação — está escrito assim na oferta, nos termos e na política.
 - Não usar GitHub Actions para nada: a conta está bloqueada e todo workflow falha e
   gera e-mail de erro. Deploy é `npm run deploy:domain`.
+
+## LIQUIDACAO AUTOMATICA (Stripe -> Pro no navegador do comprador)
+
+Antes: `npm run venda:paga <email>` na mao. Agora isso so serve para cortesia/suporte.
+
+Fluxo que esta no ar:
+
+1. `https://buy.stripe.com/4gMeVec9B7zTdRdh2Uffy00` (live, conta **Vrg Solucoes** ·
+   produto `prod_VJUASIr9kJCW0O` · preco `price_1UIrC7KCOtDfcIhDN1xRWO2G` · R$ 9,90/mes BRL).
+2. Stripe devolve o comprador para `https://hypefc.je4ndev.com/?pro=ok&session_id={CHECKOUT_SESSION_ID}`.
+3. Cron `07ce6b93a1d0` (`hypefc-venda-sync.sh`, a cada 10 min) le as sessoes pagas pelo Stripe
+   CLI (`~/.local/bin/stripe`, conta fixada em live por `.env.local:HYPEFC_STRIPE_ACCOUNT`) e
+   grava o pedido via RPC `pro_order_stripe` (service_role, idempotente por sessao).
+4. O site (`ResgatePro.tsx`) chama `pro_claim_session` com o id da sessao: libera o Pro, guarda o
+   token no navegador e limpa a URL. Resgate e de uso unico (`ja-resgatado` no segundo).
+
+Pontos de atencao que ja morderam:
+
+- **A conta recebe outros produtos.** `stripe-sync.ts` filtra por preco/produto do HypeFC e
+  **falha fechado** se `HYPEFC_STRIPE_PRICE_LIVE` nao estiver no `.env.local`. Sem o filtro, uma
+  assinatura de R$ 39,90 de outro produto virou pedido do HypeFC (e foi removida).
+- **O CLI guarda o modo selecionado.** Um cron rodando com o CLI em sandbox nao ve venda nenhuma:
+  o script roda `stripe switch <conta> --live` antes de ler.
+- **Comprou antes de sincronizar?** O ResgatePro tenta 4x (20s) e, se ainda nao achar, mantem o
+  `session_id` na URL e pede recarregar depois. Nunca limpa a URL quando o resgate falhou.
+- **Teste sem dinheiro real:** `https://buy.stripe.com/test_4gMeVec9B7zTdRdh2Uffy00` (cartao
+  4242 4242 4242 4242) + `npm run venda:sync -- --test`.
+- **Adaptive pricing** esta ligado no link: visitante fora do Brasil ve o preco na moeda local
+  (foi assim que apareceu "£ 1,51" no Chrome de automacao). Para fixar R$ 9,90 para todos:
+  `stripe payment_links update <plink> -d "adaptive_pricing[enabled]=false"`.
+- No Checkout o comprador ve **Vrg Solucoes** como recebedor (nome da conta Stripe). Se quiser
+  que apareca "HypeFC", e ajuste de nome/descriptor na conta.
