@@ -114,18 +114,31 @@ type SessaoStripe = {
 // R$ 39,90 de outro produto apareceu como "paga" nesta mesma conta). Sem este
 // filtro o sincronizador entregaria HypeFC Pro para quem comprou outra coisa —
 // então ele falha FECHADO: sem saber quais preços são nossos, não grava nada.
-const PRECO_HYPEFC = (process.env.HYPEFC_STRIPE_PRICE_LIVE || '').trim()
-const PRODUTO_HYPEFC = (process.env.HYPEFC_STRIPE_PROD_LIVE || '').trim()
+//
+// Resolvido em função, não em constante: os ids de sandbox e live são
+// diferentes, e uma constante lida no carregamento travava o preço de live
+// (foi assim que o modo teste deixou de reconhecer a própria assinatura).
+function precoAlvo(): string {
+  const bruto = modo === 'test' ? process.env.HYPEFC_STRIPE_PRICE_TEST : process.env.HYPEFC_STRIPE_PRICE_LIVE
+  return (bruto || '').trim()
+}
+
+function produtoAlvo(): string {
+  const bruto = modo === 'test' ? process.env.HYPEFC_STRIPE_PROD_TEST : process.env.HYPEFC_STRIPE_PROD_LIVE
+  return (bruto || '').trim()
+}
 
 function ehDoHypefc(s: SessaoStripe): boolean {
   if ((s.metadata?.hypefc_plan || '') === 'pro') return true
-  if (!PRECO_HYPEFC && !PRODUTO_HYPEFC) return false
+  const precoEsperado = precoAlvo()
+  const produtoEsperado = produtoAlvo()
+  if (!precoEsperado && !produtoEsperado) return false
   const itens = s.line_items?.data ?? []
   return itens.some((i) => {
     const preco = i?.price
     if (!preco) return false
-    if (PRECO_HYPEFC && preco.id === PRECO_HYPEFC) return true
-    if (PRODUTO_HYPEFC && preco.product === PRODUTO_HYPEFC) return true
+    if (precoEsperado && preco.id === precoEsperado) return true
+    if (produtoEsperado && preco.product === produtoEsperado) return true
     return false
   })
 }
@@ -139,13 +152,8 @@ async function principal(): Promise<void> {
   fixarConta()
 
   const limite = valor('--limite', '30')
-  const precoTeste = (process.env.HYPEFC_STRIPE_PRICE_TEST || '').trim()
-  if (modo === 'test' && precoTeste) {
-    process.env.HYPEFC_STRIPE_PRICE_LIVE = precoTeste
-    process.env.HYPEFC_STRIPE_PROD_LIVE = (process.env.HYPEFC_STRIPE_PROD_TEST || '').trim()
-  }
-  if (!PRECO_HYPEFC && !PRODUTO_HYPEFC) {
-    console.error('Sincronizacao abortada: sem HYPEFC_STRIPE_PRICE_LIVE/PRODUTO no .env.local.')
+  if (!precoAlvo() && !produtoAlvo()) {
+    console.error(`Sincronizacao abortada: sem preco/produto do HypeFC para o modo ${modo} no .env.local.`)
     console.error('Sem saber quais precos sao do HypeFC, gravar qualquer compra da conta seria entregar Pro errado.')
     process.exit(5)
   }
@@ -227,7 +235,11 @@ async function sincronizarAssinaturas(): Promise<void> {
       'subscriptions',
       'list',
       '--limit',
-      '30',
+      '50',
+      // 'all' inclui canceladas: sem isso o site nunca fica sabendo do
+      // cancelamento (a listagem padrao omite) e a assinatura some do radar.
+      '--status',
+      'all',
       '--expand',
       'data.customer',
       '--expand',
@@ -242,8 +254,10 @@ async function sincronizarAssinaturas(): Promise<void> {
   const nossas = assinaturas.filter((a) =>
     (a.items?.data ?? []).some((i) => {
       if (!i?.price) return false
-      if (PRECO_HYPEFC && i.price.id === PRECO_HYPEFC) return true
-      if (PRODUTO_HYPEFC && i.price.product === PRODUTO_HYPEFC) return true
+      const precoEsperado = precoAlvo()
+      const produtoEsperado = produtoAlvo()
+      if (precoEsperado && i.price.id === precoEsperado) return true
+      if (produtoEsperado && i.price.product === produtoEsperado) return true
       return false
     })
   )

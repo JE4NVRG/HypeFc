@@ -30,7 +30,9 @@ begin
     return jsonb_build_object('ok', false, 'erro', 'email-invalido');
   end if;
 
-  -- active/trialing = acesso liberado; past_due/canceled = acesso ate vencer
+  -- acesso no site exige status='active' E vencimento no futuro (ver _acesso em
+  -- 20260923090000_hypefc_pro.sql): past_due/canceled/incomplete NAO liberam,
+  -- mesmo que o vencimento esteja a frente — e o que impede cobranca falha de virar Pro.
   if v_status in ('active', 'trialing') then
     v_plano := 'pro';
     v_situacao := 'active';
