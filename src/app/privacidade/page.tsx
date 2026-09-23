@@ -11,13 +11,15 @@ const S = {
   h2: 'text-sm font-semibold text-slate-200',
   p: 'text-[13px] leading-relaxed text-slate-400',
   ul: 'space-y-1 text-[13px] leading-relaxed text-slate-400',
-  link: 'text-emerald-400 underline decoration-emerald-400/30 underline-offset-2 hover:decoration-emerald-400',
+  link: 'text-emerald-400 underline decoration-emerald-400/30 underline-offset-2 hover:decoration-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 rounded-lg',
+  linkNav:
+    'inline-flex min-h-[44px] items-center text-emerald-400 underline decoration-emerald-400/30 underline-offset-2 hover:decoration-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 rounded-lg sm:min-h-[36px]',
 }
 
 export default function Privacidade() {
   return (
     <article className="mx-auto max-w-2xl px-5 py-8">
-      <p className="text-[11px] uppercase tracking-wider text-slate-500">HypeFC</p>
+      <p className="text-[11px] uppercase tracking-wider text-slate-400">HypeFC</p>
       <h1 className={S.h1}>Política de privacidade</h1>
       <p className={`${S.p} mt-1`}>Última atualização: 23 de setembro de 2026.</p>
 
@@ -93,10 +95,10 @@ export default function Privacidade() {
       </section>
 
       <nav className="mt-8 flex flex-wrap gap-4 border-t border-slate-800 pt-4 text-[12px]">
-        <Link className={S.link} href="/">
+        <Link className={S.linkNav} href="/">
           ← Voltar ao painel
         </Link>
-        <Link className={S.link} href="/termos">
+        <Link className={S.linkNav} href="/termos">
           Termos de uso
         </Link>
       </nav>

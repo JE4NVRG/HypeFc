@@ -1,6 +1,5 @@
 "use client"
 
-import Image from 'next/image'
 import { Trophy } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import type { Standing } from '@/hooks/useDashboardData'
@@ -26,7 +25,7 @@ interface LeagueStandingsProps {
 }
 
 const LEAGUES = [
-  { id: 'BSA', name: 'Brasileirao Serie A', flag: '\u{1F1E7}\u{1F1F7}' },
+  { id: 'BSA', name: 'Brasileirão Série A', flag: '\u{1F1E7}\u{1F1F7}' },
   { id: 'PL', name: 'Premier League', flag: '\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}' },
   { id: 'PD', name: 'La Liga', flag: '\u{1F1EA}\u{1F1F8}' },
   { id: 'SA', name: 'Serie A', flag: '\u{1F1EE}\u{1F1F9}' },
@@ -70,9 +69,28 @@ function getZones(leagueId: string, totalTeams: number) {
   ]
 }
 
+/**
+ * A chance vem do build como "12.3%": aqui ela sai em pt-BR ("12,3%"). O
+ * formatador e do lib e nao muda; a apresentacao e desta tela.
+ */
+function chanceBR(p: number): string {
+  return formatarChance(p).replace('.', ',')
+}
+
+/**
+ * A tabela precisa caber em 390px de largura. Com as 8 colunas de uma vez, o
+ * nome do time ficava com 22px ("Flamengo" cortado) porque #, J, V, E, D, Pts e
+ * Tit. comem a linha inteira. No mobile ficam as colunas que decidem (posicao,
+ * time, jogos, pontos e chance de titulo); V/E/D entram a partir de sm.
+ */
+const GRADE =
+  'grid-cols-[1.5rem_1fr_1.5rem_2.25rem_2.5rem] sm:grid-cols-[1.75rem_1fr_1.75rem_1.75rem_1.75rem_1.75rem_2.5rem_3rem]'
+const SO_SM = 'hidden sm:block'
+
 export function LeagueStandings({
   standings,
   leagueId,
+  leagueName,
   capturedAt,
   loading,
   onLeagueChange,
@@ -82,53 +100,55 @@ export function LeagueStandings({
   const liga = titleOdds?.leagues?.[leagueId] ?? null
   const simulacoes = titleOdds?.simulacoes ?? 0
   return (
-    <div className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
-      <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-yellow-500/10">
-          <Trophy className="h-3.5 w-3.5 text-yellow-400" />
+    <div className="flex flex-col rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+      <div className="mb-4 flex items-center gap-2.5">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-500/10">
+          <Trophy className="h-4 w-4 text-orange-300" />
         </div>
-        <h2 className="text-sm font-semibold text-slate-200">Classificacao</h2>
+        <div className="min-w-0">
+          <h2 className="text-xl font-semibold text-slate-100">Classificação</h2>
+          {leagueName ? <p className="truncate text-[12px] text-slate-400">{leagueName}</p> : null}
+        </div>
       </div>
 
       {liga && liga.times.length > 0 && simulacoes > 0 && (
-        <div className="mb-4 rounded-xl border border-white/[0.06] bg-gradient-to-br from-orange-500/[0.07] to-transparent p-3">
-          <div className="mb-2 flex items-baseline justify-between gap-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-orange-300/90">
-              Chance de titulo
-            </span>
-            <span className="text-[10px] text-slate-500">
-              {simulacoes.toLocaleString('pt-BR')} simulacoes
+        <div className="mb-4 rounded-xl border border-orange-500/20 bg-gradient-to-br from-orange-500/[0.08] to-transparent p-3.5">
+          {/* Heading de verdade: o bloco é uma seção própria da classificação. */}
+          <div className="mb-2.5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+            <h3 className="text-base font-semibold text-orange-200">Chance de título</h3>
+            <span className="text-[11px] uppercase tracking-wider text-slate-400">
+              {simulacoes.toLocaleString('pt-BR')} {simulacoes === 1 ? 'simulação' : 'simulações'}
             </span>
           </div>
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             {liga.times.slice(0, 4).map((t, i) => (
               <div key={t.team} className="flex items-center gap-2">
-                <span className="w-3 text-[10px] font-medium text-slate-500">{i + 1}</span>
-                <span className="w-[88px] truncate text-xs font-medium text-slate-200" title={t.team}>
+                <span className="w-5 shrink-0 font-mono text-[11px] font-medium text-slate-400">{i + 1}º</span>
+                <span className="w-[96px] shrink-0 truncate text-[13px] font-medium text-slate-100" title={t.team}>
                   {t.apelido || t.team}
                 </span>
-                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/[0.06]">
+                <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/[0.08]">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-orange-500/80 to-yellow-400/80"
+                    className="h-full rounded-full bg-gradient-to-r from-orange-500 to-yellow-400"
                     style={{ width: `${Math.max(2, Math.round(t.p_titulo * 100))}%` }}
                   />
                 </div>
-                <span className="w-10 text-right text-xs font-bold text-slate-100">
-                  {formatarChance(t.p_titulo)}
+                <span className="w-14 shrink-0 text-right font-mono text-[13px] font-bold tabular-nums text-orange-200">
+                  {chanceBR(t.p_titulo)}
                 </span>
               </div>
             ))}
           </div>
-          <p className="mt-2 text-[10px] leading-relaxed text-slate-500">
-            {notaDaSimulacao(liga, simulacoes)} Nao e palpite: o modelo e calibrado e nao
-            supera a ancora &ldquo;melhor colocado vence&rdquo;.
+          <p className="mt-2.5 text-[12px] leading-relaxed text-slate-400">
+            {notaDaSimulacao(liga, simulacoes)} Não é palpite: o modelo é calibrado e não
+            supera a âncora “melhor colocado vence”.
           </p>
         </div>
       )}
 
       {showLeagueSelect && (
         <Select value={leagueId} onValueChange={onLeagueChange}>
-          <SelectTrigger className="mb-4 border-white/10 bg-white/5 text-sm text-slate-200 focus:ring-orange-500/30">
+          <SelectTrigger className="mb-4 h-11 border-slate-700 bg-slate-800/60 text-[13px] text-slate-100 focus:ring-2 focus:ring-orange-400/60">
             <SelectValue />
           </SelectTrigger>
           <SelectContent className="border-white/10 bg-slate-900">
@@ -148,25 +168,27 @@ export function LeagueStandings({
         {loading ? (
           <div className="space-y-2">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-9 animate-pulse rounded bg-white/5" />
+              <div key={i} className="h-10 animate-pulse rounded-lg bg-white/5" />
             ))}
           </div>
         ) : standings.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
-            <Trophy className="mb-3 h-8 w-8 text-slate-700" />
-            <p className="text-sm text-slate-500">Sem classificacao disponivel</p>
+            <Trophy className="mb-3 h-8 w-8 text-slate-400" />
+            <p className="text-[14px] text-slate-400">Sem classificação disponível</p>
           </div>
         ) : (
           <>
-            <div className="mb-1 grid grid-cols-[1.5rem_1fr_1.8rem_1.8rem_1.8rem_1.8rem_2.2rem_2.4rem] items-center gap-1 px-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500">
-              <span>#</span>
+            <div
+              className={`mb-1 grid ${GRADE} items-center gap-1 px-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400`}
+            >
+              <span aria-hidden="true">#</span>
               <span>Time</span>
-              <span className="text-center">J</span>
-              <span className="text-center">V</span>
-              <span className="text-center">E</span>
-              <span className="text-center">D</span>
-              <span className="text-right">Pts</span>
-              <span className="text-right" title="Chance de titulo na simulacao da temporada">Tit.</span>
+              <span className="text-center" title="Jogos disputados">J</span>
+              <span className={`text-center ${SO_SM}`} title="Vitórias">V</span>
+              <span className={`text-center ${SO_SM}`} title="Empates">E</span>
+              <span className={`text-center ${SO_SM}`} title="Derrotas">D</span>
+              <span className="text-right" title="Pontos">Pts</span>
+              <span className="text-right" title="Chance de título na simulação da temporada">Tit.</span>
             </div>
 
             <div className="space-y-0.5">
@@ -175,55 +197,60 @@ export function LeagueStandings({
                 return (
                 <div
                   key={`${s.pos}-${s.team}`}
-                  className={`grid grid-cols-[1.5rem_1fr_1.8rem_1.8rem_1.8rem_1.8rem_2.2rem_2.4rem] items-center gap-1 rounded-lg border-l-2 px-2 py-2 transition-colors hover:bg-white/[0.04] ${getPositionStyle(s.pos, standings.length)}`}
+                  className={`grid ${GRADE} items-center gap-1 rounded-lg border-l-2 px-2 py-2.5 transition-colors hover:bg-white/[0.04] ${getPositionStyle(s.pos, standings.length)}`}
                 >
-                  <span className="text-xs font-medium text-slate-500">{s.pos}</span>
+                  <span className="font-mono text-[12px] font-medium text-slate-400">{s.pos}</span>
                   <div className="flex items-center gap-2 overflow-hidden">
                     {s.crest && isAllowedCrest(s.crest) ? (
-                      <Image
+                      /* img comum pelo mesmo motivo do painel: lazy do
+                         next/image nao dispara dentro do cockpit. */
+                      // eslint-disable-next-line @next/next/no-img-element -- next/image nao carrega no cockpit
+                      <img
                         src={s.crest}
                         alt={s.team}
-                        width={18}
-                        height={18}
-                        className="h-[18px] w-[18px] flex-shrink-0 rounded object-contain"
+                        width={20}
+                        height={20}
+                        loading="eager"
+                        decoding="async"
+                        className="h-5 w-5 flex-shrink-0 rounded object-contain"
                       />
                     ) : (
-                      <div className="flex h-[18px] w-[18px] flex-shrink-0 items-center justify-center rounded bg-slate-800 text-[9px] font-bold text-slate-500">
+                      <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded bg-slate-800 text-[11px] font-bold text-slate-300">
                         {s.team.charAt(0)}
                       </div>
                     )}
-                    <span className="truncate text-xs font-medium text-slate-200">{s.team}</span>
+                    <span className="truncate text-[13px] font-medium text-slate-100">{s.team}</span>
                   </div>
-                  <span className="text-center text-xs text-slate-500">{s.played}</span>
-                  <span className="text-center text-xs text-slate-400">{s.wins}</span>
-                  <span className="text-center text-xs text-slate-500">{s.draws}</span>
-                  <span className="text-center text-xs text-slate-500">{s.losses}</span>
-                  <span className="text-right text-xs font-bold text-slate-100">{s.pts}</span>
+                  <span className="text-center font-mono text-[12px] tabular-nums text-slate-300">{s.played}</span>
+                  <span className={`text-center font-mono text-[12px] tabular-nums text-emerald-300 ${SO_SM}`}>{s.wins}</span>
+                  <span className={`text-center font-mono text-[12px] tabular-nums text-slate-300 ${SO_SM}`}>{s.draws}</span>
+                  <span className={`text-center font-mono text-[12px] tabular-nums text-slate-300 ${SO_SM}`}>{s.losses}</span>
+                  <span className="text-right font-mono text-[13px] font-bold tabular-nums text-slate-100">{s.pts}</span>
                   <span
-                    className="text-right text-xs font-semibold text-orange-300/90"
+                    className="text-right font-mono text-[12px] font-semibold tabular-nums text-orange-300"
                     title={
                       chance
-                        ? `Chance de titulo ${(chance.p_titulo * 100).toFixed(1)}% · G4 ${(chance.p_g4 * 100).toFixed(0)}% · zona ${(chance.p_zona * 100).toFixed(0)}%`
+                        ? `Chance de título ${chanceBR(chance.p_titulo)} · G4 ${(chance.p_g4 * 100).toFixed(0)}% · zona ${(chance.p_zona * 100).toFixed(0)}%`
                         : undefined
                     }
                   >
-                    {chance ? formatarChance(chance.p_titulo) : '—'}
+                    {chance ? chanceBR(chance.p_titulo) : '—'}
                   </span>
                 </div>
                 )
               })}
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-3 text-[10px] text-slate-600">
+            <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] text-slate-400">
               {getZones(leagueId, standings.length).map((zone) => (
-                <span key={zone.label} className="flex items-center gap-1">
-                  <span className={`h-2 w-2 rounded-full ${zone.color}`} /> {zone.label}
+                <span key={zone.label} className="flex items-center gap-1.5">
+                  <span className={`h-2 w-2 shrink-0 rounded-full ${zone.color}`} aria-hidden="true" /> {zone.label}
                 </span>
               ))}
             </div>
 
             {capturedAt && (
-              <p className="mt-3 text-[10px] text-slate-600">
+              <p className="mt-3 text-[11px] text-slate-400">
                 Atualizado em {new Date(capturedAt).toLocaleString('pt-BR')}
               </p>
             )}

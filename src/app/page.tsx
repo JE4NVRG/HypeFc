@@ -289,7 +289,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="min-h-0 flex-1 overflow-hidden">
+        <div className="relative min-h-0 flex-1 overflow-hidden">
           {view === 'rodada' && (
             <RoundView
               groupedMatches={groupedMatches}
@@ -304,7 +304,7 @@ export default function Home() {
           )}
 
           {view === 'liga' && (
-            <div className="h-full overflow-y-auto pr-0.5">
+            <div className="relative h-full overflow-y-auto pr-0.5">
               <LeagueTabs
                 standingsData={standingsData}
                 scorersData={scorersData}
@@ -318,7 +318,7 @@ export default function Home() {
           )}
 
           {view === 'record' && (
-            <div className="h-full overflow-y-auto pr-0.5">
+            <div className="relative h-full overflow-y-auto pr-0.5">
               <HypeRecord />
               <div className="mt-3">
                 <SourcesPanel
@@ -338,7 +338,7 @@ export default function Home() {
           {view === 'esportes' && <SportsView />}
 
           {view === 'pro' && (
-            <div className="h-full overflow-y-auto pr-0.5">
+            <div className="relative h-full overflow-y-auto pr-0.5">
               <ProView />
             </div>
           )}

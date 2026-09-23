@@ -50,35 +50,37 @@ interface Recado {
   texto: string
 }
 
+/* Piso de toque 44px no mobile e foco visivel em laranja (a cor de --ring do
+   tema): o botao de seguir time, os CTAs e os campos seguem o mesmo desenho. */
 const CTA =
-  'inline-flex min-h-[40px] w-full cursor-pointer items-center justify-center gap-1.5 rounded-lg bg-emerald-500 px-3 text-xs font-semibold text-slate-950 transition hover:bg-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/60 disabled:cursor-not-allowed disabled:opacity-60'
+  'inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 text-[13px] font-semibold text-slate-950 transition hover:bg-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 disabled:cursor-not-allowed disabled:opacity-50'
 const BOTAO_SECUNDARIO =
-  'inline-flex min-h-[40px] cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800/60 px-3 text-xs font-medium text-slate-200 transition hover:bg-slate-700/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/60 disabled:cursor-not-allowed disabled:opacity-60'
+  'inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-800/60 px-4 text-[13px] font-medium text-slate-100 transition hover:bg-slate-700/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 disabled:cursor-not-allowed disabled:opacity-50'
 const BOTAO_FANTASMA =
-  'inline-flex min-h-[40px] shrink-0 cursor-pointer items-center justify-center gap-1 rounded-lg border border-slate-700/70 px-2 text-[11px] text-slate-400 transition hover:text-slate-100 focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/60 disabled:cursor-not-allowed disabled:opacity-60'
+  'inline-flex min-h-[44px] shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-slate-700 bg-slate-900/40 px-3 text-[13px] text-slate-300 transition hover:bg-slate-800/60 hover:text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 disabled:cursor-not-allowed disabled:opacity-50'
 const CAMPO =
-  'mt-0.5 h-10 w-full rounded-lg border border-slate-700 bg-slate-950/60 px-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/50'
-const CAIXA = 'rounded-lg border border-slate-800 bg-slate-950/30 p-2.5'
-const ROTULO = 'text-[10px] font-medium uppercase tracking-wide text-slate-500'
+  'mt-1 h-11 w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 text-[14px] text-slate-100 placeholder:text-slate-400 focus:border-orange-400/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60'
+const CAIXA = 'rounded-lg border border-slate-800 bg-slate-950/30 p-3.5'
+const ROTULO = 'text-[11px] font-semibold uppercase tracking-wider text-slate-400'
 
 /** Erro da loja -> frase curta. Nunca promete sucesso que nao aconteceu. */
 const TEXTO_ERRO: Record<string, string> = {
-  'loja-offline': 'Registro online ainda nao ligado neste site: nada foi gravado aqui.',
-  rede: 'Nao deu para falar com o servidor agora. Tente de novo em instantes.',
-  'sem-acesso': 'Este navegador nao tem acesso ativo. Ative o codigo acima.',
-  'email-invalido': 'Confira o email: precisa ser um endereco valido.',
+  'loja-offline': 'Registro online ainda não ligado neste site: nada foi gravado aqui.',
+  rede: 'Não deu para falar com o servidor agora. Tente de novo em instantes.',
+  'sem-acesso': 'Este navegador não tem acesso ativo. Ative o código acima.',
+  'email-invalido': 'Confira o e-mail: precisa ser um endereço válido.',
   limite: 'Limite do plano atingido.',
-  'codigo-invalido': 'Codigo nao confere com esse email.',
-  'codigo-ja-usado': 'Esse codigo ja foi usado — cada codigo ativa um navegador.',
-  'codigo-expirado': 'Esse codigo passou da validade.',
-  'acesso-cancelado': 'Esse acesso esta cancelado.',
-  'time-invalido': 'Time sem identificacao na fonte: nao da para seguir.',
-  'inscricao-invalida': 'O navegador nao devolveu a inscricao de alerta completa.',
+  'codigo-invalido': 'Código não confere com esse e-mail.',
+  'codigo-ja-usado': 'Esse código já foi usado — cada código ativa um navegador.',
+  'codigo-expirado': 'Esse código passou da validade.',
+  'acesso-cancelado': 'Esse acesso está cancelado.',
+  'time-invalido': 'Time sem identificação na fonte: não dá para seguir.',
+  'inscricao-invalida': 'O navegador não devolveu a inscrição de alerta completa.',
 }
 
 function textoErro(erro?: string): string {
-  if (!erro) return 'Nao deu certo agora.'
-  return TEXTO_ERRO[erro] ?? `Nao deu certo (${erro}).`
+  if (!erro) return 'Não deu certo agora.'
+  return TEXTO_ERRO[erro] ?? `Não deu certo (${erro}).`
 }
 
 function emailValido(email: string): boolean {
@@ -137,8 +139,8 @@ function RecadoLinha({ recado }: { recado: Recado | null }) {
     <p
       role="status"
       aria-live="polite"
-      className={`mt-1.5 min-h-[14px] text-[10px] leading-snug ${
-        recado?.tom === 'ok' ? 'text-emerald-300' : recado?.tom === 'erro' ? 'text-red-300' : 'text-amber-300/90'
+      className={`mt-2 min-h-[16px] text-[12px] leading-snug ${
+        recado?.tom === 'ok' ? 'text-emerald-300' : recado?.tom === 'erro' ? 'text-red-300' : 'text-amber-300'
       }`}
     >
       {recado?.texto ?? ''}
@@ -231,7 +233,7 @@ export function ProView() {
   async function pedirLista() {
     if (ocupado) return
     if (!emailValido(email)) {
-      setRecadoLista({ tom: 'info', texto: 'Confira o email antes de entrar na lista.' })
+      setRecadoLista({ tom: 'info', texto: 'Confira o e-mail antes de entrar na lista.' })
       emailRef.current?.focus()
       return
     }
@@ -241,7 +243,7 @@ export function ProView() {
       const r = await entrarLista(email, nome, 'aba-pro')
       setRecadoLista(
         r.ok
-          ? { tom: 'ok', texto: `Inscricao registrada para ${email.trim()}. O aviso das vendas sai por esse email.` }
+          ? { tom: 'ok', texto: `Inscrição registrada para ${email.trim()}. O aviso das vendas sai por esse e-mail.` }
           : { tom: 'erro', texto: textoErro(r.erro) }
       )
     } finally {
@@ -268,7 +270,7 @@ export function ProView() {
         tom: 'ok',
         texto: `Acesso ativo${dados?.nome ? `: ${dados.nome}` : ''} — plano ${
           dados?.plan === 'pro' ? 'Pro' : 'Gratuito'
-        }, ate ${limiteDe(dados)} times seguidos.`,
+        }, até ${limiteDe(dados)} times seguidos.`,
       })
     } finally {
       setOcupado(null)
@@ -278,7 +280,7 @@ export function ProView() {
   async function ligarAlertas() {
     if (ocupado) return
     if (pushOk !== true) {
-      setRecadoPush({ tom: 'info', texto: 'alertas indisponiveis neste navegador' })
+      setRecadoPush({ tom: 'info', texto: 'Alertas indisponíveis neste navegador.' })
       return
     }
     if (!temToken()) {
@@ -289,14 +291,14 @@ export function ProView() {
     setRecadoPush(null)
     try {
       if (typeof Notification === 'undefined') {
-        setRecadoPush({ tom: 'info', texto: 'alertas indisponiveis neste navegador' })
+        setRecadoPush({ tom: 'info', texto: 'Alertas indisponíveis neste navegador.' })
         return
       }
       const permissao = await Notification.requestPermission()
       if (permissao !== 'granted') {
         setRecadoPush({
           tom: 'erro',
-          texto: 'O navegador nao autorizou as notificacoes. Da para liberar nas configuracoes do site.',
+          texto: 'O navegador não autorizou as notificações. Dá para liberar nas configurações do site.',
         })
         return
       }
@@ -318,7 +320,7 @@ export function ProView() {
       }
       setRecadoPush({ tom: 'erro', texto: textoErro(r.erro) })
     } catch {
-      setRecadoPush({ tom: 'erro', texto: 'Nao deu para ligar os alertas neste navegador.' })
+      setRecadoPush({ tom: 'erro', texto: 'Não deu para ligar os alertas neste navegador.' })
     } finally {
       setOcupado(null)
     }
@@ -340,7 +342,7 @@ export function ProView() {
           : { tom: 'erro', texto: textoErro(r.erro) }
       )
     } catch {
-      setRecadoPush({ tom: 'erro', texto: 'Nao deu para desligar os alertas agora.' })
+      setRecadoPush({ tom: 'erro', texto: 'Não deu para desligar os alertas agora.' })
     } finally {
       setOcupado(null)
     }
@@ -369,129 +371,129 @@ export function ProView() {
     setLista([])
     setInscricao(null)
     avisarMudanca()
-    setRecadoAcesso({ tom: 'info', texto: 'Token removido deste navegador. Com o codigo voce ativa de novo.' })
+    setRecadoAcesso({ tom: 'info', texto: 'Token removido deste navegador. Com o código você ativa de novo.' })
   }
 
   return (
     <div className="h-full overflow-y-auto pr-0.5">
-      <section className="rounded-xl border border-slate-800 bg-slate-900/40 p-3">
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <div>
-            <h2 className="text-sm font-semibold text-slate-200">Pro</h2>
-            <p className="mt-0.5 text-[11px] text-slate-500">
-              Alerta antes da rodada e registro do que foi previsto — o palpite nao esta a venda.
+      <section className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-2">
+          <div className="min-w-0">
+            <h2 className="text-xl font-semibold text-slate-100">Pro</h2>
+            <p className="mt-1 text-[13px] leading-snug text-slate-300">
+              Alerta antes da rodada e registro do que foi previsto — o palpite não está à venda.
             </p>
           </div>
           <span
-            className={`rounded-full border px-2 py-0.5 text-[10px] ${
+            className={`shrink-0 rounded-full border px-2.5 py-1 text-[11px] font-medium ${
               situacao === 'Pro ativo'
                 ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
-                : 'border-slate-700 bg-slate-800/60 text-slate-400'
+                : 'border-slate-700 bg-slate-800/60 text-slate-300'
             }`}
           >
             {situacao}
           </span>
         </div>
 
-        <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
+        <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-2">
           {/* (a) gratis vs Pro, com o preco exato do contrato */}
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className={CAIXA}>
-              <div className={ROTULO}>Gratis</div>
-              <ul className="mt-1.5 space-y-1 text-[11px] leading-snug text-slate-400">
-                <li>Painel completo: rodada, ligas, esportes e recorde publico.</li>
-                <li>Ate 3 times seguidos.</li>
+              <div className={ROTULO}>Grátis</div>
+              <ul className="mt-2 space-y-1.5 text-[13px] leading-snug text-slate-300">
+                <li>Painel completo: rodada, ligas, esportes e recorde público.</li>
+                <li>Até 3 times seguidos.</li>
                 <li>Sem alertas.</li>
               </ul>
             </div>
-            <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/5 p-2.5">
-              <div className="flex flex-wrap items-baseline justify-between gap-1">
-                <span className="text-[10px] font-medium uppercase tracking-wide text-emerald-300/80">Pro</span>
-                <span className="font-mono text-[11px] text-slate-100">R$ 9,90/mes · R$ 79/ano</span>
+            <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/5 p-3.5">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-300">Pro</span>
+                <span className="font-mono text-base font-semibold text-slate-100">R$ 9,90/mês · R$ 79/ano</span>
               </div>
-              <ul className="mt-1.5 space-y-1 text-[11px] leading-snug text-slate-300">
-                <li>Ate 20 times seguidos.</li>
+              <ul className="mt-2 space-y-1.5 text-[13px] leading-snug text-slate-100">
+                <li>Até 20 times seguidos.</li>
                 <li>Alerta antes da rodada.</li>
-                <li>Historico do registro: o que o modelo previa para quem voce segue.</li>
+                <li>Histórico do registro: o que o modelo previa para quem você segue.</li>
               </ul>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-2">
+          <div className="grid grid-cols-1 gap-3">
             {/* (b) a prova, com os numeros medidos e a leitura honesta */}
             <div className={CAIXA}>
               <div className={`flex items-center gap-1.5 ${ROTULO}`}>
-                <ShieldQuestion className="h-3 w-3" />
+                <ShieldQuestion className="h-4 w-4" />
                 O que o modelo entrega (medido)
               </div>
-              <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
+              <div className="mt-2.5 grid grid-cols-2 gap-3 sm:grid-cols-4">
                 <div>
-                  <div className="text-[10px] uppercase tracking-wide text-slate-500">Brier do modelo</div>
-                  <div className="text-lg font-semibold text-emerald-300">0,629</div>
-                  <div className="text-[10px] text-slate-500">n=1.203 jogos</div>
+                  <div className="text-[11px] uppercase tracking-wider text-slate-400">Brier do modelo</div>
+                  <div className="mt-0.5 font-mono text-xl font-semibold tabular-nums text-emerald-300">0,629</div>
+                  <div className="text-[11px] text-slate-400">n=1.203 jogos</div>
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase tracking-wide text-slate-500">Chute uniforme</div>
-                  <div className="text-lg font-semibold text-slate-300">0,667</div>
-                  <div className="text-[10px] text-slate-500">1/3 para cada lado</div>
+                  <div className="text-[11px] uppercase tracking-wider text-slate-400">Chute uniforme</div>
+                  <div className="mt-0.5 font-mono text-xl font-semibold tabular-nums text-slate-100">0,667</div>
+                  <div className="text-[11px] text-slate-400">1/3 para cada lado</div>
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase tracking-wide text-slate-500">Favorito do modelo</div>
-                  <div className="text-lg font-semibold text-slate-200">46,5%</div>
-                  <div className="text-[10px] text-slate-500">acerto do palpite</div>
+                  <div className="text-[11px] uppercase tracking-wider text-slate-400">Favorito do modelo</div>
+                  <div className="mt-0.5 font-mono text-xl font-semibold tabular-nums text-slate-100">46,5%</div>
+                  <div className="text-[11px] text-slate-400">acerto do palpite</div>
                 </div>
-                <div className="rounded-lg border border-amber-500/25 bg-amber-500/5 px-2 py-1">
-                  <div className="text-[10px] uppercase tracking-wide text-amber-500/80">Ancora melhor colocado</div>
-                  <div className="text-lg font-semibold text-amber-300">46,5%</div>
-                  <div className="text-[10px] text-slate-500">mesma taxa, sem modelo</div>
+                <div className="rounded-lg border border-amber-500/25 bg-amber-500/5 px-2.5 py-1.5">
+                  <div className="text-[11px] uppercase tracking-wider text-amber-300">Âncora melhor colocado</div>
+                  <div className="mt-0.5 font-mono text-xl font-semibold tabular-nums text-amber-200">46,5%</div>
+                  <div className="text-[11px] text-slate-400">mesma taxa, sem modelo</div>
                 </div>
               </div>
-              <p className="mt-2 rounded-lg border border-amber-500/25 bg-amber-500/5 p-2 text-[11px] leading-snug text-amber-200">
-                Prova de honestidade: calibrado, sem edge no palpite — o que vendemos e alerta e registro, nao palpite.
+              <p className="mt-3 rounded-lg border border-amber-500/25 bg-amber-500/5 p-3 text-[13px] leading-snug text-amber-200">
+                Prova de honestidade: calibrado, sem edge no palpite — o que vendemos é alerta e registro, não palpite.
               </p>
-              <p className="mt-1.5 text-[10px] leading-snug text-slate-500">
-                O favorito do modelo acerta a mesma taxa de olhar a classificacao. A probabilidade vale como
-                frequencia, nao como vantagem contra ninguem.
+              <p className="mt-2 text-[12px] leading-snug text-slate-400">
+                O favorito do modelo acerta a mesma taxa de olhar a classificação. A probabilidade vale como
+                frequência, não como vantagem contra ninguém.
               </p>
             </div>
 
             {/* (g) o que o alerta e e o que ele nao e */}
             <div className={CAIXA}>
               <div className={`flex items-center gap-1.5 ${ROTULO}`}>
-                <BellRing className="h-3 w-3" />
+                <BellRing className="h-4 w-4" />
                 O que o alerta faz
               </div>
-              <ul className="mt-1.5 space-y-1 text-[11px] leading-snug text-slate-400">
+              <ul className="mt-2 space-y-1.5 text-[13px] leading-snug text-slate-300">
                 <li>
-                  Avisa <span className="text-slate-200">quando o time joga</span> e a{' '}
-                  <span className="text-slate-200">probabilidade do modelo</span> para aquele jogo.
+                  Avisa <span className="text-slate-100">quando o time joga</span> e a{' '}
+                  <span className="text-slate-100">probabilidade do modelo</span> para aquele jogo.
                 </li>
-                <li>Nao e palpite de aposta e nao diz para apostar em nada.</li>
-                <li>O HypeFC nao e casa de aposta, nao recebe aposta e nao promete retorno financeiro.</li>
+                <li>Não é palpite de aposta e não diz para apostar em nada.</li>
+                <li>O HypeFC não é casa de aposta, não recebe aposta e não promete retorno financeiro.</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
+        <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-2">
           {/* (c) e (d) lista de espera, ativacao de acesso e estado do acesso */}
-          <div className="grid grid-cols-1 gap-2">
+          <div className="grid grid-cols-1 gap-3">
             {perfil ? (
-              <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/5 p-2.5">
+              <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/5 p-3.5">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="min-w-0">
-                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-emerald-300">
-                      <BadgeCheck className="h-3.5 w-3.5" />
+                    <div className="flex items-center gap-1.5 text-[13px] font-medium text-emerald-300">
+                      <BadgeCheck className="h-4 w-4" />
                       Acesso ativo
                       {perfil.nome ? ` · ${perfil.nome}` : ''}
                     </div>
-                    <p className="mt-0.5 truncate text-[10px] text-slate-400">
-                      {perfil.email ?? 'sem email no cadastro'} · plano{' '}
+                    <p className="mt-1 truncate text-[12px] text-slate-300">
+                      {perfil.email ?? 'sem e-mail no cadastro'} · plano{' '}
                       {perfil.plan === 'pro' ? 'Pro' : 'Gratuito'} · {seguindo} de {limite} times
                     </p>
                   </div>
                   <button type="button" onClick={sairDaqui} className={BOTAO_FANTASMA} aria-label="Sair deste navegador">
-                    <LogOut className="h-3 w-3" />
+                    <LogOut className="h-4 w-4" />
                     Sair
                   </button>
                 </div>
@@ -504,26 +506,26 @@ export function ProView() {
               </a>
             ) : (
               <button type="button" onClick={() => void pedirLista()} disabled={ocupado !== null} className={CTA}>
-                {ocupado === 'lista' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : null}
-                vendas abrindo — entre na lista
+                {ocupado === 'lista' ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
+                Vendas abrindo — entre na lista
               </button>
             )}
             {!loja ? (
-              <p className="text-[10px] leading-snug text-amber-300/80">
-                O registro online ainda nao esta ligado neste site: sua inscricao nao e gravada aqui. O painel
+              <p className="text-[12px] leading-snug text-amber-200">
+                O registro online ainda não está ligado neste site: sua inscrição não é gravada aqui. O painel
                 gratuito continua funcionando normalmente.
               </p>
             ) : null}
 
             <form onSubmit={(event) => void ativarAcesso(event)} className={CAIXA}>
               <div className={ROTULO}>Ativar acesso</div>
-              <p className="mt-1 text-[10px] leading-snug text-slate-500">
-                Quem comprou recebe um codigo de uso unico por email. Ele ativa este navegador.
+              <p className="mt-1 text-[12px] leading-snug text-slate-400">
+                Quem comprou recebe um código de uso único por e-mail. Ele ativa este navegador.
               </p>
-              <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+              <div className="mt-2.5 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="pro-acesso-email" className="text-[10px] text-slate-500">
-                    Email da compra
+                  <label htmlFor="pro-acesso-email" className="text-[12px] text-slate-400">
+                    E-mail da compra
                   </label>
                   <input
                     id="pro-acesso-email"
@@ -537,8 +539,8 @@ export function ProView() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="pro-acesso-codigo" className="text-[10px] text-slate-500">
-                    Codigo
+                  <label htmlFor="pro-acesso-codigo" className="text-[12px] text-slate-400">
+                    Código
                   </label>
                   <input
                     id="pro-acesso-codigo"
@@ -551,8 +553,8 @@ export function ProView() {
                   />
                 </div>
               </div>
-              <button type="submit" disabled={ocupado !== null} className={`${BOTAO_SECUNDARIO} mt-2 w-full`}>
-                {ocupado === 'acesso' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : null}
+              <button type="submit" disabled={ocupado !== null} className={`${BOTAO_SECUNDARIO} mt-3 w-full`}>
+                {ocupado === 'acesso' ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
                 Ativar acesso
               </button>
               <RecadoLinha recado={recadoAcesso} />
@@ -560,13 +562,13 @@ export function ProView() {
 
             <form onSubmit={(event) => { event.preventDefault(); void pedirLista() }} className={CAIXA}>
               <div className={ROTULO}>Lista de espera</div>
-              <p className="mt-1 text-[10px] leading-snug text-slate-500">
-                Sem checkout aberto ainda: a lista avisa quando as vendas comecarem. Nada de cobranca aqui.
+              <p className="mt-1 text-[12px] leading-snug text-slate-400">
+                Sem checkout aberto ainda: a lista avisa quando as vendas começarem. Nada de cobrança aqui.
               </p>
-              <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+              <div className="mt-2.5 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="pro-lista-email" className="text-[10px] text-slate-500">
-                    Email
+                  <label htmlFor="pro-lista-email" className="text-[12px] text-slate-400">
+                    E-mail
                   </label>
                   <input
                     ref={emailRef}
@@ -581,7 +583,7 @@ export function ProView() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="pro-lista-nome" className="text-[10px] text-slate-500">
+                  <label htmlFor="pro-lista-nome" className="text-[12px] text-slate-400">
                     Nome (opcional)
                   </label>
                   <input
@@ -594,25 +596,25 @@ export function ProView() {
                   />
                 </div>
               </div>
-              <button type="submit" disabled={ocupado !== null} className={`${BOTAO_SECUNDARIO} mt-2 w-full`}>
-                {ocupado === 'lista' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Plus className="h-3.5 w-3.5" />}
+              <button type="submit" disabled={ocupado !== null} className={`${BOTAO_SECUNDARIO} mt-3 w-full`}>
+                {ocupado === 'lista' ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
                 Entrar na lista
               </button>
               <RecadoLinha recado={recadoLista} />
             </form>
           </div>
 
-          <div className="grid grid-cols-1 gap-2">
+          <div className="grid grid-cols-1 gap-3">
             {/* (e) alertas no navegador */}
             <div className={CAIXA}>
               <div className={`flex items-center gap-1.5 ${ROTULO}`}>
-                <BellRing className="h-3 w-3" />
+                <BellRing className="h-4 w-4" />
                 Alertas no navegador
               </div>
               {pushOk === null ? (
-                <p className="mt-1.5 text-[11px] text-slate-500">Verificando este navegador…</p>
+                <p className="mt-2 text-[13px] text-slate-400">Verificando este navegador…</p>
               ) : pushOk ? (
-                <div className="mt-2 flex flex-wrap gap-2">
+                <div className="mt-2.5 flex flex-wrap gap-2">
                   {/* Um botao de cada vez: com inscricao viva, "ativar" de novo nao
                       faz sentido — o que o usuario precisa e poder desligar. */}
                   {inscricao ? (
@@ -623,7 +625,7 @@ export function ProView() {
                       className={BOTAO_SECUNDARIO}
                       aria-label="Desligar alertas neste navegador"
                     >
-                      {ocupado === 'push' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <BellOff className="h-3.5 w-3.5" />}
+                      {ocupado === 'push' ? <Loader2 className="h-4 w-4 animate-spin" /> : <BellOff className="h-4 w-4" />}
                       Desligar alertas neste navegador
                     </button>
                   ) : (
@@ -634,16 +636,16 @@ export function ProView() {
                       className={BOTAO_SECUNDARIO}
                       aria-label="Ativar alertas no navegador"
                     >
-                      {ocupado === 'push' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <BellRing className="h-3.5 w-3.5" />}
+                      {ocupado === 'push' ? <Loader2 className="h-4 w-4 animate-spin" /> : <BellRing className="h-4 w-4" />}
                       Ativar alertas no navegador
                     </button>
                   )}
                 </div>
               ) : (
-                <p className="mt-1.5 text-[11px] text-slate-400">alertas indisponiveis neste navegador</p>
+                <p className="mt-2 text-[13px] text-slate-300">Alertas indisponíveis neste navegador.</p>
               )}
-              <p className="mt-1.5 text-[10px] leading-snug text-slate-500">
-                O alerta chega antes da rodada com o horario do jogo e a probabilidade medida. E informativo: nao
+              <p className="mt-2 text-[12px] leading-snug text-slate-400">
+                O alerta chega antes da rodada com o horário do jogo e a probabilidade medida. É informativo: não
                 sugere aposta.
               </p>
               <RecadoLinha recado={recadoPush} />
@@ -653,24 +655,24 @@ export function ProView() {
             <div className={CAIXA}>
               <div className="flex items-baseline justify-between gap-2">
                 <span className={ROTULO}>Times seguidos</span>
-                <span className="font-mono text-[11px] text-slate-300">
+                <span className="font-mono text-[13px] tabular-nums text-slate-200">
                   {seguindo} de {limite} times
                 </span>
               </div>
               {carregando ? (
-                <p className="mt-1.5 text-[11px] text-slate-500">Carregando…</p>
+                <p className="mt-2 text-[13px] text-slate-400">Carregando…</p>
               ) : lista.length === 0 ? (
-                <p className="mt-1.5 text-[11px] leading-snug text-slate-500">
+                <p className="mt-2 text-[13px] leading-snug text-slate-300">
                   {temToken()
                     ? 'Nenhum time seguido ainda. Use Seguir no confronto do time.'
-                    : 'Seguir time e recurso Pro: ative o acesso acima para usar.'}
+                    : 'Seguir time é recurso Pro: ative o acesso acima para usar.'}
                 </p>
               ) : (
-                <ul className="mt-1.5 space-y-1">
+                <ul className="mt-2.5 space-y-2">
                   {lista.map((item) => (
                     <li key={item.team_id} className="flex items-center gap-2">
-                      <span className="min-w-0 flex-1 truncate text-[11px] text-slate-300">{item.team_name}</span>
-                      <span className="hidden shrink-0 font-mono text-[10px] text-slate-600 sm:inline">
+                      <span className="min-w-0 flex-1 truncate text-[13px] text-slate-100">{item.team_name}</span>
+                      <span className="hidden shrink-0 font-mono text-[11px] text-slate-400 sm:inline">
                         {item.league_id}
                       </span>
                       <button
@@ -680,7 +682,7 @@ export function ProView() {
                         className={BOTAO_FANTASMA}
                         aria-label={`Parar de seguir ${item.team_name}`}
                       >
-                        <Square className="h-3 w-3" />
+                        <Square className="h-3.5 w-3.5" />
                         Parar
                       </button>
                     </li>
@@ -745,7 +747,7 @@ export function SeguirTimeBotao({
       }
 
       if (!temToken()) {
-        setNota('seguir time e do Pro: ative o acesso na aba Pro.')
+        setNota('Seguir time é do Pro: ative o acesso na aba Pro.')
         return
       }
 
@@ -754,14 +756,14 @@ export function SeguirTimeBotao({
         avisarMudanca()
         setEstado('seguindo')
         if (r.limite !== undefined && r.seguidos !== undefined && r.seguidos >= r.limite) {
-          setNota(`voce chegou ao limite do plano: ${r.limite} times.`)
+          setNota(`Você chegou ao limite do plano: ${r.limite} times.`)
         }
         return
       }
       if (r.codigoErro === 'limite') {
         avisarMudanca()
         setEstado('limite')
-        setNota(`limite do plano: ${r.seguidos ?? '?'} de ${r.limite ?? '?'} times.`)
+        setNota(`Limite do plano: ${r.seguidos ?? '?'} de ${r.limite ?? '?'} times.`)
         return
       }
       setNota(textoErro(r.erro))
@@ -776,7 +778,7 @@ export function SeguirTimeBotao({
       ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
       : estado === 'limite'
         ? 'border-amber-500/30 bg-amber-500/10 text-amber-300'
-        : 'border-slate-700 bg-slate-800/60 text-slate-300 hover:text-slate-100'
+        : 'border-slate-600 bg-slate-800/60 text-slate-100 hover:bg-slate-700/60'
 
   return (
     <button
@@ -786,16 +788,16 @@ export function SeguirTimeBotao({
       aria-pressed={estado === 'seguindo'}
       aria-label={`${rotulo}: ${teamName}${nota ? ` — ${nota}` : ''}`}
       title={nota || undefined}
-      className={`inline-flex min-h-[40px] shrink-0 cursor-pointer items-center justify-center gap-1 rounded-lg border px-2 text-[11px] font-medium transition focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/60 disabled:cursor-not-allowed disabled:opacity-70 ${classes}`}
+      className={`inline-flex min-h-[44px] w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg border px-3 text-[13px] font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 disabled:cursor-not-allowed disabled:opacity-50 ${classes}`}
     >
       {ocupado ? (
-        <Loader2 className="h-3 w-3 animate-spin" />
+        <Loader2 className="h-4 w-4 animate-spin" />
       ) : estado === 'seguindo' ? (
-        <Check className="h-3 w-3" />
+        <Check className="h-4 w-4" />
       ) : estado === 'limite' ? (
-        <ShieldQuestion className="h-3 w-3" />
+        <ShieldQuestion className="h-4 w-4" />
       ) : (
-        <Plus className="h-3 w-3" />
+        <Plus className="h-4 w-4" />
       )}
       {rotulo}
     </button>

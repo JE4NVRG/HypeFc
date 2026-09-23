@@ -14,8 +14,13 @@ import { LIMITE_PLANO, eu, proConfigurado, temToken, type Perfil } from '@/lib/p
 
 const CHECKOUT_URL = (process.env.NEXT_PUBLIC_CHECKOUT_URL ?? '').trim()
 
-const PRECO = 'Pro R$ 9,90/mes ou R$ 79/ano: ate 20 times seguidos, alerta antes da rodada e historico do registro.'
-const GRATIS = 'Gratis: painel completo e ate 3 times seguidos.'
+const PRECO = 'Pro R$ 9,90/mês ou R$ 79/ano: até 20 times seguidos, alerta antes da rodada e histórico do registro.'
+const GRATIS = 'Grátis: painel completo e até 3 times seguidos.'
+
+/* Mesmo padrao de acao do resto do produto: alvo de 44px no mobile e 36px no
+   desktop, foco em anel laranja unico. */
+const ACAO =
+  'inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-lg px-4 text-[12px] font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 sm:min-h-[36px]'
 
 export interface ProGateProps {
   children: React.ReactNode
@@ -73,7 +78,7 @@ export function ProGate({ children, motivo, titulo = 'Recurso Pro', liberado, on
     return (
       <div
         aria-busy="true"
-        className="flex h-[52px] items-center rounded-xl border border-slate-800 bg-slate-900/30 px-3 text-[11px] text-slate-500"
+        className="flex min-h-[44px] items-center rounded-xl border border-slate-800 bg-slate-900/30 px-3 text-[11px] text-slate-400"
       >
         Carregando…
       </div>
@@ -84,12 +89,12 @@ export function ProGate({ children, motivo, titulo = 'Recurso Pro', liberado, on
 
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-3">
-      <div className="flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-wide text-slate-500">
-        <Lock className="h-3 w-3" />
+      <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-wide text-slate-400">
+        <Lock aria-hidden="true" className="h-3.5 w-3.5" />
         {titulo}
       </div>
-      <p className="mt-1 text-[11px] leading-snug text-slate-300">{motivo}</p>
-      <p className="mt-1 text-[10px] leading-snug text-slate-500">
+      <p className="mt-1 text-[12px] leading-snug text-slate-200">{motivo}</p>
+      <p className="mt-1 text-[11px] leading-snug text-slate-400">
         {GRATIS} {PRECO}
       </p>
       <div className="mt-2 flex flex-wrap items-center gap-2">
@@ -98,7 +103,7 @@ export function ProGate({ children, motivo, titulo = 'Recurso Pro', liberado, on
             href={CHECKOUT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[40px] cursor-pointer items-center justify-center gap-1.5 rounded-lg bg-emerald-500 px-3 text-xs font-semibold text-slate-950 transition hover:bg-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/60"
+            className={`${ACAO} bg-emerald-500 text-slate-950 hover:bg-emerald-400`}
           >
             Assinar Pro
           </a>
@@ -106,17 +111,17 @@ export function ProGate({ children, motivo, titulo = 'Recurso Pro', liberado, on
           <button
             type="button"
             onClick={onUpgrade}
-            className="inline-flex min-h-[40px] cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800/60 px-3 text-xs font-medium text-slate-200 transition hover:bg-slate-700/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/60"
+            className={`${ACAO} border border-slate-700 bg-slate-800/60 font-medium text-slate-200 hover:bg-slate-700/60`}
           >
-            vendas abrindo — entre na lista
+            Vendas abrindo — entre na lista
           </button>
         ) : (
-          <span className="text-[10px] text-slate-500">Vendas abrindo: a lista de espera esta na aba Pro.</span>
+          <span className="text-[11px] text-slate-400">Vendas abrindo: a lista de espera está na aba Pro.</span>
         )}
       </div>
       {!loja ? (
-        <p className="mt-1.5 text-[10px] leading-snug text-amber-300/80">
-          O registro online ainda nao esta ligado neste site: ativar acesso nao grava nada aqui.
+        <p className="mt-2 text-[11px] leading-snug text-amber-200">
+          O registro online ainda não está ligado neste site: ativar acesso não grava nada aqui.
         </p>
       ) : null}
     </div>

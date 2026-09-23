@@ -89,9 +89,9 @@ export function chanceDoTime(
 export function notaDaSimulacao(liga: LeagueTitleOdds, simulacoes: number): string {
   const base = `${simulacoes.toLocaleString('pt-BR')} temporadas simuladas com o modelo do site (Elo+Poisson)`
   if (liga.rodadas_aproximadas > 0) {
-    return `${base}. ${liga.rodadas_publicadas} de ${liga.rodadas_totais} rodadas estao publicadas na fonte; as ${liga.rodadas_aproximadas} restantes entram como confronto sorteado dentro da liga.`
+    return `${base}. ${liga.rodadas_publicadas} de ${liga.rodadas_totais} rodadas estão publicadas na fonte; as ${liga.rodadas_aproximadas} restantes entram como confronto sorteado dentro da liga.`
   }
-  return `${base}, a partir da tabela atual e do calendario completo da temporada.`
+  return `${base}, a partir da tabela atual e do calendário completo da temporada.`
 }
 
 /**

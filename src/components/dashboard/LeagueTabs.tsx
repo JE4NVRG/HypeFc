@@ -47,9 +47,10 @@ export function LeagueTabs({
   const leagueName = standingsData?.league_name ?? ''
 
   return (
-    <div className="flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4">
-      <div className="mb-3 flex flex-wrap items-center gap-2">
-        <div className="flex items-center gap-1" role="tablist" aria-label="Visões da liga">
+    <div className="flex flex-col rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+      <div className="mb-4 flex flex-wrap items-center gap-3">
+        {/* Abas de verdade (44px no toque / 36px no desktop, o piso do contrato): erram menos o dedo. */}
+        <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Visões da liga">
           {TABS.map(({ id, label, icon: Icon }) => {
             const ativo = tab === id
             return (
@@ -59,13 +60,13 @@ export function LeagueTabs({
                 role="tab"
                 aria-selected={ativo}
                 onClick={() => setTab(id)}
-                className={`flex cursor-pointer items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-[11px] font-medium transition focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/50 ${
+                className={`inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-lg border px-3 text-[13px] font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 md:min-h-[36px] ${
                   ativo
-                    ? 'bg-white/[0.08] text-slate-100'
-                    : 'text-slate-400 hover:bg-white/[0.04] hover:text-slate-200'
+                    ? 'border-white/20 bg-white/[0.1] text-slate-100'
+                    : 'border-transparent text-slate-300 hover:bg-white/[0.06] hover:text-slate-100'
                 }`}
               >
-                <Icon className={`h-3.5 w-3.5 ${ativo ? 'text-emerald-400' : 'text-slate-500'}`} />
+                <Icon className={`h-4 w-4 flex-shrink-0 ${ativo ? 'text-emerald-400' : 'text-slate-400'}`} />
                 {label}
               </button>
             )
@@ -74,7 +75,7 @@ export function LeagueTabs({
 
         <div className="ml-auto min-w-[180px]">
           <Select value={leagueId} onValueChange={onLeagueChange}>
-            <SelectTrigger className="h-8 border-white/10 bg-white/5 text-xs text-slate-200 focus:ring-orange-500/30">
+            <SelectTrigger className="h-11 border-white/10 bg-white/5 text-[13px] text-slate-200 focus:ring-2 focus:ring-orange-400/60 md:h-9">
               <SelectValue />
             </SelectTrigger>
             <SelectContent className="border-white/10 bg-slate-900">
@@ -82,7 +83,7 @@ export function LeagueTabs({
                 <SelectItem
                   key={id}
                   value={id}
-                  className="text-xs text-slate-200 focus:bg-white/10 focus:text-white"
+                  className="text-[13px] text-slate-200 focus:bg-white/10 focus:text-white"
                 >
                   {nome}
                 </SelectItem>

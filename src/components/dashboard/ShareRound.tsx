@@ -12,11 +12,14 @@ interface ShareRoundProps {
   label?: string
 }
 
+/* Alvo de 44px no mobile e 36px no desktop; foco no mesmo anel laranja do resto
+   do painel. Verde fica de fora daqui: nesta tela ele só marca sucesso (link
+   copiado), nunca o botão. */
 const BTN =
-  'inline-flex items-center gap-1.5 rounded-lg border border-slate-800 bg-white/[0.03] px-2.5 py-1.5 text-[11px] font-medium text-slate-300 transition hover:bg-white/[0.07] focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/50'
+  'inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 text-[12px] font-medium text-slate-300 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 active:bg-white/[0.12] sm:min-h-[36px]'
 
 const BTN_PRIMARY =
-  'inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1.5 text-[11px] font-medium text-emerald-300 transition hover:bg-emerald-500/15 focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/50'
+  'inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg border border-orange-500/30 bg-orange-500/10 px-3 text-[12px] font-medium text-orange-200 transition-colors hover:border-orange-400/40 hover:bg-orange-500/[0.16] hover:text-orange-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 active:bg-orange-500/20 sm:min-h-[36px]'
 
 /** Quanto tempo o aviso fica na tela antes de sumir. */
 const OK_MS = 2000
@@ -99,35 +102,35 @@ export function ShareRound({ url, text, label }: ShareRoundProps) {
   const xHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`
 
   return (
-    <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Compartilhar a rodada">
-      {label && <span className="mr-0.5 text-[11px] text-slate-500">{label}</span>}
+    <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Compartilhar a rodada">
+      {label && <span className="mr-1 text-[12px] text-slate-400">{label}</span>}
 
       <button type="button" onClick={handleShare} aria-label="Compartilhar rodada" className={BTN_PRIMARY}>
-        <Share2 className="h-3.5 w-3.5" />
+        <Share2 aria-hidden="true" className="h-3.5 w-3.5" />
         Compartilhar
       </button>
 
       {/* Sempre visíveis: no desktop não existe navigator.share, e o grupo de
           WhatsApp/Telegram é justamente onde a rodada circula. */}
       <a href={waHref} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no WhatsApp" className={BTN}>
-        <MessageCircle className="h-3.5 w-3.5" />
+        <MessageCircle aria-hidden="true" className="h-3.5 w-3.5" />
         WhatsApp
       </a>
       <a href={tgHref} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no Telegram" className={BTN}>
-        <Send className="h-3.5 w-3.5" />
+        <Send aria-hidden="true" className="h-3.5 w-3.5" />
         Telegram
       </a>
       <a href={xHref} target="_blank" rel="noopener noreferrer" aria-label="Compartilhar no X (Twitter)" className={BTN}>
-        <Twitter className="h-3.5 w-3.5" />
+        <Twitter aria-hidden="true" className="h-3.5 w-3.5" />
         X
       </a>
 
       {canCopy ? (
         <button type="button" onClick={copyLink} aria-label="Copiar link da rodada" className={BTN}>
           {justCopied ? (
-            <Check className="h-3.5 w-3.5 text-emerald-400" />
+            <Check aria-hidden="true" className="h-3.5 w-3.5 text-emerald-400" />
           ) : (
-            <Copy className="h-3.5 w-3.5" />
+            <Copy aria-hidden="true" className="h-3.5 w-3.5" />
           )}
           {justCopied ? 'Link copiado' : 'Copiar link'}
         </button>
@@ -138,16 +141,14 @@ export function ShareRound({ url, text, label }: ShareRoundProps) {
           aria-label="Link da rodada (selecione e copie)"
           onFocus={(event) => event.currentTarget.select()}
           onClick={(event) => event.currentTarget.select()}
-          className="min-w-[16rem] flex-1 rounded-lg border border-slate-800 bg-slate-950/60 px-2 py-1.5 font-mono text-[11px] text-slate-400 focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/50"
+          className="min-h-[44px] min-w-[16rem] flex-1 rounded-lg border border-slate-800 bg-slate-950/60 px-2 text-[12px] font-mono text-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 sm:min-h-[36px]"
         />
       )}
 
       <span
         role="status"
         aria-live="polite"
-        className={`text-[11px] ${
-          feedback?.tone === 'warn' ? 'text-amber-300/90' : 'text-emerald-300'
-        }`}
+        className={`text-[12px] ${feedback?.tone === 'warn' ? 'text-amber-300' : 'text-emerald-300'}`}
       >
         {feedback && feedback.message !== 'Link copiado' ? feedback.message : ''}
       </span>

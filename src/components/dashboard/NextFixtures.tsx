@@ -1,6 +1,5 @@
 "use client"
 
-import Image from 'next/image'
 import { Clock } from 'lucide-react'
 import { isAllowedCrest } from './HypeFlags'
 import type { TeamFixture } from '@/lib/teamSchedule'
@@ -52,50 +51,56 @@ function fixtureDayTitle(iso: string | null): string {
 }
 
 /* Escudo do adversario: mesma regra do painel de detalhe (so host liberado) e mesma
-   queda para a inicial quando a fonte nao manda escudo. Tamanho menor que o do painel:
-   aqui a linha e compacta. */
-function Crest({ src, name, size = 18 }: { src: string | null; name: string; size?: number }) {
+   queda para a inicial quando a fonte nao manda escudo. Sem next/image de proposito:
+   com loading="lazy" o escudo nao dispara dentro do cockpit (medido: 0 de 72 imagens
+   carregadas, mesmo depois de rolar), entao aqui a imagem e eager e explicita em
+   width/height. */
+function Crest({ src, name, size = 20 }: { src: string | null; name: string; size?: number }) {
   if (src && isAllowedCrest(src)) {
     return (
-      <Image
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
         src={src}
-        alt={name}
+        alt=""
         width={size}
         height={size}
-        className="rounded object-contain"
+        loading="eager"
+        decoding="async"
+        className="shrink-0 rounded object-contain"
         style={{ width: size, height: size }}
       />
     )
   }
   return (
-    <div
-      className="flex items-center justify-center rounded bg-slate-800 font-bold text-slate-400"
-      style={{ width: size, height: size, fontSize: size / 2.6 }}
+    <span
+      aria-hidden="true"
+      className="flex shrink-0 items-center justify-center rounded bg-slate-800 text-[11px] font-bold text-slate-300"
+      style={{ width: size, height: size }}
     >
-      {name.charAt(0)}
-    </div>
+      {name.charAt(0).toUpperCase()}
+    </span>
   )
 }
 
 function FixtureRow({ fixture }: { fixture: TeamFixture }) {
   return (
     <div className="flex items-center gap-2 text-[11px]">
-      <span className="w-8 shrink-0 text-[10px] uppercase tracking-wide text-slate-500">
+      <span className="w-8 shrink-0 text-[11px] uppercase tracking-wide text-slate-400">
         {fixture.home ? 'casa' : 'fora'}
       </span>
       <Crest src={fixture.opponent_crest} name={fixture.opponent} />
       <span
-        className="min-w-0 flex-1 truncate text-slate-300"
+        className="min-w-0 flex-1 truncate text-slate-200"
         title={`${fixture.home ? 'em casa' : 'fora'} vs ${fixture.opponent}`}
       >
         {fixture.opponent}
       </span>
       {fixture.competition ? (
-        <span className="max-w-[88px] shrink-0 truncate text-[10px] text-slate-500" title={fixture.competition}>
+        <span className="max-w-[88px] shrink-0 truncate text-[11px] text-slate-400" title={fixture.competition}>
           {fixture.competition}
         </span>
       ) : null}
-      <span className="w-10 shrink-0 text-right font-mono text-[10px] text-slate-500" title={fixtureDayTitle(fixture.date)}>
+      <span className="w-10 shrink-0 text-right font-mono text-[11px] text-slate-400" title={fixtureDayTitle(fixture.date)}>
         {fixtureDay(fixture.date)}
       </span>
     </div>
@@ -108,31 +113,31 @@ export function NextFixtures({ fixtures, team, loading = false }: NextFixturesPr
   return (
     <section className="rounded-xl border border-slate-800 bg-slate-900/40 p-3">
       <div className="mb-2 flex items-baseline justify-between gap-2">
-        <h3 className="flex items-center gap-1 text-[10px] font-medium uppercase tracking-wide text-slate-500">
-          <Clock className="h-3 w-3 shrink-0" />
+        <h3 className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-wide text-slate-400">
+          <Clock aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
           Próximos jogos
         </h3>
         {team ? (
-          <span className="truncate text-[10px] text-slate-600" title={team}>
+          <span className="truncate text-[11px] text-slate-400" title={team}>
             {team}
           </span>
         ) : null}
       </div>
 
       {loading ? (
-        <div className="space-y-1.5">
+        <div className="space-y-2">
           {[...Array(3)].map((_, index) => (
-            <div key={index} className="h-3.5 w-full animate-pulse rounded bg-white/5" />
+            <div key={index} className="h-4 w-full animate-pulse rounded bg-white/5" />
           ))}
         </div>
       ) : list.length ? (
-        <div className="space-y-1">
+        <div className="space-y-2">
           {list.map((fixture, index) => (
             <FixtureRow key={`${fixture.date ?? 'sem-data'}-${fixture.opponent}-${index}`} fixture={fixture} />
           ))}
         </div>
       ) : (
-        <p className="text-[11px] leading-snug text-slate-500">Próximos jogos ainda não publicados para este time.</p>
+        <p className="text-[11px] leading-snug text-slate-400">Próximos jogos ainda não publicados para este time.</p>
       )}
     </section>
   )

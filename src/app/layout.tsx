@@ -9,9 +9,9 @@ export const metadata: Metadata = {
   // imagem. O site tambem roda em subpasta no GitHub Pages, mas o card aponta
   // para o dominio proprio — e o canonical que vale para compartilhar.
   metadataBase: new URL('https://hypefc.je4ndev.com'),
-  title: 'HypeFC - Dashboard de Futebol em Tempo Real',
-  description: 'Dashboard inteligente que identifica times em alta, acompanha classificacoes e jogos do dia das principais ligas do mundo.',
-  keywords: ['futebol', 'dashboard', 'premier league', 'brasileirao', 'la liga', 'champions league'],
+  title: 'HypeFC — Dashboard de Futebol em Tempo Real',
+  description: 'Dashboard inteligente que identifica times em alta, acompanha classificações e jogos do dia das principais ligas do mundo.',
+  keywords: ['futebol', 'dashboard', 'premier league', 'brasileirão', 'la liga', 'champions league'],
   authors: [{ name: 'Jean Carlos', url: 'https://github.com/JE4NVRG' }],
   // Relativo de proposito: o site tambem roda servido de subpasta no GitHub
   // Pages (/HypeFc/), e href relativo e resolvido contra a URL da pagina.
@@ -33,14 +33,14 @@ export const metadata: Metadata = {
         url: 'og.png',
         width: 1200,
         height: 630,
-        alt: 'HypeFC: rodada inteira em uma tela, com probabilidade de modelo e registro publico',
+        alt: 'HypeFC: rodada inteira em uma tela, com probabilidade de modelo e registro público',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'HypeFC - Dashboard de Futebol',
-    description: 'Rodada inteira em uma tela. Probabilidade do modelo com registro publico.',
+    description: 'Rodada inteira em uma tela. Probabilidade do modelo com registro público.',
     images: ['og.png'],
   },
 }

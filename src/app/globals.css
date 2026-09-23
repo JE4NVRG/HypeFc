@@ -23,6 +23,7 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 24 95% 53%;
+    /* Raio dos cards (rounded-xl mantem 12px por conta propria no Tailwind). */
     --radius: 0.75rem;
   }
 }
@@ -32,15 +33,36 @@
     @apply border-border;
   }
 
+  html {
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /*
+   * Corpo em slate-300 (13,6:1 sobre slate-950): texto herdado nunca cai na faixa
+   * ilegivel. Titulos declaram slate-100/white no proprio componente.
+   */
   body {
-    @apply bg-slate-950 text-slate-100;
+    @apply bg-slate-950 text-slate-300;
     font-feature-settings: "rlig" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  /*
+   * Rede de seguranca de foco: elementos que nao declaram anel proprio ainda tem
+   * indicador visivel (laranja, o mesmo acento do painel). Quem usa
+   * focus:outline-none + ring mantem o seu indicador, sem anel duplicado.
+   */
+  :focus-visible {
+    outline: 2px solid rgb(251 146 60 / 0.6);
+    outline-offset: 2px;
   }
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -48,14 +70,36 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-slate-800;
+  @apply rounded-full bg-slate-700;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-700;
+  @apply bg-slate-600;
 }
 
 /* Selection */
 ::selection {
   @apply bg-orange-500/30 text-white;
 }
+
+/*
+ * Motion: 150ms e nada mais. Com prefers-reduced-motion o painel fica estatico
+ * (o estado continua visivel por cor, nao por animacao).
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Sem camada @layer components de atalhos tipograficos de proposito: o Tailwind
+ * remove toda classe de components que nao encontra no conteudo, e um atalho
+ * "documentado mas purgado" aplicaria estilo nenhum e quebraria a escala em
+ * silencio. A escala e a declarada no DESIGN.md, nas classes cruas do Tailwind.
+ */
