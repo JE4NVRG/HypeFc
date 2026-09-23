@@ -57,6 +57,9 @@ export interface Standing {
   wins: number
   draws: number
   losses: number
+  goalsFor?: number
+  goalsAgainst?: number
+  form?: string | null
 }
 
 export interface Scorer {
@@ -89,6 +92,8 @@ interface StandingsData {
   league_id: string
   league_name: string
   table: Standing[]
+  home?: Standing[]
+  away?: Standing[]
   captured_at: string
 }
 

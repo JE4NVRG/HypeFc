@@ -6,6 +6,7 @@ import { StatsBar } from '@/components/dashboard/StatsBar'
 import { TodayMatches } from '@/components/dashboard/TodayMatches'
 import { HypeFlags } from '@/components/dashboard/HypeFlags'
 import { LeagueStandings } from '@/components/dashboard/LeagueStandings'
+import { LeagueIntel } from '@/components/dashboard/LeagueIntel'
 import { TopScorers } from '@/components/dashboard/TopScorers'
 import { DashboardFooter } from '@/components/dashboard/DashboardFooter'
 
@@ -70,6 +71,14 @@ export default function Home() {
             loading={loadingScorers}
           />
         </div>
+
+        <LeagueIntel
+          table={standingsData?.table ?? []}
+          home={standingsData?.home}
+          away={standingsData?.away}
+          leagueName={standingsData?.league_name ?? ''}
+          loading={loadingStandings}
+        />
       </main>
 
       <DashboardFooter />

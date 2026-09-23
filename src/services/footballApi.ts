@@ -80,6 +80,8 @@ export interface StandingRow {
   losses: number
   form: string | null
   goalDifference: number
+  goalsFor: number
+  goalsAgainst: number
 }
 
 export type HypeFlag = HypeBoardItem
@@ -138,6 +140,8 @@ interface ApiStandingTeam {
   draw: number
   lost: number
   points: number
+  goalsFor?: number
+  goalsAgainst?: number
   form?: string | null
   goalDifference?: number
 }
@@ -146,31 +150,48 @@ export async function fetchStandings(leagueCode: string): Promise<{
   league_id: string
   league_name: string
   table: StandingRow[]
+  home: StandingRow[]
+  away: StandingRow[]
   captured_at: string
 }> {
   const compId = LEAGUE_MAPPING[leagueCode]
   if (!compId) throw new Error(`League ${leagueCode} not supported`)
 
-  const data = await apiGet<{ standings: Array<{ table: ApiStandingTeam[] }> }>(
+  const data = await apiGet<{ standings: Array<{ type?: string; table: ApiStandingTeam[] }> }>(
     `/competitions/${compId}/standings`
   )
+  const blocks = data.standings || []
+  const pick = (type: string) => {
+    const block = blocks.find(item => item.type === type) || (type === 'TOTAL' ? blocks[0] : undefined)
+    return (block?.table || []).map(mapStandingRow)
+  }
 
   return {
     league_id: leagueCode,
     league_name: LEAGUE_NAMES[leagueCode] || leagueCode,
-    table: (data.standings?.[0]?.table || []).map(t => ({
-      pos: t.position,
-      team: t.team.name,
-      crest: t.team.crest || '',
-      pts: t.points,
-      played: t.playedGames,
-      wins: t.won,
-      draws: t.draw,
-      losses: t.lost,
-      form: t.form || null,
-      goalDifference: t.goalDifference || 0,
-    })),
+    table: pick('TOTAL'),
+    home: pick('HOME'),
+    away: pick('AWAY'),
     captured_at: new Date().toISOString(),
+  }
+}
+
+function mapStandingRow(t: ApiStandingTeam): StandingRow {
+  const goalsFor = t.goalsFor || 0
+  const goalsAgainst = t.goalsAgainst || 0
+  return {
+    pos: t.position,
+    team: t.team.name,
+    crest: t.team.crest || '',
+    pts: t.points,
+    played: t.playedGames,
+    wins: t.won,
+    draws: t.draw,
+    losses: t.lost,
+    form: t.form || null,
+    goalDifference: t.goalDifference ?? goalsFor - goalsAgainst,
+    goalsFor,
+    goalsAgainst,
   }
 }
 
