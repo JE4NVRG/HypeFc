@@ -54,8 +54,13 @@ const ESPN_HEADERS = {
   'User-Agent': 'HypeFC/0.2 (+https://github.com/JE4NVRG/HypeFc)',
 }
 const FUSO = 'America/Sao_Paulo'
-/** Base do link do alerta: o site publicado (Pages com subpasta ou dominio). */
-const SITE_PADRAO = 'https://je4nvrg.github.io/HypeFc/'
+/**
+ * Base do link do alerta: o dominio proprio e o que o cliente reconhece (e o
+ * que tem CNAME proprio no Pages). Sobrescreve com HYPEFC_SITE se um dia mudar.
+ * O antigo je4nvrg.github.io/HypeFc/ continua de pe, mas linkar para la manda o
+ * assinante para a marca errada — foi o que a primeira notificacao de verdade fez.
+ */
+const SITE_PADRAO = (process.env.HYPEFC_SITE || 'https://hypefc.je4ndev.com/').replace(/\/+$/, '') + '/'
 /** 6h de validade: alerta de jogo de hoje nao serve para amanha. */
 const TTL_SEGUNDOS = 6 * 60 * 60
 
@@ -216,7 +221,7 @@ export function montarPayload(jogo: JogoHoje, ratings: RatingsPayload | null): P
 
 /** Link direto do confronto no painel (?jogo=<id>&dia=YYYY-MM-DD). */
 function urlDoJogo(jogo: JogoHoje): string {
-  const base = (process.env.HYPEFC_SITE_URL || SITE_PADRAO).trim() || SITE_PADRAO
+  const base = SITE_PADRAO
   const params = new URLSearchParams({ jogo: jogo.eventId })
   const dia = diaEmSaoPaulo(jogo.kickoff)
   if (dia) params.set('dia', dia)
