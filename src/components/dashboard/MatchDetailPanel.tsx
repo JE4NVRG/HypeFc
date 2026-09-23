@@ -26,6 +26,8 @@ import type {
 } from '@/lib/matchDetail'
 import { isAllowedCrest } from './HypeFlags'
 import { NextFixtures } from './NextFixtures'
+import { ProbabilityBars } from './MatchProbability'
+import type { MatchProb } from '@/lib/matchProbability'
 import { fetchMatchDetailData } from '@/lib/dataSource'
 import { fetchTeamSchedule } from '@/lib/teamSchedule'
 import type { TeamFixture } from '@/lib/teamSchedule'
@@ -38,6 +40,9 @@ interface MatchDetailPanelProps {
   /** Ids ESPN dos dois times: alimentam os proximos jogos no painel. */
   homeId?: string | null
   awayId?: string | null
+  /** Probabilidade do modelo (Elo+Poisson) e o recorde medido dele. */
+  prob?: MatchProb | null
+  probRecord?: { n: number; brier: number; uniformBrier: number; bestPlaced: number | null; hitRate: number } | null
 }
 
 type Phase = 'idle' | 'loading' | 'ready' | 'error'
@@ -392,7 +397,7 @@ function eventVisual(event: MatchDetailEvent): { icon: React.ReactNode; tone: st
 
 /* ---------- painel ---------- */
 
-export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeId, awayId }: MatchDetailPanelProps) {
+export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeId, awayId, prob, probRecord }: MatchDetailPanelProps) {
   const [detail, setDetail] = useState<MatchDetail | null>(null)
   const [loadedFor, setLoadedFor] = useState<string | null>(null)
   const [phase, setPhase] = useState<Phase>('idle')
@@ -632,6 +637,17 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
             </div>
 
             {/* Comparação de estatísticas (verde = casa, azul = fora). */}
+            {prob ? (
+              <Section title="Probabilidade (modelo)">
+                <ProbabilityBars
+                  prob={prob}
+                  homeName={detail.home.team}
+                  awayName={detail.away.team}
+                  record={probRecord ?? null}
+                />
+              </Section>
+            ) : null}
+
             <Section title="Estatísticas">
               <StatsBlock detail={detail} />
             </Section>

@@ -1,0 +1,153 @@
+{
+  "generated_at": "2026-09-23T06:44:16.643Z",
+  "season": 2026,
+  "source": "ESPN (site.api.espn.com)",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "method": {
+    "gate": "os dois times com >= 5 jogos na temporada",
+    "ratings": "reconstruidos jogo a jogo, so com o que ja tinha acontecido antes da partida",
+    "season_reset": "na virada de temporada a tabela e o Elo zeram juntos",
+    "calibration_buckets": 5
+  },
+  "sample": {
+    "finished_matches": 1923,
+    "predicted_matches": 1203,
+    "rows": 3609,
+    "outcome_rates": {
+      "home": 0.4406,
+      "draw": 0.2627,
+      "away": 0.2968
+    },
+    "goals_per_match": 2.86
+  },
+  "metrics": {
+    "model": {
+      "brier": 0.629,
+      "log_loss": 1.0449,
+      "top_pick_hit_rate": 0.4647
+    },
+    "uniform": {
+      "brier": 0.6667,
+      "log_loss": 1.0986
+    },
+    "home_base": {
+      "brier": 0.6488,
+      "log_loss": 1.0728,
+      "top_pick_hit_rate": 0.4406
+    },
+    "delta_brier_vs_uniform": -0.0377,
+    "delta_brier_vs_home_base": -0.0198
+  },
+  "anchor": {
+    "model_top_pick_hit_rate": 0.4647,
+    "best_placed_hit_rate": 0.4647,
+    "n": 1203
+  },
+  "calibration": {
+    "buckets": [
+      {
+        "bucket": "0-20%",
+        "n": 123,
+        "predicted": 0.1739,
+        "observed": 0.122
+      },
+      {
+        "bucket": "20-40%",
+        "n": 2431,
+        "predicted": 0.2733,
+        "observed": 0.2805
+      },
+      {
+        "bucket": "40-60%",
+        "n": 1014,
+        "predicted": 0.4844,
+        "observed": 0.4714
+      },
+      {
+        "bucket": "60-80%",
+        "n": 41,
+        "predicted": 0.6335,
+        "observed": 0.6829
+      }
+    ],
+    "mean_abs_error_pp": 3.04,
+    "min_sample_per_bucket": 30
+  },
+  "per_league": [
+    {
+      "league": "BSA",
+      "n": 224,
+      "brier": 0.6234,
+      "uniform_brier": 0.6667,
+      "home_base_brier": 0.6372,
+      "hit_rate": 0.4821
+    },
+    {
+      "league": "PL",
+      "n": 141,
+      "brier": 0.6528,
+      "uniform_brier": 0.6667,
+      "home_base_brier": 0.6614,
+      "hit_rate": 0.3972
+    },
+    {
+      "league": "PD",
+      "n": 175,
+      "brier": 0.6162,
+      "uniform_brier": 0.6667,
+      "home_base_brier": 0.6228,
+      "hit_rate": 0.4914
+    },
+    {
+      "league": "SA",
+      "n": 160,
+      "brier": 0.6254,
+      "uniform_brier": 0.6667,
+      "home_base_brier": 0.6465,
+      "hit_rate": 0.5062
+    },
+    {
+      "league": "BL1",
+      "n": 125,
+      "brier": 0.6234,
+      "uniform_brier": 0.6667,
+      "home_base_brier": 0.6495,
+      "hit_rate": 0.456
+    },
+    {
+      "league": "FL1",
+      "n": 117,
+      "brier": 0.6481,
+      "uniform_brier": 0.6667,
+      "home_base_brier": 0.6575,
+      "hit_rate": 0.4359
+    },
+    {
+      "league": "PPL",
+      "n": 133,
+      "brier": 0.638,
+      "uniform_brier": 0.6667,
+      "home_base_brier": 0.6602,
+      "hit_rate": 0.4436
+    },
+    {
+      "league": "DED",
+      "n": 128,
+      "brier": 0.6131,
+      "uniform_brier": 0.6667,
+      "home_base_brier": 0.6359,
+      "hit_rate": 0.4766
+    }
+  ],
+  "honest_notes": [
+    "Probabilidade calibrada NAO e vantagem de palpite: o favorito do modelo acerta na mesma taxa da ancora sem modelo (melhor colocado da tabela).",
+    "A referencia \"base do mando\" e medida no proprio conjunto (in-sample); a vantagem do modelo sobre ela e piso, nao teto.",
+    "O modelo nao usa xG, desfalque, escalacao nem mercado.",
+    "Nao e sinal de aposta nem recomendacao."
+  ],
+  "amostra_suficiente": true
+}

@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { Calendar, Zap } from 'lucide-react'
 import { MatchRow } from '@/components/dashboard/TodayMatches'
 import type { Match, HypeTeam } from '@/hooks/useDashboardData'
+import { probabilidadeDoJogo, type RatingsPayload } from '@/lib/ratings'
 
 /**
  * View da rodada: chips de liga no topo (troca em vez de rolar), faixa de times
@@ -18,6 +19,7 @@ interface RoundViewProps {
   onSelect?: (match: Match) => void
   hypeByTeam?: Record<string, number>
   hypeTeams: HypeTeam[]
+  ratings?: RatingsPayload | null
 }
 
 export function RoundView({
@@ -28,6 +30,7 @@ export function RoundView({
   onSelect,
   hypeByTeam,
   hypeTeams,
+  ratings,
 }: RoundViewProps) {
   const [liga, setLiga] = useState<string>('todas')
 
@@ -132,6 +135,7 @@ export function RoundView({
                       match={match}
                       onSelect={onSelect}
                       hypeByTeam={hypeByTeam}
+                      prob={probabilidadeDoJogo(ratings ?? null, match.league_id, match.home, match.away)}
                     />
                   ))}
                 </div>

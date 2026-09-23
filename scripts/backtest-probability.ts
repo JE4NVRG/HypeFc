@@ -29,6 +29,8 @@
  * Uso: node --experimental-strip-types scripts/backtest-probability.ts
  */
 import type { EspnMatch } from '../src/lib/espnParse.ts'
+import { mkdirSync, writeFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import {
   DEFAULT_HOME_ADVANTAGE,
   DEFAULT_K,
@@ -369,6 +371,117 @@ async function main() {
     '  O modelo nao usa xG, desfalque, escalacao nem mercado. E Elo de resultado +\n' +
     '  Poisson de gols. Nao e sinal de aposta.'
   )
+
+  // ------------------------------------------------------------- recorde publico
+  // O mesmo padrao do recorde do score de hype: o numero vai para o site, com
+  // amostra, referencias e a leitura honesta — inclusive quando ela e desfavoravel.
+  const perLeagueRecord = perLeague
+    .filter((league) => league.rows.length > 0)
+    .map((league) => {
+      const leagueProb: ProbOutcome[] = league.rows.map((row) => ({
+        probs: row.probs,
+        outcome: row.outcome,
+      }))
+      const real = { home: 0, draw: 0, away: 0 }
+      for (const row of league.rows) real[row.outcome] += 1
+      const leagueBase = {
+        home: real.home / league.rows.length,
+        draw: real.draw / league.rows.length,
+        away: real.away / league.rows.length,
+      }
+      const hits = league.rows.filter((row) => argmax(row.probs) === row.outcome).length
+      return {
+        league: league.league,
+        n: league.rows.length,
+        brier: Number(brierScore(leagueProb).toFixed(4)),
+        uniform_brier: Number(brierScore(referenceRows(league.rows, uniform)).toFixed(4)),
+        home_base_brier: Number(brierScore(referenceRows(league.rows, leagueBase)).toFixed(4)),
+        hit_rate: Number((hits / league.rows.length).toFixed(4)),
+      }
+    })
+
+  const record = {
+    generated_at: new Date().toISOString(),
+    season: SEASON,
+    source: 'ESPN (site.api.espn.com)',
+    model: { name: 'elo+poisson', k: DEFAULT_K, home_advantage: DEFAULT_HOME_ADVANTAGE },
+    method: {
+      gate: `os dois times com >= ${MIN_PLAYED} jogos na temporada`,
+      ratings: 'reconstruidos jogo a jogo, so com o que ja tinha acontecido antes da partida',
+      season_reset: 'na virada de temporada a tabela e o Elo zeram juntos',
+      calibration_buckets: CALIBRATION_BUCKETS,
+    },
+    sample: {
+      finished_matches: goals.finished,
+      predicted_matches: n,
+      rows: rows.length * 3,
+      outcome_rates: {
+        home: Number(homeRate.toFixed(4)),
+        draw: Number(drawRate.toFixed(4)),
+        away: Number(awayRate.toFixed(4)),
+      },
+      goals_per_match: goals.finished ? Number((goals.total / goals.finished).toFixed(2)) : null,
+    },
+    metrics: {
+      model: {
+        brier: Number(modelBrier.toFixed(4)),
+        log_loss: Number(modelLogLoss.toFixed(4)),
+        top_pick_hit_rate: Number((modelHits / n).toFixed(4)),
+      },
+      uniform: {
+        brier: Number(brierScore(uniformRows).toFixed(4)),
+        log_loss: Number(logLoss(uniformRows).toFixed(4)),
+      },
+      home_base: {
+        brier: Number(brierScore(baseRows).toFixed(4)),
+        log_loss: Number(logLoss(baseRows).toFixed(4)),
+        top_pick_hit_rate: Number((baseHits / n).toFixed(4)),
+      },
+      delta_brier_vs_uniform: Number(deltaUniform.toFixed(4)),
+      delta_brier_vs_home_base: Number(deltaBase.toFixed(4)),
+    },
+    anchor: {
+      // A comparacao que decide honestidade: o favorito do modelo acerta mais que
+      // "o melhor colocado da tabela vence"? Aqui os dois empatam.
+      model_top_pick_hit_rate: Number((modelHits / n).toFixed(4)),
+      best_placed_hit_rate: anchor.n ? Number((anchor.wins / anchor.n).toFixed(4)) : null,
+      n,
+    },
+    calibration: {
+      buckets: buckets.map((bucket) => ({
+        bucket: bucket.bucket,
+        n: bucket.n,
+        predicted: Number(bucket.predicted.toFixed(4)),
+        observed: Number(bucket.observed.toFixed(4)),
+      })),
+      mean_abs_error_pp: Number((meanError * 100).toFixed(2)),
+      min_sample_per_bucket: 30,
+    },
+    per_league: perLeagueRecord,
+    honest_notes: [
+      'Probabilidade calibrada NAO e vantagem de palpite: o favorito do modelo acerta na mesma taxa da ancora sem modelo (melhor colocado da tabela).',
+      'A referencia "base do mando" e medida no proprio conjunto (in-sample); a vantagem do modelo sobre ela e piso, nao teto.',
+      'O modelo nao usa xG, desfalque, escalacao nem mercado.',
+      'Nao e sinal de aposta nem recomendacao.',
+      ...(n < MIN_SAMPLE ? [`Amostra abaixo de ${MIN_SAMPLE} previstos: diferenca dentro do erro de amostragem.`] : []),
+      ...(deltaUniform >= 0 ? ['O modelo NAO bate o chute uniforme no Brier: resultado negativo registrado.'] : []),
+    ],
+    amostra_suficiente: n >= MIN_SAMPLE,
+  }
+
+  const dir = resolve(process.cwd(), 'public/data')
+  mkdirSync(dir, { recursive: true })
+  writeFileSync(resolve(dir, 'probability-record.json'), `${JSON.stringify(record, null, 2)}\n`)
+  console.log('=== RECORDE PUBLICO ===')
+  console.log(
+    `  public/data/probability-record.json — n=${n} previstos | Brier ${record.metrics.model.brier} ` +
+      `(uniforme ${record.metrics.uniform.brier}, base ${record.metrics.home_base.brier})`
+  )
+  console.log(
+    `  favorito do modelo ${(record.anchor.model_top_pick_hit_rate * 100).toFixed(1)}% vs ` +
+      `melhor colocado ${record.anchor.best_placed_hit_rate !== null ? `${(record.anchor.best_placed_hit_rate * 100).toFixed(1)}%` : '--'}`
+  )
+  console.log()
 }
 
 main().catch((error) => {

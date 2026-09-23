@@ -238,20 +238,25 @@ export function parseScoreboard(payload: unknown, league: SportLeague): SportGam
     if (!event) continue
 
     const competition = obj(list(event.competitions)[0])
-    const statusSource = obj(competition?.status) ?? obj(event.status)
-    const statusType = obj(statusSource?.type)
+    const competitionStatus = obj(competition?.status)
+    const eventStatus = obj(event.status)
+    // A ESPN usa o status da competicao (mais especifico) e cai campo a campo para
+    // o do evento: competicao sem `type` ainda tem o `type` do evento para cima.
+    const competitionType = obj(competitionStatus?.type)
+    const eventType = obj(eventStatus?.type)
     const status = mapSportStatus(
-      str(statusType?.name),
-      str(statusType?.state) ?? str(statusSource?.state)
+      str(competitionType?.name) ?? str(eventType?.name),
+      str(competitionType?.state) ??
+        str(competitionStatus?.state) ??
+        str(eventType?.state) ??
+        str(eventStatus?.state)
     )
 
     const id = str(event.id) ?? ''
     const name = str(event.name) ?? str(event.shortName) ?? ''
     if (!id && !name) continue
 
-    // A ESPN usa o status da competicao (mais especifico) e cai para o do evento.
-    const eventStatus = obj(event.status)
-    const clock = str(statusSource?.displayClock) ?? str(eventStatus?.displayClock)
+    const clock = str(competitionStatus?.displayClock) ?? str(eventStatus?.displayClock)
 
     out.push({
       id,

@@ -8,6 +8,8 @@ import { StatsBar } from '@/components/dashboard/StatsBar'
 import { ViewTabs } from '@/components/dashboard/ViewTabs'
 import type { ViewId } from '@/components/dashboard/ViewTabs'
 import { RoundView } from '@/components/dashboard/RoundView'
+import { SportsView } from '@/components/dashboard/SportsView'
+import { loadRatings, probabilidadeDoJogo, type RatingsPayload } from '@/lib/ratings'
 import { LeagueTabs } from '@/components/dashboard/LeagueTabs'
 import { HypeRecord } from '@/components/dashboard/HypeRecord'
 import { ShareRound } from '@/components/dashboard/ShareRound'
@@ -44,6 +46,9 @@ export default function Home() {
   const [selected, setSelected] = useState<Match | null>(null)
   // Cockpit: a view troca o conteudo em vez de empilhar rolagem.
   const [view, setView] = useState<ViewId>('rodada')
+  // Ratings do modelo (arquivo estatico do build) e o recorde medido dele.
+  const [ratings, setRatings] = useState<RatingsPayload | null>(null)
+  const [probRecord, setProbRecord] = useState<{ n: number; brier: number; uniformBrier: number; bestPlaced: number | null; hitRate: number } | null>(null)
   const [linkNotice, setLinkNotice] = useState('')
   const diaPedido = useRef(false)
   const diaAberto = useRef(false)
@@ -138,6 +143,30 @@ export default function Home() {
 
   const totalRodada = Object.values(groupedMatches).reduce((sum, list) => sum + list.length, 0)
 
+  // Modelo de probabilidade: ratings do build + o recorde medido dele.
+  useEffect(() => {
+    let vivo = true
+    loadRatings().then((payload) => {
+      if (vivo) setRatings(payload)
+    })
+    fetch('data/probability-record.json', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((dados) => {
+        if (!vivo || !dados?.metrics) return
+        setProbRecord({
+          n: dados.sample?.predicted_matches ?? 0,
+          brier: dados.metrics.model?.brier ?? 0,
+          uniformBrier: dados.metrics.uniform?.brier ?? 0,
+          bestPlaced: dados.anchor?.best_placed_hit_rate ?? null,
+          hitRate: dados.metrics.model?.top_pick_hit_rate ?? 0,
+        })
+      })
+      .catch(() => {})
+    return () => {
+      vivo = false
+    }
+  }, [])
+
   return (
     <div className="flex h-[100dvh] flex-col overflow-hidden">
       <DashboardHeader
@@ -201,6 +230,7 @@ export default function Home() {
               onSelect={abrirConfronto}
               hypeByTeam={hypePorTime}
               hypeTeams={todayData?.hype ?? []}
+              ratings={ratings}
             />
           )}
 
@@ -235,15 +265,7 @@ export default function Home() {
             </div>
           )}
 
-          {view === 'esportes' && (
-            <div className="flex h-full flex-col items-center justify-center text-center">
-              <p className="text-sm text-slate-400">Outros esportes estão sendo ligados.</p>
-              <p className="mt-1 max-w-sm text-xs text-slate-600">
-                Basquete, futebol americano, hóquei e beisebol vêm da mesma fonte sem chave. Nada aparece aqui
-                antes de estar funcionando de verdade.
-              </p>
-            </div>
-          )}
+          {view === 'esportes' && <SportsView />}
         </div>
 
         <MatchDetailPanel
@@ -252,6 +274,12 @@ export default function Home() {
           leagueName={selected?.league_name ?? ''}
           homeId={selected?.home_id ?? null}
           awayId={selected?.away_id ?? null}
+          prob={
+            selected
+              ? probabilidadeDoJogo(ratings, selected.league_id, selected.home, selected.away)
+              : null
+          }
+          probRecord={probRecord}
           onClose={fecharConfronto}
         />
       </main>
