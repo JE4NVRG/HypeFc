@@ -70,6 +70,8 @@ export default function Home() {
           <TodayMatches
             groupedMatches={groupedMatches}
             loading={loadingToday}
+            isFallback={todayData?.is_fallback}
+            dayLabel={todayData?.date ? formatDay(todayData.date) : undefined}
           />
           <HypeFlags
             hypeTeams={todayData?.hype ?? []}

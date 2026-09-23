@@ -7,6 +7,8 @@ import type { Match } from '@/hooks/useDashboardData'
 interface TodayMatchesProps {
   groupedMatches: Record<string, Match[]>
   loading: boolean
+  isFallback?: boolean
+  dayLabel?: string
 }
 
 function Crest({ src, name }: { src?: string | null; name: string }) {
@@ -100,7 +102,7 @@ function MatchRow({ match }: { match: Match }) {
   )
 }
 
-export function TodayMatches({ groupedMatches, loading }: TodayMatchesProps) {
+export function TodayMatches({ groupedMatches, loading, isFallback, dayLabel }: TodayMatchesProps) {
   const leagueEntries = Object.entries(groupedMatches)
 
   return (
@@ -109,7 +111,12 @@ export function TodayMatches({ groupedMatches, loading }: TodayMatchesProps) {
         <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10">
           <Calendar className="h-3.5 w-3.5 text-emerald-400" />
         </div>
-        <h2 className="text-sm font-semibold text-slate-200">Jogos de Hoje</h2>
+        <h2 className="text-sm font-semibold text-slate-200">
+          {isFallback ? 'Ultima rodada' : 'Jogos de Hoje'}
+        </h2>
+        {isFallback && dayLabel && (
+          <span className="text-[10px] font-medium text-amber-300/80">{dayLabel}</span>
+        )}
         {!loading && leagueEntries.length > 0 && (
           <span className="ml-auto rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-medium text-slate-400">
             {leagueEntries.reduce((sum, [, m]) => sum + m.length, 0)} jogos
