@@ -613,28 +613,31 @@ export function ProView() {
                 <p className="mt-1.5 text-[11px] text-slate-500">Verificando este navegador…</p>
               ) : pushOk ? (
                 <div className="mt-2 flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    onClick={() => void ligarAlertas()}
-                    disabled={ocupado !== null}
-                    className={BOTAO_SECUNDARIO}
-                    aria-label="Ativar alertas no navegador"
-                  >
-                    {ocupado === 'push' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <BellRing className="h-3.5 w-3.5" />}
-                    Ativar alertas no navegador
-                  </button>
+                  {/* Um botao de cada vez: com inscricao viva, "ativar" de novo nao
+                      faz sentido — o que o usuario precisa e poder desligar. */}
                   {inscricao ? (
                     <button
                       type="button"
                       onClick={() => void desligarAlertas()}
                       disabled={ocupado !== null}
-                      className={BOTAO_FANTASMA}
+                      className={BOTAO_SECUNDARIO}
                       aria-label="Desligar alertas neste navegador"
                     >
-                      <BellOff className="h-3 w-3" />
-                      Desligar
+                      {ocupado === 'push' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <BellOff className="h-3.5 w-3.5" />}
+                      Desligar alertas neste navegador
                     </button>
-                  ) : null}
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => void ligarAlertas()}
+                      disabled={ocupado !== null}
+                      className={BOTAO_SECUNDARIO}
+                      aria-label="Ativar alertas no navegador"
+                    >
+                      {ocupado === 'push' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <BellRing className="h-3.5 w-3.5" />}
+                      Ativar alertas no navegador
+                    </button>
+                  )}
                 </div>
               ) : (
                 <p className="mt-1.5 text-[11px] text-slate-400">alertas indisponiveis neste navegador</p>
