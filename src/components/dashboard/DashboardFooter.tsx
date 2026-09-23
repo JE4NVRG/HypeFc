@@ -27,6 +27,15 @@ export function DashboardFooter({ source }: { source?: string }) {
           <span className="text-slate-800">|</span>
           <span className="text-slate-600">Dados: {label}</span>
         </div>
+        <div className="flex items-center gap-3 text-[11px]">
+          <span className="text-slate-700">Painel informativo. Não é casa de aposta e não promete resultado.</span>
+          <a href="termos" className="text-slate-500 underline decoration-slate-700 underline-offset-2 transition hover:text-slate-300">
+            Termos
+          </a>
+          <a href="privacidade" className="text-slate-500 underline decoration-slate-700 underline-offset-2 transition hover:text-slate-300">
+            Privacidade
+          </a>
+        </div>
       </div>
     </footer>
   )

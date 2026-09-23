@@ -13,12 +13,16 @@
     "backtest": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/backtest-hype.ts",
     "snapshot:hype": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/snapshot-hype.ts",
     "settle:hype": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/settle-hype.ts",
-    "record": "npm run snapshot:hype -- --today && npm run settle:hype && npm run ratings && npm run snapshot:prob && npm run settle:prob",
-    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-hype.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-league-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-espn-parse.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-splits.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-hype-record.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-detail.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-h2h.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-multi-sport.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-market-odds.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-probability.ts",
+    "record": "npm run snapshot:hype -- --today && npm run settle:hype && npm run ratings && npm run snapshot:prob && npm run settle:prob && npm run alertas",
+    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-hype.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-league-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-stats.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-espn-parse.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-splits.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-hype-record.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-detail.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-h2h.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-multi-sport.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-market-odds.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-match-probability.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/test-push.ts",
     "ratings": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/build-ratings.ts",
     "backtest:prob": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/backtest-probability.ts",
     "snapshot:prob": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/snapshot-probability.ts",
-    "settle:prob": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/settle-probability.ts"
+    "settle:prob": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/settle-probability.ts",
+    "venda:abrir": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/create-order.ts",
+    "venda:paga": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/mark-paid.ts",
+    "alertas": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/send-alerts.ts",
+    "loja:conferir": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/conferir-loja.ts"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.2.6",
@@ -33,12 +37,14 @@
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^1.14.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/web-push": "^3.6.4",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",

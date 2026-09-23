@@ -1,0 +1,800 @@
+"use client"
+
+/**
+ * Aba Pro do painel.
+ *
+ * E uma VIEW (aba) como Rodada/Liga/Recorde: o container da home nao rola, quem
+ * rola e este bloco por dentro. Nada aqui empurra o cockpit para baixo.
+ *
+ * O que a tela vende e o que ela recusa a vender esta no mesmo lugar de
+ * proposito: o alerta e o registro medido sao o produto; o palpite nao existe.
+ * Preco e limites vem do contrato do produto, nunca calculados na tela.
+ */
+
+import { useCallback, useEffect, useRef, useState } from 'react'
+import {
+  BadgeCheck,
+  BellOff,
+  BellRing,
+  Check,
+  Loader2,
+  LogOut,
+  Plus,
+  ShieldQuestion,
+  Square,
+} from 'lucide-react'
+import { VAPID_PUBLIC_KEY, pushDisponivel } from '@/lib/push'
+import {
+  LIMITE_PLANO,
+  assinarPush,
+  ativar,
+  cancelarPush,
+  entrarLista,
+  eu,
+  parar,
+  proConfigurado,
+  sair,
+  seguir,
+  seguidos,
+  temToken,
+  type Perfil,
+  type Seguido,
+} from '@/lib/proStore'
+
+/** URL de checkout: quando existe, o botao principal vira assinatura de verdade. */
+const CHECKOUT_URL = (process.env.NEXT_PUBLIC_CHECKOUT_URL ?? '').trim()
+
+type Tom = 'ok' | 'erro' | 'info'
+interface Recado {
+  tom: Tom
+  texto: string
+}
+
+const CTA =
+  'inline-flex min-h-[40px] w-full cursor-pointer items-center justify-center gap-1.5 rounded-lg bg-emerald-500 px-3 text-xs font-semibold text-slate-950 transition hover:bg-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300/60 disabled:cursor-not-allowed disabled:opacity-60'
+const BOTAO_SECUNDARIO =
+  'inline-flex min-h-[40px] cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800/60 px-3 text-xs font-medium text-slate-200 transition hover:bg-slate-700/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/60 disabled:cursor-not-allowed disabled:opacity-60'
+const BOTAO_FANTASMA =
+  'inline-flex min-h-[40px] shrink-0 cursor-pointer items-center justify-center gap-1 rounded-lg border border-slate-700/70 px-2 text-[11px] text-slate-400 transition hover:text-slate-100 focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/60 disabled:cursor-not-allowed disabled:opacity-60'
+const CAMPO =
+  'mt-0.5 h-10 w-full rounded-lg border border-slate-700 bg-slate-950/60 px-2.5 text-sm text-slate-100 placeholder:text-slate-600 focus:border-emerald-500/50 focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/50'
+const CAIXA = 'rounded-lg border border-slate-800 bg-slate-950/30 p-2.5'
+const ROTULO = 'text-[10px] font-medium uppercase tracking-wide text-slate-500'
+
+/** Erro da loja -> frase curta. Nunca promete sucesso que nao aconteceu. */
+const TEXTO_ERRO: Record<string, string> = {
+  'loja-offline': 'Registro online ainda nao ligado neste site: nada foi gravado aqui.',
+  rede: 'Nao deu para falar com o servidor agora. Tente de novo em instantes.',
+  'sem-acesso': 'Este navegador nao tem acesso ativo. Ative o codigo acima.',
+  'email-invalido': 'Confira o email: precisa ser um endereco valido.',
+  limite: 'Limite do plano atingido.',
+  'codigo-invalido': 'Codigo nao confere com esse email.',
+  'codigo-ja-usado': 'Esse codigo ja foi usado — cada codigo ativa um navegador.',
+  'codigo-expirado': 'Esse codigo passou da validade.',
+  'acesso-cancelado': 'Esse acesso esta cancelado.',
+  'time-invalido': 'Time sem identificacao na fonte: nao da para seguir.',
+  'inscricao-invalida': 'O navegador nao devolveu a inscricao de alerta completa.',
+}
+
+function textoErro(erro?: string): string {
+  if (!erro) return 'Nao deu certo agora.'
+  return TEXTO_ERRO[erro] ?? `Nao deu certo (${erro}).`
+}
+
+function emailValido(email: string): boolean {
+  return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim())
+}
+
+function limiteDe(perfil: Perfil | null): number {
+  if (!perfil) return LIMITE_PLANO.free
+  if (typeof perfil.limite === 'number') return perfil.limite
+  return perfil.plan === 'pro' ? LIMITE_PLANO.pro : LIMITE_PLANO.free
+}
+
+/**
+ * Chave VAPID base64url -> Uint8Array (o formato que o pushManager aceita).
+ * O buffer e criado explicitamente como ArrayBuffer: o applicationServerKey nao
+ * aceita o ArrayBufferLike (SharedArrayBuffer) que a inferencia larga devolve.
+ */
+function chaveParaBytes(chave: string): Uint8Array<ArrayBuffer> {
+  const base64 = chave.trim()
+  const padding = '='.repeat((4 - (base64.length % 4)) % 4)
+  const normalizado = (base64 + padding).replace(/-/g, '+').replace(/_/g, '/')
+  try {
+    const bruto = atob(normalizado)
+    const bytes = new Uint8Array(new ArrayBuffer(bruto.length))
+    for (let i = 0; i < bruto.length; i += 1) bytes[i] = bruto.charCodeAt(i)
+    return bytes
+  } catch {
+    return new Uint8Array(new ArrayBuffer(0))
+  }
+}
+
+/**
+ * Cache curto da lista de seguidos: o painel tem uma penca de SeguirTimeBotao e
+ * nao faz sentido uma RPC por botao. Qualquer mudanca local invalida o cache.
+ */
+let cacheLista: { em: number; itens: Seguido[] } | null = null
+const CACHE_MS = 15000
+const ouvintes = new Set<() => void>()
+
+async function listaSeguida(forcar = false): Promise<Seguido[]> {
+  const agora = Date.now()
+  if (!forcar && cacheLista && agora - cacheLista.em < CACHE_MS) return cacheLista.itens
+  const itens = await seguidos()
+  cacheLista = { em: Date.now(), itens }
+  return itens
+}
+
+export function avisarMudanca(): void {
+  cacheLista = null
+  // forEach em vez de for..of: o tsconfig nao define target es2015+.
+  ouvintes.forEach((ouvinte) => ouvinte())
+}
+
+function RecadoLinha({ recado }: { recado: Recado | null }) {
+  return (
+    <p
+      role="status"
+      aria-live="polite"
+      className={`mt-1.5 min-h-[14px] text-[10px] leading-snug ${
+        recado?.tom === 'ok' ? 'text-emerald-300' : recado?.tom === 'erro' ? 'text-red-300' : 'text-amber-300/90'
+      }`}
+    >
+      {recado?.texto ?? ''}
+    </p>
+  )
+}
+
+export function ProView() {
+  // Constante do build: servidor e cliente leem o mesmo valor, sem divergencia.
+  const loja = proConfigurado()
+
+  const [perfil, setPerfil] = useState<Perfil | null>(null)
+  const [lista, setLista] = useState<Seguido[]>([])
+  const [carregando, setCarregando] = useState(true)
+  const [pushOk, setPushOk] = useState<boolean | null>(null)
+  const [inscricao, setInscricao] = useState<string | null>(null)
+
+  const [email, setEmail] = useState('')
+  const [nome, setNome] = useState('')
+  const [codigo, setCodigo] = useState('')
+
+  const [recadoLista, setRecadoLista] = useState<Recado | null>(null)
+  const [recadoAcesso, setRecadoAcesso] = useState<Recado | null>(null)
+  const [recadoPush, setRecadoPush] = useState<Recado | null>(null)
+  const [recadoTimes, setRecadoTimes] = useState<Recado | null>(null)
+  const [ocupado, setOcupado] = useState<'lista' | 'acesso' | 'push' | 'times' | null>(null)
+
+  const emailRef = useRef<HTMLInputElement | null>(null)
+
+  // pushDisponivel() so existe no cliente: resolver depois de montar evita
+  // divergencia entre o HTML exportado e o primeiro render do navegador.
+  useEffect(() => {
+    setPushOk(pushDisponivel())
+  }, [])
+
+  const recarregar = useCallback(async (forcar = false) => {
+    if (!temToken()) {
+      setPerfil(null)
+      setLista([])
+      setCarregando(false)
+      return
+    }
+    const dados = await eu()
+    setPerfil(dados)
+    setLista(dados ? await listaSeguida(forcar) : [])
+    setCarregando(false)
+  }, [])
+
+  useEffect(() => {
+    void recarregar(true)
+  }, [recarregar])
+
+  // Seguir/parar em qualquer botao do painel atualiza o contador daqui.
+  useEffect(() => {
+    const ouvinte = () => {
+      void recarregar(true)
+    }
+    ouvintes.add(ouvinte)
+    return () => {
+      ouvintes.delete(ouvinte)
+    }
+  }, [recarregar])
+
+  // Ja existe inscricao de push neste navegador?
+  useEffect(() => {
+    if (pushOk !== true || !temToken()) return
+    let vivo = true
+    navigator.serviceWorker.ready
+      .then((registro) => registro.pushManager.getSubscription())
+      .then((sub) => {
+        if (vivo) setInscricao(sub ? sub.endpoint : null)
+      })
+      .catch(() => {})
+    return () => {
+      vivo = false
+    }
+  }, [pushOk])
+
+  const limite = limiteDe(perfil)
+  const seguindo = lista.length
+
+  const situacao = !loja
+    ? 'Modo lista de espera'
+    : perfil
+      ? limite > LIMITE_PLANO.free
+        ? 'Pro ativo'
+        : 'Plano gratuito'
+      : 'Sem acesso neste navegador'
+
+  async function pedirLista() {
+    if (ocupado) return
+    if (!emailValido(email)) {
+      setRecadoLista({ tom: 'info', texto: 'Confira o email antes de entrar na lista.' })
+      emailRef.current?.focus()
+      return
+    }
+    setOcupado('lista')
+    setRecadoLista(null)
+    try {
+      const r = await entrarLista(email, nome, 'aba-pro')
+      setRecadoLista(
+        r.ok
+          ? { tom: 'ok', texto: `Inscricao registrada para ${email.trim()}. O aviso das vendas sai por esse email.` }
+          : { tom: 'erro', texto: textoErro(r.erro) }
+      )
+    } finally {
+      setOcupado(null)
+    }
+  }
+
+  async function ativarAcesso(event: React.FormEvent) {
+    event.preventDefault()
+    if (ocupado) return
+    setOcupado('acesso')
+    setRecadoAcesso(null)
+    try {
+      const r = await ativar(email, codigo)
+      if (!r.ok) {
+        setRecadoAcesso({ tom: 'erro', texto: textoErro(r.erro) })
+        return
+      }
+      setCodigo('')
+      const dados = await eu()
+      setPerfil(dados)
+      setLista(await listaSeguida(true))
+      setRecadoAcesso({
+        tom: 'ok',
+        texto: `Acesso ativo${dados?.nome ? `: ${dados.nome}` : ''} — plano ${
+          dados?.plan === 'pro' ? 'Pro' : 'Gratuito'
+        }, ate ${limiteDe(dados)} times seguidos.`,
+      })
+    } finally {
+      setOcupado(null)
+    }
+  }
+
+  async function ligarAlertas() {
+    if (ocupado) return
+    if (pushOk !== true) {
+      setRecadoPush({ tom: 'info', texto: 'alertas indisponiveis neste navegador' })
+      return
+    }
+    if (!temToken()) {
+      setRecadoPush({ tom: 'erro', texto: 'Ative o acesso antes de ligar os alertas.' })
+      return
+    }
+    setOcupado('push')
+    setRecadoPush(null)
+    try {
+      if (typeof Notification === 'undefined') {
+        setRecadoPush({ tom: 'info', texto: 'alertas indisponiveis neste navegador' })
+        return
+      }
+      const permissao = await Notification.requestPermission()
+      if (permissao !== 'granted') {
+        setRecadoPush({
+          tom: 'erro',
+          texto: 'O navegador nao autorizou as notificacoes. Da para liberar nas configuracoes do site.',
+        })
+        return
+      }
+      const registro = await navigator.serviceWorker.ready
+      const existente = await registro.pushManager.getSubscription()
+      const nova = existente ?? (await registro.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: chaveParaBytes(VAPID_PUBLIC_KEY),
+      }))
+      const json = nova.toJSON()
+      const endpoint = json.endpoint ?? nova.endpoint
+      const p256dh = json.keys?.p256dh ?? ''
+      const auth = json.keys?.auth ?? ''
+      const r = await assinarPush({ endpoint, p256dh, auth })
+      if (r.ok) {
+        setInscricao(endpoint)
+        setRecadoPush({ tom: 'ok', texto: 'Alertas ligados neste navegador.' })
+        return
+      }
+      setRecadoPush({ tom: 'erro', texto: textoErro(r.erro) })
+    } catch {
+      setRecadoPush({ tom: 'erro', texto: 'Nao deu para ligar os alertas neste navegador.' })
+    } finally {
+      setOcupado(null)
+    }
+  }
+
+  async function desligarAlertas() {
+    if (ocupado || !inscricao) return
+    setOcupado('push')
+    setRecadoPush(null)
+    try {
+      const registro = await navigator.serviceWorker.ready
+      const sub = await registro.pushManager.getSubscription()
+      if (sub) await sub.unsubscribe()
+      const r = await cancelarPush(inscricao)
+      setInscricao(null)
+      setRecadoPush(
+        r.ok
+          ? { tom: 'ok', texto: 'Alertas desligados neste navegador.' }
+          : { tom: 'erro', texto: textoErro(r.erro) }
+      )
+    } catch {
+      setRecadoPush({ tom: 'erro', texto: 'Nao deu para desligar os alertas agora.' })
+    } finally {
+      setOcupado(null)
+    }
+  }
+
+  async function pararTime(teamId: string) {
+    if (ocupado) return
+    setOcupado('times')
+    setRecadoTimes(null)
+    try {
+      const r = await parar(teamId)
+      if (!r.ok) {
+        setRecadoTimes({ tom: 'erro', texto: textoErro(r.erro) })
+        return
+      }
+      avisarMudanca()
+      setLista(await listaSeguida(true))
+    } finally {
+      setOcupado(null)
+    }
+  }
+
+  function sairDaqui() {
+    sair()
+    setPerfil(null)
+    setLista([])
+    setInscricao(null)
+    avisarMudanca()
+    setRecadoAcesso({ tom: 'info', texto: 'Token removido deste navegador. Com o codigo voce ativa de novo.' })
+  }
+
+  return (
+    <div className="h-full overflow-y-auto pr-0.5">
+      <section className="rounded-xl border border-slate-800 bg-slate-900/40 p-3">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <div>
+            <h2 className="text-sm font-semibold text-slate-200">Pro</h2>
+            <p className="mt-0.5 text-[11px] text-slate-500">
+              Alerta antes da rodada e registro do que foi previsto — o palpite nao esta a venda.
+            </p>
+          </div>
+          <span
+            className={`rounded-full border px-2 py-0.5 text-[10px] ${
+              situacao === 'Pro ativo'
+                ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+                : 'border-slate-700 bg-slate-800/60 text-slate-400'
+            }`}
+          >
+            {situacao}
+          </span>
+        </div>
+
+        <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
+          {/* (a) gratis vs Pro, com o preco exato do contrato */}
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <div className={CAIXA}>
+              <div className={ROTULO}>Gratis</div>
+              <ul className="mt-1.5 space-y-1 text-[11px] leading-snug text-slate-400">
+                <li>Painel completo: rodada, ligas, esportes e recorde publico.</li>
+                <li>Ate 3 times seguidos.</li>
+                <li>Sem alertas.</li>
+              </ul>
+            </div>
+            <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/5 p-2.5">
+              <div className="flex flex-wrap items-baseline justify-between gap-1">
+                <span className="text-[10px] font-medium uppercase tracking-wide text-emerald-300/80">Pro</span>
+                <span className="font-mono text-[11px] text-slate-100">R$ 9,90/mes · R$ 79/ano</span>
+              </div>
+              <ul className="mt-1.5 space-y-1 text-[11px] leading-snug text-slate-300">
+                <li>Ate 20 times seguidos.</li>
+                <li>Alerta antes da rodada.</li>
+                <li>Historico do registro: o que o modelo previa para quem voce segue.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-2">
+            {/* (b) a prova, com os numeros medidos e a leitura honesta */}
+            <div className={CAIXA}>
+              <div className={`flex items-center gap-1.5 ${ROTULO}`}>
+                <ShieldQuestion className="h-3 w-3" />
+                O que o modelo entrega (medido)
+              </div>
+              <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                <div>
+                  <div className="text-[10px] uppercase tracking-wide text-slate-500">Brier do modelo</div>
+                  <div className="text-lg font-semibold text-emerald-300">0,629</div>
+                  <div className="text-[10px] text-slate-500">n=1.203 jogos</div>
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase tracking-wide text-slate-500">Chute uniforme</div>
+                  <div className="text-lg font-semibold text-slate-300">0,667</div>
+                  <div className="text-[10px] text-slate-500">1/3 para cada lado</div>
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase tracking-wide text-slate-500">Favorito do modelo</div>
+                  <div className="text-lg font-semibold text-slate-200">46,5%</div>
+                  <div className="text-[10px] text-slate-500">acerto do palpite</div>
+                </div>
+                <div className="rounded-lg border border-amber-500/25 bg-amber-500/5 px-2 py-1">
+                  <div className="text-[10px] uppercase tracking-wide text-amber-500/80">Ancora melhor colocado</div>
+                  <div className="text-lg font-semibold text-amber-300">46,5%</div>
+                  <div className="text-[10px] text-slate-500">mesma taxa, sem modelo</div>
+                </div>
+              </div>
+              <p className="mt-2 rounded-lg border border-amber-500/25 bg-amber-500/5 p-2 text-[11px] leading-snug text-amber-200">
+                Prova de honestidade: calibrado, sem edge no palpite — o que vendemos e alerta e registro, nao palpite.
+              </p>
+              <p className="mt-1.5 text-[10px] leading-snug text-slate-500">
+                O favorito do modelo acerta a mesma taxa de olhar a classificacao. A probabilidade vale como
+                frequencia, nao como vantagem contra ninguem.
+              </p>
+            </div>
+
+            {/* (g) o que o alerta e e o que ele nao e */}
+            <div className={CAIXA}>
+              <div className={`flex items-center gap-1.5 ${ROTULO}`}>
+                <BellRing className="h-3 w-3" />
+                O que o alerta faz
+              </div>
+              <ul className="mt-1.5 space-y-1 text-[11px] leading-snug text-slate-400">
+                <li>
+                  Avisa <span className="text-slate-200">quando o time joga</span> e a{' '}
+                  <span className="text-slate-200">probabilidade do modelo</span> para aquele jogo.
+                </li>
+                <li>Nao e palpite de aposta e nao diz para apostar em nada.</li>
+                <li>O HypeFC nao e casa de aposta, nao recebe aposta e nao promete retorno financeiro.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
+          {/* (c) e (d) lista de espera, ativacao de acesso e estado do acesso */}
+          <div className="grid grid-cols-1 gap-2">
+            {perfil ? (
+              <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/5 p-2.5">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5 text-[11px] font-medium text-emerald-300">
+                      <BadgeCheck className="h-3.5 w-3.5" />
+                      Acesso ativo
+                      {perfil.nome ? ` · ${perfil.nome}` : ''}
+                    </div>
+                    <p className="mt-0.5 truncate text-[10px] text-slate-400">
+                      {perfil.email ?? 'sem email no cadastro'} · plano{' '}
+                      {perfil.plan === 'pro' ? 'Pro' : 'Gratuito'} · {seguindo} de {limite} times
+                    </p>
+                  </div>
+                  <button type="button" onClick={sairDaqui} className={BOTAO_FANTASMA} aria-label="Sair deste navegador">
+                    <LogOut className="h-3 w-3" />
+                    Sair
+                  </button>
+                </div>
+              </div>
+            ) : null}
+
+            {CHECKOUT_URL ? (
+              <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className={CTA}>
+                Assinar Pro
+              </a>
+            ) : (
+              <button type="button" onClick={() => void pedirLista()} disabled={ocupado !== null} className={CTA}>
+                {ocupado === 'lista' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : null}
+                vendas abrindo — entre na lista
+              </button>
+            )}
+            {!loja ? (
+              <p className="text-[10px] leading-snug text-amber-300/80">
+                O registro online ainda nao esta ligado neste site: sua inscricao nao e gravada aqui. O painel
+                gratuito continua funcionando normalmente.
+              </p>
+            ) : null}
+
+            <form onSubmit={(event) => void ativarAcesso(event)} className={CAIXA}>
+              <div className={ROTULO}>Ativar acesso</div>
+              <p className="mt-1 text-[10px] leading-snug text-slate-500">
+                Quem comprou recebe um codigo de uso unico por email. Ele ativa este navegador.
+              </p>
+              <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="pro-acesso-email" className="text-[10px] text-slate-500">
+                    Email da compra
+                  </label>
+                  <input
+                    id="pro-acesso-email"
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder="voce@email.com"
+                    className={CAMPO}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="pro-acesso-codigo" className="text-[10px] text-slate-500">
+                    Codigo
+                  </label>
+                  <input
+                    id="pro-acesso-codigo"
+                    value={codigo}
+                    onChange={(event) => setCodigo(event.target.value)}
+                    autoComplete="off"
+                    spellCheck={false}
+                    placeholder="ex: 8F3C1A9B"
+                    className={`${CAMPO} font-mono uppercase tracking-widest`}
+                  />
+                </div>
+              </div>
+              <button type="submit" disabled={ocupado !== null} className={`${BOTAO_SECUNDARIO} mt-2 w-full`}>
+                {ocupado === 'acesso' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : null}
+                Ativar acesso
+              </button>
+              <RecadoLinha recado={recadoAcesso} />
+            </form>
+
+            <form onSubmit={(event) => { event.preventDefault(); void pedirLista() }} className={CAIXA}>
+              <div className={ROTULO}>Lista de espera</div>
+              <p className="mt-1 text-[10px] leading-snug text-slate-500">
+                Sem checkout aberto ainda: a lista avisa quando as vendas comecarem. Nada de cobranca aqui.
+              </p>
+              <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="pro-lista-email" className="text-[10px] text-slate-500">
+                    Email
+                  </label>
+                  <input
+                    ref={emailRef}
+                    id="pro-lista-email"
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder="voce@email.com"
+                    className={CAMPO}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="pro-lista-nome" className="text-[10px] text-slate-500">
+                    Nome (opcional)
+                  </label>
+                  <input
+                    id="pro-lista-nome"
+                    value={nome}
+                    onChange={(event) => setNome(event.target.value)}
+                    autoComplete="name"
+                    placeholder="Como te chamamos"
+                    className={CAMPO}
+                  />
+                </div>
+              </div>
+              <button type="submit" disabled={ocupado !== null} className={`${BOTAO_SECUNDARIO} mt-2 w-full`}>
+                {ocupado === 'lista' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Plus className="h-3.5 w-3.5" />}
+                Entrar na lista
+              </button>
+              <RecadoLinha recado={recadoLista} />
+            </form>
+          </div>
+
+          <div className="grid grid-cols-1 gap-2">
+            {/* (e) alertas no navegador */}
+            <div className={CAIXA}>
+              <div className={`flex items-center gap-1.5 ${ROTULO}`}>
+                <BellRing className="h-3 w-3" />
+                Alertas no navegador
+              </div>
+              {pushOk === null ? (
+                <p className="mt-1.5 text-[11px] text-slate-500">Verificando este navegador…</p>
+              ) : pushOk ? (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => void ligarAlertas()}
+                    disabled={ocupado !== null}
+                    className={BOTAO_SECUNDARIO}
+                    aria-label="Ativar alertas no navegador"
+                  >
+                    {ocupado === 'push' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <BellRing className="h-3.5 w-3.5" />}
+                    Ativar alertas no navegador
+                  </button>
+                  {inscricao ? (
+                    <button
+                      type="button"
+                      onClick={() => void desligarAlertas()}
+                      disabled={ocupado !== null}
+                      className={BOTAO_FANTASMA}
+                      aria-label="Desligar alertas neste navegador"
+                    >
+                      <BellOff className="h-3 w-3" />
+                      Desligar
+                    </button>
+                  ) : null}
+                </div>
+              ) : (
+                <p className="mt-1.5 text-[11px] text-slate-400">alertas indisponiveis neste navegador</p>
+              )}
+              <p className="mt-1.5 text-[10px] leading-snug text-slate-500">
+                O alerta chega antes da rodada com o horario do jogo e a probabilidade medida. E informativo: nao
+                sugere aposta.
+              </p>
+              <RecadoLinha recado={recadoPush} />
+            </div>
+
+            {/* (f) times seguidos com contador e botao de parar */}
+            <div className={CAIXA}>
+              <div className="flex items-baseline justify-between gap-2">
+                <span className={ROTULO}>Times seguidos</span>
+                <span className="font-mono text-[11px] text-slate-300">
+                  {seguindo} de {limite} times
+                </span>
+              </div>
+              {carregando ? (
+                <p className="mt-1.5 text-[11px] text-slate-500">Carregando…</p>
+              ) : lista.length === 0 ? (
+                <p className="mt-1.5 text-[11px] leading-snug text-slate-500">
+                  {temToken()
+                    ? 'Nenhum time seguido ainda. Use Seguir no confronto do time.'
+                    : 'Seguir time e recurso Pro: ative o acesso acima para usar.'}
+                </p>
+              ) : (
+                <ul className="mt-1.5 space-y-1">
+                  {lista.map((item) => (
+                    <li key={item.team_id} className="flex items-center gap-2">
+                      <span className="min-w-0 flex-1 truncate text-[11px] text-slate-300">{item.team_name}</span>
+                      <span className="hidden shrink-0 font-mono text-[10px] text-slate-600 sm:inline">
+                        {item.league_id}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => void pararTime(item.team_id)}
+                        disabled={ocupado !== null}
+                        className={BOTAO_FANTASMA}
+                        aria-label={`Parar de seguir ${item.team_name}`}
+                      >
+                        <Square className="h-3 w-3" />
+                        Parar
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <RecadoLinha recado={recadoTimes} />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+/**
+ * Botao de seguir time para usar no confronto (RoundView/NextFixtures).
+ * Estados: idle, seguindo e limite. Fica fora do fluxo de clique do card
+ * (stopPropagation) porque a linha toda abre o detalhe do jogo.
+ */
+export function SeguirTimeBotao({
+  leagueId,
+  teamName,
+  teamId,
+}: {
+  leagueId: string
+  teamName: string
+  teamId: string
+}) {
+  const [estado, setEstado] = useState<'idle' | 'seguindo' | 'limite'>('idle')
+  const [nota, setNota] = useState('')
+  const [ocupado, setOcupado] = useState(false)
+
+  useEffect(() => {
+    let vivo = true
+    listaSeguida()
+      .then((itens) => {
+        if (vivo && itens.some((item) => item.team_id === teamId)) setEstado('seguindo')
+      })
+      .catch(() => {})
+    return () => {
+      vivo = false
+    }
+  }, [teamId])
+
+  async function alternar(event: React.MouseEvent) {
+    event.preventDefault()
+    event.stopPropagation()
+    if (ocupado || estado === 'limite') return
+    setOcupado(true)
+    setNota('')
+    try {
+      if (estado === 'seguindo') {
+        const r = await parar(teamId)
+        if (!r.ok) {
+          setNota(textoErro(r.erro))
+          return
+        }
+        avisarMudanca()
+        setEstado('idle')
+        return
+      }
+
+      if (!temToken()) {
+        setNota('seguir time e do Pro: ative o acesso na aba Pro.')
+        return
+      }
+
+      const r = await seguir(leagueId, teamId, teamName)
+      if (r.ok) {
+        avisarMudanca()
+        setEstado('seguindo')
+        if (r.limite !== undefined && r.seguidos !== undefined && r.seguidos >= r.limite) {
+          setNota(`voce chegou ao limite do plano: ${r.limite} times.`)
+        }
+        return
+      }
+      if (r.codigoErro === 'limite') {
+        avisarMudanca()
+        setEstado('limite')
+        setNota(`limite do plano: ${r.seguidos ?? '?'} de ${r.limite ?? '?'} times.`)
+        return
+      }
+      setNota(textoErro(r.erro))
+    } finally {
+      setOcupado(false)
+    }
+  }
+
+  const rotulo = estado === 'seguindo' ? 'Seguindo' : estado === 'limite' ? 'Limite' : 'Seguir'
+  const classes =
+    estado === 'seguindo'
+      ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+      : estado === 'limite'
+        ? 'border-amber-500/30 bg-amber-500/10 text-amber-300'
+        : 'border-slate-700 bg-slate-800/60 text-slate-300 hover:text-slate-100'
+
+  return (
+    <button
+      type="button"
+      onClick={(event) => void alternar(event)}
+      disabled={ocupado || estado === 'limite'}
+      aria-pressed={estado === 'seguindo'}
+      aria-label={`${rotulo}: ${teamName}${nota ? ` — ${nota}` : ''}`}
+      title={nota || undefined}
+      className={`inline-flex min-h-[40px] shrink-0 cursor-pointer items-center justify-center gap-1 rounded-lg border px-2 text-[11px] font-medium transition focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/60 disabled:cursor-not-allowed disabled:opacity-70 ${classes}`}
+    >
+      {ocupado ? (
+        <Loader2 className="h-3 w-3 animate-spin" />
+      ) : estado === 'seguindo' ? (
+        <Check className="h-3 w-3" />
+      ) : estado === 'limite' ? (
+        <ShieldQuestion className="h-3 w-3" />
+      ) : (
+        <Plus className="h-3 w-3" />
+      )}
+      {rotulo}
+    </button>
+  )
+}

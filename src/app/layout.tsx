@@ -5,6 +5,10 @@ import PwaRegister from '@/components/dashboard/PwaRegister'
 import './globals.css'
 
 export const metadata: Metadata = {
+  // Base absoluta: preview de link (WhatsApp, X, Telegram) exige URL completa da
+  // imagem. O site tambem roda em subpasta no GitHub Pages, mas o card aponta
+  // para o dominio proprio — e o canonical que vale para compartilhar.
+  metadataBase: new URL('https://hypefc.je4ndev.com'),
   title: 'HypeFC - Dashboard de Futebol em Tempo Real',
   description: 'Dashboard inteligente que identifica times em alta, acompanha classificacoes e jogos do dia das principais ligas do mundo.',
   keywords: ['futebol', 'dashboard', 'premier league', 'brasileirao', 'la liga', 'champions league'],
@@ -23,6 +27,21 @@ export const metadata: Metadata = {
     description: 'Times em alta, jogos de hoje e classificacoes das maiores ligas do mundo.',
     type: 'website',
     locale: 'pt_BR',
+    siteName: 'HypeFC',
+    images: [
+      {
+        url: 'og.png',
+        width: 1200,
+        height: 630,
+        alt: 'HypeFC: rodada inteira em uma tela, com probabilidade de modelo e registro publico',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'HypeFC - Dashboard de Futebol',
+    description: 'Rodada inteira em uma tela. Probabilidade do modelo com registro publico.',
+    images: ['og.png'],
   },
 }
 

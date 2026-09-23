@@ -26,6 +26,7 @@ import type {
 } from '@/lib/matchDetail'
 import { isAllowedCrest } from './HypeFlags'
 import { NextFixtures } from './NextFixtures'
+import { SeguirTimeBotao } from './ProView'
 import { ProbabilityBars } from './MatchProbability'
 import { impliedProbabilities } from '@/lib/marketOdds'
 import type { MatchProb } from '@/lib/matchProbability'
@@ -600,6 +601,9 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                   <span className="w-full truncate text-center text-xs font-semibold leading-tight text-slate-200" title={detail.home.team}>
                     {detail.home.team}
                   </span>
+                  {homeId ? (
+                    <SeguirTimeBotao leagueId={leagueId} teamId={homeId} teamName={detail.home.team} />
+                  ) : null}
                 </div>
                 <div className="flex flex-col items-center px-1">
                   {detail.home.score !== null && detail.away.score !== null ? (
@@ -630,6 +634,9 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                   <span className="w-full truncate text-center text-xs font-semibold leading-tight text-slate-200" title={detail.away.team}>
                     {detail.away.team}
                   </span>
+                  {awayId ? (
+                    <SeguirTimeBotao leagueId={leagueId} teamId={awayId} teamName={detail.away.team} />
+                  ) : null}
                 </div>
               </div>
               <div className="mt-2 flex items-center justify-center gap-1.5 text-[10px] text-slate-500">

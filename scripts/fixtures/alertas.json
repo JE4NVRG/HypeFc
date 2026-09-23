@@ -1,0 +1,28 @@
+{
+  "_comentario": [
+    "Fixture de inspecao da entrega de alertas: `node --experimental-strip-types scripts/send-alerts.ts --dry-run --fixture scripts/fixtures/alertas.json --date 2026-10-17`.",
+    "Nao fala com o banco e nao envia nada: serve para ver, com dados conhecidos, o texto que sairia e a regra de idempotencia.",
+    "Os ids de time sao os reais da ESPN (e e por eles que o jogo e casado com o time seguido).",
+    "Os endpoints sao de exemplo (fcm.googleapis.com com sufixo ficticio), nunca de um aparelho real.",
+    "O filtro de plano/status/paid_until e aplicado aqui igual ao do banco: por isso o assinante 'free' e o vencido ficam de fora."
+  ],
+  "subscribers": [
+    { "id": "11111111-1111-4111-8111-111111111111", "email": "pro@exemplo.com", "plan": "pro", "status": "active", "paid_until": "2027-01-01T00:00:00Z" },
+    { "id": "22222222-2222-4222-8222-222222222222", "email": "pro2@exemplo.com", "plan": "pro", "status": "active", "paid_until": null },
+    { "id": "33333333-3333-4333-8333-333333333333", "email": "free@exemplo.com", "plan": "free", "status": "active", "paid_until": null },
+    { "id": "44444444-4444-4444-8444-444444444444", "email": "vencido@exemplo.com", "plan": "pro", "status": "active", "paid_until": "2026-01-01T00:00:00Z" }
+  ],
+  "follows": [
+    { "subscriber_id": "11111111-1111-4111-8111-111111111111", "league_id": "BSA", "team_id": "819", "team_name": "Flamengo" },
+    { "subscriber_id": "11111111-1111-4111-8111-111111111111", "league_id": "BSA", "team_id": "2029", "team_name": "Palmeiras" },
+    { "subscriber_id": "22222222-2222-4222-8222-222222222222", "league_id": "BSA", "team_id": "7632", "team_name": "Atlético-MG" },
+    { "subscriber_id": "22222222-2222-4222-8222-222222222222", "league_id": "BSA", "team_id": "3456", "team_name": "Coritiba" }
+  ],
+  "push_subs": [
+    { "id": "aaaaaaa1-aaaa-4aaa-8aaa-aaaaaaaaaaa1", "subscriber_id": "11111111-1111-4111-8111-111111111111", "endpoint": "https://fcm.googleapis.com/fcm/send/exemplo-aparelho-111111111111", "p256dh": "exemplo-de-p256dh-do-assinante-1111111111111111", "auth": "exemplo-auth-111", "fails": 0 },
+    { "id": "aaaaaaa2-aaaa-4aaa-8aaa-aaaaaaaaaaa2", "subscriber_id": "22222222-2222-4222-8222-222222222222", "endpoint": "https://fcm.googleapis.com/fcm/send/exemplo-aparelho-222222222222", "p256dh": "exemplo-de-p256dh-do-assinante-2222222222222222", "auth": "exemplo-auth-222", "fails": 0 }
+  ],
+  "alert_log": [
+    { "subscriber_id": "11111111-1111-4111-8111-111111111111", "event_key": "401841269:rodada" }
+  ]
+}

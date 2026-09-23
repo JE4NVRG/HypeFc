@@ -7,6 +7,8 @@ import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
 import { StatsBar } from '@/components/dashboard/StatsBar'
 import { ViewTabs } from '@/components/dashboard/ViewTabs'
 import type { ViewId } from '@/components/dashboard/ViewTabs'
+import { ProView, avisarMudanca } from '@/components/dashboard/ProView'
+import { ativar } from '@/lib/proStore'
 import { RoundView } from '@/components/dashboard/RoundView'
 import { SportsView } from '@/components/dashboard/SportsView'
 import { loadRatings, probabilidadeDoJogo, type RatingsPayload } from '@/lib/ratings'
@@ -181,6 +183,54 @@ export default function Home() {
     }
   }, [])
 
+  // Link do pos-pagamento: /?ativar=1&email=...&codigo=...
+  // Troca o codigo de uso unico pela chave de acesso e ja abre a aba Pro. O
+  // codigo sai da URL assim que e aceito: link de ativacao nao fica no historico
+  // nem no autocompletar de quem compartilha a barra de enderecos.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+
+    const viewPedida = params.get('view')
+    if (viewPedida && ['rodada', 'liga', 'record', 'esportes', 'pro'].includes(viewPedida)) {
+      setView(viewPedida as ViewId)
+    }
+
+    if (!params.get('ativar')) return
+    const email = params.get('email') || ''
+    const codigo = params.get('codigo') || ''
+    setView('pro')
+
+    if (!email || !codigo) {
+      setLinkNotice('Link de ativação incompleto: falta o e-mail ou o código. Use o link exatamente como recebeu.')
+      return
+    }
+
+    let vivo = true
+    ativar(email, codigo)
+      .then((r) => {
+        if (!vivo) return
+        if (r.ok) {
+          // A aba Pro pode ter montado antes do token existir: avisa para ela
+          // reler o acesso em vez de continuar dizendo "sem acesso".
+          avisarMudanca()
+          setLinkNotice(`Acesso ativado${r.plan === 'pro' ? ' no plano Pro' : ''}. Ligue os alertas nesta aba para receber o aviso antes da rodada.`)
+          const url = new URL(window.location.href)
+          ;['ativar', 'email', 'codigo'].forEach((k) => url.searchParams.delete(k))
+          window.history.replaceState(null, '', url.pathname + (url.searchParams.toString() ? `?${url.searchParams}` : ''))
+        } else {
+          setLinkNotice(`Não deu para ativar: ${r.erro || 'código inválido ou já usado'}.`)
+        }
+      })
+      .catch(() => {
+        if (vivo) setLinkNotice('Não deu para ativar agora: falha de rede. Tente o link de novo daqui a pouco.')
+      })
+
+    return () => {
+      vivo = false
+    }
+  }, [])
+
   return (
     <div className="flex h-[100dvh] flex-col overflow-hidden">
       <DashboardHeader
@@ -280,6 +330,12 @@ export default function Home() {
           )}
 
           {view === 'esportes' && <SportsView />}
+
+          {view === 'pro' && (
+            <div className="h-full overflow-y-auto pr-0.5">
+              <ProView />
+            </div>
+          )}
         </div>
 
         <MatchDetailPanel

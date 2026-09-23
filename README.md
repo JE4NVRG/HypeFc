@@ -429,8 +429,28 @@ quer cache no servidor:
 | `FOOTBALL_API_BASE_URL` | Nao | URL base da API (default: `https://api.football-data.org/v4`) |
 | `NEXT_PUBLIC_DATA_MODE` | Nao | `static` faz o navegador buscar a ESPN direto (build para Pages) |
 | `PAGES_BASE_PATH` | Nao | `basePath` do build estatico (default: `/HypeFc`) |
+| `NEXT_PUBLIC_SUPABASE_URL` | Nao | Projeto **HypeFC** no Supabase. Sem ela, a aba Pro degrada para lista de espera |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Nao | Chave publica (vai no bundle). Nao le nem escreve tabela: tudo passa por RPC |
+| `NEXT_PUBLIC_CHECKOUT_URL` | Nao | Link de cobranca do provedor. Com ela, o botao da aba Pro vira "Assinar Pro" |
+| `NEXT_PUBLIC_VAPID_PUBLIC_KEY` | Nao | Chave publica de Web Push (o cron usa a privada para enviar) |
+| `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` | So nos scripts | Chave de servico: usada por `venda:*` e `alertas` no Mac. **Nunca no bundle** |
+| `VAPID_PRIVATE_KEY` / `VAPID_SUBJECT` | So no cron | Assinatura do envio de push. So no `.env.local`, nunca no repositorio |
 
-> Nenhuma chave secreta e exposta no frontend. O token e utilizado apenas server-side nas API Routes.
+> Nenhuma chave secreta e exposta no frontend. A chave anon e publica por desenho: as tabelas tem RLS ligada e **nenhuma policy**, entao ela so consegue chamar as funcoes `join_waitlist`, `pro_setup`, `pro_me`, `follow_*` e `push_*`, que validam o token do proprio dono.
+
+---
+
+## Plano Pro (assinatura e alertas)
+
+O painel publico e inteiro gratuito. A assinatura Pro (R$ 9,90/mes ou R$ 79/ano) libera **ate 20 times seguidos** e **alertas no navegador antes da rodada** — o gratuito acompanha ate 3 times.
+
+Nao ha login nem senha: depois do pagamento o cliente recebe um **codigo de uso unico**, que troca por uma chave aleatoria guardada no navegador dele. O banco guarda apenas hashes SHA-256. A entrega do alerta e Web Push com VAPID gerado localmente (sem conta em servico de notificacao), disparada pelo cron diario deste repositorio.
+
+- Como cobrar, passo a passo: [`docs/cobranca.md`](docs/cobranca.md)
+- Termos e privacidade (LGPD): `/termos` e `/privacidade`
+- Verificacao ponta a ponta da loja: `npm run venda:abrir` → `npm run venda:paga` → ativar no site
+
+**O que o produto nao vende:** palpite. O registro publicado mostra que o modelo e calibrado e **nao** supera a referencia mais simples no acerto do favorito (46,5% contra 46,5%). O que se vende e alerta e registro publico, e isso esta escrito na oferta, nos termos e no proprio painel.
 
 ---
 

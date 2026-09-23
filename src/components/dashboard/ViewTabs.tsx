@@ -5,7 +5,7 @@
  * view rola por dentro (ou nem isso). Trocar de view substitui o conteudo em vez
  * de empilhar mais 2.000px de rolagem embaixo.
  */
-export type ViewId = 'rodada' | 'liga' | 'record' | 'esportes'
+export type ViewId = 'rodada' | 'liga' | 'record' | 'esportes' | 'pro'
 
 interface ViewTabsProps {
   view: ViewId
@@ -18,6 +18,7 @@ const VIEWS: Array<{ id: ViewId; label: string }> = [
   { id: 'liga', label: 'Liga' },
   { id: 'record', label: 'Recorde' },
   { id: 'esportes', label: 'Esportes' },
+  { id: 'pro', label: 'Pro' },
 ]
 
 export function ViewTabs({ view, onChange, counts }: ViewTabsProps) {
@@ -37,7 +38,7 @@ export function ViewTabs({ view, onChange, counts }: ViewTabsProps) {
             role="tab"
             aria-selected={ativo}
             onClick={() => onChange(id)}
-            className={`flex flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-medium transition focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/50 ${
+            className={`flex min-h-[40px] flex-1 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-2 text-xs font-medium transition focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/50 ${
               ativo ? 'bg-white/[0.09] text-slate-100' : 'text-slate-400 hover:bg-white/[0.04] hover:text-slate-200'
             }`}
           >
