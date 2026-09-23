@@ -1,0 +1,16 @@
+[Unit]
+Description=HypeFC - job diario: recorde, probabilidades, alertas Pro e publicacao
+Documentation=file:/home/jean/hypefc-jobs/HypeFc/docs/operacao-vps.md
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/jean/hypefc-jobs/HypeFc
+EnvironmentFile=/home/jean/hypefc-jobs/HypeFc/.env.local
+Environment=TZ=America/Sao_Paulo
+Environment=PATH=/home/jean/.nvm/versions/node/v22.23.2/bin:/home/jean/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/bin/bash /home/jean/hypefc-jobs/HypeFc/scripts/record-diario.sh
+# O build + push do gh-pages no fim do job leva ~1-2 min; 30 min e folga para
+# dia com rodada cheia (11 ligas) sem transformar travamento em falso sucesso.
+TimeoutStartSec=30min

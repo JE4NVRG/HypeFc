@@ -1,0 +1,14 @@
+[Unit]
+Description=HypeFC - recorde diario as 09:00 (America/Sao_Paulo)
+Documentation=file:/home/jean/hypefc-jobs/HypeFc/docs/operacao-vps.md
+
+[Timer]
+# A VPS roda em CEST: o fuso declarado aqui e o que mantem o job as 09:00 de
+# Sao Paulo (mesmo horario que o cron antigo no Mac tinha).
+OnCalendar=*-*-* 09:00:00 America/Sao_Paulo
+RandomizedDelaySec=120
+AccuracySec=1min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
