@@ -19,6 +19,7 @@ export default function Home() {
     loadingStandings,
     loadingScorers,
     lastUpdated,
+    error,
     isLoading,
     hasLiveMatches,
     setLeagueId,
@@ -36,6 +37,11 @@ export default function Home() {
       />
 
       <main className="w-full flex-1 px-2 py-3 sm:px-4 sm:py-4">
+        {error && (
+          <div className="mb-3 rounded-xl border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+            {error}
+          </div>
+        )}
         {/* Stats resumo do dia */}
         <div className="mb-3">
           <StatsBar stats={todayData?.stats} loading={loadingToday} />

@@ -27,7 +27,7 @@ O HypeFC nasceu da necessidade de ter uma visao rapida e inteligente do cenario 
 ### O que torna diferente
 
 - **Zero banco de dados** - Arquitetura serverless pura, dados sempre frescos direto da API
-- **Hype inteligente** - Algoritmo que identifica lideres, top 3 e times em campo automaticamente
+- **Hype inteligente** - Score 0-100 com forma, tabela, saldo, clássico e jogo ao vivo. "Joga hoje" sozinho não entra.
 - **Cache otimizado** - In-memory cache com TTL para respeitar rate limits sem sacrificar velocidade
 - **Full responsive** - Interface adaptativa de 1 a 4 colunas (mobile, tablet, desktop, ultrawide)
 
@@ -42,12 +42,14 @@ Barra de estatisticas com metricas em tempo real: total de jogos, gols marcados,
 Todas as partidas do dia agrupadas por liga, com escudos dos times, posicoes na tabela e **placar ao vivo**. Jogos em andamento recebem destaque visual com indicador LIVE.
 
 ### Times em Alta (Hype Detection)
-Algoritmo que analisa classificacoes e jogos do dia para identificar automaticamente:
-- **Lideres** de cada liga (prioridade maxima)
-- **Top 3** da classificacao
-- **Times jogando hoje** com relevancia
+Score de 0 a 100, não uma lista de quem joga hoje. Entram no máximo 12 times que passam de um corte mínimo, cruzando:
+- forma dos últimos 5 jogos
+- posição na tabela
+- saldo de gols
+- clássico do dia
+- jogo ao vivo
 
-Limitado aos 12 mais relevantes, cada um com badge de prioridade e nome da liga.
+Cada card mostra o score, a forma e o motivo. Líder frio sem jogo relevante fica de fora; meio de tabela só porque "joga hoje" também.
 
 ### Classificacao Completa
 Tabela de qualquer liga com indicadores visuais de zona: Champions League (verde), Europa League (azul) e rebaixamento (vermelho). Alterna entre 10+ competicoes com um clique.

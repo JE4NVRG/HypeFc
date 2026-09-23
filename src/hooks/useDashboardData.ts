@@ -2,6 +2,19 @@
 
 import { useState, useEffect, useCallback } from 'react'
 
+function humanError(message: string): string {
+  if (message.includes('FOOTBALL_API_TOKEN')) {
+    return 'Token da Football-Data não configurado. Copie .env.example para .env.local.'
+  }
+  if (message.includes('429')) {
+    return 'Limite da API de futebol atingido. Os dados voltam no próximo ciclo.'
+  }
+  if (message.includes('Failed to fetch') || message.includes('HTTP 500')) {
+    return 'Não consegui atualizar os jogos agora.'
+  }
+  return message
+}
+
 export type MatchStatus = 'SCHEDULED' | 'TIMED' | 'IN_PLAY' | 'PAUSED' | 'FINISHED' | 'POSTPONED' | 'CANCELLED' | 'SUSPENDED'
 
 export interface Match {
@@ -27,6 +40,12 @@ export interface HypeTeam {
   position?: number | null
   league_id: string
   league_name: string
+  score?: number
+  signals?: string[]
+  form?: Array<'W' | 'D' | 'L'>
+  opponent?: string | null
+  match_status?: string | null
+  time_local?: string | null
 }
 
 export interface Standing {
@@ -87,6 +106,7 @@ interface DashboardState {
   loadingStandings: boolean
   loadingScorers: boolean
   lastUpdated: string
+  error: string
 }
 
 export function useDashboardData() {
@@ -99,28 +119,35 @@ export function useDashboardData() {
     loadingStandings: true,
     loadingScorers: true,
     lastUpdated: '',
+    error: '',
   })
 
   const setLeagueId = useCallback((id: string) => {
     setState(prev => ({ ...prev, leagueId: id }))
   }, [])
 
-  const fetchToday = useCallback(async () => {
-    setState(prev => ({ ...prev, loadingToday: true }))
+  const fetchToday = useCallback(async (silent = false) => {
+    if (!silent) setState(prev => ({ ...prev, loadingToday: true }))
     try {
       const res = await fetch("/api/dashboard/today")
       const json = await res.json()
+      if (!res.ok) {
+        throw new Error(json?.error || `HTTP ${res.status}`)
+      }
       setState(prev => ({
         ...prev,
         todayData: json,
         lastUpdated: new Date().toLocaleString('pt-BR'),
         loadingToday: false,
+        error: '',
       }))
-    } catch {
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Falha ao buscar jogos'
       setState(prev => ({
         ...prev,
-        todayData: { date: '', matches: [], hype: [] },
+        todayData: prev.todayData ?? { date: '', matches: [], hype: [] },
         loadingToday: false,
+        error: humanError(message),
       }))
     }
   }, [])
@@ -130,16 +157,19 @@ export function useDashboardData() {
     try {
       const res = await fetch(`/api/dashboard/standings/${leagueId}`)
       const json = await res.json()
+      if (!res.ok) throw new Error(json?.error || `HTTP ${res.status}`)
       setState(prev => ({
         ...prev,
         standingsData: json,
         loadingStandings: false,
       }))
-    } catch {
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Falha ao buscar classificação'
       setState(prev => ({
         ...prev,
-        standingsData: { league_id: leagueId, league_name: '', table: [], captured_at: '' },
+        standingsData: prev.standingsData ?? { league_id: leagueId, league_name: '', table: [], captured_at: '' },
         loadingStandings: false,
+        error: prev.error || humanError(message),
       }))
     }
   }, [])
@@ -149,16 +179,19 @@ export function useDashboardData() {
     try {
       const res = await fetch(`/api/dashboard/scorers/${leagueId}`)
       const json = await res.json()
+      if (!res.ok) throw new Error(json?.error || `HTTP ${res.status}`)
       setState(prev => ({
         ...prev,
         scorersData: json,
         loadingScorers: false,
       }))
-    } catch {
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Falha ao buscar artilheiros'
       setState(prev => ({
         ...prev,
-        scorersData: { league_id: leagueId, scorers: [] },
+        scorersData: prev.scorersData ?? { league_id: leagueId, scorers: [] },
         loadingScorers: false,
+        error: prev.error || humanError(message),
       }))
     }
   }, [])
@@ -186,6 +219,14 @@ export function useDashboardData() {
   const hasLiveMatches = state.todayData?.matches?.some(
     m => m.status === 'IN_PLAY' || m.status === 'PAUSED'
   ) ?? false
+
+  useEffect(() => {
+    const ms = hasLiveMatches ? 60000 : 300000
+    const id = setInterval(() => {
+      fetchToday(true)
+    }, ms)
+    return () => clearInterval(id)
+  }, [hasLiveMatches, fetchToday])
 
   return {
     ...state,

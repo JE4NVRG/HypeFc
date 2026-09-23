@@ -58,7 +58,10 @@ function MatchRow({ match }: { match: Match }) {
     <div className={`flex items-center gap-1.5 rounded-lg px-2 py-2 transition-colors ${isLive ? 'bg-emerald-500/[0.06] ring-1 ring-emerald-500/10' : 'bg-white/[0.03] hover:bg-white/[0.06]'}`}>
       {/* Casa */}
       <div className="flex flex-1 items-center justify-end gap-1.5 overflow-hidden text-right">
-        <span className="truncate text-sm font-medium text-slate-200">{match.home}</span>
+        <span className="truncate text-sm font-medium text-slate-200">
+          {match.home_position ? <span className="mr-1 font-mono text-[10px] text-slate-500">#{match.home_position}</span> : null}
+          {match.home}
+        </span>
         <Crest src={match.home_crest} name={match.home} />
       </div>
 
@@ -67,7 +70,10 @@ function MatchRow({ match }: { match: Match }) {
       {/* Visitante */}
       <div className="flex flex-1 items-center gap-1.5 overflow-hidden">
         <Crest src={match.away_crest} name={match.away} />
-        <span className="truncate text-sm font-medium text-slate-200">{match.away}</span>
+        <span className="truncate text-sm font-medium text-slate-200">
+          {match.away}
+          {match.away_position ? <span className="ml-1 font-mono text-[10px] text-slate-500">#{match.away_position}</span> : null}
+        </span>
       </div>
     </div>
   )
