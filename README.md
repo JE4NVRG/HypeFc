@@ -78,7 +78,38 @@ Se um bloco nao tem fonte confirmada, ele nao aparece com dado inventado: mostra
 
 A rodada domina a primeira tela; classificacao, rendimento por mando e artilheiros dividem **uma secao com abas e um unico seletor de liga** (antes eram tres areas empilhadas somando ~2.100px de rolagem). So a aba ativa fica montada.
 
-### Instalavel e offline (PWA)
+### Probabilidade de vitória (com o limite junto, sempre)
+
+O painel mostra a probabilidade do modelo **Elo + Poisson** e, ao lado, o que ela vale:
+
+| | |
+|---|---|
+| Amostra medida | **1.203 jogos previstos** (1.923 encerrados, 8 ligas, temporada 2026) |
+| Brier do modelo | **0,629** |
+| Chute uniforme (1/3-1/3-1/3) | 0,667 |
+| Base do mando (44/26/30) | 0,649 |
+| Calibração | desvio médio de **3,0pp** entre previsto e observado |
+| Acerto do favorito do modelo | **46,5%** |
+| Âncora "melhor colocado da tabela vence" | **46,5%** |
+
+A leitura honesta, que aparece na própria interface: **probabilidade melhor, palpite igual.** O modelo entrega número calibrado — dá para confiar no "62%" como frequência — mas o favorito dele acerta exatamente o mesmo que olhar a classificação, sem Elo nenhum. Não é edge, e o produto diz isso em vez de vender o número.
+
+O rating não vem do navegador: o site é estático, então `scripts/build-ratings.ts` reconstrói a temporada no build e publica `public/data/ratings.json` (8 ligas, 152 times, 652 jogos de base). Jogo sem rating para os dois times **não mostra probabilidade** — em vez de chutar.
+
+Tudo isso é versionado em `public/data/probability-record.json`, gerado pelo backtest (`npm run backtest:prob`), com o método, as referências e os avisos.
+
+### Chave de aposta → probabilidade de mercado
+
+`src/lib/marketOdds.ts` converte a odd publicada em probabilidade implícita, **remove a margem da casa** (normaliza para somar 1) e devolve a margem como número visível. A ESPN publica linha de verdade no resumo do jogo (DraftKings, `moneyLine`, over/under), mas **não publica no scoreboard** e não tem modelo próprio: verificado, `predictor` responde `HTTP 400 "Predictor is not supported for sport: soccer, league: bra.1"` — igual para NBA. Então probabilidade de mercado aparece onde existe, rotulada com a fonte, sem verbo de recomendação.
+
+### Outros esportes (mesma fonte, sem chave nova)
+
+A aba **Esportes** traz 8 esportes e 17 ligas: futebol (10 ligas), **NBA, NFL, NHL, MLB, Fórmula 1, UFC e ATP**. Todos no mesmo endpoint gratuito da ESPN, com parser próprio por formato — a ordem é sempre *visitante @ mandante* e o placar sai na mesma ordem do nome, para não enganar.
+
+O que muda de esporte para esporte é tratado explicitamente: o beisebol traz *innings*, o hóquei traz registro com prorrogação (`1-0-1`), F1/MMA/tênis **não têm times** (aparecem por evento e sessão, sem placar inventado), e regra do futebol — como a tabela de classificação — **não** é aplicada a esporte que não tem. Estado vazio é explícito ("sem jogos publicados agora"), nunca cache de dado velho.
+
+
+### Instalável e offline (PWA)
 
 Manifest + service worker: da para instalar na tela inicial e abrir sem rede com a ultima rodada carregada. O cache **nao intercepta a ESPN** — dado de terceiro nunca e servido do cache, senao o painel mostraria placar velho; os JSON de dados sao network-first com fallback.
 
