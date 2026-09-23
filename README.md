@@ -218,6 +218,18 @@ O `basePath` vem de `PAGES_BASE_PATH` (default `/HypeFc`, o nome do repo).
 O workflow `.github/workflows/pages.yml` publica isso no branch `gh-pages` a
 cada push na `main`.
 
+> **Enquanto o Actions estiver indisponivel:** hoje os jobs de usuario desta
+> conta nao recebem runner (nem um probe de tres linhas inicia). O caminho que
+> funciona e o deploy local, em um comando:
+>
+> ```bash
+> npm run deploy:pages
+> ```
+>
+> Ele faz o build estatico e empurra para o `gh-pages` via worktree
+> temporario, com `.nojekyll`. O workflow fica no repo e volta a valer sozinho
+> quando a conta for destravada.
+
 **Vercel (SSR, com as API Routes)** — as rotas continuam valendo para quem
 quer cache no servidor:
 
