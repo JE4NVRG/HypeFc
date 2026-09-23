@@ -206,6 +206,76 @@ async function principal(): Promise<void> {
   if (gravadas === 0 && pagas.length === 0) {
     console.log('Nada novo — normal quando ainda nao houve venda nesta janela.')
   }
+
+  await sincronizarAssinaturas()
+}
+
+/**
+ * Renovacao: a mensalidade seguinte NAO cria sessao de checkout nova, ela
+ * aparece como assinatura ativa. Sem esta passada o assinante pagaria o segundo
+ * mes e perderia o Pro — por isso o vencimento vem do `current_period_end`.
+ */
+async function sincronizarAssinaturas(): Promise<void> {
+  let assinaturas: Array<{
+    id: string
+    status?: string
+    customer?: { email?: string | null } | string | null
+    items?: { data?: Array<{ price?: { id?: string | null; product?: string | null } | null; current_period_end?: number }> }
+  }>
+  try {
+    const bruto = chamarStripe([
+      'subscriptions',
+      'list',
+      '--limit',
+      '30',
+      '--expand',
+      'data.customer',
+      '--expand',
+      'data.items',
+    ]) as { data?: typeof assinaturas }
+    assinaturas = bruto.data ?? []
+  } catch (erro) {
+    console.log(`  assinaturas nao lidas: ${(erro as Error).message.slice(0, 120)}`)
+    return
+  }
+
+  const nossas = assinaturas.filter((a) =>
+    (a.items?.data ?? []).some((i) => {
+      if (!i?.price) return false
+      if (PRECO_HYPEFC && i.price.id === PRECO_HYPEFC) return true
+      if (PRODUTO_HYPEFC && i.price.product === PRODUTO_HYPEFC) return true
+      return false
+    })
+  )
+  console.log(`  assinaturas: ${assinaturas.length} lidas · ${nossas.length} do HypeFC`)
+
+  let atualizadas = 0
+  for (const a of nossas) {
+    const cliente = a.customer
+    const email = (typeof cliente === 'object' && cliente ? cliente.email || '' : '').trim().toLowerCase()
+    if (!email) {
+      console.log(`    ${mascararId(a.id)}: assinatura sem e-mail no cliente — pulada`)
+      continue
+    }
+    const periodo = Math.max(
+      ...(a.items?.data ?? []).map((i) => Number(i?.current_period_end ?? 0)),
+      0
+    )
+    const ate = periodo > 0 ? new Date(periodo * 1000).toISOString() : null
+    const r = await rpc<{ ok?: boolean; status?: string; erro?: string }>('pro_assinatura_stripe', {
+      p_email: email,
+      p_ate: ate,
+      p_status: a.status ?? 'active',
+      p_ref: a.id,
+    })
+    if (r.ok) {
+      atualizadas += 1
+      console.log(`    ${mascararId(a.id)}: ${mascararEmail(email)} · ${r.status} · ate ${ate ?? '—'}`)
+    } else {
+      console.log(`    ${mascararId(a.id)}: nao atualizada (${r.erro ?? 'erro'})`)
+    }
+  }
+  if (nossas.length > 0) console.log(`  assinaturas atualizadas: ${atualizadas}/${nossas.length}`)
 }
 
 principal().catch((erro) => {

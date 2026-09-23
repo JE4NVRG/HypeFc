@@ -153,3 +153,8 @@ Pontos de atencao que ja morderam:
   `stripe payment_links update <plink> -d "adaptive_pricing[enabled]=false"`.
 - No Checkout o comprador ve **Vrg Solucoes** como recebedor (nome da conta Stripe). Se quiser
   que apareca "HypeFC", e ajuste de nome/descriptor na conta.
+
+- **RENOVACAO nao gera sessao nova.** A mensalidade seguinte aparece como assinatura ativa na
+  Stripe; o `venda:sync` tambem varre `subscriptions list` e grava o `current_period_end` em
+  `paid_until` (RPC `pro_assinatura_stripe`, service_role). Sem isso o assinante perderia o Pro no
+  segundo mes. Cancelou? O status vira `canceled` mas o acesso continua ate vencer (nunca encurta).
