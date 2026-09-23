@@ -103,3 +103,26 @@
  * "documentado mas purgado" aplicaria estilo nenhum e quebraria a escala em
  * silencio. A escala e a declarada no DESIGN.md, nas classes cruas do Tailwind.
  */
+
+/*
+ * Tela baixa (celular com a barra do navegador aberta, ~600px de altura):
+ * o cockpit de altura fixa nao cabe — header + KPIs + abas + rodape comem a
+ * tela e o painel de jogos ficava com 46px de altura util, com o rodape
+ * parecendo cobrir o conteudo. Abaixo de 680px de altura o layout volta ao
+ * fluxo normal da pagina: o conteudo cresce, a pagina rola e o rodape
+ * simplesmente termina a pagina em vez de disputar espaco com a lista.
+ * Em tela alta (o caso normal) nada muda: segue 100dvh sem scroll.
+ */
+@media (max-height: 680px) {
+  .cockpit-shell {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .cockpit-painel,
+  .cockpit-rolagem {
+    height: auto;
+    overflow: visible;
+  }
+}
