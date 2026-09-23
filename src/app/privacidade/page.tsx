@@ -56,11 +56,32 @@ export default function Privacidade() {
       </section>
 
       <section className="mt-6 space-y-2">
+        <h2 className={S.h2}>Entrar com o Google (opcional)</h2>
+        <p className={S.p}>
+          Você pode usar o HypeFC inteiro sem conta. Entrar com o Google serve para uma coisa só:{' '}
+          <strong className="text-slate-300">guardar o seu acesso na conta</strong>, para o Pro valer em qualquer
+          aparelho — sem isso, o acesso fica preso ao navegador em que a compra foi feita.
+        </p>
+        <p className={S.p}>
+          Do Google recebemos apenas o básico do seu perfil: <strong className="text-slate-300">e-mail</strong>, nome e
+          foto de perfil, se houver. Não pedimos e não temos acesso a Gmail, Drive, contatos, calendário nem a qualquer
+          outro conteúdo da sua conta. A autenticação é feita pelo Supabase Auth; a senha do Google nunca passa pelo
+          HypeFC e nós não temos como vê-la.
+        </p>
+        <p className={S.p}>
+          O uso desses dados é limitado a identificação e entrega do serviço, conforme a política de dados do usuário
+          dos serviços de API do Google. Você pode sair da conta a qualquer momento na aba Pro — o acesso Pro continua
+          válido onde a conta estiver conectada — e pode pedir a exclusão da conta pelos canais abaixo.
+        </p>
+      </section>
+
+      <section className="mt-6 space-y-2">
         <h2 className={S.h2}>Como o seu acesso é protegido</h2>
         <p className={S.p}>
-          Não existe senha no HypeFC. Depois da compra você recebe um código de uso único, que troca por uma chave de
-          acesso aleatória guardada apenas no seu navegador. No servidor ficam somente hashes (SHA-256) — nem o código nem
-          a chave são armazenados em texto legível. Ninguém que acesse o banco consegue reconstruir o seu acesso.
+          Não existe senha própria do HypeFC. Sem conta, depois da compra você recebe um código de uso único, que troca
+          por uma chave de acesso aleatória guardada apenas no seu navegador. Entrando com o Google, quem identifica a
+          assinatura é o e-mail da conta, e a chave continua sendo trocada pelo servidor a cada entrada. No servidor
+          ficam somente hashes (SHA-256) — nem o código nem a chave são armazenados em texto legível.
         </p>
       </section>
 

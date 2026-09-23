@@ -117,6 +117,32 @@ export function sair(): void {
 }
 
 /**
+ * Grava o token vindo da conta (login com Google). Existe separado de `sair`
+ * porque a origem e outra: aqui o servidor ja autenticou o e-mail no JWT, e o
+ * navegador so guarda o que voltou — nada e decidido do lado do cliente.
+ */
+export function aplicarToken(token: string): void {
+  gravarToken(token)
+}
+
+/**
+ * Limpa o que diz respeito à conta: o token local e a sessão do supabase-js.
+ * Usado no "sair da conta" — sem isso a sessão do Google continuaria viva e o
+ * próximo carregamento devolveria o acesso sem ninguém pedir.
+ */
+export function limparContaLocal(): void {
+  if (typeof window === 'undefined') return
+  try {
+    window.localStorage.removeItem(TOKEN_KEY)
+    for (const chave of Object.keys(window.localStorage)) {
+      if (chave.startsWith('hypefc.conta')) window.localStorage.removeItem(chave)
+    }
+  } catch {
+    // storage indisponivel: a sessao expira sozinha
+  }
+}
+
+/**
  * POST /rest/v1/rpc/<nome>. Devolve sempre uma Resposta; nunca lanca.
  * `ok` e recalculado de `=== true` porque jsonb de terceiro pode vir torto e
  * um "ok" nao-booleano seria tratado como sucesso silencioso.

@@ -23,6 +23,7 @@ import {
   ShieldQuestion,
   Square,
 } from 'lucide-react'
+import ContaPro from './ContaPro'
 import { VAPID_PUBLIC_KEY, pushDisponivel } from '@/lib/push'
 import {
   LIMITE_PLANO,
@@ -499,6 +500,8 @@ export function ProView() {
                 </div>
               </div>
             ) : null}
+
+            <ContaPro />
 
             {CHECKOUT_URL ? (
               <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className={CTA}>

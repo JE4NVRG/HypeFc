@@ -173,4 +173,43 @@ por produto: a conta e por CNPJ/conta bancaria, e o filtro de receita se faz por
 - O campo antigo `settings[card_payments][statement_descriptor]` **nao existe mais** na API atual:
   tentar por ele devolve `parameter_unknown`. O valido e `settings[payments][statement_descriptor]`.
 - Preco: **adaptativo ligado** por decisao do Jean — visitante fora do BR paga na moeda local.
-- Nome exibido no Checkout segue a razao social (Vrg Solucoes); a marca aparece na descricao.
+- Nome exibido no Checkout segue a razao social (Vrg Soluções); a marca aparece na descrição.
+
+## CONTA DO ASSINANTE (login com Google) — 23/09
+
+Motivo: o token no navegador **não tem dono**. Cliente que limpasse os dados ou trocasse de
+celular perdia o Pro e não havia como devolver. Com conta, o e-mail é o dono.
+
+**Como funciona**
+- Login: Supabase Auth com Google (`external_google_enabled: true` no projeto
+  `sebyzlcgadsiinikxfgu`), cliente OAuth `HypeFC Supabase` no projeto GCP `nifty-structure-509515-q4`.
+- Quem decide o acesso é a RPC **`pro_conta_entrar`** (só `authenticated`), lendo o e-mail de
+  dentro do JWT. O navegador nunca decide que tem Pro.
+- A RPC faz, nesta ordem: (1) acha o assinante pelo e-mail; (2) se não existe, procura **compra
+  paga e não resgatada** com esse e-mail e resgata; (3) se a assinatura vale, **rotaciona o
+  token** e devolve.
+- Consequência da rotação: **o aparelho mais recente fica com o acesso**. Reentrar com a conta é
+  um clique, então foi aceito de propósito (alternativa seria uma tabela de tokens por aparelho).
+- `pro_conta_estado` devolve o estado sem token — é o que a UI usa para não rotacionar à toa.
+- No site: `src/lib/conta.ts` (cliente), `ContaPro.tsx` (botão/estado na aba Pro) e o efeito de
+  religação em `ResgatePro.tsx` (roda no layout, então vale para qualquer aparelho que entre com
+  a conta e ainda não tenha token).
+
+**Configuração que precisa existir (se algum dia refizer)**
+1. GCP → projeto → tela de consentimento (app **HypeFC**, Externo) com início, `/privacidade` e
+   `/termos` preenchidos; usuários de teste enquanto estiver em "Testando".
+2. GCP → cliente OAuth **Aplicativo da Web** com redirect
+   `https://sebyzlcgadsiinikxfgu.supabase.co/auth/v1/callback`.
+3. Supabase → `external_google_client_id` **e** `external_google_secret` (atenção: o nome do campo
+   do segredo é `external_google_secret`; `external_google_client_secret` é **ignorado em
+   silêncio**), `site_url` e `uri_allow_list`.
+
+**Armadilha verificada**: com o nome de campo errado o PATCH responde 200 e o Supabase parece
+configurado; só o teste real do `/auth/v1/authorize` denuncia (`400 "missing OAuth secret"`).
+**Sempre** validar com o authorize devolvendo 302 para `accounts.google.com` com o seu
+`client_id` e o `redirect_uri` esperado.
+
+**Pendência**: o app está em **"Testando"** no Google (só usuários de teste entram; refresh token
+expira em 7 dias). Publicar exige completar branding/verificar domínio. Até isso, cliente novo não
+consegue entrar com Google — o caminho sem conta continua funcionando.
+

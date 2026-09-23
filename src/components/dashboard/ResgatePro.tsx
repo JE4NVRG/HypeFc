@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { proConfigurado, resgatarSessao } from '@/lib/proStore'
+import { contaConfigurada, entrarComoAssinante, estadoDaConta } from '@/lib/conta'
+import { proConfigurado, resgatarSessao, temToken } from '@/lib/proStore'
 
 /**
  * Retorno do Checkout da Stripe.
@@ -98,6 +99,60 @@ export default function ResgatePro() {
     }
 
     tentar()
+
+    return () => {
+      vivo = false
+    }
+  }, [])
+
+  // Conta (login com Google): o Pro volta em qualquer aparelho.
+  //
+  // Roda depois do resgate por sessão e nunca briga com ele: se a licença já
+  // está neste navegador, só confere o estado e não rotaciona nada. Rotaciona
+  // apenas quando a conta tem assinatura e este navegador está sem acesso — que
+  // é exatamente o caso de "troquei de celular".
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (!contaConfigurada()) return
+
+    const veioDoGoogle = new URLSearchParams(window.location.search).has('code')
+    let vivo = true
+
+    estadoDaConta()
+      .then(async (r) => {
+        if (!vivo) return
+        if (!r.logado) {
+          if (veioDoGoogle) {
+            setAviso({ tipo: 'erro', texto: 'O login voltou sem sessão. Tente entrar de novo na aba Pro.' })
+          }
+          return
+        }
+        if (!r.pro) {
+          if (veioDoGoogle) {
+            setAviso({
+              tipo: 'erro',
+              texto: `Entramos com ${r.email ?? 'sua conta'}, mas essa conta ainda não tem assinatura Pro.`,
+            })
+          }
+          return
+        }
+        if (temToken()) {
+          if (veioDoGoogle) {
+            setAviso({ tipo: 'ok', texto: `Conta conectada (${r.email ?? 'Google'}). Pro ativo neste aparelho.` })
+          }
+          return
+        }
+        const ligou = await entrarComoAssinante()
+        if (!vivo) return
+        setAviso(
+          ligou.pro
+            ? { tipo: 'ok', texto: `Pro restaurado na conta ${ligou.email ?? ''}: este aparelho está liberado.` }
+            : { tipo: 'erro', texto: 'A conta entrou, mas não conseguimos liberar o Pro agora. Tente de novo.' },
+        )
+      })
+      .catch(() => {
+        // rede fora do ar: o resgate por sessão continua sendo o caminho
+      })
 
     return () => {
       vivo = false
