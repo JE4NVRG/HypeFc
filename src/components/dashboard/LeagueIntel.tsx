@@ -54,6 +54,7 @@ export function LeagueIntel({ table, home = [], away = [], leagueName, loading }
   const intel = !loading && table.length
     ? buildLeagueIntel(table.map(toSide), home.map(toSide), away.map(toSide))
     : null
+  const hasHomeSplit = Boolean(intel && intel.teams.some((team) => team.homePpg != null || team.awayPpg != null))
 
   return (
     <section className="mt-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 sm:p-5">
@@ -76,10 +77,12 @@ export function LeagueIntel({ table, home = [], away = [], leagueName, loading }
         <p className="py-8 text-center text-sm text-slate-500">Sem base estatística para esta liga.</p>
       ) : (
         <>
-          <div className="mb-4 grid grid-cols-2 gap-3 border-y border-white/5 py-3 sm:grid-cols-4">
+          <div className={`mb-4 grid grid-cols-2 gap-3 border-y border-white/5 py-3 ${hasHomeSplit ? 'sm:grid-cols-4' : 'sm:grid-cols-3'}`}>
             <Leader label="Ataque" team={intel.leaders.attack} value={intel.leaders.attack ? `${intel.leaders.attack.gfPerGame} GF/j` : '—'} />
             <Leader label="Defesa" team={intel.leaders.defense} value={intel.leaders.defense ? `${intel.leaders.defense.gaPerGame} GA/j` : '—'} />
-            <Leader label="Fortaleza" team={intel.leaders.homeBias} value={intel.leaders.homeBias?.homeBias != null ? `${intel.leaders.homeBias.homeBias > 0 ? '+' : ''}${intel.leaders.homeBias.homeBias} PPG casa` : '—'} />
+            {hasHomeSplit && (
+              <Leader label="Fortaleza" team={intel.leaders.homeBias} value={intel.leaders.homeBias?.homeBias != null ? `${intel.leaders.homeBias.homeBias > 0 ? '+' : ''}${intel.leaders.homeBias.homeBias} PPG casa` : '—'} />
+            )}
             <Leader label="Forma" team={intel.leaders.form} value={intel.leaders.form ? `${intel.leaders.form.formPoints} pts / 5` : '—'} />
           </div>
 

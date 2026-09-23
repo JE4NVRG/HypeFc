@@ -2,21 +2,22 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import type { MatchStats } from '@/lib/matchStats'
+import type { MatchStatus } from '@/types'
+
+export type { MatchStatus }
 
 function humanError(message: string): string {
-  if (message.includes('FOOTBALL_API_TOKEN')) {
-    return 'Token da Football-Data não configurado. Copie .env.example para .env.local.'
-  }
   if (message.includes('429')) {
-    return 'Limite da API de futebol atingido. Os dados voltam no próximo ciclo.'
+    return 'Limite da fonte de dados atingido. Os dados voltam no próximo ciclo.'
   }
-  if (message.includes('Failed to fetch') || message.includes('HTTP 500')) {
-    return 'Não consegui atualizar os jogos agora.'
+  if (message.includes('Failed to fetch') || message.includes('HTTP 50')) {
+    return 'Não consegui atualizar os jogos agora. A ESPN pode estar fora do ar.'
+  }
+  if (message.includes('FOOTBALL_API_TOKEN')) {
+    return 'Token da Football-Data inválido. O dashboard volta ao modo ESPN sem token.'
   }
   return message
 }
-
-export type MatchStatus = 'SCHEDULED' | 'TIMED' | 'IN_PLAY' | 'PAUSED' | 'FINISHED' | 'POSTPONED' | 'CANCELLED' | 'SUSPENDED'
 
 export interface Match {
   league_id: string
@@ -85,9 +86,12 @@ export interface DayStats {
 
 interface TodayData {
   date: string
+  requested_date?: string
+  is_fallback?: boolean
   matches: Match[]
   hype: HypeTeam[]
   stats?: DayStats
+  source?: string
 }
 
 interface StandingsData {

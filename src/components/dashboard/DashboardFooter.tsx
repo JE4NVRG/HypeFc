@@ -1,13 +1,18 @@
 import { Github } from 'lucide-react'
 
-export function DashboardFooter() {
+export function DashboardFooter({ source }: { source?: string }) {
+  const label = source === 'football-data'
+    ? 'Football-Data.org + ESPN'
+    : source === 'espn'
+      ? 'ESPN (dados publicos)'
+      : 'Football-Data.org + ESPN'
   return (
     <footer className="border-t border-white/5 py-6">
       <div className="flex flex-col items-center gap-3 px-4 text-xs text-slate-600">
         <div className="flex items-center gap-4">
           <span>HypeFC Dashboard</span>
           <span className="text-slate-800">|</span>
-          <span>Dados atualizados diariamente</span>
+          <span>Atualiza a cada 1 min com jogo ao vivo</span>
         </div>
         <div className="flex items-center gap-4">
           <a
@@ -20,9 +25,7 @@ export function DashboardFooter() {
             <span className="font-medium">JE4NVRG</span>
           </a>
           <span className="text-slate-800">|</span>
-          <span className="text-slate-600">
-            Powered by Football-Data.org
-          </span>
+          <span className="text-slate-600">Dados: {label}</span>
         </div>
       </div>
     </footer>

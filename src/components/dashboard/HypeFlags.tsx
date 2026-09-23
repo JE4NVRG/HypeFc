@@ -4,6 +4,10 @@ import Image from 'next/image'
 import { Flame, TrendingUp, Trophy, Swords } from 'lucide-react'
 import type { HypeTeam } from '@/hooks/useDashboardData'
 
+export function isAllowedCrest(url: string): boolean {
+  return url.includes('football-data.org') || url.includes('espncdn.com')
+}
+
 interface HypeFlagsProps {
   hypeTeams: HypeTeam[]
   loading: boolean
@@ -68,7 +72,7 @@ function HypeCard({ team, rank }: { team: HypeTeam; rank: number }) {
         {rank}
       </div>
       <div className="flex-shrink-0">
-        {team.crest && team.crest.includes('football-data.org') ? (
+        {team.crest && isAllowedCrest(team.crest) ? (
           <Image
             src={team.crest}
             alt={team.team}

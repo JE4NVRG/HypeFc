@@ -52,7 +52,8 @@ interface ApiMatch {
   }
 }
 
-export type MatchStatus = 'SCHEDULED' | 'TIMED' | 'IN_PLAY' | 'PAUSED' | 'FINISHED' | 'POSTPONED' | 'CANCELLED' | 'SUSPENDED'
+import type { MatchStatus } from '@/types'
+export type { MatchStatus }
 
 export interface TodayMatch {
   league_id: string
@@ -83,14 +84,17 @@ export interface StandingRow {
   goalDifference: number
   goalsFor: number
   goalsAgainst: number
+  espn_id?: string
+  espn_short?: string
+  espn_abbr?: string
 }
 
 export type HypeFlag = HypeBoardItem
 
 // ---------- Today's matches ----------
 
-export async function fetchTodayMatches(): Promise<TodayMatch[]> {
-  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' })
+export async function fetchTodayMatches(dateIso?: string): Promise<TodayMatch[]> {
+  const today = dateIso || new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' })
   const validCompIds = new Set(Object.values(LEAGUE_MAPPING))
 
   const data = await apiGet<{ matches: ApiMatch[] }>(`/matches?date=${today}`)

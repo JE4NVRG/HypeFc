@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Trophy } from 'lucide-react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import type { Standing } from '@/hooks/useDashboardData'
+import { isAllowedCrest } from '@/components/dashboard/HypeFlags'
 
 interface LeagueStandingsProps {
   standings: Standing[]
@@ -98,7 +99,7 @@ export function LeagueStandings({
                 >
                   <span className="text-xs font-medium text-slate-500">{s.pos}</span>
                   <div className="flex items-center gap-2 overflow-hidden">
-                    {s.crest && s.crest.includes('football-data.org') ? (
+                    {s.crest && isAllowedCrest(s.crest) ? (
                       <Image
                         src={s.crest}
                         alt={s.team}

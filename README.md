@@ -22,11 +22,22 @@ Acompanhe jogos, classificacoes, artilheiros e identifique os **times em alta** 
 
 ## Sobre o projeto
 
-O HypeFC nasceu da necessidade de ter uma visao rapida e inteligente do cenario do futebol mundial. O dashboard consome a API da [Football-Data.org](https://www.football-data.org/) em tempo real e aplica um algoritmo proprio de **deteccao de hype** que cruza classificacoes, jogos do dia e posicoes para destacar automaticamente os times mais relevantes.
+O HypeFC nasceu da necessidade de ter uma visao rapida e inteligente do cenario do futebol mundial. O dashboard consome dados publicos de futebol em tempo real e aplica um algoritmo proprio de **deteccao de hype** que cruza classificacoes, jogos do dia e posicoes para destacar automaticamente os times mais relevantes.
+
+### Roda sem nenhuma chave de API
+
+Por padrao o dashboard usa a **ESPN publica**, sem cadastro e sem chave: jogos do dia, placar, classificacao, artilheiros, posse de bola, chutes e chutes no gol. Escudo, tabela e estatistica de partida funcionam com `git clone && npm install && npm run dev`.
+
+Se voce tiver um token da [Football-Data.org](https://www.football-data.org/), coloque em `FOOTBALL_API_TOKEN` (veja `.env.example`): jogos, tabela e artilheiros passam a vir de la, e a ESPN continua entrando como fonte das estatisticas de partida. Sem token, o modo ESPN assume e o rodape mostra a fonte em uso.
+
+### Sem jogos hoje?
+
+Dia sem rodada nao deixa o painel vazio: o dashboard cai automaticamente para a ultima data com jogos (ate 4 dias atras) e avisa na tela qual rodada esta sendo exibida.
 
 ### O que torna diferente
 
 - **Zero banco de dados** - Arquitetura serverless pura, dados sempre frescos direto da API
+- **Zero chave obrigatoria** - ESPN publica cobre jogos, tabela, artilheiros e estatisticas de partida
 - **Hype inteligente** - Score 0-100 com forma, tabela, saldo, clássico e jogo ao vivo. "Joga hoje" sozinho não entra.
 - **Cache otimizado** - In-memory cache com TTL para respeitar rate limits sem sacrificar velocidade
 - **Full responsive** - Interface adaptativa de 1 a 4 colunas (mobile, tablet, desktop, ultrawide)
