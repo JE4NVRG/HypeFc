@@ -13,7 +13,7 @@
 // A versao do cache e carimbada pelo build (scripts/build-pages.mjs), nao a mao:
 // se ela ficasse fixa, o stale-while-revalidate serviria o bundle antigo na
 // primeira carga depois de cada deploy.
-const CACHE_VERSION = '20260923T071034z'
+const CACHE_VERSION = '20260923T074823z'
 const CACHE = `hypefc-${CACHE_VERSION}`
 const CACHE_PREFIX = 'hypefc-'
 
@@ -170,6 +170,88 @@ async function staleWhileRevalidate(request) {
 
   if (cached) return cached
   return (await update) || Response.error()
+}
+
+// ---------------------------------------------------------------------------
+// Alertas (Web Push) — o produto pago ("seu time joga hoje").
+// ---------------------------------------------------------------------------
+// O payload chega do cron (scripts/send-alerts.ts) como JSON puro:
+//   { title, body, url, tag }
+// Sem acoes na v1: o service worker mostra o que chegou e, no clique, abre o
+// jogo. O texto e factual (time, adversario, horario e a probabilidade que o
+// modelo publicou) — aqui nao se inventa nem se reformata numero nenhum.
+
+/** Icone e badge do alerta: o mesmo icone instalavel do manifest. */
+const NOTIFICATION_ICON = './icons/icon-192.png'
+
+/** Aviso minimo quando o push chega sem payload utilizavel. */
+const PUSH_PADRAO = { title: 'HypeFC', body: 'Seus times jogam hoje.' }
+
+self.addEventListener('push', (event) => {
+  // `event.data` pode vir nulo (push sem payload) e o corpo pode nao ser JSON:
+  // nenhum dos dois pode terminar em push em branco, entao cai no padrao.
+  let payload = null
+  try {
+    payload = event.data ? event.data.json() : null
+  } catch {
+    payload = null
+  }
+  const fonte = payload && typeof payload === 'object' ? payload : {}
+
+  const title = texto(fonte.title) || PUSH_PADRAO.title
+  const body = texto(fonte.body) || PUSH_PADRAO.body
+  const tag = texto(fonte.tag) || 'hypefc-alerta'
+  const data = { url: texto(fonte.url) || './' }
+
+  event.waitUntil(
+    self.registration.showNotification(title, {
+      body,
+      icon: NOTIFICATION_ICON,
+      badge: NOTIFICATION_ICON,
+      // tag por jogo: entrega repetida do MESMO alerta substitui a notificacao
+      // em vez de empilhar dois avisos do mesmo jogo.
+      tag,
+      data,
+    })
+  )
+})
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close()
+
+  const dados = event.notification.data || {}
+  // Relativo de proposito: o site tambem e servido de subpasta (GitHub Pages
+  // sem dominio proprio) e a URL do payload e resolvida contra a raiz do escopo
+  // do service worker.
+  const destino = new URL(texto(dados.url) || './', self.location.href).href
+
+  event.waitUntil(
+    (async () => {
+      const janelas = await self.clients.matchAll({ type: 'window', includeUncontrolled: true })
+      for (const janela of janelas) {
+        // Janela do app ja aberta (mesma origem): foca e leva para o jogo, em
+        // vez de abrir uma segunda aba do mesmo painel.
+        if (!mesmaOrigem(janela.url)) continue
+        await janela.focus()
+        if (typeof janela.navigate === 'function') await janela.navigate(destino)
+        return
+      }
+      if (self.clients.openWindow) await self.clients.openWindow(destino)
+    })()
+  )
+})
+
+/** Texto nao vazio ou null (campo ausente/errado nunca vira "undefined" na tela). */
+function texto(value) {
+  return typeof value === 'string' && value.trim() ? value : null
+}
+
+function mesmaOrigem(url) {
+  try {
+    return new URL(url).origin === self.location.origin
+  } catch {
+    return false
+  }
 }
 
 /** (c) data/*.json: rede primeiro, cache so quando nao ha rede. */

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="fundo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="55%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#04120f"/>
+    </linearGradient>
+    <linearGradient id="brilho" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#34d399" stop-opacity="0"/>
+    </linearGradient>
+    <style>
+      .marca { font: 700 76px -apple-system, "SF Pro Display", Helvetica, Arial, sans-serif; fill: #f1f5f9; letter-spacing: -2px; }
+      .acento { fill: #34d399; }
+      .linha { font: 500 34px -apple-system, "SF Pro Display", Helvetica, Arial, sans-serif; fill: #94a3b8; letter-spacing: -0.5px; }
+      .rotulo { font: 600 20px -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; fill: #64748b; letter-spacing: 2.5px; }
+      .num { font: 700 54px -apple-system, "SF Pro Display", Helvetica, Arial, sans-serif; fill: #e2e8f0; letter-spacing: -1.5px; }
+      .nota { font: 400 22px -apple-system, "SF Pro Text", Helvetica, Arial, sans-serif; fill: #64748b; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#fundo)"/>
+  <rect x="0" y="0" width="1200" height="6" fill="url(#brilho)"/>
+
+  <!-- marcas de grade discretas: lembra placar, nao enfeite -->
+  <g stroke="#1e293b" stroke-width="1" opacity="0.55">
+    <line x1="0" y1="158" x2="1200" y2="158"/>
+    <line x1="0" y1="472" x2="1200" y2="472"/>
+  </g>
+
+  <text x="72" y="112" class="marca">Hype<tspan class="acento">FC</tspan></text>
+  <text x="72" y="212" class="linha">Rodada inteira em uma tela. Sem scroll.</text>
+
+  <text x="72" y="306" class="rotulo">PROBABILIDADE DO MODELO — REGISTRO PÚBLICO</text>
+
+  <text x="72" y="382" class="num">Brier 0,629</text>
+  <text x="72" y="416" class="nota">uniforme: 0,667 · n = 1.203 jogos</text>
+
+  <text x="470" y="382" class="num">17 ligas</text>
+  <text x="470" y="416" class="nota">8 esportes, dado público</text>
+
+  <text x="760" y="382" class="num">53,6%</text>
+  <text x="760" y="416" class="nota">recorde do score, +5,0pp da âncora</text>
+
+  <text x="72" y="556" class="nota" opacity="0.9">Calibrado e honesto: previsão gravada antes do jogo, liquidada depois.</text>
+  <text x="72" y="596" class="nota" opacity="0.75">hypefc.je4ndev.com · não é casa de aposta</text>
+</svg>
