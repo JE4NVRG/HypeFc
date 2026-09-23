@@ -75,7 +75,7 @@ function StatLine({ match }: { match: Match }) {
   return <p className="px-2 pb-1 text-center font-mono text-[10px] text-slate-500">{bits.join(' · ')}</p>
 }
 
-function MatchRow({ match, onSelect, hypeByTeam }: { match: Match; onSelect?: (match: Match) => void; hypeByTeam?: Record<string, number> }) {
+export function MatchRow({ match, onSelect, hypeByTeam }: { match: Match; onSelect?: (match: Match) => void; hypeByTeam?: Record<string, number> }) {
   const isLive = match.status === 'IN_PLAY' || match.status === 'PAUSED'
   // Sem id de evento nao existe detalhe para abrir: o card continua informativo,
   // mas nao vira botao (nao prometemos clique que nao funciona).

@@ -5,8 +5,9 @@ import { useDashboardData } from '@/hooks/useDashboardData'
 import type { Match } from '@/hooks/useDashboardData'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
 import { StatsBar } from '@/components/dashboard/StatsBar'
-import { TodayMatches } from '@/components/dashboard/TodayMatches'
-import { HypeFlags } from '@/components/dashboard/HypeFlags'
+import { ViewTabs } from '@/components/dashboard/ViewTabs'
+import type { ViewId } from '@/components/dashboard/ViewTabs'
+import { RoundView } from '@/components/dashboard/RoundView'
 import { LeagueTabs } from '@/components/dashboard/LeagueTabs'
 import { HypeRecord } from '@/components/dashboard/HypeRecord'
 import { ShareRound } from '@/components/dashboard/ShareRound'
@@ -41,6 +42,8 @@ export default function Home() {
 
   // Uma pagina so: o detalhe abre por cima, sem tirar o usuario da rodada.
   const [selected, setSelected] = useState<Match | null>(null)
+  // Cockpit: a view troca o conteudo em vez de empilhar rolagem.
+  const [view, setView] = useState<ViewId>('rodada')
   const [linkNotice, setLinkNotice] = useState('')
   const diaPedido = useRef(false)
   const diaAberto = useRef(false)
@@ -133,8 +136,10 @@ export default function Home() {
     setLinkNotice('Esse confronto nao esta na rodada exibida.')
   }, [todayData, loadDay])
 
+  const totalRodada = Object.values(groupedMatches).reduce((sum, list) => sum + list.length, 0)
+
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex h-[100dvh] flex-col overflow-hidden">
       <DashboardHeader
         isLoading={isLoading}
         lastUpdated={lastUpdated}
@@ -142,85 +147,103 @@ export default function Home() {
         onRefresh={refresh}
       />
 
-      <main className="w-full flex-1 px-2 py-3 sm:px-4 sm:py-4">
+      <main className="flex min-h-0 w-full flex-1 flex-col gap-2 px-2 py-2 sm:px-4">
         {error && (
-          <div className="mb-3 rounded-xl border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+          <div className="rounded-xl border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-200">
             {error}
           </div>
         )}
         {linkNotice && (
-          <div className="mb-3 rounded-xl border border-amber-500/20 bg-amber-500/10 px-3 py-2 text-xs text-amber-200">
-            {linkNotice}
+          <div className="flex items-start justify-between gap-3 rounded-xl border border-amber-500/20 bg-amber-500/10 px-3 py-2 text-xs text-amber-200">
+            <span>{linkNotice}</span>
+            <button
+              type="button"
+              onClick={() => setLinkNotice('')}
+              className="shrink-0 cursor-pointer rounded px-1 text-amber-300/70 transition hover:text-amber-100"
+              aria-label="Fechar aviso"
+            >
+              ×
+            </button>
           </div>
         )}
         {todayData?.is_fallback && (
-          <div className="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-amber-500/20 bg-amber-500/10 px-3 py-2 text-xs text-amber-200">
-            <span className="font-medium">Sem jogos hoje.</span>
-            <span className="text-amber-200/80">
-              Mostrando a ultima rodada com jogos: {formatDay(todayData.date)}.
-            </span>
+          <div className="rounded-xl border border-amber-500/20 bg-amber-500/10 px-3 py-1.5 text-xs text-amber-200">
+            <span className="font-medium">Sem jogos hoje.</span>{" "}
+            <span className="text-amber-200/80">Mostrando a última rodada com jogos: {formatDay(todayData.date)}.</span>
             {todayData.requested_date && (
-              <span className="text-amber-200/60">Hoje: {formatDay(todayData.requested_date)}.</span>
+              <span className="text-amber-200/60"> Hoje: {formatDay(todayData.requested_date)}.</span>
             )}
           </div>
         )}
-        {/* Stats resumo do dia */}
-        <div className="mb-3">
-          <StatsBar stats={todayData?.stats} loading={loadingToday} />
+
+        <StatsBar stats={todayData?.stats} loading={loadingToday} />
+
+        {/* Trocar de view substitui o conteudo. Nada empilha: a pagina nao rola. */}
+        <div className="flex items-center gap-2">
+          <div className="min-w-0 flex-1">
+            <ViewTabs view={view} onChange={setView} counts={{ rodada: totalRodada }} />
+          </div>
+          <div className="hidden shrink-0 sm:block">
+            <ShareRound
+              url={diaAtual && urlBase ? `${urlBase}?dia=${diaAtual}` : urlBase}
+              text={textoRodada}
+            />
+          </div>
         </div>
 
-        <div className="mb-3">
-          <ShareRound
-            url={diaAtual && urlBase ? `${urlBase}?dia=${diaAtual}` : urlBase}
-            text={textoRodada}
-          />
-        </div>
-
-        {/* A rodada domina a primeira tela (spec: em 390px nada alem dos jogos
-            ocupa a dobra); o resto desce depois. */}
-        <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-          <div className="lg:col-span-2">
-            <TodayMatches
+        <div className="min-h-0 flex-1 overflow-hidden">
+          {view === 'rodada' && (
+            <RoundView
               groupedMatches={groupedMatches}
               loading={loadingToday}
               isFallback={todayData?.is_fallback}
               dayLabel={todayData?.date ? formatDay(todayData.date) : undefined}
               onSelect={abrirConfronto}
               hypeByTeam={hypePorTime}
+              hypeTeams={todayData?.hype ?? []}
             />
-          </div>
-          <HypeFlags
-            hypeTeams={todayData?.hype ?? []}
-            loading={loadingToday}
-          />
-        </div>
+          )}
 
-        <div className="mt-3">
-          <LeagueTabs
-            standingsData={standingsData}
-            scorersData={scorersData}
-            leagueId={leagueId}
-            loadingStandings={loadingStandings}
-            loadingScorers={loadingScorers}
-            onLeagueChange={setLeagueId}
-          />
-        </div>
+          {view === 'liga' && (
+            <div className="h-full overflow-y-auto pr-0.5">
+              <LeagueTabs
+                standingsData={standingsData}
+                scorersData={scorersData}
+                leagueId={leagueId}
+                loadingStandings={loadingStandings}
+                loadingScorers={loadingScorers}
+                onLeagueChange={setLeagueId}
+              />
+            </div>
+          )}
 
-        <div className="mt-3">
-          <HypeRecord />
-        </div>
+          {view === 'record' && (
+            <div className="h-full overflow-y-auto pr-0.5">
+              <HypeRecord />
+              <div className="mt-3">
+                <SourcesPanel
+                  stats={
+                    todayData?.stats
+                      ? { totalMatches: todayData.stats.totalMatches, totalGoals: todayData.stats.totalGoals }
+                      : null
+                  }
+                  leagueCount={todayData?.stats?.leaguesActive ?? 0}
+                  liveCount={todayData?.stats?.liveMatches ?? 0}
+                  lastUpdated={lastUpdated}
+                />
+              </div>
+            </div>
+          )}
 
-        <div className="mt-3">
-          <SourcesPanel
-            stats={
-              todayData?.stats
-                ? { totalMatches: todayData.stats.totalMatches, totalGoals: todayData.stats.totalGoals }
-                : null
-            }
-            leagueCount={todayData?.stats?.leaguesActive ?? 0}
-            liveCount={todayData?.stats?.liveMatches ?? 0}
-            lastUpdated={lastUpdated}
-          />
+          {view === 'esportes' && (
+            <div className="flex h-full flex-col items-center justify-center text-center">
+              <p className="text-sm text-slate-400">Outros esportes estão sendo ligados.</p>
+              <p className="mt-1 max-w-sm text-xs text-slate-600">
+                Basquete, futebol americano, hóquei e beisebol vêm da mesma fonte sem chave. Nada aparece aqui
+                antes de estar funcionando de verdade.
+              </p>
+            </div>
+          )}
         </div>
 
         <MatchDetailPanel
