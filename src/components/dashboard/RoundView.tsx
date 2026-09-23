@@ -235,7 +235,7 @@ export function RoundView({
             style={chips.estilo}
             role="group"
             aria-label="Filtrar jogos por liga"
-            className={`flex flex-1 items-center gap-1.5 overflow-x-auto pb-0.5 ${semScrollbar}`}
+            className={`flex basis-full items-center gap-1.5 overflow-x-auto pb-0.5 sm:basis-0 sm:flex-1 ${semScrollbar}`}
           >
             <button
               type="button"
