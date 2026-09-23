@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useDashboardData } from '@/hooks/useDashboardData'
 import type { Match } from '@/hooks/useDashboardData'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
+import ResgatePro from '@/components/dashboard/ResgatePro'
 import { StatsBar } from '@/components/dashboard/StatsBar'
 import { ViewTabs } from '@/components/dashboard/ViewTabs'
 import type { ViewId } from '@/components/dashboard/ViewTabs'
@@ -246,6 +247,7 @@ export default function Home() {
       />
 
       <main className="flex min-h-0 w-full flex-1 flex-col gap-2 px-2 py-2 sm:px-4">
+        <ResgatePro />
         {error && (
           <div className="rounded-xl border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-200">
             {error}

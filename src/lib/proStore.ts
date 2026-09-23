@@ -161,6 +161,27 @@ function simples(bruto: Resposta): Resultado {
 }
 
 /**
+ * Resgate pós-checkout: troca o id da sessão paga (que a Stripe devolve na URL
+ * de retorno) pelo token da licença. É o que faz o Pro ligar sozinho, sem conta
+ * e sem e-mail configurado. O id é secreto e só vale uma vez; o token fica no
+ * navegador como em `ativar`.
+ */
+export async function resgatarSessao(sessionId: string): Promise<Resultado & { plan?: Plano }> {
+  const sess = (sessionId ?? '').trim()
+  if (sess === '') return { ok: false, erro: 'sessao-invalida' }
+  if (!proConfigurado()) return { ok: false, erro: 'loja-offline' }
+
+  const r = await rpc('pro_claim_session', { p_session: sess })
+  if (!r.ok) return { ok: false, erro: r.erro ?? 'rede' }
+
+  const token = texto(r.token)
+  if (!token) return { ok: false, erro: 'rede' }
+
+  gravarToken(token)
+  return { ok: true, plan: plano(r.plano) }
+}
+
+/**
  * Lista de espera. E publica por design (nao precisa de acesso ativo).
  * Com a loja offline devolve 'loja-offline' sem tentar rede.
  */
