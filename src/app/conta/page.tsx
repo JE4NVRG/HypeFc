@@ -81,13 +81,23 @@ export default function Conta() {
       setLista(await seguidos())
       setRegistro(await carregarRegistro(40))
       setAlertaOk(pushDisponivel())
-      try {
-        const sw = await navigator.serviceWorker.ready
-        const sub = await sw.pushManager.getSubscription()
-        setAlerta(sub ? sub.endpoint : null)
-      } catch {
-        setAlerta(null)
-      }
+      // A espera pelo service worker NAO pode segurar a tela: em navegador que
+      // bloqueia o worker (ou logo depois de um desregistro), `ready` nunca
+      // resolve e a conta ficava presa em "Carregando o seu acesso…" para sempre.
+      // Time-box de 2,5s: se o worker nao aparecer, a conta carrega sem o estado
+      // do alerta, que e o unico dado que depende dele.
+      void (async () => {
+        try {
+          const sw = await Promise.race([
+            navigator.serviceWorker.ready,
+            new Promise<null>((resolve) => setTimeout(() => resolve(null), 2500)),
+          ])
+          const sub = sw ? await sw.pushManager.getSubscription() : null
+          setAlerta(sub ? sub.endpoint : null)
+        } catch {
+          setAlerta(null)
+        }
+      })()
     }
     setCarregando(false)
   }, [])
