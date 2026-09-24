@@ -564,9 +564,11 @@ export function ProView() {
             </form>
 
             <form onSubmit={(event) => { event.preventDefault(); void pedirLista() }} className={CAIXA}>
-              <div className={ROTULO}>Lista de espera</div>
+              <div className={ROTULO}>{CHECKOUT_URL ? 'Avisos do Pro' : 'Lista de espera'}</div>
               <p className="mt-1 text-[12px] leading-snug text-slate-400">
-                Sem checkout aberto ainda: a lista avisa quando as vendas começarem. Nada de cobrança aqui.
+                {CHECKOUT_URL
+                  ? 'A assinatura já está aberta. Se preferir esperar, deixe o e-mail: a gente avisa de novidade do Pro. Nada de cobrança aqui.'
+                  : 'Sem checkout aberto ainda: a lista avisa quando as vendas começarem. Nada de cobrança aqui.'}
               </p>
               <div className="mt-2.5 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
