@@ -1,10 +1,5 @@
-'use client'
-
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import { Github } from 'lucide-react'
-
-import { clienteConta, contaConfigurada } from '@/lib/conta'
 
 /**
  * Rodape padrao do site, um so para o painel e para as paginas de conteudo.
@@ -13,6 +8,13 @@ import { clienteConta, contaConfigurada } from '@/lib/conta'
  * e o das paginas de documento, que era uma `nav` com dois links. Agora e o mesmo
  * bloco, e a unica variacao e a linha de meta, que so faz sentido onde existe
  * painel (`meta={false}` nas paginas de conteudo).
+ *
+ * Componente de servidor de proposito: o rodape nao depende da sessao. A versao
+ * que lia a sessao para trocar "Entrar" por "Conta" piscava depois da hidratacao
+ * (o HTML estatico dizia Entrar e o cliente trocava na frente de quem olhava) e
+ * ainda empurrava a navegacao para duas linhas no celular, quatro links em cima e
+ * um sozinho embaixo. Quem leva para a conta e a navegacao do cabecalho das
+ * paginas publicas, que ja sabe da sessao antes de pintar.
  *
  * Regras que vieram do DESIGN.md e continuam valendo:
  *  - 11px no piso, em `ink-3`, nunca no cinza reprovado;
@@ -35,25 +37,6 @@ function fonteLabel(source?: string): string {
 
 export function SiteFooter({ source, meta = true }: { source?: string; meta?: boolean }) {
   const label = fonteLabel(source)
-  const [logado, setLogado] = useState(false)
-
-  // Mesma leitura local do `PublicShell`: com sessao, o rodape aponta para a conta
-  // em vez de convidar a entrar de novo. Sem sessao (ou sem storage), mostra Entrar.
-  useEffect(() => {
-    if (!contaConfigurada()) return
-    const c = clienteConta()
-    if (!c) return
-    let vivo = true
-    void c.auth
-      .getSession()
-      .then(({ data }) => {
-        if (vivo) setLogado(Boolean(data.session))
-      })
-      .catch(() => {})
-    return () => {
-      vivo = false
-    }
-  }, [])
 
   return (
     <footer className="border-t border-ink/[0.06] px-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-1 sm:px-4 sm:pb-4 sm:pt-3">
@@ -68,11 +51,12 @@ export function SiteFooter({ source, meta = true }: { source?: string; meta?: bo
           </div>
         ) : null}
 
-        <nav aria-label="Projeto e documentos" className="flex flex-wrap items-center justify-center gap-0 sm:gap-1">
+        <nav aria-label="Navegação do rodapé" className="flex flex-wrap items-center justify-center gap-0 sm:gap-1">
           <a
             href="https://github.com/JE4NVRG"
             target="_blank"
             rel="noopener noreferrer"
+            title="Projeto no GitHub"
             className={LINK_ALVO}
           >
             <Github aria-hidden="true" className="h-4 w-4" />
@@ -80,9 +64,6 @@ export function SiteFooter({ source, meta = true }: { source?: string; meta?: bo
           </a>
           <Link href="/pro" className={LINK_ALVO}>
             Pro
-          </Link>
-          <Link href={logado ? '/conta' : '/entrar'} className={LINK_ALVO}>
-            {logado ? 'Conta' : 'Entrar'}
           </Link>
           <Link href="/termos" className={LINK_ALVO}>
             Termos
