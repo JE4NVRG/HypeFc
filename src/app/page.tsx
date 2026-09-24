@@ -264,17 +264,17 @@ export default function Home() {
       <main className="flex min-h-0 w-full flex-1 flex-col gap-2 px-2 py-2 sm:px-4">
         <ResgatePro />
         {error && (
-          <div className="rounded-xl border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+          <div className="rounded-xl border border-carimbo/20 bg-carimbo/10 px-3 py-2 text-sm text-carimbo">
             {error}
           </div>
         )}
         {linkNotice && (
-          <div className="flex items-start justify-between gap-3 rounded-xl border border-amber-500/20 bg-amber-500/10 px-3 py-2 text-xs text-amber-200">
+          <div className="flex items-start justify-between gap-3 rounded-xl border border-carimbo/20 bg-carimbo/10 px-3 py-2 text-xs text-carimbo">
             <span>{linkNotice}</span>
             <button
               type="button"
               onClick={() => setLinkNotice('')}
-              className="shrink-0 cursor-pointer rounded px-1 text-amber-300/70 transition hover:text-amber-100"
+              className="shrink-0 cursor-pointer rounded px-1 text-carimbo/70 transition hover:text-carimbo"
               aria-label="Fechar aviso"
             >
               ×
@@ -282,11 +282,11 @@ export default function Home() {
           </div>
         )}
         {todayData?.is_fallback && (
-          <div className="rounded-xl border border-amber-500/20 bg-amber-500/10 px-3 py-1.5 text-xs text-amber-200">
+          <div className="rounded-xl border border-carimbo/20 bg-carimbo/10 px-3 py-1.5 text-xs text-carimbo">
             <span className="font-medium">Sem jogos hoje.</span>{" "}
-            <span className="text-amber-200/80">Mostrando a última rodada com jogos: {formatDay(todayData.date)}.</span>
+            <span className="text-ink-2">Mostrando a última rodada com jogos: {formatDay(todayData.date)}.</span>
             {todayData.requested_date && (
-              <span className="text-amber-200/60"> Hoje: {formatDay(todayData.requested_date)}.</span>
+              <span className="text-ink-3"> Hoje: {formatDay(todayData.requested_date)}.</span>
             )}
           </div>
         )}

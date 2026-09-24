@@ -37,10 +37,13 @@ const LEAGUES = [
   { id: 'CL', name: 'Champions League', flag: '\u{1F3C6}' },
 ] as const
 
+/* A faixa na borda esquerda nao e dado do modelo: e categoria da tabela. A
+   direcao 002 nao colore por categoria, entao ela vira regua neutra e a
+   hierarquia fica na regua de 1px (line > rule > rule-2). */
 function getPositionStyle(pos: number, totalTeams: number) {
-  if (pos <= 4) return 'border-l-emerald-500/60 bg-emerald-500/[0.04]'
-  if (pos <= 6) return 'border-l-blue-500/60 bg-blue-500/[0.03]'
-  if (totalTeams > 0 && pos > totalTeams - 4) return 'border-l-red-500/60 bg-red-500/[0.04]'
+  if (pos <= 4) return 'border-l-line'
+  if (pos <= 6) return 'border-l-rule'
+  if (totalTeams > 0 && pos > totalTeams - 4) return 'border-l-rule-2'
   return 'border-l-transparent'
 }
 
@@ -49,23 +52,23 @@ function getZones(leagueId: string, totalTeams: number) {
   const relegated = totalTeams > 0 ? totalTeams - 3 : 4
   if (leagueId === 'BSA') {
     return [
-      { color: 'bg-emerald-500/60', label: `Libertadores (1-4)` },
-      { color: 'bg-blue-500/60', label: `Sul-Americana (5-6)` },
-      { color: 'bg-red-500/60', label: `Rebaixamento (${relegated}-${totalTeams || 20})` },
+      { color: 'bg-line', label: `Libertadores (1-4)` },
+      { color: 'bg-rule', label: `Sul-Americana (5-6)` },
+      { color: 'bg-rule-2', label: `Rebaixamento (${relegated}-${totalTeams || 20})` },
     ]
   }
   if (leagueId === 'ELC') {
     return [
-      { color: 'bg-emerald-500/60', label: 'Acesso (1-2)' },
-      { color: 'bg-blue-500/60', label: 'Playoff de acesso (3-6)' },
-      { color: 'bg-red-500/60', label: `Rebaixamento (${relegated}-${totalTeams || 24})` },
+      { color: 'bg-line', label: 'Acesso (1-2)' },
+      { color: 'bg-rule', label: 'Playoff de acesso (3-6)' },
+      { color: 'bg-rule-2', label: `Rebaixamento (${relegated}-${totalTeams || 24})` },
     ]
   }
   if (leagueId === 'CL') return []
   return [
-    { color: 'bg-emerald-500/60', label: 'Champions' },
-    { color: 'bg-blue-500/60', label: 'Europa' },
-    { color: 'bg-red-500/60', label: `Rebaixamento (${relegated}-${totalTeams || 20})` },
+    { color: 'bg-line', label: 'Champions' },
+    { color: 'bg-rule', label: 'Europa' },
+    { color: 'bg-rule-2', label: `Rebaixamento (${relegated}-${totalTeams || 20})` },
   ]
 }
 
@@ -100,46 +103,50 @@ export function LeagueStandings({
   const liga = titleOdds?.leagues?.[leagueId] ?? null
   const simulacoes = titleOdds?.simulacoes ?? 0
   return (
-    <div className="flex flex-col rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+    <div className="flex flex-col rounded-xl border border-paper-3 bg-paper-2/40 p-4">
       <div className="mb-4 flex items-center gap-2.5">
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-500/10">
-          <Trophy className="h-4 w-4 text-orange-300" />
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-ink/[0.06]">
+          <Trophy className="h-4 w-4 text-ink-2" />
         </div>
         <div className="min-w-0">
-          <h2 className="text-xl font-semibold text-slate-100">Classificação</h2>
-          {leagueName ? <p className="truncate text-[12px] text-slate-400">{leagueName}</p> : null}
+          <h2 className="text-xl font-semibold text-ink">Classificação</h2>
+          {leagueName ? <p className="truncate text-[12px] text-ink-3">{leagueName}</p> : null}
         </div>
       </div>
 
       {liga && liga.times.length > 0 && simulacoes > 0 && (
-        <div className="mb-4 rounded-xl border border-orange-500/20 bg-gradient-to-br from-orange-500/[0.08] to-transparent p-3.5">
+        <div className="mb-4 rounded-xl border border-line bg-paper-3/40 p-3.5">
           {/* Heading de verdade: o bloco é uma seção própria da classificação. */}
           <div className="mb-2.5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-            <h3 className="text-base font-semibold text-orange-200">Chance de título</h3>
-            <span className="text-[11px] uppercase tracking-wider text-slate-400">
+            <h3 className="text-base font-semibold text-ink">Chance de título</h3>
+            <span className="text-[11px] uppercase tracking-wider text-ink-3">
               {simulacoes.toLocaleString('pt-BR')} {simulacoes === 1 ? 'simulação' : 'simulações'}
             </span>
           </div>
           <div className="space-y-2">
             {liga.times.slice(0, 4).map((t, i) => (
               <div key={t.team} className="flex items-center gap-2">
-                <span className="w-5 shrink-0 font-mono text-[11px] font-medium text-slate-400">{i + 1}º</span>
-                <span className="w-[96px] shrink-0 truncate text-[13px] font-medium text-slate-100" title={t.team}>
+                <span className="w-5 shrink-0 font-mono text-[11px] font-medium text-ink-3">{i + 1}º</span>
+                <span className="w-[96px] shrink-0 truncate text-[13px] font-medium text-ink" title={t.team}>
                   {t.apelido || t.team}
                 </span>
-                <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/[0.08]">
+                <div className="h-2 flex-1 overflow-hidden rounded-full bg-ink/[0.08]">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-orange-500 to-yellow-400"
+                    className="h-full rounded-full bg-gradient-to-r from-verde to-verde-2"
                     style={{ width: `${Math.max(2, Math.round(t.p_titulo * 100))}%` }}
                   />
                 </div>
-                <span className="w-14 shrink-0 text-right font-mono text-[13px] font-bold tabular-nums text-orange-200">
+                <span
+                  className={`w-14 shrink-0 text-right font-mono text-[13px] font-bold tabular-nums ${
+                    i === 0 ? 'text-verde' : 'text-ink'
+                  }`}
+                >
                   {chanceBR(t.p_titulo)}
                 </span>
               </div>
             ))}
           </div>
-          <p className="mt-2.5 text-[12px] leading-relaxed text-slate-400">
+          <p className="mt-2.5 text-[12px] leading-relaxed text-ink-3">
             {notaDaSimulacao(liga, simulacoes)} Não é palpite: o modelo é calibrado e não
             supera a âncora “melhor colocado vence”.
           </p>
@@ -148,12 +155,12 @@ export function LeagueStandings({
 
       {showLeagueSelect && (
         <Select value={leagueId} onValueChange={onLeagueChange}>
-          <SelectTrigger className="mb-4 h-11 border-slate-700 bg-slate-800/60 text-[13px] text-slate-100 focus:ring-2 focus:ring-orange-400/60">
+          <SelectTrigger className="mb-4 h-11 border-line bg-paper-3/60 text-[13px] text-ink focus:ring-2 focus:ring-ink-2/60">
             <SelectValue />
           </SelectTrigger>
-          <SelectContent className="border-white/10 bg-slate-900">
+          <SelectContent className="border-ink/10 bg-paper-2">
             {LEAGUES.map((league) => (
-              <SelectItem key={league.id} value={league.id} className="text-slate-200 focus:bg-white/10 focus:text-white">
+              <SelectItem key={league.id} value={league.id} className="text-ink focus:bg-ink/10 focus:text-ink">
                 <span className="flex items-center gap-2">
                   <span>{league.flag}</span>
                   <span>{league.name}</span>
@@ -168,18 +175,18 @@ export function LeagueStandings({
         {loading ? (
           <div className="space-y-2">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-10 animate-pulse rounded-lg bg-white/5" />
+              <div key={i} className="h-10 animate-pulse rounded-lg bg-ink/5" />
             ))}
           </div>
         ) : standings.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
-            <Trophy className="mb-3 h-8 w-8 text-slate-400" />
-            <p className="text-[14px] text-slate-400">Sem classificação disponível</p>
+            <Trophy className="mb-3 h-8 w-8 text-ink-3" />
+            <p className="text-[14px] text-ink-3">Sem classificação disponível</p>
           </div>
         ) : (
           <>
             <div
-              className={`mb-1 grid ${GRADE} items-center gap-1 px-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400`}
+              className={`mb-1 grid ${GRADE} items-center gap-1 px-2 text-[11px] font-semibold uppercase tracking-wider text-ink-3`}
             >
               <span aria-hidden="true">#</span>
               <span>Time</span>
@@ -197,9 +204,9 @@ export function LeagueStandings({
                 return (
                 <div
                   key={`${s.pos}-${s.team}`}
-                  className={`grid ${GRADE} items-center gap-1 rounded-lg border-l-2 px-2 py-2.5 transition-colors hover:bg-white/[0.04] ${getPositionStyle(s.pos, standings.length)}`}
+                  className={`grid ${GRADE} items-center gap-1 rounded-lg border-l-2 px-2 py-2.5 transition-colors hover:bg-ink/[0.04] ${getPositionStyle(s.pos, standings.length)}`}
                 >
-                  <span className="font-mono text-[12px] font-medium text-slate-400">{s.pos}</span>
+                  <span className="font-mono text-[12px] font-medium text-ink-3">{s.pos}</span>
                   <div className="flex items-center gap-2 overflow-hidden">
                     {s.crest && isAllowedCrest(s.crest) ? (
                       /* img comum pelo mesmo motivo do painel: lazy do
@@ -215,19 +222,19 @@ export function LeagueStandings({
                         className="h-5 w-5 flex-shrink-0 rounded object-contain"
                       />
                     ) : (
-                      <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded bg-slate-800 text-[11px] font-bold text-slate-300">
+                      <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded bg-paper-3 text-[11px] font-bold text-ink-2">
                         {s.team.charAt(0)}
                       </div>
                     )}
-                    <span className="truncate text-[13px] font-medium text-slate-100">{s.team}</span>
+                    <span className="truncate text-[13px] font-medium text-ink">{s.team}</span>
                   </div>
-                  <span className="text-center font-mono text-[12px] tabular-nums text-slate-300">{s.played}</span>
-                  <span className={`text-center font-mono text-[12px] tabular-nums text-emerald-300 ${SO_SM}`}>{s.wins}</span>
-                  <span className={`text-center font-mono text-[12px] tabular-nums text-slate-300 ${SO_SM}`}>{s.draws}</span>
-                  <span className={`text-center font-mono text-[12px] tabular-nums text-slate-300 ${SO_SM}`}>{s.losses}</span>
-                  <span className="text-right font-mono text-[13px] font-bold tabular-nums text-slate-100">{s.pts}</span>
+                  <span className="text-center font-mono text-[12px] tabular-nums text-ink-2">{s.played}</span>
+                  <span className={`text-center font-mono text-[12px] tabular-nums text-ink ${SO_SM}`}>{s.wins}</span>
+                  <span className={`text-center font-mono text-[12px] tabular-nums text-ink-2 ${SO_SM}`}>{s.draws}</span>
+                  <span className={`text-center font-mono text-[12px] tabular-nums text-ink-2 ${SO_SM}`}>{s.losses}</span>
+                  <span className="text-right font-mono text-[13px] font-bold tabular-nums text-ink">{s.pts}</span>
                   <span
-                    className="text-right font-mono text-[12px] font-semibold tabular-nums text-orange-300"
+                    className="text-right font-mono text-[12px] font-semibold tabular-nums text-ink"
                     title={
                       chance
                         ? `Chance de título ${chanceBR(chance.p_titulo)} · G4 ${(chance.p_g4 * 100).toFixed(0)}% · zona ${(chance.p_zona * 100).toFixed(0)}%`
@@ -241,7 +248,7 @@ export function LeagueStandings({
               })}
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] text-slate-400">
+            <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] text-ink-3">
               {getZones(leagueId, standings.length).map((zone) => (
                 <span key={zone.label} className="flex items-center gap-1.5">
                   <span className={`h-2 w-2 shrink-0 rounded-full ${zone.color}`} aria-hidden="true" /> {zone.label}
@@ -250,7 +257,7 @@ export function LeagueStandings({
             </div>
 
             {capturedAt && (
-              <p className="mt-3 text-[11px] text-slate-400">
+              <p className="mt-3 text-[11px] text-ink-3">
                 Atualizado em {new Date(capturedAt).toLocaleString('pt-BR')}
               </p>
             )}

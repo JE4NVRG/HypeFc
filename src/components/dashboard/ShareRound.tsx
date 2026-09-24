@@ -12,14 +12,15 @@ interface ShareRoundProps {
   label?: string
 }
 
-/* Alvo de 44px no mobile e 36px no desktop; foco no mesmo anel laranja do resto
-   do painel. Verde fica de fora daqui: nesta tela ele só marca sucesso (link
-   copiado), nunca o botão. */
+/* Alvo de 44px no mobile e 36px no desktop; foco no mesmo anel de tinta do resto
+   do painel. Verde e acento ficam de fora daqui: nenhum dos dois marca dado do
+   modelo ou registro nesta tela — o botao de compartilhar e neutro, como no
+   mockup 002 (regua de 1px em rule, rotulo em ink-2). */
 const BTN =
-  'inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3 text-[12px] font-medium text-slate-300 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 active:bg-white/[0.12] sm:min-h-[36px]'
+  'inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg border border-ink/10 bg-ink/[0.04] px-3 text-[12px] font-medium text-ink-2 transition-colors hover:border-ink/20 hover:bg-ink/[0.08] hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 active:bg-ink/[0.12] sm:min-h-[36px]'
 
 const BTN_PRIMARY =
-  'inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg border border-orange-500/30 bg-orange-500/10 px-3 text-[12px] font-medium text-orange-200 transition-colors hover:border-orange-400/40 hover:bg-orange-500/[0.16] hover:text-orange-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 active:bg-orange-500/20 sm:min-h-[36px]'
+  'inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg border border-rule px-3 text-[12px] font-medium text-ink-2 transition-colors hover:border-line hover:bg-paper-3 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 active:bg-ink/[0.12] sm:min-h-[36px]'
 
 /** Quanto tempo o aviso fica na tela antes de sumir. */
 const OK_MS = 2000
@@ -103,7 +104,7 @@ export function ShareRound({ url, text, label }: ShareRoundProps) {
 
   return (
     <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Compartilhar a rodada">
-      {label && <span className="mr-1 text-[12px] text-slate-400">{label}</span>}
+      {label && <span className="mr-1 text-[12px] text-ink-3">{label}</span>}
 
       <button type="button" onClick={handleShare} aria-label="Compartilhar rodada" className={BTN_PRIMARY}>
         <Share2 aria-hidden="true" className="h-3.5 w-3.5" />
@@ -128,7 +129,7 @@ export function ShareRound({ url, text, label }: ShareRoundProps) {
       {canCopy ? (
         <button type="button" onClick={copyLink} aria-label="Copiar link da rodada" className={BTN}>
           {justCopied ? (
-            <Check aria-hidden="true" className="h-3.5 w-3.5 text-emerald-400" />
+            <Check aria-hidden="true" className="h-3.5 w-3.5 text-ink-2" />
           ) : (
             <Copy aria-hidden="true" className="h-3.5 w-3.5" />
           )}
@@ -141,14 +142,14 @@ export function ShareRound({ url, text, label }: ShareRoundProps) {
           aria-label="Link da rodada (selecione e copie)"
           onFocus={(event) => event.currentTarget.select()}
           onClick={(event) => event.currentTarget.select()}
-          className="min-h-[44px] min-w-[16rem] flex-1 rounded-lg border border-slate-800 bg-slate-950/60 px-2 text-[12px] font-mono text-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 sm:min-h-[36px]"
+          className="min-h-[44px] min-w-[16rem] flex-1 rounded-lg border border-paper-3 bg-paper/60 px-2 text-[12px] font-mono text-ink-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 sm:min-h-[36px]"
         />
       )}
 
       <span
         role="status"
         aria-live="polite"
-        className={`text-[12px] ${feedback?.tone === 'warn' ? 'text-amber-300' : 'text-emerald-300'}`}
+        className={`text-[12px] ${feedback?.tone === 'warn' ? 'text-carimbo' : 'text-ink-2'}`}
       >
         {feedback && feedback.message !== 'Link copiado' ? feedback.message : ''}
       </span>

@@ -7,31 +7,31 @@ export const metadata: Metadata = {
 }
 
 const S = {
-  h1: 'text-xl font-semibold tracking-tight text-slate-100',
-  h2: 'text-sm font-semibold text-slate-200',
-  p: 'text-[13px] leading-relaxed text-slate-400',
-  ul: 'space-y-1 text-[13px] leading-relaxed text-slate-400',
-  link: 'text-emerald-400 underline decoration-emerald-400/30 underline-offset-2 hover:decoration-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 rounded-lg',
+  h1: 'text-xl font-semibold tracking-tight text-ink',
+  h2: 'text-sm font-semibold text-ink',
+  p: 'text-[13px] leading-relaxed text-ink-3',
+  ul: 'space-y-1 text-[13px] leading-relaxed text-ink-3',
+  link: 'text-verde-2 underline decoration-verde/30 underline-offset-2 hover:decoration-verde focus:outline-none focus-visible:ring-2 focus-visible:ring-sinal/60 rounded-lg',
   linkNav:
-    'inline-flex min-h-[44px] items-center text-emerald-400 underline decoration-emerald-400/30 underline-offset-2 hover:decoration-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 rounded-lg sm:min-h-[36px]',
+    'inline-flex min-h-[44px] items-center text-verde-2 underline decoration-verde/30 underline-offset-2 hover:decoration-verde focus:outline-none focus-visible:ring-2 focus-visible:ring-sinal/60 rounded-lg sm:min-h-[36px]',
 }
 
 export default function Termos() {
   return (
     <article className="mx-auto max-w-2xl px-5 py-8">
-      <p className="text-[11px] uppercase tracking-wider text-slate-400">HypeFC</p>
+      <p className="text-[11px] uppercase tracking-wider text-ink-3">HypeFC</p>
       <h1 className={S.h1}>Termos de uso</h1>
       <p className={`${S.p} mt-1`}>Última atualização: 23 de setembro de 2026.</p>
 
       <section className="mt-6 space-y-2">
         <h2 className={S.h2}>1. O que o HypeFC é</h2>
         <p className={S.p}>
-          O HypeFC é um painel <strong className="text-slate-300">informativo</strong> que organiza dados públicos de
+          O HypeFC é um painel <strong className="text-ink-2">informativo</strong> que organiza dados públicos de
           esportes (placares, calendários, estatísticas) e publica a probabilidade calculada por um modelo estatístico
           próprio, junto com o registro de desempenho medido desse modelo.
         </p>
         <p className={S.p}>
-          <strong className="text-slate-300">O HypeFC não é casa de aposta</strong>, não intermedeia apostas, não recebe
+          <strong className="text-ink-2">O HypeFC não é casa de aposta</strong>, não intermedeia apostas, não recebe
           dinheiro de apostas e não indica que você aposte. Nada aqui é promessa de resultado: o registro publicado mostra
           que o modelo é calibrado e que <em>não</em> supera a referência mais simples de acerto no palpite. Você decide o
           que fazer com a informação, por sua conta e risco.
@@ -42,12 +42,12 @@ export default function Termos() {
         <h2 className={S.h2}>2. Plano gratuito e assinatura Pro</h2>
         <ul className={`${S.ul} list-disc pl-5`}>
           <li>
-            <strong className="text-slate-300">Gratuito:</strong> painel completo, todos os esportes, probabilidades do
-            modelo e acompanhamento de até <strong className="text-slate-300">3 times</strong>.
+            <strong className="text-ink-2">Gratuito:</strong> painel completo, todos os esportes, probabilidades do
+            modelo e acompanhamento de até <strong className="text-ink-2">3 times</strong>.
           </li>
           <li>
-            <strong className="text-slate-300">Pro:</strong> R$ 9,90 por mês ou R$ 79 por ano, com acompanhamento de até{' '}
-            <strong className="text-slate-300">20 times</strong> e alertas no navegador antes da rodada.
+            <strong className="text-ink-2">Pro:</strong> R$ 9,90 por mês ou R$ 79 por ano, com acompanhamento de até{' '}
+            <strong className="text-ink-2">20 times</strong> e alertas no navegador antes da rodada.
           </li>
         </ul>
         <p className={S.p}>
@@ -62,7 +62,7 @@ export default function Termos() {
         <p className={S.p}>
           Você pode cancelar quando quiser, a qualquer momento, pedindo por e-mail — sem formulário e sem justificativa.
           Conforme o art. 49 do Código de Defesa do Consumidor, compras feitas pela internet podem ser desistidas em até{' '}
-          <strong className="text-slate-300">7 dias corridos</strong> do pagamento, com devolução integral (100%) do
+          <strong className="text-ink-2">7 dias corridos</strong> do pagamento, com devolução integral (100%) do
           valor. Depois desse prazo, o acesso segue valendo até o fim do período já pago, sem novas cobranças.
         </p>
       </section>
@@ -70,7 +70,7 @@ export default function Termos() {
       <section className="mt-6 space-y-2">
         <h2 className={S.h2}>4. Alertas</h2>
         <p className={S.p}>
-          O alerta avisa <strong className="text-slate-300">quando e contra quem</strong> um time que você segue joga, e
+          O alerta avisa <strong className="text-ink-2">quando e contra quem</strong> um time que você segue joga, e
           qual a probabilidade publicada pelo modelo para aquele jogo. A entrega depende de o navegador aceitar notificações
           e pode falhar (notificações desligadas, aparelho desligado, limpeza de dados do navegador). Cada jogo gera no
           máximo um alerta — não há promessa de entrega, e falha de entrega não gera cobrança extra.
@@ -106,7 +106,7 @@ export default function Termos() {
         </p>
       </section>
 
-      <nav className="mt-8 flex flex-wrap gap-4 border-t border-slate-800 pt-4 text-[12px]">
+      <nav className="mt-8 flex flex-wrap gap-4 border-t border-paper-3 pt-4 text-[12px]">
         <Link className={S.linkNav} href="/">
           ← Voltar ao painel
         </Link>

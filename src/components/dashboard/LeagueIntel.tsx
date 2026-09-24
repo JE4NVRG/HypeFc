@@ -29,13 +29,13 @@ function contagem(total: number, singular: string, plural: string): string {
 }
 
 function FormMarks({ form }: { form: Array<'W' | 'D' | 'L'> }) {
-  if (!form.length) return <span className="text-slate-400">—</span>
+  if (!form.length) return <span className="text-ink-3">—</span>
   return (
     <span className="font-mono tracking-tight">
       {form.map((letter, index) => (
         <span
           key={`${letter}-${index}`}
-          className={letter === 'W' ? 'text-emerald-300' : letter === 'D' ? 'text-slate-400' : 'text-red-300'}
+          className={letter === 'W' ? 'text-ink' : letter === 'D' ? 'text-ink-3' : 'text-carimbo'}
         >
           {letter}
         </span>
@@ -47,11 +47,11 @@ function FormMarks({ form }: { form: Array<'W' | 'D' | 'L'> }) {
 function Leader({ label, team, value }: { label: string; team: TeamIntel | null; value: string }) {
   return (
     <div className="min-w-0">
-      <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">{label}</p>
-      <p className="truncate text-sm font-semibold text-slate-100" title={team?.team ?? undefined}>
+      <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-3">{label}</p>
+      <p className="truncate text-sm font-semibold text-ink" title={team?.team ?? undefined}>
         {team?.team || '—'}
       </p>
-      <p className="font-mono text-xs text-slate-200">{value}</p>
+      <p className="font-mono text-xs text-ink">{value}</p>
     </div>
   )
 }
@@ -63,14 +63,14 @@ export function LeagueIntel({ table, home = [], away = [], leagueName, loading }
   const hasHomeSplit = Boolean(intel && intel.teams.some((team) => team.homePpg != null || team.awayPpg != null))
 
   return (
-    <section className="mt-3 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+    <section className="mt-3 rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-4">
       <div className="mb-4 flex items-end justify-between gap-3">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-orange-300">Leitura da liga</p>
-          <h2 className="text-base font-semibold text-white">{leagueName || 'Estatísticas'}</h2>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-3">Leitura da liga</p>
+          <h2 className="text-base font-semibold text-ink">{leagueName || 'Estatísticas'}</h2>
         </div>
         {intel && (
-          <p className="text-right font-mono text-[11px] text-slate-400">
+          <p className="text-right font-mono text-[11px] text-ink-3">
             {contagem(intel.profile.matches, 'jogo', 'jogos')} · {intel.profile.goalsPerMatch} gols/jogo
             {intel.profile.homePointsShare != null ? ` · ${Math.round(intel.profile.homePointsShare * 100)}% pts em casa` : ''}
           </p>
@@ -78,12 +78,12 @@ export function LeagueIntel({ table, home = [], away = [], leagueName, loading }
       </div>
 
       {loading ? (
-        <div className="h-40 animate-pulse rounded-xl bg-white/5" />
+        <div className="h-40 animate-pulse rounded-xl bg-ink/5" />
       ) : !intel ? (
-        <p className="py-8 text-center text-[12px] text-slate-400">Sem base estatística para esta liga.</p>
+        <p className="py-8 text-center text-[12px] text-ink-3">Sem base estatística para esta liga.</p>
       ) : (
         <>
-          <div className={`mb-4 grid grid-cols-2 gap-3 border-y border-white/5 py-3 ${hasHomeSplit ? 'sm:grid-cols-4' : 'sm:grid-cols-3'}`}>
+          <div className={`mb-4 grid grid-cols-2 gap-3 border-y border-ink/5 py-3 ${hasHomeSplit ? 'sm:grid-cols-4' : 'sm:grid-cols-3'}`}>
             <Leader label="Ataque" team={intel.leaders.attack} value={intel.leaders.attack ? `${intel.leaders.attack.gfPerGame} GF/j` : '—'} />
             <Leader label="Defesa" team={intel.leaders.defense} value={intel.leaders.defense ? `${intel.leaders.defense.gaPerGame} GA/j` : '—'} />
             {hasHomeSplit && (
@@ -94,7 +94,7 @@ export function LeagueIntel({ table, home = [], away = [], leagueName, loading }
 
           <div className="overflow-x-auto">
             <div className="min-w-[640px]">
-              <div className="grid grid-cols-[2rem_1fr_3rem_3rem_3rem_3rem_3rem_4.5rem] gap-2 px-2 pb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+              <div className="grid grid-cols-[2rem_1fr_3rem_3rem_3rem_3rem_3rem_4.5rem] gap-2 px-2 pb-2 text-[11px] font-semibold uppercase tracking-wider text-ink-3">
                 <span>#</span>
                 <span>Time</span>
                 <span className="text-right">PPG</span>
@@ -107,29 +107,29 @@ export function LeagueIntel({ table, home = [], away = [], leagueName, loading }
               {intel.teams.map((team) => (
                 <div
                   key={team.team}
-                  className="grid grid-cols-[2rem_1fr_3rem_3rem_3rem_3rem_3rem_4.5rem] items-center gap-2 rounded-lg px-2 py-2 text-xs hover:bg-white/[0.04]"
+                  className="grid grid-cols-[2rem_1fr_3rem_3rem_3rem_3rem_3rem_4.5rem] items-center gap-2 rounded-lg px-2 py-2 text-xs hover:bg-ink/[0.04]"
                 >
-                  <span className="font-mono text-slate-400">{team.pos}</span>
-                  <span className="min-w-0 truncate font-medium text-slate-100" title={team.team}>
+                  <span className="font-mono text-ink-3">{team.pos}</span>
+                  <span className="min-w-0 truncate font-medium text-ink" title={team.team}>
                     {team.team}
                     <span
-                      className="ml-2 font-mono text-[11px] text-slate-400"
+                      className="ml-2 font-mono text-[11px] text-ink-3"
                       title={`Ataque: ${team.attackRank}º do ranking · Defesa: ${team.defenseRank}º do ranking`}
                     >
                       A{team.attackRank} D{team.defenseRank}
                     </span>
                   </span>
-                  <span className="text-right font-mono text-slate-100">{team.ppg}</span>
-                  <span className="text-right font-mono text-slate-200">{team.gfPerGame}</span>
-                  <span className="text-right font-mono text-slate-300">{team.gaPerGame}</span>
-                  <span className="text-right font-mono text-slate-200">{team.homePpg ?? '—'}</span>
-                  <span className="text-right font-mono text-slate-300">{team.awayPpg ?? '—'}</span>
+                  <span className="text-right font-mono text-ink">{team.ppg}</span>
+                  <span className="text-right font-mono text-ink">{team.gfPerGame}</span>
+                  <span className="text-right font-mono text-ink-2">{team.gaPerGame}</span>
+                  <span className="text-right font-mono text-ink">{team.homePpg ?? '—'}</span>
+                  <span className="text-right font-mono text-ink-2">{team.awayPpg ?? '—'}</span>
                   <span className="text-right"><FormMarks form={team.form} /></span>
                 </div>
               ))}
             </div>
           </div>
-          <p className="mt-3 text-[11px] leading-relaxed text-slate-400">
+          <p className="mt-3 text-[11px] leading-relaxed text-ink-3">
             PPG = pontos por jogo · GF/j e GA/j = gols feitos e sofridos por jogo · A/D = posição no ranking de ataque
             e de defesa · Casa/Fora = PPG em cada mando. Casa/fora só entra com 3 jogos de cada lado. Posse, chutes e
             chutes no gol vêm da ESPN, sem chave. xG continua fora: nenhuma API grátis estável entrega isso.

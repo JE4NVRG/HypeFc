@@ -33,12 +33,12 @@ const STATUS_LABEL: Record<string, string> = {
 }
 
 /* Chip de filtro: alvo de 44px no mobile e 36px no desktop, rounded-lg, foco no
-   anel laranja unico do painel. O botao "atualizar" segue a mesma regra. */
+   anel neutro unico do painel. O botao "atualizar" segue a mesma regra. */
 const CHIP =
-  'inline-flex min-h-[44px] shrink-0 cursor-pointer items-center gap-2 rounded-lg px-3 text-[12px] font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 sm:min-h-[36px]'
+  'inline-flex min-h-[44px] shrink-0 cursor-pointer items-center gap-2 rounded-lg px-3 text-[12px] font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-ink-2/60 sm:min-h-[36px]'
 
 const BTN_ACAO =
-  'inline-flex min-h-[44px] shrink-0 cursor-pointer items-center gap-2 rounded-lg px-2 text-[12px] text-slate-300 transition-colors hover:bg-white/5 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 sm:min-h-[36px]'
+  'inline-flex min-h-[44px] shrink-0 cursor-pointer items-center gap-2 rounded-lg px-2 text-[12px] text-ink-2 transition-colors hover:bg-ink/5 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink-2/60 sm:min-h-[36px]'
 
 function horaLocal(iso: string | null): string {
   if (!iso) return '—'
@@ -81,7 +81,7 @@ function Escudo({ src, name, size = 16 }: { src: string | null; name: string; si
   return (
     <span
       aria-hidden="true"
-      className="flex shrink-0 items-center justify-center rounded bg-slate-800 text-[11px] font-bold text-slate-300"
+      className="flex shrink-0 items-center justify-center rounded bg-paper-3 text-[11px] font-bold text-ink-2"
       style={{ width: size, height: size }}
     >
       {name.charAt(0).toUpperCase()}
@@ -96,10 +96,10 @@ function Estado({ status, clock }: { status: string; clock: string | null }) {
     <span
       className={`shrink-0 rounded-lg px-2 py-1 text-[11px] font-semibold uppercase tracking-wide ${
         aoVivo
-          ? 'bg-emerald-500/15 text-emerald-300'
+          ? 'bg-verde/15 text-verde-2'
           : final
-            ? 'bg-white/[0.06] text-slate-400'
-            : 'bg-white/[0.06] text-slate-300'
+            ? 'bg-ink/[0.06] text-ink-3'
+            : 'bg-ink/[0.06] text-ink-2'
       }`}
     >
       {aoVivo && clock ? clock : (STATUS_LABEL[status] ?? status.toLowerCase())}
@@ -117,7 +117,7 @@ function LinhaJogo({ jogo }: { jogo: SportGame }) {
   const ladoConhecido = Boolean(casa && fora)
 
   return (
-    <div className="rounded-lg bg-white/[0.03] px-2 py-2">
+    <div className="rounded-lg bg-ink/[0.03] px-2 py-2">
       <div className="flex items-center gap-2">
         <div className="flex min-w-0 flex-1 items-center gap-2">
           {temTimes ? (
@@ -126,20 +126,20 @@ function LinhaJogo({ jogo }: { jogo: SportGame }) {
                 {indice > 0 ? (
                   <span
                     aria-hidden="true"
-                    className="shrink-0 text-[11px] text-slate-400"
+                    className="shrink-0 text-[11px] text-ink-3"
                     title={ladoConhecido ? 'visitante @ mandante' : undefined}
                   >
                     @
                   </span>
                 ) : null}
                 <span
-                  className={`min-w-0 truncate text-xs ${indice === 0 ? 'text-slate-300' : 'font-medium text-slate-100'}`}
+                  className={`min-w-0 truncate text-xs ${indice === 0 ? 'text-ink-2' : 'font-medium text-ink'}`}
                   title={c.name}
                 >
                   {c.name}
                 </span>
                 {c.record ? (
-                  <span className="shrink-0 font-mono text-[11px] text-slate-400" title="campanha na temporada">
+                  <span className="shrink-0 font-mono text-[11px] text-ink-3" title="campanha na temporada">
                     {c.record}
                   </span>
                 ) : null}
@@ -147,9 +147,9 @@ function LinhaJogo({ jogo }: { jogo: SportGame }) {
               </span>
             ))
           ) : (
-            <span className="min-w-0 flex-1 truncate text-xs text-slate-200" title={jogo.name}>
+            <span className="min-w-0 flex-1 truncate text-xs text-ink" title={jogo.name}>
               {jogo.name}
-              {jogo.note ? <span className="ml-1 text-slate-400">· {jogo.note}</span> : null}
+              {jogo.note ? <span className="ml-1 text-ink-3">· {jogo.note}</span> : null}
             </span>
           )}
         </div>
@@ -159,7 +159,7 @@ function LinhaJogo({ jogo }: { jogo: SportGame }) {
             {ordenados.map((c) => (
               <span
                 key={`${jogo.id}-score-${c.name}`}
-                className={`min-w-[20px] text-center ${c.winner ? 'font-semibold text-emerald-300' : 'text-slate-200'}`}
+                className={`min-w-[20px] text-center ${c.winner ? 'font-semibold text-ink' : 'text-ink-2'}`}
               >
                 {c.score ?? '–'}
               </span>
@@ -170,7 +170,7 @@ function LinhaJogo({ jogo }: { jogo: SportGame }) {
         <Estado status={jogo.status} clock={jogo.clock} />
       </div>
 
-      <div className="mt-1 flex items-center gap-4 pl-1 text-[11px] text-slate-400">
+      <div className="mt-1 flex items-center gap-4 pl-1 text-[11px] text-ink-3">
         <span className="flex items-center gap-1">
           <CalendarDays aria-hidden="true" className="h-3.5 w-3.5" />
           {horaLocal(jogo.date)}
@@ -252,17 +252,17 @@ export function SportsView() {
             aria-pressed={tipo === kind}
             className={`${CHIP} ${
               tipo === kind
-                ? 'bg-orange-500/15 text-orange-100'
-                : 'bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white'
+                ? 'bg-ink/[0.1] text-ink'
+                : 'bg-ink/[0.04] text-ink-2 hover:bg-ink/[0.08] hover:text-ink'
             }`}
           >
             {KIND_LABEL[kind]}
-            <span className="font-mono text-[11px] text-slate-400">{porTipo[kind].length}</span>
+            <span className="font-mono text-[11px] text-ink-3">{porTipo[kind].length}</span>
           </button>
         ))}
       </div>
 
-      <div className="flex flex-wrap items-center gap-2 border-t border-white/[0.04] pt-2">
+      <div className="flex flex-wrap items-center gap-2 border-t border-ink/[0.04] pt-2">
         {porTipo[tipo].map((l) => (
           <button
             key={l.id}
@@ -271,15 +271,15 @@ export function SportsView() {
             aria-pressed={ligaId === l.id}
             className={`${CHIP} ${
               ligaId === l.id
-                ? 'bg-white/[0.1] text-white'
-                : 'bg-white/[0.03] text-slate-300 hover:bg-white/[0.08] hover:text-white'
+                ? 'bg-ink/[0.1] text-ink'
+                : 'bg-ink/[0.03] text-ink-2 hover:bg-ink/[0.08] hover:text-ink'
             }`}
             title={l.name}
           >
             {l.name}
           </button>
         ))}
-        <span className="ml-auto flex items-center gap-2 text-[11px] text-slate-400">
+        <span className="ml-auto flex items-center gap-2 text-[11px] text-ink-3">
           {fase === 'ready' ? <span className="font-mono">{contagemDeJogos(jogos.length)}</span> : null}
           <button
             type="button"
@@ -297,19 +297,19 @@ export function SportsView() {
         {fase === 'loading' ? (
           <div className="space-y-2">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-12 animate-pulse rounded-lg bg-white/5" />
+              <div key={i} className="h-12 animate-pulse rounded-lg bg-ink/5" />
             ))}
           </div>
         ) : fase === 'error' ? (
           <div className="flex h-full flex-col items-center justify-center text-center">
-            <p className="text-[12px] text-slate-300">A fonte não respondeu para {liga?.name ?? ligaId}.</p>
-            <p className="mt-1 text-[11px] text-slate-400">Nada é mostrado de cache: prefiro vazio a dado velho.</p>
+            <p className="text-[12px] text-ink-2">A fonte não respondeu para {liga?.name ?? ligaId}.</p>
+            <p className="mt-1 text-[11px] text-ink-3">Nada é mostrado de cache: prefiro vazio a dado velho.</p>
           </div>
         ) : jogos.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center text-center">
-            <Trophy aria-hidden="true" className="mb-2 h-7 w-7 text-slate-400/70" />
-            <p className="text-[12px] text-slate-300">Sem jogos publicados em {liga?.name ?? ligaId} agora.</p>
-            <p className="mt-1 text-[11px] text-slate-400">
+            <Trophy aria-hidden="true" className="mb-2 h-7 w-7 text-ink-3/70" />
+            <p className="text-[12px] text-ink-2">Sem jogos publicados em {liga?.name ?? ligaId} agora.</p>
+            <p className="mt-1 text-[11px] text-ink-3">
               {liga && ['racing', 'mma', 'tennis'].includes(liga.kind)
                 ? 'Neste esporte a fonte publica por evento, não por rodada.'
                 : 'Fora de temporada ou nenhum jogo na data de hoje.'}
@@ -320,9 +320,9 @@ export function SportsView() {
             {grupos.map(([dia, lista]) => (
               <div key={dia}>
                 <div className="mb-1 flex items-center gap-2">
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">{dia}</span>
-                  <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
-                  <span className="font-mono text-[11px] text-slate-400">{lista.length}</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-ink-3">{dia}</span>
+                  <div className="h-px flex-1 bg-gradient-to-r from-ink/10 to-transparent" />
+                  <span className="font-mono text-[11px] text-ink-3">{lista.length}</span>
                 </div>
                 <div className="space-y-1">
                   {lista.map((jogo) => (

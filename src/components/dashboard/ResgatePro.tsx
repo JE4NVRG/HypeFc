@@ -170,8 +170,8 @@ export default function ResgatePro() {
 
   const cor =
     aviso.tipo === 'erro'
-      ? 'border-red-500/20 bg-red-500/10 text-red-200'
-      : 'border-emerald-500/20 bg-emerald-500/10 text-emerald-200'
+      ? 'border-carimbo/20 bg-carimbo/10 text-carimbo'
+      : 'border-line bg-paper-3/40 text-ink'
 
   return (
     <div

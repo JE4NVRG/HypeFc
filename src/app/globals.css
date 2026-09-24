@@ -4,27 +4,37 @@
 
 @layer base {
   :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 224 71% 6%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 24 95% 53%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 24 95% 53%;
-    /* Raio dos cards (rounded-xl mantem 12px por conta propria no Tailwind). */
-    --radius: 0.75rem;
+    /*
+     * Identidade 002 "Mesa": grafite #0B0E11, painel #12161B, reguas de 1px,
+     * raio 0. Os nomes shadcn (background/foreground/card/border/ring) ficam
+     * porque badge/button/card/select/separator os usam, mas agora apontam
+     * para a paleta da direcao aprovada, nao para o kit generico.
+     *
+     * Valores em HSL sem unidade porque os tokens do Tailwind os consomem como
+     * hsl(var(--x)). As cores nomeadas da direcao estao em tailwind.config.ts
+     * (paper, ink, rule, sinal, verde, carimbo) para uso direto nas classes.
+     */
+    --background: 210 21% 5%;
+    --foreground: 216 25% 92%;
+    --card: 213 20% 9%;
+    --card-foreground: 216 25% 92%;
+    --popover: 213 20% 9%;
+    --popover-foreground: 216 25% 92%;
+    --primary: 68 100% 67%;
+    --primary-foreground: 210 21% 5%;
+    --secondary: 214 24% 13%;
+    --secondary-foreground: 214 17% 70%;
+    --muted: 214 24% 13%;
+    --muted-foreground: 214 17% 70%;
+    --accent: 214 24% 13%;
+    --accent-foreground: 216 25% 92%;
+    --destructive: 0 100% 71%;
+    --destructive-foreground: 210 21% 5%;
+    --border: 212 19% 15%;
+    --input: 212 19% 15%;
+    --ring: 68 100% 67%;
+    /* Raio 0 e decisao da direcao, nao esquecimento: nenhum canto arredondado. */
+    --radius: 0rem;
   }
 }
 
@@ -39,22 +49,29 @@
   }
 
   /*
-   * Corpo em slate-300 (13,6:1 sobre slate-950): texto herdado nunca cai na faixa
-   * ilegivel. Titulos declaram slate-100/white no proprio componente.
+   * Corpo em ink-2 (#A7B2C0 sobre #0B0E11 = 9,4:1): texto herdado nunca cai na
+   * faixa ilegivel. A fonte de trabalho da direcao e a mono, com tabular-nums,
+   * porque o painel e feito de numero alinhado em coluna.
    */
   body {
-    @apply bg-slate-950 text-slate-300;
+    @apply bg-paper text-ink-2 font-mono;
+    font-variant-numeric: tabular-nums;
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
+  /* Titulo, nome de time e numero grande usam a display (Inter Tight). */
+  h1, h2, h3, .font-disp {
+    @apply font-sans;
+  }
+
   /*
-   * Rede de seguranca de foco: elementos que nao declaram anel proprio ainda tem
-   * indicador visivel (laranja, o mesmo acento do painel). Quem usa
-   * focus:outline-none + ring mantem o seu indicador, sem anel duplicado.
+   * Rede de seguranca de foco: quem nao declara anel proprio ainda tem
+   * indicador visivel, em tinta clara (2px), o mesmo do painel aprovado.
    */
   :focus-visible {
-    outline: 2px solid rgb(251 146 60 / 0.6);
+    outline: 2px solid #E6EAF0;
     outline-offset: 2px;
   }
 }
@@ -70,16 +87,17 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-slate-700;
+  @apply bg-rule;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-600;
+  @apply bg-line;
 }
 
-/* Selection */
+/* Selection: o acento acido, que na direcao e reservado a registro e CTA. */
 ::selection {
-  @apply bg-orange-500/30 text-white;
+  background: #E8FF59;
+  color: #0B0E11;
 }
 
 /*

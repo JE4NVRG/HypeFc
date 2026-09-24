@@ -1,8 +1,26 @@
 import type { Metadata, Viewport } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
+import { Inter_Tight, JetBrains_Mono } from 'next/font/google'
 import PwaRegister from '@/components/dashboard/PwaRegister'
 import './globals.css'
+
+/*
+ * Fontes da direcao 002: self-hosted pelo next/font (nao CDN externo), com
+ * preload e ajuste de metrica de fallback. Isso e o que impede o layout shift
+ * de fonte fria que o mockup apresentou (CLS 0,0739) enquanto a webfont baixava.
+ */
+const interTight = Inter_Tight({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter-tight',
+  display: 'swap',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   // Base absoluta: preview de link (WhatsApp, X, Telegram) exige URL completa da
@@ -47,7 +65,7 @@ export const metadata: Metadata = {
 
 // No Next 14 themeColor mora no viewport (no metadata virou deprecated).
 export const viewport: Viewport = {
-  themeColor: '#020617',
+  themeColor: '#0B0E11',
   colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1,
@@ -60,7 +78,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className="dark">
-      <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}>
+      <body className={`${interTight.variable} ${jetbrainsMono.variable} font-mono antialiased`}>
         {children}
         <PwaRegister />
       </body>

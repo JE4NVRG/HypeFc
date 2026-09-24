@@ -33,10 +33,10 @@ interface RoundViewProps {
 type LigaBloco = { name: string; matches: Match[] }
 
 const chipBase =
-  'inline-flex min-h-[44px] shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border px-3 text-[12px] font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 md:min-h-[36px]'
+  'inline-flex min-h-[44px] shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border px-3 text-[12px] font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 md:min-h-[36px]'
 
-const chipAtivo = 'border-white/20 bg-white/[0.1] text-slate-100'
-const chipInativo = 'border-white/10 bg-white/[0.04] text-slate-300 hover:border-white/20 hover:bg-white/[0.08] hover:text-slate-100'
+const chipAtivo = 'border-ink/20 bg-ink/[0.1] text-ink'
+const chipInativo = 'border-ink/10 bg-ink/[0.04] text-ink-2 hover:border-ink/20 hover:bg-ink/[0.08] hover:text-ink'
 
 /**
  * Rolagem horizontal sem a scrollbar nativa (a barra clara em cima do painel escuro
@@ -148,13 +148,13 @@ function LeagueHeader({ name, jogos }: { name: string; jogos: number }) {
   return (
     <div className="flex items-center gap-2">
       <span
-        className="min-w-0 shrink truncate text-[11px] font-semibold uppercase tracking-wider text-slate-400"
+        className="min-w-0 shrink truncate text-[11px] font-semibold uppercase tracking-wider text-ink-3"
         title={name}
       >
         {name}
       </span>
-      <div className="h-px min-w-[16px] flex-1 bg-gradient-to-r from-white/20 to-transparent" aria-hidden="true" />
-      <span className="shrink-0 font-mono text-[11px] tabular-nums text-slate-400">
+      <div className="h-px min-w-[16px] flex-1 bg-gradient-to-r from-ink/20 to-transparent" aria-hidden="true" />
+      <span className="shrink-0 font-mono text-[11px] tabular-nums text-ink-3">
         {jogos} {jogos === 1 ? 'jogo' : 'jogos'}
       </span>
     </div>
@@ -219,11 +219,11 @@ export function RoundView({
       {/* Cabeçalho da rodada + chips de liga: trocar de liga substitui a lista. */}
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <div className="flex items-center gap-2">
-          <Calendar className="h-4 w-4 text-emerald-400" />
-          <h2 className="text-[14px] font-semibold text-slate-200">{isFallback ? 'Última rodada' : 'Jogos de hoje'}</h2>
-          {dayLabel ? <span className="text-[11px] font-medium text-amber-300">{dayLabel}</span> : null}
+          <Calendar className="h-4 w-4 text-ink-3" />
+          <h2 className="text-[14px] font-semibold text-ink">{isFallback ? 'Última rodada' : 'Jogos de hoje'}</h2>
+          {dayLabel ? <span className="text-[11px] font-medium text-ink-2">{dayLabel}</span> : null}
           {!loading && total > 0 ? (
-            <span className="rounded-lg bg-white/[0.06] px-2 py-0.5 font-mono text-[11px] tabular-nums text-slate-400">
+            <span className="rounded-lg bg-ink/[0.06] px-2 py-0.5 font-mono text-[11px] tabular-nums text-ink-3">
               {total} {total === 1 ? 'jogo' : 'jogos'}
             </span>
           ) : null}
@@ -244,7 +244,7 @@ export function RoundView({
               className={`${chipBase} ${liga === 'todas' ? chipAtivo : chipInativo}`}
             >
               Todas
-              <span className="font-mono text-[11px] tabular-nums text-slate-300">{total}</span>
+              <span className="font-mono text-[11px] tabular-nums text-ink-2">{total}</span>
             </button>
             {leagues.map(({ name, matches }) => (
               <button
@@ -256,7 +256,7 @@ export function RoundView({
                 className={`${chipBase} ${liga === name ? chipAtivo : chipInativo}`}
               >
                 <span className="max-w-[120px] truncate">{name}</span>
-                <span className="font-mono text-[11px] tabular-nums text-slate-300">{matches.length}</span>
+                <span className="font-mono text-[11px] tabular-nums text-ink-2">{matches.length}</span>
               </button>
             ))}
           </div>
@@ -277,20 +277,20 @@ export function RoundView({
               o painel foi criticado. O rotulo fica dentro da faixa, colado no
               primeiro chip, para nao gastar uma linha de altura. */}
           <span className="flex shrink-0 items-center gap-1.5 pr-1">
-            <Zap className="h-4 w-4 shrink-0 text-amber-400" aria-hidden />
+            <Zap className="h-4 w-4 shrink-0 text-ink-3" aria-hidden />
             {/* o numero sem unidade nao comunica: e o score de hype do modelo,
                 de 0 a 100, e agora esta escrito ao lado da fileira. */}
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-amber-300/90">
-              Em alta <span className="font-normal normal-case text-slate-400">· score 0–100</span>
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-ink-2">
+              Em alta <span className="font-normal normal-case text-ink-3">· score 0–100</span>
             </span>
           </span>
           {hypeTeams.slice(0, 12).map((t) => (
             <span
               key={`${t.league_id}-${t.team}`}
-              className="flex shrink-0 items-center gap-1.5 rounded-lg border border-amber-500/25 bg-amber-500/[0.08] px-2 py-1 text-[11px] text-amber-200"
+              className="flex shrink-0 items-center gap-1.5 rounded-lg border border-line bg-paper-2 px-2 py-1 text-[11px] text-ink-2"
               title={`${t.team}${t.opponent ? ` vs ${t.opponent}` : ''}${t.time_local ? ` · ${t.time_local}` : ''}`}
             >
-              <span className="font-mono font-semibold tabular-nums text-amber-300">{t.score ?? '—'}</span>
+              <span className="font-mono font-semibold tabular-nums text-ink">{t.score ?? '—'}</span>
               <span className="max-w-[110px] truncate">{t.team}</span>
             </span>
           ))}
@@ -311,17 +311,17 @@ export function RoundView({
                   coluna === 0 ? 'flex' : coluna === 1 ? 'hidden md:flex' : 'hidden xl:flex'
                 }`}
               >
-                <div className="h-4 w-32 animate-pulse rounded bg-white/[0.05]" />
+                <div className="h-4 w-32 animate-pulse rounded bg-ink/[0.05]" />
                 {[0, 1, 2].map((i) => (
-                  <div key={i} className="h-[116px] animate-pulse rounded-xl bg-white/[0.05]" />
+                  <div key={i} className="h-[116px] animate-pulse rounded-xl bg-ink/[0.05]" />
                 ))}
               </div>
             ))}
           </div>
         ) : visiveis.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center text-center">
-            <Calendar className="mb-4 h-8 w-8 text-slate-600" />
-            <p className="text-[13px] text-slate-400">Nenhum jogo programado</p>
+            <Calendar className="mb-4 h-8 w-8 text-line" />
+            <p className="text-[13px] text-ink-3">Nenhum jogo programado</p>
           </div>
         ) : ligaUnica ? (
           <div className="flex flex-col gap-2">

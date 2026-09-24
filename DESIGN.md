@@ -46,14 +46,36 @@ herói do card, ele é 28. Se é rótulo, é 11.
 
 ## 3. Cor e contraste
 
+A pele antiga (slate/emerald/orange) foi substituída pela identidade **002 "Mesa"**. O
+vocabulário agora é fechado: `paper`, `paper-2`, `paper-3`, `ink`, `ink-2`, `ink-3`, `rule`,
+`rule-2`, `line`, `verde`, `verde-2`, `sinal`, `carimbo`. Nome de cor do Tailwind
+(`slate-*`, `red-*`, `blue-*`, `emerald-*`) em componente é defeito.
+
 Regras:
 
-- **Secundário mínimo `text-slate-400`.** Corpo `text-slate-300`. Títulos `text-slate-100`
-  ou `text-white`. Labels `text-slate-400`.
-- **Nunca `text-slate-500/600/700` em texto que o usuário lê.** Bordas, divisórias e
-  ícones decorativos podem continuar sutis — desde que o elemento seja decorativo
-  (`aria-hidden`) e não seja o único portador da informação.
+- Corpo `text-ink-2`, texto que o usuário lê de verdade `text-ink`, rótulo técnico `text-ink-3`.
+- **Uma cor de dado e um acento.** `verde`/`verde-2` só onde o número vem do modelo
+  (maior probabilidade, barra, ao vivo). `sinal` em **no máximo 3 lugares no site**:
+  a palavra "registro", o número do recorde e o botão primário de assinatura.
+  `carimbo` só para erro ou aviso real (falha de dado, falha de cobrança).
+- Hierarquia se faz com **peso, tamanho e régua de 1px**, não com cor.
 - Todo texto ≥ **4.5:1** sobre o fundo efetivo (o fundo *composto*, não o token).
+- `ink-3` foi medido: 4,15:1 sobre `paper-3` reprovava, o valor corrigido passa.
+
+Contraste medido (script `measured-visual-identity`, composição de alfa subindo a árvore):
+
+| Cor | base | painel | elevado | papel |
+| --- | --- | --- | --- | --- |
+| `ink` `#E6EAF0` | 16,03 | 15,04 | 13,43 | texto principal |
+| `ink-2` `#A7B2C0` | 9,01 | 8,45 | 7,55 | secundário |
+| `ink-3` `#8C96A2` | 6,45 | 6,05 | 5,41 | rótulo técnico |
+| `verde-2` `#A9F0BB` | 14,62 | 13,72 | 12,25 | dado do modelo |
+| `verde` `#7BE495` | 12,32 | 11,57 | 10,33 | barra do modelo |
+| `sinal` `#E8FF59` | 17,40 | 16,33 | 14,58 | acento (3 lugares) |
+| `carimbo` `#FF6B6B` | 6,97 | 6,54 | 5,84 | alerta |
+
+Divisórias: régua de 1px (`bg-rule`, `border-rule`), nunca caractere de texto. Em grade,
+`gap-px` sobre fundo `bg-rule-2` cria a régua sem borda por célula.
 
 Contraste medido contra `bg-slate-950` (`#020617`), com os fundos compostos de card
 (`white/[0.02]` → `#070b1c`) e hover (`white/[0.04]` → `#0c1020`):
@@ -95,8 +117,14 @@ usar um elemento `aria-hidden` — `<span aria-hidden className="h-3 w-px bg-whi
 
 ## 6. Raios
 
-- **Cards: `rounded-xl`** (12px).
-- **Chips, botões, inputs: `rounded-lg`** (8px na escala Tailwind padrão).
+- **Raio 0 em toda a escala.** Não é esquecimento: a direção 002 não tem um único canto
+  arredondado, nem 50% em ponto ou avatar. Quem garante isso é o `borderRadius` em
+  `tailwind.config.ts` (todos os degraus em `0px`), não a memória de quem escreve componente.
+- `rounded-*` continua aparecendo no código como herança, mas renderiza 0px. Não reintroduza
+  canto arredondado por CSS arbitrário ou `style={{ borderRadius }}`.
+- Elevação é régua de 1px (`border-rule`), nunca sombra.
+
+(A regra antiga de `rounded-xl`/`rounded-lg` desta seção valia para a pele anterior.)
 - Nota honesta do token: neste projeto `borderRadius.lg` está apontado para
   `--radius` (`0.75rem`) em `tailwind.config.ts`, então `rounded-lg` renderiza **12px**
   e `rounded-lg` fica igual a `rounded-xl`. Alinhar (8px) exige mexer em

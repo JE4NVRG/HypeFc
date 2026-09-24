@@ -57,19 +57,19 @@ export default function ContaPro() {
 
   if (estado?.logado) {
     return (
-      <div className="rounded-lg border border-sky-500/25 bg-sky-500/5 p-3.5">
+      <div className="rounded-lg border border-line bg-paper-3/40 p-3.5">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="min-w-0">
-            <div className="flex items-center gap-1.5 text-[13px] font-medium text-sky-300">
+            <div className="flex items-center gap-1.5 text-[13px] font-medium text-ink">
               <BadgeCheck className="h-4 w-4" />
               Conta conectada
             </div>
-            <p className="mt-1 truncate text-[12px] text-slate-300">
+            <p className="mt-1 truncate text-[12px] text-ink-2">
               {estado.email || 'conta Google'} ·{' '}
               {estado.pro ? 'acesso Pro ativo nesta conta' : 'esta conta ainda não tem assinatura'}
             </p>
             {estado.pro && estado.paidUntil ? (
-              <p className="mt-0.5 text-[11px] text-slate-400">
+              <p className="mt-0.5 text-[11px] text-ink-3">
                 Válido até {new Date(estado.paidUntil).toLocaleDateString('pt-BR')}
               </p>
             ) : null}
@@ -78,34 +78,34 @@ export default function ContaPro() {
             type="button"
             onClick={() => void sair()}
             disabled={ocupado !== null}
-            className="inline-flex min-h-[36px] cursor-pointer items-center gap-1.5 rounded-md border border-slate-600/60 px-2.5 text-[12px] text-slate-200 transition hover:border-slate-500 hover:bg-slate-700/40 disabled:opacity-50"
+            className="inline-flex min-h-[36px] cursor-pointer items-center gap-1.5 rounded-md border border-line/60 px-2.5 text-[12px] text-ink transition hover:border-ink-3 hover:bg-line/40 disabled:opacity-50"
             aria-label="Sair da conta Google"
           >
             {ocupado === 'sair' ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogOut className="h-4 w-4" />}
             Sair da conta
           </button>
         </div>
-        {aviso ? <p className="mt-2 text-[11px] leading-snug text-slate-300">{aviso}</p> : null}
+        {aviso ? <p className="mt-2 text-[11px] leading-snug text-ink-2">{aviso}</p> : null}
       </div>
     )
   }
 
   return (
-    <div className="rounded-lg border border-slate-700/60 bg-slate-800/30 p-3.5">
-      <p className="text-[12px] leading-snug text-slate-300">
-        Entre com o Google para o acesso <span className="text-slate-200">ficar na sua conta</span>, assim o Pro
+    <div className="rounded-lg border border-line/60 bg-paper-3/30 p-3.5">
+      <p className="text-[12px] leading-snug text-ink-2">
+        Entre com o Google para o acesso <span className="text-ink">ficar na sua conta</span>, assim o Pro
         vale em qualquer aparelho, não só neste navegador.
       </p>
       <button
         type="button"
         onClick={() => void entrar()}
         disabled={ocupado !== null}
-        className="mt-2.5 inline-flex min-h-[36px] w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-slate-600/70 bg-slate-900/60 px-3 text-[13px] font-medium text-slate-100 transition hover:border-slate-500 hover:bg-slate-800 disabled:opacity-50"
+        className="mt-2.5 inline-flex min-h-[36px] w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-line/70 bg-paper-2/60 px-3 text-[13px] font-medium text-ink transition hover:border-ink-3 hover:bg-paper-3 disabled:opacity-50"
       >
         {ocupado === 'entrar' ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogIn className="h-4 w-4" />}
         Entrar com Google
       </button>
-      {aviso ? <p className="mt-2 text-[11px] leading-snug text-amber-200">{aviso}</p> : null}
+      {aviso ? <p className="mt-2 text-[11px] leading-snug text-carimbo">{aviso}</p> : null}
     </div>
   )
 }

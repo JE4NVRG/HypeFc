@@ -7,19 +7,19 @@ export const metadata: Metadata = {
 }
 
 const S = {
-  h1: 'text-xl font-semibold tracking-tight text-slate-100',
-  h2: 'text-sm font-semibold text-slate-200',
-  p: 'text-[13px] leading-relaxed text-slate-400',
-  ul: 'space-y-1 text-[13px] leading-relaxed text-slate-400',
-  link: 'text-emerald-400 underline decoration-emerald-400/30 underline-offset-2 hover:decoration-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 rounded-lg',
+  h1: 'text-xl font-semibold tracking-tight text-ink',
+  h2: 'text-sm font-semibold text-ink',
+  p: 'text-[13px] leading-relaxed text-ink-3',
+  ul: 'space-y-1 text-[13px] leading-relaxed text-ink-3',
+  link: 'text-verde-2 underline decoration-verde/30 underline-offset-2 hover:decoration-verde focus:outline-none focus-visible:ring-2 focus-visible:ring-sinal/60 rounded-lg',
   linkNav:
-    'inline-flex min-h-[44px] items-center text-emerald-400 underline decoration-emerald-400/30 underline-offset-2 hover:decoration-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 rounded-lg sm:min-h-[36px]',
+    'inline-flex min-h-[44px] items-center text-verde-2 underline decoration-verde/30 underline-offset-2 hover:decoration-verde focus:outline-none focus-visible:ring-2 focus-visible:ring-sinal/60 rounded-lg sm:min-h-[36px]',
 }
 
 export default function Privacidade() {
   return (
     <article className="mx-auto max-w-2xl px-5 py-8">
-      <p className="text-[11px] uppercase tracking-wider text-slate-400">HypeFC</p>
+      <p className="text-[11px] uppercase tracking-wider text-ink-3">HypeFC</p>
       <h1 className={S.h1}>Política de privacidade</h1>
       <p className={`${S.p} mt-1`}>Última atualização: 23 de setembro de 2026.</p>
 
@@ -27,7 +27,7 @@ export default function Privacidade() {
         <h2 className={S.h2}>O painel público não pede cadastro</h2>
         <p className={S.p}>
           Você pode usar o painel inteiro sem informar nada. Os dados esportivos são buscados{' '}
-          <strong className="text-slate-300">direto do seu navegador</strong> na API pública da ESPN; o HypeFC não
+          <strong className="text-ink-2">direto do seu navegador</strong> na API pública da ESPN; o HypeFC não
           intermedia essa chamada. Não usamos cookies de rastreamento, não usamos analytics de terceiros e não montamos
           perfil de navegação.
         </p>
@@ -37,19 +37,19 @@ export default function Privacidade() {
         <h2 className={S.h2}>O que guardamos, e só quando você informa</h2>
         <ul className={`${S.ul} list-disc pl-5`}>
           <li>
-            <strong className="text-slate-300">E-mail</strong>: para falar sobre a sua assinatura e identificar o acesso.
+            <strong className="text-ink-2">E-mail</strong>: para falar sobre a sua assinatura e identificar o acesso.
             Nome é opcional.
           </li>
           <li>
-            <strong className="text-slate-300">Times que você segue</strong>: para saber qual alerta faz sentido enviar.
+            <strong className="text-ink-2">Times que você segue</strong>: para saber qual alerta faz sentido enviar.
           </li>
           <li>
-            <strong className="text-slate-300">Inscrição de notificação do navegador</strong> (um endereço técnico de
+            <strong className="text-ink-2">Inscrição de notificação do navegador</strong> (um endereço técnico de
             entrega, mais duas chaves públicas do seu navegador): é isso que permite o alerta chegar ao seu aparelho.
           </li>
           <li>
-            <strong className="text-slate-300">Registro de pagamento</strong> (valor, data, identificador do provedor):
-            obrigação fiscal e controle de acesso. <strong className="text-slate-300">Não</strong> guardamos dados de
+            <strong className="text-ink-2">Registro de pagamento</strong> (valor, data, identificador do provedor):
+            obrigação fiscal e controle de acesso. <strong className="text-ink-2">Não</strong> guardamos dados de
             cartão: quem processa o pagamento é o provedor.
           </li>
         </ul>
@@ -59,11 +59,11 @@ export default function Privacidade() {
         <h2 className={S.h2}>Entrar com o Google (opcional)</h2>
         <p className={S.p}>
           Você pode usar o HypeFC inteiro sem conta. Entrar com o Google serve para uma coisa só:{' '}
-          <strong className="text-slate-300">guardar o seu acesso na conta</strong>, para o Pro valer em qualquer
+          <strong className="text-ink-2">guardar o seu acesso na conta</strong>, para o Pro valer em qualquer
           aparelho — sem isso, o acesso fica preso ao navegador em que a compra foi feita.
         </p>
         <p className={S.p}>
-          Do Google recebemos apenas o básico do seu perfil: <strong className="text-slate-300">e-mail</strong>, nome e
+          Do Google recebemos apenas o básico do seu perfil: <strong className="text-ink-2">e-mail</strong>, nome e
           foto de perfil, se houver. Não pedimos e não temos acesso a Gmail, Drive, contatos, calendário nem a qualquer
           outro conteúdo da sua conta. A autenticação é feita pelo Supabase Auth; a senha do Google nunca passa pelo
           HypeFC e nós não temos como vê-la.
@@ -115,7 +115,7 @@ export default function Privacidade() {
         </p>
       </section>
 
-      <nav className="mt-8 flex flex-wrap gap-4 border-t border-slate-800 pt-4 text-[12px]">
+      <nav className="mt-8 flex flex-wrap gap-4 border-t border-paper-3 pt-4 text-[12px]">
         <Link className={S.linkNav} href="/">
           ← Voltar ao painel
         </Link>

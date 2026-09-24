@@ -51,18 +51,22 @@ interface Recado {
   texto: string
 }
 
-/* Piso de toque 44px no mobile e foco visivel em laranja (a cor de --ring do
+/* Piso de toque 44px no mobile e foco visivel no anel de tinta (a cor de --ring
    tema): o botao de seguir time, os CTAs e os campos seguem o mesmo desenho. */
+/* O CTA de assinatura e o unico acento acido da tela (direcao 002). Sem
+   checkout aberto, o botao vira neutro: nao se vende o que nao esta ligado. */
 const CTA =
-  'inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 text-[13px] font-semibold text-slate-950 transition hover:bg-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 disabled:cursor-not-allowed disabled:opacity-50'
+  'inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-sinal px-4 text-[13px] font-semibold text-paper transition hover:bg-sinal/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 disabled:cursor-not-allowed disabled:opacity-50'
+const CTA_NEUTRO =
+  'inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-line bg-paper-3/60 px-4 text-[13px] font-semibold text-ink transition hover:bg-line/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 disabled:cursor-not-allowed disabled:opacity-50'
 const BOTAO_SECUNDARIO =
-  'inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-800/60 px-4 text-[13px] font-medium text-slate-100 transition hover:bg-slate-700/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 disabled:cursor-not-allowed disabled:opacity-50'
+  'inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded-lg border border-line bg-paper-3/60 px-4 text-[13px] font-medium text-ink transition hover:bg-line/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 disabled:cursor-not-allowed disabled:opacity-50'
 const BOTAO_FANTASMA =
-  'inline-flex min-h-[44px] shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-slate-700 bg-slate-900/40 px-3 text-[13px] text-slate-300 transition hover:bg-slate-800/60 hover:text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 disabled:cursor-not-allowed disabled:opacity-50'
+  'inline-flex min-h-[44px] shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg border border-line bg-paper-2/40 px-3 text-[13px] text-ink-2 transition hover:bg-paper-3/60 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 disabled:cursor-not-allowed disabled:opacity-50'
 const CAMPO =
-  'mt-1 h-11 w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 text-[14px] text-slate-100 placeholder:text-slate-400 focus:border-orange-400/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60'
-const CAIXA = 'rounded-lg border border-slate-800 bg-slate-950/30 p-3.5'
-const ROTULO = 'text-[11px] font-semibold uppercase tracking-wider text-slate-400'
+  'mt-1 h-11 w-full rounded-lg border border-line bg-paper/60 px-3 text-[14px] text-ink placeholder:text-ink-3 focus:border-ink/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60'
+const CAIXA = 'rounded-lg border border-paper-3 bg-paper/30 p-3.5'
+const ROTULO = 'text-[11px] font-semibold uppercase tracking-wider text-ink-3'
 
 /** Erro da loja -> frase curta. Nunca promete sucesso que nao aconteceu. */
 const TEXTO_ERRO: Record<string, string> = {
@@ -141,7 +145,7 @@ function RecadoLinha({ recado }: { recado: Recado | null }) {
       role="status"
       aria-live="polite"
       className={`mt-2 min-h-[16px] text-[12px] leading-snug ${
-        recado?.tom === 'ok' ? 'text-emerald-300' : recado?.tom === 'erro' ? 'text-red-300' : 'text-amber-300'
+        recado?.tom === 'ok' ? 'text-ink-2' : recado?.tom === 'erro' ? 'text-carimbo' : 'text-ink-3'
       }`}
     >
       {recado?.texto ?? ''}
@@ -377,19 +381,19 @@ export function ProView() {
 
   return (
     <div className="h-full overflow-y-auto pr-0.5">
-      <section className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+      <section className="rounded-xl border border-paper-3 bg-paper-2/40 p-4">
         <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-2">
           <div className="min-w-0">
-            <h2 className="text-xl font-semibold text-slate-100">Pro</h2>
-            <p className="mt-1 text-[13px] leading-snug text-slate-300">
+            <h2 className="text-xl font-semibold text-ink">Pro</h2>
+            <p className="mt-1 text-[13px] leading-snug text-ink-2">
               Alerta antes da rodada e registro do que foi previsto — o palpite não está à venda.
             </p>
           </div>
           <span
             className={`shrink-0 rounded-full border px-2.5 py-1 text-[11px] font-medium ${
               situacao === 'Pro ativo'
-                ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
-                : 'border-slate-700 bg-slate-800/60 text-slate-300'
+                ? 'border-ink/20 bg-ink/[0.08] text-ink'
+                : 'border-line bg-paper-3/60 text-ink-2'
             }`}
           >
             {situacao}
@@ -401,18 +405,18 @@ export function ProView() {
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className={CAIXA}>
               <div className={ROTULO}>Grátis</div>
-              <ul className="mt-2 space-y-1.5 text-[13px] leading-snug text-slate-300">
+              <ul className="mt-2 space-y-1.5 text-[13px] leading-snug text-ink-2">
                 <li>Painel completo: rodada, ligas, esportes e recorde público.</li>
                 <li>Até 3 times seguidos.</li>
                 <li>Sem alertas.</li>
               </ul>
             </div>
-            <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/5 p-3.5">
+            <div className="rounded-lg border border-line bg-paper-3/40 p-3.5">
               <div className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-300">Pro</span>
-                <span className="font-mono text-base font-semibold text-slate-100">R$ 9,90/mês · R$ 79/ano</span>
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-ink">Pro</span>
+                <span className="font-mono text-base font-semibold text-ink">R$ 9,90/mês · R$ 79/ano</span>
               </div>
-              <ul className="mt-2 space-y-1.5 text-[13px] leading-snug text-slate-100">
+              <ul className="mt-2 space-y-1.5 text-[13px] leading-snug text-ink">
                 <li>Até 20 times seguidos.</li>
                 <li>Alerta antes da rodada.</li>
                 <li>Histórico do registro: o que o modelo previa para quem você segue.</li>
@@ -429,30 +433,30 @@ export function ProView() {
               </div>
               <div className="mt-2.5 grid grid-cols-2 gap-3 sm:grid-cols-4">
                 <div>
-                  <div className="text-[11px] uppercase tracking-wider text-slate-400">Brier do modelo</div>
-                  <div className="mt-0.5 font-mono text-xl font-semibold tabular-nums text-emerald-300">0,629</div>
-                  <div className="text-[11px] text-slate-400">n=1.203 jogos</div>
+                  <div className="text-[11px] uppercase tracking-wider text-ink-3">Brier do modelo</div>
+                  <div className="mt-0.5 font-mono text-xl font-semibold tabular-nums text-ink">0,629</div>
+                  <div className="text-[11px] text-ink-3">n=1.203 jogos</div>
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-wider text-slate-400">Chute uniforme</div>
-                  <div className="mt-0.5 font-mono text-xl font-semibold tabular-nums text-slate-100">0,667</div>
-                  <div className="text-[11px] text-slate-400">1/3 para cada lado</div>
+                  <div className="text-[11px] uppercase tracking-wider text-ink-3">Chute uniforme</div>
+                  <div className="mt-0.5 font-mono text-xl font-semibold tabular-nums text-ink">0,667</div>
+                  <div className="text-[11px] text-ink-3">1/3 para cada lado</div>
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-wider text-slate-400">Favorito do modelo</div>
-                  <div className="mt-0.5 font-mono text-xl font-semibold tabular-nums text-slate-100">46,5%</div>
-                  <div className="text-[11px] text-slate-400">acerto do palpite</div>
+                  <div className="text-[11px] uppercase tracking-wider text-ink-3">Favorito do modelo</div>
+                  <div className="mt-0.5 font-mono text-xl font-semibold tabular-nums text-ink">46,5%</div>
+                  <div className="text-[11px] text-ink-3">acerto do palpite</div>
                 </div>
-                <div className="rounded-lg border border-amber-500/25 bg-amber-500/5 px-2.5 py-1.5">
-                  <div className="text-[11px] uppercase tracking-wider text-amber-300">Âncora melhor colocado</div>
-                  <div className="mt-0.5 font-mono text-xl font-semibold tabular-nums text-amber-200">46,5%</div>
-                  <div className="text-[11px] text-slate-400">mesma taxa, sem modelo</div>
+                <div className="rounded-lg border border-rule bg-paper-2/40 px-2.5 py-1.5">
+                  <div className="text-[11px] uppercase tracking-wider text-ink-3">Âncora melhor colocado</div>
+                  <div className="mt-0.5 font-mono text-xl font-semibold tabular-nums text-ink">46,5%</div>
+                  <div className="text-[11px] text-ink-3">mesma taxa, sem modelo</div>
                 </div>
               </div>
-              <p className="mt-3 rounded-lg border border-amber-500/25 bg-amber-500/5 p-3 text-[13px] leading-snug text-amber-200">
+              <p className="mt-3 rounded-lg border border-rule bg-paper-2/40 p-3 text-[13px] leading-snug text-ink-2">
                 Prova de honestidade: calibrado, sem edge no palpite — o que vendemos é alerta e registro, não palpite.
               </p>
-              <p className="mt-2 text-[12px] leading-snug text-slate-400">
+              <p className="mt-2 text-[12px] leading-snug text-ink-3">
                 O favorito do modelo acerta a mesma taxa de olhar a classificação. A probabilidade vale como
                 frequência, não como vantagem contra ninguém.
               </p>
@@ -464,10 +468,10 @@ export function ProView() {
                 <BellRing className="h-4 w-4" />
                 O que o alerta faz
               </div>
-              <ul className="mt-2 space-y-1.5 text-[13px] leading-snug text-slate-300">
+              <ul className="mt-2 space-y-1.5 text-[13px] leading-snug text-ink-2">
                 <li>
-                  Avisa <span className="text-slate-100">quando o time joga</span> e a{' '}
-                  <span className="text-slate-100">probabilidade do modelo</span> para aquele jogo.
+                  Avisa <span className="text-ink">quando o time joga</span> e a{' '}
+                  <span className="text-ink">probabilidade do modelo</span> para aquele jogo.
                 </li>
                 <li>Não é palpite de aposta e não diz para apostar em nada.</li>
                 <li>O HypeFC não é casa de aposta, não recebe aposta e não promete retorno financeiro.</li>
@@ -480,15 +484,15 @@ export function ProView() {
           {/* (c) e (d) lista de espera, ativacao de acesso e estado do acesso */}
           <div className="grid grid-cols-1 gap-3">
             {perfil ? (
-              <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/5 p-3.5">
+              <div className="rounded-lg border border-line bg-paper-3/40 p-3.5">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div className="min-w-0">
-                    <div className="flex items-center gap-1.5 text-[13px] font-medium text-emerald-300">
+                    <div className="flex items-center gap-1.5 text-[13px] font-medium text-ink">
                       <BadgeCheck className="h-4 w-4" />
                       Acesso ativo
                       {perfil.nome ? ` · ${perfil.nome}` : ''}
                     </div>
-                    <p className="mt-1 truncate text-[12px] text-slate-300">
+                    <p className="mt-1 truncate text-[12px] text-ink-2">
                       {perfil.email ?? 'sem e-mail no cadastro'} · plano{' '}
                       {perfil.plan === 'pro' ? 'Pro' : 'Gratuito'} · {seguindo} de {limite} times
                     </p>
@@ -508,13 +512,13 @@ export function ProView() {
                 Assinar Pro
               </a>
             ) : (
-              <button type="button" onClick={() => void pedirLista()} disabled={ocupado !== null} className={CTA}>
+              <button type="button" onClick={() => void pedirLista()} disabled={ocupado !== null} className={CTA_NEUTRO}>
                 {ocupado === 'lista' ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
                 Vendas abrindo — entre na lista
               </button>
             )}
             {!loja ? (
-              <p className="text-[12px] leading-snug text-amber-200">
+              <p className="text-[12px] leading-snug text-carimbo">
                 O registro online ainda não está ligado neste site: sua inscrição não é gravada aqui. O painel
                 gratuito continua funcionando normalmente.
               </p>
@@ -522,12 +526,12 @@ export function ProView() {
 
             <form onSubmit={(event) => void ativarAcesso(event)} className={CAIXA}>
               <div className={ROTULO}>Ativar acesso</div>
-              <p className="mt-1 text-[12px] leading-snug text-slate-400">
+              <p className="mt-1 text-[12px] leading-snug text-ink-3">
                 Quem comprou recebe um código de uso único por e-mail. Ele ativa este navegador.
               </p>
               <div className="mt-2.5 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="pro-acesso-email" className="text-[12px] text-slate-400">
+                  <label htmlFor="pro-acesso-email" className="text-[12px] text-ink-3">
                     E-mail da compra
                   </label>
                   <input
@@ -542,7 +546,7 @@ export function ProView() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="pro-acesso-codigo" className="text-[12px] text-slate-400">
+                  <label htmlFor="pro-acesso-codigo" className="text-[12px] text-ink-3">
                     Código
                   </label>
                   <input
@@ -565,14 +569,14 @@ export function ProView() {
 
             <form onSubmit={(event) => { event.preventDefault(); void pedirLista() }} className={CAIXA}>
               <div className={ROTULO}>{CHECKOUT_URL ? 'Avisos do Pro' : 'Lista de espera'}</div>
-              <p className="mt-1 text-[12px] leading-snug text-slate-400">
+              <p className="mt-1 text-[12px] leading-snug text-ink-3">
                 {CHECKOUT_URL
                   ? 'A assinatura já está aberta. Se preferir esperar, deixe o e-mail: a gente avisa de novidade do Pro. Nada de cobrança aqui.'
                   : 'Sem checkout aberto ainda: a lista avisa quando as vendas começarem. Nada de cobrança aqui.'}
               </p>
               <div className="mt-2.5 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="pro-lista-email" className="text-[12px] text-slate-400">
+                  <label htmlFor="pro-lista-email" className="text-[12px] text-ink-3">
                     E-mail
                   </label>
                   <input
@@ -588,7 +592,7 @@ export function ProView() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="pro-lista-nome" className="text-[12px] text-slate-400">
+                  <label htmlFor="pro-lista-nome" className="text-[12px] text-ink-3">
                     Nome (opcional)
                   </label>
                   <input
@@ -617,7 +621,7 @@ export function ProView() {
                 Alertas no navegador
               </div>
               {pushOk === null ? (
-                <p className="mt-2 text-[13px] text-slate-400">Verificando este navegador…</p>
+                <p className="mt-2 text-[13px] text-ink-3">Verificando este navegador…</p>
               ) : pushOk ? (
                 <div className="mt-2.5 flex flex-wrap gap-2">
                   {/* Um botao de cada vez: com inscricao viva, "ativar" de novo nao
@@ -647,9 +651,9 @@ export function ProView() {
                   )}
                 </div>
               ) : (
-                <p className="mt-2 text-[13px] text-slate-300">Alertas indisponíveis neste navegador.</p>
+                <p className="mt-2 text-[13px] text-ink-2">Alertas indisponíveis neste navegador.</p>
               )}
-              <p className="mt-2 text-[12px] leading-snug text-slate-400">
+              <p className="mt-2 text-[12px] leading-snug text-ink-3">
                 O alerta chega antes da rodada com o horário do jogo e a probabilidade medida. É informativo: não
                 sugere aposta.
               </p>
@@ -660,14 +664,14 @@ export function ProView() {
             <div className={CAIXA}>
               <div className="flex items-baseline justify-between gap-2">
                 <span className={ROTULO}>Times seguidos</span>
-                <span className="font-mono text-[13px] tabular-nums text-slate-200">
+                <span className="font-mono text-[13px] tabular-nums text-ink">
                   {seguindo} de {limite} times
                 </span>
               </div>
               {carregando ? (
-                <p className="mt-2 text-[13px] text-slate-400">Carregando…</p>
+                <p className="mt-2 text-[13px] text-ink-3">Carregando…</p>
               ) : lista.length === 0 ? (
-                <p className="mt-2 text-[13px] leading-snug text-slate-300">
+                <p className="mt-2 text-[13px] leading-snug text-ink-2">
                   {temToken()
                     ? 'Nenhum time seguido ainda. Use Seguir no confronto do time.'
                     : 'Seguir time é recurso Pro: ative o acesso acima para usar.'}
@@ -676,8 +680,8 @@ export function ProView() {
                 <ul className="mt-2.5 space-y-2">
                   {lista.map((item) => (
                     <li key={item.team_id} className="flex items-center gap-2">
-                      <span className="min-w-0 flex-1 truncate text-[13px] text-slate-100">{item.team_name}</span>
-                      <span className="hidden shrink-0 font-mono text-[11px] text-slate-400 sm:inline">
+                      <span className="min-w-0 flex-1 truncate text-[13px] text-ink">{item.team_name}</span>
+                      <span className="hidden shrink-0 font-mono text-[11px] text-ink-3 sm:inline">
                         {item.league_id}
                       </span>
                       <button
@@ -780,10 +784,10 @@ export function SeguirTimeBotao({
   const rotulo = estado === 'seguindo' ? 'Seguindo' : estado === 'limite' ? 'Limite' : 'Seguir'
   const classes =
     estado === 'seguindo'
-      ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+      ? 'border-ink/20 bg-ink/[0.08] text-ink'
       : estado === 'limite'
-        ? 'border-amber-500/30 bg-amber-500/10 text-amber-300'
-        : 'border-slate-600 bg-slate-800/60 text-slate-100 hover:bg-slate-700/60'
+        ? 'border-carimbo/30 bg-carimbo/10 text-carimbo'
+        : 'border-line bg-paper-3/60 text-ink hover:bg-line/60'
 
   return (
     <button
@@ -793,7 +797,7 @@ export function SeguirTimeBotao({
       aria-pressed={estado === 'seguindo'}
       aria-label={`${rotulo}: ${teamName}${nota ? `, ${nota}` : ''}`}
       title={nota || undefined}
-      className={`inline-flex min-h-[44px] w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg border px-3 text-[13px] font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 disabled:cursor-not-allowed disabled:opacity-50 ${classes}`}
+      className={`inline-flex min-h-[44px] w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg border px-3 text-[13px] font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 disabled:cursor-not-allowed disabled:opacity-50 ${classes}`}
     >
       {ocupado ? (
         <Loader2 className="h-4 w-4 animate-spin" />

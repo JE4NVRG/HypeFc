@@ -113,26 +113,26 @@ function contar(total: number, singular: string, plural: string): string {
   return `${total} ${total === 1 ? singular : plural}`
 }
 
-/* Tons com contraste conferido sobre o fundo escuro real (~#020617): o piso de
-   texto lido aqui e slate-400 (>= 6,5:1). slate-500/600 ficam fora. */
+/* Tons com contraste conferido sobre o fundo real do painel: o piso de texto
+   lido aqui e ink-3 (>= 4,9:1 medido). Nada mais fraco que isso vira texto. */
 const STATUS_META: Record<string, { label: string; tone: string }> = {
-  IN_PLAY: { label: 'ao vivo', tone: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300' },
-  PAUSED: { label: 'intervalo', tone: 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300' },
-  FINISHED: { label: 'encerrado', tone: 'border-slate-700 bg-slate-800/60 text-slate-300' },
-  SCHEDULED: { label: 'agendado', tone: 'border-slate-700 bg-slate-800/60 text-slate-300' },
-  TIMED: { label: 'agendado', tone: 'border-slate-700 bg-slate-800/60 text-slate-300' },
-  POSTPONED: { label: 'adiado', tone: 'border-amber-500/25 bg-amber-500/5 text-amber-300' },
-  DELAYED: { label: 'atrasado', tone: 'border-amber-500/25 bg-amber-500/5 text-amber-300' },
-  SUSPENDED: { label: 'suspenso', tone: 'border-amber-500/25 bg-amber-500/5 text-amber-300' },
-  CANCELED: { label: 'cancelado', tone: 'border-red-500/25 bg-red-500/5 text-red-300' },
-  CANCELLED: { label: 'cancelado', tone: 'border-red-500/25 bg-red-500/5 text-red-300' },
+  IN_PLAY: { label: 'ao vivo', tone: 'border-verde/30 bg-verde/10 text-verde-2' },
+  PAUSED: { label: 'intervalo', tone: 'border-verde/30 bg-verde/10 text-verde-2' },
+  FINISHED: { label: 'encerrado', tone: 'border-line bg-paper-3/60 text-ink-2' },
+  SCHEDULED: { label: 'agendado', tone: 'border-line bg-paper-3/60 text-ink-2' },
+  TIMED: { label: 'agendado', tone: 'border-line bg-paper-3/60 text-ink-2' },
+  POSTPONED: { label: 'adiado', tone: 'border-carimbo/25 bg-carimbo/5 text-carimbo' },
+  DELAYED: { label: 'atrasado', tone: 'border-carimbo/25 bg-carimbo/5 text-carimbo' },
+  SUSPENDED: { label: 'suspenso', tone: 'border-carimbo/25 bg-carimbo/5 text-carimbo' },
+  CANCELED: { label: 'cancelado', tone: 'border-carimbo/25 bg-carimbo/5 text-carimbo' },
+  CANCELLED: { label: 'cancelado', tone: 'border-carimbo/25 bg-carimbo/5 text-carimbo' },
 }
 
 function statusMeta(status: string): { label: string; tone: string } {
   return (
     STATUS_META[status.toUpperCase()] ?? {
       label: status.toLowerCase(),
-      tone: 'border-slate-700 bg-slate-800/60 text-slate-300',
+      tone: 'border-line bg-paper-3/60 text-ink-2',
     }
   )
 }
@@ -196,7 +196,7 @@ function Crest({ src, name, size = 40 }: { src: string | null; name: string; siz
   }
   return (
     <div
-      className="flex items-center justify-center rounded-lg bg-slate-800 font-bold text-slate-300"
+      className="flex items-center justify-center rounded-lg bg-paper-3 font-bold text-ink-2"
       style={{ width: size, height: size, fontSize: Math.max(11, size / 2.6) }}
     >
       {name.charAt(0)}
@@ -216,10 +216,10 @@ function Section({
   children: React.ReactNode
 }) {
   return (
-    <section className="rounded-xl border border-slate-800 bg-slate-900/40 p-3.5">
+    <section className="rounded-xl border border-paper-3 bg-paper-2/40 p-3.5">
       <div className="mb-2.5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <h3 className="text-base font-semibold text-slate-100">{title}</h3>
-        {hint ? <span className="text-[12px] text-slate-400">{hint}</span> : null}
+        <h3 className="text-base font-semibold text-ink">{title}</h3>
+        {hint ? <span className="text-[12px] text-ink-3">{hint}</span> : null}
       </div>
       {children}
     </section>
@@ -238,15 +238,15 @@ function ContextTile({
   hint?: string
 }) {
   return (
-    <div className="rounded-lg border border-slate-800 bg-slate-950/40 px-3.5 py-3">
-      <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-slate-400">
+    <div className="rounded-lg border border-paper-3 bg-paper/40 px-3.5 py-3">
+      <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-ink-3">
         {icon}
         {label}
       </div>
-      <div className="mt-1 truncate text-[13px] text-slate-100" title={value}>
+      <div className="mt-1 truncate text-[13px] text-ink" title={value}>
         {value}
       </div>
-      {hint ? <div className="truncate text-[11px] text-slate-400">{hint}</div> : null}
+      {hint ? <div className="truncate text-[11px] text-ink-3">{hint}</div> : null}
     </div>
   )
 }
@@ -263,23 +263,23 @@ function StatRow({ stat }: { stat: MatchDetailStat }) {
   return (
     <div>
       <div className="flex items-baseline justify-between gap-2">
-        <span className={`font-mono text-[12px] ${homeLeads ? 'text-emerald-300' : 'text-slate-200'}`}>
+        <span className={`font-mono text-[12px] ${homeLeads ? 'text-ink' : 'text-ink-2'}`}>
           {statValue(home, stat.unit)}
         </span>
-        <span className="text-[11px] uppercase tracking-wider text-slate-400">{stat.label}</span>
-        <span className={`font-mono text-[12px] ${awayLeads ? 'text-sky-300' : 'text-slate-200'}`}>
+        <span className="text-[11px] uppercase tracking-wider text-ink-3">{stat.label}</span>
+        <span className={`font-mono text-[12px] ${awayLeads ? 'text-ink' : 'text-ink-3'}`}>
           {statValue(away, stat.unit)}
         </span>
       </div>
       <div
-        className="mt-1 flex h-2 overflow-hidden rounded-full bg-slate-800"
+        className="mt-1 flex h-2 overflow-hidden rounded-full bg-paper-3"
         role="img"
         aria-label={`${stat.label}: casa ${statValue(home, stat.unit)}, fora ${statValue(away, stat.unit)}`}
       >
         {bothNull ? null : (
           <>
-            <div className="h-full rounded-l-full bg-emerald-500/70" style={{ width: `${homeWidth}%` }} />
-            <div className="h-full flex-1 rounded-r-full bg-sky-500/70" />
+            <div className="h-full rounded-l-full bg-ink-3" style={{ width: `${homeWidth}%` }} />
+            <div className="h-full flex-1 rounded-r-full bg-line" />
           </>
         )}
       </div>
@@ -298,16 +298,16 @@ function StatsBlock({ detail }: { detail: MatchDetail }) {
   const stats = detail.home.stats.filter((stat) => stat.home !== null || stat.away !== null)
 
   if (!started) {
-    return <p className="text-[12px] leading-snug text-slate-400">Estatísticas aparecem depois do apito.</p>
+    return <p className="text-[12px] leading-snug text-ink-3">Estatísticas aparecem depois do apito.</p>
   }
   if (!stats.length) {
-    return <p className="text-[12px] leading-snug text-slate-400">Sem estatísticas publicadas para esta partida.</p>
+    return <p className="text-[12px] leading-snug text-ink-3">Sem estatísticas publicadas para esta partida.</p>
   }
   return (
     <>
       <div className="mb-2 flex items-center justify-between gap-2 text-[12px]">
-        <span className="truncate text-emerald-300">{detail.home.team}</span>
-        <span className="truncate text-sky-300">{detail.away.team}</span>
+        <span className="truncate text-ink-2">{detail.home.team}</span>
+        <span className="truncate text-ink-3">{detail.away.team}</span>
       </div>
       <div className="space-y-2.5">
         {stats.map((stat) => (
@@ -321,17 +321,19 @@ function StatsBlock({ detail }: { detail: MatchDetail }) {
 function ResultPill({ result }: { result: 'W' | 'D' | 'L' | null }) {
   if (!result) {
     return (
-      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-slate-800 text-[11px] font-bold text-slate-400">
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-paper-3 text-[11px] font-bold text-ink-3">
         –
       </span>
     )
   }
+  // Sem cor por resultado: a letra (W/D/L) e que distingue, e a derrota e dado
+  // negativo, nao destaque — o tom sai do neutro so quando o dado e negativo.
   const tone =
     result === 'W'
-      ? 'bg-emerald-500/20 text-emerald-300'
+      ? 'bg-ink-3/30 text-ink'
       : result === 'D'
-        ? 'bg-slate-500/30 text-slate-100'
-        : 'bg-red-500/20 text-red-300'
+        ? 'bg-ink-3/30 text-ink'
+        : 'bg-carimbo/20 text-carimbo'
   return (
     <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-[11px] font-bold ${tone}`}>
       {result}
@@ -341,18 +343,18 @@ function ResultPill({ result }: { result: 'W' | 'D' | 'L' | null }) {
 
 function RecentList({ games }: { games: MatchDetailRecentGame[] }) {
   if (!games.length) {
-    return <p className="text-[12px] text-slate-400">Sem jogos recentes nesta fonte.</p>
+    return <p className="text-[12px] text-ink-3">Sem jogos recentes nesta fonte.</p>
   }
   return (
     <div className="space-y-1.5">
       {games.map((game, index) => (
         <div key={`${game.opponent}-${index}`} className="flex items-center gap-2 text-[12px]">
           <ResultPill result={game.result} />
-          <span className="min-w-0 flex-1 truncate text-slate-300" title={`${game.home ? 'em casa' : 'fora'} vs ${game.opponent}`}>
-            <span className="text-slate-400">{game.home ? 'casa' : 'fora'}</span> {game.opponent}
+          <span className="min-w-0 flex-1 truncate text-ink-2" title={`${game.home ? 'em casa' : 'fora'} vs ${game.opponent}`}>
+            <span className="text-ink-3">{game.home ? 'casa' : 'fora'}</span> {game.opponent}
           </span>
-          <span className="shrink-0 font-mono text-[11px] text-slate-400">{shortDay(game.date)}</span>
-          <span className="w-11 shrink-0 text-right font-mono text-slate-200">{game.score ?? '—'}</span>
+          <span className="shrink-0 font-mono text-[11px] text-ink-3">{shortDay(game.date)}</span>
+          <span className="w-11 shrink-0 text-right font-mono text-ink">{game.score ?? '—'}</span>
         </div>
       ))}
     </div>
@@ -365,9 +367,9 @@ function LineupColumn({ side }: { side: MatchDetailTeamSide }) {
 
   if (!side.lineup.length) {
     return (
-      <div className="rounded-lg border border-slate-800 bg-slate-950/40 p-3.5">
-        <div className="truncate text-[13px] font-medium text-slate-100">{side.team}</div>
-        <p className="mt-1 text-[12px] text-slate-400">Escalação não divulgada.</p>
+      <div className="rounded-lg border border-paper-3 bg-paper/40 p-3.5">
+        <div className="truncate text-[13px] font-medium text-ink">{side.team}</div>
+        <p className="mt-1 text-[12px] text-ink-3">Escalação não divulgada.</p>
       </div>
     )
   }
@@ -375,12 +377,12 @@ function LineupColumn({ side }: { side: MatchDetailTeamSide }) {
   const rows = (players: MatchDetailLineupPlayer[]) =>
     players.map((player, index) => (
       <div key={`${player.name}-${index}`} className="flex items-center gap-1.5 text-[12px]">
-        <span className="w-6 shrink-0 text-right font-mono text-[11px] text-slate-400">{player.number ?? '—'}</span>
-        <span className="min-w-0 flex-1 truncate text-slate-300" title={player.name}>
+        <span className="w-6 shrink-0 text-right font-mono text-[11px] text-ink-3">{player.number ?? '—'}</span>
+        <span className="min-w-0 flex-1 truncate text-ink-2" title={player.name}>
           {player.name}
         </span>
         {player.position ? (
-          <span className="max-w-[72px] shrink-0 truncate text-[11px] text-slate-400" title={player.position}>
+          <span className="max-w-[72px] shrink-0 truncate text-[11px] text-ink-3" title={player.position}>
             {player.position}
           </span>
         ) : null}
@@ -388,19 +390,19 @@ function LineupColumn({ side }: { side: MatchDetailTeamSide }) {
     ))
 
   return (
-    <div className="rounded-lg border border-slate-800 bg-slate-950/40 p-3.5">
-      <div className="truncate text-[13px] font-medium text-slate-100" title={side.team}>
+    <div className="rounded-lg border border-paper-3 bg-paper/40 p-3.5">
+      <div className="truncate text-[13px] font-medium text-ink" title={side.team}>
         {side.team}
       </div>
       {starters.length ? (
         <>
-          <div className="mt-2 text-[11px] uppercase tracking-wider text-slate-400">Titulares</div>
+          <div className="mt-2 text-[11px] uppercase tracking-wider text-ink-3">Titulares</div>
           <div className="mt-1.5 space-y-1">{rows(starters)}</div>
         </>
       ) : null}
       {bench.length ? (
         <>
-          <div className="mt-3 text-[11px] uppercase tracking-wider text-slate-400">Banco</div>
+          <div className="mt-3 text-[11px] uppercase tracking-wider text-ink-3">Banco</div>
           <div className="mt-1.5 space-y-1">{rows(bench)}</div>
         </>
       ) : null}
@@ -411,14 +413,14 @@ function LineupColumn({ side }: { side: MatchDetailTeamSide }) {
 function eventVisual(event: MatchDetailEvent): { icon: React.ReactNode; tone: string } {
   const type = event.type.toLowerCase()
   if (type.includes('goal') || type.includes('penalty - scored')) {
-    return { icon: <Goal className="h-3.5 w-3.5" />, tone: 'text-emerald-300' }
+    return { icon: <Goal className="h-3.5 w-3.5" />, tone: 'text-ink' }
   }
-  if (type.includes('red')) return { icon: <Shield className="h-3.5 w-3.5" />, tone: 'text-red-300' }
+  if (type.includes('red')) return { icon: <Shield className="h-3.5 w-3.5" />, tone: 'text-carimbo' }
   if (type.includes('yellow') || type.includes('card')) {
-    return { icon: <Shield className="h-3.5 w-3.5" />, tone: 'text-amber-300' }
+    return { icon: <Shield className="h-3.5 w-3.5" />, tone: 'text-carimbo' }
   }
-  if (type.includes('sub')) return { icon: <ArrowLeftRight className="h-3.5 w-3.5" />, tone: 'text-sky-300' }
-  return { icon: <Zap className="h-3.5 w-3.5" />, tone: 'text-slate-400' }
+  if (type.includes('sub')) return { icon: <ArrowLeftRight className="h-3.5 w-3.5" />, tone: 'text-ink-3' }
+  return { icon: <Zap className="h-3.5 w-3.5" />, tone: 'text-ink-3' }
 }
 
 /* ---------- painel ---------- */
@@ -531,7 +533,7 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
     <div className="fixed inset-0 z-50">
       {/* Fundo escurecido: clique fora fecha. */}
       <div
-        className="absolute inset-0 bg-slate-950/70 backdrop-blur-sm"
+        className="absolute inset-0 bg-paper/70 backdrop-blur-sm"
         onClick={() => closeRef.current()}
         aria-hidden="true"
       />
@@ -543,16 +545,16 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
         aria-label={dialogLabel}
         aria-busy={phase === 'loading'}
         tabIndex={-1}
-        className="absolute inset-y-0 right-0 flex h-full w-full max-w-md flex-col overflow-y-auto overscroll-contain border-l border-slate-800 bg-slate-950 outline-none shadow-2xl"
+        className="absolute inset-y-0 right-0 flex h-full w-full max-w-md flex-col overflow-y-auto overscroll-contain border-l border-paper-3 bg-paper outline-none"
       >
         {/* Cabeçalho fixo: liga, confronto, status e saída. */}
-        <div className="sticky top-0 z-10 flex items-start gap-3 border-b border-slate-800 bg-slate-950/95 px-4 py-3 backdrop-blur">
+        <div className="sticky top-0 z-10 flex items-start gap-3 border-b border-paper-3 bg-paper/95 px-4 py-3 backdrop-blur">
           <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-slate-400">
+            <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wider text-ink-3">
               <Trophy className="h-3.5 w-3.5 shrink-0" />
               <span className="truncate">{ready && detail ? detail.league_name : leagueName}</span>
             </div>
-            <h2 className="mt-1 truncate text-xl font-semibold text-slate-100">
+            <h2 className="mt-1 truncate text-xl font-semibold text-ink">
               {ready && detail ? `${detail.home.team} x ${detail.away.team}` : 'Carregando partida'}
             </h2>
           </div>
@@ -565,7 +567,7 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
             type="button"
             onClick={() => closeRef.current()}
             aria-label="Fechar detalhe da partida"
-            className="-mr-1 inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-lg text-slate-300 transition-colors hover:bg-white/5 hover:text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60"
+            className="-mr-1 inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-lg text-ink-2 transition-colors hover:bg-ink/5 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
           >
             <X className="h-5 w-5" />
           </button>
@@ -575,37 +577,37 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
         {!ready && phase !== 'error' ? (
           <div className="space-y-4 px-4 py-4">
             <div className="flex items-center justify-center gap-8">
-              <div className="h-12 w-12 animate-pulse rounded-lg bg-white/5" />
-              <div className="h-7 w-20 animate-pulse rounded bg-white/5" />
-              <div className="h-12 w-12 animate-pulse rounded-lg bg-white/5" />
+              <div className="h-12 w-12 animate-pulse rounded-lg bg-ink/5" />
+              <div className="h-7 w-20 animate-pulse rounded bg-ink/5" />
+              <div className="h-12 w-12 animate-pulse rounded-lg bg-ink/5" />
             </div>
-            <div className="space-y-4 rounded-xl border border-slate-800 bg-slate-900/40 p-3.5">
+            <div className="space-y-4 rounded-xl border border-paper-3 bg-paper-2/40 p-3.5">
               {[...Array(5)].map((_, index) => (
                 <div key={index} className="space-y-2">
-                  <div className="h-3 w-full animate-pulse rounded bg-white/5" />
-                  <div className="h-2 w-full animate-pulse rounded-full bg-white/5" />
+                  <div className="h-3 w-full animate-pulse rounded bg-ink/5" />
+                  <div className="h-2 w-full animate-pulse rounded-full bg-ink/5" />
                 </div>
               ))}
             </div>
             <div className="grid grid-cols-2 gap-3">
               {[...Array(4)].map((_, index) => (
-                <div key={index} className="h-14 animate-pulse rounded-lg bg-white/5" />
+                <div key={index} className="h-14 animate-pulse rounded-lg bg-ink/5" />
               ))}
             </div>
-            <p className="text-center text-[12px] text-slate-400">Carregando números e escalações…</p>
+            <p className="text-center text-[12px] text-ink-3">Carregando números e escalações…</p>
           </div>
         ) : null}
 
         {/* Erro honesto, com retentativa. */}
         {phase === 'error' ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 py-12 text-center">
-            <AlertTriangle className="h-7 w-7 text-slate-400" />
-            <p className="text-[14px] text-slate-200">Não consegui carregar o detalhe desta partida</p>
-            {errorInfo ? <p className="text-[12px] leading-snug text-slate-400">{errorInfo}</p> : null}
+            <AlertTriangle className="h-7 w-7 text-ink-3" />
+            <p className="text-[14px] text-ink">Não consegui carregar o detalhe desta partida</p>
+            {errorInfo ? <p className="text-[12px] leading-snug text-ink-3">{errorInfo}</p> : null}
             <button
               type="button"
               onClick={() => setAttempt((value) => value + 1)}
-              className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-lg border border-slate-700 bg-slate-800/60 px-4 text-[13px] font-medium text-slate-100 transition-colors hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60"
+              className="inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-lg border border-line bg-paper-3/60 px-4 text-[13px] font-medium text-ink transition-colors hover:bg-paper-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
             >
               <RefreshCw className="h-4 w-4" />
               Tentar de novo
@@ -616,11 +618,11 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
         {ready && detail ? (
           <div className="space-y-4 px-4 py-4">
             {/* 1) O que decide: times, escudo e placar/horário. */}
-            <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+            <div className="rounded-xl border border-paper-3 bg-paper-2/40 p-4">
               <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-3">
                 <div className="flex min-w-0 flex-col items-center gap-2">
                   <Crest src={detail.home.crest} name={detail.home.team} />
-                  <span className="w-full truncate text-center text-[13px] font-semibold leading-tight text-slate-100" title={detail.home.team}>
+                  <span className="w-full truncate text-center text-[13px] font-semibold leading-tight text-ink" title={detail.home.team}>
                     {detail.home.team}
                   </span>
                   {homeId ? (
@@ -631,19 +633,19 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                   {detail.home.score !== null && detail.away.score !== null ? (
                     <span
                       className={`font-mono text-3xl font-bold leading-none ${
-                        detail.status === 'IN_PLAY' || detail.status === 'PAUSED' ? 'text-emerald-300' : 'text-white'
+                        detail.status === 'IN_PLAY' || detail.status === 'PAUSED' ? 'text-verde-2' : 'text-ink'
                       }`}
                     >
                       {detail.home.score}
-                      <span className="px-1.5 text-slate-400">–</span>
+                      <span className="px-1.5 text-ink-3">–</span>
                       {detail.away.score}
                     </span>
                   ) : (
-                    <span className="font-mono text-2xl font-semibold leading-none text-slate-100">
+                    <span className="font-mono text-2xl font-semibold leading-none text-ink">
                       {kickoffTime(detail.kickoff) ?? '—'}
                     </span>
                   )}
-                  <span className="mt-1.5 whitespace-nowrap text-[11px] uppercase tracking-wider text-slate-400">
+                  <span className="mt-1.5 whitespace-nowrap text-[11px] uppercase tracking-wider text-ink-3">
                     {detail.home.score !== null && detail.away.score !== null
                       ? detail.status === 'IN_PLAY' || detail.status === 'PAUSED'
                         ? 'no placar'
@@ -653,7 +655,7 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                 </div>
                 <div className="flex min-w-0 flex-col items-center gap-2">
                   <Crest src={detail.away.crest} name={detail.away.team} />
-                  <span className="w-full truncate text-center text-[13px] font-semibold leading-tight text-slate-100" title={detail.away.team}>
+                  <span className="w-full truncate text-center text-[13px] font-semibold leading-tight text-ink" title={detail.away.team}>
                     {detail.away.team}
                   </span>
                   {awayId ? (
@@ -661,7 +663,7 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                   ) : null}
                 </div>
               </div>
-              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[12px] text-slate-400">
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[12px] text-ink-3">
                 <Clock className="h-3.5 w-3.5" />
                 {kickoffTime(detail.kickoff) ?? '—'} · {kickoffDay(detail.kickoff) ?? '—'}
                 {detail.referee ? ` · ${detail.referee}` : ''}
@@ -689,38 +691,38 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                     const probMercado = impliedProbabilities(linha)
                     if (!probMercado) return null
                     const colunas = [
-                      { rotulo: 'Casa', nome: detail.home.team, valor: probMercado.home, cor: 'bg-emerald-400' },
-                      { rotulo: 'Empate', nome: 'sem vencedor', valor: probMercado.draw, cor: 'bg-slate-400' },
-                      { rotulo: 'Fora', nome: detail.away.team, valor: probMercado.away, cor: 'bg-sky-400' },
+                      { rotulo: 'Casa', nome: detail.home.team, valor: probMercado.home, cor: 'bg-ink-3' },
+                      { rotulo: 'Empate', nome: 'sem vencedor', valor: probMercado.draw, cor: 'bg-ink-3/60' },
+                      { rotulo: 'Fora', nome: detail.away.team, valor: probMercado.away, cor: 'bg-line' },
                     ]
                     return (
-                      <div key={`${linha.provider}-prob-${index}`} className="rounded-lg border border-slate-800 bg-slate-950/40 p-3.5">
+                      <div key={`${linha.provider}-prob-${index}`} className="rounded-lg border border-paper-3 bg-paper/40 p-3.5">
                         <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                          <span className="min-w-0 truncate text-[13px] font-medium text-slate-100" title={linha.provider}>
+                          <span className="min-w-0 truncate text-[13px] font-medium text-ink" title={linha.provider}>
                             {linha.provider}
                           </span>
-                          <span className="shrink-0 text-[11px] uppercase tracking-wider text-slate-400">
+                          <span className="shrink-0 text-[11px] uppercase tracking-wider text-ink-3">
                             margem {(probMercado.margin * 100).toFixed(1).replace('.', ',')}pp
                           </span>
                         </div>
                         <div className="mt-2.5 grid grid-cols-3 gap-2">
                           {colunas.map((coluna) => (
-                            <div key={coluna.rotulo} className="rounded-lg border border-slate-800 bg-slate-900/40 p-3 text-center">
+                            <div key={coluna.rotulo} className="rounded-lg border border-paper-3 bg-paper-2/40 p-3 text-center">
                               <span className="flex items-center justify-center gap-1.5">
                                 <span className={`h-2 w-2 shrink-0 rounded-full ${coluna.cor}`} aria-hidden="true" />
-                                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">{coluna.rotulo}</span>
+                                <span className="text-[11px] font-semibold uppercase tracking-wider text-ink-3">{coluna.rotulo}</span>
                               </span>
-                              <span className="mt-1 block truncate text-[11px] leading-tight text-slate-300" title={coluna.nome}>
+                              <span className="mt-1 block truncate text-[11px] leading-tight text-ink-2" title={coluna.nome}>
                                 {coluna.nome}
                               </span>
-                              <span className="mt-1 block font-mono text-base font-semibold leading-none tabular-nums text-slate-100">
+                              <span className="mt-1 block font-mono text-base font-semibold leading-none tabular-nums text-ink">
                                 {coluna.valor === null ? '—' : `${Math.round(coluna.valor * 100)}%`}
                               </span>
                             </div>
                           ))}
                         </div>
                         {typeof linha.over_under === 'number' ? (
-                          <p className="mt-2 text-[12px] text-slate-400">
+                          <p className="mt-2 text-[12px] text-ink-3">
                             Linha de gols: {linha.over_under}
                             {linha.detail ? ` · ${linha.detail}` : ''}
                           </p>
@@ -728,7 +730,7 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                       </div>
                     )
                   })}
-                  <p className="text-[12px] leading-relaxed text-slate-400">
+                  <p className="text-[12px] leading-relaxed text-ink-3">
                     Probabilidade do MERCADO: a odd publicada convertida e normalizada (a margem da casa já foi removida e está
                     mostrada acima). É o que a casa precificou, não previsão nossa nem recomendação.
                   </p>
@@ -737,16 +739,17 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                 <div className="space-y-1.5">
                   {detail.odds.map((odd, index) => (
                     <div key={`${odd.provider}-${index}`} className="flex items-baseline gap-2 text-[12px]">
-                      <span className="shrink-0 text-slate-400">{odd.provider}</span>
-                      <span className="min-w-0 flex-1 break-words text-slate-300">{odd.detail}</span>
+                      <span className="shrink-0 text-ink-3">{odd.provider}</span>
+                      <span className="min-w-0 flex-1 break-words text-ink-2">{odd.detail}</span>
                     </div>
                   ))}
                 </div>
               )}
             </Section>
 
-            {/* 4) Estatísticas do jogo (o verde é casa, o azul é fora — os nomes
-                ficam no cabeçalho do bloco). */}
+            {/* 4) Estatísticas do jogo: casa e fora em neutro — o verde é só dado
+                do modelo, e o fora agora é régua neutra. Os nomes ficam no
+                cabeçalho do bloco. */}
             <Section title="Estatísticas">
               <StatsBlock detail={detail} />
             </Section>
@@ -779,14 +782,14 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
             {/* 6) Histórico recente: últimos 5 de cada lado. */}
             <Section title="Últimos 5">
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div className="rounded-lg border border-slate-800 bg-slate-950/40 p-3.5">
-                  <div className="mb-2 truncate text-[13px] font-medium text-slate-100" title={detail.home.team}>
+                <div className="rounded-lg border border-paper-3 bg-paper/40 p-3.5">
+                  <div className="mb-2 truncate text-[13px] font-medium text-ink" title={detail.home.team}>
                     {detail.home.team}
                   </div>
                   <RecentList games={detail.home.lastFive} />
                 </div>
-                <div className="rounded-lg border border-slate-800 bg-slate-950/40 p-3.5">
-                  <div className="mb-2 truncate text-[13px] font-medium text-slate-100" title={detail.away.team}>
+                <div className="rounded-lg border border-paper-3 bg-paper/40 p-3.5">
+                  <div className="mb-2 truncate text-[13px] font-medium text-ink" title={detail.away.team}>
                     {detail.away.team}
                   </div>
                   <RecentList games={detail.away.lastFive} />
@@ -810,16 +813,16 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                 <div className="space-y-1.5">
                   {detail.meetings.map((meeting, index) => (
                     <div key={`${meeting.date ?? 'sem-data'}-${index}`} className="flex items-center gap-2 text-[12px]">
-                      <span className="w-16 shrink-0 font-mono text-[11px] text-slate-400">{shortDay(meeting.date)}</span>
-                      <span className="min-w-0 flex-1 truncate text-slate-300" title={`${meeting.home} x ${meeting.away}`}>
+                      <span className="w-16 shrink-0 font-mono text-[11px] text-ink-3">{shortDay(meeting.date)}</span>
+                      <span className="min-w-0 flex-1 truncate text-ink-2" title={`${meeting.home} x ${meeting.away}`}>
                         {meeting.home}{' '}
-                        <span className="font-mono text-slate-100">
+                        <span className="font-mono text-ink">
                           {meeting.score_home ?? '—'}–{meeting.score_away ?? '—'}
                         </span>{' '}
                         {meeting.away}
                       </span>
                       {meeting.competition ? (
-                        <span className="max-w-[88px] shrink-0 truncate text-[11px] text-slate-400" title={meeting.competition}>
+                        <span className="max-w-[88px] shrink-0 truncate text-[11px] text-ink-3" title={meeting.competition}>
                           {meeting.competition}
                         </span>
                       ) : null}
@@ -827,7 +830,7 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                   ))}
                 </div>
               ) : (
-                <p className="text-[12px] text-slate-400">Sem confrontos registrados nesta fonte.</p>
+                <p className="text-[12px] text-ink-3">Sem confrontos registrados nesta fonte.</p>
               )}
             </Section>
 
@@ -849,11 +852,11 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                     const visual = eventVisual(event)
                     return (
                       <div key={`${event.minute ?? 's/min'}-${index}`} className="flex items-start gap-2 text-[12px]">
-                        <span className="w-9 shrink-0 text-right font-mono text-[11px] text-slate-400">{event.minute ?? '—'}</span>
+                        <span className="w-9 shrink-0 text-right font-mono text-[11px] text-ink-3">{event.minute ?? '—'}</span>
                         <span className={`mt-0.5 shrink-0 ${visual.tone}`}>{visual.icon}</span>
-                        <span className="min-w-0 flex-1 leading-snug text-slate-300">{event.text}</span>
+                        <span className="min-w-0 flex-1 leading-snug text-ink-2">{event.text}</span>
                         {event.team ? (
-                          <span className="max-w-[88px] shrink-0 truncate text-right text-[11px] text-slate-400" title={event.team}>
+                          <span className="max-w-[88px] shrink-0 truncate text-right text-[11px] text-ink-3" title={event.team}>
                             {event.team}
                           </span>
                         ) : null}
@@ -862,11 +865,11 @@ export function MatchDetailPanel({ eventId, leagueId, leagueName, onClose, homeI
                   })}
                 </div>
               ) : (
-                <p className="text-[12px] text-slate-400">Nenhum lance registrado nesta fonte.</p>
+                <p className="text-[12px] text-ink-3">Nenhum lance registrado nesta fonte.</p>
               )}
             </Section>
 
-            <p className="px-1 pb-1 text-[11px] leading-relaxed text-slate-400">
+            <p className="px-1 pb-1 text-[11px] leading-relaxed text-ink-3">
               Fonte {detail.source ? detail.source.toUpperCase() : '—'} · atualizado {stamp(detail.captured_at)} · evento {detail.event_id}. Campos sem
               informação na fonte aparecem como —.
             </p>
