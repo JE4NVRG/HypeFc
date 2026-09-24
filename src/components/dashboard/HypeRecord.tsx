@@ -65,12 +65,22 @@ interface HypeRecordData {
 
 function pct(value: number | null | undefined, digits = 1): string {
   if (value === null || value === undefined) return '—'
-  return `${(value * 100).toFixed(digits)}%`
+  // pt-BR: virgula decimal, nunca ponto. `toFixed` sempre emite ponto, entao
+  // "53,6%" virava "53.6%" na tela em texto portugues.
+  const n = (value * 100).toLocaleString('pt-BR', {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  })
+  return `${n}%`
 }
 
 function signed(value: number | null | undefined): string {
   if (value === null || value === undefined) return '—'
-  return `${value > 0 ? '+' : ''}${value.toFixed(1)}pp`
+  const n = value.toLocaleString('pt-BR', {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  })
+  return `${value > 0 ? '+' : ''}${n}pp`
 }
 
 /** Concordancia: "1 card liquidado", "1 rodada", "2 cards liquidados". */

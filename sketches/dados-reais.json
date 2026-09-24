@@ -15,7 +15,7 @@
     "kpis": [
       { "rotulo": "JOGOS", "valor": "36" },
       { "rotulo": "GOLS", "valor": "99" },
-      { "rotulo": "MÉDIA/JOGO", "valor": "2.8" },
+      { "rotulo": "MÉDIA/JOGO", "valor": "2,8" },
       { "rotulo": "ENCERRADOS", "valor": "36" },
       { "rotulo": "LIGAS", "valor": "9" }
     ],
@@ -151,10 +151,10 @@
     "rodadas": 271,
     "corte": 44,
     "detalhe": "1402 reconstruídos · 0 gravados ao vivo",
-    "acerto": "53.6%",
+    "acerto": "53,6%",
     "acerto_detalhe": "751/1402 · empate conta como erro",
-    "comparacao": "vs média do mandante 37.0%",
-    "lift": "+16.6pp",
+    "comparacao": "vs média do mandante 37,0%",
+    "lift": "+16,6pp",
     "sem_edge": "Calibrado, sem edge no palpite."
   },
   "modelo": [

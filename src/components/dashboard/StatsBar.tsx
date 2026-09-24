@@ -81,7 +81,14 @@ export function StatsBar({ stats, loading }: StatsBarProps) {
       <div className="grid grid-cols-4 gap-2 sm:grid-cols-5">
         <StatCard icon={<Tv className="h-4 w-4" />} label={stats.totalMatches === 1 ? 'Jogo' : 'Jogos'} value={stats.totalMatches} />
         <StatCard icon={<Goal className="h-4 w-4" />} label={stats.totalGoals === 1 ? 'Gol' : 'Gols'} value={stats.totalGoals} />
-        <StatCard icon={<BarChart3 className="h-4 w-4" />} label="Média/jogo" value={stats.avgGoals} />
+        <StatCard
+          icon={<BarChart3 className="h-4 w-4" />}
+          label="Média/jogo"
+          value={stats.avgGoals.toLocaleString('pt-BR', {
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1,
+          })}
+        />
         {stats.liveMatches > 0 ? (
           <StatCard
             icon={
