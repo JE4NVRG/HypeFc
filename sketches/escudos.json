@@ -1,0 +1,195 @@
+{
+ "_fonte": "Coletado do proprio painel em producao (aba Liga, trocando de competicao) — o produto resolve escudo via ESPN; hosts liberados por isAllowedCrest(): espncdn.com e football-data.org",
+ "_validado": "cada URL testada com curl: HTTP 200 + content-type de imagem",
+ "_gerado": "2026-09-23",
+ "escudos": {
+  "AJ Auxerre": "https://a.espncdn.com/i/teamlogos/soccer/500/172.png",
+  "AS Monaco": "https://a.espncdn.com/i/teamlogos/soccer/500/174.png",
+  "AS Roma": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+  "AZ Alkmaar": "https://a.espncdn.com/i/teamlogos/soccer/500/140.png",
+  "Académico de Viseu": "https://a.espncdn.com/i/teamlogos/soccer/500/21607.png",
+  "Athletico-PR": "https://a.espncdn.com/i/teamlogos/soccer/500/3458.png",
+  "Atlético Madrid": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+  "Bahia": "https://a.espncdn.com/i/teamlogos/soccer/500/9967.png",
+  "Barcelona": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+  "Benfica": "https://a.espncdn.com/i/teamlogos/soccer/500/1929.png",
+  "Borussia Dortmund": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
+  "Brest": "https://a.espncdn.com/i/teamlogos/soccer/500/6997.png",
+  "Corinthians": "https://a.espncdn.com/i/teamlogos/soccer/500/874.png",
+  "Cruzeiro": "https://a.espncdn.com/i/teamlogos/soccer/500/2022.png",
+  "Estrela": "https://a.espncdn.com/i/teamlogos/soccer/500/21610.png",
+  "FC Porto": "https://a.espncdn.com/i/teamlogos/soccer/500/437.png",
+  "Feyenoord Rotterdam": "https://a.espncdn.com/i/teamlogos/soccer/500/142.png",
+  "Flamengo": "https://a.espncdn.com/i/teamlogos/soccer/500/819.png",
+  "Fluminense": "https://a.espncdn.com/i/teamlogos/soccer/500/3445.png",
+  "Grêmio": "https://a.espncdn.com/i/teamlogos/soccer/500/6273.png",
+  "Lille": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
+  "Manchester City": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+  "Marseille": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+  "Moreirense": "https://a.espncdn.com/i/teamlogos/soccer/500/3696.png",
+  "Nice": "https://a.espncdn.com/i/teamlogos/soccer/500/2502.png",
+  "Palmeiras": "https://a.espncdn.com/i/teamlogos/soccer/500/2029.png",
+  "Paris Saint-Germain": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
+  "Real Madrid": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+  "Red Bull Bragantino": "https://a.espncdn.com/i/teamlogos/soccer/500/6079.png",
+  "Vitória": "https://a.espncdn.com/i/teamlogos/soccer/500/3457.png",
+  "Vitória de Guimaraes": "https://a.espncdn.com/i/teamlogos/soccer/500/5309.png"
+ },
+ "detalhe": {
+  "AJ Auxerre": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/172.png",
+   "nome_no_painel": "AJ Auxerre",
+   "http": "200 image/png 22238"
+  },
+  "AS Monaco": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/174.png",
+   "nome_no_painel": "AS Monaco",
+   "http": "200 image/png 19606"
+  },
+  "AS Roma": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+   "nome_no_painel": "AS Roma",
+   "http": "200 image/png 76247"
+  },
+  "AZ Alkmaar": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/140.png",
+   "nome_no_painel": "AZ Alkmaar",
+   "http": "200 image/png 24652"
+  },
+  "Académico de Viseu": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/21607.png",
+   "nome_no_painel": "Académico de Viseu",
+   "http": "200 image/png 31375"
+  },
+  "Athletico-PR": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/3458.png",
+   "nome_no_painel": "Athletico Paranaense",
+   "http": "200 image/png 47716"
+  },
+  "Atlético Madrid": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+   "nome_no_painel": "Atlético Madrid",
+   "http": "200 image/png 34532"
+  },
+  "Bahia": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/9967.png",
+   "nome_no_painel": "Bahia",
+   "http": "200 image/png 232813"
+  },
+  "Barcelona": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+   "nome_no_painel": "Barcelona",
+   "http": "200 image/png 25584"
+  },
+  "Benfica": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/1929.png",
+   "nome_no_painel": "Benfica",
+   "http": "200 image/png 124801"
+  },
+  "Borussia Dortmund": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
+   "nome_no_painel": "Borussia Dortmund",
+   "http": "200 image/png 45044"
+  },
+  "Brest": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/6997.png",
+   "nome_no_painel": "Brest",
+   "http": "200 image/png 34336"
+  },
+  "Corinthians": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/874.png",
+   "nome_no_painel": "Corinthians",
+   "http": "200 image/png 126702"
+  },
+  "Cruzeiro": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/2022.png",
+   "nome_no_painel": "Cruzeiro",
+   "http": "200 image/png 62724"
+  },
+  "Estrela": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/21610.png",
+   "nome_no_painel": "Estrela",
+   "http": "200 image/png 48145"
+  },
+  "FC Porto": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/437.png",
+   "nome_no_painel": "FC Porto",
+   "http": "200 image/png 84938"
+  },
+  "Feyenoord Rotterdam": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/142.png",
+   "nome_no_painel": "Feyenoord Rotterdam",
+   "http": "200 image/png 61699"
+  },
+  "Flamengo": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/819.png",
+   "nome_no_painel": "Flamengo",
+   "http": "200 image/png 29869"
+  },
+  "Fluminense": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/3445.png",
+   "nome_no_painel": "Fluminense",
+   "http": "200 image/png 124170"
+  },
+  "Grêmio": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/6273.png",
+   "nome_no_painel": "Grêmio",
+   "http": "200 image/png 70326"
+  },
+  "Lille": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
+   "nome_no_painel": "Lille",
+   "http": "200 image/png 108528"
+  },
+  "Manchester City": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+   "nome_no_painel": "Manchester City",
+   "http": "200 image/png 130387"
+  },
+  "Marseille": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+   "nome_no_painel": "Marseille",
+   "http": "200 image/png 51919"
+  },
+  "Moreirense": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/3696.png",
+   "nome_no_painel": "Moreirense",
+   "http": "200 image/png 32039"
+  },
+  "Nice": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/2502.png",
+   "nome_no_painel": "Nice",
+   "http": "200 image/png 140613"
+  },
+  "Palmeiras": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/2029.png",
+   "nome_no_painel": "Palmeiras",
+   "http": "200 image/png 110140"
+  },
+  "Paris Saint-Germain": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
+   "nome_no_painel": "Paris Saint-Germain",
+   "http": "200 image/png 59170"
+  },
+  "Real Madrid": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+   "nome_no_painel": "Real Madrid",
+   "http": "200 image/png 43601"
+  },
+  "Red Bull Bragantino": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/6079.png",
+   "nome_no_painel": "Red Bull Bragantino",
+   "http": "200 image/png 99308"
+  },
+  "Vitória": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/3457.png",
+   "nome_no_painel": "Vitória",
+   "http": "200 image/png 35095"
+  },
+  "Vitória de Guimaraes": {
+   "crest": "https://a.espncdn.com/i/teamlogos/soccer/500/5309.png",
+   "nome_no_painel": "Vitória de Guimaraes",
+   "http": "200 image/png 39079"
+  }
+ }
+}
