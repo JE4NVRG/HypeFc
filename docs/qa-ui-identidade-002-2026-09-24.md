@@ -80,6 +80,13 @@ Complementos medidos na mesma passada, para o critério de shell do cockpit:
    (`801eb52`) e os ajustes de copy/print que a acompanham. Foram publicados no `gh-pages` mas não
    no `main`; este commit fecha essa distância para o clone da VPS (`git pull`) não ficar atrás do
    que o site mostra.
+5. **O CTA do Pro fica abaixo da dobra interna no mobile.** Medido em 390x844, aba Pro: o painel
+   tem 2351px de conteúdo numa janela de 493px; "Entrar com Google" começa a 1437px e
+   "Assinar Pro" a 1508px do topo do painel, ou seja, cerca de duas alturas de janela de rolagem
+   interna até o primeiro botão de ação. Em 1440x1000 os dois aparecem na primeira tela (792px e
+   855px). Numa aba cujo objetivo é a assinatura, isso é defeito de conversão, não de estética.
+   Opções: CTA fixo no pé do painel quando não há acesso, ou mover o bloco de preço para o topo.
+   Não foi alterado nesta passada porque a escolha é de produto.
 
 ## 4. Como repetir esta medição
 
