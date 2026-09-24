@@ -1,8 +1,10 @@
 import { predictFromRatings, type MatchProb } from './matchProbability.ts'
+import { buscarPayload } from './payloadSource.ts'
 
 /**
  * Ratings do modelo publicado como arquivo estatico pelo build
- * (scripts/build-ratings.ts). O cliente nao reconstroi a temporada: ele le a
+ * (scripts/build-ratings.ts) e, em runtime, tambem pelo banco (site_payloads) —
+ * ver src/lib/payloadSource.ts. O cliente nao reconstroi a temporada: ele le a
  * tabela pronta e combina com o adversario.
  */
 export interface LeagueRatings {
@@ -28,9 +30,7 @@ let pedido: Promise<RatingsPayload | null> | null = null
 /** Uma busca so para a pagina inteira (36 linhas nao fazem 36 requests). */
 export function loadRatings(): Promise<RatingsPayload | null> {
   if (!pedido) {
-    pedido = fetch('data/ratings.json', { cache: 'no-store' })
-      .then((r) => (r.ok ? (r.json() as Promise<RatingsPayload>) : null))
-      .catch(() => null)
+    pedido = buscarPayload<RatingsPayload>('ratings')
   }
   return pedido
 }

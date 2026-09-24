@@ -63,6 +63,26 @@ export async function inserir<T = Record<string, unknown>>(tabela: string, dados
   return (await pedir(tabela, { method: 'POST', body: JSON.stringify(dados) })) as T[]
 }
 
+/**
+ * UPSERT: cria a linha ou substitui o conteudo da chave existente.
+ *
+ * `onConflict` vira o parametro `on_conflict` do PostgREST (a coluna da chave);
+ * sem ele o PostgREST tentaria a chave primaria. `atualizado_em` tem de vir no
+ * corpo: num UPDATE o default da coluna nao roda de novo.
+ */
+export async function upsert<T = Record<string, unknown>>(
+  tabela: string,
+  dados: unknown,
+  onConflict?: string
+): Promise<T[]> {
+  const filtro = onConflict ? `?on_conflict=${encodeURIComponent(onConflict)}` : ''
+  return (await pedir(`${tabela}${filtro}`, {
+    method: 'POST',
+    body: JSON.stringify(dados),
+    headers: { Prefer: 'return=representation,resolution=merge-duplicates' },
+  })) as T[]
+}
+
 export async function atualizar<T = Record<string, unknown>>(
   tabela: string,
   filtro: string,

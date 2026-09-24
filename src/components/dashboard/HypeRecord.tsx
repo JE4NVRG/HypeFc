@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { CheckCircle2, XCircle, MinusCircle, ShieldQuestion } from 'lucide-react'
+import { buscarPayload } from '@/lib/payloadSource'
 
 interface Bucket {
   key: string
@@ -99,11 +100,14 @@ export function HypeRecord() {
 
   useEffect(() => {
     let alive = true
-    // Caminho relativo: funciona no dev (raiz) e no Pages (sob /HypeFc).
-    fetch('data/hype-record.json', { cache: 'no-store' })
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(String(res.status)))))
-      .then((json: HypeRecordData) => {
+    // banco (site_payloads) primeiro; arquivo do build como rede de seguranca.
+    buscarPayload<HypeRecordData>('hype-record')
+      .then((json) => {
         if (!alive) return
+        if (!json) {
+          setState('empty')
+          return
+        }
         setData(json)
         setState(json.cards_settled > 0 ? 'ready' : 'empty')
       })

@@ -8,8 +8,9 @@
 # silencio nunca e interpretado como sucesso).
 #
 # Passos, na ordem: snapshot do dia, liquidacao do hype, ratings, chance de
-# titulo, snapshot/liquidacao das probabilidades e alertas dos assinantes Pro.
-# Depois: commita os dados do dia e publica (deploy:domain).
+# titulo, snapshot/liquidacao das probabilidades, alertas dos assinantes Pro e
+# publicacao dos payloads no Supabase (o site le de la em runtime). Depois:
+# commita os dados do dia e publica o build (codigo novo ainda precisa disso).
 set -uo pipefail
 
 cd "$(dirname "$0")/.." || { echo "ERRO: nao achei a raiz do repo"; exit 1; }
@@ -49,6 +50,9 @@ run "$NPM" run titulo:prob
 run "$NPM" run snapshot:prob
 run "$NPM" run settle:prob
 run "$NPM" run alertas
+# Publica os payloads no Supabase: e por aqui que o numero do site atualiza sem
+# depender do build/commit abaixo (o deploy continua valendo para codigo novo).
+run "$NPM" run payloads:publicar
 
 # O .env.local tem a service key: se ele aparecer como rastreavel, algo esta
 # errado e o job para aqui em vez de publicar um commit com segredo.

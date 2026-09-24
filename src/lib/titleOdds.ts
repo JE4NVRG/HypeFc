@@ -1,6 +1,9 @@
+import { buscarPayload } from './payloadSource.ts'
+
 /**
  * Chance de titulo / G4 / zona, publicada como arquivo estatico pelo build
- * (scripts/build-title-odds.ts).
+ * (scripts/build-title-odds.ts) e, em runtime, tambem pelo banco (site_payloads)
+ * — ver src/lib/payloadSource.ts.
  *
  * O cliente nao simula nada: ele le o resultado da simulacao pronta. O texto
  * que acompanha o numero na tela tem que deixar claro (a) quantas vezes a
@@ -49,9 +52,7 @@ let pedido: Promise<TitleOddsPayload | null> | null = null
 /** Uma busca para a pagina inteira. */
 export function loadTitleOdds(): Promise<TitleOddsPayload | null> {
   if (!pedido) {
-    pedido = fetch('data/title-odds.json', { cache: 'no-store' })
-      .then((r) => (r.ok ? (r.json() as Promise<TitleOddsPayload>) : null))
-      .catch(() => null)
+    pedido = buscarPayload<TitleOddsPayload>('title-odds')
   }
   return pedido
 }

@@ -20,6 +20,23 @@ import { ShareRound } from '@/components/dashboard/ShareRound'
 import { SourcesPanel } from '@/components/dashboard/SourcesPanel'
 import { MatchDetailPanel } from '@/components/dashboard/MatchDetailPanel'
 import { DashboardFooter } from '@/components/dashboard/DashboardFooter'
+import { buscarPayload } from '@/lib/payloadSource'
+
+/** Formato cru de public/data/probability-record.json (registro ja liquidado). */
+interface PayloadRecorde {
+  sample?: { predicted_matches?: number }
+  metrics?: {
+    model?: { brier?: number; top_pick_hit_rate?: number }
+    uniform?: { brier?: number }
+  }
+  anchor?: { best_placed_hit_rate?: number | null }
+}
+
+/** Formato cru de public/data/probability-forward.json (registro em formacao). */
+interface PayloadForward {
+  counts?: { pendentes?: number }
+  metrics?: { n?: number; brier?: number | null; top_pick_hit_rate?: number | null }
+}
 
 function formatDay(iso: string): string {
   const [year, month, day] = iso.split('-')
@@ -159,8 +176,7 @@ export default function Home() {
     loadTitleOdds().then((payload) => {
       if (vivo) setTitleOdds(payload)
     })
-    fetch('data/probability-record.json', { cache: 'no-store' })
-      .then((r) => (r.ok ? r.json() : null))
+    buscarPayload<PayloadRecorde>('probability-record')
       .then((dados) => {
         if (!vivo || !dados?.metrics) return
         setProbRecord({
@@ -172,8 +188,7 @@ export default function Home() {
         })
       })
       .catch(() => {})
-    fetch('data/probability-forward.json', { cache: 'no-store' })
-      .then((r) => (r.ok ? r.json() : null))
+    buscarPayload<PayloadForward>('probability-forward')
       .then((dados) => {
         if (!vivo || !dados?.counts) return
         setProbForward({
