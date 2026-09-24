@@ -149,6 +149,20 @@ rótulos, avisos): `Classificação`, `Média/jogo`, `públicos`, `última`, `pr
 Sem misturar com o texto sem acento. Nomes de arquivo, props e chaves de dados não
 mudam por causa disso.
 
+**Vírgula decimal, nunca ponto.** Número visível em português usa `53,6%`, `+16,6pp`,
+`2,8`, `0,629`. O ponto só aparece como separador de milhar (`1.402`, `5.000`).
+
+Isso não é detalhe de estilo: `toFixed()` e a interpolação crua de `number` **sempre
+emitem ponto**, então qualquer valor que passe por eles sai errado. Medido em produção:
+`Média/jogo` mostrava `2.8` e a aba Recorde mostrava `53.6%`, `+16.6pp`, `37.0%`,
+`+5.0pp`, `48.8%`, `59.7%` (corrigido em 24/09/2026).
+
+Como fazer certo: `valor.toLocaleString('pt-BR', { minimumFractionDigits: 1,
+maximumFractionDigits: 1 })`. Para números que já vêm como texto de formatação inglesa
+(o caso das chances de título), o repositório usa `.replace('.', ',')` em um único ponto
+de conversão (`chanceBR`). Não crie um segundo caminho de formatação: se precisar de um
+formato novo, estenda o existente.
+
 ## 11. Como a escala é expressa no código
 
 A escala é escrita com as **classes cruas do Tailwind** da tabela da seção 2 — não
