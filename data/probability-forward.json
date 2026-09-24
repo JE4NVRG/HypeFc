@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T01:30:26.226Z",
+  "generated_at": "2026-09-24T02:16:01.895Z",
   "kind": "forward",
   "definition": "Registro EM PRODUCAO: cada probabilidade foi gravada antes do jogo (data de emissao no snapshot) e liquidada depois. Nao confundir com o backtest, que mede o modelo no passado.",
   "source": "ESPN (site.api.espn.com)",

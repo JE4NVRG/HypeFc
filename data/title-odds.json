@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T01:30:22.615Z",
+  "generated_at": "2026-09-24T02:15:58.299Z",
   "season": 2026,
   "simulacoes": 5000,
   "metodo": "temporada simulada 5000 vezes a partir da tabela de pontos atual e do calendario da ESPN, com as probabilidades Elo+Poisson do proprio site; desempate por pontos e rating",
@@ -24,7 +24,7 @@
           "pts": 60,
           "jogos": 28,
           "rating": 1598.7,
-          "p_titulo": 0.705,
+          "p_titulo": 0.701,
           "p_g4": 1,
           "p_zona": 0
         },
@@ -36,7 +36,7 @@
           "pts": 57,
           "jogos": 28,
           "rating": 1583.4,
-          "p_titulo": 0.287,
+          "p_titulo": 0.292,
           "p_g4": 0.998,
           "p_zona": 0
         },
@@ -49,7 +49,7 @@
           "jogos": 28,
           "rating": 1556.2,
           "p_titulo": 0.006,
-          "p_g4": 0.789,
+          "p_g4": 0.796,
           "p_zona": 0
         },
         {
@@ -60,8 +60,8 @@
           "pts": 48,
           "jogos": 28,
           "rating": 1549.9,
-          "p_titulo": 0.002,
-          "p_g4": 0.637,
+          "p_titulo": 0.001,
+          "p_g4": 0.632,
           "p_zona": 0
         },
         {
@@ -73,7 +73,7 @@
           "jogos": 28,
           "rating": 1538.2,
           "p_titulo": 0,
-          "p_g4": 0.241,
+          "p_g4": 0.226,
           "p_zona": 0
         },
         {
@@ -85,7 +85,7 @@
           "jogos": 28,
           "rating": 1542.7,
           "p_titulo": 0,
-          "p_g4": 0.277,
+          "p_g4": 0.29,
           "p_zona": 0
         },
         {
@@ -97,7 +97,7 @@
           "jogos": 27,
           "rating": 1521.7,
           "p_titulo": 0,
-          "p_g4": 0.042,
+          "p_g4": 0.04,
           "p_zona": 0
         },
         {
@@ -109,7 +109,7 @@
           "jogos": 27,
           "rating": 1515.6,
           "p_titulo": 0,
-          "p_g4": 0.009,
+          "p_g4": 0.008,
           "p_zona": 0.003
         },
         {
@@ -121,8 +121,8 @@
           "jogos": 28,
           "rating": 1495.6,
           "p_titulo": 0,
-          "p_g4": 0.001,
-          "p_zona": 0.005
+          "p_g4": 0.003,
+          "p_zona": 0.006
         },
         {
           "team": "Red Bull Bragantino",
@@ -158,7 +158,7 @@
           "rating": 1484.1,
           "p_titulo": 0,
           "p_g4": 0,
-          "p_zona": 0.025
+          "p_zona": 0.023
         },
         {
           "team": "Vitória",
@@ -170,7 +170,7 @@
           "rating": 1468.2,
           "p_titulo": 0,
           "p_g4": 0,
-          "p_zona": 0.132
+          "p_zona": 0.125
         },
         {
           "team": "Corinthians",
@@ -194,7 +194,7 @@
           "rating": 1479,
           "p_titulo": 0,
           "p_g4": 0,
-          "p_zona": 0.186
+          "p_zona": 0.194
         },
         {
           "team": "Vasco da Gama",
@@ -206,7 +206,7 @@
           "rating": 1475.5,
           "p_titulo": 0,
           "p_g4": 0,
-          "p_zona": 0.14
+          "p_zona": 0.138
         },
         {
           "team": "Grêmio",
@@ -218,7 +218,7 @@
           "rating": 1449.5,
           "p_titulo": 0,
           "p_g4": 0,
-          "p_zona": 0.664
+          "p_zona": 0.667
         },
         {
           "team": "Internacional",
@@ -230,7 +230,7 @@
           "rating": 1457.2,
           "p_titulo": 0,
           "p_g4": 0,
-          "p_zona": 0.628
+          "p_zona": 0.625
         },
         {
           "team": "Remo",
@@ -242,7 +242,7 @@
           "rating": 1427.6,
           "p_titulo": 0,
           "p_g4": 0,
-          "p_zona": 0.975
+          "p_zona": 0.974
         },
         {
           "team": "Chapecoense",
@@ -254,7 +254,7 @@
           "rating": 1416.3,
           "p_titulo": 0,
           "p_g4": 0,
-          "p_zona": 0.997
+          "p_zona": 0.998
         }
       ]
     },
@@ -277,9 +277,9 @@
           "pts": 15,
           "jogos": 5,
           "rating": 1544.6,
-          "p_titulo": 0.407,
-          "p_g4": 0.794,
-          "p_zona": 0
+          "p_titulo": 0.404,
+          "p_g4": 0.796,
+          "p_zona": 0.001
         },
         {
           "team": "Arsenal",
@@ -289,9 +289,9 @@
           "pts": 12,
           "jogos": 5,
           "rating": 1530,
-          "p_titulo": 0.174,
-          "p_g4": 0.561,
-          "p_zona": 0.006
+          "p_titulo": 0.178,
+          "p_g4": 0.57,
+          "p_zona": 0.007
         },
         {
           "team": "Liverpool",
@@ -302,8 +302,8 @@
           "jogos": 5,
           "rating": 1520,
           "p_titulo": 0.068,
-          "p_g4": 0.363,
-          "p_zona": 0.018
+          "p_g4": 0.353,
+          "p_zona": 0.024
         },
         {
           "team": "Brighton & Hove Albion",
@@ -313,9 +313,9 @@
           "pts": 10,
           "jogos": 5,
           "rating": 1518.5,
-          "p_titulo": 0.065,
-          "p_g4": 0.347,
-          "p_zona": 0.022
+          "p_titulo": 0.063,
+          "p_g4": 0.361,
+          "p_zona": 0.021
         },
         {
           "team": "Brentford",
@@ -325,7 +325,7 @@
           "pts": 9,
           "jogos": 5,
           "rating": 1517.4,
-          "p_titulo": 0.057,
+          "p_titulo": 0.055,
           "p_g4": 0.307,
           "p_zona": 0.027
         },
@@ -337,9 +337,9 @@
           "pts": 9,
           "jogos": 5,
           "rating": 1516.4,
-          "p_titulo": 0.049,
-          "p_g4": 0.289,
-          "p_zona": 0.025
+          "p_titulo": 0.051,
+          "p_g4": 0.287,
+          "p_zona": 0.026
         },
         {
           "team": "Leeds United",
@@ -349,9 +349,9 @@
           "pts": 9,
           "jogos": 5,
           "rating": 1516.5,
-          "p_titulo": 0.048,
-          "p_g4": 0.277,
-          "p_zona": 0.027
+          "p_titulo": 0.045,
+          "p_g4": 0.288,
+          "p_zona": 0.022
         },
         {
           "team": "Hull City",
@@ -363,7 +363,7 @@
           "rating": 1509.8,
           "p_titulo": 0.043,
           "p_g4": 0.253,
-          "p_zona": 0.031
+          "p_zona": 0.033
         },
         {
           "team": "Newcastle United",
@@ -373,9 +373,9 @@
           "pts": 8,
           "jogos": 5,
           "rating": 1508,
-          "p_titulo": 0.036,
-          "p_g4": 0.228,
-          "p_zona": 0.04
+          "p_titulo": 0.034,
+          "p_g4": 0.221,
+          "p_zona": 0.047
         },
         {
           "team": "Chelsea",
@@ -385,9 +385,9 @@
           "pts": 7,
           "jogos": 5,
           "rating": 1502,
-          "p_titulo": 0.019,
-          "p_g4": 0.155,
-          "p_zona": 0.066
+          "p_titulo": 0.024,
+          "p_g4": 0.159,
+          "p_zona": 0.065
         },
         {
           "team": "Ipswich Town",
@@ -397,9 +397,9 @@
           "pts": 6,
           "jogos": 5,
           "rating": 1491.9,
-          "p_titulo": 0.009,
-          "p_g4": 0.097,
-          "p_zona": 0.114
+          "p_titulo": 0.011,
+          "p_g4": 0.089,
+          "p_zona": 0.124
         },
         {
           "team": "Manchester United",
@@ -410,8 +410,20 @@
           "jogos": 5,
           "rating": 1492.8,
           "p_titulo": 0.007,
-          "p_g4": 0.08,
-          "p_zona": 0.144
+          "p_g4": 0.077,
+          "p_zona": 0.134
+        },
+        {
+          "team": "Sunderland",
+          "apelido": "Sunderland",
+          "rating_name": "Sunderland",
+          "pos": 14,
+          "pts": 4,
+          "jogos": 5,
+          "rating": 1484.1,
+          "p_titulo": 0.004,
+          "p_g4": 0.039,
+          "p_zona": 0.236
         },
         {
           "team": "Aston Villa",
@@ -421,9 +433,9 @@
           "pts": 4,
           "jogos": 5,
           "rating": 1483.9,
-          "p_titulo": 0.006,
-          "p_g4": 0.047,
-          "p_zona": 0.208
+          "p_titulo": 0.004,
+          "p_g4": 0.043,
+          "p_zona": 0.21
         },
         {
           "team": "Nottingham Forest",
@@ -433,9 +445,9 @@
           "pts": 5,
           "jogos": 5,
           "rating": 1487,
-          "p_titulo": 0.004,
-          "p_g4": 0.044,
-          "p_zona": 0.227
+          "p_titulo": 0.003,
+          "p_g4": 0.041,
+          "p_zona": 0.232
         },
         {
           "team": "Crystal Palace",
@@ -446,32 +458,20 @@
           "jogos": 5,
           "rating": 1483.3,
           "p_titulo": 0.003,
-          "p_g4": 0.042,
-          "p_zona": 0.229
+          "p_g4": 0.039,
+          "p_zona": 0.234
         },
         {
-          "team": "Sunderland",
-          "apelido": "Sunderland",
-          "rating_name": "Sunderland",
-          "pos": 14,
-          "pts": 4,
+          "team": "Coventry City",
+          "apelido": "Coventry",
+          "rating_name": "Coventry City",
+          "pos": 18,
+          "pts": 3,
           "jogos": 5,
-          "rating": 1484.1,
+          "rating": 1475.2,
           "p_titulo": 0.002,
-          "p_g4": 0.037,
-          "p_zona": 0.239
-        },
-        {
-          "team": "Tottenham Hotspur",
-          "apelido": "Spurs",
-          "rating_name": "Tottenham Hotspur",
-          "pos": 20,
-          "pts": 2,
-          "jogos": 5,
-          "rating": 1468.9,
-          "p_titulo": 0.002,
-          "p_g4": 0.014,
-          "p_zona": 0.461
+          "p_g4": 0.03,
+          "p_zona": 0.31
         },
         {
           "team": "AFC Bournemouth",
@@ -482,20 +482,8 @@
           "jogos": 5,
           "rating": 1479.9,
           "p_titulo": 0.001,
-          "p_g4": 0.023,
-          "p_zona": 0.314
-        },
-        {
-          "team": "Coventry City",
-          "apelido": "Coventry",
-          "rating_name": "Coventry City",
-          "pos": 18,
-          "pts": 3,
-          "jogos": 5,
-          "rating": 1475.2,
-          "p_titulo": 0.001,
-          "p_g4": 0.031,
-          "p_zona": 0.302
+          "p_g4": 0.025,
+          "p_zona": 0.32
         },
         {
           "team": "Fulham",
@@ -506,8 +494,20 @@
           "jogos": 5,
           "rating": 1469.9,
           "p_titulo": 0.001,
-          "p_g4": 0.01,
-          "p_zona": 0.498
+          "p_g4": 0.011,
+          "p_zona": 0.481
+        },
+        {
+          "team": "Tottenham Hotspur",
+          "apelido": "Spurs",
+          "rating_name": "Tottenham Hotspur",
+          "pos": 20,
+          "pts": 2,
+          "jogos": 5,
+          "rating": 1468.9,
+          "p_titulo": 0.001,
+          "p_g4": 0.011,
+          "p_zona": 0.443
         }
       ]
     },
@@ -530,8 +530,8 @@
           "pts": 21,
           "jogos": 7,
           "rating": 1566.2,
-          "p_titulo": 0.647,
-          "p_g4": 0.951,
+          "p_titulo": 0.641,
+          "p_g4": 0.949,
           "p_zona": 0
         },
         {
@@ -542,8 +542,8 @@
           "pts": 16,
           "jogos": 7,
           "rating": 1538.5,
-          "p_titulo": 0.119,
-          "p_g4": 0.657,
+          "p_titulo": 0.125,
+          "p_g4": 0.666,
           "p_zona": 0.001
         },
         {
@@ -554,8 +554,8 @@
           "pts": 16,
           "jogos": 7,
           "rating": 1536.9,
-          "p_titulo": 0.099,
-          "p_g4": 0.611,
+          "p_titulo": 0.107,
+          "p_g4": 0.627,
           "p_zona": 0.002
         },
         {
@@ -566,9 +566,9 @@
           "pts": 15,
           "jogos": 7,
           "rating": 1528,
-          "p_titulo": 0.067,
-          "p_g4": 0.529,
-          "p_zona": 0.002
+          "p_titulo": 0.063,
+          "p_g4": 0.532,
+          "p_zona": 0.003
         },
         {
           "team": "Sevilla",
@@ -578,8 +578,8 @@
           "pts": 13,
           "jogos": 7,
           "rating": 1516.6,
-          "p_titulo": 0.027,
-          "p_g4": 0.341,
+          "p_titulo": 0.026,
+          "p_g4": 0.336,
           "p_zona": 0.012
         },
         {
@@ -590,9 +590,9 @@
           "pts": 11,
           "jogos": 7,
           "rating": 1504.8,
-          "p_titulo": 0.01,
-          "p_g4": 0.167,
-          "p_zona": 0.034
+          "p_titulo": 0.009,
+          "p_g4": 0.163,
+          "p_zona": 0.037
         },
         {
           "team": "Deportivo",
@@ -615,8 +615,8 @@
           "jogos": 7,
           "rating": 1502,
           "p_titulo": 0.007,
-          "p_g4": 0.123,
-          "p_zona": 0.052
+          "p_g4": 0.128,
+          "p_zona": 0.049
         },
         {
           "team": "Athletic Club",
@@ -626,21 +626,9 @@
           "pts": 8,
           "jogos": 6,
           "rating": 1497.1,
-          "p_titulo": 0.004,
-          "p_g4": 0.1,
-          "p_zona": 0.081
-        },
-        {
-          "team": "Villarreal",
-          "apelido": "Villarreal",
-          "rating_name": "Villarreal",
-          "pos": 9,
-          "pts": 8,
-          "jogos": 7,
-          "rating": 1494.1,
           "p_titulo": 0.003,
-          "p_g4": 0.065,
-          "p_zona": 0.108
+          "p_g4": 0.093,
+          "p_zona": 0.076
         },
         {
           "team": "Rayo Vallecano",
@@ -650,9 +638,33 @@
           "pts": 8,
           "jogos": 7,
           "rating": 1494.7,
+          "p_titulo": 0.003,
+          "p_g4": 0.074,
+          "p_zona": 0.085
+        },
+        {
+          "team": "Villarreal",
+          "apelido": "Villarreal",
+          "rating_name": "Villarreal",
+          "pos": 9,
+          "pts": 8,
+          "jogos": 7,
+          "rating": 1494.1,
           "p_titulo": 0.002,
-          "p_g4": 0.078,
-          "p_zona": 0.093
+          "p_g4": 0.058,
+          "p_zona": 0.112
+        },
+        {
+          "team": "Osasuna",
+          "apelido": "Osasuna",
+          "rating_name": "Osasuna",
+          "pos": 13,
+          "pts": 8,
+          "jogos": 7,
+          "rating": 1487.7,
+          "p_titulo": 0.002,
+          "p_g4": 0.048,
+          "p_zona": 0.142
         },
         {
           "team": "Getafe",
@@ -663,19 +675,7 @@
           "jogos": 7,
           "rating": 1489.7,
           "p_titulo": 0.001,
-          "p_g4": 0.046,
-          "p_zona": 0.14
-        },
-        {
-          "team": "Osasuna",
-          "apelido": "Osasuna",
-          "rating_name": "Osasuna",
-          "pos": 13,
-          "pts": 8,
-          "jogos": 7,
-          "rating": 1487.7,
-          "p_titulo": 0.001,
-          "p_g4": 0.054,
+          "p_g4": 0.05,
           "p_zona": 0.133
         },
         {
@@ -687,20 +687,8 @@
           "jogos": 7,
           "rating": 1488.7,
           "p_titulo": 0.001,
-          "p_g4": 0.031,
-          "p_zona": 0.18
-        },
-        {
-          "team": "Espanyol",
-          "apelido": "Espanyol",
-          "rating_name": "Espanyol",
-          "pos": 15,
-          "pts": 7,
-          "jogos": 7,
-          "rating": 1477.5,
-          "p_titulo": 0.001,
-          "p_g4": 0.02,
-          "p_zona": 0.258
+          "p_g4": 0.035,
+          "p_zona": 0.191
         },
         {
           "team": "Racing Santander",
@@ -711,8 +699,20 @@
           "jogos": 7,
           "rating": 1483.4,
           "p_titulo": 0.001,
-          "p_g4": 0.031,
-          "p_zona": 0.204
+          "p_g4": 0.028,
+          "p_zona": 0.198
+        },
+        {
+          "team": "Espanyol",
+          "apelido": "Espanyol",
+          "rating_name": "Espanyol",
+          "pos": 15,
+          "pts": 7,
+          "jogos": 7,
+          "rating": 1477.5,
+          "p_titulo": 0,
+          "p_g4": 0.019,
+          "p_zona": 0.257
         },
         {
           "team": "Levante",
@@ -722,9 +722,9 @@
           "pts": 5,
           "jogos": 6,
           "rating": 1485.1,
-          "p_titulo": 0.001,
-          "p_g4": 0.034,
-          "p_zona": 0.219
+          "p_titulo": 0,
+          "p_g4": 0.029,
+          "p_zona": 0.22
         },
         {
           "team": "Elche",
@@ -735,7 +735,7 @@
           "jogos": 7,
           "rating": 1475.3,
           "p_titulo": 0,
-          "p_g4": 0.01,
+          "p_g4": 0.011,
           "p_zona": 0.359
         },
         {
@@ -748,7 +748,7 @@
           "rating": 1463,
           "p_titulo": 0,
           "p_g4": 0.005,
-          "p_zona": 0.507
+          "p_zona": 0.497
         },
         {
           "team": "Málaga",
@@ -760,7 +760,7 @@
           "rating": 1463.6,
           "p_titulo": 0,
           "p_g4": 0.002,
-          "p_zona": 0.57
+          "p_zona": 0.581
         }
       ]
     },
@@ -783,8 +783,8 @@
           "pts": 13,
           "jogos": 5,
           "rating": 1538.9,
-          "p_titulo": 0.215,
-          "p_g4": 0.622,
+          "p_titulo": 0.22,
+          "p_g4": 0.618,
           "p_zona": 0.001
         },
         {
@@ -795,7 +795,7 @@
           "pts": 13,
           "jogos": 5,
           "rating": 1536.9,
-          "p_titulo": 0.188,
+          "p_titulo": 0.189,
           "p_g4": 0.588,
           "p_zona": 0.002
         },
@@ -807,8 +807,8 @@
           "pts": 13,
           "jogos": 5,
           "rating": 1536.9,
-          "p_titulo": 0.188,
-          "p_g4": 0.611,
+          "p_titulo": 0.187,
+          "p_g4": 0.601,
           "p_zona": 0.001
         },
         {
@@ -819,8 +819,8 @@
           "pts": 12,
           "jogos": 5,
           "rating": 1531.1,
-          "p_titulo": 0.12,
-          "p_g4": 0.469,
+          "p_titulo": 0.112,
+          "p_g4": 0.463,
           "p_zona": 0.003
         },
         {
@@ -831,9 +831,9 @@
           "pts": 11,
           "jogos": 5,
           "rating": 1531,
-          "p_titulo": 0.099,
+          "p_titulo": 0.105,
           "p_g4": 0.447,
-          "p_zona": 0.004
+          "p_zona": 0.003
         },
         {
           "team": "Como",
@@ -843,21 +843,9 @@
           "pts": 10,
           "jogos": 5,
           "rating": 1523.4,
-          "p_titulo": 0.061,
-          "p_g4": 0.323,
-          "p_zona": 0.008
-        },
-        {
-          "team": "Frosinone",
-          "apelido": "Frosinone",
-          "rating_name": "Frosinone",
-          "pos": 6,
-          "pts": 10,
-          "jogos": 5,
-          "rating": 1517.2,
-          "p_titulo": 0.045,
-          "p_g4": 0.278,
-          "p_zona": 0.012
+          "p_titulo": 0.06,
+          "p_g4": 0.337,
+          "p_zona": 0.007
         },
         {
           "team": "Juventus",
@@ -867,9 +855,21 @@
           "pts": 10,
           "jogos": 5,
           "rating": 1516.5,
-          "p_titulo": 0.044,
-          "p_g4": 0.249,
-          "p_zona": 0.012
+          "p_titulo": 0.045,
+          "p_g4": 0.254,
+          "p_zona": 0.011
+        },
+        {
+          "team": "Frosinone",
+          "apelido": "Frosinone",
+          "rating_name": "Frosinone",
+          "pos": 6,
+          "pts": 10,
+          "jogos": 5,
+          "rating": 1517.2,
+          "p_titulo": 0.042,
+          "p_g4": 0.265,
+          "p_zona": 0.011
         },
         {
           "team": "Sassuolo",
@@ -879,9 +879,9 @@
           "pts": 7,
           "jogos": 5,
           "rating": 1500.8,
-          "p_titulo": 0.014,
-          "p_g4": 0.103,
-          "p_zona": 0.05
+          "p_titulo": 0.013,
+          "p_g4": 0.107,
+          "p_zona": 0.051
         },
         {
           "team": "Napoli",
@@ -892,8 +892,8 @@
           "jogos": 5,
           "rating": 1501.4,
           "p_titulo": 0.011,
-          "p_g4": 0.104,
-          "p_zona": 0.048
+          "p_g4": 0.111,
+          "p_zona": 0.051
         },
         {
           "team": "Lecce",
@@ -903,9 +903,9 @@
           "pts": 6,
           "jogos": 5,
           "rating": 1492.3,
-          "p_titulo": 0.005,
-          "p_g4": 0.061,
-          "p_zona": 0.08
+          "p_titulo": 0.006,
+          "p_g4": 0.056,
+          "p_zona": 0.09
         },
         {
           "team": "Atalanta",
@@ -916,8 +916,8 @@
           "jogos": 5,
           "rating": 1488,
           "p_titulo": 0.004,
-          "p_g4": 0.047,
-          "p_zona": 0.103
+          "p_g4": 0.051,
+          "p_zona": 0.096
         },
         {
           "team": "Udinese",
@@ -927,9 +927,21 @@
           "pts": 4,
           "jogos": 5,
           "rating": 1479.7,
-          "p_titulo": 0.001,
-          "p_g4": 0.017,
-          "p_zona": 0.22
+          "p_titulo": 0.002,
+          "p_g4": 0.02,
+          "p_zona": 0.227
+        },
+        {
+          "team": "Monza",
+          "apelido": "Monza",
+          "rating_name": "Monza",
+          "pos": 16,
+          "pts": 4,
+          "jogos": 5,
+          "rating": 1483.4,
+          "p_titulo": 0.002,
+          "p_g4": 0.022,
+          "p_zona": 0.218
         },
         {
           "team": "Torino",
@@ -941,7 +953,7 @@
           "rating": 1482.8,
           "p_titulo": 0.001,
           "p_g4": 0.021,
-          "p_zona": 0.198
+          "p_zona": 0.186
         },
         {
           "team": "Parma",
@@ -952,20 +964,8 @@
           "jogos": 5,
           "rating": 1479.8,
           "p_titulo": 0.001,
-          "p_g4": 0.013,
-          "p_zona": 0.229
-        },
-        {
-          "team": "Monza",
-          "apelido": "Monza",
-          "rating_name": "Monza",
-          "pos": 16,
-          "pts": 4,
-          "jogos": 5,
-          "rating": 1483.4,
-          "p_titulo": 0.001,
-          "p_g4": 0.021,
-          "p_zona": 0.2
+          "p_g4": 0.014,
+          "p_zona": 0.243
         },
         {
           "team": "Fiorentina",
@@ -975,9 +975,9 @@
           "pts": 4,
           "jogos": 5,
           "rating": 1478.6,
-          "p_titulo": 0.001,
-          "p_g4": 0.016,
-          "p_zona": 0.24
+          "p_titulo": 0,
+          "p_g4": 0.017,
+          "p_zona": 0.236
         },
         {
           "team": "Bologna",
@@ -988,8 +988,8 @@
           "jogos": 5,
           "rating": 1469.7,
           "p_titulo": 0,
-          "p_g4": 0.006,
-          "p_zona": 0.449
+          "p_g4": 0.003,
+          "p_zona": 0.444
         },
         {
           "team": "Genoa",
@@ -1000,8 +1000,8 @@
           "jogos": 5,
           "rating": 1460.8,
           "p_titulo": 0,
-          "p_g4": 0.002,
-          "p_zona": 0.51
+          "p_g4": 0.004,
+          "p_zona": 0.494
         },
         {
           "team": "Venezia",
@@ -1012,8 +1012,8 @@
           "jogos": 5,
           "rating": 1451,
           "p_titulo": 0,
-          "p_g4": 0.001,
-          "p_zona": 0.631
+          "p_g4": 0.002,
+          "p_zona": 0.626
         }
       ]
     },
@@ -1036,9 +1036,9 @@
           "pts": 12,
           "jogos": 4,
           "rating": 1537.8,
-          "p_titulo": 0.334,
-          "p_g4": 0.747,
-          "p_zona": 0.002
+          "p_titulo": 0.331,
+          "p_g4": 0.741,
+          "p_zona": 0.001
         },
         {
           "team": "SC Freiburg",
@@ -1048,7 +1048,7 @@
           "pts": 10,
           "jogos": 4,
           "rating": 1528.1,
-          "p_titulo": 0.176,
+          "p_titulo": 0.181,
           "p_g4": 0.61,
           "p_zona": 0.003
         },
@@ -1060,33 +1060,9 @@
           "pts": 10,
           "jogos": 4,
           "rating": 1528.6,
-          "p_titulo": 0.169,
-          "p_g4": 0.567,
-          "p_zona": 0.004
-        },
-        {
-          "team": "FC Augsburg",
-          "apelido": "Augsburg",
-          "rating_name": "FC Augsburg",
-          "pos": 4,
-          "pts": 7,
-          "jogos": 4,
-          "rating": 1508.9,
-          "p_titulo": 0.051,
-          "p_g4": 0.278,
-          "p_zona": 0.023
-        },
-        {
-          "team": "Werder Bremen",
-          "apelido": "Bremen",
-          "rating_name": "Werder Bremen",
-          "pos": 8,
-          "pts": 7,
-          "jogos": 4,
-          "rating": 1510.8,
-          "p_titulo": 0.051,
-          "p_g4": 0.279,
-          "p_zona": 0.021
+          "p_titulo": 0.179,
+          "p_g4": 0.564,
+          "p_zona": 0.003
         },
         {
           "team": "Bayer Leverkusen",
@@ -1096,21 +1072,9 @@
           "pts": 7,
           "jogos": 4,
           "rating": 1510.8,
-          "p_titulo": 0.048,
-          "p_g4": 0.275,
+          "p_titulo": 0.051,
+          "p_g4": 0.294,
           "p_zona": 0.024
-        },
-        {
-          "team": "SV Elversberg",
-          "apelido": "Elversberg",
-          "rating_name": "SV Elversberg",
-          "pos": 7,
-          "pts": 7,
-          "jogos": 4,
-          "rating": 1509.1,
-          "p_titulo": 0.048,
-          "p_g4": 0.264,
-          "p_zona": 0.023
         },
         {
           "team": "Mainz",
@@ -1120,9 +1084,45 @@
           "pts": 7,
           "jogos": 4,
           "rating": 1508.6,
+          "p_titulo": 0.051,
+          "p_g4": 0.285,
+          "p_zona": 0.02
+        },
+        {
+          "team": "Werder Bremen",
+          "apelido": "Bremen",
+          "rating_name": "Werder Bremen",
+          "pos": 8,
+          "pts": 7,
+          "jogos": 4,
+          "rating": 1510.8,
           "p_titulo": 0.045,
+          "p_g4": 0.272,
+          "p_zona": 0.023
+        },
+        {
+          "team": "SV Elversberg",
+          "apelido": "Elversberg",
+          "rating_name": "SV Elversberg",
+          "pos": 7,
+          "pts": 7,
+          "jogos": 4,
+          "rating": 1509.1,
+          "p_titulo": 0.044,
+          "p_g4": 0.26,
+          "p_zona": 0.025
+        },
+        {
+          "team": "FC Augsburg",
+          "apelido": "Augsburg",
+          "rating_name": "FC Augsburg",
+          "pos": 4,
+          "pts": 7,
+          "jogos": 4,
+          "rating": 1508.9,
+          "p_titulo": 0.041,
           "p_g4": 0.27,
-          "p_zona": 0.022
+          "p_zona": 0.025
         },
         {
           "team": "RB Leipzig",
@@ -1132,21 +1132,9 @@
           "pts": 6,
           "jogos": 4,
           "rating": 1498.9,
-          "p_titulo": 0.02,
+          "p_titulo": 0.021,
           "p_g4": 0.14,
-          "p_zona": 0.05
-        },
-        {
-          "team": "Eintracht Frankfurt",
-          "apelido": "Frankfurt",
-          "rating_name": "Eintracht Frankfurt",
-          "pos": 10,
-          "pts": 5,
-          "jogos": 4,
-          "rating": 1501.4,
-          "p_titulo": 0.016,
-          "p_g4": 0.134,
-          "p_zona": 0.07
+          "p_zona": 0.055
         },
         {
           "team": "Schalke 04",
@@ -1156,9 +1144,21 @@
           "pts": 5,
           "jogos": 4,
           "rating": 1500.6,
-          "p_titulo": 0.016,
+          "p_titulo": 0.02,
           "p_g4": 0.138,
-          "p_zona": 0.066
+          "p_zona": 0.062
+        },
+        {
+          "team": "Eintracht Frankfurt",
+          "apelido": "Frankfurt",
+          "rating_name": "Eintracht Frankfurt",
+          "pos": 10,
+          "pts": 5,
+          "jogos": 4,
+          "rating": 1501.4,
+          "p_titulo": 0.013,
+          "p_g4": 0.126,
+          "p_zona": 0.069
         },
         {
           "team": "SC Paderborn 07",
@@ -1168,9 +1168,9 @@
           "pts": 4,
           "jogos": 4,
           "rating": 1491.1,
-          "p_titulo": 0.009,
-          "p_g4": 0.082,
-          "p_zona": 0.111
+          "p_titulo": 0.006,
+          "p_g4": 0.08,
+          "p_zona": 0.107
         },
         {
           "team": "FC Cologne",
@@ -1180,9 +1180,9 @@
           "pts": 4,
           "jogos": 4,
           "rating": 1488.9,
-          "p_titulo": 0.007,
-          "p_g4": 0.077,
-          "p_zona": 0.12
+          "p_titulo": 0.006,
+          "p_g4": 0.079,
+          "p_zona": 0.119
         },
         {
           "team": "TSG Hoffenheim",
@@ -1192,9 +1192,9 @@
           "pts": 3,
           "jogos": 4,
           "rating": 1480.8,
-          "p_titulo": 0.003,
-          "p_g4": 0.039,
-          "p_zona": 0.202
+          "p_titulo": 0.004,
+          "p_g4": 0.044,
+          "p_zona": 0.186
         },
         {
           "team": "VfB Stuttgart",
@@ -1204,9 +1204,9 @@
           "pts": 3,
           "jogos": 4,
           "rating": 1480.9,
-          "p_titulo": 0.002,
-          "p_g4": 0.04,
-          "p_zona": 0.203
+          "p_titulo": 0.003,
+          "p_g4": 0.036,
+          "p_zona": 0.213
         },
         {
           "team": "Hamburg SV",
@@ -1216,9 +1216,9 @@
           "pts": 3,
           "jogos": 4,
           "rating": 1481.4,
-          "p_titulo": 0.002,
+          "p_titulo": 0.003,
           "p_g4": 0.037,
-          "p_zona": 0.201
+          "p_zona": 0.208
         },
         {
           "team": "1. FC Union Berlin",
@@ -1228,9 +1228,9 @@
           "pts": 1,
           "jogos": 4,
           "rating": 1471,
-          "p_titulo": 0.002,
-          "p_g4": 0.017,
-          "p_zona": 0.345
+          "p_titulo": 0.001,
+          "p_g4": 0.019,
+          "p_zona": 0.338
         },
         {
           "team": "Borussia Mönchengladbach",
@@ -1242,7 +1242,7 @@
           "rating": 1462.2,
           "p_titulo": 0,
           "p_g4": 0.006,
-          "p_zona": 0.513
+          "p_zona": 0.519
         }
       ]
     },
@@ -1265,9 +1265,9 @@
           "pts": 13,
           "jogos": 5,
           "rating": 1539.8,
-          "p_titulo": 0.322,
-          "p_g4": 0.728,
-          "p_zona": 0.001
+          "p_titulo": 0.316,
+          "p_g4": 0.729,
+          "p_zona": 0.002
         },
         {
           "team": "Lyon",
@@ -1277,9 +1277,9 @@
           "pts": 11,
           "jogos": 5,
           "rating": 1526.9,
-          "p_titulo": 0.152,
-          "p_g4": 0.546,
-          "p_zona": 0.006
+          "p_titulo": 0.153,
+          "p_g4": 0.538,
+          "p_zona": 0.005
         },
         {
           "team": "Paris FC",
@@ -1289,8 +1289,8 @@
           "pts": 11,
           "jogos": 5,
           "rating": 1527.3,
-          "p_titulo": 0.149,
-          "p_g4": 0.529,
+          "p_titulo": 0.153,
+          "p_g4": 0.539,
           "p_zona": 0.004
         },
         {
@@ -1301,9 +1301,9 @@
           "pts": 10,
           "jogos": 5,
           "rating": 1519.2,
-          "p_titulo": 0.11,
-          "p_g4": 0.453,
-          "p_zona": 0.008
+          "p_titulo": 0.109,
+          "p_g4": 0.446,
+          "p_zona": 0.012
         },
         {
           "team": "Stade Rennais",
@@ -1313,8 +1313,8 @@
           "pts": 10,
           "jogos": 5,
           "rating": 1516.9,
-          "p_titulo": 0.091,
-          "p_g4": 0.429,
+          "p_titulo": 0.094,
+          "p_g4": 0.424,
           "p_zona": 0.012
         },
         {
@@ -1325,8 +1325,8 @@
           "pts": 8,
           "jogos": 5,
           "rating": 1516.5,
-          "p_titulo": 0.058,
-          "p_g4": 0.325,
+          "p_titulo": 0.06,
+          "p_g4": 0.334,
           "p_zona": 0.021
         },
         {
@@ -1337,9 +1337,9 @@
           "pts": 7,
           "jogos": 5,
           "rating": 1503.5,
-          "p_titulo": 0.027,
-          "p_g4": 0.196,
-          "p_zona": 0.047
+          "p_titulo": 0.028,
+          "p_g4": 0.18,
+          "p_zona": 0.056
         },
         {
           "team": "Angers",
@@ -1349,21 +1349,9 @@
           "pts": 7,
           "jogos": 5,
           "rating": 1498,
-          "p_titulo": 0.021,
-          "p_g4": 0.158,
-          "p_zona": 0.06
-        },
-        {
-          "team": "AJ Auxerre",
-          "apelido": "Auxerre",
-          "rating_name": "AJ Auxerre",
-          "pos": 10,
-          "pts": 6,
-          "jogos": 5,
-          "rating": 1489.6,
-          "p_titulo": 0.012,
-          "p_g4": 0.086,
-          "p_zona": 0.118
+          "p_titulo": 0.02,
+          "p_g4": 0.173,
+          "p_zona": 0.056
         },
         {
           "team": "Le Mans",
@@ -1373,21 +1361,33 @@
           "pts": 6,
           "jogos": 5,
           "rating": 1498.2,
-          "p_titulo": 0.011,
-          "p_g4": 0.103,
-          "p_zona": 0.096
+          "p_titulo": 0.012,
+          "p_g4": 0.104,
+          "p_zona": 0.102
         },
         {
-          "team": "Lorient",
-          "apelido": "Lorient",
-          "rating_name": "Lorient",
-          "pos": 12,
+          "team": "AJ Auxerre",
+          "apelido": "Auxerre",
+          "rating_name": "AJ Auxerre",
+          "pos": 10,
+          "pts": 6,
+          "jogos": 5,
+          "rating": 1489.6,
+          "p_titulo": 0.011,
+          "p_g4": 0.091,
+          "p_zona": 0.117
+        },
+        {
+          "team": "Brest",
+          "apelido": "Brest",
+          "rating_name": "Brest",
+          "pos": 11,
           "pts": 5,
           "jogos": 5,
-          "rating": 1491.2,
+          "rating": 1490.4,
           "p_titulo": 0.01,
-          "p_g4": 0.08,
-          "p_zona": 0.112
+          "p_g4": 0.086,
+          "p_zona": 0.117
         },
         {
           "team": "Toulouse",
@@ -1398,20 +1398,8 @@
           "jogos": 5,
           "rating": 1489.4,
           "p_titulo": 0.009,
-          "p_g4": 0.073,
-          "p_zona": 0.151
-        },
-        {
-          "team": "Brest",
-          "apelido": "Brest",
-          "rating_name": "Brest",
-          "pos": 11,
-          "pts": 5,
-          "jogos": 5,
-          "rating": 1490.4,
-          "p_titulo": 0.008,
-          "p_g4": 0.072,
-          "p_zona": 0.129
+          "p_g4": 0.067,
+          "p_zona": 0.145
         },
         {
           "team": "Nice",
@@ -1421,21 +1409,21 @@
           "pts": 5,
           "jogos": 5,
           "rating": 1489.1,
-          "p_titulo": 0.008,
-          "p_g4": 0.079,
-          "p_zona": 0.133
+          "p_titulo": 0.009,
+          "p_g4": 0.077,
+          "p_zona": 0.132
         },
         {
-          "team": "Lens",
-          "apelido": "Lens",
-          "rating_name": "Lens",
-          "pos": 15,
-          "pts": 4,
+          "team": "Lorient",
+          "apelido": "Lorient",
+          "rating_name": "Lorient",
+          "pos": 12,
+          "pts": 5,
           "jogos": 5,
-          "rating": 1482.6,
-          "p_titulo": 0.006,
-          "p_g4": 0.054,
-          "p_zona": 0.181
+          "rating": 1491.2,
+          "p_titulo": 0.007,
+          "p_g4": 0.08,
+          "p_zona": 0.12
         },
         {
           "team": "Troyes",
@@ -1445,9 +1433,21 @@
           "pts": 4,
           "jogos": 5,
           "rating": 1482.5,
-          "p_titulo": 0.005,
-          "p_g4": 0.051,
-          "p_zona": 0.186
+          "p_titulo": 0.004,
+          "p_g4": 0.05,
+          "p_zona": 0.185
+        },
+        {
+          "team": "Lens",
+          "apelido": "Lens",
+          "rating_name": "Lens",
+          "pos": 15,
+          "pts": 4,
+          "jogos": 5,
+          "rating": 1482.6,
+          "p_titulo": 0.003,
+          "p_g4": 0.041,
+          "p_zona": 0.193
         },
         {
           "team": "Marseille",
@@ -1459,7 +1459,7 @@
           "rating": 1469.9,
           "p_titulo": 0.001,
           "p_g4": 0.023,
-          "p_zona": 0.346
+          "p_zona": 0.345
         },
         {
           "team": "Le Havre AC",
@@ -1470,8 +1470,8 @@
           "jogos": 5,
           "rating": 1469.3,
           "p_titulo": 0.001,
-          "p_g4": 0.016,
-          "p_zona": 0.388
+          "p_g4": 0.018,
+          "p_zona": 0.376
         }
       ]
     },
@@ -1494,8 +1494,8 @@
           "pts": 21,
           "jogos": 7,
           "rating": 1563,
-          "p_titulo": 0.594,
-          "p_g4": 0.945,
+          "p_titulo": 0.601,
+          "p_g4": 0.946,
           "p_zona": 0
         },
         {
@@ -1506,8 +1506,8 @@
           "pts": 16,
           "jogos": 7,
           "rating": 1539,
-          "p_titulo": 0.153,
-          "p_g4": 0.698,
+          "p_titulo": 0.149,
+          "p_g4": 0.696,
           "p_zona": 0
         },
         {
@@ -1518,8 +1518,8 @@
           "pts": 15,
           "jogos": 7,
           "rating": 1535,
-          "p_titulo": 0.101,
-          "p_g4": 0.615,
+          "p_titulo": 0.095,
+          "p_g4": 0.624,
           "p_zona": 0.001
         },
         {
@@ -1530,9 +1530,9 @@
           "pts": 15,
           "jogos": 7,
           "rating": 1533.2,
-          "p_titulo": 0.074,
-          "p_g4": 0.548,
-          "p_zona": 0
+          "p_titulo": 0.078,
+          "p_g4": 0.534,
+          "p_zona": 0.001
         },
         {
           "team": "Braga",
@@ -1542,8 +1542,8 @@
           "pts": 11,
           "jogos": 6,
           "rating": 1521.9,
-          "p_titulo": 0.03,
-          "p_g4": 0.335,
+          "p_titulo": 0.031,
+          "p_g4": 0.326,
           "p_zona": 0.004
         },
         {
@@ -1554,9 +1554,9 @@
           "pts": 11,
           "jogos": 7,
           "rating": 1514.6,
-          "p_titulo": 0.016,
-          "p_g4": 0.22,
-          "p_zona": 0.01
+          "p_titulo": 0.017,
+          "p_g4": 0.221,
+          "p_zona": 0.011
         },
         {
           "team": "Arouca",
@@ -1566,9 +1566,9 @@
           "pts": 11,
           "jogos": 7,
           "rating": 1511.3,
-          "p_titulo": 0.012,
-          "p_g4": 0.203,
-          "p_zona": 0.009
+          "p_titulo": 0.011,
+          "p_g4": 0.207,
+          "p_zona": 0.006
         },
         {
           "team": "Estrela",
@@ -1578,9 +1578,9 @@
           "pts": 10,
           "jogos": 7,
           "rating": 1505.7,
-          "p_titulo": 0.006,
+          "p_titulo": 0.007,
           "p_g4": 0.126,
-          "p_zona": 0.016
+          "p_zona": 0.02
         },
         {
           "team": "Gil Vicente",
@@ -1591,8 +1591,8 @@
           "jogos": 6,
           "rating": 1494.2,
           "p_titulo": 0.004,
-          "p_g4": 0.081,
-          "p_zona": 0.035
+          "p_g4": 0.088,
+          "p_zona": 0.036
         },
         {
           "team": "Maritimo",
@@ -1602,21 +1602,21 @@
           "pts": 8,
           "jogos": 7,
           "rating": 1490.9,
-          "p_titulo": 0.003,
-          "p_g4": 0.06,
+          "p_titulo": 0.002,
+          "p_g4": 0.055,
           "p_zona": 0.051
         },
         {
-          "team": "Moreirense",
-          "apelido": "Moreirense",
-          "rating_name": "Moreirense",
-          "pos": 9,
+          "team": "Alverca",
+          "apelido": "Alverca",
+          "rating_name": "Alverca",
+          "pos": 12,
           "pts": 8,
           "jogos": 7,
-          "rating": 1493.6,
+          "rating": 1490.5,
           "p_titulo": 0.002,
-          "p_g4": 0.063,
-          "p_zona": 0.046
+          "p_g4": 0.044,
+          "p_zona": 0.065
         },
         {
           "team": "FC Famalicao",
@@ -1627,20 +1627,20 @@
           "jogos": 7,
           "rating": 1495.5,
           "p_titulo": 0.002,
-          "p_g4": 0.037,
-          "p_zona": 0.075
+          "p_g4": 0.041,
+          "p_zona": 0.076
         },
         {
-          "team": "Alverca",
-          "apelido": "Alverca",
-          "rating_name": "Alverca",
-          "pos": 12,
+          "team": "Moreirense",
+          "apelido": "Moreirense",
+          "rating_name": "Moreirense",
+          "pos": 9,
           "pts": 8,
           "jogos": 7,
-          "rating": 1490.5,
+          "rating": 1493.6,
           "p_titulo": 0.001,
-          "p_g4": 0.047,
-          "p_zona": 0.053
+          "p_g4": 0.069,
+          "p_zona": 0.048
         },
         {
           "team": "Vitória de Guimaraes",
@@ -1652,7 +1652,7 @@
           "rating": 1470,
           "p_titulo": 0,
           "p_g4": 0.008,
-          "p_zona": 0.204
+          "p_zona": 0.202
         },
         {
           "team": "C.D. Nacional",
@@ -1663,8 +1663,8 @@
           "jogos": 7,
           "rating": 1458.2,
           "p_titulo": 0,
-          "p_g4": 0.002,
-          "p_zona": 0.392
+          "p_g4": 0.003,
+          "p_zona": 0.389
         },
         {
           "team": "Rio Ave",
@@ -1675,8 +1675,8 @@
           "jogos": 7,
           "rating": 1465.9,
           "p_titulo": 0,
-          "p_g4": 0.007,
-          "p_zona": 0.276
+          "p_g4": 0.005,
+          "p_zona": 0.28
         },
         {
           "team": "Casa Pia",
@@ -1688,7 +1688,7 @@
           "rating": 1466.5,
           "p_titulo": 0,
           "p_g4": 0.006,
-          "p_zona": 0.283
+          "p_zona": 0.274
         },
         {
           "team": "Estoril",
@@ -1699,8 +1699,8 @@
           "jogos": 7,
           "rating": 1451,
           "p_titulo": 0,
-          "p_g4": 0.001,
-          "p_zona": 0.544
+          "p_g4": 0.002,
+          "p_zona": 0.537
         }
       ]
     },
@@ -1723,8 +1723,8 @@
           "pts": 19,
           "jogos": 7,
           "rating": 1551.9,
-          "p_titulo": 0.346,
-          "p_g4": 0.812,
+          "p_titulo": 0.354,
+          "p_g4": 0.814,
           "p_zona": 0
         },
         {
@@ -1735,8 +1735,8 @@
           "pts": 17,
           "jogos": 7,
           "rating": 1546.8,
-          "p_titulo": 0.217,
-          "p_g4": 0.709,
+          "p_titulo": 0.215,
+          "p_g4": 0.698,
           "p_zona": 0
         },
         {
@@ -1747,8 +1747,8 @@
           "pts": 16,
           "jogos": 7,
           "rating": 1539.4,
-          "p_titulo": 0.19,
-          "p_g4": 0.684,
+          "p_titulo": 0.186,
+          "p_g4": 0.663,
           "p_zona": 0
         },
         {
@@ -1760,7 +1760,7 @@
           "jogos": 7,
           "rating": 1535.1,
           "p_titulo": 0.101,
-          "p_g4": 0.516,
+          "p_g4": 0.535,
           "p_zona": 0
         },
         {
@@ -1771,8 +1771,8 @@
           "pts": 14,
           "jogos": 7,
           "rating": 1526.2,
-          "p_titulo": 0.063,
-          "p_g4": 0.394,
+          "p_titulo": 0.061,
+          "p_g4": 0.405,
           "p_zona": 0.001
         },
         {
@@ -1784,20 +1784,8 @@
           "jogos": 7,
           "rating": 1519.7,
           "p_titulo": 0.041,
-          "p_g4": 0.343,
-          "p_zona": 0.003
-        },
-        {
-          "team": "Excelsior",
-          "apelido": "Excelsior",
-          "rating_name": "Excelsior",
-          "pos": 7,
-          "pts": 11,
-          "jogos": 7,
-          "rating": 1509.5,
-          "p_titulo": 0.013,
-          "p_g4": 0.137,
-          "p_zona": 0.006
+          "p_g4": 0.337,
+          "p_zona": 0.002
         },
         {
           "team": "FC Groningen",
@@ -1807,9 +1795,21 @@
           "pts": 11,
           "jogos": 7,
           "rating": 1506.9,
-          "p_titulo": 0.013,
-          "p_g4": 0.146,
+          "p_titulo": 0.014,
+          "p_g4": 0.14,
           "p_zona": 0.009
+        },
+        {
+          "team": "Excelsior",
+          "apelido": "Excelsior",
+          "rating_name": "Excelsior",
+          "pos": 7,
+          "pts": 11,
+          "jogos": 7,
+          "rating": 1509.5,
+          "p_titulo": 0.011,
+          "p_g4": 0.146,
+          "p_zona": 0.01
         },
         {
           "team": "Go Ahead Eagles",
@@ -1819,8 +1819,8 @@
           "pts": 10,
           "jogos": 7,
           "rating": 1509.7,
-          "p_titulo": 0.008,
-          "p_g4": 0.121,
+          "p_titulo": 0.009,
+          "p_g4": 0.127,
           "p_zona": 0.011
         },
         {
@@ -1832,8 +1832,8 @@
           "jogos": 7,
           "rating": 1497.5,
           "p_titulo": 0.004,
-          "p_g4": 0.064,
-          "p_zona": 0.028
+          "p_g4": 0.062,
+          "p_zona": 0.029
         },
         {
           "team": "NEC Nijmegen",
@@ -1844,8 +1844,8 @@
           "jogos": 7,
           "rating": 1488.1,
           "p_titulo": 0.002,
-          "p_g4": 0.034,
-          "p_zona": 0.055
+          "p_g4": 0.035,
+          "p_zona": 0.054
         },
         {
           "team": "Sparta Rotterdam",
@@ -1856,8 +1856,8 @@
           "jogos": 7,
           "rating": 1469.5,
           "p_titulo": 0,
-          "p_g4": 0.005,
-          "p_zona": 0.218
+          "p_g4": 0.004,
+          "p_zona": 0.23
         },
         {
           "team": "Telstar",
@@ -1868,8 +1868,8 @@
           "jogos": 7,
           "rating": 1473.6,
           "p_titulo": 0,
-          "p_g4": 0.009,
-          "p_zona": 0.142
+          "p_g4": 0.008,
+          "p_zona": 0.144
         },
         {
           "team": "SC Cambuur",
@@ -1880,8 +1880,8 @@
           "jogos": 7,
           "rating": 1471.6,
           "p_titulo": 0,
-          "p_g4": 0.006,
-          "p_zona": 0.18
+          "p_g4": 0.007,
+          "p_zona": 0.202
         },
         {
           "team": "FC Utrecht",
@@ -1892,8 +1892,8 @@
           "jogos": 7,
           "rating": 1477.8,
           "p_titulo": 0,
-          "p_g4": 0.015,
-          "p_zona": 0.132
+          "p_g4": 0.014,
+          "p_zona": 0.112
         },
         {
           "team": "PEC Zwolle",
@@ -1904,8 +1904,8 @@
           "jogos": 7,
           "rating": 1465.4,
           "p_titulo": 0,
-          "p_g4": 0.003,
-          "p_zona": 0.269
+          "p_g4": 0.002,
+          "p_zona": 0.263
         },
         {
           "team": "ADO Den Haag",
@@ -1917,7 +1917,7 @@
           "rating": 1457.2,
           "p_titulo": 0,
           "p_g4": 0.001,
-          "p_zona": 0.436
+          "p_zona": 0.428
         },
         {
           "team": "Willem II",
@@ -1929,7 +1929,7 @@
           "rating": 1454,
           "p_titulo": 0,
           "p_g4": 0.001,
-          "p_zona": 0.511
+          "p_zona": 0.504
         }
       ]
     }
