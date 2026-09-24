@@ -24,6 +24,7 @@
     "venda:sync": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/stripe-sync.ts",
     "alertas": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/send-alerts.ts",
     "payloads:publicar": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/publicar-payloads.ts",
+    "registro:publicar": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/publicar-registro.ts",
     "loja:conferir": "node --env-file-if-exists=.env.local --experimental-strip-types --disable-warning=ExperimentalWarning scripts/conferir-loja.ts",
     "titulo:prob": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/build-title-odds.ts"
   },

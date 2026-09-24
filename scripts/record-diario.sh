@@ -65,6 +65,10 @@ run "$NPM" run alertas
 # Publica os payloads no Supabase: e por aqui que o numero do site atualiza sem
 # depender do build/commit abaixo (o deploy continua valendo para codigo novo).
 run "$NPM" run payloads:publicar
+# Publica o livro-razao do registro (um card por jogo/time, com o carimbo da
+# publicacao): e o que a area da conta le para mostrar o historico por time.
+# Depois do settle:hype, para o dia entrar ja liquidado quando o placar existe.
+run "$NPM" run registro:publicar
 
 # O .env.local tem a service key: se ele aparecer como rastreavel, algo esta
 # errado e o job para aqui em vez de publicar um commit com segredo.

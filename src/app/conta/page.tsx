@@ -23,6 +23,7 @@ import { PublicShell } from '@/components/site/PublicShell'
 import { BOTAO_PRIMARIO, BOTAO_SECUNDARIO, CAIXA, LINK, ROTULO } from '@/components/site/estilos'
 import { entrarComoAssinante, estadoDaConta, sairDaConta, type ContaEstado } from '@/lib/conta'
 import { desinscrever, inscrever, pushDisponivel } from '@/lib/push'
+import { carregarRegistro, type RegistroConta } from '@/lib/registro'
 import { eu, parar, seguidos, temToken, type Perfil, type Seguido } from '@/lib/proStore'
 
 type Recado = { tom: 'ok' | 'erro' | 'info'; texto: string }
@@ -34,6 +35,13 @@ function dataCurta(iso?: string): string {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return ''
   return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })
+}
+
+/** Data do registro e so dia e mes: a lista ja mostra a liga ao lado. */
+function diaCurto(iso: string): string {
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return iso
+  return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
 }
 
 function RecadoLinha({ recado }: { recado: Recado | null }) {
@@ -60,6 +68,7 @@ export default function Conta() {
   const [alerta, setAlerta] = useState<string | null>(null)
   const [alertaOk, setAlertaOk] = useState<boolean | null>(null)
   const [recado, setRecado] = useState<Recado | null>(null)
+  const [registro, setRegistro] = useState<RegistroConta | null>(null)
   const [ocupado, setOcupado] = useState<string | null>(null)
   const [fotoOk, setFotoOk] = useState(true)
 
@@ -70,10 +79,11 @@ export default function Conta() {
     if (e.logado) {
       setPerfil(await eu())
       setLista(await seguidos())
+      setRegistro(await carregarRegistro(40))
       setAlertaOk(pushDisponivel())
       try {
-        const registro = await navigator.serviceWorker.ready
-        const sub = await registro.pushManager.getSubscription()
+        const sw = await navigator.serviceWorker.ready
+        const sub = await sw.pushManager.getSubscription()
         setAlerta(sub ? sub.endpoint : null)
       } catch {
         setAlerta(null)
@@ -381,6 +391,69 @@ export default function Conta() {
             </div>
 
             <RecadoLinha recado={recado} />
+
+            {/* (e) registro dos times seguidos */}
+            <div className={CAIXA}>
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <p className={ROTULO}>Registro dos seus times</p>
+                {registro && registro.jogos > 0 ? (
+                  <p className="font-mono text-[12px] text-ink-2">
+                    {registro.acertos} de {registro.jogos} ·{' '}
+                    {Math.round((100 * registro.acertos) / registro.jogos)}%
+                  </p>
+                ) : null}
+              </div>
+              <p className="mt-2 text-[13px] leading-relaxed text-ink-2">
+                O que o modelo publicou para os jogos dos times que você segue, antes do apito, e o placar ao lado depois.
+              </p>
+              {!planoPro ? (
+                <p className="mt-3 border-t border-rule pt-3 text-[12px] leading-snug text-ink-3">
+                  No plano gratuito o número do registro fica no painel público. O histórico por time entra no Pro.
+                </p>
+              ) : !registro || registro.linhas.length === 0 ? (
+                <p className="mt-3 border-t border-rule pt-3 text-[12px] leading-snug text-ink-3">
+                  Ainda sem jogo liquidado dos seus times. Siga um time e o registro dele aparece aqui depois da primeira
+                  rodada.
+                </p>
+              ) : (
+                <ul className="mt-2 divide-y divide-rule">
+                  {registro.linhas.map((linha) => (
+                    <li
+                      key={`${linha.dia}-${linha.league_name}-${linha.home_team}-${linha.away_team}-${linha.team}`}
+                      className="flex items-start justify-between gap-3 py-2"
+                    >
+                      <span className="min-w-0">
+                        <span className="block truncate text-[13px] font-medium text-ink">
+                          {linha.home_team} × {linha.away_team}
+                        </span>
+                        <span className="text-[11px] text-ink-3">
+                          {diaCurto(linha.dia)} · {linha.league_name} · apontou {linha.team} (
+                          {linha.venue === 'home' ? 'casa' : 'fora'})
+                        </span>
+                      </span>
+                      <span className="shrink-0 text-right">
+                        <span className="block font-mono text-[13px] text-ink">
+                          {linha.liquidado ? `${linha.gols_casa}–${linha.gols_fora}` : 'a jogar'}
+                        </span>
+                        <span className="text-[11px] text-ink-3">
+                          {linha.liquidado ? (linha.acertou ? 'acertou' : 'errou') : 'aguardando'}
+                        </span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {registro && registro.pendentes > 0 ? (
+                <p className="mt-2 text-[11px] leading-snug text-ink-3">
+                  {registro.pendentes} publicado(s) nesta rodada sem placar ainda.
+                </p>
+              ) : null}
+              {registro && registro.linhas.length > 0 ? (
+                <p className="mt-2 border-t border-rule pt-2 text-[11px] leading-snug text-ink-3">
+                  Cada linha foi gravada antes do apito com o carimbo da publicação e não pode ser editada depois.
+                </p>
+              ) : null}
+            </div>
 
             <p className="text-[12px] leading-snug text-ink-3">
               Cobrança, cancelamento ou reembolso:{' '}
