@@ -10,13 +10,50 @@
  * Uso: npm run deploy:pages
  */
 import { execFileSync } from 'node:child_process'
-import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = resolve(root, 'out')
 const treeDir = resolve(root, '.pages-deploy/gh-pages')
+
+/**
+ * Variaveis que o build inlina (NEXT_PUBLIC_*) e cuja ausencia estraga o site
+ * publicado de forma silenciosa: sem elas saem sem Supabase (Pro, login e
+ * lista de espera caem para o modo degradado), sem botao de assinatura e sem
+ * push. Ja aconteceu de o deploy rodar num host sem elas — por isso aqui o
+ * .env.local entra antes do build e o deploy RECUSA publicar sem as chaves.
+ */
+const OBRIGATORIAS = [
+  'NEXT_PUBLIC_SUPABASE_URL',
+  'NEXT_PUBLIC_SUPABASE_ANON_KEY',
+  'NEXT_PUBLIC_CHECKOUT_URL',
+  'NEXT_PUBLIC_VAPID_PUBLIC_KEY',
+]
+
+/** Carrega o .env.local sem sobrescrever o que ja veio do ambiente. */
+function carregarEnvLocal() {
+  const caminho = resolve(root, '.env.local')
+  if (!existsSync(caminho)) return
+  for (const linha of readFileSync(caminho, 'utf8').split('\n')) {
+    const texto = linha.trim()
+    if (!texto || texto.startsWith('#') || !texto.includes('=')) continue
+    const chave = texto.slice(0, texto.indexOf('=')).trim()
+    const valor = texto.slice(texto.indexOf('=') + 1).trim().replace(/^["']|["']$/g, '')
+    if (chave && !(chave in process.env)) process.env[chave] = valor
+  }
+}
+
+carregarEnvLocal()
+
+const faltando = OBRIGATORIAS.filter((chave) => !process.env[chave])
+if (faltando.length > 0) {
+  console.error(`[deploy] ABORTADO: faltam variaveis de build: ${faltando.join(', ')}`)
+  console.error('[deploy] sem elas o site sai sem Supabase, sem botao de assinatura e sem push.')
+  console.error('[deploy] rode onde exista o .env.local do projeto ou exporte essas variaveis.')
+  process.exit(1)
+}
 
 function run(cmd, args, opts = {}) {
   return execFileSync(cmd, args, { cwd: root, stdio: 'inherit', ...opts })
