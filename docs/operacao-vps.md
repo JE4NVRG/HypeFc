@@ -41,6 +41,33 @@ systemctl --user daemon-reload
 systemctl --user enable --now hypefc-venda-sync.timer hypefc-recorde-diario.timer
 ```
 
+## Aviso de falha (grupo Telegram)
+
+Se qualquer um dos dois jobs falhar, o systemd dispara
+`hypefc-aviso-falha@<unit>.service` (via `OnFailure=` nas duas units), que roda
+`~/.local/bin/hypefc-vps-alert` e posta no **grupo** `Je4nDevVega Mac GRUPO`.
+
+- Destinatário: `~/.config/hypefc/alerta.env` (modo 600) com `TELEGRAM_BOT_TOKEN`
+  e `TELEGRAM_CHAT_ID`. O bot precisa **ser membro do grupo** — hoje é o
+  `@VegaCoreJe4n_bot`, que já está lá. (O bot do Hermes da VPS não está no grupo:
+  `getChat` responde `chat not found`.)
+- O script **recusa destino que não seja grupo** (id precisa começar com `-100`):
+  alerta operacional em DM é ruído, e o Jean não quer isso.
+- Cooldown de 1 h por unit: o timer de venda roda a cada 10 min, sem cooldown uma
+  falha repetida viraria enxurrada.
+- Entrega verificada: depois do `sendMessage` o script faz um `editMessageText`
+  com o mesmo texto e exige "message is not modified" — prova que o texto
+  persistiu naquela mensagem. Sem isso o aviso não é dado como entregue.
+
+Testar a cadeia inteira (unit de mentira que falha de propósito):
+
+```bash
+printf '[Unit]\nDescription=teste\nOnFailure=hypefc-aviso-falha@%%n.service\n\n[Service]\nType=oneshot\nExecStart=/bin/false\n' > ~/.config/systemd/user/hypefc-teste-falha.service
+systemctl --user daemon-reload && systemctl --user start hypefc-teste-falha.service
+journalctl --user -u hypefc-aviso-falha@hypefc-teste-falha.service -n 20 --no-pager   # deve imprimir aviso_enviado
+rm ~/.config/systemd/user/hypefc-teste-falha.service && systemctl --user daemon-reload
+```
+
 ## Credenciais: como cada job se autentica
 
 - **Stripe**: chave restrita (`rk_live_…`, Checkout Sessions + Subscriptions em

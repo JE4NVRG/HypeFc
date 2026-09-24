@@ -1,0 +1,10 @@
+[Unit]
+Description=HypeFC - aviso no grupo Telegram de falha da unit %i
+After=network-online.target
+
+[Service]
+Type=oneshot
+UMask=0077
+EnvironmentFile=/home/jean/.config/hypefc/alerta.env
+ExecStart=/home/jean/.local/bin/hypefc-vps-alert %i
+TimeoutStartSec=2min

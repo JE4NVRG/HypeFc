@@ -1,0 +1,12 @@
+[Unit]
+Description=HypeFC - venda:sync a cada 10 minutos (o comprador espera o resgate)
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=10min
+RandomizedDelaySec=20
+Persistent=true
+AccuracySec=30s
+
+[Install]
+WantedBy=timers.target

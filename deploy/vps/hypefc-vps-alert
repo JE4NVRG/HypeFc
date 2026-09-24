@@ -1,0 +1,125 @@
+#!/usr/bin/env python3
+"""Aviso de falha dos jobs do HypeFC na VPS.
+
+Chamado pelo template systemd `hypefc-aviso-falha@.service` via `OnFailure=`, com
+o nome da unit que falhou como argumento.
+
+Regras (as mesmas que a operacao ja usa neste Mac/VPS):
+  * Destino e **grupo**, nunca DM: o chat id precisa comecar com -100, senao o
+    script se recusa a enviar. Alerta operacional no privado e ruido.
+  * Cooldown por unit: o timer de venda roda a cada 10 min; sem cooldown uma
+    falha repetida viraria enxurrada de mensagens.
+  * Entrega verificada: depois do sendMessage o script faz um editMessageText com
+    o mesmo texto; o Bot API responde "message is not modified" quando o texto
+    persistiu. Sem essa confirmacao o aviso nao pode ser dado como entregue.
+
+Config esperada em ~/.config/hypefc/alerta.env (modo 600):
+    TELEGRAM_BOT_TOKEN=...
+    TELEGRAM_CHAT_ID=-100...
+"""
+
+import json
+import os
+import pathlib
+import sys
+import time
+import urllib.error
+import urllib.request
+
+ENV_PATH = pathlib.Path.home() / ".config/hypefc/alerta.env"
+STATE_DIR = pathlib.Path.home() / ".local/state/hypefc-alerta"
+COOLDOWN_S = 3600
+TIMEOUT = 20
+
+
+def carrega_env():
+    valores = {}
+    if ENV_PATH.exists():
+        for linha in ENV_PATH.read_text().splitlines():
+            linha = linha.strip()
+            if not linha or linha.startswith("#") or "=" not in linha:
+                continue
+            chave, _, valor = linha.partition("=")
+            valores[chave.strip()] = valor.strip()
+    return valores
+
+
+def chama(token, metodo, corpo):
+    req = urllib.request.Request(
+        "https://api.telegram.org/bot" + token + "/" + metodo,
+        data=json.dumps(corpo).encode(),
+        headers={"Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as resposta:
+            return resposta.status, json.load(resposta)
+    except urllib.error.HTTPError as erro:
+        return erro.code, json.load(erro)
+
+
+def main():
+    unit = sys.argv[1] if len(sys.argv) > 1 else "hypefc-desconhecido"
+    motivo = " ".join(sys.argv[2:]).strip()
+
+    env = carrega_env()
+    token = env.get("TELEGRAM_BOT_TOKEN")
+    destino = env.get("TELEGRAM_CHAT_ID", "")
+    if not token or not destino:
+        print("AVISO_NAO_CONFIGURADO (falta alerta.env)")
+        return 1
+    if not str(destino).startswith("-100"):
+        print("AVISO_RECUSADO: destino nao e grupo (-100...); alerta operacional nao vai em privado")
+        return 1
+
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    estado_path = STATE_DIR / "state.json"
+    agora = time.time()
+    estado = {}
+    if estado_path.exists():
+        try:
+            estado = json.loads(estado_path.read_text())
+        except Exception:
+            estado = {}
+    anterior = estado.get(unit, {})
+    if anterior and agora - float(anterior.get("ts", 0)) < COOLDOWN_S:
+        print("AVISO_EM_COOLDOWN (ultimo aviso desta unit ha %ds)" % int(agora - float(anterior.get("ts", 0))))
+        return 0
+
+    quando = time.strftime("%Y-%m-%d %H:%M %Z")
+    texto = (
+        "🔴 HypeFC · job falhou\n"
+        "\n"
+        "unit: " + unit + "\n"
+        "quando: " + quando + "\n"
+        + ("motivo: " + motivo + "\n" if motivo else "")
+        + "efeito: registro do dia, alertas Pro e/ou sincronizacao de venda podem nao ter saido\n"
+        "checar: journalctl --user -u " + unit + " -n 60 --no-pager"
+    )
+
+    codigo, resposta = chama(token, "sendMessage", {"chat_id": destino, "text": texto, "disable_web_page_preview": True})
+    if codigo != 200 or not resposta.get("ok"):
+        print("AVISO_FALHOU " + str(codigo) + " " + str(resposta)[:200])
+        return 1
+    mensagem = resposta["result"]
+
+    # Prova de entrega: o texto tem de estar persistido naquela mensagem.
+    ec, er = chama(
+        token,
+        "editMessageText",
+        {"chat_id": mensagem["chat"]["id"], "message_id": mensagem["message_id"], "text": texto, "disable_web_page_preview": True},
+    )
+    descricao = str(er.get("description", "")).lower()
+    verificado = (ec == 400 and "message is not modified" in descricao) or (ec == 200 and er.get("ok") and er["result"].get("text") == texto)
+    if not verificado:
+        print("AVISO_ENTREGUE_SEM_CONFIRMACAO message_id=" + str(mensagem["message_id"]))
+        return 1
+
+    estado[unit] = {"ts": agora, "quando": quando, "message_id": mensagem["message_id"], "motivo": motivo}
+    estado_path.write_text(json.dumps(estado, indent=2))
+    print(json.dumps({"aviso_enviado": True, "message_id": mensagem["message_id"], "destino_grupo": True, "texto_confirmado": True}))
+    return 0
+
+
+if __name__ == "__main__":
+    os.umask(0o077)
+    sys.exit(main())

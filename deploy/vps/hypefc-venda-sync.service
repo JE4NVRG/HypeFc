@@ -1,0 +1,13 @@
+[Unit]
+Description=HypeFC - sincroniza compras pagas da Stripe (libera o Pro no resgate)
+Documentation=file:/home/jean/hypefc-jobs/HypeFc/docs/cobranca.md
+After=network-online.target
+# Falha nunca passa em silencio: avisa no grupo (com cooldown por unit).
+OnFailure=hypefc-aviso-falha@%n.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/jean/hypefc-jobs/HypeFc
+EnvironmentFile=/home/jean/hypefc-jobs/HypeFc/.env.local
+Environment=PATH=/home/jean/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/jean/.nvm/versions/node/v22.23.2/bin/node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/stripe-sync.ts
