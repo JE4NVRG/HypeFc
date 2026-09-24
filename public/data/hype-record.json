@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T23:10:17.554Z",
+  "generated_at": "2026-09-24T01:30:03.954Z",
   "cutoff": 44,
   "method": "Rodada a rodada: a tabela e reconstruida apenas com jogos anteriores a rodada (sem lookahead) e o buildHypeBoard do produto marca os times. Cards em modo replay foram reconstruidos; cards em modo live foram gravados antes do jogo.",
   "snapshots": 271,
