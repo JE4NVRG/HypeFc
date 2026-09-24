@@ -78,7 +78,7 @@ export default function ContaPro() {
             type="button"
             onClick={() => void sair()}
             disabled={ocupado !== null}
-            className="inline-flex min-h-[36px] cursor-pointer items-center gap-1.5 rounded-md border border-line/60 px-2.5 text-[12px] text-ink transition hover:border-ink-3 hover:bg-line/40 disabled:opacity-50"
+            className="inline-flex min-h-[44px] cursor-pointer items-center gap-1.5 rounded-md border border-line/60 px-2.5 text-[12px] text-ink transition hover:border-ink-3 hover:bg-line/40 disabled:opacity-50 sm:min-h-[36px]"
             aria-label="Sair da conta Google"
           >
             {ocupado === 'sair' ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogOut className="h-4 w-4" />}
@@ -100,7 +100,7 @@ export default function ContaPro() {
         type="button"
         onClick={() => void entrar()}
         disabled={ocupado !== null}
-        className="mt-2.5 inline-flex min-h-[36px] w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-line/70 bg-paper-2/60 px-3 text-[13px] font-medium text-ink transition hover:border-ink-3 hover:bg-paper-3 disabled:opacity-50"
+        className="mt-2.5 inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-line/70 bg-paper-2/60 px-3 text-[13px] font-medium text-ink transition hover:border-ink-3 hover:bg-paper-3 disabled:opacity-50 sm:min-h-[36px]"
       >
         {ocupado === 'entrar' ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogIn className="h-4 w-4" />}
         Entrar com Google
