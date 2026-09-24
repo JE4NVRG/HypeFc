@@ -13,6 +13,6 @@ EnvironmentFile=/home/jean/hypefc-jobs/HypeFc/.env.local
 Environment=TZ=America/Sao_Paulo
 Environment=PATH=/home/jean/.nvm/versions/node/v22.23.2/bin:/home/jean/.local/bin:/usr/local/bin:/usr/bin:/bin
 ExecStart=/bin/bash /home/jean/hypefc-jobs/HypeFc/scripts/record-diario.sh
-# O build + push do gh-pages no fim do job leva ~1-2 min; 30 min e folga para
-# dia com rodada cheia (11 ligas) sem transformar travamento em falso sucesso.
-TimeoutStartSec=30min
+# Sem build no fim do job (o painel le os payloads do Supabase): 15 min e folga
+# larga para dia de rodada cheia sem transformar travamento em falso sucesso.
+TimeoutStartSec=15min

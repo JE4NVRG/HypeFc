@@ -14,7 +14,7 @@ units via `EnvironmentFile=` e o script diário via `set -a; . ./.env.local`.
 | Job | Unit | Quando | O que faz |
 | --- | --- | --- | --- |
 | Sincronizar venda | `hypefc-venda-sync.service` (oneshot) + `.timer` | a cada 10 min | Lê a Stripe (chave restrita `rk_live_…`, só leitura) e grava as compras pagas em `orders` via RPC `pro_order_stripe`, para o site liberar o Pro no resgate |
-| Job diário | `hypefc-recorde-diario.service` (oneshot) + `.timer` | 09:00 America/Sao_Paulo | `scripts/record-diario.sh`: snapshot do dia → liquidação → ratings → chance de título → snapshot/liquidação das probabilidades → **alertas Pro** → commit dos dados → `deploy:domain` |
+| Job diário | `hypefc-recorde-diario.service` (oneshot) + `.timer` | 09:00 America/Sao_Paulo | `scripts/record-diario.sh`: snapshot do dia → liquidação → ratings → chance de título → snapshot/liquidação das probabilidades → **alertas Pro** → **publica os payloads no Supabase** → commit dos dados como histórico. Sem build e sem deploy: o painel lê o número do banco |
 
 ## Comandos do dia a dia
 
@@ -94,9 +94,27 @@ snapshot do dia é por data), então reativar um cron no Mac não duplica cobran
 nem inventa resultado — mas dois publicadores ao mesmo tempo disputariam o
 `gh-pages`, então mantenha só um lado ativo.
 
-## Ainda em aberto (arquitetura)
+## Como o número chega na tela (sem rebuild)
 
-O registro (`public/data/*.json`) é **embutido no build**, e é por isso que o job
-diário precisa commitar e publicar. O passo que resolve isso de verdade é o painel
-ler o registro do Supabase (como já faz com os alertas/follows), via uma RPC
-pública; aí o job diário deixa de precisar de git e de build.
+Os cinco payloads do painel (`hype-record`, `ratings`, `title-odds`,
+`probability-record`, `probability-forward`) são publicados pelo job na tabela
+`public.site_payloads` e lidos pelo site em runtime pela RPC `payload_publico`
+(chave anon). Se o Supabase não responder, o `src/lib/payloadSource.ts` cai para
+o arquivo `public/data/<nome>.json` que vai dentro do build — a página nunca fica
+vazia, mostra o último dado publicado junto com o código.
+
+Consequência prática: **dado novo não precisa de build nem de deploy**. Publicar
+build é coisa de código novo.
+
+## Deploy: o build inlina as NEXT_PUBLIC_*
+
+`npm run deploy:domain` carrega o `.env.local` sozinho e **aborta** se faltar
+`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
+`NEXT_PUBLIC_CHECKOUT_URL` ou `NEXT_PUBLIC_VAPID_PUBLIC_KEY`. Sem elas o build sai
+sem Supabase (Pro, login e lista de espera em modo degradado), sem botão de
+assinatura e sem push — e isso não dá erro: o site sobe quebrado em silêncio. Já
+aconteceu num deploy feito da VPS, com o `.env.local` da VPS incompleto.
+
+Por isso o `.env.local` da VPS precisa ter as quatro (e ter as mesmas do Mac):
+o job diário antigo deployava, e qualquer deploy da VPS passa por este guard.
+

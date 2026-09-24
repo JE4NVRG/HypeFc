@@ -10,7 +10,8 @@
 # Passos, na ordem: snapshot do dia, liquidacao do hype, ratings, chance de
 # titulo, snapshot/liquidacao das probabilidades, alertas dos assinantes Pro e
 # publicacao dos payloads no Supabase (o site le de la em runtime). Depois:
-# commita os dados do dia e publica o build (codigo novo ainda precisa disso).
+# commita os dados do dia como historico (sem build nem deploy — o numero ja
+# esta no ar pelo banco).
 set -uo pipefail
 
 cd "$(dirname "$0")/.." || { echo "ERRO: nao achei a raiz do repo"; exit 1; }
@@ -69,8 +70,9 @@ else
   log "sem mudanca nos dados do dia (normal quando nao ha jogo)"
 fi
 
-# Publicacao: SEMPRE deploy:domain (builda sem basePath, grava o CNAME e carimba
-# o service worker). deploy:pages quebra o dominio e nao carimba o SW.
-run "$NPM" run deploy:domain
+# Sem deploy aqui de proposito: o painel le os payloads do Supabase (passo
+# payloads:publicar acima), entao o numero do dia ja esta no ar. O commit fica
+# como historico/backup dos dados. Publicar build e coisa de codigo novo, nao de
+# rotina diaria — e era o unico motivo de o job precisar de build e de gh-pages.
 
 log "recorde diario: fim"
