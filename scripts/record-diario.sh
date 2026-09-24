@@ -44,6 +44,17 @@ run() {
 
 log "recorde diario: inicio"
 
+# O repo tambem recebe commit desta maquina (design, codigo). Sem sincronizar
+# antes, o push do fim do job e rejeitado por non-fast-forward, o systemd marca
+# a unit como failed e o grupo recebe um alerta de falha que nao existiu.
+# --autostash cobre alteracao local inesperada em vez de abortar o dia.
+if ! git diff --quiet -- data public/data; then
+  log "AVISO: dados do dia sem commit antes do pull — commitando para poder sincronizar"
+  run git add -A data public/data
+  run git commit -m "chore: dados pendentes antes do recorde do dia $(date +%F)"
+fi
+run git pull --rebase --autostash origin main
+
 run "$NPM" run snapshot:hype -- --today
 run "$NPM" run settle:hype
 run "$NPM" run ratings

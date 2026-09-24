@@ -118,3 +118,14 @@ aconteceu num deploy feito da VPS, com o `.env.local` da VPS incompleto.
 Por isso o `.env.local` da VPS precisa ter as quatro (e ter as mesmas do Mac):
 o job diário antigo deployava, e qualquer deploy da VPS passa por este guard.
 
+## O job sincroniza o repo antes de commitar
+
+O repo também recebe commits do Mac (código, documentação, design). Por isso
+`record-diario.sh` faz `git pull --rebase --autostash origin main` **antes** de
+gerar os dados e de commitar. Sem esse passo, qualquer commit feito em outra
+máquina faz o `git push` do fim do job ser rejeitado por non-fast-forward, o
+systemd marca a unit como `failed` e o grupo recebe um alerta de falha que nunca
+aconteceu — foi exatamente o que a correção passou a evitar. Se houver alteração
+local pendente nos dados, o job commita antes de sincronizar, em vez de abortar o
+dia por causa de um arquivo de dado.
+
