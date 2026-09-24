@@ -1,0 +1,175 @@
+{
+  "_nota": "Conteúdo REAL extraído do HypeFC em produção (23/09/2026 22:37). Use exatamente estes números e nomes. Não invente dados, não use lorem ipsum.",
+  "marca": {
+    "nome": "HypeFC",
+    "dominio": "hypefc.je4ndev.com",
+    "assinatura": "Dashboard de futebol em tempo real",
+    "promessa": "O palpite não está à venda. O que vendemos é registro e alerta — medidos e publicados.",
+    "aviso_legal": "Painel informativo. Não é casa de aposta e não promete resultado.",
+    "posicionamento": "Mede o próprio modelo em público: acerto por card, Brier, comparação com o chute uniforme e com o favorito. Sem promessa de edge no palpite."
+  },
+  "capa": {
+    "atualizado": "Atualizado às 22:37",
+    "aviso_contexto": "Sem jogos hoje. Mostrando a última rodada com jogos: 20/09/2026.",
+    "rodada": "20/09/2026",
+    "kpis": [
+      { "rotulo": "JOGOS", "valor": "36" },
+      { "rotulo": "GOLS", "valor": "99" },
+      { "rotulo": "MÉDIA/JOGO", "valor": "2.8" },
+      { "rotulo": "ENCERRADOS", "valor": "36" },
+      { "rotulo": "LIGAS", "valor": "9" }
+    ],
+    "abas": ["Rodada", "Liga", "Recorde", "Esportes", "Pro"],
+    "compartilhar": ["WhatsApp", "Telegram", "X", "Copiar link"]
+  },
+  "filtros_liga": [
+    { "liga": "Todas", "jogos": 36 },
+    { "liga": "Brasileirão Série A", "jogos": 5 },
+    { "liga": "Bundesliga", "jogos": 3 },
+    { "liga": "Championship", "jogos": 2 },
+    { "liga": "Eredivisie", "jogos": 4 },
+    { "liga": "La Liga", "jogos": 5 },
+    { "liga": "Ligue 1", "jogos": 3 },
+    { "liga": "Premier League", "jogos": 4 },
+    { "liga": "Primeira Liga", "jogos": 5 },
+    { "liga": "Serie A", "jogos": 5 }
+  ],
+  "em_alta": [
+    { "score": 86, "time": "FC Porto" },
+    { "score": 80, "time": "Benfica" },
+    { "score": 75, "time": "Manchester City" },
+    { "score": 73, "time": "Atlético Madrid" },
+    { "score": 71, "time": "Flamengo" },
+    { "score": 67, "time": "Barcelona" },
+    { "score": 67, "time": "Borussia Dortmund" },
+    { "score": 64, "time": "AZ Alkmaar" },
+    { "score": 63, "time": "AS Monaco" },
+    { "score": 63, "time": "Real Madrid" },
+    { "score": 59, "time": "AS Roma" },
+    { "score": 58, "time": "Feyenoord Rotterdam" }
+  ],
+  "partidas": [
+    {
+      "liga": "Brasileirão Série A",
+      "status": "ENCERRADO",
+      "casa": { "time": "Grêmio", "posicao": "17º", "gols": 0 },
+      "fora": { "time": "Palmeiras", "posicao": "2º", "gols": 0 },
+      "prob": { "casa": 28, "empate": 26, "fora": 46 },
+      "destaque": "fora",
+      "stats": { "posse": "28–72", "chutes": "7–31", "no_alvo": "4–10" }
+    },
+    {
+      "liga": "Brasileirão Série A",
+      "status": "ENCERRADO",
+      "casa": { "time": "Corinthians", "posicao": "14º", "gols": 1 },
+      "fora": { "time": "Fluminense", "posicao": "4º", "gols": 3 },
+      "prob": { "casa": 34, "empate": 26, "fora": 39 },
+      "destaque": "fora",
+      "stats": { "posse": "57–43", "chutes": "20–10", "no_alvo": "7–6" }
+    },
+    {
+      "liga": "Brasileirão Série A",
+      "status": "ENCERRADO",
+      "casa": { "time": "Vitória", "posicao": "13º", "gols": 1 },
+      "fora": { "time": "Cruzeiro", "posicao": "6º", "gols": 3 },
+      "prob": { "casa": 36, "empate": 26, "fora": 37 },
+      "destaque": "fora",
+      "stats": { "posse": "44–56", "chutes": "21–14", "no_alvo": "8–5" }
+    },
+    {
+      "liga": "Brasileirão Série A",
+      "status": "ENCERRADO",
+      "casa": { "time": "Flamengo", "posicao": "1º", "gols": 2 },
+      "fora": { "time": "Red Bull Bragantino", "posicao": "10º", "gols": 1 },
+      "prob": { "casa": 62, "empate": 22, "fora": 15 },
+      "destaque": "casa",
+      "selo": "EM ALTA 71",
+      "stats": { "posse": "66–34", "chutes": "11–15", "no_alvo": "6–5" }
+    },
+    {
+      "liga": "Brasileirão Série A",
+      "status": "ENCERRADO",
+      "casa": { "time": "Athletico-PR", "posicao": "3º", "gols": 2 },
+      "fora": { "time": "Bahia", "posicao": "5º", "gols": 1 },
+      "prob": { "casa": 50, "empate": 25, "fora": 25 },
+      "destaque": "casa",
+      "stats": { "posse": "50–51", "chutes": "11–10", "no_alvo": "6–3" }
+    },
+    {
+      "liga": "Ligue 1",
+      "status": "ENCERRADO",
+      "casa": { "time": "AJ Auxerre", "posicao": "10º", "gols": 2 },
+      "fora": { "time": "Brest", "posicao": "11º", "gols": 1 },
+      "prob": { "casa": 47, "empate": 26, "fora": 27 },
+      "destaque": "casa",
+      "stats": { "posse": "52–48", "chutes": "11–8", "no_alvo": "4–2" }
+    },
+    {
+      "liga": "Ligue 1",
+      "status": "ENCERRADO",
+      "casa": { "time": "Nice", "posicao": "14º", "gols": 2 },
+      "fora": { "time": "Lille", "posicao": "4º", "gols": 1 },
+      "prob": { "casa": 43, "empate": 26, "fora": 31 },
+      "destaque": "casa",
+      "stats": { "posse": "41–59", "chutes": "10–21", "no_alvo": "4–8" }
+    },
+    {
+      "liga": "Ligue 1",
+      "status": "ENCERRADO",
+      "casa": { "time": "Marseille", "posicao": "17º", "gols": 1 },
+      "fora": { "time": "Paris Saint-Germain", "posicao": "6º", "gols": 2 },
+      "prob": { "casa": 40, "empate": 26, "fora": 33 },
+      "destaque": "casa",
+      "stats": { "posse": "39–61", "chutes": "12–31", "no_alvo": "4–10" }
+    },
+    {
+      "liga": "Primeira Liga",
+      "status": "ENCERRADO",
+      "casa": { "time": "Estrela", "posicao": "8º", "gols": 0 },
+      "fora": { "time": "Académico de Viseu", "posicao": "7º", "gols": 2 },
+      "prob": { "casa": 46, "empate": 26, "fora": 28 },
+      "destaque": "casa",
+      "stats": { "posse": "59–41", "chutes": "16–8", "no_alvo": "2–4" }
+    },
+    {
+      "liga": "Primeira Liga",
+      "status": "ENCERRADO",
+      "casa": { "time": "Vitória de Guimaraes", "posicao": "14º", "gols": 1 },
+      "fora": { "time": "Moreirense", "posicao": "9º", "gols": 1 },
+      "prob": { "casa": 44, "empate": 26, "fora": 30 },
+      "destaque": "casa",
+      "stats": { "posse": "66–34", "chutes": "16–7", "no_alvo": "5–3" }
+    }
+  ],
+  "legenda": [
+    "Probabilidade: Casa · Empate · Fora (verde = maior).",
+    "Rodapé: posse · chutes · no alvo (casa–fora); “—” = não publicado."
+  ],
+  "registro_publico": {
+    "manchete": "Recorde público",
+    "cards_liquidados": 1402,
+    "rodadas": 271,
+    "corte": 44,
+    "detalhe": "1402 reconstruídos · 0 gravados ao vivo",
+    "acerto": "53.6%",
+    "acerto_detalhe": "751/1402 · empate conta como erro",
+    "comparacao": "vs média do mandante 37.0%",
+    "lift": "+16.6pp",
+    "sem_edge": "Calibrado, sem edge no palpite."
+  },
+  "modelo": [
+    { "rotulo": "BRIER DO MODELO", "valor": "0,629", "detalhe": "n=1.203 jogos" },
+    { "rotulo": "CHUTE UNIFORME", "valor": "0,667", "detalhe": "1/3 para cada lado" },
+    { "rotulo": "FAVORITO DO MODELO", "valor": "46,5%", "detalhe": "acerto do palpite" },
+    { "rotulo": "ÂNCORA MELHOR COLOCADO", "valor": "46,5%", "detalhe": "mesma taxa, sem modelo" }
+  ],
+  "pro": {
+    "preco_mes": "R$ 9,90/mês",
+    "preco_ano": "R$ 79/ano",
+    "gratis": ["Painel completo: rodada, ligas, esportes e recorde público", "Até 3 times seguidos", "Sem alertas"],
+    "pro": ["Até 20 times seguidos", "Alerta antes da rodada", "Histórico do registro: o que o modelo previa para quem você segue"],
+    "cta": "Assinar Pro",
+    "cta_secundario": "Ativar acesso",
+    "rodape_lista": "A assinatura já está aberta. Se preferir esperar, deixe o e-mail: a gente avisa de novidade do Pro. Nada de cobrança aqui."
+  }
+}

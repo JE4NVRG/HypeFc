@@ -1,0 +1,23 @@
+{
+  "quando": "2026-09-23 22:40",
+  "viewport": "390x844",
+  "medidas": {
+    "elementos_total": 1262,
+    "altura_pagina": 1100,
+    "controles_clicaveis": 60,
+    "alvos_abaixo_de_44px": 24,
+    "elementos_arredondados_com_fundo": 194,
+    "pior_contraste": {
+      "ratio": 7.87,
+      "tamanho": 12,
+      "texto": "Dashboard de futebol em tempo real"
+    },
+    "fontes_carregadas": [
+      "__GeistSans_245d8d 100 900",
+      "__GeistSans_Fallback_245d8d normal",
+      "__GeistMono_97c177 100 900"
+    ],
+    "raio_dominante": "0px",
+    "controles_de_filtro": 0
+  }
+}

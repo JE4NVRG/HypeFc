@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HypeFC — Almanaque · Rodada 20/09/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   HYPEFC — DIREÇÃO "ALMANAQUE"
+   O produto é um registro medido em público, não um palpite.
+   A tela se comporta como um volume impresso de referência:
+   papel, fios, réguas, entradas numeradas, notas de margem.
+   Zero cartão arredondado, zero brilho, zero ícone de fogo.
+   ============================================================ */
+
+:root{
+  --paper:#F4F0E6;
+  --paper-2:#EBE5D7;
+  --paper-3:#DFD7C2;
+  --ink:#191610;
+  --ink-2:#5A5343;
+  --ink-3:#6E6650;       /* 5.0:1 no papel: rótulos pequenos seguem legíveis */
+  --rule:#CDC4AE;
+  --rule-2:#B0A488;
+  --accent:#9B2C15;      /* vermelhão de tipografia — ênfase, nunca CTA de aposta */
+  --green:#3F5A36;       /* verde só onde o dado manda: "maior" probabilidade */
+  --disp:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --text:'Newsreader',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background-color:var(--paper);
+  /* a página é papel pautado: fios verticais quase invisíveis */
+  background-image:repeating-linear-gradient(to right,rgba(25,22,16,.05) 0 1px,transparent 1px 76px);
+  color:var(--ink);
+  font-family:var(--text);
+  font-size:17px;
+  line-height:1.5;
+  font-weight:400;
+}
+img,svg{max-width:100%}
+p{margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.wrap{width:100%;max-width:1240px;margin:0 auto;padding:0 28px}
+
+/* ---------- micro-tipografia reutilizável ---------- */
+.micro{
+  font-family:var(--mono);font-size:10px;line-height:1.5;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);
+  overflow-wrap:break-word;
+}
+.micro.ink{color:var(--ink)}
+.lab{
+  font-family:var(--text);font-size:11px;font-weight:500;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--ink-2);
+}
+.rule{height:1px;background:var(--rule);border:0;margin:0}
+.rule-ink{height:1px;background:var(--ink);border:0;margin:0}
+/* fios desenhados nas bordas dos próprios itens: assim uma última linha
+   incompleta não vira bloco bege, e a grade fecha em qualquer contagem */
+.grid-lines{
+  display:grid;gap:0;
+  border-top:1px solid var(--rule);border-left:1px solid var(--rule);
+}
+.grid-lines > *{
+  background:var(--paper);min-width:0;
+  border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+}
+
+/* ============================================================
+   1. CABEÇALHO — o registro público é a primeira página
+   ============================================================ */
+.masthead{padding-top:20px}
+.topline{
+  display:flex;justify-content:space-between;align-items:baseline;
+  gap:6px 24px;flex-wrap:wrap;
+  padding-bottom:9px;border-bottom:1px solid var(--ink);
+}
+.brand{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:14px 40px;flex-wrap:wrap;
+  padding:16px 0 14px;border-bottom:3px double var(--ink);
+}
+.brand-l{min-width:0}
+.eyebrow{display:block;margin-bottom:6px}
+.wordmark{
+  font-family:var(--disp);font-weight:400;
+  font-size:clamp(54px,11.5vw,124px);line-height:.82;
+  letter-spacing:-.015em;margin:0;text-transform:uppercase;
+}
+.brand-r{max-width:34ch;min-width:0}
+.strapline{
+  font-family:var(--disp);font-style:italic;
+  font-size:clamp(21px,4.2vw,33px);line-height:1.05;
+  margin:0 0 8px;
+}
+.brand-r .micro{color:var(--ink-2)}
+
+/* faixa de registro: 4 números, fios entre eles */
+.reg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--rule);
+     border-bottom:1px solid var(--ink)}
+.reg-cell{background:var(--paper);padding:11px 16px 13px;min-width:0}
+.reg-cell b{
+  display:block;font-family:var(--disp);font-weight:400;
+  font-size:clamp(28px,3.6vw,40px);line-height:1;margin-top:6px;
+}
+.reg-cell .micro{font-size:9px;letter-spacing:.14em}
+.reg-foot{
+  display:flex;justify-content:space-between;gap:8px 20px;flex-wrap:wrap;
+  padding:12px 0 6px;
+}
+.reg-foot .stamp{margin:0}
+
+/* ---------- abas: fichas de índice, não pills ---------- */
+.tabs{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--ink);
+  margin-top:26px;
+}
+.tab{
+  appearance:none;background:transparent;border:0;cursor:pointer;
+  border-right:1px solid var(--rule);
+  padding:13px 12px 11px;text-align:left;
+  display:flex;align-items:baseline;gap:9px;min-width:0;
+  font-family:var(--text);font-size:13px;font-weight:500;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--ink-2);
+  transition:background-color .12s ease,color .12s ease;
+}
+.tab:last-child{border-right:0}
+.tab .n{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-3);transition:color .12s ease}
+.tab:hover{background:var(--paper-2);color:var(--ink)}
+.tab:hover .n{color:var(--accent)}
+.tab:active{background:var(--paper-3)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.tab[aria-selected="true"] .n{color:var(--paper-3)}
+
+/* ============================================================
+   2. PAINÉIS
+   ============================================================ */
+.panel{padding:32px 0 0}
+.panel[hidden]{display:none}
+.sec-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  gap:8px 24px;flex-wrap:wrap;
+  padding-bottom:9px;border-bottom:1px solid var(--ink);
+}
+.sec-head h2{
+  font-family:var(--disp);font-weight:400;
+  font-size:clamp(30px,4.6vw,46px);line-height:1;margin:5px 0 0;letter-spacing:-.01em;
+}
+.sec-num{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--accent)}
+.sec-meta{text-align:right}
+
+/* nota editorial — a margem que explica o contexto */
+.note{
+  border-left:2px solid var(--accent);
+  padding:2px 0 2px 14px;margin:20px 0 0;
+  font-style:italic;font-size:18px;line-height:1.45;
+}
+.note .micro{display:block;margin-top:6px;font-style:normal}
+
+.kpis{grid-template-columns:repeat(5,minmax(0,1fr));margin-top:22px}
+.kpis .kpi{padding:12px 14px 14px}
+.kpis .kpi b{
+  display:block;font-family:var(--disp);font-weight:400;
+  font-size:clamp(26px,3.4vw,42px);line-height:1;margin-top:8px;
+}
+
+/* coluna principal + margem lateral */
+.lead{display:grid;grid-template-columns:minmax(0,1fr) 272px;gap:0 44px;align-items:start;margin-top:26px}
+.block-head{
+  display:flex;justify-content:space-between;align-items:baseline;gap:8px 18px;flex-wrap:wrap;
+  padding-bottom:8px;border-bottom:1px solid var(--rule);
+}
+.block-head + *{margin-top:0}
+
+/* ---------- filtros de liga ---------- */
+.fichas{grid-template-columns:repeat(5,minmax(0,1fr));margin-top:12px}
+.ficha{
+  appearance:none;border:0;background:var(--paper);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  padding:10px 12px 11px;text-align:left;min-width:0;
+  transition:background-color .12s ease;
+}
+.ficha .nm{
+  font-family:var(--text);font-size:12px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;line-height:1.25;
+  overflow-wrap:anywhere;min-width:0;
+}
+.ficha .ct{font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.ficha:hover{background:var(--paper-2)}
+.ficha:hover .nm{color:var(--accent)}
+.ficha:hover .ct{color:var(--accent)}
+.ficha[aria-pressed="true"]{background:var(--ink)}
+.ficha[aria-pressed="true"] .nm{color:var(--paper)}
+.ficha[aria-pressed="true"] .ct{color:var(--paper-3)}
+
+.statusline{
+  display:flex;justify-content:space-between;gap:6px 18px;flex-wrap:wrap;
+  padding:11px 0 10px;border-bottom:1px solid var(--ink);
+}
+.statusline .who{font-size:13px;letter-spacing:.06em}
+.statusline b{font-weight:600}
+
+/* ---------- a lista de partidas: livro-razão, não cards ---------- */
+.ledger{border-top:0}
+.entry{
+  display:grid;grid-template-columns:minmax(0,1fr) 214px;column-gap:26px;
+  padding:15px 0 16px 14px;border-top:1px solid var(--rule);
+  box-shadow:inset 3px 0 0 transparent;
+  transition:background-color .12s ease,box-shadow .12s ease;
+}
+.entry:first-child{border-top:0}
+.entry:last-child{border-bottom:1px solid var(--rule)}
+.entry:hover{background:var(--paper-2);box-shadow:inset 3px 0 0 var(--ink)}
+.e-main{min-width:0}
+.e-meta{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.e-meta .liga{color:var(--ink)}
+.e-meta .sep{color:var(--ink-3)}
+.badge{
+  font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--rule-2);padding:2px 6px 1px;color:var(--ink-2);white-space:nowrap;
+}
+.badge.alta{border-color:var(--accent);color:var(--accent)}
+
+.e-line{
+  display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:baseline;gap:12px;
+}
+.e-line .team{
+  font-family:var(--text);font-size:22px;line-height:1.15;
+  overflow-wrap:anywhere;min-width:0;color:var(--ink);
+}
+.e-line .team.home{text-align:right}
+.e-line .team.away{text-align:left}
+.e-line .team.win{font-weight:600}
+.e-line .team .dagger{font-style:normal;color:var(--accent);font-size:.8em;padding:0 4px}
+.e-line .score{
+  font-family:var(--mono);font-size:15px;font-variant-numeric:tabular-nums;
+  letter-spacing:.02em;white-space:nowrap;
+}
+.e-line .score b{font-weight:500}
+.e-line .score .dash{color:var(--ink-3);padding:0 6px}
+.e-stats{margin-top:9px;font-size:9.5px;letter-spacing:.1em}
+
+.e-prob{min-width:0;border-left:1px solid var(--rule);padding-left:18px}
+.e-prob .prob-h{display:block;font-size:8.5px;letter-spacing:.12em;margin-bottom:7px}
+.probs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.probs b{
+  font-family:var(--mono);font-size:19px;font-weight:500;
+  font-variant-numeric:tabular-nums;line-height:1;
+}
+.probs b.hi{color:var(--green)}
+.bar{display:flex;height:5px;margin-top:9px;background:var(--paper-3)}
+.bar i{background:var(--rule-2);height:100%}
+.bar i.hi{background:var(--green)}
+.probs-lab{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:5px;
+           font-size:8px;letter-spacing:.1em}
+.probs-lab i{font-style:normal;min-width:0;overflow-wrap:anywhere}
+
+.empty{padding:26px 0 28px;border-top:1px solid var(--rule);border-bottom:1px solid var(--ink)}
+.empty p{font-size:20px;font-family:var(--disp);line-height:1.2;margin:8px 0 6px}
+.empty .micro{display:block}
+
+/* ---------- margem (selo de registro sempre à vista) ---------- */
+.side{min-width:0;padding-top:2px}
+.plate{border:1px solid var(--ink);padding:16px 16px 18px;position:relative}
+.plate::before,.plate::after{
+  content:"";position:absolute;width:9px;height:9px;border:1px solid var(--ink-3);
+}
+.plate::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.plate::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.plate-head{padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.plate-big{
+  font-family:var(--disp);font-weight:400;font-size:60px;line-height:.95;margin:12px 0 4px;
+}
+.plate-sub{font-size:15px;font-style:italic;color:var(--ink-2);line-height:1.35}
+.dl{margin:14px 0 0;border-top:1px solid var(--rule)}
+.dl .row{
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  padding:7px 0;border-bottom:1px solid var(--rule);
+}
+.dl .k{font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-2)}
+.dl .v{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+.dl .v.big{font-size:15px}
+.stamp{
+  display:inline-block;margin:14px 0 0;
+  border:1px solid var(--accent);color:var(--accent);
+  padding:6px 9px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  line-height:1.35;
+}
+.print-note{margin-top:22px;padding-top:12px;border-top:1px solid var(--ink)}
+.print-note p{font-size:13.5px;color:var(--ink-2);line-height:1.42;margin-top:7px}
+
+/* ---------- blocos de dados (índices) ---------- */
+.idx{margin-top:14px}
+.idx .row{
+  display:grid;grid-template-columns:minmax(0,1fr) 54px 120px;
+  align-items:center;gap:14px;padding:10px 12px;min-width:0;
+}
+.idx .row.total{box-shadow:inset 3px 0 0 var(--ink)}
+.idx .nm{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;overflow-wrap:anywhere}
+.idx .ct{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;text-align:right}
+.track{height:4px;background:var(--paper-3);width:100%}
+.track i{display:block;height:100%;background:var(--ink)}
+
+.rank{margin-top:14px}
+.rank .row{
+  display:grid;grid-template-columns:26px minmax(0,1fr) 44px 130px;
+  align-items:center;gap:12px;padding:9px 12px;min-width:0;
+}
+.rank .pos{font-family:var(--mono);font-size:11px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.rank .nm{font-size:16px;overflow-wrap:anywhere;min-width:0}
+.rank .sc{font-family:var(--mono);font-size:14px;font-weight:500;text-align:right;font-variant-numeric:tabular-nums}
+.rank .row:hover{background:var(--paper-2)}
+.rank .row:hover .nm{color:var(--accent)}
+.rank .row:hover .sc{color:var(--accent)}
+
+/* ---------- registro (recorde) ---------- */
+.compare{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);
+         border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-top:22px}
+.compare > div{background:var(--paper);padding:16px 16px 18px;min-width:0}
+.compare .big{font-family:var(--disp);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.9;margin:10px 0 6px}
+.compare .big.acc{color:var(--accent)}
+.compare .sub{font-size:14px;color:var(--ink-2);line-height:1.35}
+.model{margin-top:26px}
+.mrow{
+  display:grid;grid-template-columns:minmax(0,1fr) 92px;align-items:baseline;gap:8px 16px;
+  padding:12px 12px 13px;min-width:0;
+}
+.mrow .lbl{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.mrow .vl{font-family:var(--mono);font-size:17px;font-variant-numeric:tabular-nums;text-align:right}
+.mrow .dt{grid-column:1 / -1;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.mrow.twin{box-shadow:inset 3px 0 0 var(--accent)}
+.mnote{font-size:14.5px;font-style:italic;color:var(--ink-2);margin-top:14px;
+       border-left:2px solid var(--rule-2);padding-left:14px}
+
+/* ---------- esportes / cobertura ---------- */
+.tags{display:flex;flex-wrap:wrap;border-top:1px solid var(--rule);border-left:1px solid var(--rule);margin-top:16px}
+.tag{background:var(--paper);padding:9px 12px 10px;font-size:11px;font-weight:500;
+     letter-spacing:.11em;text-transform:uppercase;overflow-wrap:anywhere;
+     border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.tag .c{font-family:var(--mono);color:var(--ink-3);margin-left:8px;font-size:10px}
+
+/* ---------- pro ---------- */
+.tiers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);
+       border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-top:22px}
+.tier{background:var(--paper);padding:18px 18px 20px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.tier.pro{background:var(--paper-2)}
+.tier-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
+           padding-bottom:9px;border-bottom:1px solid var(--rule)}
+.tier-head h3{font-family:var(--disp);font-weight:400;font-size:30px;margin:0;line-height:1}
+.tier-head .price{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;text-align:right}
+.tier ul{list-style:none;margin:0;padding:0}
+.tier li{font-size:16px;line-height:1.4;padding:9px 0 10px;border-bottom:1px solid var(--rule);display:flex;gap:11px}
+.tier li:last-child{border-bottom:0}
+.tier li::before{content:"—";color:var(--ink-3);flex:0 0 auto}
+.tier .cta{margin-top:auto}
+
+/* ---------- botões-carimbo ---------- */
+.btn{
+  appearance:none;cursor:pointer;border:1px solid var(--ink);background:transparent;color:var(--ink);
+  padding:11px 15px;font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
+  transition:background-color .12s ease,color .12s ease,border-color .12s ease;
+}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn:active{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{background:var(--accent);border-color:var(--accent)}
+.btn.wide{display:block;width:100%;text-align:center}
+
+/* ---------- rodapé ---------- */
+.foot{margin-top:46px;border-top:3px double var(--ink);padding:16px 0 40px}
+.foot-top{display:flex;justify-content:space-between;gap:14px 30px;flex-wrap:wrap}
+.foot-brand{font-family:var(--disp);font-size:26px;line-height:1;text-transform:uppercase}
+.foot .legal{font-size:14.5px;color:var(--ink-2);max-width:56ch;margin-top:10px;font-style:italic}
+.share{display:flex;flex-wrap:wrap;gap:8px}
+.share .btn{font-size:9.5px;padding:8px 11px}
+
+/* ============================================================
+   3. COMPOSIÇÃO MOBILE — própria, não o desktop espremido
+   ============================================================ */
+@media (max-width:1023px){
+  .lead{grid-template-columns:minmax(0,1fr);gap:26px 0}
+  .side{padding-top:0;border-top:1px solid var(--ink);padding-top:20px}
+  .entry{grid-template-columns:minmax(0,1fr)}
+  .e-prob{border-left:0;padding-left:0;margin-top:14px;border-top:1px solid var(--rule);padding-top:12px}
+  .probs b{font-size:22px}
+  .idx .row{grid-template-columns:minmax(0,1fr) 44px 84px}
+  .rank .row{grid-template-columns:22px minmax(0,1fr) 38px 78px}
+}
+
+@media (max-width:720px){
+  body{font-size:16.5px;background-image:none}
+  .wrap{padding:0 16px}
+  .masthead{padding-top:12px}
+  .topline{flex-direction:column;align-items:flex-start;gap:4px}
+  .brand{flex-direction:column;align-items:flex-start;gap:10px;padding:12px 0 11px}
+  .wordmark{font-size:46px}
+  .brand-r{max-width:100%}
+  .strapline{font-size:22px;margin-bottom:0}
+  #promessa-sub{display:none}          /* no mobile a manchete já diz a frase inteira */
+  .reg{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .reg-cell{padding:9px 12px 11px}
+  .reg-cell b{font-size:27px}
+  .tabs{grid-template-columns:repeat(2,minmax(0,1fr));border-bottom:1px solid var(--ink);margin-top:18px}
+  .tab{border-bottom:1px solid var(--rule)}
+  .tab:nth-child(2n){border-right:0}
+  .tab:nth-child(5){grid-column:1 / -1;border-bottom:0}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpis .kpi b{font-size:34px}
+  .kpis .kpi:last-child{grid-column:1 / -1}
+  .fichas{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ficha{padding:9px 10px 10px;min-height:44px}
+  .btn{min-height:44px}
+  .ficha .nm{font-size:10.5px;letter-spacing:.07em}
+  .ficha .ct{font-size:11px}
+  .e-line{grid-template-columns:minmax(0,1fr);gap:4px}
+  .e-line .team.home{text-align:left}
+  .e-line .team.away{text-align:left}
+  .e-line .score{order:-1;font-size:26px;margin-bottom:4px}
+  .e-line .score .dash{padding:0 7px}
+  .entry{padding:14px 0 15px 12px}
+  .entry:hover{box-shadow:inset 3px 0 0 var(--accent)}
+  .compare{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .tiers{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .idx .row{grid-template-columns:minmax(0,1fr) 40px}
+  .idx .track{display:none}
+  .rank .row{grid-template-columns:20px minmax(0,1fr) 36px}
+  .rank .track{display:none}
+  .mrow{grid-template-columns:minmax(0,1fr) 76px}
+  .note{font-size:17px}
+  .sec-meta{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="topline">
+      <span class="micro ink">HYPEFC · <span id="assinatura"></span></span>
+      <span class="micro" id="edicao"></span>
+    </div>
+
+    <div class="brand">
+      <div class="brand-l">
+        <span class="micro eyebrow" id="vol"></span>
+        <h1 class="wordmark">HypeFC</h1>
+      </div>
+      <div class="brand-r">
+        <p class="strapline" id="promessa-titulo"></p>
+        <p class="micro" id="promessa-sub"></p>
+      </div>
+    </div>
+
+    <div class="reg">
+      <div class="reg-cell"><span class="micro">CARDS LIQUIDADOS</span><b id="reg-cards"></b></div>
+      <div class="reg-cell"><span class="micro">ACERTO</span><b id="reg-acerto"></b></div>
+      <div class="reg-cell"><span class="micro">MÉDIA DO MANDANTE</span><b id="reg-media"></b></div>
+      <div class="reg-cell"><span class="micro">LIFT</span><b id="reg-lift"></b></div>
+    </div>
+    <div class="reg-foot">
+      <span class="micro" id="reg-detalhe"></span>
+      <span class="stamp" id="reg-edge"></span>
+    </div>
+
+    <nav class="tabs" role="tablist" aria-label="Seções do almanaque" id="tabs"></nav>
+  </header>
+
+  <main>
+    <section class="panel" id="p-rodada" role="tabpanel" aria-labelledby="t-0"></section>
+    <section class="panel" id="p-liga" role="tabpanel" aria-labelledby="t-1" hidden></section>
+    <section class="panel" id="p-recorde" role="tabpanel" aria-labelledby="t-2" hidden></section>
+    <section class="panel" id="p-esportes" role="tabpanel" aria-labelledby="t-3" hidden></section>
+    <section class="panel" id="p-pro" role="tabpanel" aria-labelledby="t-4" hidden></section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">HypeFC</div>
+        <p class="legal" id="legal"></p>
+        <p class="legal" id="rodape-lista"></p>
+      </div>
+      <div>
+        <span class="lab">Passar adiante</span>
+        <div class="share" id="share" style="margin-top:9px"></div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<noscript><div class="wrap"><p class="micro" style="padding:20px 0">Este esboço desenha os dados com JavaScript. Ative o JS para ver o registro.</p></div></noscript>
+
+<script>
+(function(){
+  "use strict";
+
+  /* Dados REAIS do HypeFC em produção — lidos de sketches/dados-reais.json.
+     Nenhum valor abaixo foi inventado, reformatado ou arredondado. */
+  var D = {
+    "marca": {
+      "nome": "HypeFC",
+      "dominio": "hypefc.je4ndev.com",
+      "assinatura": "Dashboard de futebol em tempo real",
+      "promessa": "O palpite não está à venda. O que vendemos é registro e alerta — medidos e publicados.",
+      "aviso_legal": "Painel informativo. Não é casa de aposta e não promete resultado.",
+      "posicionamento": "Mede o próprio modelo em público: acerto por card, Brier, comparação com o chute uniforme e com o favorito. Sem promessa de edge no palpite."
+    },
+    "capa": {
+      "atualizado": "Atualizado às 22:37",
+      "aviso_contexto": "Sem jogos hoje. Mostrando a última rodada com jogos: 20/09/2026.",
+      "rodada": "20/09/2026",
+      "kpis": [
+        { "rotulo": "JOGOS", "valor": "36" },
+        { "rotulo": "GOLS", "valor": "99" },
+        { "rotulo": "MÉDIA/JOGO", "valor": "2.8" },
+        { "rotulo": "ENCERRADOS", "valor": "36" },
+        { "rotulo": "LIGAS", "valor": "9" }
+      ],
+      "abas": ["Rodada", "Liga", "Recorde", "Esportes", "Pro"],
+      "compartilhar": ["WhatsApp", "Telegram", "X", "Copiar link"]
+    },
+    "filtros_liga": [
+      { "liga": "Todas", "jogos": 36 },
+      { "liga": "Brasileirão Série A", "jogos": 5 },
+      { "liga": "Bundesliga", "jogos": 3 },
+      { "liga": "Championship", "jogos": 2 },
+      { "liga": "Eredivisie", "jogos": 4 },
+      { "liga": "La Liga", "jogos": 5 },
+      { "liga": "Ligue 1", "jogos": 3 },
+      { "liga": "Premier League", "jogos": 4 },
+      { "liga": "Primeira Liga", "jogos": 5 },
+      { "liga": "Serie A", "jogos": 5 }
+    ],
+    "em_alta": [
+      { "score": 86, "time": "FC Porto" },
+      { "score": 80, "time": "Benfica" },
+      { "score": 75, "time": "Manchester City" },
+      { "score": 73, "time": "Atlético Madrid" },
+      { "score": 71, "time": "Flamengo" },
+      { "score": 67, "time": "Barcelona" },
+      { "score": 67, "time": "Borussia Dortmund" },
+      { "score": 64, "time": "AZ Alkmaar" },
+      { "score": 63, "time": "AS Monaco" },
+      { "score": 63, "time": "Real Madrid" },
+      { "score": 59, "time": "AS Roma" },
+      { "score": 58, "time": "Feyenoord Rotterdam" }
+    ],
+    "partidas": [
+      { "liga": "Brasileirão Série A", "status": "ENCERRADO",
+        "casa": { "time": "Grêmio", "posicao": "17º", "gols": 0 },
+        "fora": { "time": "Palmeiras", "posicao": "2º", "gols": 0 },
+        "prob": { "casa": 28, "empate": 26, "fora": 46 }, "destaque": "fora",
+        "stats": { "posse": "28–72", "chutes": "7–31", "no_alvo": "4–10" } },
+      { "liga": "Brasileirão Série A", "status": "ENCERRADO",
+        "casa": { "time": "Corinthians", "posicao": "14º", "gols": 1 },
+        "fora": { "time": "Fluminense", "posicao": "4º", "gols": 3 },
+        "prob": { "casa": 34, "empate": 26, "fora": 39 }, "destaque": "fora",
+        "stats": { "posse": "57–43", "chutes": "20–10", "no_alvo": "7–6" } },
+      { "liga": "Brasileirão Série A", "status": "ENCERRADO",
+        "casa": { "time": "Vitória", "posicao": "13º", "gols": 1 },
+        "fora": { "time": "Cruzeiro", "posicao": "6º", "gols": 3 },
+        "prob": { "casa": 36, "empate": 26, "fora": 37 }, "destaque": "fora",
+        "stats": { "posse": "44–56", "chutes": "21–14", "no_alvo": "8–5" } },
+      { "liga": "Brasileirão Série A", "status": "ENCERRADO",
+        "casa": { "time": "Flamengo", "posicao": "1º", "gols": 2 },
+        "fora": { "time": "Red Bull Bragantino", "posicao": "10º", "gols": 1 },
+        "prob": { "casa": 62, "empate": 22, "fora": 15 }, "destaque": "casa",
+        "selo": "EM ALTA 71",
+        "stats": { "posse": "66–34", "chutes": "11–15", "no_alvo": "6–5" } },
+      { "liga": "Brasileirão Série A", "status": "ENCERRADO",
+        "casa": { "time": "Athletico-PR", "posicao": "3º", "gols": 2 },
+        "fora": { "time": "Bahia", "posicao": "5º", "gols": 1 },
+        "prob": { "casa": 50, "empate": 25, "fora": 25 }, "destaque": "casa",
+        "stats": { "posse": "50–51", "chutes": "11–10", "no_alvo": "6–3" } },
+      { "liga": "Ligue 1", "status": "ENCERRADO",
+        "casa": { "time": "AJ Auxerre", "posicao": "10º", "gols": 2 },
+        "fora": { "time": "Brest", "posicao": "11º", "gols": 1 },
+        "prob": { "casa": 47, "empate": 26, "fora": 27 }, "destaque": "casa",
+        "stats": { "posse": "52–48", "chutes": "11–8", "no_alvo": "4–2" } },
+      { "liga": "Ligue 1", "status": "ENCERRADO",
+        "casa": { "time": "Nice", "posicao": "14º", "gols": 2 },
+        "fora": { "time": "Lille", "posicao": "4º", "gols": 1 },
+        "prob": { "casa": 43, "empate": 26, "fora": 31 }, "destaque": "casa",
+        "stats": { "posse": "41–59", "chutes": "10–21", "no_alvo": "4–8" } },
+      { "liga": "Ligue 1", "status": "ENCERRADO",
+        "casa": { "time": "Marseille", "posicao": "17º", "gols": 1 },
+        "fora": { "time": "Paris Saint-Germain", "posicao": "6º", "gols": 2 },
+        "prob": { "casa": 40, "empate": 26, "fora": 33 }, "destaque": "casa",
+        "stats": { "posse": "39–61", "chutes": "12–31", "no_alvo": "4–10" } },
+      { "liga": "Primeira Liga", "status": "ENCERRADO",
+        "casa": { "time": "Estrela", "posicao": "8º", "gols": 0 },
+        "fora": { "time": "Académico de Viseu", "posicao": "7º", "gols": 2 },
+        "prob": { "casa": 46, "empate": 26, "fora": 28 }, "destaque": "casa",
+        "stats": { "posse": "59–41", "chutes": "16–8", "no_alvo": "2–4" } },
+      { "liga": "Primeira Liga", "status": "ENCERRADO",
+        "casa": { "time": "Vitória de Guimaraes", "posicao": "14º", "gols": 1 },
+        "fora": { "time": "Moreirense", "posicao": "9º", "gols": 1 },
+        "prob": { "casa": 44, "empate": 26, "fora": 30 }, "destaque": "casa",
+        "stats": { "posse": "66–34", "chutes": "16–7", "no_alvo": "5–3" } }
+    ],
+    "legenda": [
+      "Probabilidade: Casa · Empate · Fora (verde = maior).",
+      "Rodapé: posse · chutes · no alvo (casa–fora); “—” = não publicado."
+    ],
+    "registro_publico": {
+      "manchete": "Recorde público",
+      "cards_liquidados": 1402,
+      "rodadas": 271,
+      "corte": 44,
+      "detalhe": "1402 reconstruídos · 0 gravados ao vivo",
+      "acerto": "53.6%",
+      "acerto_detalhe": "751/1402 · empate conta como erro",
+      "comparacao": "vs média do mandante 37.0%",
+      "lift": "+16.6pp",
+      "sem_edge": "Calibrado, sem edge no palpite."
+    },
+    "modelo": [
+      { "rotulo": "BRIER DO MODELO", "valor": "0,629", "detalhe": "n=1.203 jogos" },
+      { "rotulo": "CHUTE UNIFORME", "valor": "0,667", "detalhe": "1/3 para cada lado" },
+      { "rotulo": "FAVORITO DO MODELO", "valor": "46,5%", "detalhe": "acerto do palpite" },
+      { "rotulo": "ÂNCORA MELHOR COLOCADO", "valor": "46,5%", "detalhe": "mesma taxa, sem modelo" }
+    ],
+    "pro": {
+      "preco_mes": "R$ 9,90/mês",
+      "preco_ano": "R$ 79/ano",
+      "gratis": ["Painel completo: rodada, ligas, esportes e recorde público", "Até 3 times seguidos", "Sem alertas"],
+      "pro": ["Até 20 times seguidos", "Alerta antes da rodada", "Histórico do registro: o que o modelo previa para quem você segue"],
+      "cta": "Assinar Pro",
+      "cta_secundario": "Ativar acesso",
+      "rodape_lista": "A assinatura já está aberta. Se preferir esperar, deixe o e-mail: a gente avisa de novidade do Pro. Nada de cobrança aqui."
+    }
+  };
+
+  var R = D.registro_publico, P = D.pro, M = D.marca;
+  var KPI = {};
+  D.capa.kpis.forEach(function(k){ KPI[k.rotulo] = k.valor; });
+  var TOTAL = Number(KPI["JOGOS"]);                              // 36
+  var MAXALTA = Math.max.apply(null, D.em_alta.map(function(t){ return t.score; })); // 86
+  var state = { liga: "Todas" };
+
+  function esc(v){
+    return String(v).replace(/[&<>"]/g, function(c){
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c];
+    });
+  }
+  function $(s){ return document.querySelector(s); }
+
+  /* ---------------- cabeçalho + rodapé ---------------- */
+  $("#assinatura").textContent = M.assinatura;
+  $("#edicao").textContent = "RODADA " + D.capa.rodada + " · " + D.capa.atualizado;
+  $("#vol").textContent = "VOL. I — " + R.manchete;
+  $("#promessa-titulo").textContent = "O palpite não está à venda.";
+  $("#promessa-sub").textContent = M.promessa;
+  $("#reg-cards").textContent   = R.cards_liquidados;
+  $("#reg-acerto").textContent  = R.acerto;
+  $("#reg-media").textContent   = "37.0%";
+  $("#reg-lift").textContent    = R.lift;
+  $("#reg-detalhe").textContent = R.detalhe;
+  $("#reg-edge").textContent    = R.sem_edge;
+  $("#legal").textContent       = M.aviso_legal;
+  $("#rodape-lista").textContent = P.rodape_lista;
+  $("#share").innerHTML = D.capa.compartilhar.map(function(c){
+    return '<button class="btn" type="button">' + esc(c) + "</button>";
+  }).join("");
+
+  /* ---------------- abas ---------------- */
+  var PANELS = ["p-rodada","p-liga","p-recorde","p-esportes","p-pro"];
+  var NUM = ["§ I","§ II","§ III","§ IV","§ V"];
+  $("#tabs").innerHTML = D.capa.abas.map(function(nome, i){
+    return '<button class="tab" type="button" role="tab" id="t-' + i + '" data-panel="' + PANELS[i] + '"' +
+           ' aria-controls="' + PANELS[i] + '" aria-selected="' + (i === 0) + '" tabindex="' + (i === 0 ? 0 : -1) + '">' +
+           '<span class="n">' + NUM[i] + "</span><span>" + esc(nome) + "</span></button>";
+  }).join("");
+
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+  function activate(idx, focus){
+    tabs.forEach(function(t, i){
+      var on = i === idx;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      var p = document.getElementById(t.dataset.panel);
+      if (p) { if (on) { p.removeAttribute("hidden"); } else { p.setAttribute("hidden", ""); } }
+    });
+    if (focus && tabs[idx]) tabs[idx].focus();
+  }
+  $("#tabs").addEventListener("click", function(e){
+    var t = e.target.closest(".tab"); if (!t) return;
+    activate(tabs.indexOf(t), false);
+  });
+  $("#tabs").addEventListener("keydown", function(e){
+    var i = tabs.indexOf(document.activeElement);
+    if (i < 0) return;
+    var n = null;
+    if (e.key === "ArrowRight") n = (i + 1) % tabs.length;
+    if (e.key === "ArrowLeft")  n = (i - 1 + tabs.length) % tabs.length;
+    if (n !== null) { e.preventDefault(); activate(n, true); }
+  });
+
+  /* ---------------- painel I — Rodada ---------------- */
+  function kpiHTML(){
+    return D.capa.kpis.map(function(k){
+      return '<div class="kpi"><span class="micro">' + esc(k.rotulo) + "</span><b>" + esc(k.valor) + "</b></div>";
+    }).join("");
+  }
+  function fichaHTML(f){
+    var on = f.liga === state.liga;
+    return '<button class="ficha" type="button" data-liga="' + esc(f.liga) + '" aria-pressed="' + on + '">' +
+           '<span class="nm">' + esc(f.liga) + '</span><span class="ct">' + esc(f.jogos) + "</span></button>";
+  }
+  function isHi(m, k){
+    var mx = Math.max(m.prob.casa, m.prob.empate, m.prob.fora);
+    return m.prob[k] === mx;
+  }
+  function entryHTML(m){
+    var keys = ["casa","empate","fora"];
+    var nums = keys.map(function(k){
+      return '<b class="' + (isHi(m, k) ? "hi" : "") + '">' + m.prob[k] + "</b>";
+    }).join("");
+    var bars = keys.map(function(k){
+      return '<i class="' + (isHi(m, k) ? "hi" : "") + '" style="width:' + m.prob[k] + '%"></i>';
+    }).join("");
+    var hw = m.destaque === "casa", aw = m.destaque === "fora";
+    return '<article class="entry">' +
+      '<div class="e-main">' +
+        '<div class="e-meta">' +
+          '<span class="lab liga">' + esc(m.liga) + "</span>" +
+          '<span class="sep">·</span>' +
+          '<span class="micro pos">' + esc(m.casa.posicao) + " vs " + esc(m.fora.posicao) + "</span>" +
+          (m.selo ? '<span class="badge alta">' + esc(m.selo) + "</span>" : "") +
+          '<span class="badge">' + esc(m.status) + "</span>" +
+        "</div>" +
+        '<div class="e-line">' +
+          '<span class="team home' + (hw ? " win" : "") + '">' + esc(m.casa.time) + (hw ? '<i class="dagger">†</i>' : "") + "</span>" +
+          '<span class="score"><b>' + m.casa.gols + '</b><span class="dash">—</span><b>' + m.fora.gols + "</b></span>" +
+          '<span class="team away' + (aw ? " win" : "") + '">' + (aw ? '<i class="dagger">†</i>' : "") + esc(m.fora.time) + "</span>" +
+        "</div>" +
+        '<div class="e-stats micro">posse ' + esc(m.stats.posse) + " · chutes " + esc(m.stats.chutes) +
+          " · no alvo " + esc(m.stats.no_alvo) + "</div>" +
+      "</div>" +
+      '<div class="e-prob">' +
+        '<span class="micro prob-h">Probabilidade</span>' +
+        '<span class="probs">' + nums + "</span>" +
+        '<span class="probs-lab micro"><i>casa</i><i>empate</i><i>fora</i></span>' +
+        '<span class="bar">' + bars + "</span>" +
+      "</div>" +
+    "</article>";
+  }
+  function paintLedger(){
+    var rows = D.partidas.filter(function(m){ return state.liga === "Todas" || m.liga === state.liga; });
+    var f = D.filtros_liga.filter(function(x){ return x.liga === state.liga; })[0];
+    var who = state.liga === "Todas"
+      ? "<b>Recorte do volume</b> · " + rows.length + " de " + TOTAL + " jogos · " +
+        esc(KPI["LIGAS"]) + " ligas · " + KPI["ENCERRADOS"] + " encerrados"
+      : "<b>" + esc(state.liga) + "</b> · " + rows.length + " de " + (f ? f.jogos : 0) + " jogos desta liga no recorte";
+    $("#count-line").innerHTML = who;
+    $("#ledger").innerHTML = rows.length
+      ? rows.map(entryHTML).join("")
+      : '<div class="empty"><span class="lab">Sem entradas</span>' +
+        "<p>Nenhum jogo de " + esc(state.liga) + " no recorte deste volume.</p>" +
+        '<span class="micro">A rodada tem ' + (f ? f.jogos : 0) + " jogos de " + esc(state.liga) + ", " +
+        "0 deles neste recorte.</span></div>";
+    var n = rows.length;
+    $("#rows-now").textContent = String(n);
+  }
+
+  $("#p-rodada").innerHTML =
+    '<div class="sec-head">' +
+      '<div><span class="sec-num">§ I</span><h2>Rodada</h2></div>' +
+      '<span class="sec-meta micro">' + esc(D.capa.rodada) + " · " + esc(KPI["JOGOS"]) + " jogos</span>" +
+    "</div>" +
+    '<p class="note">' + esc(D.capa.aviso_contexto) +
+      '<span class="micro">Nota de contexto publicada no painel</span></p>' +
+    '<div class="kpis grid-lines">' + kpiHTML() + "</div>" +
+    '<div class="lead">' +
+      "<div>" +
+        '<div class="block-head"><span class="lab">Fichas de liga</span>' +
+          '<span class="micro">clique: a lista muda de tamanho</span></div>' +
+        '<div class="fichas grid-lines" id="fichas">' + D.filtros_liga.map(fichaHTML).join("") + "</div>" +
+        '<div class="statusline"><span class="who" id="count-line" aria-live="polite"></span>' +
+          '<span class="micro"><span id="rows-now">0</span> linhas visíveis</span></div>' +
+        '<div class="ledger" id="ledger"></div>' +
+      "</div>" +
+      '<aside class="side">' +
+        '<div class="plate">' +
+          '<div class="plate-head"><span class="lab">' + esc(R.manchete) + "</span></div>" +
+          '<div class="plate-big">' + esc(R.acerto) + "</div>" +
+          '<p class="plate-sub">' + esc(R.acerto_detalhe) + "</p>" +
+          '<div class="dl">' +
+            '<div class="row"><span class="k">Cards liquidados</span><span class="v big">' + esc(R.cards_liquidados) + "</span></div>" +
+            '<div class="row"><span class="k">Rodadas</span><span class="v">' + esc(R.rodadas) + "</span></div>" +
+            '<div class="row"><span class="k">Corte</span><span class="v">' + esc(R.corte) + "</span></div>" +
+            '<div class="row"><span class="k">' + esc(R.comparacao) + '</span><span class="v">' + esc(R.lift) + "</span></div>" +
+          "</div>" +
+          '<span class="stamp">' + esc(R.sem_edge) + "</span>" +
+        "</div>" +
+        '<div class="print-note"><span class="lab">Legenda</span>' +
+          D.legenda.map(function(l){ return "<p>" + esc(l) + "</p>"; }).join("") +
+        "</div>" +
+      "</aside>" +
+    "</div>";
+
+  /* as fichas fecham a grade: 10 ligas em 5 colunas (2 no mobile) — a
+     contagem fica no CSS, em media query, para não sobrescrever o mobile */
+
+  $("#fichas").addEventListener("click", function(e){
+    var b = e.target.closest(".ficha"); if (!b) return;
+    state.liga = b.dataset.liga;
+    Array.prototype.forEach.call(document.querySelectorAll(".ficha"), function(f){
+      f.setAttribute("aria-pressed", String(f.dataset.liga === state.liga));
+    });
+    paintLedger();
+  });
+
+  /* ---------------- painel II — Liga ---------------- */
+  var ligas = D.filtros_liga.filter(function(f){ return f.liga !== "Todas"; });
+  var maxLiga = Math.max.apply(null, ligas.map(function(l){ return l.jogos; }));
+  $("#p-liga").innerHTML =
+    '<div class="sec-head">' +
+      "<div><span class=\"sec-num\">§ II</span><h2>Liga</h2></div>" +
+      '<span class="sec-meta micro">' + ligas.length + " ligas · " + TOTAL + " jogos</span>" +
+    "</div>" +
+    '<p class="note">Índice de ligas da rodada ' + esc(D.capa.rodada) +
+      '<span class="micro">Parte da rodada = jogos da liga sobre ' + TOTAL + " jogos</span></p>" +
+    '<div class="idx grid-lines">' +
+      ligas.map(function(l){
+        return '<div class="row"><span class="nm">' + esc(l.liga) + "</span>" +
+          '<span class="ct">' + l.jogos + "</span>" +
+          '<span class="track"><i style="width:' + Math.round(l.jogos / maxLiga * 100) + '%"></i></span></div>';
+      }).join("") +
+      '<div class="row total"><span class="nm">Todas</span><span class="ct">' + TOTAL + "</span>" +
+        '<span class="track"><i style="width:100%"></i></span></div>' +
+    "</div>" +
+    '<div class="block-head" style="margin-top:30px"><span class="lab">Em alta</span>' +
+      '<span class="micro">índice de forma · ' + D.em_alta.length + " times</span></div>" +
+    '<div class="rank grid-lines">' +
+      D.em_alta.map(function(t, i){
+        return '<div class="row"><span class="pos">' + String(i + 1).padStart(2, "0") + "</span>" +
+          '<span class="nm">' + esc(t.time) + "</span>" +
+          '<span class="sc">' + t.score + "</span>" +
+          '<span class="track"><i style="width:' + Math.round(t.score / MAXALTA * 100) + '%"></i></span></div>';
+      }).join("") +
+    "</div>" +
+    '<p class="mnote">Ranking de forma publicado no painel. ' + esc(M.posicionamento) + "</p>";
+
+  /* ---------------- painel III — Recorde ---------------- */
+  $("#p-recorde").innerHTML =
+    '<div class="sec-head">' +
+      "<div><span class=\"sec-num\">§ III</span><h2>" + esc(R.manchete) + "</h2></div>" +
+      '<span class="sec-meta micro">' + esc(R.detalhe) + "</span>" +
+    "</div>" +
+    '<div class="compare">' +
+      '<div><span class="micro">Acerto do modelo</span><div class="big">' + esc(R.acerto) + "</div>" +
+        '<p class="sub">' + esc(R.acerto_detalhe) + "</p></div>" +
+      '<div><span class="micro">Média do mandante</span><div class="big">37.0%</div>' +
+        '<p class="sub">' + esc(R.comparacao) + "</p></div>" +
+      '<div><span class="micro">Lift</span><div class="big acc">' + esc(R.lift) + "</div>" +
+        '<p class="sub">Diferença entre as duas colunas</p></div>' +
+    "</div>" +
+    '<div class="dl" style="margin-top:22px;border-top:1px solid var(--ink)">' +
+      '<div class="row"><span class="k">Cards liquidados</span><span class="v big">' + esc(R.cards_liquidados) + "</span></div>" +
+      '<div class="row"><span class="k">Rodadas</span><span class="v big">' + esc(R.rodadas) + "</span></div>" +
+      '<div class="row"><span class="k">Corte</span><span class="v big">' + esc(R.corte) + "</span></div>" +
+      '<div class="row"><span class="k">Reconstrução</span><span class="v">' + esc(R.detalhe) + "</span></div>" +
+    "</div>" +
+    '<p class="stamp" style="margin-top:20px">' + esc(R.sem_edge) + "</p>" +
+    '<div class="block-head" style="margin-top:34px"><span class="lab">Modelo · comparações</span>' +
+      '<span class="micro">publicado no painel</span></div>' +
+    '<div class="model grid-lines">' +
+      D.modelo.map(function(m, i){
+        var twin = i >= 2 ? " twin" : "";
+        return '<div class="mrow' + twin + '"><span class="lbl">' + esc(m.rotulo) + "</span>" +
+          '<span class="vl">' + esc(m.valor) + "</span>" +
+          '<span class="dt">' + esc(m.detalhe) + "</span></div>";
+      }).join("") +
+    "</div>" +
+    '<p class="mnote">As duas últimas linhas marcam ' + esc(D.modelo[2].valor) + " nas duas pontas: " +
+      esc(D.modelo[2].detalhe) + " e " + esc(D.modelo[3].detalhe) + ". " +
+      "Sem promessa de edge no palpite.</p>";
+
+  /* ---------------- painel IV — Esportes ---------------- */
+  $("#p-esportes").innerHTML =
+    '<div class="sec-head">' +
+      "<div><span class=\"sec-num\">§ IV</span><h2>Esportes</h2></div>" +
+      '<span class="sec-meta micro">cobertura deste volume</span>' +
+    "</div>" +
+    '<p class="note">Este volume publica ' + esc(KPI["LIGAS"]) + " ligas de futebol, " + esc(KPI["JOGOS"]) +
+      " jogos e " + esc(KPI["GOLS"]) + " gols na rodada " + esc(D.capa.rodada) +
+      '<span class="micro">Sem dados medidos de outras modalidades neste volume</span></p>' +
+    '<div class="kpis grid-lines">' + kpiHTML() + "</div>" +
+    '<div class="block-head" style="margin-top:30px"><span class="lab">Ligas cobertas</span>' +
+      '<span class="micro">' + ligas.length + " de " + ligas.length + " com jogos no recorte</span></div>" +
+    '<div class="tags">' +
+      ligas.map(function(l){
+        return '<span class="tag">' + esc(l.liga) + '<span class="c">' + l.jogos + "</span></span>";
+      }).join("") +
+    "</div>" +
+    '<p class="mnote">O almanaque publica o que já está medido. Modalidades fora do futebol não entram neste volume ' +
+      "enquanto não houver registro liquidado para publicar.</p>";
+
+  /* ---------------- painel V — Pro ---------------- */
+  $("#p-pro").innerHTML =
+    '<div class="sec-head">' +
+      "<div><span class=\"sec-num\">§ V</span><h2>Pro</h2></div>" +
+      '<span class="sec-meta micro">' + esc(P.preco_mes) + " · " + esc(P.preco_ano) + "</span>" +
+    "</div>" +
+    '<p class="note">O Pro não vende palpite. Vende alerta e histórico do registro.' +
+      '<span class="micro">' + esc(M.promessa) + "</span></p>" +
+    '<div class="tiers">' +
+      '<div class="tier"><div class="tier-head"><h3>Grátis</h3><span class="price">sem cobrança</span></div>' +
+        "<ul>" + P.gratis.map(function(g){ return "<li>" + esc(g) + "</li>"; }).join("") + "</ul>" +
+        '<div class="cta"><button class="btn wide" type="button">' + esc(P.cta_secundario) + "</button></div></div>" +
+      '<div class="tier pro"><div class="tier-head"><h3>Pro</h3>' +
+        '<span class="price">' + esc(P.preco_mes) + "<br>" + esc(P.preco_ano) + "</span></div>" +
+        "<ul>" + P.pro.map(function(g){ return "<li>" + esc(g) + "</li>"; }).join("") + "</ul>" +
+        '<div class="cta"><button class="btn solid wide" type="button">' + esc(P.cta) + "</button></div></div>" +
+    "</div>" +
+    '<p class="mnote">' + esc(P.rodape_lista) + "</p>" +
+    '<div class="dl" style="margin-top:24px">' +
+      '<div class="row"><span class="k">Acerto em ' + esc(R.cards_liquidados) + " cards</span><span class=\"v big\">" + esc(R.acerto) + "</span></div>" +
+      '<div class="row"><span class="k">' + esc(R.comparacao) + '</span><span class="v">' + esc(R.lift) + "</span></div>" +
+      '<div class="row"><span class="k">Governança</span><span class="v">' + esc(R.sem_edge) + "</span></div>" +
+    "</div>";
+
+  paintLedger();
+  activate(0, false);
+  window.__almanaque = { data: D, state: state, paint: paintLedger, activate: activate };
+})();
+</script>
+</body>
+</html>

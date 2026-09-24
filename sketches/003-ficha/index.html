@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HypeFC — Ficha da rodada 20/09/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   FICHA — direção visual para o HypeFC
+   Stance: o painel é uma FICHA DE ARQUIVO (registro), não um app.
+   Papel, tinta, chanfro, picote, carimbo. Zero glow, zero neon.
+   ============================================================ */
+
+:root{
+  --desk:#23211d;
+  --paper:#f4efe4;
+  --paper-2:#efe8d9;
+  --paper-3:#e5dcc7;
+  --ink:#191713;
+  --ink-2:#5b564c;
+  --ink-3:#6f6859;
+  --rule:rgba(25,23,19,.17);
+  --rule-soft:rgba(25,23,19,.09);
+  --rule-hard:rgba(25,23,19,.38);
+  --stamp:#9c2b22;
+  --ledger:#2f6b4a;
+  --sans:"Archivo", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --cut:polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  --cut-sm:polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--desk);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:14px;
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+}
+button{font-family:inherit}
+
+/* ---------- mesa + folha ---------- */
+.desk{padding:30px 20px 46px}
+.sheet{
+  position:relative;
+  max-width:1180px;
+  margin:0 auto;
+  background:var(--paper);
+  padding:16px 34px 26px;
+  clip-path:polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+  box-shadow:0 30px 70px -34px rgba(0,0,0,.8);
+}
+.sheet__perf{
+  position:absolute; top:0; left:0; right:0; height:13px;
+  background-image:radial-gradient(circle at 6px 6px, var(--desk) 3.1px, transparent 3.4px);
+  background-size:16px 13px; background-repeat:repeat-x;
+  pointer-events:none;
+}
+@media (min-width:761px){
+  .sheet::before{
+    content:""; position:absolute; top:22px; bottom:22px; left:52px; width:1px;
+    background:rgba(156,43,34,.30); pointer-events:none;
+  }
+}
+.desk::before{ /* bruma de arquivo morto */
+  content:""; position:fixed; inset:0; pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.05), transparent 60%);
+}
+
+/* ---------- cabeçalho / masthead ---------- */
+.masthead{
+  display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,.95fr); gap:34px;
+  padding:20px 0 18px; border-bottom:2px solid var(--rule-hard); align-items:start;
+}
+.serial{
+  display:block; font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:8px;
+}
+h1{
+  margin:0; font-family:var(--sans); font-weight:800; letter-spacing:-.035em;
+  font-size:clamp(34px,4.6vw,58px); line-height:.95;
+}
+.tagline{
+  margin:8px 0 0; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-2);
+}
+.note{
+  padding:12px 14px; background:var(--paper-2); border-left:3px solid var(--ink);
+  font-size:13px; color:var(--ink);
+}
+.note--promise{border-left-color:var(--stamp); font-size:14px; font-weight:500}
+.stamp{
+  display:inline-block; margin-top:14px; padding:7px 11px;
+  border:2px solid var(--stamp); color:var(--stamp);
+  font-family:var(--mono); font-weight:600; font-size:12px; letter-spacing:.09em;
+  text-transform:uppercase; transform:rotate(-1.6deg);
+}
+.legal{margin:10px 0 0; font-size:12px; color:var(--ink-2); max-width:42ch}
+
+/* ---------- abas (abas de arquivo) ---------- */
+.tabs{
+  display:flex; gap:6px; margin:20px 0 0; border-bottom:1px solid var(--rule-hard);
+}
+.tab{
+  appearance:none; cursor:pointer; margin-bottom:-1px;
+  background:var(--paper-2); color:var(--ink-2);
+  border:1px solid var(--rule); border-bottom:1px solid var(--rule-hard);
+  font-size:13px; font-weight:600; letter-spacing:.02em;
+  padding:11px 18px 12px; min-height:44px;
+  clip-path:polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%, 0 10px);
+  transition:background .15s ease, color .15s ease, border-color .15s ease;
+}
+.tab:hover{background:var(--paper-3); color:var(--ink); border-color:var(--rule-hard)}
+.tab[aria-selected="true"]{
+  background:var(--paper); color:var(--ink);
+  border-color:var(--rule-hard); border-bottom-color:transparent;
+  box-shadow:inset 0 3px 0 var(--stamp);
+}
+.tab:focus-visible{outline:none; box-shadow:inset 0 3px 0 var(--stamp), 0 0 0 2px rgba(156,43,34,.4)}
+
+/* ---------- estrutura de ficha (chanfro com contorno) ---------- */
+.ficha{background:var(--rule); padding:1px; clip-path:var(--cut)}
+.ficha__in{background:var(--paper); clip-path:var(--cut); padding:14px 16px}
+.ficha--sm{background:var(--rule); clip-path:var(--cut-sm)}
+.ficha--sm > .ficha__in{padding:12px 14px; clip-path:var(--cut-sm)}
+
+/* ---------- seção ---------- */
+.sec{display:flex; align-items:baseline; flex-wrap:wrap; gap:10px; margin:26px 0 14px; border-bottom:1px solid var(--rule-hard); padding-bottom:9px}
+.sec__t{margin:0; font-size:clamp(17px,2vw,21px); font-weight:700; letter-spacing:.01em; text-transform:uppercase}
+.sec__m{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
+.sec__r{margin-left:auto; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+
+/* ---------- faixa de KPIs (livro-razão) ---------- */
+.kpis{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:1px; background:var(--rule-soft)}
+.kpi{background:var(--paper); padding:14px 16px 16px}
+.kpi__l{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.kpi__v{font-family:var(--mono); font-size:clamp(24px,3vw,34px); font-weight:600; letter-spacing:-.03em; line-height:1; margin-top:8px}
+
+/* ---------- filtros ---------- */
+.filters{margin:18px 0 14px}
+.filters__l{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin-bottom:9px}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chip{
+  display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+  min-height:36px; padding:8px 12px; background:var(--paper-2); color:var(--ink-2);
+  border:1px solid var(--rule); font-size:12.5px; font-weight:500;
+  clip-path:var(--cut-sm);
+  transition:background .15s ease, color .15s ease, border-color .15s ease;
+}
+.chip:hover{background:var(--paper-3); color:var(--ink); border-color:var(--rule-hard)}
+.chip__n{font-family:var(--mono); font-size:11px; font-weight:600; color:var(--ink-3)}
+.chip[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.chip[aria-pressed="true"] .chip__n{color:#cfc7b6}
+
+/* ---------- linha de contagem ---------- */
+.tally{
+  display:flex; flex-wrap:wrap; gap:8px 16px; align-items:baseline;
+  font-family:var(--mono); font-size:12px; color:var(--ink-2);
+  border-bottom:1px dashed var(--rule); padding-bottom:10px; margin-bottom:12px;
+}
+.tally b{color:var(--ink); font-weight:600}
+
+/* ---------- cabeçalho de colunas (desktop) ---------- */
+.thead{
+  display:grid; grid-template-columns:148px minmax(0,1fr) 74px minmax(0,1fr) 152px 176px;
+  gap:14px; padding:0 15px 7px; font-family:var(--mono); font-size:11px;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3);
+}
+.thead span:nth-child(2){text-align:right}
+.thead span:nth-child(4){text-align:left}
+
+/* ---------- ficha de partida ---------- */
+#list{display:grid; gap:10px}
+.match{transition:none}
+.match .ficha__in{
+  display:grid; grid-template-columns:148px minmax(0,1fr) 74px minmax(0,1fr) 152px 176px;
+  gap:14px; align-items:center; padding:12px 15px;
+  box-shadow:inset 3px 0 0 transparent;
+  transition:background .15s ease, box-shadow .15s ease;
+}
+.match:hover .ficha__in{background:var(--paper-2); box-shadow:inset 3px 0 0 var(--stamp)}
+.m__liga{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); font-weight:600; text-wrap:balance}
+.m__liga span{display:block; font-family:var(--mono); letter-spacing:.1em; color:var(--ink-3); font-weight:400; margin-top:4px}
+.m__tag{
+  display:inline-block; margin-top:6px; padding:2px 6px; border:1px solid var(--stamp);
+  color:var(--stamp); font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+}
+.m__teams{display:contents}
+.m__team{min-width:0; font-size:15px; font-weight:600; line-height:1.2}
+.m__team--casa{text-align:right}
+.m__team--fora{text-align:left}
+.m__team i{display:block; font-family:var(--mono); font-style:normal; font-size:11px; font-weight:400; color:var(--ink-3); margin-top:3px}
+.m__score{
+  font-family:var(--mono); font-size:19px; font-weight:600; text-align:center;
+  letter-spacing:-.02em; color:var(--ink);
+}
+.m__score b{color:var(--stamp)}
+.m__prob{min-width:0}
+.prob__bar{display:flex; height:10px; background:var(--paper-3); border:1px solid var(--rule); overflow:hidden}
+.seg{display:block; height:100%}
+.seg--c{background:var(--ink)}
+.seg--e{background:repeating-linear-gradient(45deg, var(--ink) 0 2px, transparent 2px 5px)}
+.seg--f{background:rgba(25,23,19,.20)}
+.seg.is-max{background:var(--ledger); background-image:none}
+.prob__nums{display:flex; justify-content:space-between; margin-top:6px; font-family:var(--mono); font-size:11.5px; color:var(--ink-2)}
+.prob__nums b{color:var(--ledger); font-weight:600}
+.m__stats{font-family:var(--mono); font-size:11.5px; color:var(--ink-2); line-height:1.55}
+.m__stats b{color:var(--ink); font-weight:500}
+/* linha de stats só existe na faixa intermediária; no desktop fica escondida */
+.m__stats--inline{display:none}
+
+/* ---------- vazio ---------- */
+.empty{border:1px dashed var(--rule-hard); padding:22px 18px; background:var(--paper-2)}
+.empty p{margin:0}
+.empty b{font-weight:700}
+.empty__m{margin-top:8px !important; font-family:var(--mono); font-size:12px; color:var(--ink-2)}
+
+/* ---------- tabelas de ficha ---------- */
+.ledger{display:grid; background:var(--rule-soft); gap:1px}
+.lrow{display:grid; grid-template-columns:minmax(0,1fr) 92px; gap:14px; align-items:center; background:var(--paper); padding:11px 14px; transition:background .15s ease}
+.lrow:hover{background:var(--paper-2)}
+.lrow__n{font-size:14px; font-weight:600}
+.lrow__m{font-family:var(--mono); font-size:11px; color:var(--ink-3); margin-top:2px}
+.lrow__v{font-family:var(--mono); font-size:15px; font-weight:600; text-align:right}
+.lrow--4{grid-template-columns:minmax(0,1fr) 108px}
+.lrow--4 .lrow__r{font-family:var(--mono); font-size:11px; color:var(--ink-3); text-align:right; margin-top:3px}
+
+.grid2{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:22px}
+.registro{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px}
+.registro .kpi__v{font-size:clamp(22px,2.6vw,30px)}
+.bar{height:6px; background:var(--paper-3); margin-top:8px; overflow:hidden}
+.bar i{display:block; height:100%; background:var(--ink)}
+.alta__score{font-family:var(--mono); font-size:12px; font-weight:600; color:var(--ink-2)}
+
+.tile{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+.tile__i{background:var(--paper-2); border:1px solid var(--rule); padding:12px 13px; clip-path:var(--cut-sm); transition:background .15s ease, border-color .15s ease}
+.tile__i:hover{background:var(--paper-3); border-color:var(--rule-hard)}
+.tile__n{font-size:13.5px; font-weight:600}
+.tile__v{font-family:var(--mono); font-size:22px; font-weight:600; margin-top:8px; letter-spacing:-.02em}
+.tile__l{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); margin-top:4px}
+
+/* ---------- plano Pro ---------- */
+.plans{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); gap:16px}
+.plan__h{display:flex; align-items:baseline; justify-content:space-between; gap:10px; border-bottom:1px solid var(--rule); padding-bottom:9px}
+.plan__n{font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase}
+.plan__p{font-family:var(--mono); font-size:24px; font-weight:600; letter-spacing:-.03em; margin:16px 0 2px}
+.plan__p small{display:block; font-size:11.5px; font-weight:400; letter-spacing:0; color:var(--ink-3); margin-top:5px}
+.plan ul{margin:16px 0 0; padding:0; list-style:none; display:grid; gap:9px}
+.plan li{display:flex; gap:9px; font-size:13.5px; color:var(--ink); line-height:1.4}
+.plan li::before{content:"—"; color:var(--ink-3); font-family:var(--mono)}
+.plan--pro li::before{content:"▪"; color:var(--stamp)}
+.plan--pro{background:var(--paper-2); border:1px solid var(--rule-hard)}
+.plan--pro .ficha__in{background:var(--paper-2)}
+.pill{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; border:1px solid var(--stamp); color:var(--stamp); padding:2px 7px}
+.cta{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+.btn{
+  cursor:pointer; min-height:44px; padding:12px 18px; font-size:13.5px; font-weight:600;
+  border:1px solid var(--ink); background:var(--ink); color:var(--paper);
+  clip-path:var(--cut-sm);
+  transition:background .15s ease, color .15s ease, border-color .15s ease;
+}
+.btn:hover{background:var(--stamp); border-color:var(--stamp); color:var(--paper)}
+.btn--ghost{background:transparent; color:var(--ink); border-color:var(--rule-hard)}
+.btn--ghost:hover{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:2px solid var(--stamp); outline-offset:2px}
+.form-note{margin-top:16px; font-family:var(--mono); font-size:11.5px; color:var(--ink-2); border-top:1px dashed var(--rule); padding-top:12px}
+
+/* ---------- rodapé ---------- */
+.foot{margin-top:28px; border-top:2px solid var(--rule-hard); padding-top:14px}
+.foot__row{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.share{
+  cursor:pointer; min-height:36px; padding:8px 13px; font-size:12.5px; font-weight:500;
+  background:var(--paper-2); color:var(--ink-2); border:1px solid var(--rule);
+  clip-path:var(--cut-sm); transition:background .15s ease, color .15s ease, border-color .15s ease;
+}
+.share:hover{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.share:focus-visible{outline:2px solid var(--stamp); outline-offset:2px}
+.copied{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ledger)}
+.copied[hidden]{display:none}
+.foot__legend{margin:16px 0 0; padding:0; list-style:none; display:grid; gap:5px}
+.foot__legend li{font-size:12px; color:var(--ink-2)}
+.foot__legend li::before{content:"§ "; font-family:var(--mono); color:var(--ink-3)}
+.foot__meta{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; margin-top:16px; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.barcode{width:132px; height:24px; background:repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 9px, var(--ink) 9px 12px, transparent 12px 14px); opacity:.65}
+.foot__legal{font-size:12px; color:var(--ink-2); margin:14px 0 0}
+
+/* ============================================================
+   MOBILE — composição própria (ficha deslizante), não o desktop espremido
+   ============================================================ */
+@media (max-width:760px){
+  .desk{padding:12px 10px 30px}
+  .sheet{padding:14px 15px 20px; clip-path:polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))}
+  .masthead{grid-template-columns:minmax(0,1fr); gap:16px; padding:14px 0 16px}
+  h1{font-size:38px}
+  .serial__t{display:none}
+  .note--promise{font-size:13.5px}
+  .legal{font-size:12px}
+  /* abas como índice de fichário: 3 + 2 ocupando a largura toda, sem buraco */
+  .tabs{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:8px; border-bottom:none; margin:16px 0 16px}
+  .tab{
+    grid-column:span 2; margin:0; padding:11px 6px; font-size:12.5px; text-align:center;
+    border:1px solid var(--rule); border-bottom:1px solid var(--rule);
+    clip-path:var(--cut-sm);
+  }
+  .tab:nth-child(4),.tab:nth-child(5){grid-column:span 3}
+  .tab[aria-selected="true"]{border-color:var(--rule-hard)}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpi{padding:12px 13px 14px}
+  .kpi:last-child{grid-column:span 2}
+  /* filtros em grade de 2 colunas: 10 ligas = 5 linhas cheias, sem órfã */
+  .chips{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px}
+  .chip{min-height:44px; justify-content:space-between}
+  .chip__n{margin-left:8px}
+  .thead{display:none}
+  .match .ficha__in{grid-template-columns:minmax(0,1fr); gap:12px; padding:14px}
+  .m__teams{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:10px; align-items:center}
+  .m__team{font-size:15.5px}
+  .m__score{font-size:24px}
+  .m__stats{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; border-top:1px dashed var(--rule); padding-top:10px}
+  .m__stats > span{display:block}
+  .m__stats b{display:block}
+  .m__prob .prob__bar{height:12px}
+  .grid2{grid-template-columns:minmax(0,1fr); gap:26px}
+  .registro{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tile{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plans{grid-template-columns:minmax(0,1fr)}
+  .plan__p{font-size:26px}
+  .sheet__perf{height:11px; background-size:14px 11px}
+  .lrow,.lrow--4{grid-template-columns:minmax(0,1fr) 84px}
+}
+
+/* ---------- respiro intermediário ---------- */
+@media (min-width:761px) and (max-width:1060px){
+  .thead{grid-template-columns:120px minmax(0,1fr) 66px minmax(0,1fr) 128px}
+  .thead span:nth-child(6){display:none}
+  .match .ficha__in{grid-template-columns:120px minmax(0,1fr) 66px minmax(0,1fr) 128px}
+  .m__stats{display:none}
+  .m__stats--inline{display:block; grid-column:1 / -1; border-top:1px dashed var(--rule); padding-top:8px; margin-top:2px}
+}
+@media (max-width:760px){ .m__stats--inline{display:none} .share button{min-height:44px} }
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important; animation:none !important}
+}
+</style>
+</head>
+<body>
+<div class="desk">
+  <main class="sheet">
+    <div class="sheet__perf" aria-hidden="true"></div>
+
+    <header class="masthead">
+      <div>
+        <span class="serial" id="serial">FICHA — RODADA 20/09/2026 · ATUALIZADO ÀS 22:37</span>
+        <h1>HypeFC</h1>
+        <p class="tagline">Dashboard de futebol em tempo real</p>
+      </div>
+      <div>
+        <p class="note note--promise">O palpite não está à venda. O que vendemos é registro e alerta — medidos e publicados.</p>
+        <span class="stamp">Sem edge no palpite</span>
+        <p class="legal" id="legal"></p>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Seções da ficha" id="tabs"></nav>
+    <div id="view"></div>
+
+    <footer class="foot">
+      <div class="foot__row" id="share"></div>
+      <ul class="foot__legend" id="legend"></ul>
+      <div class="foot__meta">
+        <span class="barcode" aria-hidden="true"></span>
+        <span id="updated" aria-live="polite"></span>
+      </div>
+      <p class="foot__legal" id="footLegal"></p>
+    </footer>
+  </main>
+</div>
+
+<script id="data" type="application/json">{"_nota":"Conteúdo REAL extraído do HypeFC em produção (23/09/2026 22:37). Use exatamente estes números e nomes. Não invente dados, não use lorem ipsum.","marca":{"nome":"HypeFC","dominio":"hypefc.je4ndev.com","assinatura":"Dashboard de futebol em tempo real","promessa":"O palpite não está à venda. O que vendemos é registro e alerta — medidos e publicados.","aviso_legal":"Painel informativo. Não é casa de aposta e não promete resultado.","posicionamento":"Mede o próprio modelo em público: acerto por card, Brier, comparação com o chute uniforme e com o favorito. Sem promessa de edge no palpite."},"capa":{"atualizado":"Atualizado às 22:37","aviso_contexto":"Sem jogos hoje. Mostrando a última rodada com jogos: 20/09/2026.","rodada":"20/09/2026","kpis":[{"rotulo":"JOGOS","valor":"36"},{"rotulo":"GOLS","valor":"99"},{"rotulo":"MÉDIA/JOGO","valor":"2.8"},{"rotulo":"ENCERRADOS","valor":"36"},{"rotulo":"LIGAS","valor":"9"}],"abas":["Rodada","Liga","Recorde","Esportes","Pro"],"compartilhar":["WhatsApp","Telegram","X","Copiar link"]},"filtros_liga":[{"liga":"Todas","jogos":36},{"liga":"Brasileirão Série A","jogos":5},{"liga":"Bundesliga","jogos":3},{"liga":"Championship","jogos":2},{"liga":"Eredivisie","jogos":4},{"liga":"La Liga","jogos":5},{"liga":"Ligue 1","jogos":3},{"liga":"Premier League","jogos":4},{"liga":"Primeira Liga","jogos":5},{"liga":"Serie A","jogos":5}],"em_alta":[{"score":86,"time":"FC Porto"},{"score":80,"time":"Benfica"},{"score":75,"time":"Manchester City"},{"score":73,"time":"Atlético Madrid"},{"score":71,"time":"Flamengo"},{"score":67,"time":"Barcelona"},{"score":67,"time":"Borussia Dortmund"},{"score":64,"time":"AZ Alkmaar"},{"score":63,"time":"AS Monaco"},{"score":63,"time":"Real Madrid"},{"score":59,"time":"AS Roma"},{"score":58,"time":"Feyenoord Rotterdam"}],"partidas":[{"liga":"Brasileirão Série A","status":"ENCERRADO","casa":{"time":"Grêmio","posicao":"17º","gols":0},"fora":{"time":"Palmeiras","posicao":"2º","gols":0},"prob":{"casa":28,"empate":26,"fora":46},"destaque":"fora","stats":{"posse":"28–72","chutes":"7–31","no_alvo":"4–10"}},{"liga":"Brasileirão Série A","status":"ENCERRADO","casa":{"time":"Corinthians","posicao":"14º","gols":1},"fora":{"time":"Fluminense","posicao":"4º","gols":3},"prob":{"casa":34,"empate":26,"fora":39},"destaque":"fora","stats":{"posse":"57–43","chutes":"20–10","no_alvo":"7–6"}},{"liga":"Brasileirão Série A","status":"ENCERRADO","casa":{"time":"Vitória","posicao":"13º","gols":1},"fora":{"time":"Cruzeiro","posicao":"6º","gols":3},"prob":{"casa":36,"empate":26,"fora":37},"destaque":"fora","stats":{"posse":"44–56","chutes":"21–14","no_alvo":"8–5"}},{"liga":"Brasileirão Série A","status":"ENCERRADO","casa":{"time":"Flamengo","posicao":"1º","gols":2},"fora":{"time":"Red Bull Bragantino","posicao":"10º","gols":1},"prob":{"casa":62,"empate":22,"fora":15},"destaque":"casa","selo":"EM ALTA 71","stats":{"posse":"66–34","chutes":"11–15","no_alvo":"6–5"}},{"liga":"Brasileirão Série A","status":"ENCERRADO","casa":{"time":"Athletico-PR","posicao":"3º","gols":2},"fora":{"time":"Bahia","posicao":"5º","gols":1},"prob":{"casa":50,"empate":25,"fora":25},"destaque":"casa","stats":{"posse":"50–51","chutes":"11–10","no_alvo":"6–3"}},{"liga":"Ligue 1","status":"ENCERRADO","casa":{"time":"AJ Auxerre","posicao":"10º","gols":2},"fora":{"time":"Brest","posicao":"11º","gols":1},"prob":{"casa":47,"empate":26,"fora":27},"destaque":"casa","stats":{"posse":"52–48","chutes":"11–8","no_alvo":"4–2"}},{"liga":"Ligue 1","status":"ENCERRADO","casa":{"time":"Nice","posicao":"14º","gols":2},"fora":{"time":"Lille","posicao":"4º","gols":1},"prob":{"casa":43,"empate":26,"fora":31},"destaque":"casa","stats":{"posse":"41–59","chutes":"10–21","no_alvo":"4–8"}},{"liga":"Ligue 1","status":"ENCERRADO","casa":{"time":"Marseille","posicao":"17º","gols":1},"fora":{"time":"Paris Saint-Germain","posicao":"6º","gols":2},"prob":{"casa":40,"empate":26,"fora":33},"destaque":"casa","stats":{"posse":"39–61","chutes":"12–31","no_alvo":"4–10"}},{"liga":"Primeira Liga","status":"ENCERRADO","casa":{"time":"Estrela","posicao":"8º","gols":0},"fora":{"time":"Académico de Viseu","posicao":"7º","gols":2},"prob":{"casa":46,"empate":26,"fora":28},"destaque":"casa","stats":{"posse":"59–41","chutes":"16–8","no_alvo":"2–4"}},{"liga":"Primeira Liga","status":"ENCERRADO","casa":{"time":"Vitória de Guimaraes","posicao":"14º","gols":1},"fora":{"time":"Moreirense","posicao":"9º","gols":1},"prob":{"casa":44,"empate":26,"fora":30},"destaque":"casa","stats":{"posse":"66–34","chutes":"16–7","no_alvo":"5–3"}}],"legenda":["Probabilidade: Casa · Empate · Fora (verde = maior).","Rodapé: posse · chutes · no alvo (casa–fora); “—” = não publicado."],"registro_publico":{"manchete":"Recorde público","cards_liquidados":1402,"rodadas":271,"corte":44,"detalhe":"1402 reconstruídos · 0 gravados ao vivo","acerto":"53.6%","acerto_detalhe":"751/1402 · empate conta como erro","comparacao":"vs média do mandante 37.0%","lift":"+16.6pp","sem_edge":"Calibrado, sem edge no palpite."},"modelo":[{"rotulo":"BRIER DO MODELO","valor":"0,629","detalhe":"n=1.203 jogos"},{"rotulo":"CHUTE UNIFORME","valor":"0,667","detalhe":"1/3 para cada lado"},{"rotulo":"FAVORITO DO MODELO","valor":"46,5%","detalhe":"acerto do palpite"},{"rotulo":"ÂNCORA MELHOR COLOCADO","valor":"46,5%","detalhe":"mesma taxa, sem modelo"}],"pro":{"preco_mes":"R$ 9,90/mês","preco_ano":"R$ 79/ano","gratis":["Painel completo: rodada, ligas, esportes e recorde público","Até 3 times seguidos","Sem alertas"],"pro":["Até 20 times seguidos","Alerta antes da rodada","Histórico do registro: o que o modelo previa para quem você segue"],"cta":"Assinar Pro","cta_secundario":"Ativar acesso","rodape_lista":"A assinatura já está aberta. Se preferir esperar, deixe o e-mail: a gente avisa de novidade do Pro. Nada de cobrança aqui."}}</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const state = { tab: D.capa.abas[0], liga: 'Todas' };
+
+const esc = (s) => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $ = (s, r) => (r || document).querySelector(s);
+const ligasComFicha = [...new Set(D.partidas.map(p => p.liga))];
+
+/* ---------- texto do cabeçalho/rodapé ---------- */
+$('#legal').textContent = D.marca.aviso_legal;
+$('#footLegal').textContent = D.marca.aviso_legal;
+$('#updated').textContent = D.capa.atualizado + ' · ' + D.capa.aviso_contexto;
+$('#serial').innerHTML = 'Ficha — rodada ' + esc(D.capa.rodada) + ' <span class="serial__t">· ' + esc(D.capa.atualizado) + '</span>';
+$('#legend').innerHTML = D.legenda.map(l => '<li>' + esc(l) + '</li>').join('');
+$('#share').innerHTML = D.capa.compartilhar.map((s, i) =>
+  (i === D.capa.compartilhar.length - 1)
+    ? '<button class="share" type="button" data-copy="1">' + esc(s) + '</button><span class="copied" id="copied" hidden>link na área de transferência</span>'
+    : '<button class="share" type="button">' + esc(s) + '</button>'
+).join('');
+$('#share').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-copy]');
+  if (!b) return;
+  const tag = $('#copied');
+  try { navigator.clipboard && navigator.clipboard.writeText('https://' + D.marca.dominio).catch(() => {}); } catch (err) {}
+  tag.hidden = false;
+  setTimeout(() => { tag.hidden = true; }, 2200);
+});
+
+/* ---------- abas ---------- */
+function renderTabs() {
+  $('#tabs').innerHTML = D.capa.abas.map((t, i) => {
+    const on = state.tab === t;
+    return '<button class="tab" type="button" role="tab" id="tab-' + i + '"' +
+      ' aria-selected="' + on + '" aria-controls="view" tabindex="' + (on ? '0' : '-1') + '"' +
+      ' data-tab="' + esc(t) + '">' + esc(t) + '</button>';
+  }).join('');
+}
+$('#tabs').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-tab]');
+  if (!b) return;
+  state.tab = b.dataset.tab;
+  renderTabs();
+  renderView();
+});
+$('#tabs').addEventListener('keydown', (e) => {
+  const tabs = [...$('#tabs').querySelectorAll('[data-tab]')];
+  const i = tabs.indexOf(document.activeElement);
+  if (i < 0) return;
+  let n = -1;
+  if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+  if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+  if (e.key === 'Home') n = 0;
+  if (e.key === 'End') n = tabs.length - 1;
+  if (n < 0) return;
+  e.preventDefault();
+  tabs[n].focus();
+  state.tab = tabs[n].dataset.tab;
+  renderTabs();
+  renderView();
+  $('#tabs').querySelector('[aria-selected="true"]').focus();
+});
+
+/* ---------- blocos reutilizáveis ---------- */
+const sec = (t, m, r) => '<div class="sec"><h2 class="sec__t">' + esc(t) + '</h2>' +
+  (m ? '<span class="sec__m">' + esc(m) + '</span>' : '') +
+  (r ? '<span class="sec__r">' + esc(r) + '</span>' : '') + '</div>';
+
+const kpiStrip = () => '<div class="kpis">' + D.capa.kpis.map(k =>
+  '<div class="kpi"><span class="kpi__l">' + esc(k.rotulo) + '</span><span class="kpi__v">' + esc(k.valor) + '</span></div>'
+).join('') + '</div>';
+
+function matchHTML(p) {
+  const mx = Math.max(p.prob.casa, p.prob.empate, p.prob.fora);
+  const seg = (v, c) => '<i class="seg seg--' + c + (v === mx ? ' is-max' : '') + '" style="width:' + v + '%"></i>';
+  const num = (v) => v === mx ? '<b>' + v + '</b>' : '<span>' + v + '</span>';
+  const cell = (v, win) => win ? '<b>' + v + '</b>' : String(v);
+  const emCasa = p.casa.gols > p.fora.gols, emFora = p.fora.gols > p.casa.gols;
+  const s = p.stats;
+  return '<article class="ficha match">' +
+    '<div class="ficha__in">' +
+      '<div class="m__liga">' + esc(p.liga) + '<span>' + esc(p.status) + '</span>' +
+        '<span class="m__tag">maior prob. ' + esc(p.destaque) + '</span>' +
+        (p.selo ? '<span class="m__tag m__tag--selo">' + esc(p.selo) + '</span>' : '') +
+      '</div>' +
+      '<div class="m__teams">' +
+        '<div class="m__team m__team--casa">' + esc(p.casa.time) + '<i>' + esc(p.casa.posicao) + '</i></div>' +
+        '<div class="m__score">' + cell(p.casa.gols, emCasa) + '–' + cell(p.fora.gols, emFora) + '</div>' +
+        '<div class="m__team m__team--fora">' + esc(p.fora.time) + '<i>' + esc(p.fora.posicao) + '</i></div>' +
+      '</div>' +
+      '<div class="m__prob">' +
+        '<div class="prob__bar">' + seg(p.prob.casa, 'c') + seg(p.prob.empate, 'e') + seg(p.prob.fora, 'f') + '</div>' +
+        '<div class="prob__nums">' + num(p.prob.casa) + num(p.prob.empate) + num(p.prob.fora) + '</div>' +
+      '</div>' +
+      '<div class="m__stats">' +
+        '<span>poss. <b>' + esc(s.posse) + '</b></span>' +
+        '<span>chutes <b>' + esc(s.chutes) + '</b></span>' +
+        '<span>no alvo <b>' + esc(s.no_alvo) + '</b></span>' +
+      '</div>' +
+      '<div class="m__stats m__stats--inline">poss. <b>' + esc(s.posse) + '</b> · chutes <b>' + esc(s.chutes) + '</b> · no alvo <b>' + esc(s.no_alvo) + '</b></div>' +
+    '</div>' +
+  '</article>';
+}
+
+/* ---------- vistas ---------- */
+function viewRodada() {
+  const sel = state.liga;
+  const list = sel === 'Todas' ? D.partidas : D.partidas.filter(p => p.liga === sel);
+  const filtro = D.filtros_liga.find(f => f.liga === sel) || { jogos: 0 };
+  const jogos = D.capa.kpis.find(k => k.rotulo === 'JOGOS').valor;
+  const tally = sel === 'Todas'
+    ? '<b>' + list.length + '</b> fichas deste recorte · <b>' + ligasComFicha.length + '</b> ligas com ficha em ' + jogos + ' jogos na rodada'
+    : '<b>' + list.length + '</b> fichas em ' + esc(sel) + ' · a liga teve <b>' + filtro.jogos + '</b> jogos na rodada';
+  return kpiStrip() +
+    sec('Última rodada com jogos', D.capa.rodada, D.capa.atualizado.toLowerCase()) +
+    '<div class="filters"><p class="filters__l">Filtrar por liga</p><div class="chips">' +
+      D.filtros_liga.map(f => '<button class="chip" type="button" data-liga="' + esc(f.liga) + '" aria-pressed="' + (f.liga === sel) + '">' +
+        esc(f.liga) + '<span class="chip__n">' + f.jogos + '</span></button>').join('') +
+    '</div></div>' +
+    '<div class="tally"><span>' + tally + '</span></div>' +
+    '<div class="thead" aria-hidden="true"><span>Liga</span><span>Mandante</span><span>Placar</span><span>Visitante</span><span>Prob. casa · empate · fora</span><span>Posse · chutes · no alvo</span></div>' +
+    '<div id="list">' + (list.length ? list.map(matchHTML).join('') :
+      '<div class="empty"><p>Nenhuma ficha deste recorte para <b>' + esc(sel) + '</b>.</p>' +
+      '<p class="empty__m">A liga teve ' + filtro.jogos + ' jogos na rodada de ' + D.capa.rodada +
+      '. O recorte com campos completos traz ' + D.partidas.length + ' fichas de ' + ligasComFicha.length + ' ligas.</p></div>') +
+    '</div>';
+}
+
+function viewLiga() {
+  const rows = D.filtros_liga.filter(f => f.liga !== 'Todas');
+  const maxJ = Math.max(...rows.map(r => r.jogos));
+  return sec('Índice de ligas', rows.length + ' ligas · ' + D.capa.kpis.find(k => k.rotulo === 'JOGOS').valor + ' jogos na rodada') +
+    '<div class="ficha"><div class="ficha__in"><div class="ledger">' +
+      rows.map(r => '<div class="lrow"><div><div class="lrow__n">' + esc(r.liga) + '</div>' +
+        '<div class="lrow__m">' + r.jogos + ' jogos · ' + (ligasComFicha.indexOf(r.liga) > -1 ? 'com ficha no recorte' : 'sem ficha no recorte') + '</div>' +
+        '<div class="bar"><i style="width:' + Math.round(r.jogos / maxJ * 100) + '%"></i></div></div>' +
+        '<div class="lrow__v">' + r.jogos + '</div></div>').join('') +
+    '</div></div></div>' +
+    sec('Times em alta', D.em_alta.length + ' times', 'score do registro') +
+    '<div class="ficha"><div class="ficha__in"><div class="ledger">' +
+      D.em_alta.map(t => '<div class="lrow"><div class="lrow__n">' + esc(t.time) + '</div>' +
+        '<div class="lrow__v">' + t.score + '</div></div>').join('') +
+    '</div></div></div>';
+}
+
+function viewRecorde() {
+  const r = D.registro_publico;
+  const cells = [
+    [r.cards_liquidados, 'cards liquidados', r.detalhe],
+    [r.rodadas, 'rodadas medidas', 'corte ' + r.corte],
+    [r.acerto, 'taxa de acerto', r.acerto_detalhe],
+    [r.lift, 'lift sobre o mandante', r.comparacao]
+  ];
+  return sec(r.manchete) +
+    '<div class="registro">' + cells.map(c =>
+      '<div class="ficha ficha--sm"><div class="ficha__in"><span class="kpi__l">' + esc(c[1]) + '</span>' +
+      '<span class="kpi__v">' + esc(c[0]) + '</span>' +
+      '<p class="empty__m">' + esc(c[2]) + '</p></div></div>').join('') + '</div>' +
+    sec('Modelo medido', 'números publicados') +
+    '<div class="ficha"><div class="ficha__in"><div class="ledger">' +
+      D.modelo.map(m => '<div class="lrow lrow--4"><div><div class="lrow__n">' + esc(m.rotulo) + '</div>' +
+        '<div class="lrow__m">' + esc(m.detalhe) + '</div></div>' +
+        '<div><div class="lrow__v">' + esc(m.valor) + '</div></div></div>').join('') +
+    '</div></div></div>' +
+    '<div class="grid2" style="margin-top:16px">' +
+      '<div class="note">' + esc(r.sem_edge) + '</div>' +
+      '<div class="note">' + esc(D.marca.posicionamento) + '</div>' +
+    '</div>';
+}
+
+function viewEsportes() {
+  const k = Object.fromEntries(D.capa.kpis.map(x => [x.rotulo, x.valor]));
+  const rows = D.filtros_liga.filter(f => f.liga !== 'Todas');
+  return sec('Cobertura deste recorte', 'modalidade com dados reais') +
+    '<div class="ficha"><div class="ficha__in"><div class="ledger">' +
+      '<div class="lrow lrow--4"><div><div class="lrow__n">Futebol</div>' +
+      '<div class="lrow__m">' + rows.length + ' ligas com jogos na rodada</div></div>' +
+      '<div><div class="lrow__v">' + k['JOGOS'] + '</div><div class="lrow__m">jogos</div></div></div>' +
+      '<div class="lrow lrow--4"><div><div class="lrow__n">Gols na rodada</div>' +
+      '<div class="lrow__m">média de ' + k['MÉDIA/JOGO'] + ' por jogo</div></div>' +
+      '<div><div class="lrow__v">' + k['GOLS'] + '</div><div class="lrow__m">gols</div></div></div>' +
+      '<div class="lrow lrow--4"><div><div class="lrow__n">Partidas encerradas</div>' +
+      '<div class="lrow__m">' + k['ENCERRADOS'] + ' de ' + k['JOGOS'] + ' jogos</div></div>' +
+      '<div><div class="lrow__v">' + k['ENCERRADOS'] + '</div><div class="lrow__m">encerrados</div></div></div>' +
+    '</div></div></div>' +
+    sec('Ligas na rodada', rows.length + ' de ' + k['LIGAS'] + ' ligas com jogos') +
+    '<div class="tile">' + rows.map(r =>
+      '<div class="tile__i"><div class="tile__n">' + esc(r.liga) + '</div>' +
+      '<div class="tile__v">' + r.jogos + '</div><div class="tile__l">jogos</div></div>').join('') + '</div>' +
+    '<p class="form-note">Este recorte traz só a modalidade futebol, com os jogos medidos da rodada de ' + D.capa.rodada +
+    '. Nenhum número desta ficha foi estimado: é o que o painel publicou.</p>';
+}
+
+function viewPro() {
+  const p = D.pro;
+  return sec('Assinatura', 'registro e alerta') +
+    '<div class="plans">' +
+      '<div class="ficha"><div class="ficha__in plan" style="display:block;background:transparent">' +
+        '<div class="plan__h"><span class="plan__n">Grátis</span><span class="sec__m">painel aberto</span></div>' +
+        '<p class="plan__p">R$ 0<small>sem alerta, sem histórico</small></p>' +
+        '<ul>' + p.gratis.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' +
+      '</div></div>' +
+      '<div class="ficha plan--pro"><div class="ficha__in plan" style="display:block;background:transparent">' +
+        '<div class="plan__h"><span class="plan__n">Pro</span><span class="pill">alerta antes da rodada</span></div>' +
+        '<p class="plan__p">' + esc(p.preco_mes) + '<small>ou ' + esc(p.preco_ano) + '</small></p>' +
+        '<ul>' + p.pro.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' +
+        '<div class="cta"><button class="btn" type="button">' + esc(p.cta) + '</button>' +
+        '<button class="btn btn--ghost" type="button">' + esc(p.cta_secundario) + '</button></div>' +
+      '</div></div>' +
+    '</div>' +
+    '<p class="form-note">' + esc(p.rodape_lista) + '</p>' +
+    '<div class="grid2" style="margin-top:16px">' +
+      '<div class="note">' + esc(D.marca.promessa) + '</div>' +
+      '<div class="note">' + esc(D.marca.aviso_legal) + '</div>' +
+    '</div>';
+}
+
+const VIEWS = { 'Rodada': viewRodada, 'Liga': viewLiga, 'Recorde': viewRecorde, 'Esportes': viewEsportes, 'Pro': viewPro };
+
+function renderView() {
+  $('#view').innerHTML = VIEWS[state.tab]();
+}
+$('#view').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-liga]');
+  if (!b) return;
+  state.liga = b.dataset.liga;
+  renderView();
+});
+
+renderTabs();
+renderView();
+</script>
+</body>
+</html>

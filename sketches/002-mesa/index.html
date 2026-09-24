@@ -1,0 +1,982 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HypeFC — Mesa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================================
+   MESA — direção visual HypeFC (instrumento, não pôster)
+   Grafite, hairline e monoespaçada: a tela é uma mesa de leitura, não um
+   álbum de cartões. Zero canto arredondado, zero sombra, zero gradiente.
+   JetBrains Mono manda nos números; Inter Tight faz o texto corrido.
+   A cor de sinal (--sinal) é reservada a DUAS coisas: o número do registro
+   público e o botão de assinar. Se ela aparecer em qualquer outro lugar,
+   deixa de significar.
+   ========================================================================== */
+:root{
+  --paper:#0B0E11;
+  --paper-2:#12161B;
+  --paper-3:#1A212A;
+  --ink:#E6EAF0;
+  --ink-2:#A7B2C0;
+  --muted:#77828F;
+  --rule:#1F262E;
+  --rule-2:#161C23;
+  --line:#2A323C;
+  --verde:#7BE495;
+  --verde-2:#A9F0BB;
+  --carimbo:#FF6B6B;
+  --sinal:#E8FF59;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --disp:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --rows:minmax(0,1fr) 30px 30px minmax(0,1fr) 132px 178px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--mono);font-size:13px;line-height:1.45;
+  font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased;
+}
+/* papel pautado do arquivo */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(0deg,rgba(230,234,240,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(230,234,240,.022) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--sinal);outline-offset:2px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+b,strong{font-weight:600}
+.sheet{position:relative;z-index:1;max-width:1340px;margin:0 auto;padding:0 24px 72px}
+
+/* ---------------------------------------------------------------- topbar */
+.topbar{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 18px;
+  padding:15px 0 13px;border-bottom:1px solid var(--line);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.mark{flex:none;display:block}
+.wordmark{font-family:var(--disp);font-size:19px;font-weight:600;letter-spacing:-.01em;text-transform:none}
+.dom{color:var(--muted);font-size:10px;padding-left:12px;border-left:1px solid var(--rule);letter-spacing:.06em;text-transform:none}
+.live{display:flex;align-items:center;gap:8px;color:var(--ink-2);font-size:10px}
+.live .dot{width:6px;height:6px;background:var(--ink-2);display:block}
+
+/* -------------------------------------------------------------- masthead */
+.masthead{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px 34px;align-items:start;
+  padding:36px 0 22px;
+}
+.kicker{margin:0 0 12px;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+h1{
+  margin:0;font-family:var(--disp);font-weight:400;font-size:clamp(40px,4.8vw,66px);
+  line-height:.98;letter-spacing:-.028em;
+}
+h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
+.lede{
+  margin:16px 0 0;max-width:56ch;font-family:var(--disp);font-size:17px;line-height:1.5;
+  color:var(--ink-2);padding-left:15px;border-left:2px solid var(--line);
+}
+.carimbo{
+  justify-self:end;align-self:start;
+  font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--carimbo);
+  border:1px solid rgba(142,47,30,.55);outline:1px solid rgba(142,47,30,.55);outline-offset:3px;
+  padding:9px 13px;text-align:center;line-height:1.7;
+  transform:rotate(-1.6deg);white-space:nowrap;
+}
+.alerta{
+  margin:0;display:flex;gap:10px;align-items:flex-start;
+  border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2);
+  padding:10px 0;font-size:10.5px;color:var(--ink-2);letter-spacing:.02em;
+}
+.alerta .sq{flex:none;width:7px;height:7px;margin-top:5px;background:var(--carimbo)}
+
+/* ------------------------------------------------------------------ kpis */
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-bottom:1px solid var(--line)}
+.kpi{padding:15px 18px 13px;border-left:1px solid var(--rule-2);min-width:0}
+.kpi:first-child{border-left:0;padding-left:0}
+.kpi .kl{display:block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2)}
+.kpi .kv{display:block;font-size:31px;font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-top:5px}
+.kpi .klead{display:none}
+
+/* ------------------------------------------------------------------ tabs */
+.tabs{display:flex;align-items:stretch;border-bottom:1px solid var(--line);margin-top:26px}
+.tab{
+  position:relative;display:flex;align-items:baseline;gap:8px;
+  padding:13px 20px 12px;margin-bottom:-1px;
+  border:1px solid transparent;border-bottom:1px solid var(--paper);
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  transition:background-color .14s var(--ease),color .14s var(--ease),box-shadow .14s var(--ease);
+}
+.tab b{font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.tab:last-of-type{border-left:1px solid var(--rule)}
+.tab:last-of-type b{color:var(--ink-2)}
+.tab:hover{background:var(--paper-2);color:var(--ink)}
+.tab:hover b{color:var(--ink-2)}
+.tab.on{
+  background:var(--paper-3);color:var(--ink);border-color:var(--line);border-bottom-color:var(--line);
+  box-shadow:inset 0 3px 0 var(--ink-2);
+}
+.tab.on b{color:var(--ink-2);opacity:1}
+.tab.on:hover{background:var(--paper-3);border-color:var(--line)}
+
+/* -------------------------------------------------------------- estrutura */
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 306px;align-items:start}
+.main{min-width:0;padding:26px 28px 0 0}
+.aside{min-width:0;border-left:1px solid var(--rule);padding:26px 0 0 26px}
+.ab{min-width:0}
+.aside .ab + .ab{margin-top:30px}
+
+/* aba Recorde (laudo) abre em folha larga: o painel usa a mesa inteira e a
+   coluna lateral vira faixa de quatro colunas no pé — nada de meia tela vazia */
+.wrap.wide{grid-template-columns:minmax(0,1fr)}
+.wrap.wide .main{padding-right:0}
+.wrap.wide .aside{
+  grid-column:1 / -1;border-left:0;border-top:1px solid var(--line);
+  padding:24px 0 0;margin-top:34px;display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));gap:0;align-items:start;
+}
+.wrap.wide .aside .ab + .ab{margin-top:0;border-left:1px solid var(--rule-2);padding-left:22px;margin-left:22px}
+.phead{
+  display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;justify-content:space-between;
+  padding-bottom:9px;border-bottom:1px solid var(--line);
+}
+.ptitle{margin:0;font-family:var(--disp);font-size:23px;font-weight:600;letter-spacing:-.015em}
+.pmeta{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.bloco{margin-top:30px}
+.bt{
+  margin:0 0 10px;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  padding-bottom:7px;border-bottom:1px solid var(--rule);
+}
+.panel.in{animation:fade .18s var(--ease)}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+
+/* ---------------------------------------------------------------- filtros */
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:14px 0 2px}
+.chip{
+  display:inline-flex;align-items:baseline;gap:7px;
+  border:1px solid var(--rule);padding:7px 11px;background:transparent;
+  font-size:10px;letter-spacing:.08em;color:var(--ink-2);
+  transition:background-color .14s var(--ease),color .14s var(--ease),border-color .14s var(--ease);
+}
+.chip b{font-size:9px;color:var(--muted)}
+.chip:hover{background:var(--paper-2);border-color:var(--ink);color:var(--ink)}
+.chip.on{background:var(--paper-3);border-color:var(--line);color:var(--ink)}
+.chip.on:hover{background:var(--paper-3);border-color:var(--line)}
+.chip.on b{color:var(--ink-2);opacity:1}
+.chip.on:hover b{color:var(--ink-2)}
+.contagem{margin:12px 0 0;font-size:10px;letter-spacing:.06em;color:var(--muted)}
+.posic{margin:16px 0 0;max-width:70ch;font-size:13px;line-height:1.6;color:var(--ink-2)}
+.liftnota{margin:12px 0 0;font-size:11.5px;color:var(--ink-2)}
+.wrap.wide .posic{max-width:88ch}
+
+/* --------------------------------------------------------- linhas (mesa) */
+.colhead{
+  display:grid;grid-template-columns:var(--rows);gap:10px;align-items:start;
+  padding:9px 10px 7px;margin-top:16px;border-top:1px solid var(--line);border-bottom:1px solid var(--rule);
+  font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+}
+.colnote{margin:7px 0 0;font-size:9.5px;color:var(--muted);letter-spacing:.02em}
+.colhead .r{text-align:right}
+.colhead .c{text-align:center}
+.grupo{
+  display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between;
+  padding:20px 10px 8px;margin-top:14px;border-top:1px solid var(--rule);
+}
+#lista .grupo:first-child{margin-top:0;border-top:0;padding-top:16px}
+.gname{margin:0;font-family:var(--disp);font-size:16px;font-weight:600;letter-spacing:-.01em}
+.gmeta{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.partida{
+  display:grid;grid-template-columns:var(--rows);grid-template-areas:"casa gc gf fora prob meta";
+  gap:10px;align-items:center;padding:12px 10px;min-height:86px;border-bottom:1px solid var(--rule-2);
+  transition:background-color .14s var(--ease),box-shadow .14s var(--ease);
+}
+.partida:hover{background:var(--paper-2);box-shadow:inset 3px 0 0 var(--ink-2)}
+.casa{grid-area:casa;display:flex;justify-content:flex-end;align-items:baseline;gap:8px;min-width:0;text-align:right}
+.fora{grid-area:fora;display:flex;justify-content:flex-start;align-items:baseline;gap:8px;min-width:0}
+.gc{grid-area:gc;text-align:center;font-size:16px;font-weight:600}
+.gf{grid-area:gf;text-align:center;font-size:16px;font-weight:600}
+.gf::before{content:"–";margin-right:7px;color:var(--rule);font-weight:400}
+.nome{font-size:13px;color:var(--ink-2);overflow-wrap:anywhere}
+.nome.dest{color:var(--ink);font-weight:600}
+.nome.dest::before{content:"";display:inline-block;width:5px;height:5px;background:var(--ink-2);margin-right:7px;vertical-align:middle}
+.pos{font-size:9.5px;color:var(--muted);letter-spacing:.04em}
+.prob{grid-area:prob;text-align:right;min-width:0}
+.pnums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));row-gap:1px;min-width:0}
+.pnums .pv{font-size:12px;color:var(--ink-2);text-align:center;font-variant-numeric:tabular-nums}
+.pnums .pv.hi{color:var(--verde);font-weight:700}
+.pnums .pl{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center}
+.pbar{display:flex;gap:2px;height:3px;margin-top:6px}
+.pbar span{display:block;background:var(--rule)}
+.pbar .on{background:var(--verde-2)}
+.meta{grid-area:meta;min-width:0;text-align:right}
+.selos{flex-direction:column;align-items:flex-end;justify-content:flex-end}
+.stats{font-size:10.5px;color:var(--muted);letter-spacing:.02em}
+.selos{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.selo{
+  display:inline-block;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--rule);color:var(--muted);padding:2px 6px 1px;
+}
+.selo.alta{color:var(--ink-2);border-color:var(--line);background:var(--paper-2)}
+.vazio{margin:14px 0 0;padding:16px 12px;border:1px dashed var(--rule);font-size:11.5px;color:var(--ink-2)}
+
+/* ------------------------------------------------------------ tabela liga */
+.ledger{border-top:1px solid var(--rule-2);margin-top:22px}
+.lrow{
+  display:grid;grid-template-columns:minmax(0,1fr) 74px 150px 26px;gap:14px;align-items:center;
+  width:100%;text-align:left;padding:12px 10px;border-bottom:1px solid var(--rule-2);
+  transition:background-color .14s var(--ease),box-shadow .14s var(--ease);
+}
+.lrow:hover{background:var(--paper-2);box-shadow:inset 3px 0 0 var(--ink-2)}
+.lnome{font-size:13px;color:var(--ink)}
+.ljogos{font-size:11px;color:var(--ink-2);text-align:right}
+.lbar{height:5px;background:var(--rule-2);display:flex}
+.lbar span{background:var(--verde-2)}
+.lseta{font-size:11px;color:var(--muted);text-align:right;transition:color .14s var(--ease),transform .14s var(--ease)}
+.lrow:hover .lseta{color:var(--ink);transform:translateX(2px)}
+
+/* ---------------------------------------------------------------- laudo */
+.laudo{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);margin-top:22px}
+.lcell{padding:16px 16px 18px;border-left:1px solid var(--rule-2);min-width:0}
+.lcell:first-child{border-left:0}
+.llab{display:block;font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.lnum{display:block;font-family:var(--mono);font-size:clamp(30px,3.4vw,42px);font-weight:600;letter-spacing:-.04em;line-height:1.1;margin-top:8px;color:var(--sinal)}
+.lnum.g{color:var(--sinal)}
+.lcell:first-child .lnum{font-size:clamp(38px,4.2vw,54px)}
+.lcell:first-child .llab{color:var(--verde)}
+.lsub{display:block;font-size:9.5px;color:var(--muted);margin-top:8px;line-height:1.5}
+.mrows{margin-top:22px;border-top:1px solid var(--line)}
+.mrow{
+  display:grid;grid-template-columns:minmax(0,1fr) 128px 200px;gap:14px;align-items:baseline;
+  padding:12px 10px;border-bottom:1px solid var(--rule-2);
+  transition:background-color .14s var(--ease);
+}
+.mrow:hover{background:var(--paper-2)}
+.mlab{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.mval{font-size:16px;font-weight:600;text-align:right}
+.mdet{font-size:10px;color:var(--muted);text-align:right}
+.carimbo-largo{
+  margin-top:24px;display:inline-block;border:2px solid var(--ink-2);color:var(--ink-2);
+  padding:9px 14px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  transform:rotate(-.5deg);
+}
+
+/* ------------------------------------------------------------------- pro */
+.preco{display:flex;flex-wrap:wrap;gap:0;margin-top:22px;border:1px solid var(--line)}
+.ptab{
+  flex:1 1 150px;padding:14px 16px;text-align:left;border-left:1px solid var(--rule-2);
+  transition:background-color .14s var(--ease),color .14s var(--ease);
+}
+.ptab:first-child{border-left:0}
+.ptab .pl{display:block;font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.ptab .pv{display:block;font-family:var(--disp);font-size:26px;font-weight:500;letter-spacing:-.02em;margin-top:6px}
+.ptab:hover{background:var(--paper-2)}
+.ptab.on{background:var(--paper-3);color:var(--ink);border-color:var(--line)}
+.ptab.on:hover{background:var(--paper-3);border-color:var(--line)}
+.ptab.on .pl{color:var(--ink-2);opacity:1}
+.ptab.on:hover .pl{color:var(--ink-2)}
+.planos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;margin-top:26px}
+.plano .ptt{margin:0 0 10px;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding-bottom:7px;border-bottom:1px solid var(--rule)}
+.pitem{display:flex;gap:9px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--rule-2);font-size:12px;color:var(--ink-2)}
+.pitem .mk{flex:none;font-size:10px;color:var(--muted);margin-top:3px}
+.plano.pro .pitem .mk{color:var(--ink-2)}
+.acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{
+  border:1px solid var(--line);background:var(--paper-2);color:var(--ink);
+  padding:13px 20px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  transition:background-color .14s var(--ease),color .14s var(--ease),box-shadow .14s var(--ease),transform .14s var(--ease);
+}
+.btn:hover{background:var(--paper-3);color:var(--ink);border-color:var(--line)}
+.btn.primary{background:var(--sinal);color:#0B0E11;border-color:var(--sinal)}
+.btn.primary:hover{background:#F2FF8A;border-color:#F2FF8A;color:#0B0E11}
+.nota{margin:20px 0 0;padding:14px 16px;border-left:3px solid var(--rule);font-size:11.5px;color:var(--muted);transition:border-color .18s var(--ease),color .18s var(--ease),background-color .18s var(--ease)}
+.nota.on{border-left-color:var(--ink-2);color:var(--ink-2);background:var(--paper-2)}
+
+/* ---------------------------------------------------------------- aside */
+.alista{border-top:1px solid var(--rule-2)}
+.arow{display:grid;grid-template-columns:20px minmax(0,1fr) 34px;gap:10px;align-items:center;padding:8px 4px;border-bottom:1px solid var(--rule-2);transition:background-color .14s var(--ease)}
+.arow:hover{background:var(--paper-2)}
+.ark{font-size:10px;color:var(--muted)}
+.atime{font-size:11.5px;color:var(--ink-2);overflow-wrap:anywhere}
+.asc{font-size:11.5px;font-weight:600;color:var(--ink);text-align:right}
+.abarra{grid-column:2 / -1;height:3px;background:var(--rule-2);margin-top:-3px}
+.abarra span{display:block;height:3px;background:var(--ink-2);opacity:.3}
+.mini{font-size:12px;color:var(--ink-2)}
+.mini .lin{display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--rule-2)}
+.mini .lin b{font-weight:600}
+.share{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.share button{
+  border:1px solid var(--rule);padding:8px 11px;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);
+  transition:background-color .14s var(--ease),color .14s var(--ease),border-color .14s var(--ease);
+}
+.share button:hover{background:var(--paper-3);color:var(--ink);border-color:var(--line)}
+.legenda{margin:0;font-size:10px;color:var(--muted);line-height:1.7}
+.legenda li{margin-bottom:6px}
+
+/* ---------------------------------------------------------------- footer */
+.footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ================================================================ MOBILE */
+@media (max-width:820px){
+  .sheet{padding:0 16px 56px}
+  .topbar{padding:12px 0 11px;gap:6px 12px}
+  .wordmark{font-size:17px}
+  .dom{border-left:0;padding-left:0;width:100%;order:3;font-size:9px}
+  .live{font-size:9.5px}
+
+  .masthead{grid-template-columns:minmax(0,1fr);gap:18px;padding:26px 0 18px}
+  .chip{min-height:44px}
+  .share button{min-height:44px}
+  h1{font-size:clamp(34px,10.5vw,46px)}
+  .lede{font-size:15px;margin-top:14px;padding-left:12px}
+  .carimbo{justify-self:start;transform:rotate(-1.2deg);font-size:8.5px;padding:8px 11px}
+
+  /* KPIs viram livro-razão: rótulo à esquerda, valor à direita */
+  .kpis{display:block;border-bottom:1px solid var(--line)}
+  .kpi{display:flex;align-items:baseline;gap:10px;padding:11px 2px;border-left:0;border-bottom:1px solid var(--rule-2)}
+  .kpi .kl{flex:none;color:var(--ink-2)}
+  .kpi .kv{margin:0;font-size:19px;order:3}
+  .kpi .klead{display:block;order:2;flex:1 1 auto;border-bottom:1px dotted var(--rule);margin-bottom:5px}
+
+  /* abas viram índice em bloco */
+  .tabs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:20px;border-bottom:1px solid var(--line)}
+  .tab{margin:0 -1px -1px 0;min-height:48px;justify-content:space-between;padding:14px 14px;
+       border:1px solid var(--rule-2);border-bottom-color:var(--rule-2);background:var(--paper)}
+  .tab.on{box-shadow:inset 3px 0 0 var(--ink-2)}
+  .tabs .tab:last-child{grid-column:1 / -1}
+
+  .wrap{display:block}
+  .wrap.wide .aside{display:block;grid-column:auto;border-top:1px solid var(--line);margin-top:34px;padding:24px 0 0}
+  .wrap.wide .aside .ab + .ab{margin-top:30px}
+  .main{padding:22px 0 0}
+  .aside{border-left:0;border-top:1px solid var(--line);padding:24px 0 0;margin-top:34px}
+  .ptitle{font-size:20px}
+
+  .colhead{display:none}
+
+  /* ficha de partida empilhada */
+  .partida{
+    min-height:0;
+    grid-template-columns:minmax(0,1fr) auto;grid-template-areas:
+      "meta meta" "casa gc" "fora gf" "prob prob" "stats stats";
+    gap:7px 12px;padding:14px 4px;
+  }
+  .casa{justify-content:flex-start;text-align:left;gap:8px}
+  .fora{justify-content:flex-start;gap:8px}
+  .gc,.gf{text-align:right;font-size:19px;min-width:24px}
+  .gf::before{content:none}
+  .nome{font-size:13.5px}
+  .prob{text-align:left;margin-top:4px}
+  .pnums .pv{font-size:13px}
+  .pnums .pl{font-size:8px}
+  .pbar{height:4px;margin-top:7px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;order:0;text-align:left}
+  .selos{justify-content:flex-start;flex-direction:row;align-items:center}
+  .colnote{display:none}
+  .stats{font-size:10px}
+  .selos{margin-top:0}
+  .meta .stats{margin-left:auto}
+
+  /* microtexto: um degrau acima no mobile */
+  .pmeta,.gmeta,.contagem,.legenda,.lsub,.mdet,.mlab{font-size:10.5px}
+  .llab,.bt{font-size:9.5px}
+  .pos{font-size:10px}
+  .selo{font-size:9px;padding:3px 7px 2px}
+  .stats{font-size:11px}
+  .footer{font-size:10px}
+
+  .grupo{padding:16px 4px 6px}
+  .lrow{grid-template-columns:minmax(0,1fr) 62px;gap:10px 12px;padding:13px 4px}
+  .lbar{grid-column:1 / -1}
+  .lseta{display:none}
+  .laudo{grid-template-columns:1fr 1fr}
+  .lcell{border-left:0;border-top:1px solid var(--rule-2);padding:14px 14px 16px}
+  .lcell:nth-child(1),.lcell:nth-child(2){border-top:0}
+  .lcell:nth-child(2n){border-left:1px solid var(--rule-2)}
+  .lnum{font-size:30px}
+  .mrow{grid-template-columns:minmax(0,1fr) auto;gap:6px 12px}
+  .mval{text-align:right}
+  .mdet{grid-column:1 / -1;text-align:left}
+  .planos{grid-template-columns:minmax(0,1fr);gap:22px}
+  .acoes .btn{flex:1 1 auto;text-align:center}
+  .footer{margin-top:34px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="mark" width="15" height="15" viewBox="0 0 15 15" aria-hidden="true">
+        <rect x=".5" y=".5" width="14" height="14" fill="none" stroke="currentColor"/>
+        <path d="M1 5h13M1 9.5h13M6.5 1v13" stroke="currentColor" stroke-width="1"/>
+        <rect x="1" y="1" width="5.5" height="4" fill="var(--sinal)"/>
+      </svg>
+      <span class="wordmark">HypeFC</span>
+      <span class="dom">hypefc.je4ndev.com</span>
+    </div>
+    <div class="live"><i class="dot"></i><span id="atualizado"></span></div>
+  </header>
+
+  <section class="masthead">
+    <div>
+      <p class="kicker" id="kicker"></p>
+      <h1>Mesa de <em>registro</em></h1>
+      <p class="lede" id="promessa"></p>
+    </div>
+    <div class="carimbo">O palpite não está à venda<br>medido em público</div>
+  </section>
+
+  <p class="alerta"><span class="sq"></span><span id="aviso-contexto"></span></p>
+
+  <section class="kpis" id="kpis"></section>
+
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Seções da mesa"></nav>
+
+  <div class="wrap">
+    <main class="main">
+
+      <section class="panel in" id="panel-rodada" role="tabpanel" aria-label="Rodada">
+        <div class="phead">
+          <h2 class="ptitle">Rodada</h2>
+          <span class="pmeta" id="rodada-data"></span>
+        </div>
+        <div class="chips" id="chips"></div>
+        <p class="contagem" id="contagem"></p>
+        <div class="colhead" aria-hidden="true">
+          <span class="r">casa (posição)</span><span></span><span></span><span>fora (posição)</span>
+          <span class="c">probabilidade</span><span class="r">posse · chutes · no alvo</span>
+        </div>
+        <p class="colnote">Verde = maior probabilidade · intervalos sempre casa–fora · “—” = não publicado.</p>
+        <div id="lista"></div>
+      </section>
+
+      <section class="panel" id="panel-liga" role="tabpanel" aria-label="Liga" hidden>
+        <div class="phead">
+          <h2 class="ptitle">Ligas da rodada</h2>
+          <span class="pmeta">clique para filtrar a folha</span>
+        </div>
+        <div class="ledger" id="ligas"></div>
+        <p class="contagem" id="liga-contagem"></p>
+      </section>
+
+      <section class="panel" id="panel-recorde" role="tabpanel" aria-label="Recorde" hidden>
+        <div class="phead">
+          <h2 class="ptitle" id="rec-manchete"></h2>
+          <span class="pmeta" id="rec-detalhe"></span>
+        </div>
+        <p class="posic" id="rec-lede"></p>
+        <div class="laudo" id="laudo"></div>
+        <p class="liftnota" id="rec-lift"></p>
+        <p class="bt bloco">Modelo — como o palpite é medido</p>
+        <div class="mrows" id="modelo"></div>
+        <p class="carimbo-largo" id="sem-edge"></p>
+        <ul class="legenda bloco" id="rec-legenda"></ul>
+      </section>
+
+      <section class="panel" id="panel-esportes" role="tabpanel" aria-label="Esportes" hidden>
+        <div class="phead">
+          <h2 class="ptitle">Cobertura da rodada</h2>
+          <span class="pmeta" id="esp-meta"></span>
+        </div>
+        <div class="laudo" id="esp-hero"></div>
+        <p class="bt bloco">Distribuição por liga</p>
+        <div class="ledger" id="esp-ligas"></div>
+        <ul class="legenda bloco" id="esp-legenda"></ul>
+      </section>
+
+      <section class="panel" id="panel-pro" role="tabpanel" aria-label="Pro" hidden>
+        <div class="phead">
+          <h2 class="ptitle">Pro</h2>
+          <span class="pmeta" id="pro-meta"></span>
+        </div>
+        <div class="preco" id="pro-preco"></div>
+        <div class="planos">
+          <div class="plano">
+            <p class="ptt">Grátis</p>
+            <div id="pro-gratis"></div>
+          </div>
+          <div class="plano pro">
+            <p class="ptt">Pro</p>
+            <div id="pro-lista"></div>
+          </div>
+        </div>
+        <div class="acoes">
+          <button class="btn primary" id="cta-pro" type="button"></button>
+          <button class="btn" id="cta-ativar" type="button"></button>
+        </div>
+        <p class="nota" id="pro-nota"></p>
+      </section>
+
+    </main>
+
+    <aside class="aside">
+      <section class="ab">
+        <p class="bt" id="bt-alta">Em alta</p>
+        <div class="alista" id="alta"></div>
+      </section>
+      <section class="ab">
+        <p class="bt">Recorde público</p>
+        <div class="mini" id="mini-recorde"></div>
+      </section>
+      <section class="ab">
+        <p class="bt">Legenda</p>
+        <ul class="legenda" id="legenda"></ul>
+      </section>
+      <section class="ab">
+        <p class="bt">Compartilhar</p>
+        <div class="share" id="share"></div>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <span id="f-legal"></span>
+    <span>HypeFC · hypefc.je4ndev.com</span>
+  </footer>
+</div>
+
+<script id="dados" type="application/json">
+{
+  "_nota": "Conteúdo REAL extraído do HypeFC em produção (23/09/2026 22:37). Use exatamente estes números e nomes. Não invente dados, não use lorem ipsum.",
+  "marca": {
+    "nome": "HypeFC",
+    "dominio": "hypefc.je4ndev.com",
+    "assinatura": "Dashboard de futebol em tempo real",
+    "promessa": "O palpite não está à venda. O que vendemos é registro e alerta — medidos e publicados.",
+    "aviso_legal": "Painel informativo. Não é casa de aposta e não promete resultado.",
+    "posicionamento": "Mede o próprio modelo em público: acerto por card, Brier, comparação com o chute uniforme e com o favorito. Sem promessa de edge no palpite."
+  },
+  "capa": {
+    "atualizado": "Atualizado às 22:37",
+    "aviso_contexto": "Sem jogos hoje. Mostrando a última rodada com jogos: 20/09/2026.",
+    "rodada": "20/09/2026",
+    "kpis": [
+      { "rotulo": "JOGOS", "valor": "36" },
+      { "rotulo": "GOLS", "valor": "99" },
+      { "rotulo": "MÉDIA/JOGO", "valor": "2.8" },
+      { "rotulo": "ENCERRADOS", "valor": "36" },
+      { "rotulo": "LIGAS", "valor": "9" }
+    ],
+    "abas": ["Rodada", "Liga", "Recorde", "Esportes", "Pro"],
+    "compartilhar": ["WhatsApp", "Telegram", "X", "Copiar link"]
+  },
+  "filtros_liga": [
+    { "liga": "Todas", "jogos": 36 },
+    { "liga": "Brasileirão Série A", "jogos": 5 },
+    { "liga": "Bundesliga", "jogos": 3 },
+    { "liga": "Championship", "jogos": 2 },
+    { "liga": "Eredivisie", "jogos": 4 },
+    { "liga": "La Liga", "jogos": 5 },
+    { "liga": "Ligue 1", "jogos": 3 },
+    { "liga": "Premier League", "jogos": 4 },
+    { "liga": "Primeira Liga", "jogos": 5 },
+    { "liga": "Serie A", "jogos": 5 }
+  ],
+  "em_alta": [
+    { "score": 86, "time": "FC Porto" },
+    { "score": 80, "time": "Benfica" },
+    { "score": 75, "time": "Manchester City" },
+    { "score": 73, "time": "Atlético Madrid" },
+    { "score": 71, "time": "Flamengo" },
+    { "score": 67, "time": "Barcelona" },
+    { "score": 67, "time": "Borussia Dortmund" },
+    { "score": 64, "time": "AZ Alkmaar" },
+    { "score": 63, "time": "AS Monaco" },
+    { "score": 63, "time": "Real Madrid" },
+    { "score": 59, "time": "AS Roma" },
+    { "score": 58, "time": "Feyenoord Rotterdam" }
+  ],
+  "partidas": [
+    {
+      "liga": "Brasileirão Série A",
+      "status": "ENCERRADO",
+      "casa": { "time": "Grêmio", "posicao": "17º", "gols": 0 },
+      "fora": { "time": "Palmeiras", "posicao": "2º", "gols": 0 },
+      "prob": { "casa": 28, "empate": 26, "fora": 46 },
+      "destaque": "fora",
+      "stats": { "posse": "28–72", "chutes": "7–31", "no_alvo": "4–10" }
+    },
+    {
+      "liga": "Brasileirão Série A",
+      "status": "ENCERRADO",
+      "casa": { "time": "Corinthians", "posicao": "14º", "gols": 1 },
+      "fora": { "time": "Fluminense", "posicao": "4º", "gols": 3 },
+      "prob": { "casa": 34, "empate": 26, "fora": 39 },
+      "destaque": "fora",
+      "stats": { "posse": "57–43", "chutes": "20–10", "no_alvo": "7–6" }
+    },
+    {
+      "liga": "Brasileirão Série A",
+      "status": "ENCERRADO",
+      "casa": { "time": "Vitória", "posicao": "13º", "gols": 1 },
+      "fora": { "time": "Cruzeiro", "posicao": "6º", "gols": 3 },
+      "prob": { "casa": 36, "empate": 26, "fora": 37 },
+      "destaque": "fora",
+      "stats": { "posse": "44–56", "chutes": "21–14", "no_alvo": "8–5" }
+    },
+    {
+      "liga": "Brasileirão Série A",
+      "status": "ENCERRADO",
+      "casa": { "time": "Flamengo", "posicao": "1º", "gols": 2 },
+      "fora": { "time": "Red Bull Bragantino", "posicao": "10º", "gols": 1 },
+      "prob": { "casa": 62, "empate": 22, "fora": 15 },
+      "destaque": "casa",
+      "selo": "EM ALTA 71",
+      "stats": { "posse": "66–34", "chutes": "11–15", "no_alvo": "6–5" }
+    },
+    {
+      "liga": "Brasileirão Série A",
+      "status": "ENCERRADO",
+      "casa": { "time": "Athletico-PR", "posicao": "3º", "gols": 2 },
+      "fora": { "time": "Bahia", "posicao": "5º", "gols": 1 },
+      "prob": { "casa": 50, "empate": 25, "fora": 25 },
+      "destaque": "casa",
+      "stats": { "posse": "50–51", "chutes": "11–10", "no_alvo": "6–3" }
+    },
+    {
+      "liga": "Ligue 1",
+      "status": "ENCERRADO",
+      "casa": { "time": "AJ Auxerre", "posicao": "10º", "gols": 2 },
+      "fora": { "time": "Brest", "posicao": "11º", "gols": 1 },
+      "prob": { "casa": 47, "empate": 26, "fora": 27 },
+      "destaque": "casa",
+      "stats": { "posse": "52–48", "chutes": "11–8", "no_alvo": "4–2" }
+    },
+    {
+      "liga": "Ligue 1",
+      "status": "ENCERRADO",
+      "casa": { "time": "Nice", "posicao": "14º", "gols": 2 },
+      "fora": { "time": "Lille", "posicao": "4º", "gols": 1 },
+      "prob": { "casa": 43, "empate": 26, "fora": 31 },
+      "destaque": "casa",
+      "stats": { "posse": "41–59", "chutes": "10–21", "no_alvo": "4–8" }
+    },
+    {
+      "liga": "Ligue 1",
+      "status": "ENCERRADO",
+      "casa": { "time": "Marseille", "posicao": "17º", "gols": 1 },
+      "fora": { "time": "Paris Saint-Germain", "posicao": "6º", "gols": 2 },
+      "prob": { "casa": 40, "empate": 26, "fora": 33 },
+      "destaque": "casa",
+      "stats": { "posse": "39–61", "chutes": "12–31", "no_alvo": "4–10" }
+    },
+    {
+      "liga": "Primeira Liga",
+      "status": "ENCERRADO",
+      "casa": { "time": "Estrela", "posicao": "8º", "gols": 0 },
+      "fora": { "time": "Académico de Viseu", "posicao": "7º", "gols": 2 },
+      "prob": { "casa": 46, "empate": 26, "fora": 28 },
+      "destaque": "casa",
+      "stats": { "posse": "59–41", "chutes": "16–8", "no_alvo": "2–4" }
+    },
+    {
+      "liga": "Primeira Liga",
+      "status": "ENCERRADO",
+      "casa": { "time": "Vitória de Guimaraes", "posicao": "14º", "gols": 1 },
+      "fora": { "time": "Moreirense", "posicao": "9º", "gols": 1 },
+      "prob": { "casa": 44, "empate": 26, "fora": 30 },
+      "destaque": "casa",
+      "stats": { "posse": "66–34", "chutes": "16–7", "no_alvo": "5–3" }
+    }
+  ],
+  "legenda": [
+    "Probabilidade: Casa · Empate · Fora (verde = maior).",
+    "Rodapé: posse · chutes · no alvo (casa–fora); “—” = não publicado."
+  ],
+  "registro_publico": {
+    "manchete": "Recorde público",
+    "cards_liquidados": 1402,
+    "rodadas": 271,
+    "corte": 44,
+    "detalhe": "1402 reconstruídos · 0 gravados ao vivo",
+    "acerto": "53.6%",
+    "acerto_detalhe": "751/1402 · empate conta como erro",
+    "comparacao": "vs média do mandante 37.0%",
+    "lift": "+16.6pp",
+    "sem_edge": "Calibrado, sem edge no palpite."
+  },
+  "modelo": [
+    { "rotulo": "BRIER DO MODELO", "valor": "0,629", "detalhe": "n=1.203 jogos" },
+    { "rotulo": "CHUTE UNIFORME", "valor": "0,667", "detalhe": "1/3 para cada lado" },
+    { "rotulo": "FAVORITO DO MODELO", "valor": "46,5%", "detalhe": "acerto do palpite" },
+    { "rotulo": "ÂNCORA MELHOR COLOCADO", "valor": "46,5%", "detalhe": "mesma taxa, sem modelo" }
+  ],
+  "pro": {
+    "preco_mes": "R$ 9,90/mês",
+    "preco_ano": "R$ 79/ano",
+    "gratis": ["Painel completo: rodada, ligas, esportes e recorde público", "Até 3 times seguidos", "Sem alertas"],
+    "pro": ["Até 20 times seguidos", "Alerta antes da rodada", "Histórico do registro: o que o modelo previa para quem você segue"],
+    "cta": "Assinar Pro",
+    "cta_secundario": "Ativar acesso",
+    "rodape_lista": "A assinatura já está aberta. Se preferir esperar, deixe o e-mail: a gente avisa de novidade do Pro. Nada de cobrança aqui."
+  }
+}
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var D = JSON.parse(document.getElementById('dados').textContent);
+  var P = D.partidas, F = D.filtros_liga, R = D.registro_publico, M = D.modelo, PRO = D.pro, CAPA = D.capa;
+  var $ = function(s){ return document.querySelector(s); };
+  var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function kpi(rot){
+    for (var i=0;i<CAPA.kpis.length;i++) if (CAPA.kpis[i].rotulo===rot) return CAPA.kpis[i].valor;
+    return '';
+  }
+  var JOGOS_RODADA = kpi('JOGOS'), LIGAS_RODADA = kpi('LIGAS');
+
+  /* ------------------------------------------------------------- topo */
+  $('#atualizado').textContent = CAPA.atualizado;
+  $('#kicker').textContent = D.marca.assinatura;
+  $('#promessa').textContent = D.marca.promessa;
+  $('#aviso-contexto').textContent = CAPA.aviso_contexto;
+  $('#rodada-data').textContent = 'última rodada com jogos: ' + CAPA.rodada;
+  $('#f-legal').textContent = D.marca.aviso_legal;
+  $('#bt-alta').textContent = 'Em alta';
+  $('#rec-manchete').textContent = R.manchete;
+  $('#rec-detalhe').textContent = R.detalhe;
+  $('#sem-edge').textContent = R.sem_edge;
+  $('#esp-meta').textContent = 'rodada ' + CAPA.rodada;
+  $('#pro-meta').textContent = 'registro público + alerta antes da rodada';
+
+  /* KPI — no desktop fita de células, no mobile livro-razão */
+  $('#kpis').innerHTML = CAPA.kpis.map(function(k){
+    return '<div class="kpi"><span class="kl">' + esc(k.rotulo) + '</span>' +
+           '<span class="kv">' + esc(k.valor) + '</span>' +
+           '<span class="klead"></span></div>';
+  }).join('');
+
+  /* ------------------------------------------------------------- abas */
+  var META = {
+    'rodada': kpi('JOGOS') + ' jogos',
+    'liga': LIGAS_RODADA + ' ligas',
+    'recorde': String(R.cards_liquidados) + ' fichas',
+    'esportes': 'futebol',
+    'pro': PRO.preco_mes
+  };
+  $('#tabs').innerHTML = CAPA.abas.map(function(nome){
+    var key = nome.toLowerCase();
+    return '<button class="tab" type="button" role="tab" aria-selected="false" data-tab="' + key + '">' +
+           '<span>' + esc(nome) + '</span><b>' + esc(META[key] || '') + '</b></button>';
+  }).join('');
+
+  var primeiro = true;
+  function setTab(key){
+    $$('.tab').forEach(function(b){
+      var on = b.dataset.tab === key;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    $$('.panel').forEach(function(p){ p.hidden = (p.id !== 'panel-' + key); });
+    $('.wrap').classList.toggle('wide', key === 'recorde');
+    var p = document.getElementById('panel-' + key);
+    if (p && !primeiro){ p.classList.remove('in'); void p.offsetWidth; p.classList.add('in'); }
+  }
+  $('#tabs').addEventListener('click', function(e){
+    var b = e.target.closest('.tab');
+    if (b) setTab(b.dataset.tab);
+  });
+
+  /* ------------------------------------------------------ aba Rodada */
+  var filtro = 'Todas';
+  function grupoHtml(liga, n){
+    return '<div class="grupo"><p class="gname">' + esc(liga) + '</p>' +
+           '<span class="gmeta">' + n + (n === 1 ? ' ficha nesta folha' : ' fichas nesta folha') + '</span></div>';
+  }
+  function probHtml(p){
+    var vals = [p.casa, p.empate, p.fora], labs = ['casa', 'empate', 'fora'];
+    var max = Math.max.apply(null, vals);
+    var nums = vals.map(function(v){ return '<span class="pv' + (v === max ? ' hi' : '') + '">' + v + '</span>'; }).join('');
+    var lbs = labs.map(function(l){ return '<span class="pl">' + l + '</span>'; }).join('');
+    var bar = vals.map(function(v){
+      return '<span class="' + (v === max ? 'on' : '') + '" style="flex:' + v + '"></span>';
+    }).join('');
+    return '<div class="pnums">' + nums + lbs + '</div><div class="pbar">' + bar + '</div>';
+  }
+  function ficha(p){
+    var dc = p.destaque === 'casa', df = p.destaque === 'fora';
+    var selo = p.selo ? '<span class="selo alta">' + esc(p.selo) + '</span>' : '';
+    return '<article class="partida">' +
+      '<div class="casa"><span class="pos">' + esc(p.casa.posicao) + '</span>' +
+        '<span class="nome' + (dc ? ' dest' : '') + '">' + esc(p.casa.time) + '</span></div>' +
+      '<span class="gc">' + p.casa.gols + '</span>' +
+      '<span class="gf">' + p.fora.gols + '</span>' +
+      '<div class="fora"><span class="nome' + (df ? ' dest' : '') + '">' + esc(p.fora.time) + '</span>' +
+        '<span class="pos">' + esc(p.fora.posicao) + '</span></div>' +
+      '<div class="prob">' + probHtml(p.prob) + '</div>' +
+      '<div class="meta"><div class="stats">' + esc(p.stats.posse + ' · ' + p.stats.chutes + ' · ' + p.stats.no_alvo) + '</div>' +
+        '<div class="selos"><span class="selo">' + esc(p.status) + '</span>' + selo + '</div></div>' +
+    '</article>';
+  }
+  function renderLista(){
+    var vis = P.filter(function(p){ return filtro === 'Todas' || p.liga === filtro; });
+    var html = '', ligaAtual = null, buf = [], nBuf = 0;
+    function flush(){
+      if (nBuf) html += grupoHtml(ligaAtual, nBuf) + buf.join('');
+      buf = []; nBuf = 0;
+    }
+    vis.forEach(function(p){
+      if (p.liga !== ligaAtual){ flush(); ligaAtual = p.liga; }
+      buf.push(ficha(p)); nBuf++;
+    });
+    flush();
+    if (!vis.length){
+      var f = F.filter(function(x){ return x.liga === filtro; })[0];
+      html = '<p class="vazio">Nenhuma ficha de <b>' + esc(filtro) + '</b> nesta folha de amostra.' +
+             (f ? ' A liga teve ' + f.jogos + ' jogos na rodada de ' + JOGOS_RODADA + '.' : '') +
+             ' Use a aba Liga para ver a rodada inteira.</p>';
+    }
+    $('#lista').innerHTML = html;
+    $('#contagem').textContent = 'Exibindo ' + vis.length + ' de ' + P.length + ' fichas desta folha (amostra). A rodada tem ' +
+      JOGOS_RODADA + ' jogos em ' + LIGAS_RODADA + ' ligas, ' + kpi('ENCERRADOS') + ' encerrados.';
+  }
+  $('#chips').innerHTML = F.map(function(f){
+    return '<button class="chip' + (f.liga === 'Todas' ? ' on' : '') + '" type="button" data-liga="' + esc(f.liga) + '">' +
+           esc(f.liga) + ' <b>' + f.jogos + '</b></button>';
+  }).join('');
+  $('#chips').addEventListener('click', function(e){
+    var c = e.target.closest('.chip');
+    if (!c) return;
+    filtro = c.dataset.liga;
+    $$('.chip').forEach(function(x){ x.classList.toggle('on', x.dataset.liga === filtro); });
+    renderLista();
+  });
+
+  /* --------------------------------------------------------- aba Liga */
+  var MAXJ = Math.max.apply(null, F.filter(function(f){ return f.liga !== 'Todas'; }).map(function(f){ return f.jogos; }));
+  $('#ligas').innerHTML = F.filter(function(f){ return f.liga !== 'Todas'; }).map(function(f){
+    return '<button class="lrow" type="button" data-liga="' + esc(f.liga) + '">' +
+      '<span class="lnome">' + esc(f.liga) + '</span>' +
+      '<span class="ljogos">' + f.jogos + ' jogos</span>' +
+      '<span class="lbar"><span style="width:' + Math.round(f.jogos / MAXJ * 100) + '%"></span></span>' +
+      '<span class="lseta">→</span></button>';
+  }).join('');
+  $('#liga-contagem').textContent = LIGAS_RODADA + ' ligas nesta rodada · ' + JOGOS_RODADA + ' jogos · ' + kpi('GOLS') + ' gols';
+  $('#ligas').addEventListener('click', function(e){
+    var r = e.target.closest('.lrow');
+    if (!r) return;
+    filtro = r.dataset.liga;
+    $$('.chip').forEach(function(x){ x.classList.toggle('on', x.dataset.liga === filtro); });
+    renderLista();
+    setTab('rodada');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ------------------------------------------------------ aba Recorde */
+  var mediaMandante = (R.comparacao.match(/[\d.,]+%/) || ['—'])[0];
+  $('#laudo').innerHTML = [
+    { lab: 'Acerto por card', val: R.acerto, sub: R.acerto_detalhe, g: true },
+    { lab: 'Média do mandante', val: mediaMandante, sub: 'referência sem modelo' },
+    { lab: 'Cards liquidados', val: String(R.cards_liquidados), sub: R.detalhe },
+    { lab: 'Rodadas', val: String(R.rodadas), sub: 'corte ' + R.corte }
+  ].map(function(c){
+    return '<div class="lcell"><span class="llab">' + esc(c.lab) + '</span>' +
+           '<span class="lnum' + (c.g ? ' g' : '') + '">' + esc(c.val) + '</span>' +
+           '<span class="lsub">' + esc(c.sub) + '</span></div>';
+  }).join('');
+  $('#rec-lift').textContent = 'Lift ' + R.lift + ' · ' + R.comparacao;
+  $('#rec-lede').textContent = D.marca.posicionamento;
+  $('#rec-legenda').innerHTML = D.legenda.map(function(l){ return '<li>' + esc(l) + '</li>'; }).join('');
+  $('#modelo').innerHTML = M.map(function(m){
+    return '<div class="mrow"><span class="mlab">' + esc(m.rotulo) + '</span>' +
+           '<span class="mval">' + esc(m.valor) + '</span>' +
+           '<span class="mdet">' + esc(m.detalhe) + '</span></div>';
+  }).join('');
+
+  /* ----------------------------------------------------- aba Esportes */
+  $('#esp-hero').innerHTML = [
+    { lab: 'Esporte', val: 'Futebol', sub: D.marca.assinatura },
+    { lab: 'Ligas', val: LIGAS_RODADA, sub: 'todas com jogos encerrados' },
+    { lab: 'Jogos', val: JOGOS_RODADA, sub: 'rodada ' + CAPA.rodada },
+    { lab: 'Encerrados', val: kpi('ENCERRADOS'), sub: kpi('GOLS') + ' gols · média ' + kpi('MÉDIA/JOGO') + ' por jogo' }
+  ].map(function(c){
+    return '<div class="lcell"><span class="llab">' + esc(c.lab) + '</span>' +
+           '<span class="lnum">' + esc(c.val) + '</span>' +
+           '<span class="lsub">' + esc(c.sub) + '</span></div>';
+  }).join('');
+  var ord = F.filter(function(f){ return f.liga !== 'Todas'; }).slice().sort(function(a,b){ return b.jogos - a.jogos; });
+  var maxO = ord[0].jogos;
+  $('#esp-ligas').innerHTML = ord.map(function(f){
+    return '<div class="lrow" style="cursor:default">' +
+      '<span class="lnome">' + esc(f.liga) + '</span>' +
+      '<span class="ljogos">' + f.jogos + '</span>' +
+      '<span class="lbar"><span style="width:' + Math.round(f.jogos / maxO * 100) + '%"></span></span>' +
+      '<span class="lseta">' + (f.liga === CAPA.abas[0] ? '' : '') + '</span></div>';
+  }).join('');
+  $('#esp-legenda').innerHTML = D.legenda.map(function(l){ return '<li>' + esc(l) + '</li>'; }).join('');
+
+  /* ---------------------------------------------------------- aba Pro */
+  var ciclo = 'mes';
+  $('#pro-preco').innerHTML =
+    '<button class="ptab on" type="button" data-ciclo="mes"><span class="pl">Mensal</span><span class="pv">' + esc(PRO.preco_mes) + '</span></button>' +
+    '<button class="ptab" type="button" data-ciclo="ano"><span class="pl">Anual</span><span class="pv">' + esc(PRO.preco_ano) + '</span></button>';
+  $('#pro-preco').addEventListener('click', function(e){
+    var b = e.target.closest('.ptab');
+    if (!b) return;
+    ciclo = b.dataset.ciclo;
+    $$('.ptab').forEach(function(x){ x.classList.toggle('on', x.dataset.ciclo === ciclo); });
+  });
+  $('#pro-gratis').innerHTML = PRO.gratis.map(function(i){ return '<p class="pitem"><span class="mk">·</span><span>' + esc(i) + '</span></p>'; }).join('');
+  $('#pro-lista').innerHTML = PRO.pro.map(function(i){ return '<p class="pitem"><span class="mk">◆</span><span>' + esc(i) + '</span></p>'; }).join('');
+  $('#cta-pro').textContent = PRO.cta;
+  $('#cta-ativar').textContent = PRO.cta_secundario;
+  $('#pro-nota').textContent = PRO.rodape_lista;
+  function ativaPro(){
+    $('#pro-nota').classList.add('on');
+    $('#cta-pro').textContent = 'Assinatura aberta';
+  }
+  $('#cta-pro').addEventListener('click', ativaPro);
+  $('#cta-ativar').addEventListener('click', ativaPro);
+
+  /* --------------------------------------------------------- aside */
+  var MAXA = D.em_alta[0].score;
+  $('#alta').innerHTML = D.em_alta.map(function(t, i){
+    return '<div class="arow"><span class="ark">' + (i + 1) + '</span>' +
+      '<span class="atime">' + esc(t.time) + '</span>' +
+      '<span class="asc">' + t.score + '</span>' +
+      '<span class="abarra"><span style="width:' + Math.round(t.score / MAXA * 100) + '%"></span></span></div>';
+  }).join('');
+  $('#mini-recorde').innerHTML = [
+    ['Cards liquidados', R.cards_liquidados],
+    ['Acerto', R.acerto],
+    ['Comparação', R.comparacao.replace('vs ', '')],
+    ['Brier do modelo', M[0].valor + ' · ' + M[0].detalhe]
+  ].map(function(l){
+    return '<div class="lin"><span>' + esc(l[0]) + '</span><b>' + esc(l[1]) + '</b></div>';
+  }).join('') + '<div class="lin"><span>' + esc(R.sem_edge) + '</span></div>';
+  $('#legenda').innerHTML = D.legenda.map(function(l){ return '<li>' + esc(l) + '</li>'; }).join('');
+  var copiado = false;
+  $('#share').innerHTML = CAPA.compartilhar.map(function(s){
+    return '<button type="button" data-share="' + esc(s) + '">' + esc(s) + '</button>';
+  }).join('');
+  $('#share').addEventListener('click', function(e){
+    var b = e.target.closest('button');
+    if (!b || b.dataset.share !== 'Copiar link' || copiado) return;
+    copiado = true;
+    b.textContent = 'Link copiado';
+    b.style.background = 'var(--verde)';
+    b.style.color = 'var(--paper)';
+    b.style.borderColor = 'var(--verde)';
+  });
+
+  renderLista();
+  setTab('rodada');
+  primeiro = false;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HypeFC — três direções de identidade visual</title>
+<style>
+  :root{ --tinta:#16130F; --fraco:#5E574B; --regua:#D9D3C7; --papel:#F6F3EC; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--papel);color:var(--tinta);
+       font:16.5px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;}
+  .wrap{max-width:1180px;margin:0 auto;padding:44px 26px 90px}
+  h1{font-size:clamp(30px,4vw,48px);line-height:1.04;letter-spacing:-.022em;margin:0 0 12px}
+  .sub{max-width:840px;color:var(--fraco);margin:0 0 24px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 20px;font:500 12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
+        text-transform:uppercase;letter-spacing:.07em;color:var(--fraco);
+        border-top:1px solid var(--regua);border-bottom:1px solid var(--regua);padding:12px 0;margin-bottom:34px}
+  h2{font-size:23px;margin:40px 0 8px;letter-spacing:-.012em}
+  code{font:500 .92em ui-monospace,SFMono-Regular,Menlo,monospace;background:#efeae0;padding:1px 4px}
+  table{border-collapse:collapse;width:100%;margin:10px 0 6px;font-size:14.5px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--regua)}
+  th{font:600 11.5px/1.4 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.07em;color:var(--fraco)}
+  td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .dir{border-top:3px solid var(--tinta);margin-top:54px;padding-top:22px}
+  .dir h3{font-size:clamp(26px,3.4vw,38px);letter-spacing:-.02em;margin:0;line-height:1.08}
+  .dir h3 small{display:block;font:500 12px/1.6 ui-monospace,monospace;text-transform:uppercase;
+                letter-spacing:.1em;color:var(--fraco);margin-top:8px}
+  .tese{display:grid;grid-template-columns:1.5fr 1fr;gap:28px;margin:22px 0 24px}
+  .tese p{margin:0 0 10px}
+  .tese .ficha{border:1px solid var(--regua);background:#fff;padding:6px 16px;font-size:14px;margin:0;align-self:start}
+  .tese .ficha div{display:flex;gap:12px;border-bottom:1px solid #efeae0;padding:8px 0}
+  .tese .ficha div:last-child{border-bottom:0}
+  .tese .ficha b{flex:none;width:78px;font:600 10.5px/1.8 ui-monospace,monospace;text-transform:uppercase;
+                 letter-spacing:.06em;color:var(--fraco)}
+  figure{margin:0 0 18px}
+  figure img{width:100%;display:block;border:1px solid var(--regua);background:#fff}
+  figcaption{font:500 11px/1.6 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.07em;
+             color:var(--fraco);margin-top:6px}
+  .par{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .abrir{display:inline-block;margin:2px 0 6px;padding:13px 19px;background:var(--tinta);color:#fff;
+         font:600 13px/1 ui-monospace,monospace;text-decoration:none;letter-spacing:.02em}
+  .abrir:hover{background:#3a332a}
+  .nota{margin-top:50px;padding:18px 20px;border-left:3px solid var(--tinta);background:#fff;font-size:14.5px}
+  .nota h4{margin:0 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+  ul{margin:8px 0 0;padding-left:20px} li{margin:5px 0}
+  @media (max-width:820px){ .tese{grid-template-columns:1fr} .par{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Três direções de identidade visual — HypeFC</h1>
+  <p class="sub">Mockups descartáveis, feitos com os <b>dados reais</b> da última rodada (20/09/2026): 10 partidas reais, placares reais, probabilidades reais do modelo. Nenhum número inventado, nenhum texto de exemplo, nenhum lorem ipsum. Cada uma é um arquivo HTML único e autocontido — abre direto no navegador, sem build. <b>Nada aqui tocou no site em produção.</b></p>
+  <div class="meta">
+    <span>Base: 1.402 cards liquidados · acerto 53,6% · n=1.203 jogos</span>
+    <span>Medido por elemento, não por opinião</span>
+    <span>23/09/2026</span>
+  </div>
+
+  <h2>Diagnóstico que motivou o redesenho</h2>
+  <p class="sub" style="margin-bottom:6px">Medi o site atual antes de desenhar, e o resultado contrariou a minha expectativa: <b>a legibilidade dele não é o problema</b> — 0 falhas de contraste em 529 elementos de texto, 0 estouro horizontal, e o alvo de toque no celular está correto. O problema é <b>marca</b>: tipografia <b>Geist</b> (a fonte padrão do Next.js), base <b>slate-950</b> (o cinza padrão do shadcn), <b>194 elementos com fundo e canto arredondado</b> (a "sopa de card") e o laranja <code>#f97316</code> com um ícone de chama por cima — que é o clichê visual exato de app de aposta que a própria página diz não ser.</p>
+
+  <h2>Os três caminhos, lado a lado</h2>
+  <table>
+    <thead><tr><th>Medida</th><th class="num">Site hoje</th><th class="num">001 Almanaque</th><th class="num">002 Mesa</th><th class="num">003 Ficha</th></tr></thead>
+    <tbody>
+      <tr><td>Textos avaliados (1440 / 390)</td><td class="num">529 / 519</td><td class="num">211 / 209</td><td class="num">221 / 216</td><td class="num">222 / 215</td></tr>
+      <tr><td>Abaixo do mínimo AA (1440 / 390)</td><td class="num">0 / 0</td><td class="num">0 / 0</td><td class="num">0 / 0</td><td class="num">0 / 0</td></tr>
+      <tr><td>Estouro horizontal (1440 / 390)</td><td class="num">0 / 0</td><td class="num">0 / 0</td><td class="num">0 / 0</td><td class="num">0 / 0</td></tr>
+      <tr><td>Alvos de toque &lt; 44px no celular</td><td class="num">0 de 55</td><td class="num">2 de 19</td><td class="num">1 de 19</td><td class="num">4 de 19</td></tr>
+      <tr><td>Tipografia</td><td class="num">Geist (padrão)</td><td class="num">serifada editorial</td><td class="num">mono + grotesca</td><td class="num">grotesca pesada</td></tr>
+      <tr><td>Elementos com fundo arredondado (1440 / 390)</td><td class="num">195 / 194</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+    </tbody>
+  </table>
+
+  <div class="dir">
+    <h3>001 — Almanaque<small>papel · editorial · serifada · a mais institucional</small></h3>
+    <div class="tese">
+      <div>
+        <p><b>Tese:</b> o produto é um <b>registro</b>, então a tela é a página de um almanaque esportivo. Réguas de 1px em vez de cartões; partidas como <b>linhas de tabela</b>, não fichas; e a marca gráfica são <b>traços de contagem</b> — contar é literalmente o que o produto faz.</p>
+        <p>É a direção que faz número medido parecer <b>prova</b>, não marketing: papel claro, tinta, carimbo. Distância máxima do "app de aposta".</p>
+      </div>
+      <div class="ficha">
+        <div><b>Fontes</b><span>Instrument Serif (títulos e wordmark) · IBM Plex Mono (números) · Newsreader (texto)</span></div>
+        <div><b>Paleta</b><span>papel #F6F3EC · tinta #16130F · carimbo #B3261E só no registro e no erro</span></div>
+        <div><b>Regras</b><span>raio 0 · zero sombra · zero gradiente · sem laranja</span></div>
+        <div><b>Força</b><span>autoridade; comparação de dado em volume</span></div>
+        <div><b>Fraqueza</b><span>fria; não tem lugar natural para o ao vivo (gol, minuto, momentum)</span></div>
+      </div>
+    </div>
+    <figure><img src="001-almanaque/print-1440-final.png" alt="Almanaque — desktop, aba rodada"><figcaption>1440 · aba Rodada</figcaption></figure>
+    <div class="par">
+      <figure><img src="001-almanaque/print-1440-recorde-final.png" alt="Almanaque — aba recorde"><figcaption>1440 · aba Recorde (o número estampado como carimbo)</figcaption></figure>
+      <figure><img src="001-almanaque/print-390-final.png" alt="Almanaque — celular"><figcaption>390 · celular (composição própria)</figcaption></figure>
+    </div>
+    <a class="abrir" href="001-almanaque/index.html">abrir 001-almanaque/index.html →</a>
+  </div>
+
+  <div class="dir">
+    <h3>002 — Mesa<small>grafite · instrumento · monoespaçada · a mais densa</small></h3>
+    <div class="tese">
+      <div>
+        <p><b>Tese:</b> quem abre não está navegando um app, está <b>conferindo número</b>. Então a tela é um instrumento de leitura: hairline de 1px, densidade alta, zero canto arredondado, zero sombra.</p>
+        <p><b>Uma única cor de sinal</b> (<code>#E8FF59</code>) reservada a três coisas e nada mais: o número do registro, o botão de assinar e a palavra "registro" na manchete. O verde significa <b>só</b> dado do modelo (a maior probabilidade da linha). É a direção mais distante do clichê de aposta e a que cabe mais informação acima da dobra.</p>
+      </div>
+      <div class="ficha">
+        <div><b>Fontes</b><span>JetBrains Mono (números e rótulos) · Inter Tight (texto corrido)</span></div>
+        <div><b>Paleta</b><span>fundo #0B0E11 · painel #12161B · hairline #1F262E · sinal #E8FF59 · verde #7BE495</span></div>
+        <div><b>Regras</b><span>raio 0 · zero sombra · seleção e hover sempre neutros, nunca coloridos</span></div>
+        <div><b>Força</b><span>rigor; cabe a tela inteira (rodada + registro + alerta) acima da dobra</span></div>
+        <div><b>Fraqueza</b><span>é a que mais se degrada se alguém usar o acento "só para destacar"</span></div>
+      </div>
+    </div>
+    <figure><img src="002-mesa/print-1440-final.png" alt="Mesa — desktop, aba rodada"><figcaption>1440 · aba Rodada</figcaption></figure>
+    <div class="par">
+      <figure><img src="002-mesa/print-1440-recorde-final.png" alt="Mesa — aba recorde"><figcaption>1440 · aba Recorde</figcaption></figure>
+      <figure><img src="002-mesa/print-390-final.png" alt="Mesa — celular"><figcaption>390 · celular</figcaption></figure>
+    </div>
+    <a class="abrir" href="002-mesa/index.html">abrir 002-mesa/index.html →</a>
+  </div>
+
+  <div class="dir">
+    <h3>003 — Ficha<small>canhoto · estádio · forma proprietária · a mais calorosa</small></h3>
+    <div class="tese">
+      <div>
+        <p><b>Tese:</b> o produto tem uma <b>forma que ninguém mais tem</b> — o canhoto de ingresso, com picote tracejado e chanfro cortado no canto. O card de partida é literalmente uma ficha: metade jogo, metade canhoto com o palpite do modelo.</p>
+        <p>O registro vira <b>selo</b> com o 1.402 como elemento gráfico, e o Pro vira <b>passe de temporada</b>, com o mesmo picote. É a única das três com forma reconhecível de longe — e a mais convidativa para quem chega por jogo.</p>
+      </div>
+      <div class="ficha">
+        <div><b>Fontes</b><span>Archivo pesada (placar e wordmark) · IBM Plex Mono (registro)</span></div>
+        <div><b>Paleta</b><span>mesa #23211D · creme #F4EFE4 · coral de marca #FF5A3C</span></div>
+        <div><b>Regras</b><span>picote e chanfro só onde significam corte, não como enfeite</span></div>
+        <div><b>Força</b><span>identidade imediata; a mais quente das três</span></div>
+        <div><b>Fraqueza</b><span>no celular o canhoto perde força e precisa de picote real atravessando a ficha</span></div>
+      </div>
+    </div>
+    <figure><img src="003-ficha/print-1440-final.png" alt="Ficha — desktop, aba rodada"><figcaption>1440 · aba Rodada</figcaption></figure>
+    <div class="par">
+      <figure><img src="003-ficha/print-1440-recorde-final.png" alt="Ficha — aba recorde"><figcaption>1440 · aba Recorde (o registro como selo)</figcaption></figure>
+      <figure><img src="003-ficha/print-390-final.png" alt="Ficha — celular"><figcaption>390 · celular</figcaption></figure>
+    </div>
+    <a class="abrir" href="003-ficha/index.html">abrir 003-ficha/index.html →</a>
+  </div>
+
+  <div class="nota">
+    <h4>Como isso foi verificado, e o que ainda falta</h4>
+    Cada direção foi aberta no navegador e medida por elemento — contraste calculado contra o <b>fundo real composto</b> de cada texto (o alfa de cada camada até o fundo da página; sem isso, os cards semitransparentes do site atual são lidos como branco puro e a medição mente), alvo de toque por geometria e estouro horizontal por <code>scrollWidth</code>. As três estão em <b>0 falhas de contraste</b> e <b>0 estouro</b> nas duas larguras, e as três são navegáveis de verdade: as abas trocam de conteúdo, o filtro de liga filtra, o hover responde.
+    <ul>
+      <li><b>Aberto, para depois da escolha:</b> alvos de toque pequenos no desktop (são chips de ponteiro — 44px é regra de toque, não de mouse); na 003 o canhoto precisa de linha de picote real atravessando a ficha no celular; o rótulo <i>EM ALTA</i> aparece nas três <b>sem unidade, sem janela e sem variação</b> — ou ganha definição, ou sai; e o produto hoje mistura separador decimal (<code>53.6%</code> e <code>0,629</code> na mesma tela), o que num produto brasileiro é defeito de formatação.</li>
+      <li><b>Próximo passo:</b> escolhida a direção, implemento no site com gate medido <b>antes e depois</b> (estes mesmos números), começando pelo cabeçalho/hero e pela linha de partida — que é onde a marca se decide.</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

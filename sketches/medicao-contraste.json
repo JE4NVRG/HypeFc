@@ -1,0 +1,220 @@
+{
+  "SITE ATUAL": {
+    "1440": {
+      "fundoBody": "rgb(2, 6, 23)",
+      "avaliados": 529,
+      "reprovados": 0,
+      "taxa": 0,
+      "pior": [],
+      "alvos": 60,
+      "alvos_menores_44": 24,
+      "estouro": 0
+    },
+    "390": {
+      "fundoBody": "rgb(2, 6, 23)",
+      "avaliados": 519,
+      "reprovados": 0,
+      "taxa": 0,
+      "pior": [],
+      "alvos": 55,
+      "alvos_menores_44": 0,
+      "estouro": 0
+    }
+  },
+  "001-almanaque": {
+    "1440": {
+      "fundoBody": "rgb(244, 240, 230)",
+      "avaliados": 211,
+      "reprovados": 0,
+      "taxa": 0,
+      "pior": [],
+      "alvos": 19,
+      "alvos_menores_44": 14,
+      "estouro": 0
+    },
+    "390": {
+      "fundoBody": "rgb(244, 240, 230)",
+      "avaliados": 209,
+      "reprovados": 0,
+      "taxa": 0,
+      "pior": [],
+      "alvos": 19,
+      "alvos_menores_44": 15,
+      "estouro": 0
+    }
+  },
+  "002-mesa": {
+    "1440": {
+      "fundoBody": "rgb(11, 14, 17)",
+      "avaliados": 221,
+      "reprovados": 3,
+      "taxa": 1.4,
+      "pior": [
+        {
+          "r": 1.27,
+          "tam": 9,
+          "t": "10",
+          "cls": "ark",
+          "bg": "rgb(11,14,17)"
+        },
+        {
+          "r": 1.27,
+          "tam": 9,
+          "t": "11",
+          "cls": "ark",
+          "bg": "rgb(11,14,17)"
+        },
+        {
+          "r": 1.27,
+          "tam": 9,
+          "t": "12",
+          "cls": "ark",
+          "bg": "rgb(11,14,17)"
+        }
+      ],
+      "alvos": 19,
+      "alvos_menores_44": 19,
+      "estouro": 0
+    },
+    "390": {
+      "fundoBody": "rgb(11, 14, 17)",
+      "avaliados": 216,
+      "reprovados": 3,
+      "taxa": 1.4,
+      "pior": [
+        {
+          "r": 1.27,
+          "tam": 9,
+          "t": "10",
+          "cls": "ark",
+          "bg": "rgb(11,14,17)"
+        },
+        {
+          "r": 1.27,
+          "tam": 9,
+          "t": "11",
+          "cls": "ark",
+          "bg": "rgb(11,14,17)"
+        },
+        {
+          "r": 1.27,
+          "tam": 9,
+          "t": "12",
+          "cls": "ark",
+          "bg": "rgb(11,14,17)"
+        }
+      ],
+      "alvos": 19,
+      "alvos_menores_44": 14,
+      "estouro": 0
+    }
+  },
+  "003-ficha": {
+    "1440": {
+      "fundoBody": "rgb(35, 33, 29)",
+      "avaliados": 222,
+      "reprovados": 58,
+      "taxa": 26.1,
+      "pior": [
+        {
+          "r": 3.92,
+          "tam": 11,
+          "t": "Ficha — rodada 20/",
+          "cls": "serial",
+          "bg": "rgb(244,239,228)"
+        },
+        {
+          "r": 3.92,
+          "tam": 11,
+          "t": "· Atualizado às 22",
+          "cls": "serial__t",
+          "bg": "rgb(244,239,228)"
+        },
+        {
+          "r": 3.92,
+          "tam": 11,
+          "t": "JOGOS",
+          "cls": "kpi__l",
+          "bg": "rgb(244,239,228)"
+        },
+        {
+          "r": 3.92,
+          "tam": 11,
+          "t": "GOLS",
+          "cls": "kpi__l",
+          "bg": "rgb(244,239,228)"
+        },
+        {
+          "r": 3.92,
+          "tam": 11,
+          "t": "MÉDIA/JOGO",
+          "cls": "kpi__l",
+          "bg": "rgb(244,239,228)"
+        },
+        {
+          "r": 3.92,
+          "tam": 11,
+          "t": "ENCERRADOS",
+          "cls": "kpi__l",
+          "bg": "rgb(244,239,228)"
+        }
+      ],
+      "alvos": 19,
+      "alvos_menores_44": 14,
+      "estouro": 0
+    },
+    "390": {
+      "fundoBody": "rgb(35, 33, 29)",
+      "avaliados": 215,
+      "reprovados": 51,
+      "taxa": 23.7,
+      "pior": [
+        {
+          "r": 3.92,
+          "tam": 11,
+          "t": "Ficha — rodada 20/",
+          "cls": "serial",
+          "bg": "rgb(244,239,228)"
+        },
+        {
+          "r": 3.92,
+          "tam": 11,
+          "t": "JOGOS",
+          "cls": "kpi__l",
+          "bg": "rgb(244,239,228)"
+        },
+        {
+          "r": 3.92,
+          "tam": 11,
+          "t": "GOLS",
+          "cls": "kpi__l",
+          "bg": "rgb(244,239,228)"
+        },
+        {
+          "r": 3.92,
+          "tam": 11,
+          "t": "MÉDIA/JOGO",
+          "cls": "kpi__l",
+          "bg": "rgb(244,239,228)"
+        },
+        {
+          "r": 3.92,
+          "tam": 11,
+          "t": "ENCERRADOS",
+          "cls": "kpi__l",
+          "bg": "rgb(244,239,228)"
+        },
+        {
+          "r": 3.92,
+          "tam": 11,
+          "t": "LIGAS",
+          "cls": "kpi__l",
+          "bg": "rgb(244,239,228)"
+        }
+      ],
+      "alvos": 19,
+      "alvos_menores_44": 4,
+      "estouro": 0
+    }
+  }
+}
