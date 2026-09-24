@@ -97,7 +97,7 @@ export default function ContaPro({ plano, seguindo, limite, onSairLocal }: Props
                 height={32}
                 decoding="async"
                 referrerPolicy="no-referrer"
-                className="h-8 w-8 shrink-0 rounded-full border border-rule object-cover"
+                className="h-8 w-8 shrink-0 border border-rule object-cover"
               />
             ) : (
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-rule bg-paper-3/60 text-ink-2">
