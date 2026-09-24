@@ -88,7 +88,27 @@ Complementos medidos na mesma passada, para o critério de shell do cockpit:
    Opções: CTA fixo no pé do painel quando não há acesso, ou mover o bloco de preço para o topo.
    Não foi alterado nesta passada porque a escolha é de produto.
 
-## 4. Como repetir esta medição
+## 4. Área de conta na aba Pro (correção de padrão de tela)
+
+A área de acesso tinha quatro caminhos e duas identidades no mesmo bloco, sem hierarquia:
+
+| Antes | Depois |
+| --- | --- |
+| Cartão "Acesso ativo · nome" (perfil do navegador) com um botão "Sair" | Removido; os dados dele entram como uma linha dentro do cartão de conta |
+| Cartão de login com parágrafo antes do botão | Cartão "Conta" com rótulo, frase de uma linha, botão e uma linha de apoio |
+| "Entrar com Google" e "Assinar Pro" com o mesmo peso visual, colados | "Assinar Pro" primeiro, único elemento em `sinal` (ácido); "Entrar com Google" neutro |
+| "Ativar acesso" (e-mail mais código) aberto no meio do fluxo | Fechado em `<details>` "Já comprei: tenho um código" |
+| Dois botões "Sair" quando havia conta Google e perfil do navegador | Um só, que encerra a conta e limpa o acesso do navegador |
+| Selo de estado "Sem acesso neste navegador" para quem não tem token | "Acesso gratuito" |
+
+Medido no build local (1440x1000 e 390x844, aba Pro), depois do ajuste:
+
+- Ordem dos controles: `Assinar Pro` (fundo `sinal`, 44px nos dois viewports), `Entrar com Google`
+  (neutro, 44px no mobile e 36px no desktop), `<details>` fechado com resumo de 44px, `Entrar na lista`.
+- Botões "Sair" visíveis sem conta: 0 (antes o perfil do navegador já desenhava um).
+- `<details>` fechado por padrão, então o formulário de código não compete com os CTAs.
+
+## 5. Como repetir esta medição
 
 O instrumento é o mesmo da passada anterior (`docs/qa-ui-2026-09-23.md` §1) e não mudou: abrir a URL
 numa aba dedicada, `Emulation.setDeviceMetricsOverride` para cada viewport, e ler o DOM. Para este

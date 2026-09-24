@@ -13,12 +13,10 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
-  BadgeCheck,
   BellOff,
   BellRing,
   Check,
   Loader2,
-  LogOut,
   Plus,
   ShieldQuestion,
   Square,
@@ -233,7 +231,7 @@ export function ProView() {
       ? limite > LIMITE_PLANO.free
         ? 'Pro ativo'
         : 'Plano gratuito'
-      : 'Sem acesso neste navegador'
+      : 'Acesso gratuito'
 
   async function pedirLista() {
     if (ocupado) return
@@ -483,30 +481,9 @@ export function ProView() {
         <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-2">
           {/* (c) e (d) lista de espera, ativacao de acesso e estado do acesso */}
           <div className="grid grid-cols-1 gap-3">
-            {perfil ? (
-              <div className="rounded-lg border border-line bg-paper-3/40 p-3.5">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5 text-[13px] font-medium text-ink">
-                      <BadgeCheck className="h-4 w-4" />
-                      Acesso ativo
-                      {perfil.nome ? ` · ${perfil.nome}` : ''}
-                    </div>
-                    <p className="mt-1 truncate text-[12px] text-ink-2">
-                      {perfil.email ?? 'sem e-mail no cadastro'} · plano{' '}
-                      {perfil.plan === 'pro' ? 'Pro' : 'Gratuito'} · {seguindo} de {limite} times
-                    </p>
-                  </div>
-                  <button type="button" onClick={sairDaqui} className={BOTAO_FANTASMA} aria-label="Sair deste navegador">
-                    <LogOut className="h-4 w-4" />
-                    Sair
-                  </button>
-                </div>
-              </div>
-            ) : null}
-
-            <ContaPro />
-
+            {/* Ordem da area de acesso: primeiro a assinatura (unico CTA acido da
+                aba), depois a conta, e o codigo de compra atras de um detalhe.
+                Antes eram dois cartoes de identidade e dois "Sair" no mesmo bloco. */}
             {CHECKOUT_URL ? (
               <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className={CTA}>
                 Assinar Pro
@@ -517,6 +494,9 @@ export function ProView() {
                 Vendas abrindo — entre na lista
               </button>
             )}
+
+            <ContaPro plano={perfil?.plan} seguindo={seguindo} limite={limite} onSairLocal={sairDaqui} />
+
             {!loja ? (
               <p className="text-[12px] leading-snug text-carimbo">
                 O registro online ainda não está ligado neste site: sua inscrição não é gravada aqui. O painel
@@ -524,9 +504,13 @@ export function ProView() {
               </p>
             ) : null}
 
-            <form onSubmit={(event) => void ativarAcesso(event)} className={CAIXA}>
-              <div className={ROTULO}>Ativar acesso</div>
-              <p className="mt-1 text-[12px] leading-snug text-ink-3">
+            <details className={CAIXA}>
+              <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-2 text-[11px] font-semibold uppercase tracking-wider text-ink-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 [&::-webkit-details-marker]:hidden">
+                Já comprei: tenho um código
+                <span className="text-[11px] font-normal normal-case tracking-normal text-ink-3">abrir</span>
+              </summary>
+              <form onSubmit={(event) => void ativarAcesso(event)} className="mt-2.5">
+              <p className="text-[12px] leading-snug text-ink-3">
                 Quem comprou recebe um código de uso único por e-mail. Ele ativa este navegador.
               </p>
               <div className="mt-2.5 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -565,7 +549,8 @@ export function ProView() {
                 Ativar acesso
               </button>
               <RecadoLinha recado={recadoAcesso} />
-            </form>
+              </form>
+            </details>
 
             <form onSubmit={(event) => { event.preventDefault(); void pedirLista() }} className={CAIXA}>
               <div className={ROTULO}>{CHECKOUT_URL ? 'Avisos do Pro' : 'Lista de espera'}</div>
