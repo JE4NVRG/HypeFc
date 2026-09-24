@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+
+import { DocsShell } from '@/components/site/DocsShell'
 
 export const metadata: Metadata = {
   title: 'Termos de uso · HypeFC',
@@ -12,14 +13,11 @@ const S = {
   p: 'text-[13px] leading-relaxed text-ink-3',
   ul: 'space-y-1 text-[13px] leading-relaxed text-ink-3',
   link: 'text-verde-2 underline decoration-verde/30 underline-offset-2 hover:decoration-verde focus:outline-none focus-visible:ring-2 focus-visible:ring-sinal/60 rounded-lg',
-  linkNav:
-    'inline-flex min-h-[44px] items-center text-verde-2 underline decoration-verde/30 underline-offset-2 hover:decoration-verde focus:outline-none focus-visible:ring-2 focus-visible:ring-sinal/60 rounded-lg sm:min-h-[36px]',
 }
 
 export default function Termos() {
   return (
-    <article className="mx-auto max-w-2xl px-5 py-8">
-      <p className="text-[11px] uppercase tracking-wider text-ink-3">HypeFC</p>
+    <DocsShell atual="termos">
       <h1 className={S.h1}>Termos de uso</h1>
       <p className={`${S.p} mt-1`}>Última atualização: 23 de setembro de 2026.</p>
 
@@ -105,15 +103,6 @@ export default function Termos() {
           .
         </p>
       </section>
-
-      <nav className="mt-8 flex flex-wrap gap-4 border-t border-paper-3 pt-4 text-[12px]">
-        <Link className={S.linkNav} href="/">
-          ← Voltar ao painel
-        </Link>
-        <Link className={S.linkNav} href="/privacidade">
-          Política de privacidade
-        </Link>
-      </nav>
-    </article>
+    </DocsShell>
   )
 }

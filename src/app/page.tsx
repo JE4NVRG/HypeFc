@@ -19,7 +19,7 @@ import { HypeRecord } from '@/components/dashboard/HypeRecord'
 import { ShareRound } from '@/components/dashboard/ShareRound'
 import { SourcesPanel } from '@/components/dashboard/SourcesPanel'
 import { MatchDetailPanel } from '@/components/dashboard/MatchDetailPanel'
-import { DashboardFooter } from '@/components/dashboard/DashboardFooter'
+import { SiteFooter } from '@/components/site/SiteFooter'
 import { buscarPayload } from '@/lib/payloadSource'
 
 /** Formato cru de public/data/probability-record.json (registro ja liquidado). */
@@ -378,7 +378,7 @@ export default function Home() {
         />
       </main>
 
-      <DashboardFooter source={todayData?.source} />
+      <SiteFooter source={todayData?.source} />
     </div>
   )
 }

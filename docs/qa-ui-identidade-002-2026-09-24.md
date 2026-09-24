@@ -108,7 +108,62 @@ Medido no build local (1440x1000 e 390x844, aba Pro), depois do ajuste:
 - Botões "Sair" visíveis sem conta: 0 (antes o perfil do navegador já desenhava um).
 - `<details>` fechado por padrão, então o formulário de código não compete com os CTAs.
 
-## 5. Como repetir esta medição
+## 5. Teste dos dois estados (sem login e com login)
+
+Não existia. Esta passada criou o instrumento e mediu os três estados de acesso, porque gate de
+identidade não cobre contrato de acesso: uma tela pode estar bonita e o dado por trás estar errado.
+
+Como foi feito, sem digitar senha de ninguém: sessão real gerada por magic link na Admin API
+(`~/.hermes/cache/scratch/hypefc-sessao.py`; a service key sai do `.env.local` e nunca é impressa),
+grava o payload no formato do supabase-js e injeta em `localStorage['hypefc.conta']`. A conta usada é
+`je4ndev@gmail.com`, a do dono do produto. Leitura por DOM em 390x844 e 1440x900, prints por
+`Page.captureScreenshot` (o helper de screenshot da automação devolve arquivo compartilhado e chegou
+a entregar imagem velha).
+
+| Estado | Cartão de conta | Token de acesso | Limite de times | Clicar em Seguir | Alertas |
+| --- | --- | --- | --- | --- | --- |
+| Sem login | "Acesso gratuito" | nenhum | 3, e só depois de entrar na lista | aviso na tela: "Seguir time é do Pro: ative o acesso na aba Pro." | não |
+| Com login, sem assinatura | "esta conta ainda não tem assinatura" + foto do Google | nenhum | 3 (não usa a conta) | mesmo aviso | não |
+| Com login e assinatura Pro | "Pro ativo até 24/10/2026" | sim | 20 | funciona: botão vira "Seguindo" e o contador vai a "1 de 20" | sim |
+
+### Achados e o que foi feito
+
+1. **Login com Google não dá acesso nenhum.** `pro_conta_entrar` só devolve token para assinante
+   ativo, então a conta Google sem assinatura fica com menos acesso do que quem preencheu o
+   formulário "Entrar na lista" (esse recebe token do plano gratuito via `join_waitlist`). Seguir
+   time, que a copy vende como parte do plano gratuito ("Até 3 times seguidos"), não funciona nem
+   logado nem deslogado sem passar pela lista. **Correção pendente, mexe em cobrança:** entrar na
+   conta deveria provisionar o mesmo acesso gratuito (linha `plan='free'`/`status='waitlist'` por
+   e-mail) e devolver token free, com o Pro continuando por assinatura. Não foi alterado sem a
+   decisão do dono do produto.
+2. **O motivo da recusa do "Seguir" não aparecia na tela.** A mensagem era montada em `title` e
+   `aria-label` do próprio botão; no toque não existe tooltip, então o usuário clicava e nada
+   acontecia. Agora a mensagem é um `<span role="status">` visível abaixo do botão (medido: 138x41px,
+   11px, contraste 8.45:1 contra o fundo real do diálogo). Corrigido em `ProView.tsx`.
+3. **A foto da conta Google não aparecia.** `user_metadata.avatar_url`/`picture` chegam na sessão e
+   eram descartados: o cartão mostrava só um selo genérico. `conta.ts` passou a carregar
+   `foto` (com queda para a identidade) e o cartão mostra a foto de 32px, `alt=""` porque o e-mail
+   está ao lado. Medido no publicado: imagem de `lh3.googleusercontent.com`, 96px de origem,
+   carregada (`naturalWidth` 96). Sem `loading="lazy"`, porque o cartão fica abaixo da dobra e a
+   imagem ficava pendente.
+4. **Não existia cabeçalho e rodapé padrão fora do painel.** `/termos` e `/privacidade` eram um
+   `<article>` solto: sem marca, sem rodapé e com a única navegação no fim do texto. A marca estava
+   escrita duas vezes (bloco do painel e um rótulo "HYPEFC" nas páginas) e o rodapé duas (cockpit e
+   `nav` de dois links). Agora existe `src/components/site/`: `SiteMarca`, `SiteFooter` e `DocsShell`
+   usados pelo painel e pelas páginas de documento; `DashboardFooter.tsx` foi removido. Os links
+   internos passaram a `next/link` com caminho absoluto, porque o rodapé antigo usava `href`
+   relativo, que quebra em página de segundo nível e ignora o `basePath` do GitHub Pages.
+   Medido no publicado: `/termos` e `/privacidade` com cabeçalho e rodapé (200), marca linkando
+   para `/`, 0 alvos abaixo de 44px no mobile, 0 de estouro horizontal.
+5. **Sobra de PKCE no navegador.** Sobraram `hypefc.conta-flow-*-code-verifier` de uma tentativa de
+   login abandonada. Não quebra nada hoje, mas é lixo acumulando por tentativa de login.
+
+Dados de teste: a assinatura Pro da conta foi criada para este teste
+(`subscribers` de `je4ndev@gmail.com`, `plan=pro`, `status=active`, `paid_until=2026-10-24`,
+`source=qa-teste-conta`) e o único time seguido do teste foi removido. Para revogar, apagar a linha
+de `subscribers` desse e-mail.
+
+## 6. Como repetir esta medição
 
 O instrumento é o mesmo da passada anterior (`docs/qa-ui-2026-09-23.md` §1) e não mudou: abrir a URL
 numa aba dedicada, `Emulation.setDeviceMetricsOverride` para cada viewport, e ler o DOM. Para este

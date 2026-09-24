@@ -50,6 +50,8 @@ export function clienteConta(): SupabaseClient | null {
 export type ContaEstado = {
   logado: boolean
   email?: string
+  /** Foto do provedor (Google), quando o provedor entrega. */
+  foto?: string
   pro?: boolean
   paidUntil?: string
   erro?: string
@@ -79,7 +81,27 @@ export async function sairDaConta(): Promise<void> {
   limparContaLocal()
 }
 
-type SessaoAtual = { email: string; token: string }
+type SessaoAtual = { email: string; token: string; foto: string }
+
+/**
+ * Foto do Google, quando existe. O Supabase entrega em `user_metadata`
+ * (`avatar_url` ou `picture`, depende do provedor) e tambem dentro da identidade.
+ * Sem ela a interface cai para o selo de conta, nunca para um espaco vazio.
+ */
+function fotoDaSessao(
+  usuario:
+    | {
+        user_metadata?: Record<string, unknown>
+        identities?: { identity_data?: Record<string, unknown> }[] | null
+      }
+    | null
+    | undefined
+): string {
+  const meta = usuario?.user_metadata ?? {}
+  const ident = usuario?.identities?.[0]?.identity_data ?? {}
+  const candidatos = [meta.avatar_url, meta.picture, ident.avatar_url, ident.picture]
+  return candidatos.find((v): v is string => typeof v === 'string' && v.startsWith('http')) ?? ''
+}
 
 async function sessaoAtual(): Promise<SessaoAtual | null> {
   const c = clienteConta()
@@ -87,7 +109,7 @@ async function sessaoAtual(): Promise<SessaoAtual | null> {
   const { data } = await c.auth.getSession()
   const sessao = data.session
   if (!sessao?.access_token) return null
-  return { email: sessao.user?.email ?? '', token: sessao.access_token }
+  return { email: sessao.user?.email ?? '', token: sessao.access_token, foto: fotoDaSessao(sessao.user) }
 }
 
 /**
@@ -109,7 +131,7 @@ export async function entrarComoAssinante(): Promise<ContaEstado> {
     body: '{}',
   }).catch(() => null)
 
-  if (!resposta) return { logado: true, email: sessao.email, pro: false, erro: 'rede' }
+  if (!resposta) return { logado: true, email: sessao.email, foto: sessao.foto, pro: false, erro: 'rede' }
 
   const dados = (await resposta.json().catch(() => ({}))) as {
     ok?: boolean
@@ -121,12 +143,13 @@ export async function entrarComoAssinante(): Promise<ContaEstado> {
 
   if (dados.ok === true && typeof dados.token === 'string' && dados.token.length > 20) {
     aplicarToken(dados.token)
-    return { logado: true, email: dados.email ?? sessao.email, pro: true, paidUntil: dados.paid_until }
+    return { logado: true, email: dados.email ?? sessao.email, foto: sessao.foto, pro: true, paidUntil: dados.paid_until }
   }
 
   return {
     logado: true,
     email: sessao.email,
+    foto: sessao.foto,
     pro: false,
     erro: typeof dados.erro === 'string' ? dados.erro : 'rede',
   }
@@ -147,7 +170,7 @@ export async function estadoDaConta(): Promise<ContaEstado> {
     body: '{}',
   }).catch(() => null)
 
-  if (!resposta) return { logado: true, email: sessao.email, erro: 'rede' }
+  if (!resposta) return { logado: true, email: sessao.email, foto: sessao.foto, erro: 'rede' }
   const dados = (await resposta.json().catch(() => ({}))) as {
     email?: string
     assinatura?: boolean
@@ -156,6 +179,7 @@ export async function estadoDaConta(): Promise<ContaEstado> {
   return {
     logado: true,
     email: dados.email ?? sessao.email,
+    foto: sessao.foto,
     pro: dados.assinatura === true,
     paidUntil: dados.paid_until,
   }

@@ -775,25 +775,33 @@ export function SeguirTimeBotao({
         : 'border-line bg-paper-3/60 text-ink hover:bg-line/60'
 
   return (
-    <button
-      type="button"
-      onClick={(event) => void alternar(event)}
-      disabled={ocupado || estado === 'limite'}
-      aria-pressed={estado === 'seguindo'}
-      aria-label={`${rotulo}: ${teamName}${nota ? `, ${nota}` : ''}`}
-      title={nota || undefined}
-      className={`inline-flex min-h-[44px] w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg border px-3 text-[13px] font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 disabled:cursor-not-allowed disabled:opacity-50 ${classes}`}
-    >
-      {ocupado ? (
-        <Loader2 className="h-4 w-4 animate-spin" />
-      ) : estado === 'seguindo' ? (
-        <Check className="h-4 w-4" />
-      ) : estado === 'limite' ? (
-        <ShieldQuestion className="h-4 w-4" />
-      ) : (
-        <Plus className="h-4 w-4" />
-      )}
-      {rotulo}
-    </button>
+    <span className="flex w-full flex-col items-center gap-1">
+      <button
+        type="button"
+        onClick={(event) => void alternar(event)}
+        disabled={ocupado || estado === 'limite'}
+        aria-pressed={estado === 'seguindo'}
+        aria-label={`${rotulo}: ${teamName}`}
+        className={`inline-flex min-h-[44px] w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg border px-3 text-[13px] font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 disabled:cursor-not-allowed disabled:opacity-50 ${classes}`}
+      >
+        {ocupado ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : estado === 'seguindo' ? (
+          <Check className="h-4 w-4" />
+        ) : estado === 'limite' ? (
+          <ShieldQuestion className="h-4 w-4" />
+        ) : (
+          <Plus className="h-4 w-4" />
+        )}
+        {rotulo}
+      </button>
+      {nota ? (
+        // O motivo da recusa precisa aparecer na tela: ficava so no `title`, e no
+        // toque nao existe tooltip, entao o usuario clicava em Seguir e nada acontecia.
+        <span role="status" className="text-center text-[11px] leading-tight text-ink-2">
+          {nota}
+        </span>
+      ) : null}
+    </span>
   )
 }

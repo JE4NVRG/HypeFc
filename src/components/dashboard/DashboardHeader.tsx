@@ -1,6 +1,8 @@
 "use client"
 
-import { Flame, RefreshCw, Wifi, WifiOff } from 'lucide-react'
+import { RefreshCw, Wifi, WifiOff } from 'lucide-react'
+
+import { SiteMarca } from '@/components/site/SiteMarca'
 
 interface DashboardHeaderProps {
   isLoading: boolean
@@ -38,26 +40,13 @@ export function DashboardHeader({ isLoading, lastUpdated, hasLiveMatches, onRefr
     <header className="sticky top-0 z-50 border-b border-ink/[0.06] bg-paper/85 backdrop-blur-xl">
       <div className="flex items-center justify-between gap-3 px-3 py-2 sm:px-4">
         <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-          <div
-            aria-hidden="true"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-rule bg-paper-2"
-          >
-            <Flame className="h-4 w-4 text-ink-2" />
-          </div>
-          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-            <h1 className="text-[22px] font-bold leading-none tracking-tight text-ink sm:text-[26px]">
-              HypeFC
-            </h1>
-            {hasLiveMatches && (
-              <span className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-verde/15 px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-verde-2">
-                <span aria-hidden="true" className="h-1.5 w-1.5 animate-pulse rounded-full bg-verde" />
-                ao vivo
-              </span>
-            )}
-            <p className="hidden min-w-0 truncate text-xs text-ink-3 md:block">
-              Dashboard de futebol em tempo real
-            </p>
-          </div>
+          <SiteMarca subtitulo="Dashboard de futebol em tempo real" />
+          {hasLiveMatches && (
+            <span className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-verde/15 px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-verde-2">
+              <span aria-hidden="true" className="h-1.5 w-1.5 animate-pulse rounded-full bg-verde" />
+              ao vivo
+            </span>
+          )}
         </div>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">

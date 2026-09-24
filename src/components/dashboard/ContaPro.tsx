@@ -87,22 +87,37 @@ export default function ContaPro({ plano, seguindo, limite, onSairLocal }: Props
     return (
       <div className={CAIXA}>
         <div className="flex flex-wrap items-start justify-between gap-2">
-          <div className="min-w-0">
-            <div className="flex items-center gap-1.5 text-[13px] font-medium text-ink">
-              <BadgeCheck className="h-4 w-4" />
-              Conta conectada
-            </div>
-            <p className="mt-1 truncate text-[12px] text-ink-2">
-              {estado.email || 'conta Google'} ·{' '}
-              {estado.pro
-                ? `Pro ativo${validade ? ` até ${validade}` : ''}`
-                : 'esta conta ainda não tem assinatura'}
-            </p>
-            {typeof seguindo === 'number' && typeof limite === 'number' ? (
-              <p className="mt-0.5 text-[11px] text-ink-3">
-                Neste navegador: {plano === 'pro' ? 'Pro' : 'Gratuito'} · {seguindo} de {limite} times seguidos
+          <div className="flex min-w-0 items-center gap-3">
+            {estado.foto ? (
+              // eslint-disable-next-line @next/next/no-img-element -- foto do provedor; o next/image nao carrega no cockpit
+              <img
+                src={estado.foto}
+                alt=""
+                width={32}
+                height={32}
+                decoding="async"
+                referrerPolicy="no-referrer"
+                className="h-8 w-8 shrink-0 rounded-full border border-rule object-cover"
+              />
+            ) : (
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-rule bg-paper-3/60 text-ink-2">
+                <BadgeCheck className="h-4 w-4" />
+              </span>
+            )}
+            <div className="min-w-0">
+              <div className={ROTULO}>Conta</div>
+              <p className="truncate text-[13px] font-medium text-ink">{estado.email || 'conta Google'}</p>
+              <p className="mt-0.5 text-[12px] text-ink-2">
+                {estado.pro
+                  ? `Pro ativo${validade ? ` até ${validade}` : ''}`
+                  : 'esta conta ainda não tem assinatura'}
               </p>
-            ) : null}
+              {typeof seguindo === 'number' && typeof limite === 'number' ? (
+                <p className="mt-0.5 text-[11px] text-ink-3">
+                  Neste navegador: {plano === 'pro' ? 'Pro' : 'Gratuito'} · {seguindo} de {limite} times seguidos
+                </p>
+              ) : null}
+            </div>
           </div>
           <button
             type="button"
