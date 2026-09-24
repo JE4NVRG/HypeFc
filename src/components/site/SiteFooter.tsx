@@ -1,5 +1,10 @@
+'use client'
+
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { Github } from 'lucide-react'
+
+import { clienteConta, contaConfigurada } from '@/lib/conta'
 
 /**
  * Rodape padrao do site, um so para o painel e para as paginas de conteudo.
@@ -30,6 +35,25 @@ function fonteLabel(source?: string): string {
 
 export function SiteFooter({ source, meta = true }: { source?: string; meta?: boolean }) {
   const label = fonteLabel(source)
+  const [logado, setLogado] = useState(false)
+
+  // Mesma leitura local do `PublicShell`: com sessao, o rodape aponta para a conta
+  // em vez de convidar a entrar de novo. Sem sessao (ou sem storage), mostra Entrar.
+  useEffect(() => {
+    if (!contaConfigurada()) return
+    const c = clienteConta()
+    if (!c) return
+    let vivo = true
+    void c.auth
+      .getSession()
+      .then(({ data }) => {
+        if (vivo) setLogado(Boolean(data.session))
+      })
+      .catch(() => {})
+    return () => {
+      vivo = false
+    }
+  }, [])
 
   return (
     <footer className="border-t border-ink/[0.06] px-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-1 sm:px-4 sm:pb-4 sm:pt-3">
@@ -54,6 +78,12 @@ export function SiteFooter({ source, meta = true }: { source?: string; meta?: bo
             <Github aria-hidden="true" className="h-4 w-4" />
             <span>JE4NVRG</span>
           </a>
+          <Link href="/pro" className={LINK_ALVO}>
+            Pro
+          </Link>
+          <Link href={logado ? '/conta' : '/entrar'} className={LINK_ALVO}>
+            {logado ? 'Conta' : 'Entrar'}
+          </Link>
           <Link href="/termos" className={LINK_ALVO}>
             Termos
           </Link>

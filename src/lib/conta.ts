@@ -52,6 +52,10 @@ export type ContaEstado = {
   email?: string
   /** Foto do provedor (Google), quando o provedor entrega. */
   foto?: string
+  /** Plano da licenca aplicada neste navegador depois do login. */
+  plano?: 'free' | 'pro'
+  /** Teto de times seguidos daquele plano. */
+  limite?: number
   pro?: boolean
   paidUntil?: string
   erro?: string
@@ -137,13 +141,27 @@ export async function entrarComoAssinante(): Promise<ContaEstado> {
     ok?: boolean
     token?: string
     email?: string
+    plano?: string
+    limite?: number
     paid_until?: string
     erro?: string
   }
 
   if (dados.ok === true && typeof dados.token === 'string' && dados.token.length > 20) {
     aplicarToken(dados.token)
-    return { logado: true, email: dados.email ?? sessao.email, foto: sessao.foto, pro: true, paidUntil: dados.paid_until }
+    // A conta sempre devolve licenca: `pro` quando ha assinatura ativa, `free`
+    // quando nao ha (3 times, sem alerta). Antes, quem logava sem assinar ficava
+    // sem token nenhum e o painel continuava dizendo "ative o acesso".
+    const plano: 'pro' | 'free' = dados.plano === 'pro' ? 'pro' : 'free'
+    return {
+      logado: true,
+      email: dados.email ?? sessao.email,
+      foto: sessao.foto,
+      plano,
+      limite: typeof dados.limite === 'number' ? dados.limite : plano === 'pro' ? 20 : 3,
+      pro: plano === 'pro',
+      paidUntil: dados.paid_until,
+    }
   }
 
   return {

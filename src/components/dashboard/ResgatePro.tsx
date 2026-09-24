@@ -130,15 +130,17 @@ export default function ResgatePro() {
           return
         }
         if (temToken()) {
-          // Licença local existe, mas ela pode ser a do plano gratuito (quem entrou
-          // na lista antes de assinar). Só aqui o token local deixa de mandar: se a
-          // conta tem assinatura e o token deste navegador é gratuito, rotaciona.
-          // Sem isso, assinante que já tinha acesso gratuito no navegador ficava
-          // preso no gratuito mesmo pagando (achado em teste, 24/09).
+          // Licença local existe, mas pode ser a gratuita (quem entrou na lista antes
+          // de assinar) ou pode estar morta (token rotacionado em outro aparelho).
+          // Só aqui o token local deixa de mandar: sem licença válida, ou com licença
+          // gratuita numa conta que tem assinatura, rotaciona. Sem isso, assinante com
+          // acesso gratuito no navegador ficava preso no gratuito mesmo pagando, e
+          // token invalidado em outro aparelho deixava o painel sem acesso (achado 24/09).
           const atual = await eu()
           if (!vivo) return
-          const localGratuito = !atual || atual.plan !== 'pro'
-          if (r.pro !== true || !localGratuito) {
+          const semLicenca = !atual
+          const localGratuito = atual?.plan !== 'pro'
+          if (!semLicenca && !(localGratuito && r.pro === true)) {
             if (veioDoGoogle) {
               setAviso({ tipo: 'ok', texto: `Conta conectada (${r.email ?? 'Google'}). Pro ativo neste aparelho.` })
             }
@@ -157,6 +159,17 @@ export default function ResgatePro() {
             texto: veioDoGoogle
               ? `Pro ativado na conta ${ligou.email ?? ''}. Abra a aba Pro: este aparelho está liberado.`
               : `Pro restaurado na conta ${ligou.email ?? ''}: este aparelho está liberado.`,
+          })
+          return
+        }
+        if (ligou.plano === 'free') {
+          // Conta sem assinatura tambem entra: ganha a licenca gratuita (3 times,
+          // sem alerta) em vez de ficar sem acesso. E o que faz o cadastro valer algo.
+          setAviso({
+            tipo: 'ok',
+            texto: veioDoGoogle
+              ? `Conta conectada (${ligou.email ?? ''}). Acesso gratuito neste aparelho: até ${ligou.limite ?? 3} times, sem alerta.`
+              : `Acesso gratuito restaurado na conta ${ligou.email ?? ''}: até ${ligou.limite ?? 3} times, sem alerta.`,
           })
           return
         }
