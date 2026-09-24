@@ -163,7 +163,43 @@ Dados de teste: a assinatura Pro da conta foi criada para este teste
 `source=qa-teste-conta`) e o único time seguido do teste foi removido. Para revogar, apagar a linha
 de `subscribers` desse e-mail.
 
-## 6. Como repetir esta medição
+## 6. Contrato de acesso medido no banco (gratuito x Pro)
+
+Instrumento: `~/.hermes/cache/scratch/hypefc-contrato-acesso.py` chama as RPCs com a chave anônima, igual ao
+site, criando assinante de teste descartável (apagado no fim; sobrou só a assinatura Pro do dono do
+produto, criada para o teste da seção 5).
+
+| Verificação | Resultado medido |
+| --- | --- |
+| Entrar na lista devolve licença gratuita | `plan=free`, `status=waitlist`, `limite=3` |
+| Três primeiros times | aceitos, `seguidos` 1, 2, 3 |
+| Quarto e quinto time | recusados com `erro='limite'` (a tela traduz para "Limite do plano: 3 de 3 times") |
+| Remover um time | libera a vaga e o próximo entra |
+| Token inventado | `sem-acesso` |
+| `push_save` com token gratuito | **aceito** (`ok:true`) |
+| Reentrar na lista com o mesmo e-mail | `ja_tinha_acesso:true` e **sem token de novo** |
+
+### Achados e o que foi feito
+
+1. **Alerta prometido, alerta não entregue.** O plano gratuito diz "Sem alertas" e o botão de alerta exigia
+   apenas ter licença, não ter Pro. Quem entrou na lista podia ligar o alerta, ver "ativado" e nunca
+   receber nada, porque `scripts/send-alerts.ts` filtra `plan=eq.pro&status=eq.active`. Agora o cartão de
+   alerta só mostra o botão para `plan === 'pro'`; no gratuito explica "Alertas entram no Pro. Aqui você
+   segue até 3 times, sem aviso antes da rodada." O `ligarAlertas` também recusa fora do Pro. Correção de
+   servidor pendente: `push_save` continua aceitando token gratuito (hoje inofensivo, porque o remetente
+   filtra, mas grava inscrição inútil no banco).
+2. **Assinante preso no plano gratuito.** `ResgatePro` saía cedo quando o navegador já tinha licença: quem
+   entrou na lista antes de assinar e depois assinava continuava no gratuito, mesmo pagando, porque o
+   login não rotacionava o token. Agora o token local só manda quando é Pro, ou quando a conta não tem
+   assinatura. Verificado: licença gratuita no navegador mais conta com assinatura passa de "Gratuito · 3"
+   para "Pro · 20" com o aviso "Pro restaurado na conta"; licença gratuita mais conta sem assinatura
+   continua gratuita, sem rotacionar.
+3. **Licença gratuita sem recuperação.** `join_waitlist` só devolve token na criação: quem perdeu o
+   `localStorage` fica sem acesso e sem caminho de volta, porque a conta ainda não provisiona o gratuito
+   (achado 1 da seção 5). Decisão pendente do dono do produto: devolver o token quando a linha já existe,
+   ou provisionar o gratuito na conta logada (a segunda resolve os dois casos de uma vez).
+
+## 7. Como repetir esta medição
 
 O instrumento é o mesmo da passada anterior (`docs/qa-ui-2026-09-23.md` §1) e não mudou: abrir a URL
 numa aba dedicada, `Emulation.setDeviceMetricsOverride` para cada viewport, e ler o DOM. Para este

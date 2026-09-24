@@ -290,6 +290,10 @@ export function ProView() {
       setRecadoPush({ tom: 'erro', texto: 'Ative o acesso antes de ligar os alertas.' })
       return
     }
+    if (perfil?.plan !== 'pro') {
+      setRecadoPush({ tom: 'erro', texto: 'Alertas são do plano Pro: no gratuito você segue sem aviso.' })
+      return
+    }
     setOcupado('push')
     setRecadoPush(null)
     try {
@@ -608,33 +612,43 @@ export function ProView() {
               {pushOk === null ? (
                 <p className="mt-2 text-[13px] text-ink-3">Verificando este navegador…</p>
               ) : pushOk ? (
-                <div className="mt-2.5 flex flex-wrap gap-2">
-                  {/* Um botao de cada vez: com inscricao viva, "ativar" de novo nao
-                      faz sentido — o que o usuario precisa e poder desligar. */}
-                  {inscricao ? (
-                    <button
-                      type="button"
-                      onClick={() => void desligarAlertas()}
-                      disabled={ocupado !== null}
-                      className={BOTAO_SECUNDARIO}
-                      aria-label="Desligar alertas neste navegador"
-                    >
-                      {ocupado === 'push' ? <Loader2 className="h-4 w-4 animate-spin" /> : <BellOff className="h-4 w-4" />}
-                      Desligar alertas neste navegador
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => void ligarAlertas()}
-                      disabled={ocupado !== null}
-                      className={BOTAO_SECUNDARIO}
-                      aria-label="Ativar alertas no navegador"
-                    >
-                      {ocupado === 'push' ? <Loader2 className="h-4 w-4 animate-spin" /> : <BellRing className="h-4 w-4" />}
-                      Ativar alertas no navegador
-                    </button>
-                  )}
-                </div>
+                // Alerta e recurso do Pro: o remetente (`scripts/send-alerts.ts`) so
+                // entrega para `plan=pro` ativo, entao um token gratuito podia ligar o
+                // alerta aqui, ver "ativado" e nunca receber nada. Sem token tambem nao
+                // vale: o botao so aparece para quem tem o plano.
+                perfil?.plan === 'pro' ? (
+                  <div className="mt-2.5 flex flex-wrap gap-2">
+                    {/* Um botao de cada vez: com inscricao viva, "ativar" de novo nao
+                        faz sentido — o que o usuario precisa e poder desligar. */}
+                    {inscricao ? (
+                      <button
+                        type="button"
+                        onClick={() => void desligarAlertas()}
+                        disabled={ocupado !== null}
+                        className={BOTAO_SECUNDARIO}
+                        aria-label="Desligar alertas neste navegador"
+                      >
+                        {ocupado === 'push' ? <Loader2 className="h-4 w-4 animate-spin" /> : <BellOff className="h-4 w-4" />}
+                        Desligar alertas neste navegador
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => void ligarAlertas()}
+                        disabled={ocupado !== null}
+                        className={BOTAO_SECUNDARIO}
+                        aria-label="Ativar alertas no navegador"
+                      >
+                        {ocupado === 'push' ? <Loader2 className="h-4 w-4 animate-spin" /> : <BellRing className="h-4 w-4" />}
+                        Ativar alertas no navegador
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <p className="mt-2 text-[13px] leading-snug text-ink-2">
+                    Alertas entram no Pro. Aqui você segue até {limite ?? 3} times, sem aviso antes da rodada.
+                  </p>
+                )
               ) : (
                 <p className="mt-2 text-[13px] text-ink-2">Alertas indisponíveis neste navegador.</p>
               )}

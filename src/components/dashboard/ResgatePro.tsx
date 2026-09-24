@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { contaConfigurada, entrarComoAssinante, estadoDaConta } from '@/lib/conta'
-import { proConfigurado, resgatarSessao, temToken } from '@/lib/proStore'
+import { eu, proConfigurado, resgatarSessao, temToken } from '@/lib/proStore'
 
 /**
  * Retorno do Checkout da Stripe.
@@ -130,10 +130,20 @@ export default function ResgatePro() {
           return
         }
         if (temToken()) {
-          if (veioDoGoogle) {
-            setAviso({ tipo: 'ok', texto: `Conta conectada (${r.email ?? 'Google'}). Pro ativo neste aparelho.` })
+          // Licença local existe, mas ela pode ser a do plano gratuito (quem entrou
+          // na lista antes de assinar). Só aqui o token local deixa de mandar: se a
+          // conta tem assinatura e o token deste navegador é gratuito, rotaciona.
+          // Sem isso, assinante que já tinha acesso gratuito no navegador ficava
+          // preso no gratuito mesmo pagando (achado em teste, 24/09).
+          const atual = await eu()
+          if (!vivo) return
+          const localGratuito = !atual || atual.plan !== 'pro'
+          if (r.pro !== true || !localGratuito) {
+            if (veioDoGoogle) {
+              setAviso({ tipo: 'ok', texto: `Conta conectada (${r.email ?? 'Google'}). Pro ativo neste aparelho.` })
+            }
+            return
           }
-          return
         }
         // Sem licença neste navegador: sempre tenta ligar. É aqui que entra quem
         // comprou ANTES de ter conta — `pro_conta_entrar` resgata a compra paga
