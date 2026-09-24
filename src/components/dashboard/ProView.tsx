@@ -72,7 +72,7 @@ const TEXTO_ERRO: Record<string, string> = {
   'email-invalido': 'Confira o e-mail: precisa ser um endereço válido.',
   limite: 'Limite do plano atingido.',
   'codigo-invalido': 'Código não confere com esse e-mail.',
-  'codigo-ja-usado': 'Esse código já foi usado — cada código ativa um navegador.',
+  'codigo-ja-usado': 'Esse código já foi usado. Cada código ativa um navegador.',
   'codigo-expirado': 'Esse código passou da validade.',
   'acesso-cancelado': 'Esse acesso está cancelado.',
   'time-invalido': 'Time sem identificação na fonte: não dá para seguir.',
@@ -269,7 +269,7 @@ export function ProView() {
       setLista(await listaSeguida(true))
       setRecadoAcesso({
         tom: 'ok',
-        texto: `Acesso ativo${dados?.nome ? `: ${dados.nome}` : ''} — plano ${
+        texto: `Acesso ativo${dados?.nome ? `: ${dados.nome}` : ''}, plano ${
           dados?.plan === 'pro' ? 'Pro' : 'Gratuito'
         }, até ${limiteDe(dados)} times seguidos.`,
       })
@@ -791,7 +791,7 @@ export function SeguirTimeBotao({
       onClick={(event) => void alternar(event)}
       disabled={ocupado || estado === 'limite'}
       aria-pressed={estado === 'seguindo'}
-      aria-label={`${rotulo}: ${teamName}${nota ? ` — ${nota}` : ''}`}
+      aria-label={`${rotulo}: ${teamName}${nota ? `, ${nota}` : ''}`}
       title={nota || undefined}
       className={`inline-flex min-h-[44px] w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-lg border px-3 text-[13px] font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 disabled:cursor-not-allowed disabled:opacity-50 ${classes}`}
     >

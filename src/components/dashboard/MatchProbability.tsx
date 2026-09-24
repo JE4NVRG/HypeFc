@@ -116,7 +116,7 @@ export function ProbabilityBars({
             }${
               forward.hitRate !== null ? ` · favorito ${decimal(forward.hitRate * 100, 1)}%` : ''
             }${forward.pendentes ? ` · ${forward.pendentes} pendentes` : ''}.`
-          : 'Registro em produção começa do zero: cada probabilidade é gravada antes do apito e liquidada depois — sem número até o primeiro jogo terminar.'}
+          : 'Registro em produção começa do zero: cada probabilidade é gravada antes do apito e liquidada depois, sem número até o primeiro jogo terminar.'}
       </p>
     </div>
   )

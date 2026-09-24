@@ -86,14 +86,14 @@ export function ShareRound({ url, text, label }: ShareRoundProps) {
       }
       const copied = await copyLink()
       if (copied) {
-        showFeedback('warn', 'Compartilhamento indisponível — link copiado', WARN_MS)
+        showFeedback('warn', 'Compartilhamento indisponível, link copiado', WARN_MS)
       }
       return
     }
     // Desktop sem Web Share: cai no copiar em vez de não fazer nada.
     const copied = await copyLink()
     if (copied) {
-      showFeedback('warn', 'Compartilhamento do navegador indisponível — link copiado', WARN_MS)
+      showFeedback('warn', 'Compartilhamento do navegador indisponível, link copiado', WARN_MS)
     }
   }, [copyLink, showFeedback, text, url])
 

@@ -93,7 +93,7 @@ export default function ContaPro() {
   return (
     <div className="rounded-lg border border-slate-700/60 bg-slate-800/30 p-3.5">
       <p className="text-[12px] leading-snug text-slate-300">
-        Entre com o Google para o acesso <span className="text-slate-200">ficar na sua conta</span> — assim o Pro
+        Entre com o Google para o acesso <span className="text-slate-200">ficar na sua conta</span>, assim o Pro
         vale em qualquer aparelho, não só neste navegador.
       </p>
       <button

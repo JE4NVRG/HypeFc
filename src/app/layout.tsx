@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   // imagem. O site tambem roda em subpasta no GitHub Pages, mas o card aponta
   // para o dominio proprio — e o canonical que vale para compartilhar.
   metadataBase: new URL('https://hypefc.je4ndev.com'),
-  title: 'HypeFC — Dashboard de Futebol em Tempo Real',
+  title: 'HypeFC · Dashboard de Futebol em Tempo Real',
   description: 'Dashboard inteligente que identifica times em alta, acompanha classificações e jogos do dia das principais ligas do mundo.',
   keywords: ['futebol', 'dashboard', 'premier league', 'brasileirão', 'la liga', 'champions league'],
   authors: [{ name: 'Jean Carlos', url: 'https://github.com/JE4NVRG' }],

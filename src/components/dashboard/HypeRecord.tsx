@@ -243,7 +243,7 @@ export function HypeRecord() {
       <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
         <div className="rounded-lg border border-slate-800 bg-slate-950/30 p-3">
           <div className="text-[11px] font-medium uppercase tracking-wide text-slate-400">
-            Últimas rodadas <span className="normal-case tracking-normal">(acertos/cards — contagem, não taxa)</span>
+            Últimas rodadas <span className="normal-case tracking-normal">(contagem de acertos por card, não taxa)</span>
           </div>
           <div className="mt-2 space-y-1">
             {rounds.map((row) => (

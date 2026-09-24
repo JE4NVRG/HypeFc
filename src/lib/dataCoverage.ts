@@ -30,7 +30,7 @@ export interface SourceFacts {
 export const DATA_SOURCE: SourceFacts = {
   name: 'ESPN (API pública, sem chave)',
   host: 'site.api.espn.com',
-  access: 'Sem chave, sem login e sem cadastro — o navegador chama a ESPN direto',
+  access: 'Sem chave, sem login e sem cadastro: o navegador chama a ESPN direto',
   endpoints: ['scoreboard (rodada)', 'standings (tabela)', 'summary (detalhe do jogo)'],
 }
 
@@ -52,7 +52,7 @@ export const SOURCE_GAPS: CoveragePoint[] = [
     key: 'publico',
     label: 'Público no Brasileirão',
     detail:
-      'A ESPN manda 0 quando não publica o número (na Premier League manda o real). 0 em estádio com jogo é ausência de dado, não zero — então vira "—".',
+      'A ESPN manda 0 quando não publica o número (na Premier League manda o real). 0 em estádio com jogo é ausência de dado, não zero, então vira "—".',
   },
   {
     key: 'odds',
@@ -64,7 +64,7 @@ export const SOURCE_GAPS: CoveragePoint[] = [
     key: 'narracao',
     label: 'Narração do feed',
     detail:
-      'O texto corrido do feed vem em inglês e é descartado. Ficam os lances com minuto, autor e placar — o que dá para conferir sem traduzir nada.',
+      'O texto corrido do feed vem em inglês e é descartado. Ficam os lances com minuto, autor e placar, o que dá para conferir sem traduzir nada.',
   },
 ]
 
@@ -94,7 +94,7 @@ export const REFUSALS: CoveragePoint[] = [
     key: 'publico',
     label: 'Público zerado',
     detail:
-      'Público 0 publicado pela fonte vira "—". Zero é um número, ausência de dado também — e o painel não confunde os dois.',
+      'Público 0 publicado pela fonte vira "—". Zero é um número, ausência de dado também, e o painel não confunde os dois.',
   },
 ]
 
@@ -102,7 +102,7 @@ export const REFUSALS: CoveragePoint[] = [
 export const SCORE_STANCE = {
   title: 'O score mede atenção e embalo',
   detail:
-    'Não é palpite, não é probabilidade e não é sinal de aposta. Não existe modelo de resultado nem recomendação de mercado no painel — só o registro medido, com amostra à vista.',
+    'Não é palpite, não é probabilidade e não é sinal de aposta. Não existe modelo de resultado nem recomendação de mercado no painel, só o registro medido, com amostra à vista.',
 }
 
 export interface CadenceFact {

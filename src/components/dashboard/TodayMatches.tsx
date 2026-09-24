@@ -147,7 +147,7 @@ function StatsLine({ match }: { match: Match }) {
     // O rotulo de leitor de tela fica FORA da grade: dentro dela viraria item de
     // grade (e o `divide-x` desenharia uma divisoria sobrando na primeira coluna).
     <div className="mt-2 border-t border-white/[0.08] pt-2" title={`${leitura} (casa–fora)`}>
-      <span className="sr-only">Estatísticas casa–fora — posse, chutes, no alvo:</span>
+      <span className="sr-only">Estatísticas casa–fora: posse, chutes, no alvo</span>
       <div className="grid grid-cols-3 divide-x divide-white/[0.08] text-center font-mono text-[11px] leading-none tabular-nums text-slate-400">
         {valores.map((valor, i) => (
           <span key={STAT_KEYS[i]}>{valor ?? '—'}</span>

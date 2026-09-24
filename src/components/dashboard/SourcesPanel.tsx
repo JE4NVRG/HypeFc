@@ -49,7 +49,7 @@ function Points({ items }: { items: CoveragePoint[] }) {
       {items.map((item) => (
         <li key={item.key} className="text-[11px] leading-snug">
           <span className="font-medium text-slate-200">{item.label}</span>
-          <span className="text-slate-400"> — {item.detail}</span>
+          <span className="text-slate-400">: {item.detail}</span>
         </li>
       ))}
     </ul>
@@ -128,7 +128,7 @@ export function SourcesPanel({ stats, leagueCount, liveCount, lastUpdated }: Sou
         <Group
           icon={<ShieldQuestion aria-hidden="true" className="h-3.5 w-3.5" />}
           title="Onde o produto prefere não mostrar a mostrar errado"
-          hint="A mesma regra em todas as telas — não um caso isolado deste painel."
+          hint="A mesma regra em todas as telas, não um caso isolado deste painel."
         >
           <Points items={REFUSALS} />
           <div className="mt-2 rounded-lg border border-amber-500/25 bg-amber-500/5 p-3">

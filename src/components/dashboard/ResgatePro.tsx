@@ -44,7 +44,7 @@ export default function ResgatePro() {
       limparUrl()
       setAviso({
         tipo: 'ok',
-        texto: 'Pagamento recebido. A liberação leva alguns minutos — recarregue a página daqui a pouco.',
+        texto: 'Pagamento recebido. A liberação leva alguns minutos, recarregue a página daqui a pouco.',
       })
       return
     }
@@ -80,7 +80,7 @@ export default function ResgatePro() {
           limparUrl()
           setAviso({
             tipo: 'ok',
-            texto: 'Esta compra já foi ativada neste link. Abra a aba Pro — se não aparecer, recarregue a página.',
+            texto: 'Esta compra já foi ativada neste link. Abra a aba Pro; se não aparecer, recarregue a página.',
           })
           return
         }
@@ -92,7 +92,7 @@ export default function ResgatePro() {
         if (r.erro === 'sessao-nao-encontrada') {
           setAviso({
             tipo: 'erro',
-            texto: 'Ainda não encontramos essa compra. Recarregue esta página em alguns minutos — o link continua funcionando.',
+            texto: 'Ainda não encontramos essa compra. Recarregue esta página em alguns minutos, o link continua funcionando.',
           })
           return
         }

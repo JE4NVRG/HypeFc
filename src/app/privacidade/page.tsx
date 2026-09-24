@@ -37,18 +37,18 @@ export default function Privacidade() {
         <h2 className={S.h2}>O que guardamos, e só quando você informa</h2>
         <ul className={`${S.ul} list-disc pl-5`}>
           <li>
-            <strong className="text-slate-300">E-mail</strong> — para falar sobre a sua assinatura e identificar o acesso.
+            <strong className="text-slate-300">E-mail</strong>: para falar sobre a sua assinatura e identificar o acesso.
             Nome é opcional.
           </li>
           <li>
-            <strong className="text-slate-300">Times que você segue</strong> — para saber qual alerta faz sentido enviar.
+            <strong className="text-slate-300">Times que você segue</strong>: para saber qual alerta faz sentido enviar.
           </li>
           <li>
             <strong className="text-slate-300">Inscrição de notificação do navegador</strong> (um endereço técnico de
-            entrega, mais duas chaves públicas do seu navegador) — é isso que permite o alerta chegar ao seu aparelho.
+            entrega, mais duas chaves públicas do seu navegador): é isso que permite o alerta chegar ao seu aparelho.
           </li>
           <li>
-            <strong className="text-slate-300">Registro de pagamento</strong> (valor, data, identificador do provedor) —
+            <strong className="text-slate-300">Registro de pagamento</strong> (valor, data, identificador do provedor):
             obrigação fiscal e controle de acesso. <strong className="text-slate-300">Não</strong> guardamos dados de
             cartão: quem processa o pagamento é o provedor.
           </li>
