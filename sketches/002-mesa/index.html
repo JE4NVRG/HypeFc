@@ -13,9 +13,9 @@
    Grafite, hairline e monoespaçada: a tela é uma mesa de leitura, não um
    álbum de cartões. Zero canto arredondado, zero sombra, zero gradiente.
    JetBrains Mono manda nos números; Inter Tight faz o texto corrido.
-   A cor de sinal (--sinal) é reservada a DUAS coisas: o número do registro
-   público e o botão de assinar. Se ela aparecer em qualquer outro lugar,
-   deixa de significar.
+   A cor de sinal (--sinal) é reservada a TRÊS coisas: o número do registro
+   público, o botão de assinar e a palavra "registro" na manchete. Se ela
+   aparecer em qualquer outro lugar, deixa de significar.
    ========================================================================== */
 :root{
   --paper:#0B0E11;
@@ -34,6 +34,13 @@
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --disp:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
   --ease:cubic-bezier(.2,.7,.2,1);
+  --m-fast:120ms;                          /* feedback de mouse/tato */
+  --m-base:200ms;                          /* transição de estado */
+  --m-slow:320ms;                          /* movimento maior, raro */
+  --m-count:700ms;                         /* contagem do número do registro */
+  --m-out:cubic-bezier(.16,1,.3,1);        /* entrando */
+  --m-in:cubic-bezier(.55,0,1,.45);        /* saindo */
+  --m-inout:cubic-bezier(.65,0,.35,1);     /* movendo entre dois pontos */
   --rows:minmax(0,1fr) 30px 30px minmax(0,1fr) 132px 178px;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -51,7 +58,7 @@ body::before{
   background-size:26px 26px;
 }
 [hidden]{display:none!important}
-:focus-visible{outline:2px solid var(--sinal);outline-offset:2px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 b,strong{font-weight:600}
 .sheet{position:relative;z-index:1;max-width:1340px;margin:0 auto;padding:0 24px 72px}
@@ -67,7 +74,7 @@ b,strong{font-weight:600}
 .wordmark{font-family:var(--disp);font-size:19px;font-weight:600;letter-spacing:-.01em;text-transform:none}
 .dom{color:var(--muted);font-size:10px;padding-left:12px;border-left:1px solid var(--rule);letter-spacing:.06em;text-transform:none}
 .live{display:flex;align-items:center;gap:8px;color:var(--ink-2);font-size:10px}
-.live .dot{width:6px;height:6px;background:var(--ink-2);display:block}
+.live .dot{width:6px;height:6px;background:var(--ink-2);display:block;transform-origin:center}
 
 /* -------------------------------------------------------------- masthead */
 .masthead{
@@ -113,8 +120,11 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
   padding:13px 20px 12px;margin-bottom:-1px;
   border:1px solid transparent;border-bottom:1px solid var(--paper);
   font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
-  transition:background-color .14s var(--ease),color .14s var(--ease),box-shadow .14s var(--ease);
+  transition:background-color var(--m-fast) var(--ease),color var(--m-fast) var(--ease),transform var(--m-fast) var(--ease);
 }
+.tab:active{transform:scale(.98)}
+.tab:focus-visible{background:var(--paper-2);color:var(--ink)}
+.tab:focus-visible b{color:var(--ink-2)}
 .tab b{font-size:10.5px;font-weight:500;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
 .tab:last-of-type{border-left:1px solid var(--rule)}
 .tab:last-of-type b{color:var(--ink-2)}
@@ -155,8 +165,24 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
   margin:0 0 10px;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
   padding-bottom:7px;border-bottom:1px solid var(--rule);
 }
-.panel.in{animation:fade .18s var(--ease)}
-@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+/* ----------------------------------------------------------- movimento */
+/* MOTION-SPEC.md. Movimento só comunica estado: entrada, troca de aba,
+   reordenação por filtro, crescimento da barra, contagem do registro.
+   Só transform/opacity/background-color. Nenhum loop infinito: cada classe
+   animada é removida no animationend — nada fica "em efeito" parado no DOM. */
+.panel.mv-pane{animation:mv-pane var(--m-base) var(--m-out) both}
+@keyframes mv-pane{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.mv{animation:mv-bloco var(--m-base) var(--m-out) both}
+@keyframes mv-bloco{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pbar.mv-bars span{animation:mv-barra 400ms var(--m-out) both}
+.pbar.mv-bars span:nth-child(2){animation-delay:60ms}
+.pbar.mv-bars span:nth-child(3){animation-delay:120ms}
+@keyframes mv-barra{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.mv-pulse .dot{animation:mv-pulso 2s var(--m-inout) 3 both}
+@keyframes mv-pulso{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.2;transform:scale(.6)}}
+#lista{position:relative}
+.flip-saindo{position:absolute;pointer-events:none;z-index:2;background:var(--paper)}
+#mini-recorde .lin b{display:inline-block;min-width:6ch;text-align:right}
 
 /* ---------------------------------------------------------------- filtros */
 .chips{display:flex;flex-wrap:wrap;gap:6px;padding:14px 0 2px}
@@ -164,8 +190,9 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
   display:inline-flex;align-items:baseline;gap:7px;
   border:1px solid var(--rule);padding:7px 11px;background:transparent;
   font-size:10px;letter-spacing:.08em;color:var(--ink-2);
-  transition:background-color .14s var(--ease),color .14s var(--ease),border-color .14s var(--ease);
+  transition:background-color var(--m-fast) var(--ease),color var(--m-fast) var(--ease);
 }
+.chip:focus-visible{background:var(--paper-2);border-color:var(--ink);color:var(--ink)}
 .chip b{font-size:9px;color:var(--muted)}
 .chip:hover{background:var(--paper-2);border-color:var(--ink);color:var(--ink)}
 .chip.on{background:var(--paper-3);border-color:var(--line);color:var(--ink)}
@@ -196,7 +223,7 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
 .partida{
   display:grid;grid-template-columns:var(--rows);grid-template-areas:"casa gc gf fora prob meta";
   gap:10px;align-items:center;padding:12px 10px;min-height:86px;border-bottom:1px solid var(--rule-2);
-  transition:background-color .14s var(--ease),box-shadow .14s var(--ease);
+  transition:background-color var(--m-fast) var(--ease);
 }
 .partida:hover{background:var(--paper-2);box-shadow:inset 3px 0 0 var(--ink-2)}
 .casa{grid-area:casa;display:flex;justify-content:flex-end;align-items:baseline;gap:8px;min-width:0;text-align:right}
@@ -208,13 +235,30 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
 .nome.dest{color:var(--ink);font-weight:600}
 .nome.dest::before{content:"";display:inline-block;width:5px;height:5px;background:var(--ink-2);margin-right:7px;vertical-align:middle}
 .pos{font-size:9.5px;color:var(--muted);letter-spacing:.04em}
+/* Escudo: prato neutro `--paper-2` com hairline `--rule` de 1px, 2px de
+   respiro e `object-fit:contain` (sem isso o escudo de fundo claro some no
+   papel e o escuro some no grafite). É a ÚNICA imagem colorida da tela — logo
+   nunca ganha moldura de acento nem `filter`. Tamanho rígido: a grade do
+   placar (colunas fixas `--rows`) não depende dele. Raio 0, zero sombra. */
+.crest{
+  flex:none;display:block;box-sizing:content-box;
+  width:22px;height:22px;padding:2px;
+  background:var(--paper-2);border:1px solid var(--rule);
+  object-fit:contain;align-self:center;
+}
+/* fallback: mesma caixa, mesma régua, inicial do time no lugar da imagem */
+.crest.fb{
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:600;color:var(--ink-2);text-transform:uppercase;
+  letter-spacing:0;
+}
 .prob{grid-area:prob;text-align:right;min-width:0}
 .pnums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));row-gap:1px;min-width:0}
 .pnums .pv{font-size:12px;color:var(--ink-2);text-align:center;font-variant-numeric:tabular-nums}
 .pnums .pv.hi{color:var(--verde);font-weight:700}
 .pnums .pl{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center}
 .pbar{display:flex;gap:2px;height:3px;margin-top:6px}
-.pbar span{display:block;background:var(--rule)}
+.pbar span{display:block;background:var(--rule);transform-origin:left center}
 .pbar .on{background:var(--verde-2)}
 .meta{grid-area:meta;min-width:0;text-align:right}
 .selos{flex-direction:column;align-items:flex-end;justify-content:flex-end}
@@ -232,14 +276,15 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
 .lrow{
   display:grid;grid-template-columns:minmax(0,1fr) 74px 150px 26px;gap:14px;align-items:center;
   width:100%;text-align:left;padding:12px 10px;border-bottom:1px solid var(--rule-2);
-  transition:background-color .14s var(--ease),box-shadow .14s var(--ease);
+  transition:background-color var(--m-fast) var(--ease);
 }
 .lrow:hover{background:var(--paper-2);box-shadow:inset 3px 0 0 var(--ink-2)}
+.lrow:focus-visible{background:var(--paper-2);box-shadow:inset 3px 0 0 var(--ink-2)}
 .lnome{font-size:13px;color:var(--ink)}
 .ljogos{font-size:11px;color:var(--ink-2);text-align:right}
 .lbar{height:5px;background:var(--rule-2);display:flex}
 .lbar span{background:var(--verde-2)}
-.lseta{font-size:11px;color:var(--muted);text-align:right;transition:color .14s var(--ease),transform .14s var(--ease)}
+.lseta{font-size:11px;color:var(--muted);text-align:right;transition:color var(--m-fast) var(--ease),transform var(--m-fast) var(--ease)}
 .lrow:hover .lseta{color:var(--ink);transform:translateX(2px)}
 
 /* ---------------------------------------------------------------- laudo */
@@ -247,16 +292,16 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
 .lcell{padding:16px 16px 18px;border-left:1px solid var(--rule-2);min-width:0}
 .lcell:first-child{border-left:0}
 .llab{display:block;font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.lnum{display:block;font-family:var(--mono);font-size:clamp(30px,3.4vw,42px);font-weight:600;letter-spacing:-.04em;line-height:1.1;margin-top:8px;color:var(--sinal)}
-.lnum.g{color:var(--sinal)}
+.lnum{display:block;font-family:var(--mono);font-size:clamp(30px,3.4vw,42px);font-weight:600;letter-spacing:-.04em;line-height:1.1;margin-top:8px;color:var(--ink)}
+.lnum.reg{color:var(--sinal)}
 .lcell:first-child .lnum{font-size:clamp(38px,4.2vw,54px)}
-.lcell:first-child .llab{color:var(--verde)}
+.lcell:first-child .llab{color:var(--ink-2)}
 .lsub{display:block;font-size:9.5px;color:var(--muted);margin-top:8px;line-height:1.5}
 .mrows{margin-top:22px;border-top:1px solid var(--line)}
 .mrow{
   display:grid;grid-template-columns:minmax(0,1fr) 128px 200px;gap:14px;align-items:baseline;
   padding:12px 10px;border-bottom:1px solid var(--rule-2);
-  transition:background-color .14s var(--ease);
+  transition:background-color var(--m-fast) var(--ease);
 }
 .mrow:hover{background:var(--paper-2)}
 .mlab{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
@@ -272,8 +317,9 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
 .preco{display:flex;flex-wrap:wrap;gap:0;margin-top:22px;border:1px solid var(--line)}
 .ptab{
   flex:1 1 150px;padding:14px 16px;text-align:left;border-left:1px solid var(--rule-2);
-  transition:background-color .14s var(--ease),color .14s var(--ease);
+  transition:background-color var(--m-fast) var(--ease),color var(--m-fast) var(--ease);
 }
+.ptab:focus-visible{background:var(--paper-2)}
 .ptab:first-child{border-left:0}
 .ptab .pl{display:block;font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .ptab .pv{display:block;font-family:var(--disp);font-size:26px;font-weight:500;letter-spacing:-.02em;margin-top:6px}
@@ -291,18 +337,19 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
 .btn{
   border:1px solid var(--line);background:var(--paper-2);color:var(--ink);
   padding:13px 20px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
-  transition:background-color .14s var(--ease),color .14s var(--ease),box-shadow .14s var(--ease),transform .14s var(--ease);
+  transition:background-color var(--m-fast) var(--ease),color var(--m-fast) var(--ease),transform var(--m-fast) var(--ease);
 }
+.btn:focus-visible{background:var(--paper-3);border-color:var(--line)}
 .btn:hover{background:var(--paper-3);color:var(--ink);border-color:var(--line)}
 .btn.primary{background:var(--sinal);color:#0B0E11;border-color:var(--sinal)}
 .btn.primary:hover{background:#F2FF8A;border-color:#F2FF8A;color:#0B0E11}
-.nota{margin:20px 0 0;padding:14px 16px;border-left:3px solid var(--rule);font-size:11.5px;color:var(--muted);transition:border-color .18s var(--ease),color .18s var(--ease),background-color .18s var(--ease)}
+.nota{margin:20px 0 0;padding:14px 16px;border-left:3px solid var(--rule);font-size:11.5px;color:var(--muted);transition:color var(--m-base) var(--ease),background-color var(--m-base) var(--ease)}
 .nota.on{border-left-color:var(--ink-2);color:var(--ink-2);background:var(--paper-2)}
 
 /* ---------------------------------------------------------------- aside */
 .alista{border-top:1px solid var(--rule-2)}
-.arow{display:grid;grid-template-columns:20px minmax(0,1fr) 34px;gap:10px;align-items:center;padding:8px 4px;border-bottom:1px solid var(--rule-2);transition:background-color .14s var(--ease)}
-.arow:hover{background:var(--paper-2)}
+.arow{display:grid;grid-template-columns:20px minmax(0,1fr) 34px;gap:10px;align-items:center;padding:8px 4px;border-bottom:1px solid var(--rule-2);transition:background-color var(--m-fast) var(--ease)}
+.arow:hover,.arow:focus-within{background:var(--paper-2)}
 .ark{font-size:10px;color:var(--muted)}
 .atime{font-size:11.5px;color:var(--ink-2);overflow-wrap:anywhere}
 .asc{font-size:11.5px;font-weight:600;color:var(--ink);text-align:right}
@@ -314,9 +361,10 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
 .share{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .share button{
   border:1px solid var(--rule);padding:8px 11px;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);
-  transition:background-color .14s var(--ease),color .14s var(--ease),border-color .14s var(--ease);
+  transition:background-color var(--m-fast) var(--ease),color var(--m-fast) var(--ease);
 }
 .share button:hover{background:var(--paper-3);color:var(--ink);border-color:var(--line)}
+.share button:focus-visible{background:var(--paper-3);color:var(--ink);border-color:var(--line)}
 .legenda{margin:0;font-size:10px;color:var(--muted);line-height:1.7}
 .legenda li{margin-bottom:6px}
 
@@ -370,6 +418,7 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
   }
   .casa{justify-content:flex-start;text-align:left;gap:8px}
   .fora{justify-content:flex-start;gap:8px}
+  .crest{width:20px;height:20px}
   .gc,.gf{text-align:right;font-size:19px;min-width:24px}
   .gf::before{content:none}
   .nome{font-size:13.5px}
@@ -409,7 +458,13 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
   .footer{margin-top:34px}
 }
 @media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
+  /* todas as durações viram 0.01ms — via tokens (as transições são todas
+     por token, então nada fica com duração longa) */
+  :root{--m-fast:.01ms;--m-base:.01ms;--m-slow:.01ms;--m-count:.01ms}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-delay:0ms!important;
+    animation-iteration-count:1!important;
+  }
 }
 </style>
 </head>
@@ -421,12 +476,12 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
       <svg class="mark" width="15" height="15" viewBox="0 0 15 15" aria-hidden="true">
         <rect x=".5" y=".5" width="14" height="14" fill="none" stroke="currentColor"/>
         <path d="M1 5h13M1 9.5h13M6.5 1v13" stroke="currentColor" stroke-width="1"/>
-        <rect x="1" y="1" width="5.5" height="4" fill="var(--sinal)"/>
+        <rect x="1" y="1" width="5.5" height="4" fill="currentColor"/>
       </svg>
       <span class="wordmark">HypeFC</span>
       <span class="dom">hypefc.je4ndev.com</span>
     </div>
-    <div class="live"><i class="dot"></i><span id="atualizado"></span></div>
+    <div class="live" tabindex="0"><i class="dot"></i><span id="atualizado"></span></div>
   </header>
 
   <section class="masthead">
@@ -584,6 +639,39 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
     { "liga": "Primeira Liga", "jogos": 5 },
     { "liga": "Serie A", "jogos": 5 }
   ],
+  "escudos": {
+    "AJ Auxerre": "https://a.espncdn.com/i/teamlogos/soccer/500/172.png",
+    "AS Monaco": "https://a.espncdn.com/i/teamlogos/soccer/500/174.png",
+    "AS Roma": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+    "AZ Alkmaar": "https://a.espncdn.com/i/teamlogos/soccer/500/140.png",
+    "Académico de Viseu": "https://a.espncdn.com/i/teamlogos/soccer/500/21607.png",
+    "Athletico-PR": "https://a.espncdn.com/i/teamlogos/soccer/500/3458.png",
+    "Atlético Madrid": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+    "Bahia": "https://a.espncdn.com/i/teamlogos/soccer/500/9967.png",
+    "Barcelona": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+    "Benfica": "https://a.espncdn.com/i/teamlogos/soccer/500/1929.png",
+    "Borussia Dortmund": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
+    "Brest": "https://a.espncdn.com/i/teamlogos/soccer/500/6997.png",
+    "Corinthians": "https://a.espncdn.com/i/teamlogos/soccer/500/874.png",
+    "Cruzeiro": "https://a.espncdn.com/i/teamlogos/soccer/500/2022.png",
+    "Estrela": "https://a.espncdn.com/i/teamlogos/soccer/500/21610.png",
+    "FC Porto": "https://a.espncdn.com/i/teamlogos/soccer/500/437.png",
+    "Feyenoord Rotterdam": "https://a.espncdn.com/i/teamlogos/soccer/500/142.png",
+    "Flamengo": "https://a.espncdn.com/i/teamlogos/soccer/500/819.png",
+    "Fluminense": "https://a.espncdn.com/i/teamlogos/soccer/500/3445.png",
+    "Grêmio": "https://a.espncdn.com/i/teamlogos/soccer/500/6273.png",
+    "Lille": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
+    "Manchester City": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+    "Marseille": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+    "Moreirense": "https://a.espncdn.com/i/teamlogos/soccer/500/3696.png",
+    "Nice": "https://a.espncdn.com/i/teamlogos/soccer/500/2502.png",
+    "Palmeiras": "https://a.espncdn.com/i/teamlogos/soccer/500/2029.png",
+    "Paris Saint-Germain": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
+    "Real Madrid": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+    "Red Bull Bragantino": "https://a.espncdn.com/i/teamlogos/soccer/500/6079.png",
+    "Vitória": "https://a.espncdn.com/i/teamlogos/soccer/500/3457.png",
+    "Vitória de Guimaraes": "https://a.espncdn.com/i/teamlogos/soccer/500/5309.png"
+  },
   "em_alta": [
     { "score": 86, "time": "FC Porto" },
     { "score": 80, "time": "Benfica" },
@@ -739,6 +827,74 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
   }
   var JOGOS_RODADA = kpi('JOGOS'), LIGAS_RODADA = kpi('LIGAS');
 
+  /* ------------------------------------------------ movimento (MOTION-SPEC) */
+  var REDUZ = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nfBR = new Intl.NumberFormat('pt-BR');
+  function cssMs(nome, padrao){
+    var v = parseFloat(getComputedStyle(document.documentElement).getPropertyValue(nome));
+    return isNaN(v) ? padrao : v;
+  }
+  /* a contagem usa a MESMA curva --m-out do CSS, resolvida em JS */
+  function curva(x1, y1, x2, y2){
+    function bx(t){ return 3*x1*t*(1-t)*(1-t) + 3*x2*t*t*(1-t) + t*t*t; }
+    function by(t){ return 3*y1*t*(1-t)*(1-t) + 3*y2*t*t*(1-t) + t*t*t; }
+    return function(x){
+      var lo = 0, hi = 1, t = x, i;
+      for (i = 0; i < 24; i++){ t = (lo + hi) / 2; if (bx(t) < x) lo = t; else hi = t; }
+      return by((lo + hi) / 2);
+    };
+  }
+  var saida = curva(.16, 1, .3, 1);
+  /* a classe sai no animationend: nada fica "em efeito" parado no DOM */
+  function aoTerminar(el, cls, nomeAnim){
+    if (el.dataset.mvEscuta) return;
+    el.dataset.mvEscuta = '1';
+    el.addEventListener('animationend', function fim(e){
+      if (e.animationName !== nomeAnim) return;   /* ignora fim de filho */
+      el.classList.remove(cls);
+      delete el.dataset.mvEscuta;
+      el.removeEventListener('animationend', fim);
+    });
+  }
+  function pulsar(){
+    var live = $('.live');
+    if (!live || REDUZ) return;
+    live.classList.remove('mv-pulse'); void live.offsetWidth;
+    aoTerminar(live, 'mv-pulse', 'mv-pulso');
+    live.classList.add('mv-pulse');
+  }
+  function contar(el){
+    if (!el || el.dataset.contado) return;
+    el.dataset.contado = '1';
+    var alvo = parseInt(el.dataset.contar, 10) || 0;
+    if (REDUZ || !alvo){ el.textContent = nfBR.format(alvo); return; }
+    var dur = Math.max(1, cssMs('--m-count', 700)), t0 = performance.now();
+    (function passo(){
+      var q = Math.min(1, (performance.now() - t0) / dur);
+      el.textContent = nfBR.format(Math.round(alvo * saida(q)));
+      if (q < 1) requestAnimationFrame(passo);
+      else el.textContent = nfBR.format(alvo);
+    })();
+  }
+  var ioContagem = ('IntersectionObserver' in window) ? new IntersectionObserver(function(ents){
+    ents.forEach(function(e){ if (e.isIntersecting){ contar(e.target); ioContagem.unobserve(e.target); } });
+  }, { threshold: 0 }) : null;
+  function observaContadores(){
+    $$('[data-contar]').forEach(function(el){
+      if (el.dataset.contado) return;
+      if (ioContagem) ioContagem.observe(el); else contar(el);
+    });
+  }
+  function entrarBloco(){
+    if (REDUZ) return;                       /* sem entrada: valor final direto */
+    [$('.masthead'), $('#kpis'), $('#tabs'), $('#lista')].forEach(function(el, i){
+      if (!el) return;
+      el.style.animationDelay = (i * 40) + 'ms';
+      aoTerminar(el, 'mv', 'mv-bloco');
+      el.classList.add('mv');
+    });
+  }
+
   /* ------------------------------------------------------------- topo */
   $('#atualizado').textContent = CAPA.atualizado;
   $('#kicker').textContent = D.marca.assinatura;
@@ -764,7 +920,7 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
   var META = {
     'rodada': kpi('JOGOS') + ' jogos',
     'liga': LIGAS_RODADA + ' ligas',
-    'recorde': String(R.cards_liquidados) + ' fichas',
+    'recorde': nfBR.format(R.cards_liquidados) + ' fichas',
     'esportes': 'futebol',
     'pro': PRO.preco_mes
   };
@@ -774,17 +930,30 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
            '<span>' + esc(nome) + '</span><b>' + esc(META[key] || '') + '</b></button>';
   }).join('');
 
-  var primeiro = true;
+  var primeiro = true, abaAtual = null;
   function setTab(key){
+    if (key === abaAtual) return;
+    var antigo = abaAtual ? document.getElementById('panel-' + abaAtual) : null;
+    abaAtual = key;
     $$('.tab').forEach(function(b){
       var on = b.dataset.tab === key;
       b.classList.toggle('on', on);
       b.setAttribute('aria-selected', on ? 'true' : 'false');
     });
     $$('.panel').forEach(function(p){ p.hidden = (p.id !== 'panel-' + key); });
+    /* o painel antigo sai sem animação: nada pode atrasar a leitura */
+    if (antigo) antigo.classList.remove('mv-pane');
     $('.wrap').classList.toggle('wide', key === 'recorde');
     var p = document.getElementById('panel-' + key);
-    if (p && !primeiro){ p.classList.remove('in'); void p.offsetWidth; p.classList.add('in'); }
+    if (p){
+      if (!primeiro && !REDUZ){
+        p.classList.remove('mv-pane'); void p.offsetWidth;
+        aoTerminar(p, 'mv-pane', 'mv-pane');
+        p.classList.add('mv-pane');
+      }
+      $$('#panel-' + key + ' [data-contar]').forEach(contar);
+      observaContadores();
+    }
   }
   $('#tabs').addEventListener('click', function(e){
     var b = e.target.closest('.tab');
@@ -807,22 +976,49 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
     }).join('');
     return '<div class="pnums">' + nums + lbs + '</div><div class="pbar">' + bar + '</div>';
   }
+  /* Escudo do time. `<img>` comum — nunca next/image: no cockpit do produto o
+     lazy do next/image não dispara e o escudo nunca aparece (documentado em
+     4 componentes). width/height explícitos = CLS 0. Host só espncdn.com /
+     football-data.org (isAllowedCrest() do produto); URL fora do JSON cai no
+     fallback de régua com a inicial. Sem loading="lazy" de propósito: são as
+     10 fichas da dobra e a verificação exige naturalWidth > 0 em todas. */
+  var ESC = D.escudos || {};
+  function escudo(time){
+    var url = ESC[time];
+    if (!url) return '<span class="crest fb" aria-hidden="true">' + esc(time.charAt(0)) + '</span>';
+    return '<img class="crest" src="' + esc(url) + '" alt="Escudo do ' + esc(time) + '" width="22" height="22">';
+  }
   function ficha(p){
     var dc = p.destaque === 'casa', df = p.destaque === 'fora';
     var selo = p.selo ? '<span class="selo alta">' + esc(p.selo) + '</span>' : '';
-    return '<article class="partida">' +
+    return '<article class="partida" data-key="' + esc(chave(p)) + '">' +
       '<div class="casa"><span class="pos">' + esc(p.casa.posicao) + '</span>' +
-        '<span class="nome' + (dc ? ' dest' : '') + '">' + esc(p.casa.time) + '</span></div>' +
+        '<span class="nome' + (dc ? ' dest' : '') + '">' + esc(p.casa.time) + '</span>' +
+        escudo(p.casa.time) + '</div>' +
       '<span class="gc">' + p.casa.gols + '</span>' +
       '<span class="gf">' + p.fora.gols + '</span>' +
-      '<div class="fora"><span class="nome' + (df ? ' dest' : '') + '">' + esc(p.fora.time) + '</span>' +
+      '<div class="fora">' + escudo(p.fora.time) +
+        '<span class="nome' + (df ? ' dest' : '') + '">' + esc(p.fora.time) + '</span>' +
         '<span class="pos">' + esc(p.fora.posicao) + '</span></div>' +
       '<div class="prob">' + probHtml(p.prob) + '</div>' +
       '<div class="meta"><div class="stats">' + esc(p.stats.posse + ' · ' + p.stats.chutes + ' · ' + p.stats.no_alvo) + '</div>' +
         '<div class="selos"><span class="selo">' + esc(p.status) + '</span>' + selo + '</div></div>' +
     '</article>';
   }
-  function renderLista(){
+  function chave(p){ return p.liga + '|' + p.casa.time + '|' + p.fora.time; }
+  var vistas = {};
+  /* FLIP de verdade: mede os rects antes, aplica o delta invertido por
+     transform e anima até zero. Quem sai faz opacity→0 e desaparece. */
+  function renderLista(comFlip){
+    var lista = $('#lista'), lr = null, antes = null;
+    if (comFlip && !REDUZ){
+      lr = lista.getBoundingClientRect();
+      antes = {};
+      $$('#lista .partida:not(.flip-saindo)').forEach(function(el){
+        var r = el.getBoundingClientRect();
+        antes[el.dataset.key] = { top: r.top, left: r.left, w: r.width, el: el };
+      });
+    }
     var vis = P.filter(function(p){ return filtro === 'Todas' || p.liga === filtro; });
     var html = '', ligaAtual = null, buf = [], nBuf = 0;
     function flush(){
@@ -840,7 +1036,56 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
              (f ? ' A liga teve ' + f.jogos + ' jogos na rodada de ' + JOGOS_RODADA + '.' : '') +
              ' Use a aba Liga para ver a rodada inteira.</p>';
     }
-    $('#lista').innerHTML = html;
+    lista.innerHTML = html;
+    if (antes){
+      var ficou = {};
+      $$('#lista .partida:not(.flip-saindo)').forEach(function(el){
+        var c = el.dataset.key; ficou[c] = 1;
+        var a = antes[c];
+        if (!a) return;
+        var r = el.getBoundingClientRect();
+        var dy = Math.round((a.top - r.top) * 100) / 100;
+        if (Math.abs(dy) < .5) return;
+        el.style.transition = 'none';
+        el.style.transform = 'translateY(' + dy + 'px)';
+        el.style.willChange = 'transform';        /* só durante a animação */
+        el.getBoundingClientRect();               /* fixa o ponto de partida */
+        el.style.transition = 'transform var(--m-base) var(--m-inout)';
+        el.style.transform = '';
+        var fim = function(e){
+          if (e && e.target !== el) return;
+          el.style.transition = ''; el.style.willChange = ''; el.style.transform = '';
+          el.removeEventListener('transitionend', fim);
+        };
+        el.addEventListener('transitionend', fim);
+      });
+      Object.keys(antes).forEach(function(c){
+        if (ficou[c]) return;
+        var a = antes[c], copia = a.el.cloneNode(true);
+        copia.classList.add('flip-saindo');
+        copia.style.left = Math.round(a.left - lr.left) + 'px';
+        copia.style.top = Math.round(a.top - lr.top) + 'px';
+        copia.style.width = Math.round(a.w) + 'px';
+        copia.style.transition = 'opacity var(--m-fast) var(--m-in)';
+        lista.appendChild(copia);
+        copia.getBoundingClientRect();
+        copia.style.opacity = '0';
+        setTimeout(function(){ if (copia.parentNode) copia.parentNode.removeChild(copia); }, 170);
+      });
+    }
+    /* barra de probabilidade: cresce só na primeira vez que a linha aparece */
+    $$('#lista .partida:not(.flip-saindo)').forEach(function(row){
+      var c = row.dataset.key, pb = row.querySelector('.pbar');
+      if (!pb || vistas[c]) return;
+      vistas[c] = 1;
+      if (REDUZ) return;
+      pb.classList.add('mv-bars');
+      pb.addEventListener('animationend', function fimBarra(e){
+        if (e.animationName !== 'mv-barra' || e.target !== pb.lastElementChild) return;
+        pb.classList.remove('mv-bars');
+        pb.removeEventListener('animationend', fimBarra);
+      });
+    });
     $('#contagem').textContent = 'Exibindo ' + vis.length + ' de ' + P.length + ' fichas desta folha (amostra). A rodada tem ' +
       JOGOS_RODADA + ' jogos em ' + LIGAS_RODADA + ' ligas, ' + kpi('ENCERRADOS') + ' encerrados.';
   }
@@ -853,7 +1098,7 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
     if (!c) return;
     filtro = c.dataset.liga;
     $$('.chip').forEach(function(x){ x.classList.toggle('on', x.dataset.liga === filtro); });
-    renderLista();
+    renderLista(true);
   });
 
   /* --------------------------------------------------------- aba Liga */
@@ -871,7 +1116,7 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
     if (!r) return;
     filtro = r.dataset.liga;
     $$('.chip').forEach(function(x){ x.classList.toggle('on', x.dataset.liga === filtro); });
-    renderLista();
+    renderLista(true);
     setTab('rodada');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -879,13 +1124,14 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
   /* ------------------------------------------------------ aba Recorde */
   var mediaMandante = (R.comparacao.match(/[\d.,]+%/) || ['—'])[0];
   $('#laudo').innerHTML = [
-    { lab: 'Acerto por card', val: R.acerto, sub: R.acerto_detalhe, g: true },
+    { lab: 'Acerto por card', val: R.acerto, sub: R.acerto_detalhe },
     { lab: 'Média do mandante', val: mediaMandante, sub: 'referência sem modelo' },
-    { lab: 'Cards liquidados', val: String(R.cards_liquidados), sub: R.detalhe },
+    { lab: 'Cards liquidados', val: nfBR.format(R.cards_liquidados), sub: R.detalhe, reg: true, contar: R.cards_liquidados },
     { lab: 'Rodadas', val: String(R.rodadas), sub: 'corte ' + R.corte }
   ].map(function(c){
     return '<div class="lcell"><span class="llab">' + esc(c.lab) + '</span>' +
-           '<span class="lnum' + (c.g ? ' g' : '') + '">' + esc(c.val) + '</span>' +
+           '<span class="lnum' + (c.reg ? ' reg' : '') + '"' +
+             (c.contar ? ' data-contar="' + c.contar + '"' : '') + '>' + esc(c.val) + '</span>' +
            '<span class="lsub">' + esc(c.sub) + '</span></div>';
   }).join('');
   $('#rec-lift').textContent = 'Lift ' + R.lift + ' · ' + R.comparacao;
@@ -951,12 +1197,13 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
       '<span class="abarra"><span style="width:' + Math.round(t.score / MAXA * 100) + '%"></span></span></div>';
   }).join('');
   $('#mini-recorde').innerHTML = [
-    ['Cards liquidados', R.cards_liquidados],
+    ['Cards liquidados', nfBR.format(R.cards_liquidados), true],
     ['Acerto', R.acerto],
     ['Comparação', R.comparacao.replace('vs ', '')],
     ['Brier do modelo', M[0].valor + ' · ' + M[0].detalhe]
   ].map(function(l){
-    return '<div class="lin"><span>' + esc(l[0]) + '</span><b>' + esc(l[1]) + '</b></div>';
+    return '<div class="lin"><span>' + esc(l[0]) + '</span><b' +
+      (l[2] ? ' data-contar="' + R.cards_liquidados + '"' : '') + '>' + esc(l[1]) + '</b></div>';
   }).join('') + '<div class="lin"><span>' + esc(R.sem_edge) + '</span></div>';
   $('#legenda').innerHTML = D.legenda.map(function(l){ return '<li>' + esc(l) + '</li>'; }).join('');
   var copiado = false;
@@ -968,14 +1215,22 @@ h1 em{font-style:italic;font-weight:400;color:var(--sinal)}
     if (!b || b.dataset.share !== 'Copiar link' || copiado) return;
     copiado = true;
     b.textContent = 'Link copiado';
-    b.style.background = 'var(--verde)';
-    b.style.color = 'var(--paper)';
-    b.style.borderColor = 'var(--verde)';
+    b.style.background = 'var(--paper-3)';
+    b.style.color = 'var(--ink-2)';
+    b.style.borderColor = 'var(--line)';
   });
 
   renderLista();
   setTab('rodada');
   primeiro = false;
+  observaContadores();
+  entrarBloco();                                    /* entrada: uma vez, no 1º paint */
+  pulsar();
+  var live = $('.live');
+  if (live){
+    live.addEventListener('mouseenter', pulsar);
+    live.addEventListener('focusin', pulsar);
+  }
 })();
 </script>
 </body>

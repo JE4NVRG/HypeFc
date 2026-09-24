@@ -30,6 +30,20 @@
   --disp:'Instrument Serif',Georgia,'Times New Roman',serif;
   --text:'Newsreader',Georgia,'Times New Roman',serif;
   --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+
+  /* --- tokens de movimento (MOTION-SPEC.md) — usar sempre por token --- */
+  --m-fast:120ms;   /* feedback de mouse/tato */
+  --m-base:200ms;   /* transição de estado */
+  --m-slow:320ms;   /* movimento maior, raro */
+  --m-count:700ms;  /* contagem do número do registro */
+  --m-out:cubic-bezier(.16,1,.3,1);      /* entrando */
+  --m-in:cubic-bezier(.55,0,1,.45);      /* saindo */
+  --m-inout:cubic-bezier(.65,0,.35,1);   /* movendo entre dois pontos */
+
+  /* --- escudo (CREST-SPEC.md): prato neutro, raio 0, zero sombra --- */
+  --crest:22px;           /* linha de partida; 20px no celular (media query 720) */
+  --crest-rule:#D9D3C7;   /* régua de 1px do prato */
+  --crest-plate:#FFFFFF;  /* prato branco: escudo de fundo claro não some no papel */
 }
 
 *{box-sizing:border-box}
@@ -74,6 +88,29 @@ button{font:inherit;color:inherit}
 .grid-lines > *{
   background:var(--paper);min-width:0;
   border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
+}
+
+/* ---------- escudo (CREST-SPEC.md) — a única imagem colorida da direção ----------
+   `<img>` comum, nunca `next/image`: o produto documenta em 4 componentes que o lazy
+   do next/image não dispara dentro do cockpit e o escudo nunca aparece. Prato neutro
+   atrás do escudo porque escudo de fundo claro (Real Madrid, Juventus) some no papel.
+   Raio 0, zero sombra, sem filtro, sem moldura de acento: o acento é do dado. */
+.crest{
+  box-sizing:content-box;                /* 22px é o desenho do escudo; o prato soma 2px + 1px */
+  width:var(--crest);height:var(--crest);
+  padding:2px;border:1px solid var(--crest-rule);background:var(--crest-plate);
+  object-fit:contain;
+  vertical-align:baseline;               /* o prato senta na linha de base do nome do time */
+  margin-right:8px;                      /* 8px do nome — identificação, não protagonismo */
+}
+.crest.sm{--crest:18px}                  /* lista "em alta" (CREST-SPEC § tamanhos) */
+/* fallback: inicial em caixa de régua, mesmo tamanho do escudo. Sem imagem quebrada,
+   sem espaço vazio. `overflow:hidden` faz a linha de base ser a borda inferior — a
+   mesma regra que vale para o <img>, então o fallback alinha igual ao escudo. */
+.crest-fb{
+  display:inline-block;overflow:hidden;
+  text-align:center;line-height:var(--crest);
+  font-family:var(--mono);font-size:12px;color:var(--ink-2);
 }
 
 /* ============================================================
@@ -133,15 +170,21 @@ button{font:inherit;color:inherit}
   display:flex;align-items:baseline;gap:9px;min-width:0;
   font-family:var(--text);font-size:13px;font-weight:500;
   letter-spacing:.13em;text-transform:uppercase;color:var(--ink-2);
-  transition:background-color .12s ease,color .12s ease;
+  transition:background-color var(--m-fast) linear,color var(--m-fast) linear,
+             transform var(--m-fast) var(--m-inout);
 }
 .tab:last-child{border-right:0}
-.tab .n{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-3);transition:color .12s ease}
+.tab .n{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--ink-3);transition:color var(--m-fast) linear}
 .tab:hover{background:var(--paper-2);color:var(--ink)}
 .tab:hover .n{color:var(--accent)}
-.tab:active{background:var(--paper-3)}
+/* F. foco com a mesma resposta visual do hover */
+.tab:focus-visible{background:var(--paper-2);color:var(--ink)}
+.tab:focus-visible .n{color:var(--accent)}
+/* B. feedback de pressão imediato */
+.tab:active{background:var(--paper-3);transform:scale(.98)}
 .tab[aria-selected="true"]{background:var(--ink);color:var(--paper)}
 .tab[aria-selected="true"] .n{color:var(--paper-3)}
+.tab[aria-selected="true"]:active{transform:scale(.98)}
 
 /* ============================================================
    2. PAINÉIS
@@ -189,7 +232,7 @@ button{font:inherit;color:inherit}
   appearance:none;border:0;background:var(--paper);cursor:pointer;
   display:flex;justify-content:space-between;align-items:baseline;gap:10px;
   padding:10px 12px 11px;text-align:left;min-width:0;
-  transition:background-color .12s ease;
+  transition:background-color var(--m-fast) linear,transform var(--m-fast) var(--m-inout);
 }
 .ficha .nm{
   font-family:var(--text);font-size:12px;font-weight:500;
@@ -197,9 +240,16 @@ button{font:inherit;color:inherit}
   overflow-wrap:anywhere;min-width:0;
 }
 .ficha .ct{font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+/* o `border:0` acima (reset de botão) vencia `.grid-lines > *`: a ficha ficava
+   sem os fios da grade e parecia lista crua. Medido: border-bottomWidth era 0px. */
+.fichas > .ficha{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 .ficha:hover{background:var(--paper-2)}
 .ficha:hover .nm{color:var(--accent)}
 .ficha:hover .ct{color:var(--accent)}
+.ficha:focus-visible{background:var(--paper-2)}
+.ficha:focus-visible .nm{color:var(--accent)}
+.ficha:focus-visible .ct{color:var(--accent)}
+.ficha:active{transform:scale(.98)}
 .ficha[aria-pressed="true"]{background:var(--ink)}
 .ficha[aria-pressed="true"] .nm{color:var(--paper)}
 .ficha[aria-pressed="true"] .ct{color:var(--paper-3)}
@@ -212,15 +262,16 @@ button{font:inherit;color:inherit}
 .statusline b{font-weight:600}
 
 /* ---------- a lista de partidas: livro-razão, não cards ---------- */
-.ledger{border-top:0}
+.ledger{position:relative;border-top:0}   /* âncora das linhas que saem (FLIP) */
 .entry{
   display:grid;grid-template-columns:minmax(0,1fr) 214px;column-gap:26px;
   padding:15px 0 16px 14px;border-top:1px solid var(--rule);
   box-shadow:inset 3px 0 0 transparent;
-  transition:background-color .12s ease,box-shadow .12s ease;
+  /* só estado: background-color; o fio lateral troca sem animação */
+  transition:background-color var(--m-fast) linear;
 }
-.entry:first-child{border-top:0}
-.entry:last-child{border-bottom:1px solid var(--rule)}
+.entry[data-first]{border-top:0}
+.entry[data-last]{border-bottom:1px solid var(--rule)}
 .entry:hover{background:var(--paper-2);box-shadow:inset 3px 0 0 var(--ink)}
 .e-main{min-width:0}
 .e-meta{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:8px}
@@ -261,7 +312,7 @@ button{font:inherit;color:inherit}
 }
 .probs b.hi{color:var(--green)}
 .bar{display:flex;height:5px;margin-top:9px;background:var(--paper-3)}
-.bar i{background:var(--rule-2);height:100%}
+.bar i{background:var(--rule-2);height:100%;transform-origin:0 50%}
 .bar i.hi{background:var(--green)}
 .probs-lab{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:5px;
            font-size:8px;letter-spacing:.1em}
@@ -370,12 +421,14 @@ button{font:inherit;color:inherit}
 .btn{
   appearance:none;cursor:pointer;border:1px solid var(--ink);background:transparent;color:var(--ink);
   padding:11px 15px;font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
-  transition:background-color .12s ease,color .12s ease,border-color .12s ease;
+  transition:background-color var(--m-fast) linear,color var(--m-fast) linear;
 }
 .btn:hover{background:var(--ink);color:var(--paper)}
 .btn:active{background:var(--accent);border-color:var(--accent);color:var(--paper)}
 .btn.solid{background:var(--ink);color:var(--paper)}
 .btn.solid:hover{background:var(--accent);border-color:var(--accent)}
+.btn:focus-visible{background:var(--ink);color:var(--paper)}
+.btn.solid:focus-visible{background:var(--accent);border-color:var(--accent)}
 .btn.wide{display:block;width:100%;text-align:center}
 
 /* ---------- rodapé ---------- */
@@ -385,6 +438,30 @@ button{font:inherit;color:inherit}
 .foot .legal{font-size:14.5px;color:var(--ink-2);max-width:56ch;margin-top:10px;font-style:italic}
 .share{display:flex;flex-wrap:wrap;gap:8px}
 .share .btn{font-size:9.5px;padding:8px 11px}
+
+/* ============================================================
+   MOVIMENTO — só comunica estado (MOTION-SPEC.md)
+   Chegada de dado, mudança, seleção. Nada de entrada decorativa.
+   Só transform / opacity / background-color (e color em estado).
+   ============================================================ */
+@keyframes mEnter{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+@keyframes mEnterSm{ from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+@keyframes mPanelIn{ from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+@keyframes mBar{ from{transform:scaleX(0)} to{transform:scaleX(1)} }
+
+/* A. entrada da página: uma vez, no primeiro paint; 40ms entre blocos */
+.m-in{animation:mEnter var(--m-base) var(--m-out) both;animation-delay:var(--md,0ms)}
+.m-in-sm{animation:mEnterSm var(--m-base) var(--m-out) both;animation-delay:var(--md,0ms)}
+
+/* B. troca de aba: só o painel que entra anima; o antigo sai sem animação */
+.panel.p-in{animation:mPanelIn var(--m-base) var(--m-out) both}
+
+/* D. barra de probabilidade: cresce por transform, a partir da esquerda */
+.m-bar{animation:mBar 400ms var(--m-out) both;animation-delay:var(--seg,0ms)}
+
+/* 3. indicador "atualizado às HH:MM": ponto quadrado (raio 0, direção almanaque) */
+.upd{display:inline-flex;align-items:center;gap:7px;min-width:0}
+.dot{width:6px;height:6px;flex:0 0 auto;background:var(--accent);opacity:.4}
 
 /* ============================================================
    3. COMPOSIÇÃO MOBILE — própria, não o desktop espremido
@@ -431,6 +508,7 @@ button{font:inherit;color:inherit}
   .e-line .score .dash{padding:0 7px}
   .entry{padding:14px 0 15px 12px}
   .entry:hover{box-shadow:inset 3px 0 0 var(--accent)}
+  .ledger .crest{--crest:20px}      /* linha de partida no celular: 20px (CREST-SPEC) */
   .compare{grid-template-columns:repeat(1,minmax(0,1fr))}
   .tiers{grid-template-columns:repeat(1,minmax(0,1fr))}
   .idx .row{grid-template-columns:minmax(0,1fr) 40px}
@@ -441,18 +519,38 @@ button{font:inherit;color:inherit}
   .note{font-size:17px}
   .sec-meta{display:none}
 }
+
+/* ============================================================
+   4. MOVIMENTO REDUZIDO — nenhuma informação depende de movimento:
+      pulso, contagem e entrada não acontecem; o valor final aparece
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-delay:0ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    transition-delay:0ms !important;
+    /* Medido: com 0.01ms o Chrome deixa a animação/transição "pending"
+       (currentTime 0) e o elemento fica preso no estado inicial — a entrada
+       ficava em opacity 0 e o hover não respondia. Aqui nada é aplicado:
+       o valor final aparece direto e nada fora da lista permitida roda. */
+    animation-name:none !important;
+    transition-property:none !important;
+  }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header class="masthead">
-    <div class="topline">
+    <div class="topline m-in" style="--md:0ms">
       <span class="micro ink">HYPEFC · <span id="assinatura"></span></span>
-      <span class="micro" id="edicao"></span>
+      <span class="micro upd" id="upd"><i class="dot" id="dot" aria-hidden="true"></i><span id="edicao"></span></span>
     </div>
 
-    <div class="brand">
+    <div class="brand m-in" style="--md:40ms">
       <div class="brand-l">
         <span class="micro eyebrow" id="vol"></span>
         <h1 class="wordmark">HypeFC</h1>
@@ -463,18 +561,18 @@ button{font:inherit;color:inherit}
       </div>
     </div>
 
-    <div class="reg">
+    <div class="reg m-in" style="--md:80ms">
       <div class="reg-cell"><span class="micro">CARDS LIQUIDADOS</span><b id="reg-cards"></b></div>
       <div class="reg-cell"><span class="micro">ACERTO</span><b id="reg-acerto"></b></div>
       <div class="reg-cell"><span class="micro">MÉDIA DO MANDANTE</span><b id="reg-media"></b></div>
       <div class="reg-cell"><span class="micro">LIFT</span><b id="reg-lift"></b></div>
     </div>
-    <div class="reg-foot">
+    <div class="reg-foot m-in" style="--md:120ms">
       <span class="micro" id="reg-detalhe"></span>
       <span class="stamp" id="reg-edge"></span>
     </div>
 
-    <nav class="tabs" role="tablist" aria-label="Seções do almanaque" id="tabs"></nav>
+    <nav class="tabs m-in" role="tablist" aria-label="Seções do almanaque" id="tabs" style="--md:160ms"></nav>
   </header>
 
   <main>
@@ -657,13 +755,181 @@ button{font:inherit;color:inherit}
   }
   function $(s){ return document.querySelector(s); }
 
+  /* ---------------- escudos (CREST-SPEC.md) ----------------
+     Os 31 times dos 10 jogos, com URL real e já validada (HTTP 200 + image/png) em
+     sketches/escudos.json. Host espncdn.com — é o que o isAllowedCrest() do produto
+     aceita (junto de football-data.org); nada de host fora dessa lista, senão o
+     mockup promete o que o produto recusa. Nada inventado: time sem entrada aqui cai
+     no fallback da inicial, nunca em imagem quebrada. */
+  var ESCUDOS = {
+    "AJ Auxerre": "https://a.espncdn.com/i/teamlogos/soccer/500/172.png",
+    "AS Monaco": "https://a.espncdn.com/i/teamlogos/soccer/500/174.png",
+    "AS Roma": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+    "AZ Alkmaar": "https://a.espncdn.com/i/teamlogos/soccer/500/140.png",
+    "Académico de Viseu": "https://a.espncdn.com/i/teamlogos/soccer/500/21607.png",
+    "Athletico-PR": "https://a.espncdn.com/i/teamlogos/soccer/500/3458.png",
+    "Atlético Madrid": "https://a.espncdn.com/i/teamlogos/soccer/500/1068.png",
+    "Bahia": "https://a.espncdn.com/i/teamlogos/soccer/500/9967.png",
+    "Barcelona": "https://a.espncdn.com/i/teamlogos/soccer/500/83.png",
+    "Benfica": "https://a.espncdn.com/i/teamlogos/soccer/500/1929.png",
+    "Borussia Dortmund": "https://a.espncdn.com/i/teamlogos/soccer/500/124.png",
+    "Brest": "https://a.espncdn.com/i/teamlogos/soccer/500/6997.png",
+    "Corinthians": "https://a.espncdn.com/i/teamlogos/soccer/500/874.png",
+    "Cruzeiro": "https://a.espncdn.com/i/teamlogos/soccer/500/2022.png",
+    "Estrela": "https://a.espncdn.com/i/teamlogos/soccer/500/21610.png",
+    "FC Porto": "https://a.espncdn.com/i/teamlogos/soccer/500/437.png",
+    "Feyenoord Rotterdam": "https://a.espncdn.com/i/teamlogos/soccer/500/142.png",
+    "Flamengo": "https://a.espncdn.com/i/teamlogos/soccer/500/819.png",
+    "Fluminense": "https://a.espncdn.com/i/teamlogos/soccer/500/3445.png",
+    "Grêmio": "https://a.espncdn.com/i/teamlogos/soccer/500/6273.png",
+    "Lille": "https://a.espncdn.com/i/teamlogos/soccer/500/166.png",
+    "Manchester City": "https://a.espncdn.com/i/teamlogos/soccer/500/382.png",
+    "Marseille": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+    "Moreirense": "https://a.espncdn.com/i/teamlogos/soccer/500/3696.png",
+    "Nice": "https://a.espncdn.com/i/teamlogos/soccer/500/2502.png",
+    "Palmeiras": "https://a.espncdn.com/i/teamlogos/soccer/500/2029.png",
+    "Paris Saint-Germain": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
+    "Real Madrid": "https://a.espncdn.com/i/teamlogos/soccer/500/86.png",
+    "Red Bull Bragantino": "https://a.espncdn.com/i/teamlogos/soccer/500/6079.png",
+    "Vitória": "https://a.espncdn.com/i/teamlogos/soccer/500/3457.png",
+    "Vitória de Guimaraes": "https://a.espncdn.com/i/teamlogos/soccer/500/5309.png"
+  };
+  var TAM_ESCUDO = { lg:22, sm:18 };   /* linha de partida / lista "em alta" */
+
+  function inicial(time){
+    var t = String(time == null ? "" : time).replace(/^\s+/, "");
+    return t ? t.charAt(0).toUpperCase() : "?";
+  }
+  /* `<img>` comum (nunca next/image), width/height explícitos, alt descritivo.
+     O nome do time é sempre texto ao lado: o escudo nunca identifica sozinho. */
+  function escudoHTML(time, tam){
+    var alt = "Escudo do " + time;
+    var extra = tam === "sm" ? " sm" : "";
+    var url = ESCUDOS[time];
+    if (!url){                                   /* sem escudo no mapa → fallback da inicial */
+      return '<span class="crest crest-fb' + extra + '" role="img" aria-label="' + esc(alt) + '">' +
+             esc(inicial(time)) + "</span>";
+    }
+    var lado = TAM_ESCUDO[tam] || TAM_ESCUDO.lg;
+    return '<img class="crest' + extra + '" src="' + esc(url) + '" width="' + lado + '" height="' + lado +
+           '" alt="' + esc(alt) + '" data-time="' + esc(time) + '">';
+  }
+  /* Imagem que falha vira a mesma caixa de régua com a inicial (nunca imagem quebrada,
+     nunca espaço vazio). `error` não borbulha, mas é capturável: listener de captura. */
+  function caiNoFallback(img){
+    var time = img.getAttribute("data-time") || "";
+    var caixa = document.createElement("span");
+    caixa.className = "crest crest-fb" + (img.classList.contains("sm") ? " sm" : "");
+    caixa.setAttribute("role", "img");
+    caixa.setAttribute("aria-label", "Escudo do " + time);
+    caixa.textContent = inicial(time);
+    if (img.parentNode) img.parentNode.replaceChild(caixa, img);
+  }
+  document.addEventListener("error", function(e){
+    var alvo = e.target;
+    if (alvo && alvo.tagName === "IMG" && alvo.classList && alvo.classList.contains("crest")) caiNoFallback(alvo);
+  }, true);
+
+  /* ---------------- movimento (MOTION-SPEC.md) ----------------
+     Os tokens do CSS são a fonte da verdade: lidos aqui, nunca duplicados.
+     Sem biblioteca, sem rAF permanente. Só anima o que comunica estado. */
+  var RAIZ = document.documentElement;
+  var MQ = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  function reduzido(){ return !!(MQ && MQ.matches); }
+  function token(nome, alt){
+    var v = getComputedStyle(RAIZ).getPropertyValue(nome).trim();
+    return v || alt;
+  }
+  function paraMs(v, alt){
+    var m = /^\s*([-\d.]+(?:[eE][-+]?\d+)?)(ms|s)\s*$/.exec(String(v));
+    if (!m) return alt;
+    var n = parseFloat(m[1]);
+    return m[2] === "s" ? n * 1000 : n;
+  }
+  function curva(txt){
+    var m = /cubic-bezier\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*,\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/.exec(String(txt));
+    var p = m ? [parseFloat(m[1]), parseFloat(m[2]), parseFloat(m[3]), parseFloat(m[4])] : [.25, .1, .25, 1];
+    var x1 = p[0], y1 = p[1], x2 = p[2], y2 = p[3];
+    function A(a, b){ return 1 - 3 * b + 3 * a; }
+    function B(a, b){ return 3 * b - 6 * a; }
+    function C(a){ return 3 * a; }
+    function f(t, a, b){ return ((A(a, b) * t + B(a, b)) * t + C(a)) * t; }
+    function df(t, a, b){ return 3 * A(a, b) * t * t + 2 * B(a, b) * t + C(a); }
+    return function(x){
+      if (x <= 0) return 0;
+      if (x >= 1) return 1;
+      var t = x, i, d;
+      for (i = 0; i < 8; i++){ d = df(t, x1, x2); if (!d) break; t -= (f(t, x1, x2) - x) / d; }
+      return f(t, y1, y2);
+    };
+  }
+  var M_FAST  = paraMs(token("--m-fast", "120ms"), 120);
+  var M_BASE  = paraMs(token("--m-base", "200ms"), 200);
+  var M_COUNT = paraMs(token("--m-count", "700ms"), 700);
+  var E_IN    = token("--m-in", "cubic-bezier(.55,0,1,.45)");
+  var E_INOUT = token("--m-inout", "cubic-bezier(.65,0,.35,1)");
+  var curvOUT = curva(token("--m-out", "cubic-bezier(.16,1,.3,1)"));
+  var NF = new Intl.NumberFormat("pt-BR");
+
+  /* ao terminar, a classe sai — a animação deixa de existir (getAnimations() volta a 0)
+     e pode ser reaplicada quando o estado mudar de novo */
+  var CLASSE_DA_ANIMACAO = { "mEnter":"m-in", "mEnterSm":"m-in-sm", "mPanelIn":"p-in", "mBar":"m-bar" };
+  document.addEventListener("animationend", function(e){
+    var cls = CLASSE_DA_ANIMACAO[e.animationName];
+    if (cls && e.target && e.target.classList) e.target.classList.remove(cls);
+  }, true);
+
+  /* Com movimento reduzido nada depende de animação: as classes que animam
+     não ficam aplicadas. (Medido: com duração 0.01ms o Chrome deixa a
+     animação "pending" e prende o elemento no estado inicial — opacity 0.) */
+  function limparMovimento(){
+    Array.prototype.forEach.call(document.querySelectorAll(".m-in,.m-in-sm,.m-bar,.p-in"), function(el){
+      el.classList.remove("m-in"); el.classList.remove("m-in-sm");
+      el.classList.remove("m-bar"); el.classList.remove("p-in");
+    });
+  }
+  if (MQ && MQ.addEventListener) MQ.addEventListener("change", function(){ if (reduzido()) limparMovimento(); });
+
+  /* 3. indicador "atualizado às HH:MM": 3 pulsos de 2s na carga e para;
+     volta a pulsar no hover/focus do bloco (WCAG 2.2.2: nada infinito) */
+  var ponto = $("#dot"), pulso = null;
+  function pulsarPonto(){
+    if (!ponto || reduzido() || pulso) return;
+    pulso = ponto.animate(
+      [{opacity:.4, transform:"scale(1)"}, {opacity:1, transform:"scale(1.35)"}, {opacity:.4, transform:"scale(1)"}],
+      {duration:2000, iterations:3, easing:E_INOUT}
+    );
+    var fim = function(){ pulso = null; };
+    pulso.finished.then(fim, fim);
+  }
+
+  /* E. número do registro público: conta de 0 ao valor final, uma vez,
+     quando entra em tela. Sem movimento reduzido, o valor final é imediato. */
+  var contouRegistro = false;
+  function contarRegistro(){
+    var el = $("#reg-cards");
+    if (!el || contouRegistro) return;
+    contouRegistro = true;
+    var alvo = R.cards_liquidados;
+    if (reduzido()){ el.textContent = NF.format(alvo); return; }
+    var t0 = 0;
+    function passo(agora){
+      if (!t0) t0 = agora;
+      var p = Math.min(1, (agora - t0) / M_COUNT);
+      el.textContent = NF.format(Math.round(curvOUT(p) * alvo));
+      if (p < 1) requestAnimationFrame(passo);
+      else el.textContent = NF.format(alvo);      /* rAF para aqui: nada permanente */
+    }
+    requestAnimationFrame(passo);
+  }
+
   /* ---------------- cabeçalho + rodapé ---------------- */
   $("#assinatura").textContent = M.assinatura;
   $("#edicao").textContent = "RODADA " + D.capa.rodada + " · " + D.capa.atualizado;
   $("#vol").textContent = "VOL. I — " + R.manchete;
   $("#promessa-titulo").textContent = "O palpite não está à venda.";
   $("#promessa-sub").textContent = M.promessa;
-  $("#reg-cards").textContent   = R.cards_liquidados;
+  $("#reg-cards").textContent   = reduzido() ? NF.format(R.cards_liquidados) : NF.format(0);
   $("#reg-acerto").textContent  = R.acerto;
   $("#reg-media").textContent   = "37.0%";
   $("#reg-lift").textContent    = R.lift;
@@ -691,7 +957,22 @@ button{font:inherit;color:inherit}
       t.setAttribute("aria-selected", String(on));
       t.tabIndex = on ? 0 : -1;
       var p = document.getElementById(t.dataset.panel);
-      if (p) { if (on) { p.removeAttribute("hidden"); } else { p.setAttribute("hidden", ""); } }
+      if (!p) return;
+      if (on) {
+        /* B. o painel novo entra; o antigo sai sem animação (não atrasa a leitura).
+           Com movimento reduzido, o painel simplesmente aparece. */
+        if (p.hasAttribute("hidden")) {
+          p.removeAttribute("hidden");
+          if (!reduzido()) {
+            p.classList.remove("p-in");
+            void p.offsetWidth;                     /* reinicia a animação na troca */
+            p.classList.add("p-in");
+          }
+        }
+      } else {
+        p.setAttribute("hidden", "");
+        p.classList.remove("p-in");
+      }
     });
     if (focus && tabs[idx]) tabs[idx].focus();
   }
@@ -728,11 +1009,14 @@ button{font:inherit;color:inherit}
     var nums = keys.map(function(k){
       return '<b class="' + (isHi(m, k) ? "hi" : "") + '">' + m.prob[k] + "</b>";
     }).join("");
-    var bars = keys.map(function(k){
-      return '<i class="' + (isHi(m, k) ? "hi" : "") + '" style="width:' + m.prob[k] + '%"></i>';
+    var bars = keys.map(function(k, i){
+      /* D. os três segmentos crescem por transform (scaleX), à esquerda,
+         com 60ms entre eles — só na primeira vez que a linha aparece */
+      return '<i class="m-bar' + (isHi(m, k) ? " hi" : "") + '" style="width:' + m.prob[k] +
+             "%;--seg:" + (i * 60) + 'ms"></i>';
     }).join("");
     var hw = m.destaque === "casa", aw = m.destaque === "fora";
-    return '<article class="entry">' +
+    return '<article class="entry" data-key="' + esc(entryKey(m)) + '">' +
       '<div class="e-main">' +
         '<div class="e-meta">' +
           '<span class="lab liga">' + esc(m.liga) + "</span>" +
@@ -742,9 +1026,9 @@ button{font:inherit;color:inherit}
           '<span class="badge">' + esc(m.status) + "</span>" +
         "</div>" +
         '<div class="e-line">' +
-          '<span class="team home' + (hw ? " win" : "") + '">' + esc(m.casa.time) + (hw ? '<i class="dagger">†</i>' : "") + "</span>" +
+          '<span class="team home' + (hw ? " win" : "") + '">' + escudoHTML(m.casa.time, "lg") + esc(m.casa.time) + (hw ? '<i class="dagger">†</i>' : "") + "</span>" +
           '<span class="score"><b>' + m.casa.gols + '</b><span class="dash">—</span><b>' + m.fora.gols + "</b></span>" +
-          '<span class="team away' + (aw ? " win" : "") + '">' + (aw ? '<i class="dagger">†</i>' : "") + esc(m.fora.time) + "</span>" +
+          '<span class="team away' + (aw ? " win" : "") + '">' + escudoHTML(m.fora.time, "lg") + (aw ? '<i class="dagger">†</i>' : "") + esc(m.fora.time) + "</span>" +
         "</div>" +
         '<div class="e-stats micro">posse ' + esc(m.stats.posse) + " · chutes " + esc(m.stats.chutes) +
           " · no alvo " + esc(m.stats.no_alvo) + "</div>" +
@@ -757,33 +1041,115 @@ button{font:inherit;color:inherit}
       "</div>" +
     "</article>";
   }
-  function paintLedger(){
+  function entryKey(m){ return m.liga + "|" + m.casa.time + "|" + m.fora.time; }
+  function makeEntry(m){
+    var caixa = document.createElement("div");
+    caixa.innerHTML = entryHTML(m);
+    return caixa.firstChild;
+  }
+  /* C. FLIP: a linha que sai fica fora do fluxo, no lugar em que estava,
+     esmaecendo; as que ficam já viajam por transform até a posição final */
+  function soltarLinha(el, caixa){
+    var r = el.getBoundingClientRect();
+    el.dataset.ghost = "1";
+    el.style.position = "absolute";
+    el.style.left = (r.left - caixa.left) + "px";
+    el.style.top  = (r.top  - caixa.top) + "px";
+    el.style.width = r.width + "px";
+    el.style.margin = "0";
+    el.style.pointerEvents = "none";
+    var a = el.animate([{opacity:1},{opacity:0}], {duration:M_FAST, easing:E_IN, fill:"forwards"});
+    var fim = function(){ el.remove(); };
+    a.finished.then(fim, fim);
+  }
+  function primeiraEUltima(ledger, linhas){
+    Array.prototype.forEach.call(ledger.querySelectorAll(".entry"), function(el){
+      delete el.dataset.first; delete el.dataset.last;
+    });
+    if (linhas[0]) linhas[0].dataset.first = "1";
+    if (linhas.length) linhas[linhas.length - 1].dataset.last = "1";
+  }
+  function paintLedger(flip){
+    var ledger = $("#ledger");
     var rows = D.partidas.filter(function(m){ return state.liga === "Todas" || m.liga === state.liga; });
     var f = D.filtros_liga.filter(function(x){ return x.liga === state.liga; })[0];
-    var who = state.liga === "Todas"
+
+    /* FIRST: posição atual das linhas (a fantasma da troca anterior não conta) */
+    var antigas = Array.prototype.slice.call(ledger.querySelectorAll(".entry")).filter(function(el){
+      return el.dataset.ghost !== "1";
+    });
+    var porChave = {}, antes = {};
+    antigas.forEach(function(el){
+      porChave[el.dataset.key] = el;
+      if (flip) antes[el.dataset.key] = el.getBoundingClientRect();
+    });
+    var caixa = ledger.getBoundingClientRect();
+
+    var ficam = {};
+    rows.forEach(function(m){ ficam[entryKey(m)] = true; });
+    antigas.forEach(function(el){
+      if (!ficam[el.dataset.key]){
+        delete porChave[el.dataset.key];
+        if (flip) soltarLinha(el, caixa); else el.remove();
+      }
+    });
+
+    var frag = document.createDocumentFragment();
+    rows.forEach(function(m){
+      var k = entryKey(m);
+      var el = porChave[k];
+      if (!el){ el = makeEntry(m); porChave[k] = el; }   /* nó reaproveitado: não se reconstrói o que não mudou */
+      frag.appendChild(el);
+    });
+    ledger.appendChild(frag);
+
+    var vazio = ledger.querySelector(".empty");
+    if (rows.length){ if (vazio) vazio.remove(); }
+    else if (!vazio){
+      vazio = document.createElement("div");
+      vazio.className = "empty";
+      vazio.innerHTML = '<span class="lab">Sem entradas</span>' +
+        "<p>Nenhum jogo de " + esc(state.liga) + " no recorte deste volume.</p>" +
+        '<span class="micro">A rodada tem ' + (f ? f.jogos : 0) + " jogos de " + esc(state.liga) +
+        ", 0 deles neste recorte.</span>";
+      ledger.appendChild(vazio);
+    }
+
+    var ficaram = [];
+    rows.forEach(function(m){ if (porChave[entryKey(m)]) ficaram.push(porChave[entryKey(m)]); });
+    primeiraEUltima(ledger, ficaram);
+
+    /* LAST + INVERT + PLAY: só transform, de --m-base, na curva de dois pontos */
+    if (flip){
+      rows.forEach(function(m){
+        var k = entryKey(m), el = porChave[k], r0 = antes[k];
+        if (!el || !r0) return;                       /* linha nova não se move: ela surge */
+        var r1 = el.getBoundingClientRect();
+        var dx = r0.left - r1.left, dy = r0.top - r1.top;
+        if (!dx && !dy) return;
+        el.animate(
+          [{transform:"translate(" + dx + "px," + dy + "px)"}, {transform:"translate(0,0)"}],
+          {duration:M_BASE, easing:E_INOUT}
+        );
+      });
+    }
+
+    $("#count-line").innerHTML = state.liga === "Todas"
       ? "<b>Recorte do volume</b> · " + rows.length + " de " + TOTAL + " jogos · " +
         esc(KPI["LIGAS"]) + " ligas · " + KPI["ENCERRADOS"] + " encerrados"
       : "<b>" + esc(state.liga) + "</b> · " + rows.length + " de " + (f ? f.jogos : 0) + " jogos desta liga no recorte";
-    $("#count-line").innerHTML = who;
-    $("#ledger").innerHTML = rows.length
-      ? rows.map(entryHTML).join("")
-      : '<div class="empty"><span class="lab">Sem entradas</span>' +
-        "<p>Nenhum jogo de " + esc(state.liga) + " no recorte deste volume.</p>" +
-        '<span class="micro">A rodada tem ' + (f ? f.jogos : 0) + " jogos de " + esc(state.liga) + ", " +
-        "0 deles neste recorte.</span></div>";
-    var n = rows.length;
-    $("#rows-now").textContent = String(n);
+    $("#rows-now").textContent = String(rows.length);
   }
 
   $("#p-rodada").innerHTML =
-    '<div class="sec-head">' +
+    '<div class="sec-head m-in" style="--md:200ms">' +
       '<div><span class="sec-num">§ I</span><h2>Rodada</h2></div>' +
       '<span class="sec-meta micro">' + esc(D.capa.rodada) + " · " + esc(KPI["JOGOS"]) + " jogos</span>" +
     "</div>" +
     '<p class="note">' + esc(D.capa.aviso_contexto) +
       '<span class="micro">Nota de contexto publicada no painel</span></p>' +
-    '<div class="kpis grid-lines">' + kpiHTML() + "</div>" +
-    '<div class="lead">' +
+    '<div class="kpis grid-lines m-in" style="--md:240ms">' + kpiHTML() + "</div>" +
+    '<div class="lead m-in" style="--md:280ms">' +
       "<div>" +
         '<div class="block-head"><span class="lab">Fichas de liga</span>' +
           '<span class="micro">clique: a lista muda de tamanho</span></div>' +
@@ -820,7 +1186,7 @@ button{font:inherit;color:inherit}
     Array.prototype.forEach.call(document.querySelectorAll(".ficha"), function(f){
       f.setAttribute("aria-pressed", String(f.dataset.liga === state.liga));
     });
-    paintLedger();
+    paintLedger(true);          /* C. FLIP: medir antes/depois e mover por transform */
   });
 
   /* ---------------- painel II — Liga ---------------- */
@@ -847,7 +1213,7 @@ button{font:inherit;color:inherit}
     '<div class="rank grid-lines">' +
       D.em_alta.map(function(t, i){
         return '<div class="row"><span class="pos">' + String(i + 1).padStart(2, "0") + "</span>" +
-          '<span class="nm">' + esc(t.time) + "</span>" +
+          '<span class="nm">' + escudoHTML(t.time, "sm") + esc(t.time) + "</span>" +
           '<span class="sc">' + t.score + "</span>" +
           '<span class="track"><i style="width:' + Math.round(t.score / MAXALTA * 100) + '%"></i></span></div>';
       }).join("") +
@@ -933,9 +1299,35 @@ button{font:inherit;color:inherit}
       '<div class="row"><span class="k">Governança</span><span class="v">' + esc(R.sem_edge) + "</span></div>" +
     "</div>";
 
-  paintLedger();
+  paintLedger(false);
+  if (reduzido()) limparMovimento();   /* nada preso no estado inicial */
   activate(0, false);
-  window.__almanaque = { data: D, state: state, paint: paintLedger, activate: activate };
+
+  /* 3. o ponto de "atualizado às HH:MM" pulsa 3 vezes (2s por ciclo) e para */
+  pulsarPonto();
+  var toplineEl = $(".topline");
+  if (toplineEl){
+    toplineEl.addEventListener("mouseenter", pulsarPonto);
+    toplineEl.addEventListener("focusin", pulsarPonto);
+  }
+
+  /* E. o número do registro conta uma única vez, ao entrar em tela */
+  var regEl = $("#reg-cards");
+  if (regEl && "IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(ents){
+      ents.forEach(function(en){ if (en.isIntersecting){ io.disconnect(); contarRegistro(); } });
+    }, {threshold:.5});
+    io.observe(regEl);
+    setTimeout(contarRegistro, 2500);   /* rede de segurança: o valor nunca fica em 0 */
+  } else {
+    contarRegistro();
+  }
+
+  window.__almanaque = {
+    data: D, state: state, paint: paintLedger, activate: activate,
+    /* exposto para a verificação medida do escudo (CREST-SPEC.md) */
+    escudos: ESCUDOS, escudoHTML: escudoHTML, caiNoFallback: caiNoFallback
+  };
 })();
 </script>
 </body>

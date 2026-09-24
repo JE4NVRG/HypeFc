@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HypeFC · as duas finalistas (com escudo e movimento)</title>
+<style>
+  :root { --bg:#0E0F11; --fg:#E8EAED; --dim:#9BA3AC; --faint:#6B747D; --line:#262A2F; --card:#15181C; }
+  * { box-sizing:border-box; margin:0; padding:0; border-radius:0; }
+  body { background:var(--bg); color:var(--fg); font:14px/1.55 ui-sans-serif,-apple-system,"Helvetica Neue",sans-serif; padding:40px 28px 72px; }
+  .wrap { max-width:1560px; margin:0 auto; }
+  h1 { font-size:26px; font-weight:600; letter-spacing:-.01em; }
+  .sub { color:var(--dim); margin-top:8px; max-width:88ch; }
+  .meta { color:var(--faint); font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; margin-top:14px; border-top:1px solid var(--line); padding-top:14px; }
+  h2 { font-size:17px; font-weight:600; margin:44px 0 4px; }
+  .lane { display:grid; grid-template-columns:1.55fr 1fr; gap:22px; margin-top:18px; }
+  @media (max-width:1100px) { .lane { grid-template-columns:1fr; } }
+  figure { background:var(--card); border:1px solid var(--line); overflow:hidden; }
+  figure img { display:block; width:100%; height:auto; }
+  figcaption { color:var(--faint); font:11px/1.4 ui-monospace,Menlo,monospace; padding:9px 11px; border-top:1px solid var(--line); }
+  .tese { color:var(--dim); }
+  .tese b { color:var(--fg); font-weight:600; }
+  table { width:100%; border-collapse:collapse; margin-top:26px; font-size:13.5px; }
+  th,td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--faint); font-weight:500; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; }
+  td.n { font-family:ui-monospace,Menlo,monospace; font-variant-numeric:tabular-nums; }
+  .ok { color:#7BD88F; }
+  .nota { margin-top:30px; border-left:2px solid var(--line); padding:12px 0 12px 16px; color:var(--dim); }
+  .nota b { color:var(--fg); }
+  code { font-family:ui-monospace,Menlo,monospace; font-size:12.5px; color:#C9D1D9; }
+  .swatch { display:inline-block; width:12px; height:12px; border:1px solid var(--line); vertical-align:-1px; margin-right:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>HypeFC · as duas finalistas</h1>
+  <p class="sub">Mesma estrutura de informação nas duas: sem card de canto arredondado, régua de 1px no lugar de sombra, número tabular, e o laranja fora do produto. A diferença é a classe do produto (claro ou escuro) e o que cada uma faz com o escudo do time, que entrou agora nas duas com URL real e verificada.</p>
+  <div class="meta">dados de produção · 23/09/2026 22:37 · 9 ligas · 10 partidas · registro 1.402 cards · 53,6% de acerto · baseline 37,0% · lift +16,6pp<br>
+  escudos: 31 URLs reais validadas (HTTP 200 + image/png), host <code>a.espncdn.com</code>, o mesmo que <code>isAllowedCrest()</code> aceita<br>
+  movimento: <code>MOTION-SPEC.md</code> · escudo: <code>CREST-SPEC.md</code> · conteúdo: <code>dados-reais.json</code></div>
+
+  <h2>001 · Almanaque <span class="tese">· papel <span class="swatch" style="background:#F4F0E6"></span><code>#F4F0E6</code> · carimbo <code>#B3261E</code> · Instrument Serif + Newsreader + IBM Plex Mono</span></h2>
+  <p class="tese">O jornal de resultados. Partida é <b>linha de tabela com fio</b>, não cartão. O escudo é a <b>única cor</b> da página: prato branco com régua <code>#D9D3C7</code>, 22px no desktop e 20px no celular, alinhado à linha de base do nome do time.</p>
+  <div class="lane">
+    <figure><img src="001-almanaque/print-escudos-1440.png" alt="001 Almanaque no desktop, com escudos"><figcaption>1440 · rodada, com escudo nos 10 jogos</figcaption></figure>
+    <figure><img src="001-almanaque/print-escudos-390.png" alt="001 Almanaque no celular, com escudos"><figcaption>390 · celular</figcaption></figure>
+  </div>
+  <div class="lane">
+    <figure><img src="001-almanaque/print-escudos-1440-lista.png" alt="001 Almanaque, lista de partidas"><figcaption>1440 · a lista, 2 escudos por linha</figcaption></figure>
+    <figure><img src="001-almanaque/print-escudos-1440-em-alta.png" alt="001 Almanaque, times em alta"><figcaption>1440 · em alta, escudo de 18px</figcaption></figure>
+  </div>
+
+  <h2>002 · Mesa <span class="tese">· grafite <span class="swatch" style="background:#0B0E11"></span><code>#0B0E11</code> · sinal <code>#E8FF59</code> · JetBrains Mono + Inter Tight</span></h2>
+  <p class="tese">O instrumento de mesa. Ficha densa, hairline <code>#1F262E</code>, raio 0. O escudo fica no <b>prato grafite</b> e segue sendo a única imagem colorida: o acento ácido continua reservado a 3 elementos (a palavra <code>registro</code>, o <code>1.402</code> e o botão Assinar Pro) e o verde só marca a maior probabilidade da linha.</p>
+  <div class="lane">
+    <figure><img src="002-mesa/print-1440-escudos-final.png" alt="002 Mesa no desktop, com escudos"><figcaption>1440 · rodada, com escudo nas 10 fichas</figcaption></figure>
+    <figure><img src="002-mesa/print-390-escudos-final.png" alt="002 Mesa no celular, com escudos"><figcaption>390 · celular</figcaption></figure>
+  </div>
+  <div class="lane">
+    <figure><img src="002-mesa/print-1440-escudos-pagina.png" alt="002 Mesa, página inteira"><figcaption>1440 · página inteira</figcaption></figure>
+    <figure><img src="002-mesa/print-1440-recorde-final.png" alt="002 Mesa, aba Recorde"><figcaption>1440 · aba Recorde</figcaption></figure>
+  </div>
+
+  <h2>Números medidos (meus, não do agente)</h2>
+  <table>
+    <thead><tr><th>O que</th><th>001 Almanaque</th><th>002 Mesa</th><th>Site hoje</th></tr></thead>
+    <tbody>
+      <tr><td>Escudos na lista de partidas</td><td class="n">20 (2 por linha × 10)</td><td class="n">20 (2 por ficha × 10)</td><td class="n">existe, mesmo host</td></tr>
+      <tr><td>Escudo quebrado (naturalWidth 0)</td><td class="n ok">0 de 32</td><td class="n ok">0 de 20</td><td class="n">não medido hoje</td></tr>
+      <tr><td>Escudo sem <code>alt</code></td><td class="n ok">0</td><td class="n ok">0</td><td class="n">não medido hoje</td></tr>
+      <tr><td>Prato do escudo (nunca solto no fundo)</td><td class="n">branco + régua #D9D3C7</td><td class="n">#12161B + hairline #1F262E</td><td class="n">sem prato</td></tr>
+      <tr><td>Texto abaixo de AA (contraste)</td><td class="n ok">0 de 210</td><td class="n ok">0 de 221</td><td class="n">medido antes: 0</td></tr>
+      <tr><td>Texto abaixo de AA no celular</td><td class="n ok">0 de 208</td><td class="n ok">0 de 216</td><td class="n">0</td></tr>
+      <tr><td>Animações ativas em 7s</td><td class="n ok">0</td><td class="n ok">0</td><td class="n">n/a</td></tr>
+      <tr><td>Animação em loop infinito</td><td class="n ok">0</td><td class="n ok">0</td><td class="n">n/a</td></tr>
+      <tr><td>Propriedades animadas</td><td class="n">opacity, transform</td><td class="n">opacity, transform</td><td class="n">só hover</td></tr>
+      <tr><td>Layout shift (CLS)</td><td class="n ok">0</td><td class="n ok">0</td><td class="n">não medido</td></tr>
+      <tr><td>Estouro horizontal (1440 / 390)</td><td class="n ok">0 / 0</td><td class="n ok">0 / 0</td><td class="n">não medido</td></tr>
+      <tr><td>Com "reduzir movimento" ligado no sistema</td><td class="n ok">0 animações, 0ms, registro já em 1.402</td><td class="n ok">0 animações, 0ms, registro já em 1.402</td><td class="n">n/a</td></tr>
+      <tr><td>Elemento com fundo arredondado</td><td class="n ok">0</td><td class="n ok">0</td><td class="n">195 / 194 (celular)</td></tr>
+      <tr><td>Cor de acento</td><td class="n">carimbo #B3261E, em 1 lugar</td><td class="n">#E8FF59, em 3 lugares</td><td class="n">laranja #f97316, espalhado</td></tr>
+    </tbody>
+  </table>
+
+  <div class="nota">
+    <b>Como decidir:</b> a 001 muda a <b>classe</b> do produto, que hoje é escuro, para claro, e isso obriga a revalidar contraste em cada tela (incluindo privacidade e termos). A 002 troca a <b>pele</b> mantendo o escuro, que é o que o produto já é. O escudo ajuda a decidir: ele é desenhado para fundo escuro (padrão de transmissão), então na 002 ele assenta sozinho; na 001 ele depende do prato branco para não desaparecer quando o clube tem escudo claro. Nas duas, o nome do time continua sendo texto: o escudo nunca é o único identificador.
+    <br><br>
+    <b>003 Ficha</b> ficou fora do páreo (o canhoto de ingresso não te agradou), mas continua no repositório com movimento aplicado, caso você queira voltar nela.
+    <br><br>
+    <b>Ainda não fiz:</b> revisão de craft (<code>interface-review</code>, a skill nova) nas duas, e o app real ainda não foi tocado. Ele só muda depois de você escolher.
+  </div>
+</div>
+</body>
+</html>

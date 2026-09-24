@@ -31,6 +31,15 @@
   --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --cut:polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
   --cut-sm:polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
+  /* movimento — tokens obrigatórios (MOTION-SPEC) */
+  --m-fast:120ms;
+  --m-base:200ms;
+  --m-slow:320ms;
+  --m-count:700ms;
+  --m-out:cubic-bezier(.16,1,.3,1);
+  --m-in:cubic-bezier(.55,0,1,.45);
+  --m-inout:cubic-bezier(.65,0,.35,1);
+  --live:#ff5a3c;
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -114,9 +123,10 @@ h1{
   font-size:13px; font-weight:600; letter-spacing:.02em;
   padding:11px 18px 12px; min-height:44px;
   clip-path:polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%, 0 10px);
-  transition:background .15s ease, color .15s ease, border-color .15s ease;
+  transition:background-color var(--m-fast) var(--m-inout), color var(--m-fast) var(--m-inout), transform var(--m-fast) var(--m-inout);
 }
 .tab:hover{background:var(--paper-3); color:var(--ink); border-color:var(--rule-hard)}
+.tab:active{transform:scale(.98)}
 .tab[aria-selected="true"]{
   background:var(--paper); color:var(--ink);
   border-color:var(--rule-hard); border-bottom-color:transparent;
@@ -139,8 +149,8 @@ h1{
 /* ---------- faixa de KPIs (livro-razão) ---------- */
 .kpis{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:1px; background:var(--rule-soft)}
 .kpi{background:var(--paper); padding:14px 16px 16px}
-.kpi__l{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
-.kpi__v{font-family:var(--mono); font-size:clamp(24px,3vw,34px); font-weight:600; letter-spacing:-.03em; line-height:1; margin-top:8px}
+.kpi__l{display:block; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.kpi__v{display:block; font-family:var(--mono); font-size:clamp(24px,3vw,34px); font-weight:600; letter-spacing:-.03em; line-height:1; margin-top:8px}
 
 /* ---------- filtros ---------- */
 .filters{margin:18px 0 14px}
@@ -151,9 +161,12 @@ h1{
   min-height:36px; padding:8px 12px; background:var(--paper-2); color:var(--ink-2);
   border:1px solid var(--rule); font-size:12.5px; font-weight:500;
   clip-path:var(--cut-sm);
-  transition:background .15s ease, color .15s ease, border-color .15s ease;
+  transition:background-color var(--m-fast) var(--m-inout), color var(--m-fast) var(--m-inout), transform var(--m-fast) var(--m-inout);
 }
 .chip:hover{background:var(--paper-3); color:var(--ink); border-color:var(--rule-hard)}
+.chip:active{transform:scale(.98)}
+.chip:focus-visible{background:var(--paper-3); color:var(--ink); border-color:var(--rule-hard); outline:2px solid var(--stamp); outline-offset:2px}
+.chip[aria-pressed="true"]:focus-visible{background:var(--ink); color:var(--paper); border-color:var(--ink)}
 .chip__n{font-family:var(--mono); font-size:11px; font-weight:600; color:var(--ink-3)}
 .chip[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
 .chip[aria-pressed="true"] .chip__n{color:#cfc7b6}
@@ -182,9 +195,9 @@ h1{
   display:grid; grid-template-columns:148px minmax(0,1fr) 74px minmax(0,1fr) 152px 176px;
   gap:14px; align-items:center; padding:12px 15px;
   box-shadow:inset 3px 0 0 transparent;
-  transition:background .15s ease, box-shadow .15s ease;
+  transition:background-color var(--m-fast) var(--m-inout);
 }
-.match:hover .ficha__in{background:var(--paper-2); box-shadow:inset 3px 0 0 var(--stamp)}
+.match:hover .ficha__in,.match:focus-within .ficha__in{background:var(--paper-2); box-shadow:inset 3px 0 0 var(--stamp)}
 .m__liga{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2); font-weight:600; text-wrap:balance}
 .m__liga span{display:block; font-family:var(--mono); letter-spacing:.1em; color:var(--ink-3); font-weight:400; margin-top:4px}
 .m__tag{
@@ -203,7 +216,7 @@ h1{
 .m__score b{color:var(--stamp)}
 .m__prob{min-width:0}
 .prob__bar{display:flex; height:10px; background:var(--paper-3); border:1px solid var(--rule); overflow:hidden}
-.seg{display:block; height:100%}
+.seg{display:block; height:100%; transform-origin:left center}
 .seg--c{background:var(--ink)}
 .seg--e{background:repeating-linear-gradient(45deg, var(--ink) 0 2px, transparent 2px 5px)}
 .seg--f{background:rgba(25,23,19,.20)}
@@ -223,8 +236,8 @@ h1{
 
 /* ---------- tabelas de ficha ---------- */
 .ledger{display:grid; background:var(--rule-soft); gap:1px}
-.lrow{display:grid; grid-template-columns:minmax(0,1fr) 92px; gap:14px; align-items:center; background:var(--paper); padding:11px 14px; transition:background .15s ease}
-.lrow:hover{background:var(--paper-2)}
+.lrow{display:grid; grid-template-columns:minmax(0,1fr) 92px; gap:14px; align-items:center; background:var(--paper); padding:11px 14px; transition:background-color var(--m-fast) var(--m-inout)}
+.lrow:hover,.lrow:focus-within{background:var(--paper-2)}
 .lrow__n{font-size:14px; font-weight:600}
 .lrow__m{font-family:var(--mono); font-size:11px; color:var(--ink-3); margin-top:2px}
 .lrow__v{font-family:var(--mono); font-size:15px; font-weight:600; text-align:right}
@@ -234,13 +247,15 @@ h1{
 .grid2{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:22px}
 .registro{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px}
 .registro .kpi__v{font-size:clamp(22px,2.6vw,30px)}
+/* rótulo e valor empilhados (o margin-top só funciona assim) e números alinhados entre os 4 cards */
+.registro .kpi__l{min-height:32px}
 .bar{height:6px; background:var(--paper-3); margin-top:8px; overflow:hidden}
 .bar i{display:block; height:100%; background:var(--ink)}
 .alta__score{font-family:var(--mono); font-size:12px; font-weight:600; color:var(--ink-2)}
 
 .tile{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
-.tile__i{background:var(--paper-2); border:1px solid var(--rule); padding:12px 13px; clip-path:var(--cut-sm); transition:background .15s ease, border-color .15s ease}
-.tile__i:hover{background:var(--paper-3); border-color:var(--rule-hard)}
+.tile__i{background:var(--paper-2); border:1px solid var(--rule); padding:12px 13px; clip-path:var(--cut-sm); transition:background-color var(--m-fast) var(--m-inout)}
+.tile__i:hover,.tile__i:focus-within{background:var(--paper-3); border-color:var(--rule-hard)}
 .tile__n{font-size:13.5px; font-weight:600}
 .tile__v{font-family:var(--mono); font-size:22px; font-weight:600; margin-top:8px; letter-spacing:-.02em}
 .tile__l{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); margin-top:4px}
@@ -263,13 +278,14 @@ h1{
   cursor:pointer; min-height:44px; padding:12px 18px; font-size:13.5px; font-weight:600;
   border:1px solid var(--ink); background:var(--ink); color:var(--paper);
   clip-path:var(--cut-sm);
-  transition:background .15s ease, color .15s ease, border-color .15s ease;
+  transition:background-color var(--m-fast) var(--m-inout), color var(--m-fast) var(--m-inout), transform var(--m-fast) var(--m-inout);
 }
 .btn:hover{background:var(--stamp); border-color:var(--stamp); color:var(--paper)}
 .btn--ghost{background:transparent; color:var(--ink); border-color:var(--rule-hard)}
 .btn--ghost:hover{background:var(--ink); color:var(--paper); border-color:var(--ink)}
-.btn:active{transform:translateY(1px)}
-.btn:focus-visible{outline:2px solid var(--stamp); outline-offset:2px}
+.btn:active{transform:scale(.98)}
+.btn:focus-visible{background:var(--stamp); color:var(--paper); outline:2px solid var(--stamp); outline-offset:2px}
+.btn--ghost:focus-visible{background:var(--ink); color:var(--paper); border-color:var(--ink)}
 .form-note{margin-top:16px; font-family:var(--mono); font-size:11.5px; color:var(--ink-2); border-top:1px dashed var(--rule); padding-top:12px}
 
 /* ---------- rodapé ---------- */
@@ -278,10 +294,10 @@ h1{
 .share{
   cursor:pointer; min-height:36px; padding:8px 13px; font-size:12.5px; font-weight:500;
   background:var(--paper-2); color:var(--ink-2); border:1px solid var(--rule);
-  clip-path:var(--cut-sm); transition:background .15s ease, color .15s ease, border-color .15s ease;
+  clip-path:var(--cut-sm); transition:background-color var(--m-fast) var(--m-inout), color var(--m-fast) var(--m-inout);
 }
 .share:hover{background:var(--ink); color:var(--paper); border-color:var(--ink)}
-.share:focus-visible{outline:2px solid var(--stamp); outline-offset:2px}
+.share:focus-visible{background:var(--ink); color:var(--paper); border-color:var(--ink); outline:2px solid var(--stamp); outline-offset:2px}
 .copied{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ledger)}
 .copied[hidden]{display:none}
 .foot__legend{margin:16px 0 0; padding:0; list-style:none; display:grid; gap:5px}
@@ -346,8 +362,40 @@ h1{
 }
 @media (max-width:760px){ .m__stats--inline{display:none} .share button{min-height:44px} }
 
+/* ============================================================
+   MOVIMENTO — só estado: dado que chega, troca, seleção, ao vivo.
+   Tokens em :root. Sem loop, sem width/height/top/left/filter.
+   ============================================================ */
+@keyframes m-rise{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+@keyframes m-rise6{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+@keyframes m-fade{to{opacity:0}}
+@keyframes m-seg{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+@keyframes m-dot{0%{transform:scale(1); opacity:1} 35%{transform:scale(2.15); opacity:.15} 100%{transform:scale(1); opacity:1}}
+
+/* A — entrada da página (uma vez, no primeiro paint; stagger 40ms por bloco) */
+.m-rise{animation:m-rise var(--m-base) var(--m-out) both; animation-delay:var(--d,0ms)}
+/* B — painel novo da aba */
+.m-panel{animation:m-rise6 var(--m-base) var(--m-out) both}
+/* C — linhas que saem no filtro */
+.m-leave{animation:m-fade var(--m-fast) var(--m-in) both}
+/* D — barra de probabilidade, só no primeiro paint da lista (400ms, stagger 60ms) */
+.m-seg{animation:m-seg 400ms var(--m-out) both; animation-delay:var(--sd,0ms)}
+
+/* item 3 — indicador "atualizado às HH:MM": 3 pulsos de 2s na carga, depois estático */
+.live{display:inline-flex; align-items:center; gap:7px}
+.live__dot{width:8px; height:8px; flex:0 0 8px; border-radius:50%; background:var(--live)}
+.live.is-live .live__dot{animation:m-dot 2s var(--m-inout) 3 both}
+.live:hover .live__dot,.live:focus-visible .live__dot{animation:m-dot 2s var(--m-inout) 3}
+.live:focus-visible{outline:2px solid var(--stamp); outline-offset:3px}
+
 @media (prefers-reduced-motion:reduce){
-  *{transition:none !important; animation:none !important}
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-delay:0ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    transition-delay:0ms !important;
+  }
 }
 </style>
 </head>
@@ -377,7 +425,7 @@ h1{
       <ul class="foot__legend" id="legend"></ul>
       <div class="foot__meta">
         <span class="barcode" aria-hidden="true"></span>
-        <span id="updated" aria-live="polite"></span>
+        <span class="live" id="live" tabindex="0"><i class="live__dot" aria-hidden="true"></i><span id="updated" aria-live="polite"></span></span>
       </div>
       <p class="foot__legal" id="footLegal"></p>
     </footer>
@@ -392,6 +440,7 @@ const state = { tab: D.capa.abas[0], liga: 'Todas' };
 const esc = (s) => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const $ = (s, r) => (r || document).querySelector(s);
 const ligasComFicha = [...new Set(D.partidas.map(p => p.liga))];
+const pk = (p) => p.liga + '|' + p.casa.time + '|' + p.fora.time;
 
 /* ---------- texto do cabeçalho/rodapé ---------- */
 $('#legal').textContent = D.marca.aviso_legal;
@@ -415,19 +464,31 @@ $('#share').addEventListener('click', (e) => {
 
 /* ---------- abas ---------- */
 function renderTabs() {
-  $('#tabs').innerHTML = D.capa.abas.map((t, i) => {
-    const on = state.tab === t;
-    return '<button class="tab" type="button" role="tab" id="tab-' + i + '"' +
-      ' aria-selected="' + on + '" aria-controls="view" tabindex="' + (on ? '0' : '-1') + '"' +
-      ' data-tab="' + esc(t) + '">' + esc(t) + '</button>';
-  }).join('');
+  $('#tabs').innerHTML = D.capa.abas.map((t, i) =>
+    '<button class="tab" type="button" role="tab" id="tab-' + i + '"' +
+    ' aria-selected="false" aria-controls="view" tabindex="-1"' +
+    ' data-tab="' + esc(t) + '">' + esc(t) + '</button>').join('');
+  updateTabs();
+}
+/* não recria a aba clicada: o DOM vivo é o que deixa o scale(.98) de pressão aparecer */
+function updateTabs() {
+  [...$('#tabs').querySelectorAll('[data-tab]')].forEach(b => {
+    const on = b.dataset.tab === state.tab;
+    b.setAttribute('aria-selected', String(on));
+    b.tabIndex = on ? 0 : -1;
+  });
+}
+function setTab(t) {
+  if (t === state.tab) return;
+  state.tab = t;
+  updateTabs();
+  renderView();
+  panelEnter();
 }
 $('#tabs').addEventListener('click', (e) => {
   const b = e.target.closest('[data-tab]');
   if (!b) return;
-  state.tab = b.dataset.tab;
-  renderTabs();
-  renderView();
+  setTab(b.dataset.tab);
 });
 $('#tabs').addEventListener('keydown', (e) => {
   const tabs = [...$('#tabs').querySelectorAll('[data-tab]')];
@@ -440,11 +501,8 @@ $('#tabs').addEventListener('keydown', (e) => {
   if (e.key === 'End') n = tabs.length - 1;
   if (n < 0) return;
   e.preventDefault();
+  setTab(tabs[n].dataset.tab);
   tabs[n].focus();
-  state.tab = tabs[n].dataset.tab;
-  renderTabs();
-  renderView();
-  $('#tabs').querySelector('[aria-selected="true"]').focus();
 });
 
 /* ---------- blocos reutilizáveis ---------- */
@@ -463,7 +521,7 @@ function matchHTML(p) {
   const cell = (v, win) => win ? '<b>' + v + '</b>' : String(v);
   const emCasa = p.casa.gols > p.fora.gols, emFora = p.fora.gols > p.casa.gols;
   const s = p.stats;
-  return '<article class="ficha match">' +
+  return '<article class="ficha match" data-key="' + esc(pk(p)) + '">' +
     '<div class="ficha__in">' +
       '<div class="m__liga">' + esc(p.liga) + '<span>' + esc(p.status) + '</span>' +
         '<span class="m__tag">maior prob. ' + esc(p.destaque) + '</span>' +
@@ -489,27 +547,37 @@ function matchHTML(p) {
 }
 
 /* ---------- vistas ---------- */
-function viewRodada() {
+const currentList = () => state.liga === 'Todas' ? D.partidas : D.partidas.filter(p => p.liga === state.liga);
+
+function tallyHTML() {
   const sel = state.liga;
-  const list = sel === 'Todas' ? D.partidas : D.partidas.filter(p => p.liga === sel);
+  const list = currentList();
   const filtro = D.filtros_liga.find(f => f.liga === sel) || { jogos: 0 };
   const jogos = D.capa.kpis.find(k => k.rotulo === 'JOGOS').valor;
-  const tally = sel === 'Todas'
+  return sel === 'Todas'
     ? '<b>' + list.length + '</b> fichas deste recorte · <b>' + ligasComFicha.length + '</b> ligas com ficha em ' + jogos + ' jogos na rodada'
     : '<b>' + list.length + '</b> fichas em ' + esc(sel) + ' · a liga teve <b>' + filtro.jogos + '</b> jogos na rodada';
+}
+
+function emptyHTML() {
+  const filtro = D.filtros_liga.find(f => f.liga === state.liga) || { jogos: 0 };
+  return '<div class="empty"><p>Nenhuma ficha deste recorte para <b>' + esc(state.liga) + '</b>.</p>' +
+    '<p class="empty__m">A liga teve ' + filtro.jogos + ' jogos na rodada de ' + D.capa.rodada +
+    '. O recorte com campos completos traz ' + D.partidas.length + ' fichas de ' + ligasComFicha.length + ' ligas.</p></div>';
+}
+const listHTML = (list) => list.length ? list.map(matchHTML).join('') : emptyHTML();
+
+function viewRodada() {
+  const list = currentList();
   return kpiStrip() +
     sec('Última rodada com jogos', D.capa.rodada, D.capa.atualizado.toLowerCase()) +
     '<div class="filters"><p class="filters__l">Filtrar por liga</p><div class="chips">' +
-      D.filtros_liga.map(f => '<button class="chip" type="button" data-liga="' + esc(f.liga) + '" aria-pressed="' + (f.liga === sel) + '">' +
+      D.filtros_liga.map(f => '<button class="chip" type="button" data-liga="' + esc(f.liga) + '" aria-pressed="' + (f.liga === state.liga) + '">' +
         esc(f.liga) + '<span class="chip__n">' + f.jogos + '</span></button>').join('') +
     '</div></div>' +
-    '<div class="tally"><span>' + tally + '</span></div>' +
+    '<div class="tally"><span id="tallyTxt" aria-live="polite">' + tallyHTML() + '</span></div>' +
     '<div class="thead" aria-hidden="true"><span>Liga</span><span>Mandante</span><span>Placar</span><span>Visitante</span><span>Prob. casa · empate · fora</span><span>Posse · chutes · no alvo</span></div>' +
-    '<div id="list">' + (list.length ? list.map(matchHTML).join('') :
-      '<div class="empty"><p>Nenhuma ficha deste recorte para <b>' + esc(sel) + '</b>.</p>' +
-      '<p class="empty__m">A liga teve ' + filtro.jogos + ' jogos na rodada de ' + D.capa.rodada +
-      '. O recorte com campos completos traz ' + D.partidas.length + ' fichas de ' + ligasComFicha.length + ' ligas.</p></div>') +
-    '</div>';
+    '<div id="list">' + listHTML(list) + '</div>';
 }
 
 function viewLiga() {
@@ -540,7 +608,7 @@ function viewRecorde() {
   return sec(r.manchete) +
     '<div class="registro">' + cells.map(c =>
       '<div class="ficha ficha--sm"><div class="ficha__in"><span class="kpi__l">' + esc(c[1]) + '</span>' +
-      '<span class="kpi__v">' + esc(c[0]) + '</span>' +
+      '<span class="kpi__v"' + countAttrs(c[0]) + '>' + esc(numBR(c[0])) + '</span>' +
       '<p class="empty__m">' + esc(c[2]) + '</p></div></div>').join('') + '</div>' +
     sec('Modelo medido', 'números publicados') +
     '<div class="ficha"><div class="ficha__in"><div class="ledger">' +
@@ -605,16 +673,185 @@ const VIEWS = { 'Rodada': viewRodada, 'Liga': viewLiga, 'Recorde': viewRecorde, 
 
 function renderView() {
   $('#view').innerHTML = VIEWS[state.tab]();
+  watchCounters($('#view'));
+  const list = $('#list');
+  if (list) barFirstPaint(list);
 }
 $('#view').addEventListener('click', (e) => {
   const b = e.target.closest('[data-liga]');
   if (!b) return;
+  if (b.dataset.liga === state.liga) return;
   state.liga = b.dataset.liga;
-  renderView();
+  syncChips();
+  syncTally();
+  swapList();
 });
+
+/* ============================================================
+   MOVIMENTO — só estado: dado que chega, troca, seleção, ao vivo.
+   Tokens em :root. Sem loop, sem width/height/top/left/filter.
+   ============================================================ */
+const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const cssv = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const msOf = (n) => parseFloat(cssv(n)) || 0;
+
+function bezierOf(str) {
+  const m = /cubic-bezier\(([^)]+)\)/.exec(str || '');
+  const p = m ? m[1].split(',').map(v => parseFloat(v)) : [0, 0, 1, 1];
+  const cx = t => 3 * (1 - t) * (1 - t) * t * p[0] + 3 * (1 - t) * t * t * p[2] + t * t * t;
+  const cy = t => 3 * (1 - t) * (1 - t) * t * p[1] + 3 * (1 - t) * t * t * p[3] + t * t * t;
+  return (x) => {
+    if (x <= 0) return 0;
+    if (x >= 1) return 1;
+    let lo = 0, hi = 1, t = x;
+    for (let i = 0; i < 24; i++) { const v = cx(t); if (v < x) lo = t; else hi = t; t = (lo + hi) / 2; }
+    return cy(t);
+  };
+}
+
+/* Roda UMA animação de entrada e devolve o elemento ao estado natural quando ela termina
+   (assim nada fica "em efeito" depois: getAnimations() volta a zero). */
+function playOnce(el, cls, delay) {
+  if (REDUCE || !el) return;
+  if (delay) { el.style.setProperty('--d', delay + 'ms'); el.style.setProperty('--sd', delay + 'ms'); }
+  el.classList.add(cls);
+  const done = (e) => {
+    if (e.target !== el) return;
+    el.classList.remove(cls);
+    el.style.removeProperty('--d');
+    el.style.removeProperty('--sd');
+    el.removeEventListener('animationend', done);
+  };
+  el.addEventListener('animationend', done);
+}
+
+let entered = false, barsDone = false;
+function pageEnter() {                       /* A — uma vez, no primeiro paint */
+  if (entered) return;
+  entered = true;
+  [[$('.masthead'), 0], [$('.kpis'), 40], [$('.tabs'), 80], [$('#list'), 120]]
+    .forEach(([el, d]) => playOnce(el, 'm-rise', d));
+}
+function panelEnter() { playOnce($('#view'), 'm-panel', 0); }   /* B — painel novo da aba */
+function barFirstPaint(root) {               /* D — só no primeiro paint da lista */
+  if (REDUCE || barsDone || !root) return;
+  barsDone = true;
+  root.querySelectorAll('.prob__bar').forEach(bar => {
+    [...bar.querySelectorAll('.seg')].forEach((seg, j) => playOnce(seg, 'm-seg', j * 60));
+  });
+}
+
+/* ---------- E — contagem do registro público (uma vez por número) ---------- */
+const counted = new Set();
+const fmtBR = (v, dec) => new Intl.NumberFormat('pt-BR', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(v);
+function numParts(v) {
+  const m = String(v).match(/^([^\d]*)([\d.,]+)(.*)$/);
+  const pre = m ? m[1] : '', raw = m ? m[2] : '0', suf = m ? m[3] : '';
+  let clean;
+  if (raw.indexOf(',') > -1) clean = raw.replace(/\./g, '').replace(',', '.');
+  else if ((raw.match(/\./g) || []).length === 1 && raw.split('.')[1].length <= 2) clean = raw;
+  else clean = raw.replace(/\./g, '');
+  return { pre, suf, num: parseFloat(clean) || 0, dec: (clean.split('.')[1] || '').length };
+}
+const numBR = (v) => { const p = numParts(v); return p.pre + fmtBR(p.num, p.dec) + p.suf; };
+const countAttrs = (v) => {
+  const p = numParts(v);
+  return ' data-count-to="' + p.num + '" data-count-dec="' + p.dec +
+    '" data-count-pre="' + esc(p.pre) + '" data-count-suf="' + esc(p.suf) + '"';
+};
+function runCount(el) {
+  const to = parseFloat(el.dataset.countTo);
+  const dec = parseInt(el.dataset.countDec || '0', 10);
+  const pre = el.dataset.countPre || '', suf = el.dataset.countSuf || '';
+  const key = pre + to + suf;
+  const final = pre + fmtBR(to, dec) + suf;
+  if (REDUCE || counted.has(key)) { el.textContent = final; return; }  /* reduced-motion: valor direto */
+  counted.add(key);
+  const dur = msOf('--m-count') || 700;
+  const ease = bezierOf(cssv('--m-out'));
+  const t0 = performance.now();
+  const step = (now) => {
+    const p = Math.min(1, (now - t0) / dur);
+    if (p < 1) { el.textContent = pre + fmtBR(to * ease(p), dec) + suf; requestAnimationFrame(step); }
+    else el.textContent = final;
+  };
+  requestAnimationFrame(step);
+}
+let counterIO = null;
+function watchCounters(root) {
+  const els = root.querySelectorAll('[data-count-to]');
+  if (!els.length) return;
+  if (!('IntersectionObserver' in window)) { els.forEach(runCount); return; }
+  if (!counterIO) counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) { counterIO.unobserve(en.target); runCount(en.target); } });
+  }, { threshold: .4 });
+  els.forEach(el => counterIO.observe(el));
+}
+
+/* ---------- C — FLIP de verdade no filtro de liga ---------- */
+window.__flip = { log: [], done: true };
+function syncChips() {
+  $('#view').querySelectorAll('[data-liga]').forEach(c =>
+    c.setAttribute('aria-pressed', String(c.dataset.liga === state.liga)));
+}
+function syncTally() { const t = $('#tallyTxt'); if (t) t.innerHTML = tallyHTML(); }
+
+function swapList() {
+  const list = $('#list');
+  if (!list) return;
+  const next = currentList();
+  const keep = new Set(next.map(pk));
+  const rows = [...list.children].filter(el => el.classList.contains('match'));
+  const before = new Map();
+  rows.forEach(el => before.set(el.dataset.key, el.getBoundingClientRect()));
+  const leaving = rows.filter(el => !keep.has(el.dataset.key));
+  window.__flip.done = false;
+
+  const commit = () => {
+    list.innerHTML = listHTML(next);
+    if (REDUCE) { window.__flip.done = true; return; }
+    const moved = [];
+    [...list.children].forEach(el => {
+      const b = before.get(el.dataset.key);
+      if (!b) return;
+      const a = el.getBoundingClientRect();
+      const dx = b.left - a.left, dy = b.top - a.top;
+      if (Math.abs(dx) < .5 && Math.abs(dy) < .5) return;
+      el.getAnimations().forEach(x => x.cancel());
+      const anim = el.animate(
+        [{ transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'none' }],
+        { duration: msOf('--m-base'), easing: cssv('--m-inout'), fill: 'none' });
+      anim.onfinish = () => anim.cancel();
+      moved.push(anim);
+      window.__flip.log.push({ key: el.dataset.key, dx: +dx.toFixed(2), dy: +dy.toFixed(2),
+        to: [+a.left.toFixed(2), +a.top.toFixed(2)] });
+    });
+    if (!moved.length) { window.__flip.done = true; return; }
+    Promise.all(moved.map(a => a.finished.catch(() => {}))).then(() => { window.__flip.done = true; });
+  };
+
+  if (REDUCE || !leaving.length) { commit(); return; }
+  leaving.forEach(el => el.classList.add('m-leave'));   /* linha que sai: opacity -> 0 em --m-fast */
+  setTimeout(commit, msOf('--m-fast'));
+}
+window.__mov = { reduce: REDUCE, fast: msOf('--m-fast'), base: msOf('--m-base'), count: msOf('--m-count') };
+
+/* item 3 — pulso limitado do indicador "atualizado às HH:MM" (3 ciclos de 2s) */
+(function livePulse() {
+  const el = $('#live');
+  if (!el || REDUCE) return;
+  el.classList.add('is-live');
+  const fim = (e) => {
+    if (e.target !== el.querySelector('.live__dot')) return;
+    el.classList.remove('is-live');
+    el.removeEventListener('animationend', fim);
+  };
+  el.addEventListener('animationend', fim);
+})();
 
 renderTabs();
 renderView();
+pageEnter();
 </script>
 </body>
 </html>

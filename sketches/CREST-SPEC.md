@@ -36,10 +36,10 @@ colorida de terceiro, e ela briga com uma paleta de acento único se não for tr
 
 ## Tratamento por direção (o que cada uma faz com a cor)
 
-**001 Almanaque (papel `#F6F3EC`)**
+**001 Almanaque (papel `#F4F0E6`)**
 - Escudo é a única cor da tela. Nada de aumentar o escudo para ele virar protagonista: ele
   identifica, quem informa é o número.
-- Prato branco com régua `#D9D3C7` de 1px, alinhado à linha de base do nome do time.
+- Prato branco `#FFFFFF` com régua `#D9D3C7` de 1px, alinhado à linha de base do nome do time.
 - Na tabela-razão o escudo entra na primeira coluna, alinhado à esquerda, e o nome do time fica
   em versalete pequeno ao lado — sem negrito concorrente.
 
