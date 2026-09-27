@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Loader2 } from 'lucide-react'
 
-import { criarContaEmail, entrarEmail, reenviarConfirmacao } from '@/lib/auth'
+import { criarContaEmail, entrarEmail, pedirNovaSenha, reenviarConfirmacao } from '@/lib/auth'
 import { clienteConta, entrarComGoogle } from '@/lib/conta'
 
 import { BOTAO_PRIMARIO, BOTAO_SECUNDARIO, CAMPO, LINK, ROTULO } from './estilos'
@@ -42,7 +42,7 @@ export function FormularioConta({ modo }: { modo: Modo }) {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
-  const [ocupado, setOcupado] = useState<'google' | 'form' | 'reenviar' | null>(null)
+  const [ocupado, setOcupado] = useState<'google' | 'form' | 'reenviar' | 'reset' | null>(null)
   const [recado, setRecado] = useState<{ tom: 'ok' | 'erro' | 'info'; texto: string } | null>(null)
   const [esperandoEmail, setEsperandoEmail] = useState(false)
   const [resetAberto, setResetAberto] = useState(false)
@@ -103,6 +103,27 @@ export function FormularioConta({ modo }: { modo: Modo }) {
         ? { tom: 'ok', texto: 'Se esse e-mail tiver cadastro pendente, o link de confirmação chega em instantes.' }
         : { tom: 'erro', texto: r.erro ?? 'Não deu para reenviar agora.' }
     )
+  }
+
+  /**
+   * Pede o link de nova senha. A resposta e sempre a mesma, exista ou nao conta
+   * com aquele e-mail: dizer "esse e-mail nao tem conta" entregaria quem tem
+   * cadastro para quem so esta chutando endereco.
+   */
+  async function pedirLink() {
+    setOcupado('reset')
+    setRecado(null)
+    const r = await pedirNovaSenha(email)
+    setOcupado(null)
+    if (!r.ok) {
+      setRecado({ tom: 'erro', texto: r.erro ?? 'Não deu para pedir o link agora.' })
+      return
+    }
+    setResetAberto(false)
+    setRecado({
+      tom: 'ok',
+      texto: 'Se existir conta com esse e-mail, o link de nova senha chega em instantes. Confira também a caixa de spam.',
+    })
   }
 
   if (jaConectado) {
@@ -225,13 +246,37 @@ export function FormularioConta({ modo }: { modo: Modo }) {
             Esqueci a senha
           </button>
           {resetAberto ? (
-            <p className="mt-2 text-[12px] leading-snug text-ink-2">
-              Sem senha, o caminho mais rápido é entrar com o Google ou pedir o link de acesso pelo e-mail{' '}
-              <a className={LINK} href="mailto:jean@je4ndev.com">
-                jean@je4ndev.com
-              </a>
-              .
-            </p>
+            <form
+              onSubmit={(event) => {
+                event.preventDefault()
+                void pedirLink()
+              }}
+              noValidate
+              className="mt-3"
+            >
+              <label htmlFor="conta-email-reset" className="text-[12px] text-ink-3">
+                E-mail da conta
+              </label>
+              <input
+                id="conta-email-reset"
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                required
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="voce@email.com"
+                className={CAMPO}
+              />
+              <button type="submit" disabled={ocupado !== null} className={`${BOTAO_SECUNDARIO} mt-3 w-full`}>
+                {ocupado === 'reset' ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
+                Enviar link de nova senha
+              </button>
+              <p className="mt-2 text-[12px] leading-snug text-ink-3">
+                O link chega por e-mail e vale por 1 hora. Se a conta entrou pelo Google, use o botão de cima: ali não
+                existe senha para recuperar.
+              </p>
+            </form>
           ) : null}
         </div>
       ) : null}

@@ -1,13 +1,13 @@
-import type { Metadata } from 'next'
-
 import { FormularioConta } from '@/components/site/FormularioConta'
 import { PublicShell } from '@/components/site/PublicShell'
 import { CAIXA, ROTULO } from '@/components/site/estilos'
+import { metaDaRota } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Entrar · HypeFC',
-  description: 'Entre com Google ou e-mail para abrir a sua conta do HypeFC.',
-}
+export const metadata = metaDaRota({
+  titulo: 'Entrar · HypeFC',
+  descricao: 'Entre com Google ou e-mail para abrir a sua conta do HypeFC.',
+  caminho: '/entrar',
+})
 
 export default function Entrar() {
   return (

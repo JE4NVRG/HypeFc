@@ -1,14 +1,15 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { PublicShell } from '@/components/site/PublicShell'
 import { BOTAO_PRIMARIO, BOTAO_SECUNDARIO, CAIXA, LINK, ROTULO } from '@/components/site/estilos'
+import { metaDaRota } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'HypeFC Pro · alerta antes da rodada e registro do que foi previsto',
-  description:
+export const metadata = metaDaRota({
+  titulo: 'HypeFC Pro · alerta antes da rodada e registro do que foi previsto',
+  descricao:
     'Alerta quando o time que você segue joga, com a probabilidade que o modelo publicou antes do apito, e o registro do que acertou e errou. R$ 9,90/mês ou R$ 79/ano.',
-}
+  caminho: '/pro',
+})
 
 /** Mesmo link de checkout do painel (constante do build). */
 const CHECKOUT_URL = (process.env.NEXT_PUBLIC_CHECKOUT_URL ?? '').trim()

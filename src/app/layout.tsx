@@ -29,6 +29,8 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://hypefc.je4ndev.com'),
   title: 'HypeFC · Dashboard de Futebol em Tempo Real',
   description: 'Dashboard inteligente que identifica times em alta, acompanha classificações e jogos do dia das principais ligas do mundo.',
+  // Canonical da home. Cada rota filha declara o proprio em src/lib/seo.ts.
+  alternates: { canonical: '/' },
   keywords: ['futebol', 'dashboard', 'premier league', 'brasileirão', 'la liga', 'champions league'],
   authors: [{ name: 'Jean Carlos', url: 'https://github.com/JE4NVRG' }],
   // Relativo de proposito: o site tambem roda servido de subpasta no GitHub
@@ -43,6 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'HypeFC - Dashboard de Futebol',
     description: 'Times em alta, jogos de hoje e classificacoes das maiores ligas do mundo.',
+    url: '/',
     type: 'website',
     locale: 'pt_BR',
     siteName: 'HypeFC',

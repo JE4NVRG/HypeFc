@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
-
 import { DocsShell } from '@/components/site/DocsShell'
+import { metaDaRota } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Termos de uso · HypeFC',
-  description: 'O que o HypeFC é, o que a assinatura Pro inclui, cancelamento e reembolso.',
-}
+export const metadata = metaDaRota({
+  titulo: 'Termos de uso · HypeFC',
+  descricao: 'O que o HypeFC é, o que a assinatura Pro inclui, cancelamento e reembolso.',
+  caminho: '/termos',
+})
 
 const S = {
   h1: 'text-xl font-semibold tracking-tight text-ink',

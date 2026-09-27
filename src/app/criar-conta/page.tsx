@@ -1,13 +1,13 @@
-import type { Metadata } from 'next'
-
 import { FormularioConta } from '@/components/site/FormularioConta'
 import { PublicShell } from '@/components/site/PublicShell'
 import { CAIXA, ROTULO } from '@/components/site/estilos'
+import { metaDaRota } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Criar conta · HypeFC',
-  description: 'Crie a conta gratuita do HypeFC: painel completo e até 3 times seguidos, sem cartão.',
-}
+export const metadata = metaDaRota({
+  titulo: 'Criar conta · HypeFC',
+  descricao: 'Crie a conta gratuita do HypeFC: painel completo e até 3 times seguidos, sem cartão.',
+  caminho: '/criar-conta',
+})
 
 const INCLUIDO = [
   'Painel completo: rodada, ligas, esportes e o recorde público.',

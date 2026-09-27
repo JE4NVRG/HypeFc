@@ -1,8 +1,8 @@
 # Como o HypeFC cobra (runbook)
 
-Estado: **tudo pronto menos a sua conta de pagamento.** O funil inteiro existe e
-foi exercitado; o único passo que ninguém faz por você é escolher o provedor e
-colar o link. Este documento é a ordem exata dos passos.
+Estado: **cobrança ligada e no ar (Stripe live, conta Vrg Soluções).** O funil
+inteiro existe e foi exercitado ponta a ponta, do link de compra ao resgate no
+navegador do comprador. O que falta não é fiação: é a primeira venda.
 
 ## O que já está construído
 
@@ -166,6 +166,26 @@ Pontos de atencao que ja morderam:
   Stripe; o `venda:sync` tambem varre `subscriptions list` e grava o `current_period_end` em
   `paid_until` (RPC `pro_assinatura_stripe`, service_role). Sem isso o assinante perderia o Pro no
   segundo mes. Cancelou? O status vira `canceled` mas o acesso continua ate vencer (nunca encurta).
+
+## ESTADO DA VENDA (27/09/2026)
+
+Conferido na Stripe (chave restrita) e no banco:
+
+- **vendas reais: 0.** Nenhuma sessão de checkout do HypeFC paga. As sessões antigas
+  da conta são de outros produtos ou ficaram `expired`/`unpaid`.
+- Assinantes no banco: 3. `je4ndev@gmail.com` é Pro de **cortesia** até 24/10/2026;
+  as outras duas são contas de QA `free`, criadas para provar cadastro e recuperação
+  de senha. `push_subs`: 0 (as inscrições de teste foram removidas de propósito).
+- Pedidos: 0. A tabela `orders` só ganha linha quando o ciclo grava uma venda.
+- 1 assinatura ativa na Stripe live, de **outro preço** (não o do HypeFC): é
+  exatamente o caso que o filtro por `HYPEFC_STRIPE_PRICE_LIVE` tem de continuar
+  barrando.
+- Link live conferido no ar: o botão de `/pro/` aponta para o link de pagamento e a
+  página abre; a volta `?pro=ok&session_id=...` com sessão inexistente mostra
+  "Confirmando o pagamento…" e **não** libera acesso.
+
+O que falta não é fiação: é a primeira venda. Quando entrar, o ciclo de 10 min na VPS
+grava o pedido e o comprador resgata sozinho em `/?pro=ok&session_id=...`.
 
 ## IDENTIDADE NO CHECKOUT / FATURA (achado do descriptor)
 

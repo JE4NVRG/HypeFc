@@ -33,6 +33,27 @@ journalctl --user -u hypefc-venda-sync.service -n 30 --no-pager
 systemctl --user show hypefc-venda-sync.service -p ExecMainStatus
 ```
 
+## Provar que o alerta entrega (sem esperar jogo do dia)
+
+O `npm run alertas` só manda se um time seguido joga **naquele dia** e o jogo ainda
+não acabou: certo em produção, inútil para conferir o canal depois de mexer em chave
+VAPID, service worker ou inscrição. Para isso existe:
+
+```bash
+npm run alerta:teste            # envia para as inscrições de assinante Pro ativo
+npm run alerta:teste -- --seco  # mostra o texto e os alvos, sem enviar
+```
+
+O texto sai marcado como teste e o registro vai para `alert_log` com `event_key`
+terminando em `:teste-entrega`, que não colide com o alerta do jogo (`<eventId>:rodada`).
+Mesma biblioteca, mesmo par VAPID, mesmo `push_subs` do cron; o mesmo comando atualiza
+`last_ok_at`/`fails` da inscrição.
+
+Atenção (já mordeu): permissão de notificação concedida por automação (CDP) morre junto
+com a sessão, e aí o Chrome invalida a inscrição e o FCM passa a responder `410`. A
+inscrição que vale para o cron tem de nascer de um clique humano em **Ativar alertas
+neste navegador** na `/conta`.
+
 Instalar/atualizar as units (depois de `git pull` no clone da VPS):
 
 ```bash

@@ -1,0 +1,49 @@
+<!-- Confirmacao de cadastro · HypeFC (identidade 002 "Mesa": regua de 1px, sem raio, sem sombra) -->
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Confirme seu e-mail no HypeFC</title></head>
+<body style="margin:0;padding:0;background:#0B0E11;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#0B0E11;">
+    <tr>
+      <td align="center" style="padding:32px 16px;">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;max-width:100%;background:#12161B;border:1px solid #1F262E;">
+          <tr>
+            <td style="padding:18px 24px;border-bottom:1px solid #1F262E;">
+              <span style="font-family:'Inter Tight',Helvetica,Arial,sans-serif;font-size:15px;font-weight:700;color:#E6EAF0;letter-spacing:.02em;">HypeFC</span>
+              <span style="font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:11px;color:#8C96A2;">&nbsp;registro de futebol</span>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:24px;">
+              <h1 style="margin:0 0 14px;font-family:'Inter Tight',Helvetica,Arial,sans-serif;font-size:20px;line-height:1.3;font-weight:700;color:#E6EAF0;">Confirme seu e-mail</h1>
+              <p style="margin:0 0 20px;font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;line-height:1.7;color:#A7B2C0;">
+                Falta um clique para a sua conta valer. Enquanto o e-mail nao estiver confirmado, o login por e-mail nao abre o painel.
+              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="background:#E8FF59;">
+                    <a href="{{ .SiteURL }}/conta/confirmar/?token_hash={{ .TokenHash }}&type=signup" style="display:inline-block;padding:13px 22px;font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:13px;font-weight:700;color:#0B0E11;text-decoration:none;letter-spacing:.04em;">CONFIRMAR E-MAIL</a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:20px 0 0;font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:12px;line-height:1.7;color:#8C96A2;">
+                O link vale por 1 hora. Se o botao nao abrir, copie e cole no navegador:<br>
+                <span style="color:#A7B2C0;word-break:break-all;">{{ .SiteURL }}/conta/confirmar/?token_hash={{ .TokenHash }}&type=signup</span>
+              </p>
+              <p style="margin:16px 0 0;font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:12px;line-height:1.7;color:#8C96A2;">
+                Voce nao criou essa conta? Ignore este e-mail: sem o clique, nada acontece.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:16px 24px;border-top:1px solid #1F262E;font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:11px;line-height:1.7;color:#8C96A2;">
+              HypeFC &middot; hypefc.je4ndev.com<br>
+              E-mail automatico, nao responda.
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

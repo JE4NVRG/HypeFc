@@ -25,6 +25,8 @@ const MENSAGENS: { teste: RegExp; texto: string }[] = [
   { teste: /email not confirmed/i, texto: 'Confirme o e-mail antes de entrar: o link foi enviado na inscrição.' },
   { teste: /user already registered|already been registered/i, texto: 'Esse e-mail já tem conta. Entre por aqui.' },
   { teste: /password should be at least/i, texto: 'A senha precisa de pelo menos 8 caracteres.' },
+  { teste: /token has expired|expired|invalid token|otp_expired|invalid or has expired/i, texto: 'Esse link já venceu ou foi usado.' },
+  { teste: /email link is invalid|invalid.*token_hash/i, texto: 'Esse link não confere. Peça outro e-mail.' },
   { teste: /unable to validate email|invalid format/i, texto: 'Esse e-mail não parece válido.' },
   { teste: /over_email_send_rate_limit|rate limit|too many requests/i, texto: 'Muitas tentativas em pouco tempo. Espere um minuto e tente de novo.' },
   { teste: /signups not allowed|signup is disabled/i, texto: 'Cadastro por e-mail está desligado neste momento. Use o Google.' },
@@ -82,6 +84,62 @@ export async function reenviarConfirmacao(email: string): Promise<ResultadoAuth>
   const c = clienteConta()
   if (!c) return { ok: false, erro: 'Registro online ainda não ligado neste site.' }
   const { error } = await c.auth.resend({ type: 'signup', email: email.trim().toLowerCase() })
+  if (error) return { ok: false, erro: textoDoErro(error.message) }
+  return { ok: true }
+}
+
+/**
+ * Pede o link de nova senha. Antes disto, "esqueci a senha" terminava pedindo para
+ * a pessoa escrever para o suporte: o projeto nao tinha SMTP proprio. Agora tem
+ * (MepMail, em `nao-responda@je4ndev.com`), entao o pedido vira e-mail de verdade.
+ *
+ * O `redirectTo` aponta para `/conta/redefinir/`, que e a unica tela que sabe
+ * trocar a senha de quem chegou pelo link. Sem isso a pessoa cai na home com uma
+ * sessao de recuperacao e nenhum lugar para digitar a senha nova.
+ */
+export async function pedirNovaSenha(email: string): Promise<ResultadoAuth> {
+  const c = clienteConta()
+  if (!c) return { ok: false, erro: 'Registro online ainda não ligado neste site.' }
+  const limpo = email.trim().toLowerCase()
+  if (!emailValido(limpo)) return { ok: false, erro: 'Digite o e-mail da conta.' }
+  const { error } = await c.auth.resetPasswordForEmail(limpo, {
+    redirectTo: `${window.location.origin}/conta/redefinir/`,
+  })
+  if (error) return { ok: false, erro: textoDoErro(error.message) }
+  return { ok: true }
+}
+
+/**
+ * Troca a senha de quem chegou pelo link (a sessao de recuperacao vem na propria
+ * URL do e-mail). Vale igual para quem so quer trocar a senha estando conectado.
+ */
+export async function definirNovaSenha(senha: string): Promise<ResultadoAuth> {
+  const c = clienteConta()
+  if (!c) return { ok: false, erro: 'Registro online ainda não ligado neste site.' }
+  if (senha.length < 8) return { ok: false, erro: 'A senha precisa de pelo menos 8 caracteres.' }
+  const { error } = await c.auth.updateUser({ password: senha })
+  if (error) return { ok: false, erro: textoDoErro(error.message) }
+  return { ok: true }
+}
+
+/** Tipos de link que o Supabase manda por e-mail e o `verifyOtp` entende. */
+export type TipoDeLink = 'signup' | 'recovery' | 'email_change' | 'invite' | 'magiclink'
+
+/**
+ * Confirma o link do e-mail na propria pagina do site (`token_hash` + `type` na
+ * URL), em vez de deixar o Supabase devolver a sessao no endereco.
+ *
+ * Por que assim: o cliente da conta usa `flowType: 'pkce'` e a biblioteca recusa
+ * de proposito a sessao que vem no fragmento da URL ("Not a valid PKCE flow url").
+ * Com o link padrao, quem clicava no e-mail caia no site SEM sessao — o cadastro
+ * confirmado e a senha nova simplesmente nao aconteciam. Aqui a sessao nasce de um
+ * POST (`verifyOtp`), o que tambem faz o link valer em qualquer aparelho: nao
+ * depende do que ficou guardado no navegador que pediu o e-mail.
+ */
+export async function confirmarLinkDoEmail(tokenHash: string, tipo: TipoDeLink): Promise<ResultadoAuth> {
+  const c = clienteConta()
+  if (!c) return { ok: false, erro: 'Registro online ainda não ligado neste site.' }
+  const { error } = await c.auth.verifyOtp({ token_hash: tokenHash, type: tipo })
   if (error) return { ok: false, erro: textoDoErro(error.message) }
   return { ok: true }
 }

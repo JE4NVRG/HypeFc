@@ -87,6 +87,25 @@ try {
     console.log(`[pages] service worker versionado: hypefc-${stamp}`)
   }
 
+  // Sitemap: sai do proprio build para o `lastmod` ser a data do deploy, e nao
+  // uma data escrita a mao que envelhece. Entram so as rotas publicas: `/conta`
+  // fica de fora porque responde `noindex` (layout proprio) e nao tem conteudo
+  // publico para indexar.
+  const rotasPublicas = ['', 'pro', 'entrar', 'criar-conta', 'termos', 'privacidade']
+  const dominioSitemap = customDomain || 'hypefc.je4ndev.com'
+  const hoje = new Date().toISOString().slice(0, 10)
+  const urls = rotasPublicas
+    .map(
+      (rota) =>
+        `  <url>\n    <loc>https://${dominioSitemap}/${rota ? `${rota}/` : ''}</loc>\n    <lastmod>${hoje}</lastmod>\n  </url>`
+    )
+    .join('\n')
+  writeFileSync(
+    resolve(root, 'out/sitemap.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
+  )
+  console.log(`[pages] sitemap.xml: ${rotasPublicas.length} rotas publicas em ${dominioSitemap}`)
+
   if (customDomain) {
     writeFileSync(resolve(root, 'out/CNAME'), `${customDomain}\n`)
     console.log(`[pages] CNAME gravado: ${customDomain}`)
