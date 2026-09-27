@@ -1,8 +1,10 @@
 "use client"
 
-import { RefreshCw, Wifi, WifiOff } from 'lucide-react'
+import Link from 'next/link'
+import { RefreshCw, User, Wifi, WifiOff } from 'lucide-react'
 
 import { SiteMarca } from '@/components/site/SiteMarca'
+import { useContaResumo } from './contaResumo'
 
 interface DashboardHeaderProps {
   isLoading: boolean
@@ -35,6 +37,7 @@ function horaCurta(lastUpdated: string): string {
  */
 export function DashboardHeader({ isLoading, lastUpdated, hasLiveMatches, onRefresh }: DashboardHeaderProps) {
   const hora = horaCurta(lastUpdated)
+  const { conta } = useContaResumo()
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink/[0.06] bg-paper/85 backdrop-blur-xl">
@@ -63,6 +66,31 @@ export function DashboardHeader({ isLoading, lastUpdated, hasLiveMatches, onRefr
               </>
             )}
           </div>
+          {/* No mobile a coluna lateral nao existe: a conta entra aqui. */}
+          <Link
+            href="/conta"
+            onClick={(evento) => {
+              if (conta?.logado) return
+              evento.preventDefault()
+              window.location.href = '/entrar'
+            }}
+            className="flex min-h-[36px] items-center gap-2 rounded-lg px-2 text-[13px] font-medium text-ink-2 transition-colors hover:bg-ink/[0.05] hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 lg:hidden"
+          >
+            {conta?.foto ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={conta.foto}
+                alt=""
+                width={24}
+                height={24}
+                className="h-6 w-6 rounded-full border border-ink/10"
+              />
+            ) : (
+              <User aria-hidden="true" className="h-4 w-4" />
+            )}
+            <span>{conta?.logado ? 'Conta' : 'Entrar'}</span>
+            {conta?.pro && <span className="rounded bg-verde/15 px-1 text-[10px] font-semibold uppercase text-verde-2">pro</span>}
+          </Link>
           <button
             type="button"
             onClick={onRefresh}

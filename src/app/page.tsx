@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useDashboardData } from '@/hooks/useDashboardData'
 import type { Match } from '@/hooks/useDashboardData'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
+import { DashboardSidebar } from '@/components/dashboard/DashboardSidebar'
 import ResgatePro from '@/components/dashboard/ResgatePro'
 import { StatsBar } from '@/components/dashboard/StatsBar'
 import { ViewTabs } from '@/components/dashboard/ViewTabs'
@@ -261,7 +262,11 @@ export default function Home() {
         onRefresh={refresh}
       />
 
-      <main className="flex min-h-0 w-full flex-1 flex-col gap-2 px-2 py-2 sm:px-4">
+      {/* Nav lateral no desktop (padrao JE4NDEV), abas horizontais no mobile. */}
+      <div className="flex min-h-0 flex-1">
+        <DashboardSidebar view={view} onChange={setView} counts={{ rodada: totalRodada }} />
+
+        <main className="flex min-h-0 w-full flex-1 flex-col gap-2 px-2 py-2 sm:px-4">
         <ResgatePro />
         {error && (
           <div className="rounded-xl border border-carimbo/20 bg-carimbo/10 px-3 py-2 text-sm text-carimbo">
@@ -282,11 +287,20 @@ export default function Home() {
           </div>
         )}
         {todayData?.is_fallback && (
-          <div className="rounded-xl border border-carimbo/20 bg-carimbo/10 px-3 py-1.5 text-xs text-carimbo">
-            <span className="font-medium">Sem jogos hoje.</span>{" "}
-            <span className="text-ink-2">Mostrando a última rodada com jogos: {formatDay(todayData.date)}.</span>
-            {todayData.requested_date && (
-              <span className="text-ink-3"> Hoje: {formatDay(todayData.requested_date)}.</span>
+          <div className="flex flex-wrap items-baseline gap-x-1.5 rounded-xl border border-carimbo/20 bg-carimbo/10 px-3 py-1.5 text-xs text-carimbo">
+            <span className="font-medium">
+              Sem jogos hoje
+              {todayData.requested_date ? ` (${formatDay(todayData.requested_date)})` : ''}.
+            </span>
+            {/* "Ultima rodada com jogos" so quando ela existe de verdade: antes o
+                aviso carimbava a data do ultimo dia consultado, mesmo sem jogo. */}
+            {totalRodada > 0 ? (
+              <span className="text-ink-2">Mostrando a última rodada com jogos: {formatDay(todayData.date)}.</span>
+            ) : (
+              <span className="text-ink-2">Nenhuma rodada no calendário dessas ligas.</span>
+            )}
+            {todayData.proxima_rodada && (
+              <span className="text-ink-2">Próxima rodada: {formatDay(todayData.proxima_rodada)}.</span>
             )}
           </div>
         )}
@@ -295,7 +309,7 @@ export default function Home() {
 
         {/* Trocar de view substitui o conteudo. Nada empilha: a pagina nao rola. */}
         <div className="flex items-center gap-2">
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 flex-1 lg:hidden">
             <ViewTabs view={view} onChange={setView} counts={{ rodada: totalRodada }} />
           </div>
           <div className="hidden shrink-0 sm:block">
@@ -376,7 +390,8 @@ export default function Home() {
           probForward={probForward}
           onClose={fecharConfronto}
         />
-      </main>
+        </main>
+      </div>
 
       <SiteFooter source={todayData?.source} />
     </div>

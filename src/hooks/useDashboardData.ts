@@ -94,6 +94,8 @@ export interface TodayData {
   date: string
   requested_date?: string
   is_fallback?: boolean
+  /** Data da proxima rodada no calendario, quando hoje esta vazio. */
+  proxima_rodada?: string | null
   matches: Match[]
   hype: HypeTeam[]
   stats?: DayStats

@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic'
 import { NextResponse } from 'next/server'
 import { createCacheKey, memoryCache, withCache } from '@/lib/cache'
 import { fetchTodayMatches, fetchStandings } from '@/services/footballApi'
-import { fetchEspnDay, fetchEspnStandings, fetchEspnFixtures } from '@/services/espn'
+import { fetchEspnDay, fetchEspnStandings, fetchEspnFixtures, fetchEspnSeason } from '@/services/espn'
 import { attachMatchStats } from '@/lib/matchStats'
 import { composeDay } from '@/lib/composeDay'
 import type { EspnTeamMeta } from '@/lib/espnParse'
@@ -11,17 +11,36 @@ import { LEAGUE_NAMES } from '@/types'
 import type { StandingRow, TodayMatch } from '@/services/footballApi'
 
 const HAS_TOKEN = Boolean(process.env.FOOTBALL_API_TOKEN)
-const MAX_LOOKBACK = 4
 
 interface DayData {
   matches: TodayMatch[]
   metas: EspnTeamMeta[]
 }
 
-function shiftDate(iso: string, days: number): string {
-  const date = new Date(`${iso}T12:00:00Z`)
-  date.setUTCDate(date.getUTCDate() + days)
-  return date.toISOString().slice(0, 10)
+/**
+ * Datas com jogos no calendario da temporada, uma requisicao por liga (cacheada
+ * por 1h). A busca dia a dia nao bastava: em setembro de 2026 a ESPN ficou de
+ * 21/09 a 01/10 sem jogos nessas ligas e olhar 4 dias para tras nao alcancava a
+ * rodada anterior — a home aparecia zerada e o aviso apontava uma data sem jogo.
+ */
+async function calendarioDeDatas(): Promise<string[]> {
+  const listas = await Promise.all(
+    Object.keys(LEAGUE_NAMES).map(async (id) => {
+      try {
+        return await withCache(createCacheKey('espn-calendario', id), () => fetchEspnSeason(id), 60)
+      } catch {
+        return []
+      }
+    })
+  )
+  const datas = new Set<string>()
+  for (const lista of listas) {
+    for (const partida of lista) {
+      const dia = (partida.date || '').slice(0, 10)
+      if (dia) datas.add(dia)
+    }
+  }
+  return Array.from(datas).sort()
 }
 
 async function loadDay(dateIso: string): Promise<DayData> {
@@ -65,27 +84,25 @@ export async function GET(request: Request) {
     const requested = new URL(request.url).searchParams.get('date')
     const requestedDate = requested && /^\d{4}-\d{2}-\d{2}$/.test(requested) ? requested : hoje
 
-    const candidates = [requestedDate]
-    if (!requested) {
-      for (let offset = 1; offset <= MAX_LOOKBACK; offset += 1) {
-        candidates.push(shiftDate(hoje, -offset))
-      }
-    }
-
     let day: DayData = { matches: [], metas: [] }
     let usedDate = requestedDate
+    let proximaRodada: string | null = null
 
-    for (const candidate of candidates) {
-      const loaded = await loadDay(candidate)
-      const isLast = candidate === candidates[candidates.length - 1]
-      if (loaded.matches.length > 0) {
-        day = loaded
-        usedDate = candidate
-        break
-      }
-      if (isLast) {
-        day = loaded
-        usedDate = candidate
+    const doDia = await loadDay(requestedDate)
+    if (doDia.matches.length > 0) {
+      day = doDia
+    } else if (!requested) {
+      // Dia vazio nao quer dizer rodada anterior a 4 dias: o calendario da
+      // temporada diz qual foi a ultima rodada de verdade e qual e a proxima.
+      const datas = await calendarioDeDatas()
+      const anterior = [...datas].reverse().find((dia) => dia < requestedDate)
+      proximaRodada = datas.find((dia) => dia > requestedDate) ?? null
+      if (anterior) {
+        const rodada = await loadDay(anterior)
+        if (rodada.matches.length > 0) {
+          day = rodada
+          usedDate = anterior
+        }
       }
     }
 
@@ -113,6 +130,7 @@ export async function GET(request: Request) {
       date: usedDate,
       requested_date: requestedDate,
       is_fallback: usedDate !== requestedDate,
+      proxima_rodada: proximaRodada,
       source: HAS_TOKEN ? 'football-data' : 'espn',
       matches: composed.matches,
       hype: composed.hype,

@@ -20,7 +20,6 @@ import type { MatchDetail } from '@/lib/matchDetail'
  * chave, sem backend e sem custo.
  */
 
-const MAX_LOOKBACK = 4
 const TTL_MS = 2 * 60 * 1000
 
 interface CacheEntry {
@@ -63,6 +62,8 @@ export interface BrowserToday {
   date: string
   requested_date: string
   is_fallback: boolean
+  /** Data da proxima rodada no calendario, quando hoje esta vazio. */
+  proxima_rodada: string | null
   source: 'espn'
   matches: TodayMatch[]
   hype: HypeBoardItem[]
@@ -96,30 +97,63 @@ async function formsFor(leagueIds: string[], from: string) {
   return lists.flat()
 }
 
+/**
+ * Datas com jogos no calendario da temporada, uma requisicao por liga (cacheada
+ * por 1h). A busca dia a dia nao bastava: em setembro de 2026 a ESPN ficou de
+ * 21/09 a 01/10 sem jogos nessas ligas, e olhar 4 dias para tras nao alcancava a
+ * rodada de 20/09 — a home aparecia zerada e o aviso dizia "ultima rodada com
+ * jogos: 22/09", uma data que nao teve jogo nenhum. Com o calendario em maos o
+ * painel sabe qual foi a ultima rodada de verdade e qual e a proxima.
+ */
+async function calendarioDeDatas(leagueIds: string[]): Promise<string[]> {
+  const listas = await Promise.all(
+    leagueIds.map(async (leagueId) => {
+      try {
+        return await cached(`calendario:${leagueId}`, 60 * TTL_MS, () => fetchEspnSeason(leagueId))
+      } catch {
+        return []
+      }
+    })
+  )
+  const datas = new Set<string>()
+  for (const lista of listas) {
+    for (const partida of lista) {
+      const dia = (partida.date || '').slice(0, 10)
+      if (dia) datas.add(dia)
+    }
+  }
+  return Array.from(datas).sort()
+}
+
 export async function loadBrowserToday(dateIso?: string): Promise<BrowserToday> {
   // Com data explicita (link compartilhado ?dia=) NAO procura para tras: se a
   // pessoa mandou o link daquele dia, mostrar outro dia seria mentir o link.
   const requestedDate = dateIso && /^\d{4}-\d{2}-\d{2}$/.test(dateIso) ? dateIso : saoPauloToday()
-  const candidates = [requestedDate]
-  if (!dateIso) {
-    for (let offset = 1; offset <= MAX_LOOKBACK; offset += 1) {
-      candidates.push(shiftIso(requestedDate, -offset))
-    }
-  }
 
   let matches: TodayMatch[] = []
   let metas: Awaited<ReturnType<typeof fetchEspnLatestForms>> = []
   let usedDate = requestedDate
+  let proximaRodada: string | null = null
 
-  for (const candidate of candidates) {
-    const day = await cached(`day:${candidate}`, 2 * TTL_MS, () =>
-      fetchEspnDay(Object.keys(ESPN_LEAGUE_SLUGS), candidate, LEAGUE_NAMES)
-    )
-    usedDate = candidate
-    if (day.matches.length > 0) {
-      matches = day.matches
-      metas = day.metas
-      break
+  const doDia = await cached(`day:${requestedDate}`, 2 * TTL_MS, () =>
+    fetchEspnDay(Object.keys(ESPN_LEAGUE_SLUGS), requestedDate, LEAGUE_NAMES)
+  )
+  if (doDia.matches.length > 0) {
+    matches = doDia.matches
+    metas = doDia.metas
+  } else if (!dateIso) {
+    const datas = await calendarioDeDatas(Object.keys(ESPN_LEAGUE_SLUGS))
+    const anterior = [...datas].reverse().find((dia) => dia < requestedDate)
+    proximaRodada = datas.find((dia) => dia > requestedDate) ?? null
+    if (anterior) {
+      const rodada = await cached(`day:${anterior}`, 2 * TTL_MS, () =>
+        fetchEspnDay(Object.keys(ESPN_LEAGUE_SLUGS), anterior, LEAGUE_NAMES)
+      )
+      if (rodada.matches.length > 0) {
+        matches = rodada.matches
+        metas = rodada.metas
+        usedDate = anterior
+      }
     }
   }
 
@@ -132,6 +166,7 @@ export async function loadBrowserToday(dateIso?: string): Promise<BrowserToday> 
     date: usedDate,
     requested_date: requestedDate,
     is_fallback: usedDate !== requestedDate,
+    proxima_rodada: proximaRodada,
     source: 'espn',
     matches: composed.matches,
     hype: composed.hype,
