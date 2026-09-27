@@ -17,6 +17,7 @@ para quem mexe no app: se o código divergir daqui, o código está errado.
 | `rule` | `#1F262E` | régua de 1px |
 | `line` | `#2A323C` | régua estrutural |
 | `verde` | `#7BE495` | **só** dado do modelo |
+| `verde-2` | `#A9F0BB` | números do modelo (texto pequeno; barras continuam em `verde`) |
 | `sinal` | `#E8FF59` | **só** registro, número do recorde e CTA primário |
 | `carimbo` | `#FF6B6B` | erro, aviso, atenção |
 
@@ -34,6 +35,8 @@ A direção tem **um** acento e **uma** cor de dado. Trocar isso por "colorir po
 2. **`verde` só onde o número vem do modelo**: maior probabilidade da linha, barra de
    probabilidade e o estado "ao vivo" (que o DESIGN.md já reservava em verde). Verde em
    título, ícone, borda de card ou texto de apoio é ruído: volta para `ink-2`/`ink-3`.
+   Os **números** de probabilidade usam `verde-2` (`#A9F0BB`), variante clara do mesmo
+   papel para texto pequeno; as barras continuam em `verde`.
 3. **`carimbo` só para erro/aviso de verdade** (falha de dado, fonte fora, cobrança).
    Não use para "atenção" genérica nem para destacar seção.
 4. Todo o resto é neutro: hierarquia por **peso, tamanho e régua**, nunca por cor.
@@ -54,8 +57,8 @@ A direção tem **um** acento e **uma** cor de dado. Trocar isso por "colorir po
   sobre `paper-2`. Bloco denso de dado (lista, tabela, ficha) não vira card.
 - Barra de 3px na borda esquerda significa **clicável**. Não use em linha que não clica.
 - Alvo de toque: mínimo 44x44 no celular, inclusive o botão de compartilhar e os CTAs.
-- Escudo: prato com régua de 1px, `<img>` comum, `alt` "Escudo do <time>", fallback pela
-  inicial. O nome do time é sempre texto ao lado.
+- Escudo: prato com régua de 1px, `<img>` comum, `alt=""` porque é **decorativo** — o nome
+  do time é sempre texto ao lado e o leitor de tela não repete o nome. Fallback pela inicial.
 
 ## Movimento
 
@@ -71,4 +74,5 @@ esconder informação. O pulso do "atualizado" pulsa 3 vezes e para (WCAG 2.2.2)
    informação escondida.
 5. `sinal` em no máximo 3 elementos; `verde` só em dado de modelo/live.
 6. Elemento com fundo arredondado: 0. Alvo de toque abaixo de 44px no celular: 0.
-7. Escudo: todos carregados (`naturalWidth > 0`), todos com `alt`.
+7. Escudo: todos carregados (`naturalWidth > 0`), todos com `alt` (hoje `alt=""`,
+   decorativo — decisão de 27/09, o nome do time fica ao lado no texto).

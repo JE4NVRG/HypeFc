@@ -35,6 +35,9 @@ yarn-error.log*
 .trae/
 .playwright-mcp/
 
+# Supabase CLI (estado local do link, nao versionar)
+supabase/.temp/
+
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts

@@ -77,10 +77,13 @@ function HypeCard({ team, rank }: { team: HypeTeam; rank: number }) {
       </div>
       <div className="flex-shrink-0">
         {team.crest && isAllowedCrest(team.crest) ? (
+          /* Escudo decorativo (alt=""): o nome do time aparece sempre ao lado,
+             entao repetir o nome no leitor de tela e ruido. Contrato em
+             docs/identidade-002.md. */
           // eslint-disable-next-line @next/next/no-img-element -- lazy do next/image nao carrega no cockpit
           <img
             src={team.crest}
-            alt={team.team}
+            alt=""
             width={32}
             height={32}
             loading="eager"

@@ -81,13 +81,16 @@ export function SiteFooter({
           <p className="min-w-0">
             <span className="font-medium text-ink-2">HypeFC</span>
             {/* A fonte so entra quando o dado chegou: antes disso a barra nao
-                afirma ESPN nem Football-Data. */}
+                afirma ESPN nem Football-Data. No celular ela sai junto com os
+                links de fora (JE4NVRG, Produtos): a barra tem de caber em duas
+                linhas curtas no painel, e a atribuicao continua na pagina
+                publica e no rodape completo. */}
             {source ? (
               <>
-                <span className="px-1" aria-hidden="true">
+                <span className="hidden px-1 sm:inline" aria-hidden="true">
                   ·
                 </span>
-                Dados: {label}
+                <span className="hidden sm:inline">Dados: {label}</span>
               </>
             ) : null}
             <span className="px-1" aria-hidden="true">
@@ -101,7 +104,7 @@ export function SiteFooter({
               target="_blank"
               rel="noopener noreferrer"
               title="Projeto no GitHub"
-              className="inline-flex min-h-[24px] items-center text-ink-2 underline decoration-ink/20 underline-offset-2 transition-colors hover:text-ink hover:decoration-ink/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60"
+              className="hidden min-h-[24px] items-center text-ink-2 underline decoration-ink/20 underline-offset-2 transition-colors hover:text-ink hover:decoration-ink/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 sm:inline-flex"
             >
               JE4NVRG
             </a>
@@ -118,11 +121,14 @@ export function SiteFooter({
               href="https://je4ndev.com"
               target="_blank"
               rel="noopener"
-              className="inline-flex min-h-[24px] items-center text-ink-2 transition-colors hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60"
+              className="hidden min-h-[24px] items-center text-ink-2 transition-colors hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60 sm:inline-flex"
             >
               Produtos JE4NDEV
             </a>
-            <span className="text-ink-3">Painel informativo, não é casa de aposta.</span>
+            <span className="text-ink-3">
+              <span className="sm:hidden">Não é casa de aposta.</span>
+              <span className="hidden sm:inline">Painel informativo, não é casa de aposta.</span>
+            </span>
           </nav>
         </div>
       </footer>

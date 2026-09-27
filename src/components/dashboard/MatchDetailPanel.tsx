@@ -180,11 +180,12 @@ function Crest({ src, name, size = 40 }: { src: string | null; name: string; siz
     return (
       /* <img> comum, e NAO next/image: com loading="lazy" dentro do cockpit o
          next/image nao dispara a requisicao e o escudo nunca aparece (medido:
-         0 de 72 carregados). Tamanho explicito evita layout shift. */
+         0 de 72 carregados). Tamanho explicito evita layout shift.
+         alt="" decorativo: o nome do time esta sempre ao lado no cabecalho. */
       // eslint-disable-next-line @next/next/no-img-element -- next/image nao carrega no cockpit
       <img
         src={src}
-        alt={name}
+        alt=""
         width={size}
         height={size}
         loading="eager"

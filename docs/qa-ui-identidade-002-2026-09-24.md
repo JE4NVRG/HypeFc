@@ -62,6 +62,10 @@ Complementos medidos na mesma passada, para o critério de shell do cockpit:
 
 ## 3. Itens abertos (não bloqueiam o gate, exigem decisão)
 
+> **Resolvidos em 27/09** (ver `docs/cta-mobile-e-push-pro-2026-09-27.md`):
+> `alt` do escudo virou decorativo (`alt=""`), `verde-2` entrou na tabela do
+> `identidade-002`, e o `push_save` passou a exigir Pro no servidor.
+
 1. **`alt` do escudo diverge do contrato.** `docs/identidade-002.md` §Estrutura pede
    `alt` "Escudo do <time>"; o código usa o nome do time (`alt={team.team}` em
    `HypeFlags.tsx:83` e `LeagueStandings.tsx:217`). Como o nome do time é sempre texto ao lado,

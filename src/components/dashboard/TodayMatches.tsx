@@ -49,6 +49,9 @@ const STATUS_TAG: Record<string, { label: string; className: string }> = {
  * 500px fora dele. Aqui o carregamento e eager, com largura/altura declaradas para
  * o layout nao pular quando a imagem chega. O guard de host e a queda para a inicial
  * continuam iguais.
+ *
+ * `alt=""` de proposito: o escudo e decorativo, o nome do time aparece sempre
+ * ao lado; repetir o nome no leitor de tela e ruido (contrato do identidade-002).
  */
 function Crest({ src, name }: { src?: string | null; name: string }) {
   if (src && isAllowedCrest(src)) {
@@ -56,7 +59,7 @@ function Crest({ src, name }: { src?: string | null; name: string }) {
       // eslint-disable-next-line @next/next/no-img-element -- lazy do next/image nao carrega no cockpit
       <img
         src={src}
-        alt={name}
+        alt=""
         width={24}
         height={24}
         loading="eager"

@@ -71,6 +71,7 @@ const TEXTO_ERRO: Record<string, string> = {
   'loja-offline': 'Registro online ainda não ligado neste site: nada foi gravado aqui.',
   rede: 'Não deu para falar com o servidor agora. Tente de novo em instantes.',
   'sem-acesso': 'Este navegador não tem acesso ativo. Ative o código acima.',
+  'sem-pro': 'O alerta é do plano Pro: assine na aba acima para receber o aviso antes da rodada.',
   'email-invalido': 'Confira o e-mail: precisa ser um endereço válido.',
   limite: 'Limite do plano atingido.',
   'codigo-invalido': 'Código não confere com esse e-mail.',
@@ -224,6 +225,8 @@ export function ProView() {
 
   const limite = limiteDe(perfil)
   const seguindo = lista.length
+  /** Ja paga o Pro neste navegador? O CTA fixo do celular nao insiste com quem ja tem. */
+  const temPro = perfil !== null && limite > LIMITE_PLANO.free
 
   const situacao = !loja
     ? 'Modo lista de espera'
@@ -702,6 +705,21 @@ export function ProView() {
           </div>
         </div>
       </section>
+
+      {/* CTA fixo no celular. Medido em 27/09 na producao (390x844): o botao de
+          assinatura vivia a y=1378 num painel de 705px — cerca de duas telas de
+          rolagem interna — numa aba que existe para assinar: defeito de
+          conversao, nao de estetica. No desktop o CTA ja aparece na primeira
+          tela (y=793 de 814), entao a barra e so do celular (`sm:hidden`) e so
+          de quem ainda nao tem Pro. Fica colada no pe do painel de rolagem
+          (sticky), acima da barra de status do cockpit. */}
+      {CHECKOUT_URL && !carregando && !temPro ? (
+        <div className="sticky bottom-0 z-10 mt-3 bg-paper/95 pb-1 pt-1.5 backdrop-blur sm:hidden">
+          <a href={CHECKOUT_URL} target="_blank" rel="noopener noreferrer" className={CTA}>
+            Assinar Pro · R$ 9,90/mês
+          </a>
+        </div>
+      ) : null}
     </div>
   )
 }

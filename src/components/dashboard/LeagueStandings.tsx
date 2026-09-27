@@ -210,11 +210,12 @@ export function LeagueStandings({
                   <div className="flex items-center gap-2 overflow-hidden">
                     {s.crest && isAllowedCrest(s.crest) ? (
                       /* img comum pelo mesmo motivo do painel: lazy do
-                         next/image nao dispara dentro do cockpit. */
+                         next/image nao dispara dentro do cockpit. Escudo e
+                         decorativo (alt=""): o nome do time esta ao lado. */
                       // eslint-disable-next-line @next/next/no-img-element -- next/image nao carrega no cockpit
                       <img
                         src={s.crest}
-                        alt={s.team}
+                        alt=""
                         width={20}
                         height={20}
                         loading="eager"
