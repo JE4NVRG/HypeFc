@@ -1,0 +1,11 @@
+# HypeFC (https://hypefc.je4ndev.com)
+#
+# Tudo que e publicado aqui e publico por desenho. A area da conta nao entra por
+# bloqueio de rastreio: ela responde `noindex, follow` na propria pagina, que e
+# mais honesto (o rastreador le a pagina, ve que ela nao deve ser indexada e
+# ainda segue os links dela) do que um Disallow, que esconde o bloqueio e ainda
+# deixa a URL aparecer na busca quando alguem a linka.
+User-agent: *
+Allow: /
+
+Sitemap: https://hypefc.je4ndev.com/sitemap.xml
