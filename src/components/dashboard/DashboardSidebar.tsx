@@ -18,10 +18,10 @@ import type { ViewId } from './ViewTabs'
  */
 const SECOES: Array<{ id: ViewId; label: string; dica: string }> = [
   { id: 'rodada', label: 'Rodada', dica: 'jogos do dia' },
-  { id: 'liga', label: 'Liga', dica: 'tabela, artilharia e titulo' },
-  { id: 'record', label: 'Recorde', dica: 'registro do que o modelo previu' },
+  { id: 'liga', label: 'Liga', dica: 'tabela e artilharia' },
+  { id: 'record', label: 'Recorde', dica: 'registro do modelo' },
   { id: 'esportes', label: 'Esportes', dica: 'outras modalidades' },
-  { id: 'pro', label: 'Pro', dica: 'alerta do seu time antes da rodada' },
+  { id: 'pro', label: 'Pro', dica: 'alerta do seu time' },
 ]
 
 interface DashboardSidebarProps {

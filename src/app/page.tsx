@@ -393,7 +393,7 @@ export default function Home() {
         </main>
       </div>
 
-      <SiteFooter source={todayData?.source} />
+      <SiteFooter source={todayData?.source} compact />
     </div>
   )
 }

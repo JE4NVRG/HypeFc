@@ -54,8 +54,80 @@ function fonteLabel(source?: string): string {
   return 'Football-Data.org + ESPN'
 }
 
-export function SiteFooter({ source, meta = true }: { source?: string; meta?: boolean }) {
+export function SiteFooter({
+  source,
+  meta = true,
+  compact = false,
+}: {
+  source?: string
+  meta?: boolean
+  /** Barra de status de uma linha: e o formato que o cockpit usa. */
+  compact?: boolean
+}) {
   const label = fonteLabel(source)
+
+  /**
+   * Cockpit: uma linha so. O painel tem altura de tela e nao rola por fora, entao
+   * tudo que fica embaixo come altura das listas para sempre. O bloco completo
+   * (meta + links + produtos + credito + aviso) ocupava ~100px grudados na base e
+   * ainda competia com a tabela; aqui sobra o essencial: de onde vem o dado, com
+   * que frequencia atualiza, para onde ir (termos, privacidade, produtos) e o
+   * aviso de que nao e casa de aposta, tudo em uma faixa de ~28px.
+   */
+  if (compact) {
+    return (
+      <footer className="border-t border-ink/[0.06] px-3 pb-[max(0.25rem,env(safe-area-inset-bottom))] pt-1 sm:px-4">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-0.5 text-[11px] leading-tight text-ink-3">
+          <p className="min-w-0">
+            <span className="font-medium text-ink-2">HypeFC</span>
+            {/* A fonte so entra quando o dado chegou: antes disso a barra nao
+                afirma ESPN nem Football-Data. */}
+            {source ? (
+              <>
+                <span className="px-1" aria-hidden="true">
+                  ·
+                </span>
+                Dados: {label}
+              </>
+            ) : null}
+            <span className="px-1" aria-hidden="true">
+              ·
+            </span>
+            atualiza a cada 1 min
+          </p>
+          <nav aria-label="Links do rodapé" className="flex flex-wrap items-center gap-x-2.5 gap-y-0.5">
+            <a
+              href="https://github.com/JE4NVRG"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Projeto no GitHub"
+              className="inline-flex min-h-[24px] items-center text-ink-2 underline decoration-ink/20 underline-offset-2 transition-colors hover:text-ink hover:decoration-ink/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60"
+            >
+              JE4NVRG
+            </a>
+            <Link href="/pro" className="inline-flex min-h-[24px] items-center text-ink-2 transition-colors hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60">
+              Pro
+            </Link>
+            <Link href="/termos" className="inline-flex min-h-[24px] items-center text-ink-2 transition-colors hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60">
+              Termos
+            </Link>
+            <Link href="/privacidade" className="inline-flex min-h-[24px] items-center text-ink-2 transition-colors hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60">
+              Privacidade
+            </Link>
+            <a
+              href="https://je4ndev.com"
+              target="_blank"
+              rel="noopener"
+              className="inline-flex min-h-[24px] items-center text-ink-2 transition-colors hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/60"
+            >
+              Produtos JE4NDEV
+            </a>
+            <span className="text-ink-3">Painel informativo, não é casa de aposta.</span>
+          </nav>
+        </div>
+      </footer>
+    )
+  }
 
   return (
     <footer className="border-t border-ink/[0.06] px-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-1 sm:px-4 sm:pb-4 sm:pt-3">
