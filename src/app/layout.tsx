@@ -33,10 +33,12 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   keywords: ['futebol', 'dashboard', 'premier league', 'brasileirão', 'la liga', 'champions league'],
   authors: [{ name: 'Jean Carlos', url: 'https://github.com/JE4NVRG' }],
-  // Relativo de proposito: o site tambem roda servido de subpasta no GitHub
-  // Pages (/HypeFc/), e href relativo e resolvido contra a URL da pagina.
-  // O icone instalavel sai do link rel=icon gerado por src/app/icon.svg.
-  manifest: './manifest.webmanifest',
+  // Absoluto a partir da raiz do site, com o basePath do build do Pages quando
+  // existe. Antes era relativo ('./manifest.webmanifest') para funcionar tambem
+  // na subpasta do GitHub Pages, mas href relativo e resolvido contra a URL DA
+  // PAGINA: em rota aninhada ele virava /conta/manifest.webmanifest (404), e o
+  // navegador registrava o manifest so quando a visita comecava na home.
+  manifest: `${process.env.PAGES_BASE_PATH ?? ''}/manifest.webmanifest`,
   appleWebApp: {
     capable: true,
     title: 'HypeFC',
