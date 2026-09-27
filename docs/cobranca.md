@@ -187,6 +187,14 @@ Conferido na Stripe (chave restrita) e no banco:
 O que falta não é fiação: é a primeira venda. Quando entrar, o ciclo de 10 min na VPS
 grava o pedido e o comprador resgata sozinho em `/?pro=ok&session_id=...`.
 
+A cadeia de liberação foi exercitada em 27/09 pelo **fluxo de cortesia**
+(`venda:abrir --valor 0` → `venda:paga` → link de ativação aberto num perfil de
+navegador limpo): o pedido virou `paid`, o assinante virou `pro` e o navegador recebeu
+a licença com a mensagem "Acesso ativado no plano Pro". O pedido de teste e o Pro da
+conta de QA foram revertidos na sequência, para `orders` continuar significando venda
+de verdade. O que segue **não** exercitado é só o dinheiro entrando (decisão do Jean:
+validar com o primeiro cliente).
+
 ## IDENTIDADE NO CHECKOUT / FATURA (achado do descriptor)
 
 A conta que recebe (`acct_1U9vtzKCOtDfcIhD`, razão social **Vrg Soluções**) é a mesma entidade
