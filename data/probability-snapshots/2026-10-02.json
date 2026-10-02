@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-02",
+  "mode": "live",
+  "issued_at": "2026-10-02T12:00:34.476Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "São Paulo",
+      "away": "Santos",
+      "kickoff": "2026-10-02T23:00Z",
+      "prob": {
+        "home": 0.42752417599249254,
+        "draw": 0.2614748240897363,
+        "away": 0.3110009999177711
+      },
+      "favorito": "home",
+      "rating_home": 1486.3,
+      "rating_away": 1515.6,
+      "jogos_home": 27,
+      "jogos_away": 27,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
