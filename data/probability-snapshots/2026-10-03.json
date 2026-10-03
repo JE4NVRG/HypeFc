@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-03",
+  "mode": "live",
+  "issued_at": "2026-10-03T12:01:14.921Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Atlético-MG",
+      "away": "Red Bull Bragantino",
+      "kickoff": "2026-10-03T21:30Z",
+      "prob": {
+        "home": 0.5146071446969198,
+        "draw": 0.24978176618017492,
+        "away": 0.23561108912290524
+      },
+      "favorito": "home",
+      "rating_home": 1521.7,
+      "rating_away": 1492.1,
+      "jogos_home": 27,
+      "jogos_away": 27,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
