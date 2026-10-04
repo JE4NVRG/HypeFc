@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T12:00:55.848Z",
+  "generated_at": "2026-10-04T12:01:43.898Z",
   "season": 2026,
   "model": {
     "name": "elo+poisson",
@@ -13,13 +13,13 @@
       "league_name": "Brasileirao",
       "slug": "bra.1",
       "season": 2026,
-      "matches": 278,
+      "matches": 279,
       "teams": 20,
       "ratings": {
-        "Atlético-MG": 1521.7,
+        "Atlético-MG": 1528.9,
         "Palmeiras": 1583.4,
         "Coritiba": 1495.6,
-        "Red Bull Bragantino": 1492.1,
+        "Red Bull Bragantino": 1484.9,
         "Internacional": 1457.2,
         "Athletico-PR": 1556.2,
         "Vitória": 1468.2,
