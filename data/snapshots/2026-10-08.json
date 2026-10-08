@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-08",
+  "seasons": [
+    2026
+  ],
+  "mode": "live",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-10-08T12:00:54.589Z",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Santos",
+      "away": "Flamengo",
+      "score_home": null,
+      "score_away": null,
+      "outcome": null
+    },
+    {
+      "league_id": "BSA",
+      "home": "Athletico-PR",
+      "away": "Atlético-MG",
+      "score_home": null,
+      "score_away": null,
+      "outcome": null
+    },
+    {
+      "league_id": "BSA",
+      "home": "Fluminense",
+      "away": "Coritiba",
+      "score_home": null,
+      "score_away": null,
+      "outcome": null
+    },
+    {
+      "league_id": "BSA",
+      "home": "Palmeiras",
+      "away": "Bahia",
+      "score_home": null,
+      "score_away": null,
+      "outcome": null
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Santos",
+      "away": "Flamengo",
+      "team": "Flamengo",
+      "venue": "away",
+      "score": 75,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 8,
+      "outcome": null,
+      "score_home": null,
+      "score_away": null,
+      "hit": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Palmeiras",
+      "away": "Bahia",
+      "team": "Palmeiras",
+      "venue": "home",
+      "score": 53,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 6,
+      "outcome": null,
+      "score_home": null,
+      "score_away": null,
+      "hit": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Palmeiras",
+      "away": "Bahia",
+      "team": "Bahia",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 6,
+      "opp_pos": 2,
+      "outcome": null,
+      "score_home": null,
+      "score_away": null,
+      "hit": null
+    }
+  ]
+}

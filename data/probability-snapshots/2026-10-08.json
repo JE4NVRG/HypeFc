@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-08",
+  "mode": "live",
+  "issued_at": "2026-10-08T12:01:21.153Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Santos",
+      "away": "Flamengo",
+      "kickoff": "2026-10-08T22:30Z",
+      "prob": {
+        "home": 0.3652883572068258,
+        "draw": 0.26390854505393374,
+        "away": 0.3708030977392405
+      },
+      "favorito": "away",
+      "rating_home": 1526.8,
+      "rating_away": 1598.7,
+      "jogos_home": 28,
+      "jogos_away": 28,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Athletico-PR",
+      "away": "Atlético-MG",
+      "kickoff": "2026-10-08T23:00Z",
+      "prob": {
+        "home": 0.5111879810682604,
+        "draw": 0.2504115210198357,
+        "away": 0.23840049791190404
+      },
+      "favorito": "home",
+      "rating_home": 1556.2,
+      "rating_away": 1528.9,
+      "jogos_home": 28,
+      "jogos_away": 28,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Fluminense",
+      "away": "Coritiba",
+      "kickoff": "2026-10-09T00:30Z",
+      "prob": {
+        "home": 0.5504500400554753,
+        "draw": 0.24237335423803555,
+        "away": 0.20717660570648927
+      },
+      "favorito": "home",
+      "rating_home": 1549.9,
+      "rating_away": 1495.6,
+      "jogos_home": 28,
+      "jogos_away": 28,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Palmeiras",
+      "away": "Bahia",
+      "kickoff": "2026-10-09T00:30Z",
+      "prob": {
+        "home": 0.5374366636072062,
+        "draw": 0.24523229901864937,
+        "away": 0.2173310373741445
+      },
+      "favorito": "home",
+      "rating_home": 1583.4,
+      "rating_away": 1538.2,
+      "jogos_home": 28,
+      "jogos_away": 28,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
