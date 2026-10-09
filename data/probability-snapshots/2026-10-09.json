@@ -1,0 +1,122 @@
+{
+  "date": "2026-10-09",
+  "mode": "live",
+  "issued_at": "2026-10-09T12:02:07.003Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 4,
+  "matches": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Málaga",
+      "away": "Espanyol",
+      "kickoff": "2026-10-09T19:00Z",
+      "prob": {
+        "home": 0.4502915357415154,
+        "draw": 0.25931215385756007,
+        "away": 0.29039631040092445
+      },
+      "favorito": "home",
+      "rating_home": 1463.6,
+      "rating_away": 1477.5,
+      "jogos_home": 7,
+      "jogos_away": 7,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Lens",
+      "away": "Lyon",
+      "kickoff": "2026-10-09T18:45Z",
+      "prob": {
+        "home": 0.40544391204211644,
+        "draw": 0.2629362064672162,
+        "away": 0.33161988149066735
+      },
+      "favorito": "home",
+      "rating_home": 1482.6,
+      "rating_away": 1526.9,
+      "jogos_home": 5,
+      "jogos_away": 5,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Moreirense",
+      "away": "Gil Vicente",
+      "kickoff": "2026-10-09T17:45Z",
+      "prob": {
+        "home": 0.47015626377482683,
+        "draw": 0.25689835849757814,
+        "away": 0.2729453777275951
+      },
+      "favorito": "home",
+      "rating_home": 1493.6,
+      "rating_away": 1494.2,
+      "jogos_home": 7,
+      "jogos_away": 6,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Braga",
+      "away": "Sporting CP",
+      "kickoff": "2026-10-09T19:15Z",
+      "prob": {
+        "home": 0.4542400122145573,
+        "draw": 0.2588709868462656,
+        "away": 0.2868890009391771
+      },
+      "favorito": "home",
+      "rating_home": 1521.9,
+      "rating_away": 1533.2,
+      "jogos_home": 6,
+      "jogos_away": 7,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "PSV Eindhoven",
+      "away": "Heerenveen",
+      "kickoff": "2026-10-09T18:00Z",
+      "prob": {
+        "home": 0.5324597509458029,
+        "draw": 0.24627491450037683,
+        "away": 0.22126533455382025
+      },
+      "favorito": "home",
+      "rating_home": 1539.4,
+      "rating_away": 1497.5,
+      "jogos_home": 7,
+      "jogos_away": 7,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}

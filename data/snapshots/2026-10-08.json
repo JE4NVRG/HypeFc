@@ -12,33 +12,33 @@
       "league_id": "BSA",
       "home": "Santos",
       "away": "Flamengo",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
     },
     {
       "league_id": "BSA",
       "home": "Athletico-PR",
       "away": "Atlético-MG",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw"
     },
     {
       "league_id": "BSA",
       "home": "Fluminense",
       "away": "Coritiba",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 4,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "BSA",
       "home": "Palmeiras",
       "away": "Bahia",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
     }
   ],
   "cards": [
@@ -57,10 +57,10 @@
       ],
       "pos": 1,
       "opp_pos": 8,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
     },
     {
       "league_id": "BSA",
@@ -77,10 +77,10 @@
       ],
       "pos": 2,
       "opp_pos": 6,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
     },
     {
       "league_id": "BSA",
@@ -96,10 +96,10 @@
       ],
       "pos": 6,
       "opp_pos": 2,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": false
     }
   ]
 }
