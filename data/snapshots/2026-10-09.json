@@ -20,33 +20,33 @@
       "league_id": "FL1",
       "home": "Lens",
       "away": "Lyon",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
     },
     {
       "league_id": "PPL",
       "home": "Moreirense",
       "away": "Gil Vicente",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
     },
     {
       "league_id": "PPL",
       "home": "Braga",
       "away": "Sporting CP",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away"
     },
     {
       "league_id": "DED",
       "home": "PSV Eindhoven",
       "away": "Heerenveen",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
     }
   ],
   "cards": [
@@ -65,10 +65,10 @@
       ],
       "pos": 2,
       "opp_pos": 15,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": false
     },
     {
       "league_id": "PPL",
@@ -85,10 +85,10 @@
       ],
       "pos": 3,
       "opp_pos": 6,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": true
     },
     {
       "league_id": "DED",
@@ -105,10 +105,10 @@
       ],
       "pos": 3,
       "opp_pos": 10,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
     }
   ]
 }
