@@ -1,27 +1,27 @@
 {
-  "generated_at": "2026-10-10T12:01:51.301Z",
+  "generated_at": "2026-10-11T12:01:31.240Z",
   "cutoff": 44,
   "method": "Rodada a rodada: a tabela e reconstruida apenas com jogos anteriores a rodada (sem lookahead) e o buildHypeBoard do produto marca os times. Cards em modo replay foram reconstruidos; cards em modo live foram gravados antes do jogo.",
-  "snapshots": 274,
-  "completed_rounds": 273,
-  "cards_total": 1425,
-  "cards_settled": 1408,
-  "cards_pending": 17,
-  "live_cards": 23,
+  "snapshots": 275,
+  "completed_rounds": 274,
+  "cards_total": 1434,
+  "cards_settled": 1425,
+  "cards_pending": 9,
+  "live_cards": 32,
   "replay_cards": 1402,
   "flagged": {
-    "n": 1408,
-    "wins": 754,
+    "n": 1425,
+    "wins": 764,
     "rate": 0.536
   },
   "baseline": {
-    "n": 3272,
-    "home_rate": 0.429,
-    "away_rate": 0.308,
+    "n": 3299,
+    "home_rate": 0.43,
+    "away_rate": 0.307,
     "draw_rate": 0.254,
-    "expected_for_flagged": 0.367
+    "expected_for_flagged": 0.366
   },
-  "lift_pp": 16.9,
+  "lift_pp": 17,
   "anchor": {
     "n": 3236,
     "wins": 1578,
@@ -34,28 +34,28 @@
   "by_venue": [
     {
       "key": "fora",
-      "n": 731,
-      "wins": 335,
+      "n": 740,
+      "wins": 339,
       "rate": 0.458
     },
     {
       "key": "casa",
-      "n": 677,
-      "wins": 419,
-      "rate": 0.619
+      "n": 685,
+      "wins": 425,
+      "rate": 0.62
     }
   ],
   "by_band": [
     {
       "key": "40-54",
-      "n": 670,
-      "wins": 314,
-      "rate": 0.469
+      "n": 677,
+      "wins": 318,
+      "rate": 0.47
     },
     {
       "key": "55+",
-      "n": 738,
-      "wins": 440,
+      "n": 748,
+      "wins": 446,
       "rate": 0.596
     }
   ],
@@ -67,40 +67,40 @@
       "rate": 0.459
     },
     {
+      "key": "PD",
+      "n": 186,
+      "wins": 113,
+      "rate": 0.608
+    },
+    {
       "key": "SA",
-      "n": 183,
-      "wins": 97,
+      "n": 185,
+      "wins": 98,
       "rate": 0.53
     },
     {
-      "key": "PD",
-      "n": 183,
-      "wins": 110,
-      "rate": 0.601
-    },
-    {
       "key": "PL",
-      "n": 182,
-      "wins": 88,
-      "rate": 0.484
+      "n": 185,
+      "wins": 90,
+      "rate": 0.486
     },
     {
       "key": "PPL",
-      "n": 176,
-      "wins": 105,
-      "rate": 0.597
+      "n": 178,
+      "wins": 107,
+      "rate": 0.601
     },
     {
       "key": "FL1",
-      "n": 165,
-      "wins": 91,
-      "rate": 0.552
+      "n": 168,
+      "wins": 92,
+      "rate": 0.548
     },
     {
       "key": "DED",
-      "n": 162,
-      "wins": 85,
-      "rate": 0.525
+      "n": 166,
+      "wins": 86,
+      "rate": 0.518
     },
     {
       "key": "BL1",
@@ -110,14 +110,6 @@
     }
   ],
   "by_round": [
-    {
-      "key": "2026-07-30",
-      "n": 1,
-      "wins": 0,
-      "rate": null,
-      "expected": 0.308,
-      "lift_pp": -30.8
-    },
     {
       "key": "2026-08-09",
       "n": 3,
@@ -139,8 +131,8 @@
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.308,
-      "lift_pp": 69.2
+      "expected": 0.307,
+      "lift_pp": 69.3
     },
     {
       "key": "2026-08-22",
@@ -163,16 +155,16 @@
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.308,
-      "lift_pp": 69.2
+      "expected": 0.307,
+      "lift_pp": 69.3
     },
     {
       "key": "2026-08-29",
       "n": 1,
       "wins": 0,
       "rate": null,
-      "expected": 0.308,
-      "lift_pp": -30.8
+      "expected": 0.307,
+      "lift_pp": -30.7
     },
     {
       "key": "2026-08-30",
@@ -187,16 +179,16 @@
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.429,
-      "lift_pp": 57.1
+      "expected": 0.43,
+      "lift_pp": 57
     },
     {
       "key": "2026-09-06",
       "n": 4,
       "wins": 2,
       "rate": null,
-      "expected": 0.339,
-      "lift_pp": 16.1
+      "expected": 0.338,
+      "lift_pp": 16.2
     },
     {
       "key": "2026-09-12",
@@ -211,7 +203,7 @@
       "n": 7,
       "wins": 4,
       "rate": null,
-      "expected": 0.378,
+      "expected": 0.377,
       "lift_pp": 19.4
     },
     {
@@ -227,16 +219,16 @@
       "n": 2,
       "wins": 2,
       "rate": null,
-      "expected": 0.429,
-      "lift_pp": 57.1
+      "expected": 0.43,
+      "lift_pp": 57
     },
     {
       "key": "2026-09-17",
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.429,
-      "lift_pp": 57.1
+      "expected": 0.43,
+      "lift_pp": 57
     },
     {
       "key": "2026-09-19",
@@ -251,7 +243,7 @@
       "n": 13,
       "wins": 6,
       "rate": null,
-      "expected": 0.374,
+      "expected": 0.373,
       "lift_pp": 8.8
     },
     {
@@ -259,7 +251,7 @@
       "n": 3,
       "wins": 1,
       "rate": null,
-      "expected": 0.349,
+      "expected": 0.348,
       "lift_pp": -1.5
     },
     {
@@ -267,29 +259,377 @@
       "n": 3,
       "wins": 2,
       "rate": null,
-      "expected": 0.349,
-      "lift_pp": 31.8
+      "expected": 0.348,
+      "lift_pp": 31.9
+    },
+    {
+      "key": "2026-10-10",
+      "n": 17,
+      "wins": 10,
+      "rate": null,
+      "expected": 0.365,
+      "lift_pp": 22.3
     }
   ],
   "by_edge": [
     {
       "key": "marcado MELHOR colocado",
-      "n": 1240,
-      "wins": 706,
+      "n": 1256,
+      "wins": 715,
       "rate": 0.569,
       "expected": 0.366,
       "lift_pp": 20.3
     },
     {
       "key": "marcado PIOR colocado",
-      "n": 168,
-      "wins": 48,
-      "rate": 0.286,
-      "expected": 0.367,
-      "lift_pp": -8.1
+      "n": 169,
+      "wins": 49,
+      "rate": 0.29,
+      "expected": 0.368,
+      "lift_pp": -7.8
     }
   ],
   "recent": [
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "Ajax Amsterdam",
+      "away": "NEC Nijmegen",
+      "team": "Ajax Amsterdam",
+      "venue": "home",
+      "score": 48,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 11,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "Fortuna Sittard",
+      "away": "FC Twente",
+      "team": "FC Twente",
+      "venue": "away",
+      "score": 55,
+      "flags": [
+        "Forma 4V",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 6,
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "Feyenoord Rotterdam",
+      "away": "AZ Alkmaar",
+      "team": "Feyenoord Rotterdam",
+      "venue": "home",
+      "score": 61,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 2,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "Feyenoord Rotterdam",
+      "away": "AZ Alkmaar",
+      "team": "AZ Alkmaar",
+      "venue": "away",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 3,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Casa Pia",
+      "away": "Santa Clara",
+      "team": "Santa Clara",
+      "venue": "away",
+      "score": 51,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 17,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Maritimo",
+      "away": "FC Porto",
+      "team": "FC Porto",
+      "venue": "away",
+      "score": 75,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 11,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Lille",
+      "away": "Le Havre AC",
+      "team": "Lille",
+      "venue": "home",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 18,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Lorient",
+      "away": "Paris FC",
+      "team": "Paris FC",
+      "venue": "away",
+      "score": 57,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 13,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "AS Monaco",
+      "away": "Toulouse",
+      "team": "AS Monaco",
+      "venue": "home",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 14,
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Napoli",
+      "away": "Frosinone",
+      "team": "Frosinone",
+      "venue": "away",
+      "score": 48,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 6,
+      "opp_pos": 9,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": false
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Internazionale",
+      "away": "Parma",
+      "team": "Internazionale",
+      "venue": "home",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 15,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Real Madrid",
+      "away": "Villarreal",
+      "team": "Real Madrid",
+      "venue": "home",
+      "score": 45,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 9,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Alavés",
+      "away": "Atlético Madrid",
+      "team": "Atlético Madrid",
+      "venue": "away",
+      "score": 62,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 6,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Barcelona",
+      "away": "Getafe",
+      "team": "Barcelona",
+      "venue": "home",
+      "score": 75,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 12,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Aston Villa",
+      "away": "Brentford",
+      "team": "Brentford",
+      "venue": "away",
+      "score": 47,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 4,
+      "opp_pos": 16,
+      "outcome": "draw",
+      "score_home": 2,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Sunderland",
+      "away": "Brighton & Hove Albion",
+      "team": "Brighton & Hove Albion",
+      "venue": "away",
+      "score": 54,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 14,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Arsenal",
+      "away": "Leeds United",
+      "team": "Arsenal",
+      "venue": "home",
+      "score": 58,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 5,
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": true
+    },
     {
       "league_id": "DED",
       "league_name": "Eredivisie",
@@ -427,342 +767,6 @@
       "outcome": "home",
       "score_home": 3,
       "score_away": 2,
-      "hit": true
-    },
-    {
-      "league_id": "DED",
-      "league_name": "Eredivisie",
-      "home": "Feyenoord Rotterdam",
-      "away": "FC Utrecht",
-      "team": "Feyenoord Rotterdam",
-      "venue": "home",
-      "score": 57,
-      "flags": [
-        "Boa forma",
-        "Top 3",
-        "Saldo alto"
-      ],
-      "pos": 3,
-      "opp_pos": 14,
-      "outcome": "home",
-      "score_home": 5,
-      "score_away": 0,
-      "hit": true
-    },
-    {
-      "league_id": "DED",
-      "league_name": "Eredivisie",
-      "home": "AZ Alkmaar",
-      "away": "Telstar",
-      "team": "AZ Alkmaar",
-      "venue": "home",
-      "score": 65,
-      "flags": [
-        "Forma 4V",
-        "Top 3",
-        "Saldo alto"
-      ],
-      "pos": 2,
-      "opp_pos": 12,
-      "outcome": "home",
-      "score_home": 1,
-      "score_away": 0,
-      "hit": true
-    },
-    {
-      "league_id": "DED",
-      "league_name": "Eredivisie",
-      "home": "FC Twente",
-      "away": "PSV Eindhoven",
-      "team": "PSV Eindhoven",
-      "venue": "away",
-      "score": 75,
-      "flags": [
-        "Forma 5V",
-        "Líder",
-        "Saldo alto"
-      ],
-      "pos": 1,
-      "opp_pos": 5,
-      "outcome": "home",
-      "score_home": 3,
-      "score_away": 2,
-      "hit": false
-    },
-    {
-      "league_id": "PPL",
-      "league_name": "Primeira Liga",
-      "home": "Santa Clara",
-      "away": "Braga",
-      "team": "Santa Clara",
-      "venue": "home",
-      "score": 55,
-      "flags": [
-        "Forma 4V",
-        "Zona alta",
-        "Saldo alto"
-      ],
-      "pos": 4,
-      "opp_pos": 7,
-      "outcome": "draw",
-      "score_home": 0,
-      "score_away": 0,
-      "hit": false
-    },
-    {
-      "league_id": "PPL",
-      "league_name": "Primeira Liga",
-      "home": "FC Porto",
-      "away": "Benfica",
-      "team": "Benfica",
-      "venue": "away",
-      "score": 87,
-      "flags": [
-        "Clássico",
-        "Forma 5V",
-        "Top 3"
-      ],
-      "pos": 2,
-      "opp_pos": 1,
-      "outcome": "home",
-      "score_home": 3,
-      "score_away": 1,
-      "hit": false
-    },
-    {
-      "league_id": "PPL",
-      "league_name": "Primeira Liga",
-      "home": "FC Porto",
-      "away": "Benfica",
-      "team": "FC Porto",
-      "venue": "home",
-      "score": 93,
-      "flags": [
-        "Clássico",
-        "Forma 5V",
-        "Líder"
-      ],
-      "pos": 1,
-      "opp_pos": 2,
-      "outcome": "home",
-      "score_home": 3,
-      "score_away": 1,
-      "hit": true
-    },
-    {
-      "league_id": "PD",
-      "league_name": "La Liga",
-      "home": "Deportivo",
-      "away": "Real Betis",
-      "team": "Real Betis",
-      "venue": "away",
-      "score": 50,
-      "flags": [
-        "Forma 4V",
-        "Top 3"
-      ],
-      "pos": 3,
-      "opp_pos": 7,
-      "outcome": "draw",
-      "score_home": 1,
-      "score_away": 1,
-      "hit": false
-    },
-    {
-      "league_id": "PD",
-      "league_name": "La Liga",
-      "home": "Atlético Madrid",
-      "away": "Real Madrid",
-      "team": "Atlético Madrid",
-      "venue": "home",
-      "score": 66,
-      "flags": [
-        "Clássico",
-        "Boa forma",
-        "Zona alta"
-      ],
-      "pos": 4,
-      "opp_pos": 2,
-      "outcome": "home",
-      "score_home": 2,
-      "score_away": 1,
-      "hit": true
-    },
-    {
-      "league_id": "PD",
-      "league_name": "La Liga",
-      "home": "Atlético Madrid",
-      "away": "Real Madrid",
-      "team": "Real Madrid",
-      "venue": "away",
-      "score": 80,
-      "flags": [
-        "Clássico",
-        "Forma 4V",
-        "Top 3"
-      ],
-      "pos": 2,
-      "opp_pos": 4,
-      "outcome": "home",
-      "score_home": 2,
-      "score_away": 1,
-      "hit": false
-    },
-    {
-      "league_id": "BSA",
-      "league_name": "Brasileirao",
-      "home": "Athletico-PR",
-      "away": "Bahia",
-      "team": "Bahia",
-      "venue": "away",
-      "score": 47,
-      "flags": [
-        "Forma 4V",
-        "Zona alta"
-      ],
-      "pos": 4,
-      "opp_pos": 3,
-      "outcome": "home",
-      "score_home": 2,
-      "score_away": 1,
-      "hit": false
-    },
-    {
-      "league_id": "BSA",
-      "league_name": "Brasileirao",
-      "home": "Grêmio",
-      "away": "Palmeiras",
-      "team": "Palmeiras",
-      "venue": "away",
-      "score": 50,
-      "flags": [
-        "Top 3",
-        "Saldo alto"
-      ],
-      "pos": 2,
-      "opp_pos": 18,
-      "outcome": "draw",
-      "score_home": 0,
-      "score_away": 0,
-      "hit": false
-    },
-    {
-      "league_id": "BSA",
-      "league_name": "Brasileirao",
-      "home": "Flamengo",
-      "away": "Red Bull Bragantino",
-      "team": "Flamengo",
-      "venue": "home",
-      "score": 68,
-      "flags": [
-        "Forma 4V",
-        "Líder",
-        "Saldo alto"
-      ],
-      "pos": 1,
-      "opp_pos": 10,
-      "outcome": "home",
-      "score_home": 2,
-      "score_away": 1,
-      "hit": true
-    },
-    {
-      "league_id": "DED",
-      "league_name": "Eredivisie",
-      "home": "Ajax Amsterdam",
-      "away": "Excelsior",
-      "team": "Ajax Amsterdam",
-      "venue": "home",
-      "score": 48,
-      "flags": [
-        "Boa forma",
-        "Zona alta",
-        "Saldo alto"
-      ],
-      "pos": 4,
-      "opp_pos": 7,
-      "outcome": "draw",
-      "score_home": 2,
-      "score_away": 2,
-      "hit": false
-    },
-    {
-      "league_id": "PPL",
-      "league_name": "Primeira Liga",
-      "home": "Sporting CP",
-      "away": "Arouca",
-      "team": "Sporting CP",
-      "venue": "home",
-      "score": 61,
-      "flags": [
-        "Forma 4V",
-        "Top 3",
-        "Saldo alto"
-      ],
-      "pos": 3,
-      "opp_pos": 5,
-      "outcome": "draw",
-      "score_home": 2,
-      "score_away": 2,
-      "hit": false
-    },
-    {
-      "league_id": "PD",
-      "league_name": "La Liga",
-      "home": "Sevilla",
-      "away": "Barcelona",
-      "team": "Sevilla",
-      "venue": "home",
-      "score": 44,
-      "flags": [
-        "Boa forma",
-        "Zona alta",
-        "Saldo alto"
-      ],
-      "pos": 5,
-      "opp_pos": 1,
-      "outcome": "away",
-      "score_home": 1,
-      "score_away": 3,
-      "hit": false
-    },
-    {
-      "league_id": "PD",
-      "league_name": "La Liga",
-      "home": "Sevilla",
-      "away": "Barcelona",
-      "team": "Barcelona",
-      "venue": "away",
-      "score": 75,
-      "flags": [
-        "Forma 5V",
-        "Líder",
-        "Saldo alto"
-      ],
-      "pos": 1,
-      "opp_pos": 5,
-      "outcome": "away",
-      "score_home": 1,
-      "score_away": 3,
-      "hit": true
-    },
-    {
-      "league_id": "PD",
-      "league_name": "La Liga",
-      "home": "Real Betis",
-      "away": "Getafe",
-      "team": "Real Betis",
-      "venue": "home",
-      "score": 44,
-      "flags": [
-        "Forma 4V",
-        "Zona alta"
-      ],
-      "pos": 5,
-      "opp_pos": 15,
-      "outcome": "home",
-      "score_home": 1,
-      "score_away": 0,
       "hit": true
     }
   ],
