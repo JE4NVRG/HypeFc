@@ -1,0 +1,185 @@
+{
+  "date": "2026-10-12",
+  "mode": "live",
+  "issued_at": "2026-10-12T12:01:53.587Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 5,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Coritiba",
+      "away": "Botafogo",
+      "kickoff": "2026-10-12T19:00Z",
+      "prob": {
+        "home": 0.496387997114359,
+        "draw": 0.2529805383176442,
+        "away": 0.2506314645679968
+      },
+      "favorito": "home",
+      "rating_home": 1489.1,
+      "rating_away": 1471.9,
+      "jogos_home": 29,
+      "jogos_away": 29,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Chapecoense",
+      "away": "Athletico-PR",
+      "kickoff": "2026-10-12T22:30Z",
+      "prob": {
+        "home": 0.2674417006361515,
+        "draw": 0.2560210466797765,
+        "away": 0.47653725268407193
+      },
+      "favorito": "away",
+      "rating_home": 1409.7,
+      "rating_away": 1553.4,
+      "jogos_home": 28,
+      "jogos_away": 29,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Red Bull Bragantino",
+      "away": "Cruzeiro",
+      "kickoff": "2026-10-13T00:00Z",
+      "prob": {
+        "home": 0.3736138012349377,
+        "draw": 0.26389183279824413,
+        "away": 0.36249436596681817
+      },
+      "favorito": "home",
+      "rating_home": 1482.8,
+      "rating_away": 1548.9,
+      "jogos_home": 29,
+      "jogos_away": 29,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Coventry City",
+      "away": "Newcastle United",
+      "kickoff": "2026-10-12T19:00Z",
+      "prob": {
+        "home": 0.42245584938946207,
+        "draw": 0.2618664655537451,
+        "away": 0.3156776850567929
+      },
+      "favorito": "home",
+      "rating_home": 1475.2,
+      "rating_away": 1508,
+      "jogos_home": 5,
+      "jogos_away": 5,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Levante",
+      "away": "Sevilla",
+      "kickoff": "2026-10-12T19:00Z",
+      "prob": {
+        "home": 0.42421520106045885,
+        "draw": 0.2617342716582791,
+        "away": 0.314050527281262
+      },
+      "favorito": "home",
+      "rating_home": 1485.1,
+      "rating_away": 1516.6,
+      "jogos_home": 6,
+      "jogos_away": 7,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Atalanta",
+      "away": "Venezia",
+      "kickoff": "2026-10-12T16:30Z",
+      "prob": {
+        "home": 0.5254344514643975,
+        "draw": 0.24769855484279069,
+        "away": 0.22686699369281185
+      },
+      "favorito": "home",
+      "rating_home": 1488,
+      "rating_away": 1451,
+      "jogos_home": 5,
+      "jogos_away": 5,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Torino",
+      "away": "Udinese",
+      "kickoff": "2026-10-12T18:45Z",
+      "prob": {
+        "home": 0.47561423661757474,
+        "draw": 0.256150985692574,
+        "away": 0.2682347776898512
+      },
+      "favorito": "home",
+      "rating_home": 1482.8,
+      "rating_away": 1479.7,
+      "jogos_home": 5,
+      "jogos_away": 5,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "FC Famalicao",
+      "away": "Alverca",
+      "kickoff": "2026-10-12T19:15Z",
+      "prob": {
+        "home": 0.478319260902361,
+        "draw": 0.2557672869065934,
+        "away": 0.2659134521910456
+      },
+      "favorito": "home",
+      "rating_home": 1495.5,
+      "rating_away": 1490.5,
+      "jogos_home": 7,
+      "jogos_away": 7,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
