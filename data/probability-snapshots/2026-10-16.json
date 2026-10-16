@@ -1,0 +1,143 @@
+{
+  "date": "2026-10-16",
+  "mode": "live",
+  "issued_at": "2026-10-16T12:01:04.538Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 6,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Mirassol",
+      "away": "Internacional",
+      "kickoff": "2026-10-16T23:00Z",
+      "prob": {
+        "home": 0.4821069518117281,
+        "draw": 0.25521527814743566,
+        "away": 0.26267777004083626
+      },
+      "favorito": "home",
+      "rating_home": 1474.4,
+      "rating_away": 1466.9,
+      "jogos_home": 30,
+      "jogos_away": 30,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Deportivo",
+      "away": "Levante",
+      "kickoff": "2026-10-16T19:00Z",
+      "prob": {
+        "home": 0.4930671871901025,
+        "draw": 0.25352171969908266,
+        "away": 0.2534110931108149
+      },
+      "favorito": "home",
+      "rating_home": 1498.9,
+      "rating_away": 1484,
+      "jogos_home": 8,
+      "jogos_away": 7,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Frosinone",
+      "away": "Sassuolo",
+      "kickoff": "2026-10-16T18:45Z",
+      "prob": {
+        "home": 0.4844447230869572,
+        "draw": 0.2548660242157959,
+        "away": 0.26068925269724696
+      },
+      "favorito": "home",
+      "rating_home": 1508.7,
+      "rating_away": 1499.6,
+      "jogos_home": 6,
+      "jogos_away": 6,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "Eintracht Frankfurt",
+      "away": "FC Cologne",
+      "kickoff": "2026-10-16T18:30Z",
+      "prob": {
+        "home": 0.4667513086805832,
+        "draw": 0.25734635521133464,
+        "away": 0.2759023361080822
+      },
+      "favorito": "home",
+      "rating_home": 1493.3,
+      "rating_away": 1496.2,
+      "jogos_home": 5,
+      "jogos_away": 5,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Le Mans",
+      "away": "Toulouse",
+      "kickoff": "2026-10-16T18:45Z",
+      "prob": {
+        "home": 0.4678412739643075,
+        "draw": 0.2572044771753126,
+        "away": 0.2749542488603799
+      },
+      "favorito": "home",
+      "rating_home": 1490.6,
+      "rating_away": 1492.8,
+      "jogos_home": 6,
+      "jogos_away": 6,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "Heerenveen",
+      "away": "Excelsior",
+      "kickoff": "2026-10-16T18:00Z",
+      "prob": {
+        "home": 0.46093952397776533,
+        "draw": 0.2580784319121495,
+        "away": 0.2809820441100852
+      },
+      "favorito": "home",
+      "rating_home": 1490.7,
+      "rating_away": 1497.4,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
