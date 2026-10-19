@@ -1,0 +1,143 @@
+{
+  "date": "2026-10-19",
+  "mode": "live",
+  "issued_at": "2026-10-19T12:02:39.443Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 5,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Corinthians",
+      "away": "Vitória",
+      "kickoff": "2026-10-19T23:00Z",
+      "prob": {
+        "home": 0.44546932962500774,
+        "draw": 0.25982466660824033,
+        "away": 0.294706003766752
+      },
+      "favorito": "home",
+      "rating_home": 1449.4,
+      "rating_away": 1466.6,
+      "jogos_home": 30,
+      "jogos_away": 30,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Tottenham Hotspur",
+      "away": "Coventry City",
+      "kickoff": "2026-10-19T19:00Z",
+      "prob": {
+        "home": 0.45231446832319816,
+        "draw": 0.25908854219294974,
+        "away": 0.2885969894838521
+      },
+      "favorito": "home",
+      "rating_home": 1471.5,
+      "rating_away": 1484.1,
+      "jogos_home": 6,
+      "jogos_away": 6,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Getafe",
+      "away": "Rayo Vallecano",
+      "kickoff": "2026-10-19T19:00Z",
+      "prob": {
+        "home": 0.4576265975513091,
+        "draw": 0.25847725202855976,
+        "away": 0.28389615042013133
+      },
+      "favorito": "home",
+      "rating_home": 1483.7,
+      "rating_away": 1492.7,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Monza",
+      "away": "Cagliari",
+      "kickoff": "2026-10-19T16:30Z",
+      "prob": {
+        "home": 0.3944860461234289,
+        "draw": 0.2634217059307862,
+        "away": 0.34209224794578497
+      },
+      "favorito": "home",
+      "rating_home": 1476.9,
+      "rating_away": 1528.7,
+      "jogos_home": 6,
+      "jogos_away": 6,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Parma",
+      "away": "Torino",
+      "kickoff": "2026-10-19T18:45Z",
+      "prob": {
+        "home": 0.4451322939469328,
+        "draw": 0.2598594024765419,
+        "away": 0.29500830357652535
+      },
+      "favorito": "home",
+      "rating_home": 1473.3,
+      "rating_away": 1490.8,
+      "jogos_home": 6,
+      "jogos_away": 6,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Braga",
+      "away": "Gil Vicente",
+      "kickoff": "2026-10-19T19:15Z",
+      "prob": {
+        "home": 0.47698158321696016,
+        "draw": 0.25595813031601855,
+        "away": 0.2670602864670213
+      },
+      "favorito": "home",
+      "rating_home": 1510.2,
+      "rating_away": 1506.2,
+      "jogos_home": 7,
+      "jogos_away": 7,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
