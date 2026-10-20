@@ -29,10 +29,10 @@
       "rating_away": 1466.6,
       "jogos_home": 30,
       "jogos_away": 30,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw",
+      "settled_at": "2026-10-20T12:01:32.055Z"
     },
     {
       "league_id": "PL",
@@ -50,10 +50,10 @@
       "rating_away": 1484.1,
       "jogos_home": 6,
       "jogos_away": 6,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home",
+      "settled_at": "2026-10-20T12:01:32.055Z"
     },
     {
       "league_id": "PD",
@@ -71,10 +71,10 @@
       "rating_away": 1492.7,
       "jogos_home": 8,
       "jogos_away": 8,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw",
+      "settled_at": "2026-10-20T12:01:32.055Z"
     },
     {
       "league_id": "SA",
@@ -92,10 +92,10 @@
       "rating_away": 1528.7,
       "jogos_home": 6,
       "jogos_away": 6,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 4,
+      "score_away": 0,
+      "outcome": "home",
+      "settled_at": "2026-10-20T12:01:32.055Z"
     },
     {
       "league_id": "SA",
@@ -113,10 +113,10 @@
       "rating_away": 1490.8,
       "jogos_home": 6,
       "jogos_away": 6,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 0,
+      "score_away": 3,
+      "outcome": "away",
+      "settled_at": "2026-10-20T12:01:32.055Z"
     },
     {
       "league_id": "PPL",
@@ -134,10 +134,10 @@
       "rating_away": 1506.2,
       "jogos_home": 7,
       "jogos_away": 7,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-10-20T12:01:32.055Z"
     }
   ]
 }
