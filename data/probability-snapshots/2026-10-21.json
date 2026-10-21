@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-21",
+  "mode": "live",
+  "issued_at": "2026-10-21T12:01:41.440Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Levante",
+      "away": "Athletic Club",
+      "kickoff": "2026-10-21T18:00Z",
+      "prob": {
+        "home": 0.450683365123792,
+        "draw": 0.2592692381498399,
+        "away": 0.29004739672636815
+      },
+      "favorito": "home",
+      "rating_home": 1486.4,
+      "rating_away": 1500.1,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
