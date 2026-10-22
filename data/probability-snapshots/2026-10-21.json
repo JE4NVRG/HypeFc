@@ -29,10 +29,10 @@
       "rating_away": 1500.1,
       "jogos_home": 8,
       "jogos_away": 8,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home",
+      "settled_at": "2026-10-22T12:02:02.635Z"
     }
   ]
 }

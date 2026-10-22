@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T12:01:20.516Z",
+  "generated_at": "2026-10-22T12:01:30.525Z",
   "season": 2026,
   "model": {
     "name": "elo+poisson",
@@ -73,7 +73,7 @@
       "league_name": "La Liga",
       "slug": "esp.1",
       "season": 2026,
-      "matches": 89,
+      "matches": 90,
       "teams": 20,
       "ratings": {
         "Alavés": 1485.6,
@@ -83,14 +83,14 @@
         "Racing Santander": 1472.9,
         "Villarreal": 1484.6,
         "Espanyol": 1469.1,
-        "Levante": 1486.4,
+        "Levante": 1494.8,
         "Deportivo": 1496.5,
         "Elche": 1476,
         "Atlético Madrid": 1558,
         "Málaga": 1451.3,
         "Real Betis": 1534,
         "Real Sociedad": 1520.7,
-        "Athletic Club": 1500.1,
+        "Athletic Club": 1491.7,
         "Valencia": 1464.5,
         "Celta Vigo": 1498.4,
         "Real Madrid": 1542.6,
