@@ -1,0 +1,122 @@
+{
+  "date": "2026-10-26",
+  "mode": "live",
+  "issued_at": "2026-10-26T12:01:08.022Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 4,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Coritiba",
+      "away": "Grêmio",
+      "kickoff": "2026-10-26T22:30Z",
+      "prob": {
+        "home": 0.5300265939201098,
+        "draw": 0.24677436544452513,
+        "away": 0.22319904063536505
+      },
+      "favorito": "home",
+      "rating_home": 1480,
+      "rating_away": 1439.8,
+      "jogos_home": 31,
+      "jogos_away": 31,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Atlético-MG",
+      "kickoff": "2026-10-26T23:00Z",
+      "prob": {
+        "home": 0.571963621337989,
+        "draw": 0.23722902881349334,
+        "away": 0.19080734984851777
+      },
+      "favorito": "home",
+      "rating_home": 1615.6,
+      "rating_away": 1546.1,
+      "jogos_home": 31,
+      "jogos_away": 31,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Sevilla",
+      "away": "Osasuna",
+      "kickoff": "2026-10-26T20:00Z",
+      "prob": {
+        "home": 0.5021974025764516,
+        "draw": 0.2520026356287222,
+        "away": 0.24579996179482613
+      },
+      "favorito": "home",
+      "rating_home": 1510.2,
+      "rating_away": 1489.1,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Paris Saint-Germain",
+      "away": "Lyon",
+      "kickoff": "2026-10-26T19:30Z",
+      "prob": {
+        "home": 0.48598557756678334,
+        "draw": 0.2546322671189514,
+        "away": 0.2593821553142654
+      },
+      "favorito": "home",
+      "rating_home": 1535.2,
+      "rating_away": 1525.1,
+      "jogos_home": 7,
+      "jogos_away": 7,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Santa Clara",
+      "away": "Benfica",
+      "kickoff": "2026-10-26T18:45Z",
+      "prob": {
+        "home": 0.4706651268224499,
+        "draw": 0.256830199457326,
+        "away": 0.2725046737202241
+      },
+      "favorito": "home",
+      "rating_home": 1545,
+      "rating_away": 1545.2,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
