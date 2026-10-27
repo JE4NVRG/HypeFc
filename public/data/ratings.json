@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T12:00:45.010Z",
+  "generated_at": "2026-10-27T12:00:37.432Z",
   "season": 2026,
   "model": {
     "name": "elo+poisson",
@@ -13,25 +13,25 @@
       "league_name": "Brasileirao",
       "slug": "bra.1",
       "season": 2026,
-      "matches": 317,
+      "matches": 319,
       "teams": 20,
       "ratings": {
-        "Atlético-MG": 1546.1,
+        "Atlético-MG": 1539.9,
         "Palmeiras": 1611.1,
-        "Coritiba": 1480,
+        "Coritiba": 1466.9,
         "Red Bull Bragantino": 1487.7,
         "Internacional": 1467.7,
         "Athletico-PR": 1549.9,
         "Vitória": 1468.5,
         "Remo": 1424.6,
         "Fluminense": 1524.8,
-        "Grêmio": 1439.8,
+        "Grêmio": 1452.9,
         "Chapecoense": 1407.7,
         "Santos": 1529.7,
         "Corinthians": 1440.7,
         "Bahia": 1530.1,
         "São Paulo": 1487.2,
-        "Flamengo": 1615.6,
+        "Flamengo": 1621.8,
         "Mirassol": 1480.3,
         "Vasco da Gama": 1483.1,
         "Botafogo": 1471.8,
@@ -73,12 +73,12 @@
       "league_name": "La Liga",
       "slug": "esp.1",
       "season": 2026,
-      "matches": 99,
+      "matches": 100,
       "teams": 20,
       "ratings": {
         "Alavés": 1482.7,
         "Getafe": 1474.2,
-        "Sevilla": 1510.2,
+        "Sevilla": 1517.6,
         "Rayo Vallecano": 1482,
         "Racing Santander": 1480.8,
         "Villarreal": 1496.1,
@@ -95,7 +95,7 @@
         "Celta Vigo": 1497.4,
         "Real Madrid": 1555.7,
         "Barcelona": 1570.4,
-        "Osasuna": 1489.1
+        "Osasuna": 1481.7
       }
     },
     "SA": {
@@ -161,7 +161,7 @@
       "league_name": "Ligue 1",
       "slug": "fra.1",
       "season": 2026,
-      "matches": 71,
+      "matches": 72,
       "teams": 18,
       "ratings": {
         "Marseille": 1501.2,
@@ -173,7 +173,7 @@
         "Nice": 1502.3,
         "Lorient": 1510.4,
         "Toulouse": 1501.5,
-        "Lyon": 1525.1,
+        "Lyon": 1517.3,
         "Troyes": 1462,
         "Paris FC": 1517.8,
         "Angers": 1476.5,
@@ -181,7 +181,7 @@
         "Le Havre AC": 1444.3,
         "AS Monaco": 1525.3,
         "Stade Rennais": 1523.1,
-        "Paris Saint-Germain": 1535.2
+        "Paris Saint-Germain": 1542.9
       }
     },
     "PPL": {
@@ -189,7 +189,7 @@
       "league_name": "Primeira Liga",
       "slug": "por.1",
       "season": 2026,
-      "matches": 80,
+      "matches": 81,
       "teams": 18,
       "ratings": {
         "Estoril": 1433.7,
@@ -202,13 +202,13 @@
         "Sporting CP": 1532.2,
         "FC Porto": 1583.4,
         "Alverca": 1491.1,
-        "Benfica": 1545.2,
+        "Benfica": 1557.2,
         "Académico de Viseu": 1533.6,
         "Gil Vicente": 1507.8,
         "Rio Ave": 1461.9,
         "Moreirense": 1492.6,
         "Braga": 1488.7,
-        "Santa Clara": 1545,
+        "Santa Clara": 1533,
         "C.D. Nacional": 1459.7
       }
     },

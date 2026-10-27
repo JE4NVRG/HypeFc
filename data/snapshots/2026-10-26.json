@@ -12,17 +12,17 @@
       "league_id": "BSA",
       "home": "Coritiba",
       "away": "Grêmio",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
     },
     {
       "league_id": "BSA",
       "home": "Flamengo",
       "away": "Atlético-MG",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
     },
     {
       "league_id": "PD",
@@ -36,17 +36,17 @@
       "league_id": "FL1",
       "home": "Paris Saint-Germain",
       "away": "Lyon",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "PPL",
       "home": "Santa Clara",
       "away": "Benfica",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away"
     }
   ],
   "cards": [
@@ -65,10 +65,10 @@
       ],
       "pos": 2,
       "opp_pos": 6,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 2,
+      "hit": true
     },
     {
       "league_id": "FL1",
@@ -85,10 +85,10 @@
       ],
       "pos": 4,
       "opp_pos": 5,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": false
     },
     {
       "league_id": "FL1",
@@ -105,10 +105,10 @@
       ],
       "pos": 5,
       "opp_pos": 4,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": true
     },
     {
       "league_id": "PPL",
@@ -125,10 +125,10 @@
       ],
       "pos": 2,
       "opp_pos": 4,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 2,
+      "hit": true
     },
     {
       "league_id": "PPL",
@@ -145,10 +145,10 @@
       ],
       "pos": 4,
       "opp_pos": 2,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 2,
+      "hit": false
     }
   ]
 }

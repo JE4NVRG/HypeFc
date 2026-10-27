@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-27",
+  "mode": "live",
+  "issued_at": "2026-10-27T12:00:58.478Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Sassuolo",
+      "away": "Lazio",
+      "kickoff": "2026-10-27T17:30Z",
+      "prob": {
+        "home": 0.3576009634022306,
+        "draw": 0.2638352190981041,
+        "away": 0.3785638174996653
+      },
+      "favorito": "away",
+      "rating_home": 1485,
+      "rating_away": 1562.2,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "AS Roma",
+      "away": "Cagliari",
+      "kickoff": "2026-10-27T19:45Z",
+      "prob": {
+        "home": 0.529016501391149,
+        "draw": 0.24697972028663626,
+        "away": 0.22400377832221477
+      },
+      "favorito": "home",
+      "rating_home": 1545.4,
+      "rating_away": 1505.9,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Torino",
+      "away": "Como",
+      "kickoff": "2026-10-27T19:45Z",
+      "prob": {
+        "home": 0.42743786960712304,
+        "draw": 0.26148177007664414,
+        "away": 0.31108036031623276
+      },
+      "favorito": "home",
+      "rating_home": 1509.8,
+      "rating_away": 1539.2,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
