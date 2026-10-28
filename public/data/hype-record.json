@@ -1,27 +1,27 @@
 {
-  "generated_at": "2026-10-27T12:00:32.063Z",
+  "generated_at": "2026-10-28T12:02:10.900Z",
   "cutoff": 44,
   "method": "Rodada a rodada: a tabela e reconstruida apenas com jogos anteriores a rodada (sem lookahead) e o buildHypeBoard do produto marca os times. Cards em modo replay foram reconstruidos; cards em modo live foram gravados antes do jogo.",
-  "snapshots": 281,
-  "completed_rounds": 280,
-  "cards_total": 1500,
-  "cards_settled": 1497,
-  "cards_pending": 3,
-  "live_cards": 98,
+  "snapshots": 282,
+  "completed_rounds": 281,
+  "cards_total": 1504,
+  "cards_settled": 1500,
+  "cards_pending": 4,
+  "live_cards": 102,
   "replay_cards": 1402,
   "flagged": {
-    "n": 1497,
-    "wins": 806,
-    "rate": 0.538
+    "n": 1500,
+    "wins": 809,
+    "rate": 0.539
   },
   "baseline": {
-    "n": 3426,
-    "home_rate": 0.431,
-    "away_rate": 0.31,
-    "draw_rate": 0.253,
-    "expected_for_flagged": 0.368
+    "n": 3436,
+    "home_rate": 0.43,
+    "away_rate": 0.309,
+    "draw_rate": 0.252,
+    "expected_for_flagged": 0.367
   },
-  "lift_pp": 17,
+  "lift_pp": 17.2,
   "anchor": {
     "n": 3236,
     "wins": 1578,
@@ -30,32 +30,32 @@
     "away_rate": 0.419,
     "expected_for_flagged": 0.486
   },
-  "anchor_lift_pp": 5.2,
+  "anchor_lift_pp": 5.3,
   "by_venue": [
     {
       "key": "fora",
-      "n": 779,
-      "wins": 358,
-      "rate": 0.46
+      "n": 781,
+      "wins": 360,
+      "rate": 0.461
     },
     {
       "key": "casa",
-      "n": 718,
-      "wins": 448,
+      "n": 719,
+      "wins": 449,
       "rate": 0.624
     }
   ],
   "by_band": [
     {
       "key": "40-54",
-      "n": 709,
-      "wins": 334,
-      "rate": 0.471
+      "n": 711,
+      "wins": 336,
+      "rate": 0.473
     },
     {
       "key": "55+",
-      "n": 788,
-      "wins": 472,
+      "n": 789,
+      "wins": 473,
       "rate": 0.599
     }
   ],
@@ -68,9 +68,9 @@
     },
     {
       "key": "SA",
-      "n": 199,
-      "wins": 107,
-      "rate": 0.538
+      "n": 202,
+      "wins": 110,
+      "rate": 0.545
     },
     {
       "key": "PD",
@@ -111,19 +111,11 @@
   ],
   "by_round": [
     {
-      "key": "2026-08-29",
-      "n": 1,
-      "wins": 0,
-      "rate": null,
-      "expected": 0.31,
-      "lift_pp": -31
-    },
-    {
       "key": "2026-08-30",
       "n": 3,
       "wins": 1,
       "rate": null,
-      "expected": 0.391,
+      "expected": 0.39,
       "lift_pp": -5.7
     },
     {
@@ -131,8 +123,8 @@
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.431,
-      "lift_pp": 56.9
+      "expected": 0.43,
+      "lift_pp": 57
     },
     {
       "key": "2026-09-06",
@@ -155,48 +147,48 @@
       "n": 7,
       "wins": 4,
       "rate": null,
-      "expected": 0.379,
-      "lift_pp": 19.2
+      "expected": 0.378,
+      "lift_pp": 19.3
     },
     {
       "key": "2026-09-15",
       "n": 3,
       "wins": 2,
       "rate": null,
-      "expected": 0.391,
-      "lift_pp": 27.6
+      "expected": 0.39,
+      "lift_pp": 27.7
     },
     {
       "key": "2026-09-16",
       "n": 2,
       "wins": 2,
       "rate": null,
-      "expected": 0.431,
-      "lift_pp": 56.9
+      "expected": 0.43,
+      "lift_pp": 57
     },
     {
       "key": "2026-09-17",
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.431,
-      "lift_pp": 56.9
+      "expected": 0.43,
+      "lift_pp": 57
     },
     {
       "key": "2026-09-19",
       "n": 4,
       "wins": 1,
       "rate": null,
-      "expected": 0.401,
-      "lift_pp": -15.1
+      "expected": 0.4,
+      "lift_pp": -15
     },
     {
       "key": "2026-09-20",
       "n": 13,
       "wins": 6,
       "rate": null,
-      "expected": 0.375,
-      "lift_pp": 8.6
+      "expected": 0.374,
+      "lift_pp": 8.7
     },
     {
       "key": "2026-10-08",
@@ -204,7 +196,7 @@
       "wins": 1,
       "rate": null,
       "expected": 0.35,
-      "lift_pp": -1.7
+      "lift_pp": -1.6
     },
     {
       "key": "2026-10-09",
@@ -219,16 +211,16 @@
       "n": 17,
       "wins": 10,
       "rate": null,
-      "expected": 0.367,
-      "lift_pp": 22.1
+      "expected": 0.366,
+      "lift_pp": 22.2
     },
     {
       "key": "2026-10-11",
       "n": 9,
       "wins": 5,
       "rate": null,
-      "expected": 0.377,
-      "lift_pp": 17.8
+      "expected": 0.376,
+      "lift_pp": 17.9
     },
     {
       "key": "2026-10-17",
@@ -244,22 +236,22 @@
       "wins": 10,
       "rate": null,
       "expected": 0.366,
-      "lift_pp": 30
+      "lift_pp": 30.1
     },
     {
       "key": "2026-10-24",
       "n": 10,
       "wins": 7,
       "rate": null,
-      "expected": 0.383,
-      "lift_pp": 31.7
+      "expected": 0.382,
+      "lift_pp": 31.8
     },
     {
       "key": "2026-10-25",
       "n": 18,
       "wins": 8,
       "rate": null,
-      "expected": 0.357,
+      "expected": 0.356,
       "lift_pp": 8.8
     },
     {
@@ -267,29 +259,97 @@
       "n": 5,
       "wins": 3,
       "rate": null,
-      "expected": 0.383,
-      "lift_pp": 21.7
+      "expected": 0.382,
+      "lift_pp": 21.8
+    },
+    {
+      "key": "2026-10-27",
+      "n": 3,
+      "wins": 3,
+      "rate": null,
+      "expected": 0.35,
+      "lift_pp": 65
     }
   ],
   "by_edge": [
     {
       "key": "marcado MELHOR colocado",
-      "n": 1316,
-      "wins": 751,
-      "rate": 0.571,
-      "expected": 0.368,
-      "lift_pp": 20.3
+      "n": 1319,
+      "wins": 754,
+      "rate": 0.572,
+      "expected": 0.367,
+      "lift_pp": 20.5
     },
     {
       "key": "marcado PIOR colocado",
       "n": 181,
       "wins": 55,
       "rate": 0.304,
-      "expected": 0.37,
-      "lift_pp": -6.6
+      "expected": 0.369,
+      "lift_pp": -6.5
     }
   ],
   "recent": [
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Torino",
+      "away": "Como",
+      "team": "Como",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 5,
+      "opp_pos": 8,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 3,
+      "hit": true
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "AS Roma",
+      "away": "Cagliari",
+      "team": "AS Roma",
+      "venue": "home",
+      "score": 53,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 9,
+      "outcome": "home",
+      "score_home": 4,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Sassuolo",
+      "away": "Lazio",
+      "team": "Lazio",
+      "venue": "away",
+      "score": 65,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 14,
+      "outcome": "away",
+      "score_home": 2,
+      "score_away": 6,
+      "hit": true
+    },
     {
       "league_id": "PPL",
       "league_name": "Primeira Liga",
@@ -705,66 +765,6 @@
       "outcome": "away",
       "score_home": 1,
       "score_away": 2,
-      "hit": true
-    },
-    {
-      "league_id": "PD",
-      "league_name": "La Liga",
-      "home": "Barcelona",
-      "away": "Real Madrid",
-      "team": "Barcelona",
-      "venue": "home",
-      "score": 93,
-      "flags": [
-        "Clássico",
-        "Forma 5V",
-        "Líder"
-      ],
-      "pos": 1,
-      "opp_pos": 3,
-      "outcome": "away",
-      "score_home": 1,
-      "score_away": 2,
-      "hit": false
-    },
-    {
-      "league_id": "PL",
-      "league_name": "Premier League",
-      "home": "Liverpool",
-      "away": "Brighton & Hove Albion",
-      "team": "Brighton & Hove Albion",
-      "venue": "away",
-      "score": 61,
-      "flags": [
-        "Forma 4V",
-        "Top 3",
-        "Saldo alto"
-      ],
-      "pos": 3,
-      "opp_pos": 5,
-      "outcome": "home",
-      "score_home": 2,
-      "score_away": 0,
-      "hit": false
-    },
-    {
-      "league_id": "PPL",
-      "league_name": "Primeira Liga",
-      "home": "Gil Vicente",
-      "away": "FC Porto",
-      "team": "FC Porto",
-      "venue": "away",
-      "score": 75,
-      "flags": [
-        "Forma 5V",
-        "Líder",
-        "Saldo alto"
-      ],
-      "pos": 1,
-      "opp_pos": 6,
-      "outcome": "away",
-      "score_home": 0,
-      "score_away": 1,
       "hit": true
     }
   ],
