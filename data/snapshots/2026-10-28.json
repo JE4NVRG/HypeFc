@@ -12,81 +12,81 @@
       "league_id": "BSA",
       "home": "Fluminense",
       "away": "Internacional",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
     },
     {
       "league_id": "BSA",
       "home": "Red Bull Bragantino",
       "away": "Chapecoense",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "BSA",
       "home": "Santos",
       "away": "Palmeiras",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
     },
     {
       "league_id": "BSA",
       "home": "Bahia",
       "away": "São Paulo",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
     },
     {
       "league_id": "BSA",
       "home": "Remo",
       "away": "Botafogo",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
     },
     {
       "league_id": "SA",
       "home": "AC Milan",
       "away": "Bologna",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 4,
+      "outcome": "away"
     },
     {
       "league_id": "SA",
       "home": "Parma",
       "away": "Udinese",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
     },
     {
       "league_id": "SA",
       "home": "Venezia",
       "away": "Internazionale",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
     },
     {
       "league_id": "SA",
       "home": "Genoa",
       "away": "Juventus",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "SA",
       "home": "Monza",
       "away": "Napoli",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 4,
+      "outcome": "away"
     }
   ],
   "cards": [
@@ -105,10 +105,10 @@
       ],
       "pos": 2,
       "opp_pos": 8,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
     },
     {
       "league_id": "BSA",
@@ -123,10 +123,10 @@
       ],
       "pos": 8,
       "opp_pos": 2,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "draw",
+      "score_home": 0,
+      "score_away": 0,
+      "hit": false
     },
     {
       "league_id": "SA",
@@ -143,10 +143,10 @@
       ],
       "pos": 2,
       "opp_pos": 20,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": true
     },
     {
       "league_id": "SA",
@@ -163,10 +163,10 @@
       ],
       "pos": 5,
       "opp_pos": 13,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "away",
+      "score_home": 2,
+      "score_away": 4,
+      "hit": false
     }
   ]
 }

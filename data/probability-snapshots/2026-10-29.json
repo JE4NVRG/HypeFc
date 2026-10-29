@@ -1,0 +1,122 @@
+{
+  "date": "2026-10-29",
+  "mode": "live",
+  "issued_at": "2026-10-29T12:01:37.465Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 2,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Atlético-MG",
+      "away": "Cruzeiro",
+      "kickoff": "2026-10-29T22:30Z",
+      "prob": {
+        "home": 0.45089813277513874,
+        "draw": 0.25924563452749166,
+        "away": 0.28985623269736954
+      },
+      "favorito": "home",
+      "rating_home": 1539.9,
+      "rating_away": 1553.5,
+      "jogos_home": 32,
+      "jogos_away": 32,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Vasco da Gama",
+      "away": "Flamengo",
+      "kickoff": "2026-10-29T23:00Z",
+      "prob": {
+        "home": 0.2739282073880501,
+        "draw": 0.25704906090575297,
+        "away": 0.46902273170619696
+      },
+      "favorito": "away",
+      "rating_home": 1483.1,
+      "rating_away": 1621.8,
+      "jogos_home": 31,
+      "jogos_away": 32,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Grêmio",
+      "away": "Athletico-PR",
+      "kickoff": "2026-10-30T00:30Z",
+      "prob": {
+        "home": 0.3297576038283417,
+        "draw": 0.26283205428135165,
+        "away": 0.40741034189030667
+      },
+      "favorito": "away",
+      "rating_home": 1452.9,
+      "rating_away": 1549.9,
+      "jogos_home": 32,
+      "jogos_away": 32,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Frosinone",
+      "away": "Lecce",
+      "kickoff": "2026-10-29T17:30Z",
+      "prob": {
+        "home": 0.5265830793856345,
+        "draw": 0.24746965162298645,
+        "away": 0.2259472689913791
+      },
+      "favorito": "home",
+      "rating_home": 1517.7,
+      "rating_away": 1479.9,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Fiorentina",
+      "away": "Atalanta",
+      "kickoff": "2026-10-29T19:45Z",
+      "prob": {
+        "home": 0.4223817263837519,
+        "draw": 0.26187194709003014,
+        "away": 0.315746326526218
+      },
+      "favorito": "home",
+      "rating_home": 1454,
+      "rating_away": 1486.8,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}

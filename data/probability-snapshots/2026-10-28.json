@@ -29,10 +29,10 @@
       "rating_away": 1467.7,
       "jogos_home": 32,
       "jogos_away": 32,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home",
+      "settled_at": "2026-10-29T12:01:40.121Z"
     },
     {
       "league_id": "BSA",
@@ -50,10 +50,10 @@
       "rating_away": 1407.7,
       "jogos_home": 32,
       "jogos_away": 31,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home",
+      "settled_at": "2026-10-29T12:01:40.121Z"
     },
     {
       "league_id": "BSA",
@@ -71,10 +71,10 @@
       "rating_away": 1611.1,
       "jogos_home": 32,
       "jogos_away": 32,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw",
+      "settled_at": "2026-10-29T12:01:40.121Z"
     },
     {
       "league_id": "BSA",
@@ -92,10 +92,10 @@
       "rating_away": 1487.2,
       "jogos_home": 32,
       "jogos_away": 32,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home",
+      "settled_at": "2026-10-29T12:01:40.121Z"
     },
     {
       "league_id": "BSA",
@@ -113,10 +113,10 @@
       "rating_away": 1471.8,
       "jogos_home": 32,
       "jogos_away": 32,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home",
+      "settled_at": "2026-10-29T12:01:40.121Z"
     },
     {
       "league_id": "SA",
@@ -134,10 +134,10 @@
       "rating_away": 1485.3,
       "jogos_home": 8,
       "jogos_away": 8,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 4,
+      "outcome": "away",
+      "settled_at": "2026-10-29T12:01:40.121Z"
     },
     {
       "league_id": "SA",
@@ -155,10 +155,10 @@
       "rating_away": 1450.3,
       "jogos_home": 8,
       "jogos_away": 8,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw",
+      "settled_at": "2026-10-29T12:01:40.121Z"
     },
     {
       "league_id": "SA",
@@ -176,10 +176,10 @@
       "rating_away": 1559.2,
       "jogos_home": 8,
       "jogos_away": 8,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-10-29T12:01:40.121Z"
     },
     {
       "league_id": "SA",
@@ -197,10 +197,10 @@
       "rating_away": 1519.2,
       "jogos_home": 8,
       "jogos_away": 8,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home",
+      "settled_at": "2026-10-29T12:01:40.121Z"
     },
     {
       "league_id": "SA",
@@ -218,10 +218,10 @@
       "rating_away": 1499.2,
       "jogos_home": 8,
       "jogos_away": 8,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 4,
+      "outcome": "away",
+      "settled_at": "2026-10-29T12:01:40.121Z"
     }
   ]
 }
