@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T12:01:16.322Z",
+  "generated_at": "2026-10-30T12:01:21.565Z",
   "season": 2026,
   "model": {
     "name": "elo+poisson",
@@ -13,29 +13,29 @@
       "league_name": "Brasileirao",
       "slug": "bra.1",
       "season": 2026,
-      "matches": 324,
+      "matches": 327,
       "teams": 20,
       "ratings": {
-        "Atlético-MG": 1539.9,
+        "Atlético-MG": 1528.3,
         "Palmeiras": 1610.8,
         "Coritiba": 1466.9,
         "Red Bull Bragantino": 1493.6,
         "Internacional": 1461.2,
-        "Athletico-PR": 1549.9,
+        "Athletico-PR": 1539.2,
         "Vitória": 1468.5,
         "Remo": 1433.9,
         "Fluminense": 1531.3,
-        "Grêmio": 1452.9,
+        "Grêmio": 1463.7,
         "Chapecoense": 1401.8,
         "Santos": 1530,
         "Corinthians": 1440.7,
         "Bahia": 1536.9,
         "São Paulo": 1480.3,
-        "Flamengo": 1621.8,
+        "Flamengo": 1629.8,
         "Mirassol": 1480.3,
-        "Vasco da Gama": 1483.1,
+        "Vasco da Gama": 1475.1,
         "Botafogo": 1462.5,
-        "Cruzeiro": 1553.5
+        "Cruzeiro": 1565.1
       }
     },
     "PL": {
@@ -103,7 +103,7 @@
       "league_name": "Serie A",
       "slug": "ita.1",
       "season": 2026,
-      "matches": 88,
+      "matches": 90,
       "teams": 20,
       "ratings": {
         "Internazionale": 1568,
@@ -114,18 +114,18 @@
         "Napoli": 1510.6,
         "Parma": 1454.1,
         "Cagliari": 1499,
-        "Frosinone": 1517.7,
+        "Frosinone": 1524.7,
         "Juventus": 1509.8,
         "Venezia": 1437.3,
-        "Lecce": 1479.9,
-        "Atalanta": 1486.8,
+        "Lecce": 1472.9,
+        "Atalanta": 1487.8,
         "Sassuolo": 1475.2,
         "Torino": 1498.7,
         "AC Milan": 1535.2,
         "Bologna": 1499,
         "Lazio": 1572,
         "AS Roma": 1552.4,
-        "Fiorentina": 1454
+        "Fiorentina": 1452.9
       }
     },
     "BL1": {

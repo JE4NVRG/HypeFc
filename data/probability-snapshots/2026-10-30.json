@@ -1,0 +1,164 @@
+{
+  "date": "2026-10-30",
+  "mode": "live",
+  "issued_at": "2026-10-30T12:01:51.615Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 5,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Corinthians",
+      "away": "Mirassol",
+      "kickoff": "2026-10-30T23:00Z",
+      "prob": {
+        "home": 0.41223898675208165,
+        "draw": 0.26255455219479795,
+        "away": 0.3252064610531204
+      },
+      "favorito": "home",
+      "rating_home": 1440.7,
+      "rating_away": 1480.3,
+      "jogos_home": 32,
+      "jogos_away": 32,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Villarreal",
+      "away": "Espanyol",
+      "kickoff": "2026-10-30T20:00Z",
+      "prob": {
+        "home": 0.5223424273166639,
+        "draw": 0.2483072280181437,
+        "away": 0.22935034466519236
+      },
+      "favorito": "home",
+      "rating_home": 1496.1,
+      "rating_away": 1461.2,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "SV Elversberg",
+      "away": "Mainz",
+      "kickoff": "2026-10-30T19:30Z",
+      "prob": {
+        "home": 0.47597971079607465,
+        "draw": 0.25609965798066525,
+        "away": 0.26792063122326015
+      },
+      "favorito": "home",
+      "rating_home": 1500,
+      "rating_away": 1496.7,
+      "jogos_home": 7,
+      "jogos_away": 7,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Le Havre AC",
+      "away": "Paris Saint-Germain",
+      "kickoff": "2026-10-30T18:00Z",
+      "prob": {
+        "home": 0.32757378904339707,
+        "draw": 0.2627029805895906,
+        "away": 0.4097232303670123
+      },
+      "favorito": "away",
+      "rating_home": 1444.3,
+      "rating_away": 1542.9,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Nice",
+      "away": "Stade Rennais",
+      "kickoff": "2026-10-30T18:00Z",
+      "prob": {
+        "home": 0.44016558839902903,
+        "draw": 0.26035477142303753,
+        "away": 0.2994796401779334
+      },
+      "favorito": "home",
+      "rating_home": 1502.3,
+      "rating_away": 1523.1,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Lille",
+      "away": "Lens",
+      "kickoff": "2026-10-30T20:05Z",
+      "prob": {
+        "home": 0.49074026088526146,
+        "draw": 0.2538931802256056,
+        "away": 0.2553665588891328
+      },
+      "favorito": "home",
+      "rating_home": 1525.2,
+      "rating_away": 1511.9,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Casa Pia",
+      "away": "Sporting CP",
+      "kickoff": "2026-10-30T20:15Z",
+      "prob": {
+        "home": 0.3786839039914321,
+        "draw": 0.26383341720485476,
+        "away": 0.35748267880371326
+      },
+      "favorito": "home",
+      "rating_home": 1469.6,
+      "rating_away": 1532.2,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}

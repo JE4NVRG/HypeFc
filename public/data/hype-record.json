@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-10-29T12:01:09.322Z",
+  "generated_at": "2026-10-30T12:01:10.057Z",
   "cutoff": 44,
   "method": "Rodada a rodada: a tabela e reconstruida apenas com jogos anteriores a rodada (sem lookahead) e o buildHypeBoard do produto marca os times. Cards em modo replay foram reconstruidos; cards em modo live foram gravados antes do jogo.",
-  "snapshots": 283,
-  "completed_rounds": 282,
-  "cards_total": 1507,
-  "cards_settled": 1504,
-  "cards_pending": 3,
-  "live_cards": 105,
+  "snapshots": 284,
+  "completed_rounds": 283,
+  "cards_total": 1511,
+  "cards_settled": 1507,
+  "cards_pending": 4,
+  "live_cards": 109,
   "replay_cards": 1402,
   "flagged": {
-    "n": 1504,
-    "wins": 810,
+    "n": 1507,
+    "wins": 812,
     "rate": 0.539
   },
   "baseline": {
-    "n": 3441,
-    "home_rate": 0.431,
+    "n": 3448,
+    "home_rate": 0.43,
     "away_rate": 0.31,
-    "draw_rate": 0.253,
+    "draw_rate": 0.252,
     "expected_for_flagged": 0.368
   },
   "lift_pp": 17.1,
@@ -34,37 +34,37 @@
   "by_venue": [
     {
       "key": "fora",
-      "n": 783,
-      "wins": 361,
-      "rate": 0.461
+      "n": 785,
+      "wins": 363,
+      "rate": 0.462
     },
     {
       "key": "casa",
-      "n": 721,
+      "n": 722,
       "wins": 449,
-      "rate": 0.623
+      "rate": 0.622
     }
   ],
   "by_band": [
     {
       "key": "40-54",
-      "n": 713,
-      "wins": 336,
+      "n": 715,
+      "wins": 337,
       "rate": 0.471
     },
     {
       "key": "55+",
-      "n": 791,
-      "wins": 474,
-      "rate": 0.599
+      "n": 792,
+      "wins": 475,
+      "rate": 0.6
     }
   ],
   "by_league": [
     {
       "key": "BSA",
-      "n": 205,
-      "wins": 96,
-      "rate": 0.468
+      "n": 208,
+      "wins": 98,
+      "rate": 0.471
     },
     {
       "key": "SA",
@@ -111,14 +111,6 @@
   ],
   "by_round": [
     {
-      "key": "2026-09-02",
-      "n": 1,
-      "wins": 1,
-      "rate": null,
-      "expected": 0.431,
-      "lift_pp": 56.9
-    },
-    {
       "key": "2026-09-06",
       "n": 4,
       "wins": 2,
@@ -140,14 +132,14 @@
       "wins": 4,
       "rate": null,
       "expected": 0.379,
-      "lift_pp": 19.2
+      "lift_pp": 19.3
     },
     {
       "key": "2026-09-15",
       "n": 3,
       "wins": 2,
       "rate": null,
-      "expected": 0.391,
+      "expected": 0.39,
       "lift_pp": 27.6
     },
     {
@@ -155,24 +147,24 @@
       "n": 2,
       "wins": 2,
       "rate": null,
-      "expected": 0.431,
-      "lift_pp": 56.9
+      "expected": 0.43,
+      "lift_pp": 57
     },
     {
       "key": "2026-09-17",
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.431,
-      "lift_pp": 56.9
+      "expected": 0.43,
+      "lift_pp": 57
     },
     {
       "key": "2026-09-19",
       "n": 4,
       "wins": 1,
       "rate": null,
-      "expected": 0.401,
-      "lift_pp": -15.1
+      "expected": 0.4,
+      "lift_pp": -15
     },
     {
       "key": "2026-09-20",
@@ -180,7 +172,7 @@
       "wins": 6,
       "rate": null,
       "expected": 0.375,
-      "lift_pp": 8.6
+      "lift_pp": 8.7
     },
     {
       "key": "2026-10-08",
@@ -196,7 +188,7 @@
       "wins": 2,
       "rate": null,
       "expected": 0.35,
-      "lift_pp": 31.6
+      "lift_pp": 31.7
     },
     {
       "key": "2026-10-10",
@@ -204,7 +196,7 @@
       "wins": 10,
       "rate": null,
       "expected": 0.367,
-      "lift_pp": 22.1
+      "lift_pp": 22.2
     },
     {
       "key": "2026-10-11",
@@ -212,7 +204,7 @@
       "wins": 5,
       "rate": null,
       "expected": 0.377,
-      "lift_pp": 17.8
+      "lift_pp": 17.9
     },
     {
       "key": "2026-10-17",
@@ -228,15 +220,15 @@
       "wins": 10,
       "rate": null,
       "expected": 0.366,
-      "lift_pp": 30
+      "lift_pp": 30.1
     },
     {
       "key": "2026-10-24",
       "n": 10,
       "wins": 7,
       "rate": null,
-      "expected": 0.383,
-      "lift_pp": 31.7
+      "expected": 0.382,
+      "lift_pp": 31.8
     },
     {
       "key": "2026-10-25",
@@ -251,8 +243,8 @@
       "n": 5,
       "wins": 3,
       "rate": null,
-      "expected": 0.383,
-      "lift_pp": 21.7
+      "expected": 0.382,
+      "lift_pp": 21.8
     },
     {
       "key": "2026-10-27",
@@ -269,27 +261,93 @@
       "rate": null,
       "expected": 0.37,
       "lift_pp": -12
+    },
+    {
+      "key": "2026-10-29",
+      "n": 3,
+      "wins": 2,
+      "rate": null,
+      "expected": 0.35,
+      "lift_pp": 31.7
     }
   ],
   "by_edge": [
     {
       "key": "marcado MELHOR colocado",
-      "n": 1322,
-      "wins": 755,
-      "rate": 0.571,
-      "expected": 0.368,
-      "lift_pp": 20.3
+      "n": 1324,
+      "wins": 757,
+      "rate": 0.572,
+      "expected": 0.367,
+      "lift_pp": 20.5
     },
     {
       "key": "marcado PIOR colocado",
-      "n": 182,
+      "n": 183,
       "wins": 55,
-      "rate": 0.302,
+      "rate": 0.301,
       "expected": 0.37,
-      "lift_pp": -6.8
+      "lift_pp": -6.9
     }
   ],
   "recent": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Atlético-MG",
+      "away": "Cruzeiro",
+      "team": "Cruzeiro",
+      "venue": "away",
+      "score": 44,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 5,
+      "opp_pos": 7,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Vasco da Gama",
+      "away": "Flamengo",
+      "team": "Vasco da Gama",
+      "venue": "home",
+      "score": 50,
+      "flags": [
+        "Clássico",
+        "Boa forma"
+      ],
+      "pos": 13,
+      "opp_pos": 1,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 4,
+      "hit": false
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Vasco da Gama",
+      "away": "Flamengo",
+      "team": "Flamengo",
+      "venue": "away",
+      "score": 89,
+      "flags": [
+        "Clássico",
+        "Forma 4V",
+        "Líder"
+      ],
+      "pos": 1,
+      "opp_pos": 13,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 4,
+      "hit": true
+    },
     {
       "league_id": "SA",
       "league_name": "Serie A",
@@ -704,66 +762,6 @@
       "outcome": "away",
       "score_home": 1,
       "score_away": 3,
-      "hit": false
-    },
-    {
-      "league_id": "BL1",
-      "league_name": "Bundesliga",
-      "home": "TSG Hoffenheim",
-      "away": "Bayer Leverkusen",
-      "team": "Bayer Leverkusen",
-      "venue": "away",
-      "score": 55,
-      "flags": [
-        "Forma 4V",
-        "Zona alta",
-        "Saldo alto"
-      ],
-      "pos": 4,
-      "opp_pos": 14,
-      "outcome": "home",
-      "score_home": 3,
-      "score_away": 0,
-      "hit": false
-    },
-    {
-      "league_id": "BL1",
-      "league_name": "Bundesliga",
-      "home": "SC Freiburg",
-      "away": "Bayern Munich",
-      "team": "Bayern Munich",
-      "venue": "away",
-      "score": 61,
-      "flags": [
-        "Boa forma",
-        "Top 3",
-        "Saldo alto"
-      ],
-      "pos": 2,
-      "opp_pos": 3,
-      "outcome": "away",
-      "score_home": 1,
-      "score_away": 3,
-      "hit": true
-    },
-    {
-      "league_id": "SA",
-      "league_name": "Serie A",
-      "home": "Atalanta",
-      "away": "Frosinone",
-      "team": "Frosinone",
-      "venue": "away",
-      "score": 44,
-      "flags": [
-        "Boa forma",
-        "Zona alta",
-        "Saldo alto"
-      ],
-      "pos": 6,
-      "opp_pos": 11,
-      "outcome": "draw",
-      "score_home": 4,
-      "score_away": 4,
       "hit": false
     }
   ],
