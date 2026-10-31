@@ -36,33 +36,33 @@
       "league_id": "FL1",
       "home": "Le Havre AC",
       "away": "Paris Saint-Germain",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 5,
+      "outcome": "away"
     },
     {
       "league_id": "FL1",
       "home": "Nice",
       "away": "Stade Rennais",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 5,
+      "score_away": 2,
+      "outcome": "home"
     },
     {
       "league_id": "FL1",
       "home": "Lille",
       "away": "Lens",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "PPL",
       "home": "Casa Pia",
       "away": "Sporting CP",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
     }
   ],
   "cards": [
@@ -81,10 +81,10 @@
       ],
       "pos": 1,
       "opp_pos": 18,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 5,
+      "hit": true
     },
     {
       "league_id": "FL1",
@@ -101,10 +101,10 @@
       ],
       "pos": 2,
       "opp_pos": 10,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 5,
+      "score_away": 2,
+      "hit": false
     },
     {
       "league_id": "FL1",
@@ -120,10 +120,10 @@
       ],
       "pos": 3,
       "opp_pos": 7,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
     },
     {
       "league_id": "PPL",
@@ -139,10 +139,10 @@
       ],
       "pos": 3,
       "opp_pos": 16,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": true
     }
   ]
 }

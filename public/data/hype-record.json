@@ -1,27 +1,27 @@
 {
-  "generated_at": "2026-10-30T12:01:10.057Z",
+  "generated_at": "2026-10-31T12:01:47.596Z",
   "cutoff": 44,
   "method": "Rodada a rodada: a tabela e reconstruida apenas com jogos anteriores a rodada (sem lookahead) e o buildHypeBoard do produto marca os times. Cards em modo replay foram reconstruidos; cards em modo live foram gravados antes do jogo.",
-  "snapshots": 284,
-  "completed_rounds": 283,
-  "cards_total": 1511,
-  "cards_settled": 1507,
-  "cards_pending": 4,
-  "live_cards": 109,
+  "snapshots": 285,
+  "completed_rounds": 284,
+  "cards_total": 1527,
+  "cards_settled": 1511,
+  "cards_pending": 16,
+  "live_cards": 125,
   "replay_cards": 1402,
   "flagged": {
-    "n": 1507,
-    "wins": 812,
+    "n": 1511,
+    "wins": 815,
     "rate": 0.539
   },
   "baseline": {
-    "n": 3448,
-    "home_rate": 0.43,
-    "away_rate": 0.31,
-    "draw_rate": 0.252,
-    "expected_for_flagged": 0.368
+    "n": 3478,
+    "home_rate": 0.427,
+    "away_rate": 0.308,
+    "draw_rate": 0.25,
+    "expected_for_flagged": 0.365
   },
-  "lift_pp": 17.1,
+  "lift_pp": 17.4,
   "anchor": {
     "n": 3236,
     "wins": 1578,
@@ -34,28 +34,28 @@
   "by_venue": [
     {
       "key": "fora",
-      "n": 785,
-      "wins": 363,
-      "rate": 0.462
+      "n": 788,
+      "wins": 365,
+      "rate": 0.463
     },
     {
       "key": "casa",
-      "n": 722,
-      "wins": 449,
+      "n": 723,
+      "wins": 450,
       "rate": 0.622
     }
   ],
   "by_band": [
     {
       "key": "40-54",
-      "n": 715,
-      "wins": 337,
-      "rate": 0.471
+      "n": 718,
+      "wins": 339,
+      "rate": 0.472
     },
     {
       "key": "55+",
-      "n": 792,
-      "wins": 475,
+      "n": 793,
+      "wins": 476,
       "rate": 0.6
     }
   ],
@@ -86,15 +86,15 @@
     },
     {
       "key": "PPL",
-      "n": 184,
-      "wins": 111,
-      "rate": 0.603
+      "n": 185,
+      "wins": 112,
+      "rate": 0.605
     },
     {
       "key": "FL1",
-      "n": 178,
-      "wins": 96,
-      "rate": 0.539
+      "n": 181,
+      "wins": 98,
+      "rate": 0.541
     },
     {
       "key": "DED",
@@ -111,185 +111,263 @@
   ],
   "by_round": [
     {
-      "key": "2026-09-06",
-      "n": 4,
-      "wins": 2,
-      "rate": null,
-      "expected": 0.34,
-      "lift_pp": 16
-    },
-    {
       "key": "2026-09-12",
       "n": 4,
       "wins": 3,
       "rate": null,
-      "expected": 0.37,
-      "lift_pp": 38
+      "expected": 0.367,
+      "lift_pp": 38.3
     },
     {
       "key": "2026-09-13",
       "n": 7,
       "wins": 4,
       "rate": null,
-      "expected": 0.379,
-      "lift_pp": 19.3
+      "expected": 0.376,
+      "lift_pp": 19.5
     },
     {
       "key": "2026-09-15",
       "n": 3,
       "wins": 2,
       "rate": null,
-      "expected": 0.39,
-      "lift_pp": 27.6
+      "expected": 0.387,
+      "lift_pp": 27.9
     },
     {
       "key": "2026-09-16",
       "n": 2,
       "wins": 2,
       "rate": null,
-      "expected": 0.43,
-      "lift_pp": 57
+      "expected": 0.427,
+      "lift_pp": 57.3
     },
     {
       "key": "2026-09-17",
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.43,
-      "lift_pp": 57
+      "expected": 0.427,
+      "lift_pp": 57.3
     },
     {
       "key": "2026-09-19",
       "n": 4,
       "wins": 1,
       "rate": null,
-      "expected": 0.4,
-      "lift_pp": -15
+      "expected": 0.397,
+      "lift_pp": -14.7
     },
     {
       "key": "2026-09-20",
       "n": 13,
       "wins": 6,
       "rate": null,
-      "expected": 0.375,
-      "lift_pp": 8.7
+      "expected": 0.372,
+      "lift_pp": 8.9
     },
     {
       "key": "2026-10-08",
       "n": 3,
       "wins": 1,
       "rate": null,
-      "expected": 0.35,
-      "lift_pp": -1.7
+      "expected": 0.348,
+      "lift_pp": -1.4
     },
     {
       "key": "2026-10-09",
       "n": 3,
       "wins": 2,
       "rate": null,
-      "expected": 0.35,
-      "lift_pp": 31.7
+      "expected": 0.348,
+      "lift_pp": 31.9
     },
     {
       "key": "2026-10-10",
       "n": 17,
       "wins": 10,
       "rate": null,
-      "expected": 0.367,
-      "lift_pp": 22.2
+      "expected": 0.364,
+      "lift_pp": 22.4
     },
     {
       "key": "2026-10-11",
       "n": 9,
       "wins": 5,
       "rate": null,
-      "expected": 0.377,
-      "lift_pp": 17.9
+      "expected": 0.374,
+      "lift_pp": 18.1
     },
     {
       "key": "2026-10-17",
       "n": 15,
       "wins": 9,
       "rate": null,
-      "expected": 0.35,
-      "lift_pp": 25
+      "expected": 0.348,
+      "lift_pp": 25.2
     },
     {
       "key": "2026-10-18",
       "n": 15,
       "wins": 10,
       "rate": null,
-      "expected": 0.366,
-      "lift_pp": 30.1
+      "expected": 0.363,
+      "lift_pp": 30.3
     },
     {
       "key": "2026-10-24",
       "n": 10,
       "wins": 7,
       "rate": null,
-      "expected": 0.382,
-      "lift_pp": 31.8
+      "expected": 0.379,
+      "lift_pp": 32.1
     },
     {
       "key": "2026-10-25",
       "n": 18,
       "wins": 8,
       "rate": null,
-      "expected": 0.357,
-      "lift_pp": 8.8
+      "expected": 0.354,
+      "lift_pp": 9
     },
     {
       "key": "2026-10-26",
       "n": 5,
       "wins": 3,
       "rate": null,
-      "expected": 0.382,
-      "lift_pp": 21.8
+      "expected": 0.379,
+      "lift_pp": 22.1
     },
     {
       "key": "2026-10-27",
       "n": 3,
       "wins": 3,
       "rate": null,
-      "expected": 0.35,
-      "lift_pp": 65
+      "expected": 0.348,
+      "lift_pp": 65.2
     },
     {
       "key": "2026-10-28",
       "n": 4,
       "wins": 1,
       "rate": null,
-      "expected": 0.37,
-      "lift_pp": -12
+      "expected": 0.367,
+      "lift_pp": -11.7
     },
     {
       "key": "2026-10-29",
       "n": 3,
       "wins": 2,
       "rate": null,
-      "expected": 0.35,
-      "lift_pp": 31.7
+      "expected": 0.348,
+      "lift_pp": 31.9
+    },
+    {
+      "key": "2026-10-30",
+      "n": 4,
+      "wins": 3,
+      "rate": null,
+      "expected": 0.338,
+      "lift_pp": 41.2
     }
   ],
   "by_edge": [
     {
       "key": "marcado MELHOR colocado",
-      "n": 1324,
-      "wins": 757,
+      "n": 1328,
+      "wins": 760,
       "rate": 0.572,
-      "expected": 0.367,
-      "lift_pp": 20.5
+      "expected": 0.364,
+      "lift_pp": 20.8
     },
     {
       "key": "marcado PIOR colocado",
       "n": 183,
       "wins": 55,
       "rate": 0.301,
-      "expected": 0.37,
-      "lift_pp": -6.9
+      "expected": 0.368,
+      "lift_pp": -6.7
     }
   ],
   "recent": [
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Casa Pia",
+      "away": "Sporting CP",
+      "team": "Sporting CP",
+      "venue": "away",
+      "score": 50,
+      "flags": [
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 16,
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 2,
+      "hit": true
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Lille",
+      "away": "Lens",
+      "team": "Lille",
+      "venue": "home",
+      "score": 46,
+      "flags": [
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 3,
+      "opp_pos": 7,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Nice",
+      "away": "Stade Rennais",
+      "team": "Stade Rennais",
+      "venue": "away",
+      "score": 51,
+      "flags": [
+        "Boa forma",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 10,
+      "outcome": "home",
+      "score_home": 5,
+      "score_away": 2,
+      "hit": false
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Le Havre AC",
+      "away": "Paris Saint-Germain",
+      "team": "Paris Saint-Germain",
+      "venue": "away",
+      "score": 71,
+      "flags": [
+        "Forma 5V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 18,
+      "outcome": "away",
+      "score_home": 1,
+      "score_away": 5,
+      "hit": true
+    },
     {
       "league_id": "BSA",
       "league_name": "Brasileirao",
@@ -683,85 +761,6 @@
       "outcome": "draw",
       "score_home": 1,
       "score_away": 1,
-      "hit": false
-    },
-    {
-      "league_id": "PPL",
-      "league_name": "Primeira Liga",
-      "home": "Sporting CP",
-      "away": "Académico de Viseu",
-      "team": "Académico de Viseu",
-      "venue": "away",
-      "score": 44,
-      "flags": [
-        "Forma 4V",
-        "Zona alta"
-      ],
-      "pos": 6,
-      "opp_pos": 3,
-      "outcome": "away",
-      "score_home": 1,
-      "score_away": 2,
-      "hit": true
-    },
-    {
-      "league_id": "PPL",
-      "league_name": "Primeira Liga",
-      "home": "Sporting CP",
-      "away": "Académico de Viseu",
-      "team": "Sporting CP",
-      "venue": "home",
-      "score": 57,
-      "flags": [
-        "Boa forma",
-        "Top 3",
-        "Saldo alto"
-      ],
-      "pos": 3,
-      "opp_pos": 6,
-      "outcome": "away",
-      "score_home": 1,
-      "score_away": 2,
-      "hit": false
-    },
-    {
-      "league_id": "FL1",
-      "league_name": "Ligue 1",
-      "home": "AS Monaco",
-      "away": "Lille",
-      "team": "Lille",
-      "venue": "away",
-      "score": 50,
-      "flags": [
-        "Boa forma",
-        "Top 3",
-        "Saldo alto"
-      ],
-      "pos": 3,
-      "opp_pos": 5,
-      "outcome": "draw",
-      "score_home": 1,
-      "score_away": 1,
-      "hit": false
-    },
-    {
-      "league_id": "BL1",
-      "league_name": "Bundesliga",
-      "home": "SC Freiburg",
-      "away": "Bayern Munich",
-      "team": "SC Freiburg",
-      "venue": "home",
-      "score": 54,
-      "flags": [
-        "Boa forma",
-        "Top 3",
-        "Saldo alto"
-      ],
-      "pos": 3,
-      "opp_pos": 2,
-      "outcome": "away",
-      "score_home": 1,
-      "score_away": 3,
       "hit": false
     }
   ],
