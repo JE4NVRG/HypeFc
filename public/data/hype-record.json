@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-11-02T12:00:52.399Z",
+  "generated_at": "2026-11-03T12:01:15.863Z",
   "cutoff": 44,
   "method": "Rodada a rodada: a tabela e reconstruida apenas com jogos anteriores a rodada (sem lookahead) e o buildHypeBoard do produto marca os times. Cards em modo replay foram reconstruidos; cards em modo live foram gravados antes do jogo.",
   "snapshots": 287,
-  "completed_rounds": 286,
+  "completed_rounds": 287,
   "cards_total": 1537,
-  "cards_settled": 1536,
-  "cards_pending": 1,
+  "cards_settled": 1537,
+  "cards_pending": 0,
   "live_cards": 135,
   "replay_cards": 1402,
   "flagged": {
-    "n": 1536,
-    "wins": 833,
-    "rate": 0.542
+    "n": 1537,
+    "wins": 834,
+    "rate": 0.543
   },
   "baseline": {
     "n": 3510,
-    "home_rate": 0.431,
+    "home_rate": 0.432,
     "away_rate": 0.309,
     "draw_rate": 0.249,
-    "expected_for_flagged": 0.367
+    "expected_for_flagged": 0.368
   },
   "lift_pp": 17.5,
   "anchor": {
@@ -30,7 +30,7 @@
     "away_rate": 0.419,
     "expected_for_flagged": 0.486
   },
-  "anchor_lift_pp": 5.6,
+  "anchor_lift_pp": 5.7,
   "by_venue": [
     {
       "key": "fora",
@@ -40,8 +40,8 @@
     },
     {
       "key": "casa",
-      "n": 736,
-      "wins": 459,
+      "n": 737,
+      "wins": 460,
       "rate": 0.624
     }
   ],
@@ -54,8 +54,8 @@
     },
     {
       "key": "55+",
-      "n": 807,
-      "wins": 485,
+      "n": 808,
+      "wins": 486,
       "rate": 0.601
     }
   ],
@@ -86,9 +86,9 @@
     },
     {
       "key": "PPL",
-      "n": 188,
-      "wins": 115,
-      "rate": 0.612
+      "n": 189,
+      "wins": 116,
+      "rate": 0.614
     },
     {
       "key": "FL1",
@@ -111,28 +111,20 @@
   ],
   "by_round": [
     {
-      "key": "2026-09-15",
-      "n": 3,
-      "wins": 2,
-      "rate": null,
-      "expected": 0.39,
-      "lift_pp": 27.6
-    },
-    {
       "key": "2026-09-16",
       "n": 2,
       "wins": 2,
       "rate": null,
-      "expected": 0.431,
-      "lift_pp": 56.9
+      "expected": 0.432,
+      "lift_pp": 56.8
     },
     {
       "key": "2026-09-17",
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.431,
-      "lift_pp": 56.9
+      "expected": 0.432,
+      "lift_pp": 56.8
     },
     {
       "key": "2026-09-19",
@@ -155,7 +147,7 @@
       "n": 3,
       "wins": 1,
       "rate": null,
-      "expected": 0.349,
+      "expected": 0.35,
       "lift_pp": -1.6
     },
     {
@@ -163,7 +155,7 @@
       "n": 3,
       "wins": 2,
       "rate": null,
-      "expected": 0.349,
+      "expected": 0.35,
       "lift_pp": 31.7
     },
     {
@@ -187,8 +179,8 @@
       "n": 15,
       "wins": 9,
       "rate": null,
-      "expected": 0.349,
-      "lift_pp": 25.1
+      "expected": 0.35,
+      "lift_pp": 25
     },
     {
       "key": "2026-10-18",
@@ -227,8 +219,8 @@
       "n": 3,
       "wins": 3,
       "rate": null,
-      "expected": 0.349,
-      "lift_pp": 65.1
+      "expected": 0.35,
+      "lift_pp": 65
     },
     {
       "key": "2026-10-28",
@@ -243,7 +235,7 @@
       "n": 3,
       "wins": 2,
       "rate": null,
-      "expected": 0.349,
+      "expected": 0.35,
       "lift_pp": 31.7
     },
     {
@@ -269,13 +261,21 @@
       "rate": null,
       "expected": 0.363,
       "lift_pp": 52.6
+    },
+    {
+      "key": "2026-11-02",
+      "n": 1,
+      "wins": 1,
+      "rate": null,
+      "expected": 0.432,
+      "lift_pp": 56.8
     }
   ],
   "by_edge": [
     {
       "key": "marcado MELHOR colocado",
-      "n": 1350,
-      "wins": 776,
+      "n": 1351,
+      "wins": 777,
       "rate": 0.575,
       "expected": 0.367,
       "lift_pp": 20.8
@@ -290,6 +290,26 @@
     }
   ],
   "recent": [
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Benfica",
+      "away": "Alverca",
+      "team": "Benfica",
+      "venue": "home",
+      "score": 62,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 10,
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
+    },
     {
       "league_id": "DED",
       "league_name": "Eredivisie",
@@ -744,26 +764,6 @@
       "outcome": "away",
       "score_home": 0,
       "score_away": 2,
-      "hit": true
-    },
-    {
-      "league_id": "PL",
-      "league_name": "Premier League",
-      "home": "Manchester City",
-      "away": "Brighton & Hove Albion",
-      "team": "Brighton & Hove Albion",
-      "venue": "away",
-      "score": 58,
-      "flags": [
-        "Forma 4V",
-        "Top 3",
-        "Saldo alto"
-      ],
-      "pos": 3,
-      "opp_pos": 1,
-      "outcome": "away",
-      "score_home": 0,
-      "score_away": 1,
       "hit": true
     }
   ],

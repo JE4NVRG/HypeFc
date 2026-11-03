@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-03",
+  "mode": "live",
+  "issued_at": "2026-11-03T12:01:42.148Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Chapecoense",
+      "away": "Mirassol",
+      "kickoff": "2026-11-03T22:30Z",
+      "prob": {
+        "home": 0.3688345437282758,
+        "draw": 0.2639135476605684,
+        "away": 0.3672519086111558
+      },
+      "favorito": "home",
+      "rating_home": 1401.8,
+      "rating_away": 1471.2,
+      "jogos_home": 32,
+      "jogos_away": 33,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Internacional",
+      "away": "Coritiba",
+      "kickoff": "2026-11-04T00:30Z",
+      "prob": {
+        "home": 0.4506337103762869,
+        "draw": 0.25927468720956337,
+        "away": 0.29009160241414966
+      },
+      "favorito": "home",
+      "rating_home": 1461.2,
+      "rating_away": 1475,
+      "jogos_home": 33,
+      "jogos_away": 33,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
