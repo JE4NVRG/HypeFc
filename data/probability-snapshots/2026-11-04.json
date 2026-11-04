@@ -1,0 +1,101 @@
+{
+  "date": "2026-11-04",
+  "mode": "live",
+  "issued_at": "2026-11-04T12:02:08.259Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Athletico-PR",
+      "away": "Vasco da Gama",
+      "kickoff": "2026-11-04T22:30Z",
+      "prob": {
+        "home": 0.5643873725313701,
+        "draw": 0.23909978893287845,
+        "away": 0.19651283853575155
+      },
+      "favorito": "home",
+      "rating_home": 1539.2,
+      "rating_away": 1475.1,
+      "jogos_home": 33,
+      "jogos_away": 32,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Grêmio",
+      "kickoff": "2026-11-04T22:30Z",
+      "prob": {
+        "home": 0.6970900371805315,
+        "draw": 0.19713039534540341,
+        "away": 0.10577956747406497
+      },
+      "favorito": "home",
+      "rating_home": 1629.8,
+      "rating_away": 1463.7,
+      "jogos_home": 33,
+      "jogos_away": 33,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Botafogo",
+      "away": "Atlético-MG",
+      "kickoff": "2026-11-05T00:30Z",
+      "prob": {
+        "home": 0.3740552380144304,
+        "draw": 0.2638881890843181,
+        "away": 0.3620565729012515
+      },
+      "favorito": "home",
+      "rating_home": 1462.5,
+      "rating_away": 1528.3,
+      "jogos_home": 33,
+      "jogos_away": 33,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "São Paulo",
+      "away": "Corinthians",
+      "kickoff": "2026-11-05T00:30Z",
+      "prob": {
+        "home": 0.5160019265132397,
+        "draw": 0.24952098570005035,
+        "away": 0.23447708778670995
+      },
+      "favorito": "home",
+      "rating_home": 1480.3,
+      "rating_away": 1449.8,
+      "jogos_home": 33,
+      "jogos_away": 33,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
