@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-11-04T12:01:39.875Z",
+  "generated_at": "2026-11-05T12:00:36.113Z",
   "cutoff": 44,
   "method": "Rodada a rodada: a tabela e reconstruida apenas com jogos anteriores a rodada (sem lookahead) e o buildHypeBoard do produto marca os times. Cards em modo replay foram reconstruidos; cards em modo live foram gravados antes do jogo.",
-  "snapshots": 288,
-  "completed_rounds": 287,
-  "cards_total": 1538,
-  "cards_settled": 1537,
-  "cards_pending": 1,
-  "live_cards": 136,
+  "snapshots": 289,
+  "completed_rounds": 288,
+  "cards_total": 1540,
+  "cards_settled": 1538,
+  "cards_pending": 2,
+  "live_cards": 138,
   "replay_cards": 1402,
   "flagged": {
-    "n": 1537,
-    "wins": 834,
+    "n": 1538,
+    "wins": 835,
     "rate": 0.543
   },
   "baseline": {
-    "n": 3514,
+    "n": 3516,
     "home_rate": 0.431,
     "away_rate": 0.308,
     "draw_rate": 0.249,
@@ -40,9 +40,9 @@
     },
     {
       "key": "casa",
-      "n": 737,
-      "wins": 460,
-      "rate": 0.624
+      "n": 738,
+      "wins": 461,
+      "rate": 0.625
     }
   ],
   "by_band": [
@@ -54,9 +54,9 @@
     },
     {
       "key": "55+",
-      "n": 808,
-      "wins": 486,
-      "rate": 0.601
+      "n": 809,
+      "wins": 487,
+      "rate": 0.602
     }
   ],
   "by_league": [
@@ -68,9 +68,9 @@
     },
     {
       "key": "BSA",
-      "n": 208,
-      "wins": 98,
-      "rate": 0.471
+      "n": 209,
+      "wins": 99,
+      "rate": 0.474
     },
     {
       "key": "PD",
@@ -111,14 +111,6 @@
   ],
   "by_round": [
     {
-      "key": "2026-09-16",
-      "n": 2,
-      "wins": 2,
-      "rate": null,
-      "expected": 0.431,
-      "lift_pp": 56.9
-    },
-    {
       "key": "2026-09-17",
       "n": 1,
       "wins": 1,
@@ -131,15 +123,15 @@
       "n": 4,
       "wins": 1,
       "rate": null,
-      "expected": 0.4,
-      "lift_pp": -15
+      "expected": 0.401,
+      "lift_pp": -15.1
     },
     {
       "key": "2026-09-20",
       "n": 13,
       "wins": 6,
       "rate": null,
-      "expected": 0.374,
+      "expected": 0.375,
       "lift_pp": 8.7
     },
     {
@@ -171,7 +163,7 @@
       "n": 9,
       "wins": 5,
       "rate": null,
-      "expected": 0.376,
+      "expected": 0.377,
       "lift_pp": 17.9
     },
     {
@@ -251,8 +243,8 @@
       "n": 16,
       "wins": 10,
       "rate": null,
-      "expected": 0.377,
-      "lift_pp": 24.8
+      "expected": 0.378,
+      "lift_pp": 24.7
     },
     {
       "key": "2026-11-01",
@@ -269,13 +261,21 @@
       "rate": null,
       "expected": 0.431,
       "lift_pp": 56.9
+    },
+    {
+      "key": "2026-11-04",
+      "n": 1,
+      "wins": 1,
+      "rate": null,
+      "expected": 0.431,
+      "lift_pp": 56.9
     }
   ],
   "by_edge": [
     {
       "key": "marcado MELHOR colocado",
-      "n": 1351,
-      "wins": 777,
+      "n": 1352,
+      "wins": 778,
       "rate": 0.575,
       "expected": 0.367,
       "lift_pp": 20.8
@@ -290,6 +290,26 @@
     }
   ],
   "recent": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Grêmio",
+      "team": "Flamengo",
+      "venue": "home",
+      "score": 71,
+      "flags": [
+        "Forma 4V",
+        "Líder",
+        "Saldo alto"
+      ],
+      "pos": 1,
+      "opp_pos": 17,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 1,
+      "hit": true
+    },
     {
       "league_id": "PPL",
       "league_name": "Primeira Liga",
@@ -744,26 +764,6 @@
       "outcome": "home",
       "score_home": 6,
       "score_away": 1,
-      "hit": true
-    },
-    {
-      "league_id": "PD",
-      "league_name": "La Liga",
-      "home": "Levante",
-      "away": "Atlético Madrid",
-      "team": "Atlético Madrid",
-      "venue": "away",
-      "score": 69,
-      "flags": [
-        "Forma 5V",
-        "Top 3",
-        "Saldo alto"
-      ],
-      "pos": 2,
-      "opp_pos": 15,
-      "outcome": "away",
-      "score_home": 0,
-      "score_away": 2,
       "hit": true
     }
   ],
