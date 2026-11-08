@@ -1,0 +1,752 @@
+{
+  "date": "2026-11-08",
+  "mode": "live",
+  "issued_at": "2026-11-08T12:01:15.036Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 7,
+  "matches": [
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Brighton & Hove Albion",
+      "away": "Brentford",
+      "kickoff": "2026-11-08T14:00Z",
+      "prob": {
+        "home": 0.5089316715389428,
+        "draw": 0.25081967383530146,
+        "away": 0.2402486546257557
+      },
+      "favorito": "home",
+      "rating_home": 1540.7,
+      "rating_away": 1515,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Crystal Palace",
+      "away": "Liverpool",
+      "kickoff": "2026-11-08T14:00Z",
+      "prob": {
+        "home": 0.3926992224034728,
+        "draw": 0.2634854784517152,
+        "away": 0.34381529914481196
+      },
+      "favorito": "home",
+      "rating_home": 1465.1,
+      "rating_away": 1518.1,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Ipswich Town",
+      "away": "AFC Bournemouth",
+      "kickoff": "2026-11-08T14:00Z",
+      "prob": {
+        "home": 0.4578304532367889,
+        "draw": 0.25845310041614983,
+        "away": 0.2837164463470613
+      },
+      "favorito": "home",
+      "rating_home": 1492.3,
+      "rating_away": 1501.2,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Sunderland",
+      "away": "Chelsea",
+      "kickoff": "2026-11-08T14:00Z",
+      "prob": {
+        "home": 0.3831790588169007,
+        "draw": 0.2637514629186309,
+        "away": 0.3530694782644684
+      },
+      "favorito": "home",
+      "rating_home": 1456.2,
+      "rating_away": 1515.8,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Manchester United",
+      "away": "Aston Villa",
+      "kickoff": "2026-11-08T16:30Z",
+      "prob": {
+        "home": 0.42723021504779135,
+        "draw": 0.2614984430236951,
+        "away": 0.3112713419285135
+      },
+      "favorito": "home",
+      "rating_home": 1473.1,
+      "rating_away": 1502.6,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Elche",
+      "away": "Real Betis",
+      "kickoff": "2026-11-08T13:00Z",
+      "prob": {
+        "home": 0.37488926741636164,
+        "draw": 0.26388055193879406,
+        "away": 0.3612301806448442
+      },
+      "favorito": "home",
+      "rating_home": 1475.6,
+      "rating_away": 1540.9,
+      "jogos_home": 11,
+      "jogos_away": 11,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Real Sociedad",
+      "away": "Rayo Vallecano",
+      "kickoff": "2026-11-08T15:15Z",
+      "prob": {
+        "home": 0.5108128174926087,
+        "draw": 0.2504797954045256,
+        "away": 0.23870738710286588
+      },
+      "favorito": "home",
+      "rating_home": 1519.2,
+      "rating_away": 1492.2,
+      "jogos_home": 11,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Celta Vigo",
+      "away": "Levante",
+      "kickoff": "2026-11-08T17:30Z",
+      "prob": {
+        "home": 0.4879268534060052,
+        "draw": 0.2543337461430387,
+        "away": 0.257739400450956
+      },
+      "favorito": "home",
+      "rating_home": 1489,
+      "rating_away": 1477.6,
+      "jogos_home": 11,
+      "jogos_away": 11,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Villarreal",
+      "away": "Getafe",
+      "kickoff": "2026-11-08T17:30Z",
+      "prob": {
+        "home": 0.47046872674494034,
+        "draw": 0.2568565431592952,
+        "away": 0.27267473009576443
+      },
+      "favorito": "home",
+      "rating_home": 1483.1,
+      "rating_away": 1483.5,
+      "jogos_home": 11,
+      "jogos_away": 11,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Atlético Madrid",
+      "away": "Barcelona",
+      "kickoff": "2026-11-08T20:00Z",
+      "prob": {
+        "home": 0.4680854335140031,
+        "draw": 0.25717249774786893,
+        "away": 0.27474206873812806
+      },
+      "favorito": "home",
+      "rating_home": 1574.2,
+      "rating_away": 1576.1,
+      "jogos_home": 11,
+      "jogos_away": 11,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Napoli",
+      "away": "Lazio",
+      "kickoff": "2026-11-08T11:30Z",
+      "prob": {
+        "home": 0.360076495293786,
+        "draw": 0.2638682271421511,
+        "away": 0.376055277564063
+      },
+      "favorito": "away",
+      "rating_home": 1502.6,
+      "rating_away": 1578.1,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Genoa",
+      "away": "AC Milan",
+      "kickoff": "2026-11-08T14:00Z",
+      "prob": {
+        "home": 0.39400532294684903,
+        "draw": 0.26343929061552196,
+        "away": 0.3425553864376291
+      },
+      "favorito": "home",
+      "rating_home": 1492,
+      "rating_away": 1544.1,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Monza",
+      "away": "Atalanta",
+      "kickoff": "2026-11-08T14:00Z",
+      "prob": {
+        "home": 0.44915812956000334,
+        "draw": 0.25943521793946334,
+        "away": 0.2914066525005333
+      },
+      "favorito": "home",
+      "rating_home": 1460.2,
+      "rating_away": 1474.9,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Internazionale",
+      "away": "Como",
+      "kickoff": "2026-11-08T17:00Z",
+      "prob": {
+        "home": 0.4762012082384408,
+        "draw": 0.25606847240763325,
+        "away": 0.267730319353926
+      },
+      "favorito": "home",
+      "rating_home": 1559.1,
+      "rating_away": 1555.6,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Fiorentina",
+      "away": "Juventus",
+      "kickoff": "2026-11-08T19:45Z",
+      "prob": {
+        "home": 0.39361325170771516,
+        "draw": 0.26345339960493447,
+        "away": 0.3429333486873503
+      },
+      "favorito": "home",
+      "rating_home": 1465.5,
+      "rating_away": 1517.9,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "FC Cologne",
+      "away": "Bayer Leverkusen",
+      "kickoff": "2026-11-08T14:30Z",
+      "prob": {
+        "home": 0.4405011295161067,
+        "draw": 0.26032228174783373,
+        "away": 0.2991765887360595
+      },
+      "favorito": "home",
+      "rating_home": 1487.8,
+      "rating_away": 1508.4,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "SC Freiburg",
+      "away": "1. FC Union Berlin",
+      "kickoff": "2026-11-08T16:30Z",
+      "prob": {
+        "home": 0.539151535455287,
+        "draw": 0.24486652577832987,
+        "away": 0.21598193876638308
+      },
+      "favorito": "home",
+      "rating_home": 1526.8,
+      "rating_away": 1480.3,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "TSG Hoffenheim",
+      "away": "Schalke 04",
+      "kickoff": "2026-11-08T18:30Z",
+      "prob": {
+        "home": 0.4865587638424971,
+        "draw": 0.25454459071668695,
+        "away": 0.258896645440816
+      },
+      "favorito": "home",
+      "rating_home": 1482.8,
+      "rating_away": 1472.3,
+      "jogos_home": 8,
+      "jogos_away": 8,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Stade Rennais",
+      "away": "Lille",
+      "kickoff": "2026-11-08T14:00Z",
+      "prob": {
+        "home": 0.44379888794333894,
+        "draw": 0.2599954332064947,
+        "away": 0.2962056788501664
+      },
+      "favorito": "home",
+      "rating_home": 1514.5,
+      "rating_away": 1532.9,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Angers",
+      "away": "Nice",
+      "kickoff": "2026-11-08T16:15Z",
+      "prob": {
+        "home": 0.40985045882854115,
+        "draw": 0.26269567485417,
+        "away": 0.32745386631728884
+      },
+      "favorito": "home",
+      "rating_home": 1469.6,
+      "rating_away": 1510.9,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Brest",
+      "away": "Lyon",
+      "kickoff": "2026-11-08T16:15Z",
+      "prob": {
+        "home": 0.43737321793007944,
+        "draw": 0.26061964089072387,
+        "away": 0.3020071411791967
+      },
+      "favorito": "home",
+      "rating_home": 1501.6,
+      "rating_away": 1524.3,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Le Havre AC",
+      "away": "Lorient",
+      "kickoff": "2026-11-08T16:15Z",
+      "prob": {
+        "home": 0.37861920769558866,
+        "draw": 0.26383439048346674,
+        "away": 0.3575464018209446
+      },
+      "favorito": "home",
+      "rating_home": 1435.1,
+      "rating_away": 1497.8,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Le Mans",
+      "away": "AS Monaco",
+      "kickoff": "2026-11-08T16:15Z",
+      "prob": {
+        "home": 0.4051612507844493,
+        "draw": 0.2629507544429115,
+        "away": 0.33188799477263914
+      },
+      "favorito": "home",
+      "rating_home": 1472.6,
+      "rating_away": 1517.1,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Lens",
+      "away": "Marseille",
+      "kickoff": "2026-11-08T19:45Z",
+      "prob": {
+        "home": 0.46353740191038717,
+        "draw": 0.25775628641158066,
+        "away": 0.2787063116780322
+      },
+      "favorito": "home",
+      "rating_home": 1504.2,
+      "rating_away": 1509.3,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "C.D. Nacional",
+      "away": "Académico de Viseu",
+      "kickoff": "2026-11-08T15:30Z",
+      "prob": {
+        "home": 0.3450222888699356,
+        "draw": 0.2635274695443352,
+        "away": 0.39145024158572916
+      },
+      "favorito": "away",
+      "rating_home": 1453.6,
+      "rating_away": 1539.7,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Estoril",
+      "away": "Maritimo",
+      "kickoff": "2026-11-08T15:30Z",
+      "prob": {
+        "home": 0.4222396456722854,
+        "draw": 0.2618824343361404,
+        "away": 0.3158779199915743
+      },
+      "favorito": "home",
+      "rating_home": 1429.3,
+      "rating_away": 1462.2,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Santa Clara",
+      "away": "Gil Vicente",
+      "kickoff": "2026-11-08T15:30Z",
+      "prob": {
+        "home": 0.5275102390047366,
+        "draw": 0.24728378150466732,
+        "away": 0.22520597949059606
+      },
+      "favorito": "home",
+      "rating_home": 1543.3,
+      "rating_away": 1504.9,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Vitória de Guimaraes",
+      "away": "FC Porto",
+      "kickoff": "2026-11-08T18:00Z",
+      "prob": {
+        "home": 0.30843923755102887,
+        "draw": 0.2612450037806433,
+        "away": 0.43031575866832783
+      },
+      "favorito": "away",
+      "rating_home": 1475.3,
+      "rating_away": 1587.8,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Estrela",
+      "away": "Benfica",
+      "kickoff": "2026-11-08T20:30Z",
+      "prob": {
+        "home": 0.3445133657072584,
+        "draw": 0.2635100329621342,
+        "away": 0.39197660133060747
+      },
+      "favorito": "away",
+      "rating_home": 1477,
+      "rating_away": 1563.5,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PPL",
+      "league_name": "Primeira Liga",
+      "home": "Rio Ave",
+      "away": "Braga",
+      "kickoff": "2026-11-08T20:30Z",
+      "prob": {
+        "home": 0.41011964574561244,
+        "draw": 0.2626801470001218,
+        "away": 0.32720020725426574
+      },
+      "favorito": "home",
+      "rating_home": 1455.8,
+      "rating_away": 1496.9,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "Heerenveen",
+      "away": "Feyenoord Rotterdam",
+      "kickoff": "2026-11-08T11:15Z",
+      "prob": {
+        "home": 0.4040543052724541,
+        "draw": 0.26300670054422276,
+        "away": 0.33293899418332307
+      },
+      "favorito": "home",
+      "rating_home": 1517.5,
+      "rating_away": 1562.7,
+      "jogos_home": 11,
+      "jogos_away": 11,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "FC Twente",
+      "away": "Ajax Amsterdam",
+      "kickoff": "2026-11-08T13:30Z",
+      "prob": {
+        "home": 0.4609446174138415,
+        "draw": 0.25807780838625116,
+        "away": 0.28097757419990727
+      },
+      "favorito": "home",
+      "rating_home": 1546.3,
+      "rating_away": 1553.1,
+      "jogos_home": 11,
+      "jogos_away": 11,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "AZ Alkmaar",
+      "away": "FC Groningen",
+      "kickoff": "2026-11-08T15:45Z",
+      "prob": {
+        "home": 0.5127222534633212,
+        "draw": 0.25013060727882047,
+        "away": 0.23714713925785827
+      },
+      "favorito": "home",
+      "rating_home": 1523.8,
+      "rating_away": 1495.6,
+      "jogos_home": 11,
+      "jogos_away": 11,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "SC Cambuur",
+      "away": "PSV Eindhoven",
+      "kickoff": "2026-11-08T15:45Z",
+      "prob": {
+        "home": 0.4151528217252006,
+        "draw": 0.2623722211778308,
+        "away": 0.32247495709696855
+      },
+      "favorito": "home",
+      "rating_home": 1502.2,
+      "rating_away": 1539.9,
+      "jogos_home": 11,
+      "jogos_away": 11,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "DED",
+      "league_name": "Eredivisie",
+      "home": "FC Utrecht",
+      "away": "NEC Nijmegen",
+      "kickoff": "2026-11-08T19:00Z",
+      "prob": {
+        "home": 0.4791888480140117,
+        "draw": 0.2556420740069223,
+        "away": 0.26516907797906597
+      },
+      "favorito": "home",
+      "rating_home": 1486.5,
+      "rating_away": 1480.9,
+      "jogos_home": 11,
+      "jogos_away": 11,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
