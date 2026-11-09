@@ -164,9 +164,9 @@
       "league_id": "PPL",
       "home": "C.D. Nacional",
       "away": "Académico de Viseu",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "PPL",
@@ -404,10 +404,10 @@
       ],
       "pos": 6,
       "opp_pos": 15,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": false
     },
     {
       "league_id": "PPL",

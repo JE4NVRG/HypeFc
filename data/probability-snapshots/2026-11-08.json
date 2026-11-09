@@ -29,10 +29,10 @@
       "rating_away": 1515,
       "jogos_home": 9,
       "jogos_away": 9,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home",
+      "settled_at": "2026-11-09T12:02:01.814Z"
     },
     {
       "league_id": "PL",
@@ -50,10 +50,10 @@
       "rating_away": 1518.1,
       "jogos_home": 9,
       "jogos_away": 9,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 3,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PL",
@@ -71,10 +71,10 @@
       "rating_away": 1501.2,
       "jogos_home": 9,
       "jogos_away": 9,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PL",
@@ -92,10 +92,10 @@
       "rating_away": 1515.8,
       "jogos_home": 9,
       "jogos_away": 9,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PL",
@@ -113,10 +113,10 @@
       "rating_away": 1502.6,
       "jogos_home": 9,
       "jogos_away": 9,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 4,
+      "score_away": 4,
+      "outcome": "draw",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PD",
@@ -134,10 +134,10 @@
       "rating_away": 1540.9,
       "jogos_home": 11,
       "jogos_away": 11,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PD",
@@ -155,10 +155,10 @@
       "rating_away": 1492.2,
       "jogos_home": 11,
       "jogos_away": 10,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PD",
@@ -176,10 +176,10 @@
       "rating_away": 1477.6,
       "jogos_home": 11,
       "jogos_away": 11,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PD",
@@ -197,10 +197,10 @@
       "rating_away": 1483.5,
       "jogos_home": 11,
       "jogos_away": 11,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PD",
@@ -218,10 +218,10 @@
       "rating_away": 1576.1,
       "jogos_home": 11,
       "jogos_away": 11,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "SA",
@@ -239,10 +239,10 @@
       "rating_away": 1578.1,
       "jogos_home": 10,
       "jogos_away": 10,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "SA",
@@ -260,10 +260,10 @@
       "rating_away": 1544.1,
       "jogos_home": 10,
       "jogos_away": 10,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "SA",
@@ -281,10 +281,10 @@
       "rating_away": 1474.9,
       "jogos_home": 10,
       "jogos_away": 10,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "SA",
@@ -302,10 +302,10 @@
       "rating_away": 1555.6,
       "jogos_home": 10,
       "jogos_away": 10,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "SA",
@@ -323,10 +323,10 @@
       "rating_away": 1517.9,
       "jogos_home": 10,
       "jogos_away": 10,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "BL1",
@@ -344,10 +344,10 @@
       "rating_away": 1508.4,
       "jogos_home": 8,
       "jogos_away": 8,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "BL1",
@@ -365,10 +365,10 @@
       "rating_away": 1480.3,
       "jogos_home": 8,
       "jogos_away": 8,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "BL1",
@@ -386,10 +386,10 @@
       "rating_away": 1472.3,
       "jogos_home": 8,
       "jogos_away": 8,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "FL1",
@@ -407,10 +407,10 @@
       "rating_away": 1532.9,
       "jogos_home": 9,
       "jogos_away": 9,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "FL1",
@@ -428,10 +428,10 @@
       "rating_away": 1510.9,
       "jogos_home": 9,
       "jogos_away": 9,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "FL1",
@@ -449,10 +449,10 @@
       "rating_away": 1524.3,
       "jogos_home": 9,
       "jogos_away": 9,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "FL1",
@@ -470,10 +470,10 @@
       "rating_away": 1497.8,
       "jogos_home": 9,
       "jogos_away": 9,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "FL1",
@@ -491,10 +491,10 @@
       "rating_away": 1517.1,
       "jogos_home": 9,
       "jogos_away": 9,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "FL1",
@@ -512,10 +512,10 @@
       "rating_away": 1509.3,
       "jogos_home": 9,
       "jogos_away": 9,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PPL",
@@ -533,10 +533,10 @@
       "rating_away": 1539.7,
       "jogos_home": 10,
       "jogos_away": 10,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PPL",
@@ -575,10 +575,10 @@
       "rating_away": 1504.9,
       "jogos_home": 10,
       "jogos_away": 10,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PPL",
@@ -596,10 +596,10 @@
       "rating_away": 1587.8,
       "jogos_home": 10,
       "jogos_away": 10,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 2,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PPL",
@@ -617,10 +617,10 @@
       "rating_away": 1563.5,
       "jogos_home": 10,
       "jogos_away": 10,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 3,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "PPL",
@@ -638,10 +638,10 @@
       "rating_away": 1496.9,
       "jogos_home": 10,
       "jogos_away": 10,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "DED",
@@ -659,10 +659,10 @@
       "rating_away": 1562.7,
       "jogos_home": 11,
       "jogos_away": 11,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 5,
+      "score_away": 3,
+      "outcome": "home",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "DED",
@@ -680,10 +680,10 @@
       "rating_away": 1553.1,
       "jogos_home": 11,
       "jogos_away": 11,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 2,
+      "outcome": "draw",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "DED",
@@ -701,10 +701,10 @@
       "rating_away": 1495.6,
       "jogos_home": 11,
       "jogos_away": 11,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 4,
+      "score_away": 3,
+      "outcome": "home",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "DED",
@@ -722,10 +722,10 @@
       "rating_away": 1539.9,
       "jogos_home": 11,
       "jogos_away": 11,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 5,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     },
     {
       "league_id": "DED",
@@ -743,10 +743,10 @@
       "rating_away": 1480.9,
       "jogos_home": 11,
       "jogos_away": 11,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 2,
+      "score_away": 3,
+      "outcome": "away",
+      "settled_at": "2026-11-09T12:02:01.821Z"
     }
   ]
 }
