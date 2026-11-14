@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-14",
+  "mode": "live",
+  "issued_at": "2026-11-14T12:00:59.706Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Mirassol",
+      "away": "Atlético-MG",
+      "kickoff": "2026-11-14T21:30Z",
+      "prob": {
+        "home": 0.41586568763477405,
+        "draw": 0.2623259179125321,
+        "away": 0.3218083944526938
+      },
+      "favorito": "home",
+      "rating_home": 1481.2,
+      "rating_away": 1518.5,
+      "jogos_home": 34,
+      "jogos_away": 34,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Chapecoense",
+      "away": "Vasco da Gama",
+      "kickoff": "2026-11-14T23:30Z",
+      "prob": {
+        "home": 0.32979781368136357,
+        "draw": 0.26283436053423304,
+        "away": 0.4073678257844034
+      },
+      "favorito": "away",
+      "rating_home": 1391.7,
+      "rating_away": 1488.8,
+      "jogos_home": 33,
+      "jogos_away": 33,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
