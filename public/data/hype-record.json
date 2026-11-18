@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-17T12:00:48.663Z",
+  "generated_at": "2026-11-18T12:00:44.937Z",
   "cutoff": 44,
   "method": "Rodada a rodada: a tabela e reconstruida apenas com jogos anteriores a rodada (sem lookahead) e o buildHypeBoard do produto marca os times. Cards em modo replay foram reconstruidos; cards em modo live foram gravados antes do jogo.",
-  "snapshots": 292,
+  "snapshots": 293,
   "completed_rounds": 292,
-  "cards_total": 1570,
+  "cards_total": 1573,
   "cards_settled": 1570,
-  "cards_pending": 0,
-  "live_cards": 168,
+  "cards_pending": 3,
+  "live_cards": 171,
   "replay_cards": 1402,
   "flagged": {
     "n": 1570,
@@ -15,10 +15,10 @@
     "rate": 0.545
   },
   "baseline": {
-    "n": 3584,
-    "home_rate": 0.43,
+    "n": 3590,
+    "home_rate": 0.429,
     "away_rate": 0.308,
-    "draw_rate": 0.248,
+    "draw_rate": 0.247,
     "expected_for_flagged": 0.366
   },
   "lift_pp": 17.9,
@@ -115,7 +115,7 @@
       "n": 3,
       "wins": 2,
       "rate": null,
-      "expected": 0.349,
+      "expected": 0.348,
       "lift_pp": 31.8
     },
     {
@@ -131,7 +131,7 @@
       "n": 9,
       "wins": 5,
       "rate": null,
-      "expected": 0.376,
+      "expected": 0.375,
       "lift_pp": 18
     },
     {
@@ -139,15 +139,15 @@
       "n": 15,
       "wins": 9,
       "rate": null,
-      "expected": 0.349,
-      "lift_pp": 25.1
+      "expected": 0.348,
+      "lift_pp": 25.2
     },
     {
       "key": "2026-10-18",
       "n": 15,
       "wins": 10,
       "rate": null,
-      "expected": 0.365,
+      "expected": 0.364,
       "lift_pp": 30.2
     },
     {
@@ -163,8 +163,8 @@
       "n": 18,
       "wins": 8,
       "rate": null,
-      "expected": 0.356,
-      "lift_pp": 8.9
+      "expected": 0.355,
+      "lift_pp": 9
     },
     {
       "key": "2026-10-26",
@@ -179,23 +179,23 @@
       "n": 3,
       "wins": 3,
       "rate": null,
-      "expected": 0.349,
-      "lift_pp": 65.1
+      "expected": 0.348,
+      "lift_pp": 65.2
     },
     {
       "key": "2026-10-28",
       "n": 4,
       "wins": 1,
       "rate": null,
-      "expected": 0.369,
-      "lift_pp": -11.9
+      "expected": 0.368,
+      "lift_pp": -11.8
     },
     {
       "key": "2026-10-29",
       "n": 3,
       "wins": 2,
       "rate": null,
-      "expected": 0.349,
+      "expected": 0.348,
       "lift_pp": 31.8
     },
     {
@@ -203,16 +203,16 @@
       "n": 4,
       "wins": 3,
       "rate": null,
-      "expected": 0.339,
-      "lift_pp": 41.1
+      "expected": 0.338,
+      "lift_pp": 41.2
     },
     {
       "key": "2026-10-31",
       "n": 16,
       "wins": 10,
       "rate": null,
-      "expected": 0.377,
-      "lift_pp": 24.8
+      "expected": 0.376,
+      "lift_pp": 24.9
     },
     {
       "key": "2026-11-01",
@@ -227,24 +227,24 @@
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.43,
-      "lift_pp": 57
+      "expected": 0.429,
+      "lift_pp": 57.1
     },
     {
       "key": "2026-11-04",
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.43,
-      "lift_pp": 57
+      "expected": 0.429,
+      "lift_pp": 57.1
     },
     {
       "key": "2026-11-05",
       "n": 2,
       "wins": 2,
       "rate": null,
-      "expected": 0.43,
-      "lift_pp": 57
+      "expected": 0.429,
+      "lift_pp": 57.1
     },
     {
       "key": "2026-11-06",
@@ -259,7 +259,7 @@
       "n": 11,
       "wins": 8,
       "rate": null,
-      "expected": 0.375,
+      "expected": 0.374,
       "lift_pp": 35.3
     },
     {
@@ -267,7 +267,7 @@
       "n": 18,
       "wins": 10,
       "rate": null,
-      "expected": 0.349,
+      "expected": 0.348,
       "lift_pp": 20.7
     }
   ],
@@ -277,8 +277,8 @@
       "n": 1381,
       "wins": 798,
       "rate": 0.578,
-      "expected": 0.366,
-      "lift_pp": 21.2
+      "expected": 0.365,
+      "lift_pp": 21.3
     },
     {
       "key": "marcado PIOR colocado",

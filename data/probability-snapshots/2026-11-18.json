@@ -1,0 +1,143 @@
+{
+  "date": "2026-11-18",
+  "mode": "live",
+  "issued_at": "2026-11-18T12:01:25.459Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Coritiba",
+      "away": "Santos",
+      "kickoff": "2026-11-18T22:30Z",
+      "prob": {
+        "home": 0.39067223105284765,
+        "draw": 0.2635525484899405,
+        "away": 0.3457752204572118
+      },
+      "favorito": "home",
+      "rating_home": 1466.6,
+      "rating_away": 1521,
+      "jogos_home": 34,
+      "jogos_away": 34,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Remo",
+      "away": "Chapecoense",
+      "kickoff": "2026-11-18T23:00Z",
+      "prob": {
+        "home": 0.5406614057335941,
+        "draw": 0.2445417153772121,
+        "away": 0.21479687888919377
+      },
+      "favorito": "home",
+      "rating_home": 1430,
+      "rating_away": 1382.5,
+      "jogos_home": 34,
+      "jogos_away": 34,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Cruzeiro",
+      "away": "Palmeiras",
+      "kickoff": "2026-11-18T23:30Z",
+      "prob": {
+        "home": 0.40835167846087955,
+        "draw": 0.262780377529353,
+        "away": 0.3288679440097675
+      },
+      "favorito": "home",
+      "rating_home": 1572.4,
+      "rating_away": 1614.7,
+      "jogos_home": 34,
+      "jogos_away": 34,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Flamengo",
+      "away": "Athletico-PR",
+      "kickoff": "2026-11-18T23:30Z",
+      "prob": {
+        "home": 0.6252167831190506,
+        "draw": 0.22228186220619872,
+        "away": 0.15250135467475062
+      },
+      "favorito": "home",
+      "rating_home": 1633.9,
+      "rating_away": 1525.5,
+      "jogos_home": 34,
+      "jogos_away": 34,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Corinthians",
+      "away": "Botafogo",
+      "kickoff": "2026-11-19T00:30Z",
+      "prob": {
+        "home": 0.4416697940470674,
+        "draw": 0.2602080161274832,
+        "away": 0.29812218982544947
+      },
+      "favorito": "home",
+      "rating_home": 1452.6,
+      "rating_away": 1472.4,
+      "jogos_home": 34,
+      "jogos_away": 34,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Grêmio",
+      "away": "Bahia",
+      "kickoff": "2026-11-19T00:30Z",
+      "prob": {
+        "home": 0.36794294154223056,
+        "draw": 0.26391398946732847,
+        "away": 0.36814306899044086
+      },
+      "favorito": "away",
+      "rating_home": 1459.6,
+      "rating_away": 1529.7,
+      "jogos_home": 34,
+      "jogos_away": 34,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}

@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-17T12:01:44.463Z",
+  "generated_at": "2026-11-18T12:01:36.293Z",
   "kind": "forward",
   "definition": "Registro EM PRODUCAO: cada probabilidade foi gravada antes do jogo (data de emissao no snapshot) e liquidada depois. Nao confundir com o backtest, que mede o modelo no passado.",
   "source": "ESPN (site.api.espn.com)",
   "counts": {
-    "dias_gravados": 32,
-    "partidas_gravadas": 408,
+    "dias_gravados": 33,
+    "partidas_gravadas": 414,
     "partidas_liquidadas": 386,
-    "pendentes": 3
+    "pendentes": 9
   },
   "metrics": {
     "n": 386,
@@ -234,6 +234,12 @@
       "mode": "live",
       "total": 2,
       "settled": 2
+    },
+    {
+      "date": "2026-11-18",
+      "mode": "live",
+      "total": 6,
+      "settled": 0
     }
   ],
   "honest_notes": [
