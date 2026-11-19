@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-19",
+  "mode": "live",
+  "issued_at": "2026-11-19T12:02:19.455Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Vasco da Gama",
+      "away": "Internacional",
+      "kickoff": "2026-11-19T22:30Z",
+      "prob": {
+        "home": 0.5127940373257328,
+        "draw": 0.25011739740275285,
+        "away": 0.23708856527151434
+      },
+      "favorito": "home",
+      "rating_home": 1498,
+      "rating_away": 1469.6,
+      "jogos_home": 34,
+      "jogos_away": 34,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Vitória",
+      "away": "Red Bull Bragantino",
+      "kickoff": "2026-11-19T22:30Z",
+      "prob": {
+        "home": 0.3938598117652651,
+        "draw": 0.2634445513701691,
+        "away": 0.34269563686456583
+      },
+      "favorito": "home",
+      "rating_home": 1450.5,
+      "rating_away": 1502.7,
+      "jogos_home": 34,
+      "jogos_away": 34,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "São Paulo",
+      "away": "Fluminense",
+      "kickoff": "2026-11-20T00:30Z",
+      "prob": {
+        "home": 0.3770510763096381,
+        "draw": 0.26385618361881336,
+        "away": 0.3590927400715486
+      },
+      "favorito": "home",
+      "rating_home": 1477.5,
+      "rating_away": 1541.3,
+      "jogos_home": 34,
+      "jogos_away": 34,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}

@@ -12,49 +12,49 @@
       "league_id": "BSA",
       "home": "Coritiba",
       "away": "Santos",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
     },
     {
       "league_id": "BSA",
       "home": "Remo",
       "away": "Chapecoense",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "BSA",
       "home": "Cruzeiro",
       "away": "Palmeiras",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
     },
     {
       "league_id": "BSA",
       "home": "Flamengo",
       "away": "Athletico-PR",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
     },
     {
       "league_id": "BSA",
       "home": "Corinthians",
       "away": "Botafogo",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 4,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "BSA",
       "home": "Grêmio",
       "away": "Bahia",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 0,
+      "score_away": 0,
+      "outcome": "draw"
     }
   ],
   "cards": [
@@ -73,10 +73,10 @@
       ],
       "pos": 1,
       "opp_pos": 5,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": true
     },
     {
       "league_id": "BSA",
@@ -93,10 +93,10 @@
       ],
       "pos": 2,
       "opp_pos": 3,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": false
     },
     {
       "league_id": "BSA",
@@ -112,10 +112,10 @@
       ],
       "pos": 3,
       "opp_pos": 2,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": true
     }
   ]
 }
