@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-20",
+  "mode": "live",
+  "issued_at": "2026-11-20T12:01:40.681Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 3,
+  "matches": [
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Athletic Club",
+      "away": "Espanyol",
+      "kickoff": "2026-11-20T20:00Z",
+      "prob": {
+        "home": 0.5222477122756553,
+        "draw": 0.2483256996738096,
+        "away": 0.22942658805053517
+      },
+      "favorito": "home",
+      "rating_home": 1507.6,
+      "rating_away": 1472.8,
+      "jogos_home": 11,
+      "jogos_away": 12,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "Bayern Munich",
+      "away": "FC Cologne",
+      "kickoff": "2026-11-20T19:30Z",
+      "prob": {
+        "home": 0.5880044839045658,
+        "draw": 0.23305716712597696,
+        "away": 0.17893834896945718
+      },
+      "favorito": "home",
+      "rating_home": 1557.3,
+      "rating_away": 1476.4,
+      "jogos_home": 9,
+      "jogos_away": 9,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Troyes",
+      "away": "Le Havre AC",
+      "kickoff": "2026-11-20T19:45Z",
+      "prob": {
+        "home": 0.5293371743358417,
+        "draw": 0.24691465282071237,
+        "away": 0.223748172843446
+      },
+      "favorito": "home",
+      "rating_home": 1464.6,
+      "rating_away": 1424.9,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
