@@ -20,9 +20,9 @@
       "league_id": "BL1",
       "home": "Bayern Munich",
       "away": "FC Cologne",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
     },
     {
       "league_id": "FL1",
@@ -49,10 +49,10 @@
       ],
       "pos": 1,
       "opp_pos": 15,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "draw",
+      "score_home": 1,
+      "score_away": 1,
+      "hit": false
     }
   ]
 }

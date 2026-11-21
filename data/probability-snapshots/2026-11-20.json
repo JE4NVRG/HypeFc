@@ -29,10 +29,10 @@
       "rating_away": 1472.8,
       "jogos_home": 11,
       "jogos_away": 12,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away",
+      "settled_at": "2026-11-21T12:02:48.403Z"
     },
     {
       "league_id": "BL1",
@@ -50,10 +50,10 @@
       "rating_away": 1476.4,
       "jogos_home": 9,
       "jogos_away": 9,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw",
+      "settled_at": "2026-11-21T12:02:48.403Z"
     },
     {
       "league_id": "FL1",
@@ -71,10 +71,10 @@
       "rating_away": 1424.9,
       "jogos_home": 10,
       "jogos_away": 10,
-      "score_home": null,
-      "score_away": null,
-      "outcome": null,
-      "settled_at": null
+      "score_home": 3,
+      "score_away": 1,
+      "outcome": "home",
+      "settled_at": "2026-11-21T12:02:48.403Z"
     }
   ]
 }
