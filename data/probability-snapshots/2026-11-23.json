@@ -1,0 +1,143 @@
+{
+  "date": "2026-11-23",
+  "mode": "live",
+  "issued_at": "2026-11-23T12:02:19.902Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 4,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Internacional",
+      "away": "Vitória",
+      "kickoff": "2026-11-23T22:30Z",
+      "prob": {
+        "home": 0.4746335760521988,
+        "draw": 0.2562879169805271,
+        "away": 0.26907850696727414
+      },
+      "favorito": "home",
+      "rating_home": 1462.4,
+      "rating_away": 1459.9,
+      "jogos_home": 35,
+      "jogos_away": 35,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Botafogo",
+      "away": "São Paulo",
+      "kickoff": "2026-11-23T23:00Z",
+      "prob": {
+        "home": 0.46581449792160307,
+        "draw": 0.2574671435078098,
+        "away": 0.276718358570587
+      },
+      "favorito": "home",
+      "rating_home": 1463.8,
+      "rating_away": 1467.3,
+      "jogos_home": 35,
+      "jogos_away": 35,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Santos",
+      "away": "Grêmio",
+      "kickoff": "2026-11-24T00:00Z",
+      "prob": {
+        "home": 0.5752759414565475,
+        "draw": 0.23639101736499524,
+        "away": 0.18833304117845728
+      },
+      "favorito": "home",
+      "rating_home": 1531.4,
+      "rating_away": 1459.6,
+      "jogos_home": 35,
+      "jogos_away": 35,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PL",
+      "league_name": "Premier League",
+      "home": "Brentford",
+      "away": "Everton",
+      "kickoff": "2026-11-23T20:00Z",
+      "prob": {
+        "home": 0.455761862881745,
+        "draw": 0.258695800955385,
+        "away": 0.28554233616287
+      },
+      "favorito": "home",
+      "rating_home": 1507.7,
+      "rating_away": 1518,
+      "jogos_home": 10,
+      "jogos_away": 10,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "PD",
+      "league_name": "La Liga",
+      "home": "Levante",
+      "away": "Elche",
+      "kickoff": "2026-11-23T20:00Z",
+      "prob": {
+        "home": 0.49236414453580296,
+        "draw": 0.2536346246761216,
+        "away": 0.25400123078807557
+      },
+      "favorito": "home",
+      "rating_home": 1479.9,
+      "rating_away": 1465.5,
+      "jogos_home": 12,
+      "jogos_away": 12,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    },
+    {
+      "league_id": "SA",
+      "league_name": "Serie A",
+      "home": "Monza",
+      "away": "Fiorentina",
+      "kickoff": "2026-11-23T19:45Z",
+      "prob": {
+        "home": 0.44674912979391807,
+        "draw": 0.25969147355644945,
+        "away": 0.2935593966496325
+      },
+      "favorito": "home",
+      "rating_home": 1448.6,
+      "rating_away": 1465,
+      "jogos_home": 11,
+      "jogos_away": 11,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}

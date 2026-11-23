@@ -36,89 +36,89 @@
       "league_id": "PL",
       "home": "Hull City",
       "away": "Brighton & Hove Albion",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "PL",
       "home": "Liverpool",
       "away": "Manchester United",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 4,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "PD",
       "home": "Barcelona",
       "away": "Villarreal",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
     },
     {
       "league_id": "PD",
       "home": "Racing Santander",
       "away": "Real Sociedad",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 3,
+      "score_away": 2,
+      "outcome": "home"
     },
     {
       "league_id": "PD",
       "home": "Osasuna",
       "away": "Málaga",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "PD",
       "home": "Getafe",
       "away": "Atlético Madrid",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 0,
+      "score_away": 3,
+      "outcome": "away"
     },
     {
       "league_id": "SA",
       "home": "Juventus",
       "away": "Venezia",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 4,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "SA",
       "home": "Bologna",
       "away": "Udinese",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
     },
     {
       "league_id": "SA",
       "home": "Sassuolo",
       "away": "Genoa",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 0,
+      "score_away": 2,
+      "outcome": "away"
     },
     {
       "league_id": "SA",
       "home": "AC Milan",
       "away": "Frosinone",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 5,
+      "score_away": 1,
+      "outcome": "home"
     },
     {
       "league_id": "SA",
       "home": "Atalanta",
       "away": "Internazionale",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 4,
+      "score_away": 4,
+      "outcome": "draw"
     },
     {
       "league_id": "BL1",
@@ -140,57 +140,57 @@
       "league_id": "FL1",
       "home": "Paris FC",
       "away": "Angers",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 4,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "FL1",
       "home": "Lorient",
       "away": "Stade Rennais",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 1,
+      "outcome": "draw"
     },
     {
       "league_id": "FL1",
       "home": "Marseille",
       "away": "Le Mans",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 3,
+      "outcome": "away"
     },
     {
       "league_id": "DED",
       "home": "FC Twente",
       "away": "Willem II",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 2,
+      "score_away": 1,
+      "outcome": "home"
     },
     {
       "league_id": "DED",
       "home": "Ajax Amsterdam",
       "away": "ADO Den Haag",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "DED",
       "home": "Sparta Rotterdam",
       "away": "AZ Alkmaar",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 5,
+      "outcome": "away"
     },
     {
       "league_id": "DED",
       "home": "Go Ahead Eagles",
       "away": "Fortuna Sittard",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
     }
   ],
   "cards": [
@@ -209,10 +209,10 @@
       ],
       "pos": 2,
       "opp_pos": 14,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 0,
+      "hit": false
     },
     {
       "league_id": "PL",
@@ -229,10 +229,10 @@
       ],
       "pos": 5,
       "opp_pos": 19,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 4,
+      "score_away": 0,
+      "hit": true
     },
     {
       "league_id": "PD",
@@ -249,10 +249,10 @@
       ],
       "pos": 1,
       "opp_pos": 9,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 2,
+      "hit": true
     },
     {
       "league_id": "PD",
@@ -269,10 +269,10 @@
       ],
       "pos": 3,
       "opp_pos": 15,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 3,
+      "hit": true
     },
     {
       "league_id": "PD",
@@ -288,10 +288,10 @@
       ],
       "pos": 5,
       "opp_pos": 12,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 2,
+      "hit": false
     },
     {
       "league_id": "SA",
@@ -308,10 +308,10 @@
       ],
       "pos": 3,
       "opp_pos": 11,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "draw",
+      "score_home": 4,
+      "score_away": 4,
+      "hit": false
     },
     {
       "league_id": "SA",
@@ -328,10 +328,10 @@
       ],
       "pos": 5,
       "opp_pos": 6,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 5,
+      "score_away": 1,
+      "hit": true
     },
     {
       "league_id": "SA",
@@ -348,10 +348,10 @@
       ],
       "pos": 6,
       "opp_pos": 5,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 5,
+      "score_away": 1,
+      "hit": false
     },
     {
       "league_id": "FL1",
@@ -368,10 +368,10 @@
       ],
       "pos": 5,
       "opp_pos": 16,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "away",
+      "score_home": 2,
+      "score_away": 3,
+      "hit": false
     },
     {
       "league_id": "FL1",
@@ -388,10 +388,10 @@
       ],
       "pos": 3,
       "opp_pos": 17,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 4,
+      "score_away": 0,
+      "hit": true
     },
     {
       "league_id": "DED",
@@ -408,10 +408,10 @@
       ],
       "pos": 3,
       "opp_pos": 17,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": true
     },
     {
       "league_id": "DED",
@@ -427,10 +427,10 @@
       ],
       "pos": 4,
       "opp_pos": 18,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 2,
+      "score_away": 1,
+      "hit": true
     }
   ]
 }
