@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-24",
+  "mode": "live",
+  "issued_at": "2026-11-24T12:01:03.836Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Chapecoense",
+      "away": "Palmeiras",
+      "kickoff": "2026-11-24T21:00Z",
+      "prob": {
+        "home": 0.16514392784303378,
+        "draw": 0.22770372427893495,
+        "away": 0.6071523478780313
+      },
+      "favorito": "away",
+      "rating_home": 1369.5,
+      "rating_away": 1604.4,
+      "jogos_home": 36,
+      "jogos_away": 36,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}

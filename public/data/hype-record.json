@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-23T12:01:33.349Z",
+  "generated_at": "2026-11-24T12:00:23.964Z",
   "cutoff": 44,
   "method": "Rodada a rodada: a tabela e reconstruida apenas com jogos anteriores a rodada (sem lookahead) e o buildHypeBoard do produto marca os times. Cards em modo replay foram reconstruidos; cards em modo live foram gravados antes do jogo.",
-  "snapshots": 296,
+  "snapshots": 297,
   "completed_rounds": 296,
-  "cards_total": 1603,
+  "cards_total": 1604,
   "cards_settled": 1603,
-  "cards_pending": 0,
-  "live_cards": 201,
+  "cards_pending": 1,
+  "live_cards": 202,
   "replay_cards": 1402,
   "flagged": {
     "n": 1603,
@@ -15,7 +15,7 @@
     "rate": 0.546
   },
   "baseline": {
-    "n": 3650,
+    "n": 3651,
     "home_rate": 0.428,
     "away_rate": 0.309,
     "draw_rate": 0.247,
@@ -123,8 +123,8 @@
       "n": 10,
       "wins": 7,
       "rate": null,
-      "expected": 0.381,
-      "lift_pp": 31.9
+      "expected": 0.38,
+      "lift_pp": 32
     },
     {
       "key": "2026-10-25",
@@ -139,8 +139,8 @@
       "n": 5,
       "wins": 3,
       "rate": null,
-      "expected": 0.381,
-      "lift_pp": 21.9
+      "expected": 0.38,
+      "lift_pp": 22
     },
     {
       "key": "2026-10-27",
@@ -243,7 +243,7 @@
       "n": 3,
       "wins": 2,
       "rate": null,
-      "expected": 0.389,
+      "expected": 0.388,
       "lift_pp": 27.8
     },
     {
@@ -285,8 +285,8 @@
       "n": 193,
       "wins": 58,
       "rate": 0.301,
-      "expected": 0.37,
-      "lift_pp": -6.9
+      "expected": 0.369,
+      "lift_pp": -6.8
     }
   ],
   "recent": [
