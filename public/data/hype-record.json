@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-11-24T12:00:23.964Z",
+  "generated_at": "2026-11-25T12:01:06.211Z",
   "cutoff": 44,
   "method": "Rodada a rodada: a tabela e reconstruida apenas com jogos anteriores a rodada (sem lookahead) e o buildHypeBoard do produto marca os times. Cards em modo replay foram reconstruidos; cards em modo live foram gravados antes do jogo.",
   "snapshots": 297,
-  "completed_rounds": 296,
+  "completed_rounds": 297,
   "cards_total": 1604,
-  "cards_settled": 1603,
-  "cards_pending": 1,
+  "cards_settled": 1604,
+  "cards_pending": 0,
   "live_cards": 202,
   "replay_cards": 1402,
   "flagged": {
-    "n": 1603,
+    "n": 1604,
     "wins": 875,
     "rate": 0.546
   },
   "baseline": {
     "n": 3651,
-    "home_rate": 0.428,
+    "home_rate": 0.429,
     "away_rate": 0.309,
     "draw_rate": 0.247,
     "expected_for_flagged": 0.366
@@ -34,9 +34,9 @@
   "by_venue": [
     {
       "key": "fora",
-      "n": 834,
+      "n": 835,
       "wins": 392,
-      "rate": 0.47
+      "rate": 0.469
     },
     {
       "key": "casa",
@@ -48,9 +48,9 @@
   "by_band": [
     {
       "key": "40-54",
-      "n": 755,
+      "n": 756,
       "wins": 364,
-      "rate": 0.482
+      "rate": 0.481
     },
     {
       "key": "55+",
@@ -68,9 +68,9 @@
     },
     {
       "key": "BSA",
-      "n": 217,
+      "n": 218,
       "wins": 104,
-      "rate": 0.479
+      "rate": 0.477
     },
     {
       "key": "PD",
@@ -111,20 +111,12 @@
   ],
   "by_round": [
     {
-      "key": "2026-10-18",
-      "n": 15,
-      "wins": 10,
-      "rate": null,
-      "expected": 0.365,
-      "lift_pp": 30.2
-    },
-    {
       "key": "2026-10-24",
       "n": 10,
       "wins": 7,
       "rate": null,
-      "expected": 0.38,
-      "lift_pp": 32
+      "expected": 0.381,
+      "lift_pp": 31.9
     },
     {
       "key": "2026-10-25",
@@ -139,8 +131,8 @@
       "n": 5,
       "wins": 3,
       "rate": null,
-      "expected": 0.38,
-      "lift_pp": 22
+      "expected": 0.381,
+      "lift_pp": 21.9
     },
     {
       "key": "2026-10-27",
@@ -195,24 +187,24 @@
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.428,
-      "lift_pp": 57.2
+      "expected": 0.429,
+      "lift_pp": 57.1
     },
     {
       "key": "2026-11-04",
       "n": 1,
       "wins": 1,
       "rate": null,
-      "expected": 0.428,
-      "lift_pp": 57.2
+      "expected": 0.429,
+      "lift_pp": 57.1
     },
     {
       "key": "2026-11-05",
       "n": 2,
       "wins": 2,
       "rate": null,
-      "expected": 0.428,
-      "lift_pp": 57.2
+      "expected": 0.429,
+      "lift_pp": 57.1
     },
     {
       "key": "2026-11-06",
@@ -243,7 +235,7 @@
       "n": 3,
       "wins": 2,
       "rate": null,
-      "expected": 0.388,
+      "expected": 0.389,
       "lift_pp": 27.8
     },
     {
@@ -251,8 +243,8 @@
       "n": 1,
       "wins": 0,
       "rate": null,
-      "expected": 0.428,
-      "lift_pp": -42.8
+      "expected": 0.429,
+      "lift_pp": -42.9
     },
     {
       "key": "2026-11-21",
@@ -269,12 +261,20 @@
       "rate": null,
       "expected": 0.379,
       "lift_pp": 20.5
+    },
+    {
+      "key": "2026-11-24",
+      "n": 1,
+      "wins": 0,
+      "rate": null,
+      "expected": 0.309,
+      "lift_pp": -30.9
     }
   ],
   "by_edge": [
     {
       "key": "marcado MELHOR colocado",
-      "n": 1410,
+      "n": 1411,
       "wins": 817,
       "rate": 0.579,
       "expected": 0.366,
@@ -285,11 +285,30 @@
       "n": 193,
       "wins": 58,
       "rate": 0.301,
-      "expected": 0.369,
-      "lift_pp": -6.8
+      "expected": 0.37,
+      "lift_pp": -6.9
     }
   ],
   "recent": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Chapecoense",
+      "away": "Palmeiras",
+      "team": "Palmeiras",
+      "venue": "away",
+      "score": 54,
+      "flags": [
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 20,
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": false
+    },
     {
       "league_id": "DED",
       "league_name": "Eredivisie",
@@ -744,26 +763,6 @@
       "outcome": "away",
       "score_home": 1,
       "score_away": 5,
-      "hit": true
-    },
-    {
-      "league_id": "SA",
-      "league_name": "Serie A",
-      "home": "Lazio",
-      "away": "Lecce",
-      "team": "Lazio",
-      "venue": "home",
-      "score": 71,
-      "flags": [
-        "Forma 4V",
-        "Líder",
-        "Saldo alto"
-      ],
-      "pos": 1,
-      "opp_pos": 14,
-      "outcome": "home",
-      "score_home": 3,
-      "score_away": 0,
       "hit": true
     }
   ],

@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-25",
+  "mode": "live",
+  "issued_at": "2026-11-25T12:01:44.931Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Atlético-MG",
+      "away": "Corinthians",
+      "kickoff": "2026-11-25T23:00Z",
+      "prob": {
+        "home": 0.5560444481759483,
+        "draw": 0.24108555871552229,
+        "away": 0.20286999310852938
+      },
+      "favorito": "home",
+      "rating_home": 1519.4,
+      "rating_away": 1461.2,
+      "jogos_home": 35,
+      "jogos_away": 35,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}

@@ -12,9 +12,9 @@
       "league_id": "BSA",
       "home": "Chapecoense",
       "away": "Palmeiras",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 3,
+      "score_away": 0,
+      "outcome": "home"
     }
   ],
   "cards": [
@@ -32,10 +32,10 @@
       ],
       "pos": 2,
       "opp_pos": 20,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 3,
+      "score_away": 0,
+      "hit": false
     }
   ]
 }
