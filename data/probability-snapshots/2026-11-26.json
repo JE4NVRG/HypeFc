@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-26",
+  "mode": "live",
+  "issued_at": "2026-11-26T12:01:43.602Z",
+  "model": {
+    "name": "elo+poisson",
+    "k": 20,
+    "home_advantage": 70
+  },
+  "gate": "os dois times com >= 5 jogos na temporada",
+  "seasons": [
+    2026
+  ],
+  "leagues": 1,
+  "matches": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "São Paulo",
+      "away": "Remo",
+      "kickoff": "2026-11-26T23:00Z",
+      "prob": {
+        "home": 0.5273295631786852,
+        "draw": 0.24732007924977595,
+        "away": 0.22535035757153882
+      },
+      "favorito": "home",
+      "rating_home": 1469.2,
+      "rating_away": 1430.9,
+      "jogos_home": 36,
+      "jogos_away": 36,
+      "score_home": null,
+      "score_away": null,
+      "outcome": null,
+      "settled_at": null
+    }
+  ]
+}
