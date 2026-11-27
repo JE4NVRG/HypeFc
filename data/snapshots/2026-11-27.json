@@ -1,0 +1,176 @@
+{
+  "date": "2026-11-27",
+  "seasons": [
+    2026
+  ],
+  "mode": "live",
+  "cutoff": 44,
+  "min_played": 5,
+  "captured_at": "2026-11-27T12:01:57.504Z",
+  "matches": [
+    {
+      "league_id": "BSA",
+      "home": "Fluminense",
+      "away": "Cruzeiro",
+      "score_home": null,
+      "score_away": null,
+      "outcome": null
+    },
+    {
+      "league_id": "PL",
+      "home": "Nottingham Forest",
+      "away": "Chelsea",
+      "score_home": null,
+      "score_away": null,
+      "outcome": null
+    },
+    {
+      "league_id": "PD",
+      "home": "Levante",
+      "away": "Racing Santander",
+      "score_home": null,
+      "score_away": null,
+      "outcome": null
+    },
+    {
+      "league_id": "SA",
+      "home": "Venezia",
+      "away": "Bologna",
+      "score_home": null,
+      "score_away": null,
+      "outcome": null
+    },
+    {
+      "league_id": "BL1",
+      "home": "Werder Bremen",
+      "away": "Borussia Mönchengladbach",
+      "score_home": null,
+      "score_away": null,
+      "outcome": null
+    },
+    {
+      "league_id": "FL1",
+      "home": "Brest",
+      "away": "Paris FC",
+      "score_home": null,
+      "score_away": null,
+      "outcome": null
+    },
+    {
+      "league_id": "PPL",
+      "home": "Maritimo",
+      "away": "C.D. Nacional",
+      "score_home": null,
+      "score_away": null,
+      "outcome": null
+    },
+    {
+      "league_id": "DED",
+      "home": "FC Groningen",
+      "away": "Willem II",
+      "score_home": null,
+      "score_away": null,
+      "outcome": null
+    }
+  ],
+  "cards": [
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Fluminense",
+      "away": "Cruzeiro",
+      "team": "Cruzeiro",
+      "venue": "away",
+      "score": 57,
+      "flags": [
+        "Forma 5V",
+        "Top 3"
+      ],
+      "pos": 3,
+      "opp_pos": 4,
+      "outcome": null,
+      "score_home": null,
+      "score_away": null,
+      "hit": null
+    },
+    {
+      "league_id": "BSA",
+      "league_name": "Brasileirao",
+      "home": "Fluminense",
+      "away": "Cruzeiro",
+      "team": "Fluminense",
+      "venue": "home",
+      "score": 44,
+      "flags": [
+        "Forma 4V",
+        "Zona alta"
+      ],
+      "pos": 4,
+      "opp_pos": 3,
+      "outcome": null,
+      "score_home": null,
+      "score_away": null,
+      "hit": null
+    },
+    {
+      "league_id": "BL1",
+      "league_name": "Bundesliga",
+      "home": "Werder Bremen",
+      "away": "Borussia Mönchengladbach",
+      "team": "Werder Bremen",
+      "venue": "home",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 6,
+      "opp_pos": 18,
+      "outcome": null,
+      "score_home": null,
+      "score_away": null,
+      "hit": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Brest",
+      "away": "Paris FC",
+      "team": "Paris FC",
+      "venue": "away",
+      "score": 62,
+      "flags": [
+        "Forma 4V",
+        "Top 3",
+        "Saldo alto"
+      ],
+      "pos": 2,
+      "opp_pos": 6,
+      "outcome": null,
+      "score_home": null,
+      "score_away": null,
+      "hit": null
+    },
+    {
+      "league_id": "FL1",
+      "league_name": "Ligue 1",
+      "home": "Brest",
+      "away": "Paris FC",
+      "team": "Brest",
+      "venue": "home",
+      "score": 44,
+      "flags": [
+        "Boa forma",
+        "Zona alta",
+        "Saldo alto"
+      ],
+      "pos": 6,
+      "opp_pos": 2,
+      "outcome": null,
+      "score_home": null,
+      "score_away": null,
+      "hit": null
+    }
+  ]
+}

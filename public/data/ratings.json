@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T12:01:16.697Z",
+  "generated_at": "2026-11-27T12:02:19.140Z",
   "season": 2026,
   "model": {
     "name": "elo+poisson",
@@ -13,7 +13,7 @@
       "league_name": "Brasileirao",
       "slug": "bra.1",
       "season": 2026,
-      "matches": 361,
+      "matches": 362,
       "teams": 20,
       "ratings": {
         "Atlético-MG": 1515.9,
@@ -23,14 +23,14 @@
         "Internacional": 1450.3,
         "Athletico-PR": 1526.1,
         "Vitória": 1472,
-        "Remo": 1430.9,
+        "Remo": 1423.9,
         "Fluminense": 1557.6,
         "Grêmio": 1473.5,
         "Chapecoense": 1383.9,
         "Santos": 1517.6,
         "Corinthians": 1464.7,
         "Bahia": 1515.8,
-        "São Paulo": 1469.2,
+        "São Paulo": 1476.2,
         "Flamengo": 1640.2,
         "Mirassol": 1474.1,
         "Vasco da Gama": 1496.9,
