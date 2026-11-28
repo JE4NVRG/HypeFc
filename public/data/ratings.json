@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T12:02:19.140Z",
+  "generated_at": "2026-11-28T12:01:12.534Z",
   "season": 2026,
   "model": {
     "name": "elo+poisson",
@@ -13,7 +13,7 @@
       "league_name": "Brasileirao",
       "slug": "bra.1",
       "season": 2026,
-      "matches": 362,
+      "matches": 363,
       "teams": 20,
       "ratings": {
         "Atlético-MG": 1515.9,
@@ -24,7 +24,7 @@
         "Athletico-PR": 1526.1,
         "Vitória": 1472,
         "Remo": 1423.9,
-        "Fluminense": 1557.6,
+        "Fluminense": 1546.4,
         "Grêmio": 1473.5,
         "Chapecoense": 1383.9,
         "Santos": 1517.6,
@@ -35,7 +35,7 @@
         "Mirassol": 1474.1,
         "Vasco da Gama": 1496.9,
         "Botafogo": 1461.9,
-        "Cruzeiro": 1587.8
+        "Cruzeiro": 1599
       }
     },
     "PL": {
@@ -43,7 +43,7 @@
       "league_name": "Premier League",
       "slug": "eng.1",
       "season": 2026,
-      "matches": 110,
+      "matches": 111,
       "teams": 20,
       "ratings": {
         "Arsenal": 1571.9,
@@ -54,7 +54,7 @@
         "Crystal Palace": 1446.9,
         "Ipswich Town": 1472.9,
         "Sunderland": 1468.9,
-        "Nottingham Forest": 1467.4,
+        "Nottingham Forest": 1476.1,
         "Leeds United": 1518.8,
         "Brentford": 1516,
         "Tottenham Hotspur": 1500.1,
@@ -65,7 +65,7 @@
         "Newcastle United": 1488.9,
         "Liverpool": 1535.1,
         "Fulham": 1487.6,
-        "Chelsea": 1494.1
+        "Chelsea": 1485.3
       }
     },
     "PD": {
@@ -73,17 +73,17 @@
       "league_name": "La Liga",
       "slug": "esp.1",
       "season": 2026,
-      "matches": 129,
+      "matches": 130,
       "teams": 20,
       "ratings": {
         "Alavés": 1488.4,
         "Getafe": 1465.9,
         "Sevilla": 1504.9,
         "Rayo Vallecano": 1472.2,
-        "Racing Santander": 1491.6,
+        "Racing Santander": 1503.2,
         "Villarreal": 1485.6,
         "Espanyol": 1485.7,
-        "Levante": 1477.5,
+        "Levante": 1465.9,
         "Deportivo": 1490.7,
         "Elche": 1467.8,
         "Atlético Madrid": 1571.8,
@@ -103,7 +103,7 @@
       "league_name": "Serie A",
       "slug": "ita.1",
       "season": 2026,
-      "matches": 120,
+      "matches": 121,
       "teams": 20,
       "ratings": {
         "Internazionale": 1566.7,
@@ -116,13 +116,13 @@
         "Cagliari": 1495.2,
         "Frosinone": 1515.7,
         "Juventus": 1524.4,
-        "Venezia": 1434.5,
+        "Venezia": 1434.7,
         "Lecce": 1458.8,
         "Atalanta": 1486.8,
         "Sassuolo": 1445.8,
         "Torino": 1480.9,
         "AC Milan": 1561.8,
-        "Bologna": 1512.9,
+        "Bologna": 1512.7,
         "Lazio": 1583.1,
         "AS Roma": 1575.8,
         "Fiorentina": 1456.5
@@ -133,7 +133,7 @@
       "league_name": "Bundesliga",
       "slug": "ger.1",
       "season": 2026,
-      "matches": 90,
+      "matches": 91,
       "teams": 18,
       "ratings": {
         "Bayern Munich": 1553.2,
@@ -145,13 +145,13 @@
         "Mainz": 1470.4,
         "SC Paderborn 07": 1482.5,
         "RB Leipzig": 1536.8,
-        "Borussia Mönchengladbach": 1439.1,
+        "Borussia Mönchengladbach": 1443.4,
         "SV Elversberg": 1489.9,
         "Bayer Leverkusen": 1527,
         "Borussia Dortmund": 1560.8,
         "Hamburg SV": 1484.8,
         "SC Freiburg": 1544.6,
-        "Werder Bremen": 1527.7,
+        "Werder Bremen": 1523.4,
         "FC Augsburg": 1486.2,
         "Schalke 04": 1463.4
       }
@@ -161,7 +161,7 @@
       "league_name": "Ligue 1",
       "slug": "fra.1",
       "season": 2026,
-      "matches": 99,
+      "matches": 100,
       "teams": 18,
       "ratings": {
         "Marseille": 1507.8,
@@ -169,13 +169,13 @@
         "Lens": 1490.6,
         "AJ Auxerre": 1475.4,
         "Le Mans": 1485.1,
-        "Brest": 1521.3,
+        "Brest": 1529.9,
         "Nice": 1510.8,
         "Lorient": 1505.9,
         "Toulouse": 1503,
         "Lyon": 1528.4,
         "Troyes": 1471.6,
-        "Paris FC": 1542.7,
+        "Paris FC": 1534.1,
         "Angers": 1452.8,
         "Lille": 1531.6,
         "Le Havre AC": 1418,
@@ -189,12 +189,12 @@
       "league_name": "Primeira Liga",
       "slug": "por.1",
       "season": 2026,
-      "matches": 98,
+      "matches": 99,
       "teams": 18,
       "ratings": {
         "Estoril": 1429.3,
         "FC Famalicao": 1496.3,
-        "Maritimo": 1462.2,
+        "Maritimo": 1450.3,
         "Casa Pia": 1462,
         "Vitória de Guimaraes": 1466.5,
         "Arouca": 1527.4,
@@ -209,7 +209,7 @@
         "Moreirense": 1493.5,
         "Braga": 1507.8,
         "Santa Clara": 1530.3,
-        "C.D. Nacional": 1464
+        "C.D. Nacional": 1476
       }
     },
     "DED": {
@@ -217,7 +217,7 @@
       "league_name": "Eredivisie",
       "slug": "ned.1",
       "season": 2026,
-      "matches": 117,
+      "matches": 118,
       "teams": 18,
       "ratings": {
         "SC Cambuur": 1502.8,
@@ -225,14 +225,14 @@
         "NEC Nijmegen": 1482.7,
         "Telstar": 1455.6,
         "Go Ahead Eagles": 1495.7,
-        "Willem II": 1417.7,
+        "Willem II": 1421.2,
         "PSV Eindhoven": 1561.2,
         "Fortuna Sittard": 1537.4,
         "AZ Alkmaar": 1541.5,
         "ADO Den Haag": 1454.4,
         "Sparta Rotterdam": 1463.2,
         "Feyenoord Rotterdam": 1539,
-        "FC Groningen": 1477.4,
+        "FC Groningen": 1473.8,
         "FC Utrecht": 1462.8,
         "PEC Zwolle": 1486.2,
         "Ajax Amsterdam": 1560.5,

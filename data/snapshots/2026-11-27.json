@@ -12,9 +12,9 @@
       "league_id": "BSA",
       "home": "Fluminense",
       "away": "Cruzeiro",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 0,
+      "score_away": 1,
+      "outcome": "away"
     },
     {
       "league_id": "PL",
@@ -44,17 +44,17 @@
       "league_id": "BL1",
       "home": "Werder Bremen",
       "away": "Borussia Mönchengladbach",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 3,
+      "score_away": 3,
+      "outcome": "draw"
     },
     {
       "league_id": "FL1",
       "home": "Brest",
       "away": "Paris FC",
-      "score_home": null,
-      "score_away": null,
-      "outcome": null
+      "score_home": 1,
+      "score_away": 0,
+      "outcome": "home"
     },
     {
       "league_id": "PPL",
@@ -88,10 +88,10 @@
       ],
       "pos": 3,
       "opp_pos": 4,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": true
     },
     {
       "league_id": "BSA",
@@ -107,10 +107,10 @@
       ],
       "pos": 4,
       "opp_pos": 3,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "away",
+      "score_home": 0,
+      "score_away": 1,
+      "hit": false
     },
     {
       "league_id": "BL1",
@@ -127,10 +127,10 @@
       ],
       "pos": 6,
       "opp_pos": 18,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "draw",
+      "score_home": 3,
+      "score_away": 3,
+      "hit": false
     },
     {
       "league_id": "FL1",
@@ -147,10 +147,10 @@
       ],
       "pos": 2,
       "opp_pos": 6,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": false
     },
     {
       "league_id": "FL1",
@@ -167,10 +167,10 @@
       ],
       "pos": 6,
       "opp_pos": 2,
-      "outcome": null,
-      "score_home": null,
-      "score_away": null,
-      "hit": null
+      "outcome": "home",
+      "score_home": 1,
+      "score_away": 0,
+      "hit": true
     }
   ]
 }
